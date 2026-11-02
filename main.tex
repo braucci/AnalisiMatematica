@@ -1,0 +1,82 @@
+%% ============================================================================
+%%  ANALISI MATEMATICA — un corso rigoroso, spiegato passo per passo
+%%  File principale.  Compilare con:   latexmk -lualatex main
+%%
+%%  Copyright (c) 2026 Biagio Raucci.
+%%  Quest'opera è rilasciata con licenza Creative Commons
+%%  Attribuzione - Condividi allo stesso modo 4.0 Internazionale (CC BY-SA 4.0).
+%%  https://creativecommons.org/licenses/by-sa/4.0/
+%% ============================================================================
+\documentclass[11pt,a4paper,twoside,openright]{book}
+
+%% --- stile del libro -------------------------------------------------------
+\usepackage{stile/analisi}
+
+%% --- florilegium: ornamenti floreali procedurali (LuaLaTeX, licenza MIT) ----
+%  Il pacchetto vive in stile/florilegium/.  Lo carichiamo con l'opzione
+%  `nomargin': il giardino viene disegnato soltanto nelle pagine di apertura
+%  dei capitoli (si veda \aperturacapitolo in stile/teoremi.sty).
+\directlua{
+  % LuaTeX cerca i moduli Lua con kpathsea: aggiungiamo un cercatore per la
+  % sottocartella del pacchetto, così `require("florilegium")' trova i file.
+  table.insert(package.searchers, 2, function(name)
+    local path = "stile/florilegium/" .. name .. ".lua"
+    local f = io.open(path, "r")
+    if f then f:close(); return loadfile(path) end
+    return "\string\n\string\tno file '" .. path .. "'"
+  end)}
+\def\florilegiumseed{1972}            % seme fisso: il giardino non cambia tra le compilazioni
+\usepackage[grown,nomargin,novisitors,density=0.8]{stile/florilegium/florilegium}
+%  (l'avviso «You have requested package stile/florilegium/florilegium, but the
+%   package provides florilegium» è innocuo: dipende solo dal percorso.)
+\definecolor{ink}{HTML}{1F4E79}
+\definecolor{accent}{HTML}{B4662F}
+
+%% --- ambienti per teoremi, dimostrazioni, note, codice ---------------------
+\usepackage{stile/teoremi}
+
+%% --- metadati --------------------------------------------------------------
+\title{Analisi Matematica}
+\author{Biagio Raucci}
+\date{\today}
+
+\begin{document}
+
+%% ===================== FRONTESPIZIO E PAGINE INIZIALI ======================
+\frontmatter
+\input{frontmatter/copertina}
+\input{frontmatter/colophon}
+\input{frontmatter/dedica}
+\cleardoublepage
+\pdfbookmark[0]{Indice}{indice}
+\tableofcontents
+\cleardoublepage
+\input{frontmatter/introduzione}
+
+%% ============================ CAPITOLI =====================================
+\mainmatter
+\input{capitoli/cap01-numeri-funzioni}
+\input{capitoli/cap02-complementi}
+\input{capitoli/cap03-successioni}
+\input{capitoli/cap04-funzioni-continue}
+\input{capitoli/cap05-derivate}
+\input{capitoli/cap06-applicazioni-derivate}
+\input{capitoli/cap07-funzioni-piu-variabili}
+\input{capitoli/cap08-integrali-definiti}
+\input{capitoli/cap09-integrali-indefiniti}
+\input{capitoli/cap10-formula-taylor}
+\input{capitoli/cap11-serie}
+
+%% ============================ APPENDICI ====================================
+\appendix
+% \input{capitoli/appA-...}
+
+%% ============================ PAGINE FINALI ================================
+\backmatter
+% due righe in più nell'ultima pagina dell'indice, perché la voce finale non resti sola
+\addtocontents{toc}{\protect\enlargethispage{3\baselineskip}}
+\input{frontmatter/bibliografia}
+\cleardoublepage
+\printindex
+
+\end{document}

@@ -1,0 +1,35 @@
+Analisi Matematica — Un corso rigoroso, spiegato passo per passo
+Copyright (c) 2026 Biagio Raucci
+
+Quest'opera (testo, figure, codice sorgente LaTeX e Python contenuti in
+questa cartella) è rilasciata con licenza
+
+    Creative Commons Attribuzione - Condividi allo stesso modo 4.0
+    Internazionale (CC BY-SA 4.0)
+
+Tu sei libero di:
+  - Condividere: riprodurre, distribuire, comunicare al pubblico, esporre
+    in pubblico, rappresentare, eseguire e recitare questo materiale con
+    qualsiasi mezzo e formato;
+  - Modificare: remixare, trasformare il materiale e basarti su di esso per
+    le tue opere, per qualsiasi fine, anche commerciale.
+
+Alle seguenti condizioni:
+  - Attribuzione: devi riconoscere una menzione di paternità adeguata,
+    fornire un link alla licenza e indicare se sono state effettuate delle
+    modifiche;
+  - StessaLicenza: se remixi, trasformi il materiale o ti basi su di esso,
+    devi distribuire i tuoi contributi con la stessa licenza del materiale
+    originario.
+
+Testo integrale della licenza:
+  https://creativecommons.org/licenses/by-sa/4.0/legalcode.it
+Riassunto in italiano:
+  https://creativecommons.org/licenses/by-sa/4.0/deed.it
+
+---------------------------------------------------------------------------
+Componenti di terze parti
+
+stile/florilegium/  — "florilegium", ornamenti floreali procedurali per
+LuaLaTeX, Copyright (c) 2026 Kevin Raymond, licenza MIT (si veda
+stile/florilegium/LICENSE). https://github.com/kevinraymond/florilegium
