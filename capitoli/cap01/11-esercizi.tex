@@ -1,0 +1,159 @@
+%% ----------------------------------------------------------------------------
+%%  §1.11  Esercizi di riepilogo
+%% ----------------------------------------------------------------------------
+\section{Esercizi di riepilogo}
+\label{sec:esercizi-cap1}
+
+Gli esercizi di questo paragrafo non servono a «fare pratica» nel senso scolastico: ogni
+soluzione è accompagnata da un commento sulle \emph{scelte logiche} che la guidano,
+perché è lì che si impara a dimostrare. Il lettore provi sempre prima da solo.
+
+\begin{esercizio}[Unicità di $\sqrt2$]
+Dimostrare che esiste al più un numero reale positivo $c$ tale che $c^{2}=2$.
+\begin{soluzione}
+Siano $c_{1},c_{2}>0$ con $c_{1}^{2}=c_{2}^{2}=2$. Allora
+$0=c_{1}^{2}-c_{2}^{2}=(c_{1}-c_{2})(c_{1}+c_{2})$; per la legge di annullamento del
+prodotto (\cref{prop:annullamento}) uno dei fattori è nullo; ma $c_{1}+c_{2}>0$, quindi
+$c_{1}=c_{2}$. \emph{Scelta logica:} per provare l'unicità si suppongono due oggetti e si
+mostra che coincidono; la fattorizzazione $a^{2}-b^{2}=(a-b)(a+b)$ trasforma un
+problema di uguaglianza in un problema di annullamento, dove abbiamo un teorema
+pronto. Si noti che l'\emph{esistenza} di $c$ richiede invece l'assioma di completezza
+(\cref{sec:nzq}): esistenza e unicità sono due questioni logicamente distinte.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}[Dove si usa la completezza?]
+Si consideri l'insieme $A=\{x\in\Q : x<1\}$ e $B=\{x\in\Q : x\ge1\}$. Esiste un
+razionale $c$ che separa $A$ e $B$? È in contraddizione con il
+\cref{teo:Q-non-completo}?
+\begin{soluzione}
+Sì: $c=1$ separa $A$ e $B$ (anzi è l'unico separatore). Nessuna contraddizione: il
+\cref{teo:Q-non-completo} afferma che l'assioma di completezza fallisce in $\Q$ per
+\emph{almeno una} coppia di insiemi, non per tutte. \emph{Scelta logica:} la negazione di
+«per ogni coppia $A,B$ esiste $c$» è «esiste una coppia $A,B$ per cui non esiste $c$»;
+per confutare un'affermazione universale basta un controesempio, e per quello abbiamo
+dovuto scegliere con cura gli insiemi della \eqref{eq:AB-radice2}.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}[Disuguaglianza tra media aritmetica e geometrica]
+Dimostrare che per ogni $a,b\ge0$ si ha $\sqrt{ab}\le\dfrac{a+b}{2}$, con uguaglianza se
+e solo se $a=b$.
+\begin{soluzione}
+Poiché entrambi i membri sono $\ge0$ e la funzione $t\mapsto t^{2}$ è strettamente
+crescente su $[0,+\infty)$ (\cref{prop:potenza-crescente}), la disuguaglianza equivale
+a $ab\le\frac{(a+b)^{2}}{4}$, cioè a $4ab\le a^{2}+2ab+b^{2}$, cioè a
+$0\le a^{2}-2ab+b^{2}=(a-b)^{2}$, che è vera per \ref{ass:ordine-prodotto} (e la regola
+dei segni). L'uguaglianza vale se e solo se $(a-b)^{2}=0$, cioè $a=b$. \emph{Scelta
+logica:} la catena di «equivale a» è lecita solo perché a ogni passo abbiamo usato
+un'equivalenza: la stretta crescenza del quadrato sui numeri non negativi, che vale nei
+due versi, la moltiplicazione per $4>0$ (\cref{prop:ordine-prodotto}) e l'assioma
+\ref{ass:ordine-somma}, che permette di sommare o sottrarre uno stesso termine ai due
+membri; se avessimo usato una semplice implicazione, avremmo dovuto percorrere la
+catena a ritroso.
+\end{soluzione}
+\end{esercizio}
+
+\begin{marginfigure}
+\centering
+\begin{tikzpicture}[scale=0.9]
+  \draw[grigio!70] (0,0) -- (4,0);
+  \draw[grigio!70] (4,0) arc (0:180:2);
+  \draw[blu, thick] (1.2,0) -- (1.2,{sqrt(1.2*2.8)});
+  \draw[rame, thick] (2,0) -- (2,2);
+  \draw[tratteggio] (0,0) -- (1.2,{sqrt(1.2*2.8)}) -- (4,0);
+  \node[font=\scriptsize, below] at (0.6,0) {$a$};
+  \node[font=\scriptsize, below] at (2.6,0) {$b$};
+  \node[font=\scriptsize, blu, left] at (1.2,0.45) {$\sqrt{ab}$};
+  \node[font=\scriptsize, rame, right] at (2,0.55) {$\tfrac{a+b}{2}$};
+\end{tikzpicture}
+\caption{Media aritmetica e geometrica: in una semicirconferenza di diametro $a+b$,
+l'altezza $\sqrt{ab}$ (secondo teorema di Euclide) non supera mai il raggio.}
+\end{marginfigure}
+
+\begin{esercizio}[Funzioni e monotonia]
+Sia $f\colon\R\to\R$ strettamente crescente. Dimostrare che per ogni $y\in\R$
+l'equazione $f(x)=y$ ha \emph{al più} una soluzione. Mostrare con un esempio che può
+non averne nessuna.
+\begin{soluzione}
+Se $f(x_{1})=f(x_{2})=y$ con $x_{1}\neq x_{2}$, diciamo $x_{1}<x_{2}$, la stretta
+crescenza darebbe $f(x_{1})<f(x_{2})$: assurdo. Per l'esempio: $f(x)=e^{x}$ è
+strettamente crescente, ma $e^{x}=-1$ non ha soluzioni. \emph{Scelta logica:} «al più
+una» è un'affermazione di unicità e si tratta come sempre; l'esempio mostra che
+l'unicità non implica l'esistenza, cioè che iniettività e suriettività sono proprietà
+indipendenti (\cref{fig:iniettiva-suriettiva}).
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}[Valore assoluto]
+Dimostrare che per ogni $x,y\in\R$ vale $\abs{x\,y}=\abs{x}\,\abs{y}$ \emph{senza}
+distinguere i casi, usando l'identità $\abs{t}=\sqrt{t^{2}}$.
+\begin{soluzione}
+Si ha $\abs{t}^{2}=t^{2}$ per ogni $t$ (in entrambi i casi della definizione), e
+$\abs{t}\ge0$; poiché la radice quadrata è l'inversa del quadrato su $[0,+\infty)$,
+$\abs{t}=\sqrt{t^{2}}$. Allora
+$\abs{xy}=\sqrt{(xy)^{2}}=\sqrt{x^{2}y^{2}}=\sqrt{x^{2}}\sqrt{y^{2}}=\abs{x}\abs{y}$,
+dove abbiamo usato $\sqrt{uv}=\sqrt u\sqrt v$ per $u,v\ge0$ (che segue dall'unicità
+della radice: $(\sqrt u\sqrt v)^{2}=uv$). \emph{Scelta logica:} rappresentare un
+oggetto definito per casi con una formula unica elimina la distinzione dei casi; il
+prezzo è dover usare proprietà della radice, cioè in ultima analisi la completezza.
+Entrambe le dimostrazioni sono corrette: quella per casi usa meno strumenti, questa è
+più corta.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}[Induzione: dove sta l'errore?]
+Si consideri la seguente «dimostrazione» che tutti i cavalli hanno lo stesso colore.
+\emph{Per $n=1$ è ovvio. Supponiamo che in ogni insieme di $n$ cavalli tutti abbiano lo
+stesso colore, e consideriamo $n+1$ cavalli $c_{1},\dots,c_{n+1}$. I primi $n$ hanno lo
+stesso colore per ipotesi induttiva; anche gli ultimi $n$, $c_{2},\dots,c_{n+1}$, hanno lo
+stesso colore. Poiché $c_{2}$ sta in entrambi i gruppi, tutti gli $n+1$ cavalli hanno lo
+stesso colore.} Dove sta l'errore?
+\begin{soluzione}
+Il passo induttivo fallisce per $n=1$: i due gruppi $\{c_{1}\}$ e $\{c_{2}\}$ non hanno
+elementi in comune, e il «ponte» $c_{2}$ non esiste. Il passo $\mathcal{P}(n)\implica
+\mathcal{P}(n+1)$ è corretto per ogni $n\ge2$, ma la base $\mathcal{P}(1)$ non si
+collega a $\mathcal{P}(2)$: la prima tessera del domino cade, ma non urta la seconda.
+\emph{Scelta logica:} nel verificare il passo induttivo bisogna assicurarsi che il
+ragionamento valga \emph{per ogni} $n$ a partire dalla base, inclusi i primi valori,
+che sono spesso quelli critici.
+\end{soluzione}
+\end{esercizio}
+
+\needspace{14\baselineskip}
+\begin{esercizio}[Con Python]
+Scrivere una funzione Python \texttt{radice(y, n)} che, dato $y\ge0$, restituisca
+un'approssimazione di $\sqrt{y}$ con errore minore di $10^{-n}$ usando il metodo di
+bisezione del \cref{sec:nzq}: si parte dall'intervallo $[0,\max\{1,y\}]$ e lo si dimezza
+finché la sua lunghezza è minore di $10^{-n}$. Quante iterazioni servono per $n=12$?
+Perché il metodo funziona (quale teorema di questo capitolo garantisce che il punto
+medio $m$ soddisfa $m^{2}<y$ oppure $m^{2}\ge y$, e che la scelta è coerente con
+l'ordine)?
+\begin{soluzione}
+\begin{python}
+def radice(y, n):
+    a, b = 0.0, max(1.0, y)          # a^2 <= y <= b^2
+    iterazioni = 0
+    while b - a >= 10**(-n):
+        m = (a + b) / 2
+        if m * m < y:
+            a = m                    # m è "troppo piccolo"
+        else:
+            b = m                    # m è "troppo grande"
+        iterazioni += 1
+    return (a + b) / 2, iterazioni
+
+print(radice(2, 12))                 # (1.414213562372879, 41)
+\end{python}
+La dicotomia \ref{ass:dicotomia} garantisce che vale $m^{2}<y$ oppure $m^{2}\ge y$;
+la \cref{prop:potenza-crescente} (stretta crescenza di $t\mapsto t^{2}$ sui non
+negativi) garantisce che se $m^{2}<y$ allora la radice cercata è maggiore di $m$, e
+viceversa. Servono $41$ iterazioni: l'intervallo iniziale $[0,2]$ ha lunghezza $2$, dopo
+$k$ dimezzamenti ha lunghezza $2^{1-k}$, e $2^{-40}\approx9{,}1\cdot10^{-13}$ è la prima
+potenza sotto $10^{-12}$. Ogni passo guadagna una cifra binaria, cioè circa $0{,}3$
+cifre decimali. \emph{Scelta logica:} la bisezione usa soltanto l'ordinamento, e
+l'invariante $a^{2}\le y\le b^{2}$, conservato a ogni passo, garantisce che la radice
+cercata stia sempre in $[a,b]$: l'errore è quindi controllato a priori dalla lunghezza
+dell'intervallo, che si dimezza, e il numero di iterazioni si calcola in anticipo.
+\end{soluzione}
+\end{esercizio}

@@ -1,0 +1,411 @@
+%% ----------------------------------------------------------------------------
+%%  §1.8  Le funzioni potenza, esponenziale, logaritmo
+%% ----------------------------------------------------------------------------
+\section{Le funzioni potenza, esponenziale, logaritmo}
+\label{sec:potenze}
+
+\subsection{Potenze con esponente naturale e radici}
+
+Consideriamo la \emph{funzione potenza con esponente $n\in\N$}:\index{funzione!potenza}
+\begin{equation}\label{eq:potenza-n}
+  f(x)=x^{n},
+\end{equation}
+che è definita, per ogni $x\in\R$, moltiplicando il numero $x$ per se stesso $n$ volte
+(più precisamente: $x^{1}=x$ e $x^{n+1}=x^{n}\cdot x$; si pone inoltre $x^{0}=1$).
+
+\begin{proposizione}\label{prop:potenza-crescente}
+La funzione $f(x)=x^{n}$ è strettamente crescente per $x\ge0$, cioè
+\begin{equation}\label{eq:potenza-crescente}
+  0\le x_{1}<x_{2} \ \implica\ x_{1}^{n}<x_{2}^{n} \qquad\perogni n\in\N.
+\end{equation}
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$n\in\N$; \ $0\le x_{1}<x_{2}$.}
+\Tesi{$x_{1}^{n}<x_{2}^{n}$.}
+\end{schema}
+
+\begin{strategia}
+Per $n=2$ il ragionamento è questo: da $x_{1}<x_{2}$, moltiplicando per $x_{1}\ge0$ si
+ottiene $x_{1}^{2}\le x_{1}x_{2}$ (\cref{prop:ordine-prodotto}; uguaglianza possibile
+solo se $x_{1}=0$); moltiplicando invece per $x_{2}>0$ si ottiene $x_{1}x_{2}<x_{2}^{2}$.
+Mettendo insieme le due, $x_{1}^{2}<x_{2}^{2}$. Per $n=3$ si riparte da
+$x_{1}^{2}<x_{2}^{2}$ e si ripete lo stesso gioco. Il «e così via» che ne segue è
+proprio il contenuto del \emph{principio di induzione}, che enunceremo e useremo
+rigorosamente nel \cref{sec:induzione}: qui ci accontentiamo dei primi passi.
+\end{strategia}
+
+\begin{dimostrazione}
+Per $n=1$ la tesi coincide con l'ipotesi. Se $n=2$ e $0\le x_{1}<x_{2}$, allora
+moltiplicando prima per $x_{1}\ge0$, poi per $x_{2}>0$, si ottiene
+$x_{1}^{2}\le x_{1}x_{2}$ e $x_{1}x_{2}<x_{2}^{2}$ (la seconda disuguaglianza è stretta
+perché $x_{2}\neq0$ e $x_{1}\neq x_{2}$, per la \cref{prop:semplificazione-prodotto});
+cioè $x_{1}^{2}<x_{2}^{2}$.
+Se $n=3$, partendo da $x_{1}^{2}<x_{2}^{2}$ si ottiene
+$x_{1}^{3}=x_{1}x_{1}^{2}\le x_{1}x_{2}^{2}<x_{2}x_{2}^{2}=x_{2}^{3}$, e così via per
+$n>3$ (si veda la \cref{prop:induzione-potenza} per la dimostrazione completa per
+induzione).
+\end{dimostrazione}
+
+Per mezzo dell'estremo superiore dimostreremo nel prossimo capitolo
+(\cref{teo:radice-n}) che a ogni $y\ge0$ corrisponde almeno un numero reale $x\ge0$ per cui
+$f(x)=x^{n}=y$: cioè che $f$ è suriettiva da $[0,+\infty)$ su $[0,+\infty)$. La
+condizione di stretta monotonia \eqref{eq:potenza-crescente} implica allora, per il
+criterio di invertibilità (\cref{teo:monotona-invertibile}), che la funzione è
+invertibile. Perciò è definita la funzione inversa di $f(x)=x^{n}$ ($x\ge0$), che si
+chiama funzione \emph{radice $n$-esima}\index{radice $n$-esima} e si indica con
+\begin{equation}\label{eq:radice}
+  f^{-1}(x)=\sqrt[n]{x}=x^{1/n} \qquad (x\ge0).
+\end{equation}
+I grafici delle funzioni \eqref{eq:potenza-n}, per $x\ge0$, e \eqref{eq:radice} sono
+riportati nella \cref{fig:potenze-radici}: in accordo con la \cref{fig:inversa}, sono
+simmetrici rispetto alla bisettrice.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=6cm, height=5.6cm, xmin=-0.1, xmax=1.8, ymin=-0.1, ymax=1.8,
+  xtick={1}, ytick={1}, title={\footnotesize $y=x^{n}$ \ ($x\ge0$)}, title style={at={(0.4,0.92)}},
+  legend entries={$n=1$,$n=2$,$n=3$}, legend pos=south east, legend cell align=left,
+  legend style={font=\scriptsize, draw=none, fill=none}]
+  \addplot[curva, domain=0:1.75] {x};
+  \addplot[curva2, domain=0:1.32] {x^2};
+  \addplot[curva3, domain=0:1.2] {x^3};
+\end{axis}
+\end{tikzpicture}\hfill
+\begin{tikzpicture}
+\begin{axis}[width=6cm, height=5.6cm, xmin=-0.1, xmax=1.8, ymin=-0.1, ymax=1.8,
+  xtick={1}, ytick={1}, title={\footnotesize $y=\sqrt[n]{x}$}, title style={at={(0.4,0.92)}},
+  legend entries={$n=1$,$n=2$,$n=3$}, legend pos=south east, legend cell align=left,
+  legend style={font=\scriptsize, draw=none, fill=none}]
+  \addplot[curva, domain=0:1.75] {x};
+  \addplot[curva2, domain=0:1.75, samples=100] {sqrt(x)};
+  \addplot[curva3, domain=0:1.75, samples=100] {x^(1/3)};
+\end{axis}
+\end{tikzpicture}
+\caption{Le funzioni potenza $y=x^{n}$ (a sinistra) e le loro inverse, le radici
+$y=\sqrt[n]{x}$ (a destra), per $n=1,2,3$. Tutte passano per $(0,0)$ e $(1,1)$; per
+$0<x<1$ le potenze decrescono al crescere di $n$, per $x>1$ crescono.}
+\label{fig:potenze-radici}
+\end{figure}
+
+\subsection{Potenze con esponente razionale e reale}
+
+Per mezzo delle funzioni \eqref{eq:potenza-n} e \eqref{eq:radice} si può definire
+l'elevazione a esponente \emph{razionale} ($m,n\in\N$, $x\in\R$, $x>0$):
+\begin{equation}\label{eq:potenza-razionale}
+  x^{m/n}=\sqrt[n]{x^{m}}, \qquad x^{-m/n}=\frac{1}{\sqrt[n]{x^{m}}}, \qquad x^{0}=1.
+\end{equation}
+Si verifica che la definizione è ben posta, cioè che il valore non dipende dalla
+rappresentazione della frazione: $x^{2/4}=x^{1/2}$ (è un buon esercizio, che usa
+l'iniettività della potenza $n$-esima). A questo punto è stato definito il significato
+di $a^{b}$, con $a$ numero reale positivo e $b$ numero razionale. Utilizzando
+l'assioma di completezza è possibile estendere la definizione di $a^{b}$ anche al caso
+in cui l'esponente $b$ sia un numero reale non razionale, come vedremo nel prossimo
+capitolo (\cref{sec:esponenziale-reale}): l'idea è di definire, per $a>1$, $a^{\sqrt2}$
+come l'unico numero reale che separa
+$\{a^{q}: q\in\Q,\ q<\sqrt2\}$ da $\{a^{q}: q\in\Q,\ q>\sqrt2\}$ --- ancora una volta
+la completezza «riempie il buco». Un'altra definizione equivalente, tramite la funzione
+esponenziale, sarà proposta nel capitolo sulle serie.
+
+Elenchiamo le proprietà fondamentali delle potenze, valide per ogni coppia di basi
+$a,b>0$ e ogni coppia di esponenti $s,t\in\R$ (per esponenti interi sono conseguenze
+immediate della definizione; per esponenti razionali si deducono da quelle con esponente
+intero; per esponenti reali saranno dimostrate nei prossimi capitoli,
+\cref{teo:esponenziale} e \cref{teo:potenze-reali}):
+\begin{gather}
+  a^{s}\cdot a^{t}=a^{s+t}, \qquad (a^{s})^{t}=a^{s\cdot t}, \qquad (a\cdot b)^{s}=a^{s}\cdot b^{s}; \label{eq:pot1}\\
+  a^{s}>0; \label{eq:pot2}\\
+  a<b,\ s>0 \ \implica\ a^{s}<b^{s}; \label{eq:pot3}\\
+  a<b,\ s<0 \ \implica\ a^{s}>b^{s}; \label{eq:pot4}\\
+  a>1,\ s<t \ \implica\ a^{s}<a^{t}; \label{eq:pot5}\\
+  a<1,\ s<t \ \implica\ a^{s}>a^{t}. \label{eq:pot6}
+\end{gather}
+
+\subsection{Funzione potenza e funzione esponenziale}
+
+Dall'espressione $a^{b}$ derivano due diversi tipi di funzione, a seconda che si faccia
+variare la base $a$ o l'esponente $b$. Nel primo caso consideriamo la \emph{funzione
+potenza} $f(x)=x^{b}$, con $b\in\R$ fissato. Nel secondo caso abbiamo la \emph{funzione
+esponenziale}\index{funzione!esponenziale} $f(x)=a^{x}$, con $a$ numero reale positivo
+fissato.
+
+Casi particolari della funzione potenza $f(x)=x^{b}$ sono quelli con $b=n\in\N$, oppure
+$b=1/n$, già esaminati in precedenza. La funzione potenza, per $x>0$, in base alla
+\eqref{eq:pot2}, è positiva. Inoltre $x^{b}$ \emph{è una funzione strettamente crescente
+se $b>0$ e strettamente decrescente se $b<0$}, in base alle \eqref{eq:pot3},
+\eqref{eq:pot4}. Esempi di grafici nei vari casi sono riportati nella
+\cref{fig:potenze-reali}.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=4.3cm, height=4.6cm, xmin=-0.1, xmax=2.2, ymin=-0.1, ymax=3.2,
+  xtick={1}, ytick={1}, title={\footnotesize $x^{b}$, $b>1$}, title style={at={(0.4,0.92)}}]
+  \addplot[curva, domain=0:1.75, samples=100] {x^2};
+\end{axis}
+\end{tikzpicture}\hfill
+\begin{tikzpicture}
+\begin{axis}[width=4.3cm, height=4.6cm, xmin=-0.1, xmax=2.2, ymin=-0.1, ymax=3.2,
+  xtick={1}, ytick={1}, title={\footnotesize $x^{b}$, $0<b<1$}, title style={at={(0.45,0.92)}}]
+  \addplot[curva, domain=0:2.1, samples=100] {x^0.5};
+\end{axis}
+\end{tikzpicture}\hfill
+\begin{tikzpicture}
+\begin{axis}[width=4.3cm, height=4.6cm, xmin=-0.1, xmax=2.2, ymin=-0.1, ymax=3.2,
+  xtick={1}, ytick={1}, title={\footnotesize $x^{b}$, $b<0$}, title style={at={(0.5,0.92)}}]
+  \addplot[curva, domain=0.56:2.1, samples=100] {x^(-2)};
+  \addplot[curva2, domain=0.1:2.1, samples=100] {x^(-0.5)};
+  \node[blu, font=\scriptsize, anchor=west] at (axis cs:0.75,2.2) {$b=-2$};
+  \node[rame, font=\scriptsize, anchor=south] at (axis cs:1.6,0.95) {$b=-\tfrac12$};
+\end{axis}
+\end{tikzpicture}
+\caption{La funzione potenza $y=x^{b}$ per $x>0$: crescente se $b>0$ (convessa se
+$b>1$, concava se $0<b<1$), decrescente se $b<0$.}
+\label{fig:potenze-reali}
+\end{figure}
+
+La \emph{funzione esponenziale} $f(x)=a^{x}$, con $a$ numero reale positivo, è una
+funzione positiva, \emph{strettamente crescente se $a>1$ e strettamente decrescente se
+$a<1$}, in base alle \eqref{eq:pot2}, \eqref{eq:pot5}, \eqref{eq:pot6}. Esempi di
+grafici sono riportati nella \cref{fig:esponenziali}.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=6cm, height=5cm, xmin=-2.5, xmax=2.2, ymin=-0.3, ymax=4.5,
+  xtick={1}, ytick={1}, title={\footnotesize $a^{x}$, $a>1$}, title style={at={(0.3,0.9)}}]
+  \addplot[curva, domain=-2.4:2.1, samples=100] {2^x};
+  \addplot[tratteggio] coordinates {(1,0) (1,2) (0,2)};
+\end{axis}
+\end{tikzpicture}\hfill
+\begin{tikzpicture}
+\begin{axis}[width=6cm, height=5cm, xmin=-2.2, xmax=2.5, ymin=-0.3, ymax=4.5,
+  xtick={1}, ytick={1}, title={\footnotesize $a^{x}$, $0<a<1$}, title style={at={(0.7,0.9)}}]
+  \addplot[curva, domain=-2.1:2.4, samples=100] {0.5^x};
+\end{axis}
+\end{tikzpicture}
+\caption{La funzione esponenziale $y=a^{x}$: $a=2$ (a sinistra) e $a=\tfrac12$ (a
+destra). Entrambe passano per $(0,1)$, sono sempre positive, e l'una è la riflessa
+dell'altra rispetto all'asse $y$, perché $(1/2)^{x}=2^{-x}$.}
+\label{fig:esponenziali}
+\end{figure}
+
+Un caso notevolmente importante, e ciò diventerà chiaro nello studio delle derivate, si
+ha quando la base è uguale al \emph{numero di Nepero}\index{numero di Nepero}
+$e=2{,}718\,281\,8\dots$, che definiremo nel capitolo sulle successioni come limite di
+$(1+1/n)^{n}$. In tal caso ovviamente si indica la funzione esponenziale con
+$f(x)=e^{x}$; dato che $e>1$, la funzione $e^{x}$ è strettamente crescente.
+
+\begin{notastorica}[Il numero $e$ e gli interessi composti]
+Il numero $e$ compare per la prima volta, senza nome, nel 1618, in una tavola di
+logaritmi naturali pubblicata in appendice a un'edizione dell'opera di Nepero (John
+Napier, 1550--1617), probabilmente redatta da William Oughtred; fu Jakob Bernoulli, nel
+1683, a incontrarlo studiando il
+problema dell'\emph{interesse composto}: un capitale $C$ investito al tasso annuo del
+$100\%$, con interessi capitalizzati $n$ volte l'anno, dopo un anno diventa
+$C(1+1/n)^{n}$, e Bernoulli osservò che al crescere di $n$ questa quantità non cresce
+all'infinito ma si avvicina a un numero compreso tra $2$ e $3$. La lettera $e$ compare
+per la prima volta in una lettera di Eulero a Christian Goldbach del 1731, e sempre
+Eulero dimostrò nel 1737 che $e$ è irrazionale. La trascendenza di $e$ --- il fatto che non sia radice di alcun
+polinomio a coefficienti interi --- fu provata da Charles Hermite nel 1873.
+\end{notastorica}
+
+\subsection{La funzione logaritmo}
+
+Se $a=1$, la funzione $a^{x}$ è identicamente uguale a $1$: è costante e, naturalmente,
+non invertibile. Se invece $a\neq1$, la funzione esponenziale $a^{x}$ è strettamente
+monotòna e quindi invertibile; si dimostra inoltre (\cref{teo:esponenziale}) che la sua
+immagine è costituita da \emph{tutti} i numeri reali positivi.
+La funzione inversa è quindi definita sui numeri reali positivi.
+
+\begin{definizione}[Logaritmo]\index{logaritmo}
+Sia $a>0$, $a\neq1$. La funzione inversa dell'esponenziale $x\mapsto a^{x}$, definita
+per $x>0$ e a valori in $\R$, si chiama \emph{funzione logaritmo in base $a$} e si
+scrive $f(x)=\log_{a}x$. Essa è dunque caratterizzata da
+\begin{equation}\label{eq:log-def}
+  y=\log_{a}x \ \sse\ a^{y}=x \qquad (x>0,\ y\in\R).
+\end{equation}
+Si suole omettere l'indicazione esplicita della base se tale base è il numero $e$:
+\begin{equation}\label{eq:ln-def}
+  y=\log x \ \sse\ e^{y}=x .
+\end{equation}
+\end{definizione}
+
+In parole: $\log_{a}x$ è \emph{l'esponente da dare ad $a$ per ottenere $x$}. Le formule
+\eqref{eq:log-def}, \eqref{eq:ln-def} sono molto usate anche nella forma seguente, che
+non è altro che la \eqref{eq:inversa} scritta per questa coppia di funzioni:
+\begin{equation}\label{eq:log-inversa}
+\begin{aligned}
+  a^{\log_{a}x}&=x, & e^{\log x}&=x & &(x>0); \\
+  \log_{a}(a^{y})&=y, & \log(e^{y})&=y & &(y\in\R).
+\end{aligned}
+\end{equation}
+
+\begin{proposizione}\label{prop:log-monotono}
+Se la base $a$ è maggiore di $1$, il logaritmo $\log_{a}x$ è una funzione strettamente
+crescente; se $0<a<1$ è strettamente decrescente.
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$a>1$ (oppure $0<a<1$); \ $0<x_{1}<x_{2}$.}
+\Tesi{$\log_{a}x_{1}<\log_{a}x_{2}$ (rispettivamente $\log_{a}x_{1}>\log_{a}x_{2}$).}
+\end{schema}
+
+\begin{strategia}
+È un caso particolare del \cref{teo:monotona-invertibile}: l'inversa di una funzione
+strettamente crescente è strettamente crescente. Ne ripetiamo la dimostrazione per
+assurdo in questo caso concreto, perché è istruttivo vedere come la monotonia
+dell'esponenziale si «trasferisce» al logaritmo.
+\end{strategia}
+
+\begin{dimostrazione}
+Siano $x_{1}<x_{2}$ e $y_{1}=\log_{a}x_{1}$, $y_{2}=\log_{a}x_{2}$. Se fosse
+$y_{2}<y_{1}$, per la \eqref{eq:pot5} avremmo $x_{2}=a^{y_{2}}<a^{y_{1}}=x_{1}$,
+contrariamente alle ipotesi. Analogamente è assurdo che $y_{1}=y_{2}$, perché avremmo
+$x_{1}=x_{2}$. Quindi deve risultare $y_{1}<y_{2}$. Con dimostrazione analoga (usando
+la \eqref{eq:pot6}) si verifica che il logaritmo è strettamente decrescente se la base è
+minore di $1$.
+\end{dimostrazione}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=6cm, height=5cm, xmin=-0.5, xmax=4.5, ymin=-2.5, ymax=2.2,
+  xtick={1}, ytick={1}, title={\footnotesize $\log_{a}x$, $a>1$}, title style={at={(0.7,0.9)}}]
+  \addplot[curva, domain=0.12:4.4, samples=150] {ln(x)/ln(2)};
+\end{axis}
+\end{tikzpicture}\hfill
+\begin{tikzpicture}
+\begin{axis}[width=6cm, height=5cm, xmin=-0.5, xmax=4.5, ymin=-2.2, ymax=2.5,
+  xtick={1}, ytick={1}, title={\footnotesize $\log_{a}x$, $0<a<1$}, title style={at={(0.7,0.9)}}]
+  \addplot[curva, domain=0.12:4.4, samples=150] {-ln(x)/ln(2)};
+\end{axis}
+\end{tikzpicture}
+\caption{La funzione logaritmo $y=\log_{a}x$: $a=2$ (a sinistra) e $a=\tfrac12$ (a
+destra). Sono definite solo per $x>0$, passano per $(1,0)$ e sono le simmetriche
+rispetto alla bisettrice delle esponenziali della \cref{fig:esponenziali}.}
+\label{fig:logaritmi}
+\end{figure}
+
+\needspace{8\baselineskip}
+\begin{proposizione}[Proprietà dei logaritmi]\label{prop:log-proprieta}
+Sia $a>0$, $a\neq1$. Per ogni $x,x_{1},x_{2}>0$ e ogni $b\in\R$, e per ogni altra base
+$c>0$, $c\neq1$, valgono:
+\begin{align}
+  \log_{a}(x_{1}\cdot x_{2}) &= \log_{a}x_{1}+\log_{a}x_{2}; \label{eq:log1}\\
+  \log_{a}(x_{1}/x_{2})      &= \log_{a}x_{1}-\log_{a}x_{2}; \label{eq:log2}\\
+  \log_{a}x^{b}              &= b\log_{a}x; \label{eq:log3}\\
+  \log_{c}x                  &= \frac{\log_{a}x}{\log_{a}c} \qquad\text{(cambiamento di base).} \label{eq:log4}
+\end{align}
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$a,c>0$, \ $a,c\neq1$; \ $x,x_{1},x_{2}>0$; \ $b\in\R$.}
+\Tesi{Le relazioni \eqref{eq:log1}--\eqref{eq:log4}.}
+\end{schema}
+
+\begin{strategia}
+Ogni proprietà del logaritmo è la «traduzione» di una proprietà delle potenze
+\eqref{eq:pot1}, letta attraverso la definizione \eqref{eq:log-def}. Il metodo è sempre
+lo stesso: si dà un nome agli esponenti, $y_{1}=\log_{a}x_{1}$ e $y_{2}=\log_{a}x_{2}$;
+si riscrive tutto in forma esponenziale, $x_{1}=a^{y_{1}}$, $x_{2}=a^{y_{2}}$; si
+applica la proprietà delle potenze; si torna ai logaritmi. Lo facciamo per la
+\eqref{eq:log1} e lasciamo le altre al lettore.
+\end{strategia}
+
+\begin{dimostrazione}
+Per provare la \eqref{eq:log1} poniamo
+\[
+  \log_{a}x_{1}=y_{1}, \qquad \log_{a}x_{2}=y_{2};
+\]
+in base alla definizione \eqref{eq:log-def} risulta $a^{y_{1}}=x_{1}$ e
+$a^{y_{2}}=x_{2}$. Pertanto, per la prima delle \eqref{eq:pot1},
+\[
+  x_{1}\cdot x_{2}=a^{y_{1}}\cdot a^{y_{2}}=a^{y_{1}+y_{2}},
+\]
+che, di nuovo in base alla definizione \eqref{eq:log-def}, equivale a
+\[
+  y_{1}+y_{2}=\log_{a}(x_{1}\cdot x_{2}).
+\]
+Ricordando i simboli introdotti all'inizio, quest'ultima è la tesi \eqref{eq:log1}. Le
+altre relazioni si dimostrano in modo analogo: per la \eqref{eq:log3} si parte da
+$x^{b}=(a^{y})^{b}=a^{by}$; per la \eqref{eq:log4} si pone $y=\log_{c}x$, cioè
+$x=c^{y}$, e si prende il logaritmo in base $a$ di entrambi i membri usando la
+\eqref{eq:log3}: $\log_{a}x=y\log_{a}c$. Il lettore è invitato a eseguire i calcoli
+esplicitamente.
+\end{dimostrazione}
+
+\begin{notastorica}[I logaritmi: trasformare prodotti in somme]
+Le proprietà \eqref{eq:log1}--\eqref{eq:log3} non sono curiosità: sono il motivo per cui
+i logaritmi furono inventati. All'inizio del Seicento astronomi e navigatori dovevano
+eseguire a mano moltiplicazioni tra numeri di molte cifre; Nepero (1614) e, poco dopo,
+Henry Briggs (1617, con la base 10) pubblicarono tavole che permettevano di sostituire
+ogni prodotto con una somma: si cercano i logaritmi dei due fattori, si sommano, e si
+cerca nella tavola il numero che ha quel logaritmo. Laplace disse che i logaritmi,
+«abbreviando le fatiche, raddoppiarono la vita degli astronomi». Il regolo calcolatore,
+usato dagli ingegneri fino agli anni Settanta del Novecento (anche per progettare
+aerei e missioni spaziali), è una tavola di logaritmi incisa su due righelli
+scorrevoli: sommare lunghezze proporzionali a $\log x_{1}$ e $\log x_{2}$ dà una
+lunghezza proporzionale a $\log(x_{1}x_{2})$.
+\end{notastorica}
+
+\begin{python}[Esponenziali, logaritmi e le loro proprietà]
+import math
+# La definizione: log_a(x) è l'esponente y tale che a**y == x
+a, x = 2.0, 10.0
+y = math.log(x, a)                     # logaritmo in base a
+print(f"log_2(10) = {y:.6f},   2**{y:.6f} = {a**y:.6f}")
+
+# Proprietà (log1), (log3), (log4) verificate numericamente
+x1, x2, b = 3.0, 7.0, 2.5
+print(math.isclose(math.log(x1*x2), math.log(x1) + math.log(x2)))
+print(math.isclose(math.log(x1**b), b*math.log(x1)))
+print(math.isclose(math.log(x1, 10), math.log(x1)/math.log(10)))
+
+# Il numero di Nepero come limite di (1 + 1/n)**n
+for n in (1, 10, 100, 1000, 10**6):
+    print(f"n = {n:>8d}   (1+1/n)^n = {(1 + 1/n)**n:.8f}")
+print(f"math.e         = {math.e:.8f}")
+\end{python}
+\begin{risultato}
+log_2(10) = 3.321928,   2**3.321928 = 10.000000
+True
+True
+True
+n =        1   (1+1/n)^n = 2.00000000
+n =       10   (1+1/n)^n = 2.59374246
+n =      100   (1+1/n)^n = 2.70481383
+n =     1000   (1+1/n)^n = 2.71692393
+n =  1000000   (1+1/n)^n = 2.71828047
+math.e         = 2.71828183
+\end{risultato}
+
+\begin{esercizio}
+Risolvere l'equazione $2^{x+1}=3^{x}$.
+\begin{soluzione}
+Prendendo il logaritmo (in qualsiasi base, per esempio naturale) di ambo i membri, che
+sono positivi, e usando le \eqref{eq:log3} e \eqref{eq:log2}:
+$(x+1)\log2=x\log3$, da cui $x(\log3-\log2)=\log2$ e
+$x=\log2/(\log3-\log2)=\log2/\log(3/2)\approx1{,}71$. Il passaggio al logaritmo è
+un'equivalenza: da $u=v$ segue $\log u=\log v$ perché $\log$ è una funzione, e da
+$\log u=\log v$ segue $u=v$ \emph{perché il logaritmo è iniettivo}
+(\cref{prop:log-monotono}). \emph{Scelta logica:} l'incognita compare all'esponente, e
+il logaritmo, che trasforma le potenze in prodotti \eqref{eq:log3}, la «porta giù»,
+riducendo il problema a un'equazione di primo grado.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Dimostrare che $\log_{a}(1/x)=-\log_{a}x$ e che $\log_{1/a}x=-\log_{a}x$.
+\begin{soluzione}
+Poiché $a^{0}=1$, è $\log_{a}1=0$; per la \eqref{eq:log2} con $x_{1}=1$ e $x_{2}=x$ si
+ha allora $\log_{a}(1/x)=\log_{a}1-\log_{a}x=-\log_{a}x$. In particolare
+$\log_{a}(1/a)=-\log_{a}a=-1$. Per la seconda identità usiamo il cambiamento di base
+\eqref{eq:log4} con $c=1/a$, lecito perché $1/a>0$ e $1/a\neq1$:
+$\log_{1/a}x=\log_{a}x/\log_{a}(1/a)=-\log_{a}x$. \emph{Scelta logica:} entrambe le
+identità sono casi particolari delle proprietà generali \eqref{eq:log2} e
+\eqref{eq:log4}: conviene riconoscere la struttura (un quoziente, un cambio di base)
+invece di ripartire ogni volta dalla definizione.
+\end{soluzione}
+\end{esercizio}
