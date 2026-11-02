@@ -1,0 +1,164 @@
+%% ============================================================================
+%%  Introduzione
+%% ============================================================================
+\chapter*{Introduzione}
+\addcontentsline{toc}{chapter}{Introduzione}
+\markboth{Introduzione}{Introduzione}
+\AddToShipoutPictureBG*{\AtPageLowerLeft{\margingardengrown}}
+
+\epigraph{La matematica è l'arte di dare lo stesso nome a cose diverse.}{Henri Poincaré}
+
+\lettrine[lines=3, findent=2pt, nindent=0pt]{Q}{uesto libro} nasce da una convinzione
+semplice: una dimostrazione non è una sequenza di formule da imparare a memoria, ma un
+\emph{ragionamento}, e un ragionamento si può raccontare. Il programma è quello classico
+dei corsi universitari di Analisi Matematica Uno --- i numeri reali, le successioni e le
+serie, i limiti e la continuità, il calcolo differenziale e integrale --- e l'impostazione
+è quella rigorosa e formale che la materia richiede. Ciò che cambia è il \emph{modo} in cui
+le cose vengono dette: nessun passaggio viene lasciato al freddo formalismo, e per ogni
+teorema il lettore viene accompagnato per mano nel piano della dimostrazione prima ancora
+di leggerne i dettagli.
+
+\section*{Come è organizzato ogni teorema}
+
+Ogni risultato importante del libro è presentato secondo uno schema fisso, che il
+lettore imparerà presto a riconoscere.
+
+\begin{enumerate}[label=\textbf{\arabic*.}]
+  \item \textbf{L'enunciato}, in una cornice azzurra, scritto nella forma più precisa
+  possibile.
+  \item \textbf{Lo schema dell'enunciato}, un riquadro in cui le \emph{ipotesi} e la
+  \emph{tesi} sono esplicitate in modo schematico, separate l'una dall'altra. È un
+  esercizio che consigliamo di fare da soli, coprendo il riquadro: saper dire con
+  esattezza «che cosa si suppone» e «che cosa si vuole provare» è già metà del lavoro.
+  \item \textbf{Il piano d'attacco}, in una cornice verde: \emph{come} affronteremo la
+  dimostrazione, quale idea la guida, quali strumenti useremo e perché. È la parte che di
+  solito manca nei libri di testo e che invece un buon insegnante racconta alla lavagna.
+  \item \textbf{La dimostrazione} vera e propria, in cui ogni passaggio è giustificato con
+  un rimando esplicito all'assioma, alla definizione o al risultato precedente che lo
+  autorizza.
+\end{enumerate}
+
+Accanto a questo schema compaiono altri riquadri: le \textbf{definizioni} (color rame),
+gli \textbf{esempi} e le \textbf{osservazioni} (grigio), le \textbf{note storiche} sui
+matematici e sulle idee che incontreremo, le \textbf{avvertenze} sugli errori più comuni
+e i riquadri di \textbf{codice Python}.
+
+Alcuni teoremi hanno anche una \textbf{seconda dimostrazione}, preceduta da un piano
+d'attacco intitolato «Un'altra via»: arrivare allo stesso risultato per una strada
+diversa (l'estremo superiore al posto della bisezione, il valor medio al posto
+dell'integrale) mostra quali ipotesi e quali idee sono davvero essenziali. Le
+sottosezioni intitolate \textbf{Approfondimento} trattano argomenti che arricchiscono
+il quadro senza essere indispensabili al seguito: l'assioma di Dedekind, il massimo e il
+minimo limite, la quadratura della parabola di Archimede, le funzioni omogenee, i
+prodotti infiniti. Molti di questi complementi, e numerose notizie storiche, seguono i
+due volumi di Enrico Giusti \cite{giusti,giusti2}; in una prima lettura si possono
+saltare.
+
+Ogni capitolo, infine, si chiude con i
+\textbf{punti fondamentali}: un riquadro azzurro che raccoglie le definizioni, i teoremi
+e i metodi da ricordare, con i rimandi alle pagine in cui sono dimostrati, e un breve
+paragrafo che collega il capitolo a quello successivo. È il punto da cui ripartire
+quando si ripassa per l'esame.
+
+\section*{Perché Python}
+
+Un corso di Analisi è, per sua natura, un corso di \emph{idee}; ma le idee si capiscono
+meglio quando si possono toccare. Abbiamo quindi inserito, dove pertinente, brevi
+programmi in Python (con le librerie \texttt{numpy}, \texttt{matplotlib},
+\texttt{sympy} e \texttt{fractions}) che permettono di verificare numericamente un
+enunciato, di disegnare il grafico di una funzione, di esplorare che cosa succede quando
+un'ipotesi viene a mancare, o di risolvere un esercizio. Tutte le figure generate al
+calcolatore sono riproducibili con gli script distribuiti insieme ai sorgenti del libro,
+nella cartella \texttt{python/}. Il codice non sostituisce mai la dimostrazione: la
+affianca, come un laboratorio affianca un corso di fisica.
+
+\section*{Il filo conduttore: i teoremi di esistenza}
+
+Un corso di Analisi Matematica non è un elenco di formule, ma una catena di
+argomentazioni logiche coerenti e conseguenti. Lo schema in \cref{fig:schema-teoremi}
+riassume i collegamenti tra i principali teoremi (in genere \emph{di esistenza}) che
+incontreremo in questo volume: tutto discende dall'\emph{assioma di completezza} dei
+numeri reali, introdotto nel primo capitolo. Il lettore potrà tornare a questo schema
+man mano che procede nello studio, e lo troverà utile anche nella preparazione
+dell'esame.
+
+\begin{figure}[p]
+\centering
+\begin{tikzpicture}[x=1cm, y=1cm,
+  box/.style={draw=blu, fill=bluchiaro, rounded corners=2pt, text width=33mm,
+    align=center, font=\scriptsize\sffamily, inner sep=3pt, minimum height=9mm},
+  root/.style={box, fill=blu, text=white, font=\scriptsize\sffamily\bfseries},
+  arr/.style={-{Latex[length=2mm]}, blu, thick},
+  side/.style={-{Latex[length=2mm]}, rame, thick, dashed}]
+  \def\dx{4.05}\def\dy{1.45}
+  \node[root] (ass)     at (0,0)              {Assioma di completezza};
+  \node[box]  (sup)     at (0,-\dy)           {Esistenza dell'estremo superiore};
+  \node[box]  (mon)     at (0,-2*\dy)         {Esistenza del limite delle successioni monotòne};
+  \node[box]  (bw)      at (-\dx,-3*\dy)      {Teorema di Bolzano--Weierstrass};
+  \node[box]  (zeri)    at (\dx,-3*\dy)       {Teorema dell'esistenza degli zeri};
+  \node[box]  (wei)     at (-\dx,-4*\dy)      {Teorema di Weierstrass};
+  \node[box]  (cantor)  at (0,-4*\dy)         {Teorema di Cantor};
+  \node[box]  (vi)      at (\dx,-4*\dy)       {Teorema dei valori intermedi};
+  \node[box]  (rolle)   at (-\dx,-5*\dy)      {Teorema di Rolle};
+  \node[box]  (integ)   at (0,-5*\dy)         {Integrabilità delle funzioni continue};
+  \node[box]  (media)   at (\dx,-5*\dy)       {Teorema della media integrale};
+  \node[box]  (lagr)    at (-\dx,-6*\dy)      {Teorema di Lagrange};
+  \node[box]  (dernulla) at (0,-6*\dy)        {Funzioni con derivata nulla su un intervallo};
+  \node[box]  (tfci)    at (\dx,-6*\dy)       {Teorema fondamentale del calcolo integrale};
+  \node[box]  (cauchy)  at (-\dx,-7*\dy)      {Teorema di Cauchy};
+  \node[box]  (prim)    at (0,-7*\dy)         {Caratterizzazione delle primitive};
+  \node[box]  (ffci)    at (\dx,-7*\dy)       {Formula fondamentale del calcolo integrale};
+  \node[box]  (hop)     at (-\dx,-8*\dy)      {Teorema di L'Hôpital};
+  \node[box]  (tayint)  at (\dx,-8*\dy)       {Formula di Taylor con resto integrale};
+  \node[box]  (peano)   at (-\dx,-9*\dy)      {Formula di Taylor con resto di Peano};
+  \node[box]  (taylag)  at (\dx,-9*\dy)       {Formula di Taylor con resto di Lagrange};
+  \draw[arr] (ass) -- (sup);
+  \draw[arr] (sup) -- (mon);
+  \draw[arr] (mon) -- (bw);
+  \draw[arr] (mon) -- (zeri);
+  \draw[arr] (bw) -- (wei);
+  \draw[arr] (bw) -- (cantor);
+  \draw[arr] (zeri) -- (vi);
+  \draw[arr] (wei) -- (rolle);
+  \draw[arr] (cantor) -- (integ);
+  \draw[arr] (vi) -- (media);
+  \draw[arr] (rolle) -- (lagr);
+  \draw[arr] (integ) -- (dernulla);
+  \draw[arr] (media) -- (tfci);
+  \draw[arr] (lagr) -- (cauchy);
+  \draw[side] (lagr) -- (dernulla);
+  \draw[arr] (dernulla) -- (prim);
+  \draw[arr] (tfci) -- (ffci);
+  \draw[side] (prim) -- (ffci);
+  \draw[arr] (cauchy) -- (hop);
+  \draw[arr] (ffci) -- (tayint);
+  \draw[arr] (hop) -- (peano);
+  \draw[arr] (tayint) -- (taylag);
+\end{tikzpicture}
+\caption{Lo schema di collegamento dei principali teoremi di esistenza del corso. Le
+frecce continue indicano «è usato nella dimostrazione di»; quelle tratteggiate un
+contributo laterale. Oltre all'assioma di completezza, l'intero sistema degli assiomi dei
+numeri reali è presupposto da tutta la teoria. Altre implicazioni importanti, non
+riportate nello schema, sono quelle del teorema di Bolzano--Weierstrass, che implica il
+criterio di convergenza di Cauchy, e del teorema dei valori intermedi, che implica la
+continuità delle funzioni inverse e quindi la loro derivabilità.}
+\label{fig:schema-teoremi}
+\end{figure}
+
+\section*{Avvertenze sulla notazione}
+
+Scriviamo $\N=\{1,2,3,\dots\}$ per l'insieme dei numeri naturali (lo zero \emph{non} è
+un numero naturale, in questo libro), $\Z$ per gli interi, $\Q$ per i razionali e
+$\R$ per i reali. Il simbolo $\sen x$ indica il seno di $x$, secondo la consuetudine
+italiana, e $\tg x$ la tangente. Il logaritmo senza indicazione della base, $\log x$, è
+sempre il logaritmo naturale, in base $e$. Il simbolo $\blacksquare$ segna la fine di
+una dimostrazione; i simboli $\implica$ e $\sse$ si leggono «implica» e «se e solo se»;
+$\perogni$ si legge «per ogni» ed $\esiste$ «esiste».
+
+\section*{Come usare questo libro}
+
+Il consiglio più importante è di \emph{non} leggere le dimostrazioni passivamente.
+Dopo l'enunciato, provate a scrivere da soli lo schema ipotesi/tesi; dopo il piano
+d'attacco, provate a completare la dimostrazione prima di leggerla; dopo ogni esercizio
+svolto, chiedetevi \emph{perché} si è scelta quella strada e non un'altra. È in queste
+domande, più che nelle risposte, che si impara l'Analisi.

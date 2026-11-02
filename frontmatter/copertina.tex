@@ -1,0 +1,31 @@
+%% ============================================================================
+%%  Copertina
+%%  Il giardino di florilegium cresce nel margine esterno; il frontespizio è
+%%  disegnato in coordinate assolute di pagina (origine in basso a sinistra).
+%% ============================================================================
+\begin{titlepage}
+\AddToShipoutPictureBG*{\AtPageLowerLeft{\margingardengrown}}%
+\AddToShipoutPictureFG*{\AtPageLowerLeft{%
+\begin{tikzpicture}[overlay]
+  % barra verticale sul dorso
+  \fill[blu] (0,0) rectangle (9mm,\paperheight);
+  % filetti color rame
+  \draw[rame, line width=0.8pt] (22mm,235mm) -- (140mm,235mm);
+  \draw[rame, line width=0.8pt] (22mm,42mm) -- (140mm,42mm);
+  % autore e titolo
+  \node[anchor=north west, text width=118mm, align=left, inner sep=0pt]
+    at (22mm,227mm) {%
+      {\sffamily\color{grigio}\Large Biagio Raucci}\\[14mm]
+      {\sffamily\bfseries\color{blu}\fontsize{44}{48}\selectfont Analisi\\[3mm] Matematica}\\[10mm]
+      {\sffamily\color{grigio}\Large Un corso rigoroso,\\ spiegato passo per passo}\\[6mm]
+      {\sffamily\color{grigio}\large Volume primo --- con figure, esercizi commentati\\ e codice Python}
+    };
+  % piede
+  \node[anchor=south west, text width=118mm, align=left, inner sep=0pt]
+    at (22mm,30mm) {%
+      {\sffamily\color{grigio}\small Edizione aperta --- \the\year\\
+       Testo rilasciato con licenza Creative Commons BY-SA 4.0}
+    };
+\end{tikzpicture}}}%
+\null
+\end{titlepage}
