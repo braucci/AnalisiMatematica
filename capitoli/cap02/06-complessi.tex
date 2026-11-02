@@ -1,0 +1,857 @@
+%% ----------------------------------------------------------------------------
+%%  §2.6  Appendice: i numeri complessi
+%% ----------------------------------------------------------------------------
+\section{Appendice: i numeri complessi}
+\label{sec:complessi}
+
+\subsection{Perché ampliare \texorpdfstring{$\R$}{R}}
+
+Consideriamo una generica equazione di secondo grado nell'incognita $z$:
+\begin{equation}\label{eq:secondo-grado}
+  az^{2}+bz+c=0 \qquad (a\neq0),
+\end{equation}
+che ha come soluzioni (reali, se $b^{2}-4ac\ge0$)
+\begin{equation}\label{eq:formula-risolutiva}
+  z_{1,2}=-\frac{b}{2a}\pm\frac{\sqrt{b^{2}-4ac}}{2a}.
+\end{equation}
+I coefficienti $a$, $b$, $c$ sono legati alle soluzioni $z_{1}$, $z_{2}$ anche dalle
+semplici relazioni, che si verificano immediatamente sommando e moltiplicando le
+\eqref{eq:formula-risolutiva},
+\begin{equation}\label{eq:viete}
+  z_{1}+z_{2}=-\frac ba, \qquad z_{1}\cdot z_{2}=\frac ca .
+\end{equation}
+Proviamo a scrivere tali relazioni nel caso dell'equazione
+\begin{equation}\label{eq:z2piu1}
+  z^{2}+1=0;
+\end{equation}
+in tal caso le \eqref{eq:viete} diventano $z_{1}+z_{2}=0$ e $z_{1}\cdot z_{2}=1$.
+Queste relazioni, anche se formalmente ben definite, non hanno alcun senso nell'ambito
+dei numeri reali, perché non esistono $z_{1}$, $z_{2}$ soluzioni \emph{reali} della
+\eqref{eq:z2piu1}: il quadrato di un numero reale non è mai negativo. Questo esempio
+mostra come talvolta sia utile pensare che qualsiasi equazione di secondo grado ammetta
+soluzione. Dato che ciò non vale nell'ambito dei numeri reali, si amplia $\R$
+introducendo il campo $\C$ dei \emph{numeri complessi}.
+
+\begin{notastorica}[Cardano, Bombelli e il «più di meno»]
+Curiosamente, i numeri complessi non nacquero dalle equazioni di secondo grado (di fronte
+a $z^{2}+1=0$ ci si limitava a dire che non ci sono soluzioni) ma da quelle di
+\emph{terzo} grado. Nell'\emph{Ars Magna} (1545) Gerolamo Cardano pubblicò la formula
+risolutiva dell'equazione $x^{3}=px+q$, scoperta da Scipione del Ferro e da Tartaglia.
+Applicata a $x^{3}=15x+4$, che ha la soluzione reale $x=4$, la formula produce
+\[
+  x=\sqrt[3]{2+\sqrt{-121}}+\sqrt[3]{2-\sqrt{-121}},
+\]
+un'espressione con radici di numeri negativi. Fu il bolognese Rafael Bombelli, nella sua
+\emph{L'Algebra} (1572), ad avere il coraggio di calcolare con questi oggetti
+«sofistici», introducendo regole come «più di meno via più di meno fa meno» (cioè
+$i\cdot i=-1$). Bombelli osservò che $(2+\sqrt{-1})^{3}=2+\sqrt{-121}$ e
+$(2-\sqrt{-1})^{3}=2-\sqrt{-121}$, e quindi
+$x=(2+\sqrt{-1})+(2-\sqrt{-1})=4$: i numeri «impossibili» servivano a trovare una
+soluzione perfettamente reale. Il lettore potrà verificare il calcolo di Bombelli dopo
+aver letto questo paragrafo.
+\end{notastorica}
+
+\subsection{Definizione e forma algebrica}
+
+Il testo di riferimento \cite{marcellini-sbordone} introduce i numeri complessi
+definendo «$i=\sqrt{-1}$» e calcolando «con le stesse regole dei reali». È un approccio
+efficace, ma lascia aperta una domanda: \emph{esiste} davvero un sistema di numeri che
+contiene $\R$ e un elemento con quadrato $-1$, nel quale valgano tutte le regole del
+calcolo? La risposta più semplice, dovuta a William Rowan Hamilton (1837), consiste nel
+costruirlo esplicitamente come insieme di coppie di numeri reali.
+
+\needspace{8\baselineskip}
+\begin{definizione}[Numeri complessi]\index{numeri complessi}
+Si chiama insieme dei \emph{numeri complessi}, e si indica con $\C$, l'insieme
+$\R^{2}=\R\times\R$ delle coppie ordinate di numeri reali, munito delle operazioni
+\begin{align}
+  (x,y)+(x',y')&=(x+x',\ y+y'), \label{eq:somma-complessi}\\
+  (x,y)\cdot(x',y')&=(xx'-yy',\ xy'+x'y). \label{eq:prodotto-complessi}
+\end{align}
+\end{definizione}
+
+La somma è quella «componente per componente»; il prodotto, a prima vista misterioso, è
+scelto apposta perché funzioni la costruzione che segue.
+
+\begin{teorema}[$\C$ è un campo]\label{teo:C-campo}\index{campo!dei numeri complessi}
+Con le operazioni \eqref{eq:somma-complessi}, \eqref{eq:prodotto-complessi} l'insieme
+$\C$ soddisfa gli assiomi (A1)--(A6) del \cref{sec:assiomi}, con elementi neutri
+$(0,0)$ e $(1,0)$, opposto $-(x,y)=(-x,-y)$ e, per $(x,y)\neq(0,0)$, inverso
+\begin{equation}\label{eq:inverso-complesso}
+  (x,y)^{-1}=\Bigl(\frac{x}{x^{2}+y^{2}},\ \frac{-y}{x^{2}+y^{2}}\Bigr).
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$\C=\R^{2}$ con le operazioni \eqref{eq:somma-complessi},
+\eqref{eq:prodotto-complessi}; \ gli assiomi di campo valgono in $\R$.}
+\Tesi{$\C$ soddisfa (A1)--(A6), con zero $(0,0)$, unità $(1,0)$, opposto $(-x,-y)$ e,
+per $(x,y)\neq(0,0)$, inverso dato dalla \eqref{eq:inverso-complesso}.}
+\end{schema}
+
+\begin{strategia}
+Si tratta di verificare uno per uno gli assiomi, usando le proprietà dei numeri reali
+sulle componenti. Le proprietà della somma sono immediate (si lavora componente per
+componente). Per il prodotto, la commutatività si vede dalla simmetria della formula;
+l'associatività e la distributiva richiedono un calcolo diretto, che svolgiamo; per
+l'inverso basta verificare che la coppia proposta funziona, dopo aver osservato che il
+denominatore $x^{2}+y^{2}$ non si annulla.
+\end{strategia}
+
+\begin{dimostrazione}
+Le proprietà associativa e commutativa della somma, l'esistenza dello zero $(0,0)$ e
+dell'opposto $(-x,-y)$ seguono immediatamente dalle corrispondenti proprietà dei numeri
+reali, applicate alle due componenti. Il prodotto è commutativo, perché scambiando
+$(x,y)$ con $(x',y')$ la \eqref{eq:prodotto-complessi} non cambia. È associativo: posto
+$z=(a,b)$, $w=(c,d)$, $u=(e,f)$,
+\begin{align*}
+  (zw)u&=(ac-bd,\ ad+bc)\cdot(e,f)\\
+       &=(ace-bde-adf-bcf,\ acf-bdf+ade+bce),\\
+  z(wu)&=(a,b)\cdot(ce-df,\ cf+de)\\
+       &=(ace-adf-bcf-bde,\ acf+ade+bce-bdf),
+\end{align*}
+e le due coppie coincidono. È distributivo:
+\begin{align*}
+  (a,b)\cdot\bigl[(c,d)+(e,f)\bigr]&=\bigl(a(c+e)-b(d+f),\ a(d+f)+b(c+e)\bigr)\\
+  &=(ac-bd,\ ad+bc)+(ae-bf,\ af+be).
+\end{align*}
+L'elemento $(1,0)$ è neutro: $(x,y)(1,0)=(x\cdot1-y\cdot0,\ x\cdot0+1\cdot y)=(x,y)$; ed
+è diverso da $(0,0)$. Infine, se $(x,y)\neq(0,0)$, allora $x^{2}+y^{2}>0$ (una somma di
+quadrati di numeri reali è nulla solo se entrambi sono nulli, perché ogni quadrato è
+$\ge0$), e
+\[
+  (x,y)\cdot\Bigl(\frac{x}{x^{2}+y^{2}},\frac{-y}{x^{2}+y^{2}}\Bigr)
+  =\Bigl(\frac{x^{2}+y^{2}}{x^{2}+y^{2}},\ \frac{-xy+xy}{x^{2}+y^{2}}\Bigr)=(1,0). \qedhere
+\]
+\end{dimostrazione}
+
+Poiché valgono gli assiomi (A1)--(A6), in $\C$ valgono anche \emph{tutte} le loro
+conseguenze dimostrate nel \cref{sec:conseguenze}: leggi di semplificazione, legge di
+annullamento del prodotto, regola dei segni, unicità di opposto e inverso. Ecco il
+vantaggio dell'approccio assiomatico: non serve ridimostrare nulla.
+
+\paragraph{I reali dentro i complessi.} Le coppie della forma $(x,0)$ si sommano e si
+moltiplicano esattamente come i numeri reali:
+\[
+  (x,0)+(x',0)=(x+x',0), \qquad (x,0)\cdot(x',0)=(xx',0).
+\]
+Possiamo quindi \emph{identificare} il numero reale $x$ con la coppia $(x,0)$, e
+considerare $\R$ come un sottoinsieme di $\C$. Poniamo poi
+\[
+  i=(0,1),
+\]
+e risulta
+\begin{equation}\label{eq:unita-immaginaria}
+  i^{2}=(0,1)\cdot(0,1)=(0\cdot0-1\cdot1,\ 0\cdot1+1\cdot0)=(-1,0)=-1.
+\end{equation}
+Il numero $i$ si chiama \emph{unità immaginaria}\index{unità immaginaria}. Infine, per
+ogni coppia,
+\[
+  (x,y)=(x,0)+(0,y)=(x,0)+(y,0)\cdot(0,1)=x+iy .
+\]
+Abbiamo così ottenuto la \emph{forma algebrica} dei numeri complessi:
+\begin{equation}\label{eq:forma-algebrica}
+  \C=\{z=x+iy : x,y\in\R\}.
+\end{equation}
+Si dice che $x=\operatorname{Re}z$ è la \emph{parte reale} e $y=\operatorname{Im}z$ è
+il \emph{coefficiente della parte immaginaria} di $z$. Due numeri complessi sono uguali
+se e solo se hanno uguali parte reale e coefficiente dell'immaginario (è la
+\eqref{eq:coppie}). Le operazioni sui numeri complessi si eseguono con le stesse regole
+dei numeri reali, tenendo anche conto della \eqref{eq:unita-immaginaria}; quindi:
+\begin{align}
+  (x+iy)+(x'+iy')&=(x+x')+i(y+y'); \label{eq:somma-algebrica}\\
+  (x+iy)\cdot(x'+iy')&=xx'+ixy'+ix'y+i^{2}yy' \notag\\
+                      &=(xx'-yy')+i(xy'+x'y). \label{eq:prodotto-algebrico}
+\end{align}
+La \eqref{eq:prodotto-algebrico} spiega, a posteriori, la scelta del prodotto
+\eqref{eq:prodotto-complessi}: è l'unica compatibile con la proprietà distributiva e con
+$i^{2}=-1$.
+
+\begin{notastorica}[Hamilton: dalle coppie ai quaternioni]
+William Rowan Hamilton (1805--1865) pubblicò la sua teoria delle «coppie algebriche» nel
+1837, negli atti dell'Accademia irlandese: voleva fondare i numeri complessi sulla sola
+algebra, senza bisogno del piano di Wessel e di Argand di cui diremo più avanti. Il
+successo lo spinse a cercare per lo \emph{spazio} ciò che le coppie fanno per il piano:
+una moltiplicazione di terne $(x,y,z)$ che rappresentasse le rotazioni tridimensionali,
+come quella dei complessi rappresenta le rotazioni piane. Non poteva riuscirci (oggi
+sappiamo che in dimensione $3$ una moltiplicazione con le proprietà richieste non esiste),
+ma il 16 ottobre 1843, camminando lungo il Royal Canal di Dublino, capì che bastava
+passare alle \emph{quaterne}, con tre unità immaginarie legate dalle relazioni
+$i^{2}=j^{2}=k^{2}=ijk=-1$, che incise sulla pietra del Brougham Bridge. Il prezzo era la
+rinuncia alla commutatività: $ij=k$, ma $ji=-k$. I \emph{quaternioni}, a lungo considerati
+una curiosità, sono oggi di uso quotidiano in ingegneria aerospaziale: i sistemi di
+navigazione inerziale e di controllo d'assetto di velivoli e veicoli spaziali descrivono
+l'orientamento con un quaternione di modulo $1$, che non soffre delle singolarità degli
+angoli di Eulero.
+\end{notastorica}
+
+\begin{proposizione}[$\C$ non è ordinabile]\label{prop:C-non-ordinabile}
+Non esiste in $\C$ alcuna relazione $\le$ che soddisfi gli assiomi dell'ordinamento
+(O1)--(O4).
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$\C$ è un campo nel quale $i^{2}=-1$.}
+\Tesi{Non esiste in $\C$ una relazione $\le$ che verifichi (O1)--(O4).}
+\end{schema}
+
+\begin{strategia}
+Supponiamo per assurdo che un tale ordinamento esista. Allora valgono in $\C$ tutte le
+conseguenze degli assiomi del \cref{sec:conseguenze}, e in particolare un fatto che si
+deduce dai soli assiomi (lo verifichiamo nella dimostrazione): \emph{ogni quadrato è $\ge0$}.
+Ma in $\C$ anche $-1$ è un quadrato, $-1=i^{2}$; e $1=1^{2}$ è un quadrato. Avremmo
+dunque $1\ge0$ e $-1\ge0$, da cui $1=0$.
+\end{strategia}
+
+\begin{dimostrazione}
+Se esistesse un tale ordinamento, per ogni $z\in\C$ si avrebbe $z^{2}\ge0$: se $z\ge0$
+per l'assioma \ref{ass:ordine-prodotto}; se $z\le0$, allora $-z\ge0$
+(\cref{prop:segno-opposto}) e $z^{2}=(-z)^{2}\ge0$ (\cref{prop:segni}). In particolare
+$1=1^{2}\ge0$ e $-1=i^{2}\ge0$; dalla seconda, per la \cref{prop:segno-opposto},
+$1\le0$, e per l'antisimmetria \ref{ass:antisimmetrica} $1=0$, contro l'assioma
+\ref{ass:neutri}.
+\end{dimostrazione}
+
+\begin{attenzione}[Nei complessi non si scrivono disuguaglianze]
+Una conseguenza pratica: scrivere $z<w$ con $z,w$ complessi non reali non ha senso. Le
+disuguaglianze si scrivono solo tra numeri reali, ad esempio tra i \emph{moduli}
+$\abs z$, $\abs w$, che definiamo tra poco.
+\end{attenzione}
+
+\subsection{Coniugato e modulo}
+
+\begin{definizione}[Coniugato e modulo]\index{complesso coniugato}\index{modulo!di un numero complesso}
+Il numero complesso $\bar z=x-iy$ si chiama \emph{complesso coniugato} del numero
+$z=x+iy$. Il numero reale non negativo
+\begin{equation}\label{eq:modulo-complesso}
+  \abs z=\sqrt{x^{2}+y^{2}}
+\end{equation}
+si chiama \emph{modulo} di $z$. Se $z=x$ è reale, $\abs z=\sqrt{x^{2}}$ coincide con il
+valore assoluto di $x$: la notazione è coerente.
+\end{definizione}
+
+\begin{proposizione}[Proprietà del coniugato e del modulo]\label{prop:coniugato-modulo}
+Per ogni $z,w\in\C$:
+\begin{enumerate}
+  \item $\overline{z+w}=\bar z+\bar w$, \quad $\overline{zw}=\bar z\,\bar w$, \quad
+  $\bar{\bar z}=z$;
+  \item $z\,\bar z=\abs z^{2}$; \quad $\operatorname{Re}z=\dfrac{z+\bar z}{2}$, \quad
+  $\operatorname{Im}z=\dfrac{z-\bar z}{2i}$;
+  \item $\abs{zw}=\abs z\,\abs w$; \quad $\abs{\bar z}=\abs z$; \quad
+  $\abs{\operatorname{Re}z}\le\abs z$, \quad $\abs{\operatorname{Im}z}\le\abs z$;
+  \item $\abs{z+w}\le\abs z+\abs w$ \quad (disuguaglianza triangolare).
+\end{enumerate}
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$z=x+iy$, \ $w=u+iv$, \ con $x,y,u,v\in\R$.}
+\Tesi{Le identità (i)--(ii), le relazioni (iii) sui moduli e la disuguaglianza
+triangolare $\abs{z+w}\le\abs z+\abs w$.}
+\end{schema}
+
+\begin{strategia}
+(i) e (ii) sono calcoli diretti con la forma algebrica. Il punto (ii),
+$z\bar z=\abs z^{2}$, è lo strumento principale per il resto: permette di trasformare
+affermazioni sui moduli (che contengono radici) in affermazioni sui \emph{quadrati} dei
+moduli, che sono prodotti e si calcolano con l'algebra. Così per (iii) calcoleremo
+$\abs{zw}^{2}$ e per la disuguaglianza triangolare $\abs{z+w}^{2}$; alla fine si
+torna ai moduli estraendo la radice, che è crescente (\cref{cor:radice-2}).
+\end{strategia}
+
+\begin{dimostrazione}
+(i) Se $z=x+iy$, $w=u+iv$, si ha $zw=(xu-yv)+i(xv+yu)$ e
+$\bar z\bar w=(x-iy)(u-iv)=(xu-yv)-i(xv+yu)=\overline{zw}$; le altre due sono immediate.
+(ii) $z\bar z=(x+iy)(x-iy)=x^{2}-i^{2}y^{2}=x^{2}+y^{2}=\abs z^{2}$; inoltre
+$z+\bar z=2x$ e $z-\bar z=2iy$.
+(iii) Per (i) e (ii), $\abs{zw}^{2}=zw\,\overline{zw}=z\bar z\,w\bar w=\abs z^{2}\abs w^{2}$,
+e poiché i moduli sono non negativi, $\abs{zw}=\abs z\abs w$. La seconda è ovvia; per la
+terza, $\abs{\operatorname{Re}z}=\sqrt{x^{2}}\le\sqrt{x^{2}+y^{2}}$ per la monotonia della
+radice, e analogamente per la quarta.
+(iv) Usando (i), (ii) e il fatto che $\bar zw=\overline{z\bar w}$,
+\[
+  \abs{z+w}^{2}=(z+w)(\bar z+\bar w)=\abs z^{2}+\abs w^{2}+z\bar w+\overline{z\bar w}
+  =\abs z^{2}+\abs w^{2}+2\operatorname{Re}(z\bar w).
+\]
+Per (iii), $\operatorname{Re}(z\bar w)\le\abs{z\bar w}=\abs z\abs w$, quindi
+$\abs{z+w}^{2}\le\abs z^{2}+\abs w^{2}+2\abs z\abs w=(\abs z+\abs w)^{2}$; estraendo la
+radice si ottiene la tesi.
+\end{dimostrazione}
+
+Il coniugato è particolarmente utile nel calcolo del quoziente di due numeri complessi:
+moltiplicando numeratore e denominatore per il coniugato del denominatore, il
+denominatore diventa reale. Se $z=x+iy\neq0$,
+\begin{equation}\label{eq:quoziente-algebrico}
+\begin{split}
+  \frac{x'+iy'}{x+iy}&=\frac{(x'+iy')(x-iy)}{(x+iy)(x-iy)}=\frac{(x'+iy')(x-iy)}{x^{2}+y^{2}}\\
+  &=\frac{xx'+yy'}{x^{2}+y^{2}}-i\,\frac{x'y-xy'}{x^{2}+y^{2}}.
+\end{split}
+\end{equation}
+Come si vede dal conto precedente, la divisione tra due numeri complessi è possibile
+purché il denominatore $z=x+iy$ sia diverso da zero, cioè purché non risulti
+contemporaneamente $x=0$ e $y=0$ (è la \eqref{eq:inverso-complesso}).
+
+\begin{esempio}
+Calcoliamo un quoziente moltiplicando per il coniugato del denominatore:
+\[
+  \frac{3+2i}{1-i}=\frac{(3+2i)(1+i)}{(1-i)(1+i)}=\frac{3+3i+2i+2i^{2}}{2}=\frac{1+5i}{2}
+  =\frac12+\frac52\,i .
+\]
+\end{esempio}
+
+\subsection{Il piano di Gauss e la forma trigonometrica}
+
+È utile la \emph{rappresentazione cartesiana} dei numeri complessi, che si ottiene
+facendo corrispondere a ogni numero complesso $z=x+iy$ il punto $P$ di coordinate
+$(x,y)$, come nella \cref{fig:piano-gauss}: l'asse delle ascisse rappresenta i numeri
+reali (\emph{asse reale}), quello delle ordinate i multipli reali di $i$ (\emph{asse
+immaginario}). Il piano così interpretato si chiama \emph{piano di Gauss} (o di
+Argand--Gauss). Il modulo $\abs z$ è la distanza di $P$ dall'origine (per il teorema di
+Pitagora), il coniugato $\bar z$ è il simmetrico di $z$ rispetto all'asse reale, e la
+somma di due numeri complessi corrisponde alla regola del parallelogramma per la somma
+di vettori.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[scale=1.05, every node/.style={font=\footnotesize}]
+  \draw[-Latex, grigio] (-0.5,0) -- (4.3,0) node[below] {$\operatorname{Re}$};
+  \draw[-Latex, grigio] (0,-2.3) -- (0,2.6) node[left] {$\operatorname{Im}$};
+  \coordinate (z) at (3,1.8);
+  \draw[blu, thick, -Latex] (0,0) -- (z) node[midway, above left] {$\rho=\abs z$};
+  \fill[blu] (z) circle (1.6pt) node[above right] {$z=x+iy$};
+  \draw[tratteggio] (z) -- (3,0) node[below] {$x$};
+  \draw[tratteggio] (z) -- (0,1.8) node[left] {$y$};
+  \draw[rame, thick] (0.8,0) arc (0:31:0.8) node[midway, right] {$\vartheta$};
+  \coordinate (zb) at (3,-1.8);
+  \draw[verde, thick, -Latex] (0,0) -- (zb);
+  \fill[verde] (zb) circle (1.6pt) node[below right] {$\bar z=x-iy$};
+  \draw[tratteggio] (3,0) -- (zb);
+  \node[below left] at (0,0) {$0$};
+\end{tikzpicture}\hfill
+\begin{tikzpicture}[scale=1.05, every node/.style={font=\footnotesize}]
+  \draw[-Latex, grigio] (-0.5,0) -- (4.3,0) node[below] {$\operatorname{Re}$};
+  \draw[-Latex, grigio] (0,-0.5) -- (0,3.3) node[left] {$\operatorname{Im}$};
+  \coordinate (z) at (2.6,0.8); \coordinate (w) at (0.8,2.0); \coordinate (s) at (3.4,2.8);
+  \fill[bluchiaro] (0,0) -- (z) -- (s) -- (w) -- cycle;
+  \draw[blu, thick, -Latex] (0,0) -- (z) node[below right] {$z$};
+  \draw[rame, thick, -Latex] (0,0) -- (w) node[above left] {$w$};
+  \draw[verde, very thick, -Latex] (0,0) -- (s) node[above right] {$z+w$};
+  \draw[tratteggio] (z) -- (s) -- (w);
+\end{tikzpicture}
+\caption{A sinistra: il piano di Gauss; il numero complesso $z$ è il punto di coordinate
+$(x,y)$, individuato anche dal modulo $\rho$ e dall'argomento $\vartheta$; il coniugato
+$\bar z$ è il simmetrico rispetto all'asse reale. A destra: la somma di numeri complessi
+segue la regola del parallelogramma; la disuguaglianza triangolare dice che la diagonale
+non supera la somma dei lati.}
+\label{fig:piano-gauss}
+\end{figure}
+
+Un punto $P\neq0$ del piano può essere individuato anche dalla distanza $\rho$
+dall'origine e dall'angolo $\vartheta$ che il segmento $OP$ forma con il semiasse reale
+positivo. Dal teorema di Pitagora si deduce che
+\begin{equation}\label{eq:rho}
+  \rho=\sqrt{x^{2}+y^{2}}=\abs z;
+\end{equation}
+l'angolo $\vartheta$ è legato alla parte reale $x$ e al coefficiente dell'immaginario
+$y$ dalle formule
+\begin{equation}\label{eq:theta}
+  \cos\vartheta=\frac x\rho, \qquad \sen\vartheta=\frac y\rho .
+\end{equation}
+Un tale $\vartheta$ esiste: poiché $(x/\rho)^{2}+(y/\rho)^{2}=1$, il punto
+$(x/\rho,y/\rho)$ sta sulla circonferenza di raggio $1$, e per la definizione di seno e
+coseno (\cref{sec:trigonometriche}) è il punto corrispondente a un opportuno angolo
+$\vartheta$.
+
+\begin{definizione}[Argomento e forma trigonometrica]\index{argomento di un numero complesso}\index{forma trigonometrica}
+Se $z\neq0$, il numero $\vartheta$ della \eqref{eq:theta}, misurato in radianti, si
+chiama \emph{argomento} di $z$; esso è definito a meno di multipli interi di $2\pi$.
+Tenendo conto delle relazioni tra $\rho$, $\vartheta$ e $x$, $y$, il numero complesso
+$z=x+iy$ si scrive in \emph{forma trigonometrica}
+\begin{equation}\label{eq:forma-trigonometrica}
+  z=\rho(\cos\vartheta+i\sen\vartheta).
+\end{equation}
+\end{definizione}
+
+\begin{teorema}[Prodotto e quoziente in forma trigonometrica]\label{teo:prodotto-trigonometrico}
+Siano
+\begin{equation}\label{eq:due-complessi}
+  z=\rho(\cos\vartheta+i\sen\vartheta), \qquad z'=\rho'(\cos\vartheta'+i\sen\vartheta').
+\end{equation}
+Allora
+\begin{equation}\label{eq:prodotto-trigonometrico}
+  z\cdot z'=\rho\rho'\bigl[\cos(\vartheta+\vartheta')+i\sen(\vartheta+\vartheta')\bigr],
+\end{equation}
+e, se $z'\neq0$,
+\begin{equation}\label{eq:quoziente-trigonometrico}
+  \frac{z}{z'}=\frac{\rho}{\rho'}\bigl[\cos(\vartheta-\vartheta')+i\sen(\vartheta-\vartheta')\bigr].
+\end{equation}
+Cioè: \emph{il prodotto di due numeri complessi ha per modulo il prodotto dei moduli e
+per argomento la somma degli argomenti}; il quoziente ha per modulo il quoziente dei
+moduli e per argomento la differenza degli argomenti.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$z$, $z'$ in forma trigonometrica \eqref{eq:due-complessi}, con
+$\rho,\rho'\ge0$; \ per il quoziente, $z'\neq0$ (cioè $\rho'>0$).}
+\Tesi{Valgono la \eqref{eq:prodotto-trigonometrico} e la
+\eqref{eq:quoziente-trigonometrico}.}
+\end{schema}
+
+\begin{strategia}
+Si moltiplica in forma algebrica e si riconoscono, nella parte reale e nel coefficiente
+dell'immaginario, i secondi membri delle formule di addizione del coseno e del seno
+(\eqref{eq:addizione-cos}, \eqref{eq:addizione-sen}). Per il quoziente conviene non
+rifare il conto: si calcola l'inverso di $\cos\vartheta'+i\sen\vartheta'$, che è il suo
+coniugato $\cos(-\vartheta')+i\sen(-\vartheta')$, e si applica la formula del prodotto.
+\end{strategia}
+
+\begin{dimostrazione}
+Tenendo conto delle formule di addizione \eqref{eq:addizione-sen},
+\eqref{eq:addizione-cos} si ottiene
+\begin{equation}\label{eq:prodotto-passo}
+\begin{split}
+  z\cdot z'&=\rho\rho'(\cos\vartheta+i\sen\vartheta)(\cos\vartheta'+i\sen\vartheta')\\
+  &=\rho\rho'\bigl[(\cos\vartheta\cos\vartheta'-\sen\vartheta\sen\vartheta')\\
+  &\qquad\quad+i(\sen\vartheta\cos\vartheta'+\sen\vartheta'\cos\vartheta)\bigr]\\
+  &=\rho\rho'\bigl[\cos(\vartheta+\vartheta')+i\sen(\vartheta+\vartheta')\bigr].
+\end{split}
+\end{equation}
+Per il quoziente, osserviamo che
+$(\cos\vartheta'+i\sen\vartheta')(\cos\vartheta'-i\sen\vartheta')=\cos^{2}\vartheta'+\sen^{2}\vartheta'=1$
+per la relazione fondamentale \eqref{eq:relazione-fondamentale}; quindi, essendo il
+coseno pari e il seno dispari,
+\[
+  \frac{1}{z'}=\frac{1}{\rho'}(\cos\vartheta'-i\sen\vartheta')
+  =\frac{1}{\rho'}\bigl[\cos(-\vartheta')+i\sen(-\vartheta')\bigr],
+\]
+e la \eqref{eq:quoziente-trigonometrico} segue dalla \eqref{eq:prodotto-trigonometrico}
+applicata a $z\cdot\frac{1}{z'}$.
+\end{dimostrazione}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[scale=1.25, every node/.style={font=\footnotesize}]
+  \draw[-Latex, grigio] (-0.4,0) -- (3.6,0) node[below] {$\operatorname{Re}$};
+  \draw[-Latex, grigio] (0,-0.3) -- (0,3.2) node[left] {$\operatorname{Im}$};
+  \draw[grigio!50] (1,0) arc (0:100:1);
+  % z: modulo 1.6, arg 20°; w: modulo 1.25, arg 45°; zw: modulo 2, arg 65°
+  \draw[blu, thick, -Latex] (0,0) -- (20:1.6) node[right] {$z$};
+  \draw[rame, thick, -Latex] (0,0) -- (45:1.25) node[above right] {$z'$};
+  \draw[verde, very thick, -Latex] (0,0) -- (65:2.0) node[above] {$zz'$};
+  \draw[blu] (0.55,0) arc (0:20:0.55); \node[blu] at (10:0.75) {$\vartheta$};
+  \draw[verde] (20:0.95) arc (20:65:0.95); \node[verde] at (32:1.2) {$\vartheta'$};
+  \node[grigio, align=left, anchor=west] at (1.9,2.6) {$\abs{zz'}=\abs z\,\abs{z'}$\\ $\arg(zz')=\vartheta+\vartheta'$};
+\end{tikzpicture}
+\caption{Il significato geometrico della \eqref{eq:prodotto-trigonometrico}: moltiplicare
+per $z'$ significa \emph{ruotare} di un angolo $\vartheta'$ e \emph{dilatare} di un
+fattore $\abs{z'}$. In particolare, moltiplicare per un numero di modulo $1$ è una
+rotazione pura; moltiplicare per $i$ ruota di un angolo retto.}
+\label{fig:prodotto-rotazione}
+\end{figure}
+
+\begin{notastorica}[Wessel, Argand, Gauss: i numeri diventano punti]
+Per più di due secoli dopo Bombelli i numeri complessi furono usati con profitto, ma senza
+che nessuno sapesse dire che cosa fossero: ancora Eulero, che li maneggiava con grande
+disinvoltura, li chiamava «impossibili». La svolta venne dalla geometria. Il norvegese
+Caspar Wessel (1745--1818), cartografo al servizio dell'Accademia danese delle scienze,
+cercava un modo di calcolare con i segmenti orientati: in una memoria presentata
+all'Accademia nel 1797, e pubblicata nel 1799, li sommava con la regola del
+parallelogramma e li moltiplicava moltiplicando le lunghezze e sommando gli angoli,
+proprio come nel \cref{teo:prodotto-trigonometrico}. Scritta in danese, la memoria restò
+ignorata fino alla traduzione francese del 1897. Nel 1806 Jean-Robert Argand, un
+dilettante che viveva a Parigi, fece circolare in poche copie, senza firmarlo, un
+\emph{Essai} con la stessa idea; lo si conobbe solo nel 1813, quando Jacques Français ne
+espose il contenuto negli \emph{Annales} di Gergonne invitando l'autore sconosciuto a
+farsi avanti. A imporre la rappresentazione fu l'autorità di Gauss, che nel 1831 la difese
+pubblicamente e coniò il nome di «numero complesso»: se $+1$, $-1$ e $\sqrt{-1}$, scrisse,
+si fossero chiamate unità «diretta, inversa e laterale» anziché positiva, negativa e
+immaginaria, nessuno vi avrebbe visto alcun mistero. È la lezione della
+\cref{fig:prodotto-rotazione}: $i$ non è un numero misterioso, è una rotazione di un
+angolo retto.
+\end{notastorica}
+
+\begin{esempio}[Dagli assi vento agli assi corda di un profilo]\label{es:assi-profilo}
+Il significato «rotatorio» del prodotto è uno strumento di calcolo molto pratico. Un
+profilo alare investito da una corrente di velocità $V_{\infty}$ con incidenza $\alpha$
+è soggetto a una forza aerodinamica che nel riferimento \emph{vento} (asse $x$ nella
+direzione della corrente, asse $y$ perpendicolare, verso l'alto) ha componenti $D$
+(resistenza) e $L$ (portanza). Rappresentiamo la forza con il numero complesso
+$F_{v}=D+iL$. Nel riferimento \emph{corda} (asse lungo la corda, dal bordo d'attacco al
+bordo d'uscita, e asse normale), che con il profilo cabrato è ruotato di un angolo
+$-\alpha$ rispetto al riferimento vento, le componenti si ottengono ruotando il vettore
+in senso opposto, cioè moltiplicando per $\cos\alpha+i\sen\alpha$:
+\[
+  F_{c}=F_{v}(\cos\alpha+i\sen\alpha)=(D\cos\alpha-L\sen\alpha)+i\,(L\cos\alpha+D\sen\alpha).
+\]
+La parte reale è la \emph{forza assiale} $A=D\cos\alpha-L\sen\alpha$, il coefficiente
+dell'immaginario è la \emph{forza normale} $N=L\cos\alpha+D\sen\alpha$: sono le formule
+che si trovano in ogni testo di aerodinamica, ottenute qui con una sola moltiplicazione.
+Con $L=1000$~N, $D=50$~N e $\alpha=5^{\circ}$ si trova $N\approx1000{,}6$~N e
+$A\approx-37{,}3$~N: la forza assiale è
+\emph{negativa}, cioè diretta verso il bordo d'attacco (è l'effetto della
+«suzione» sul bordo d'attacco). Il passaggio inverso si ottiene moltiplicando per
+$\cos\alpha-i\sen\alpha$, cioè dividendo: $F_{v}=F_{c}/(\cos\alpha+i\sen\alpha)$.
+\end{esempio}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[scale=1.0, every node/.style={font=\footnotesize},
+  etich/.style={fill=white, inner sep=1pt, fill opacity=0.85, text opacity=1}]
+  \def\alf{15}\def\Lv{2.6}\def\Dv{0.3}
+  \pgfmathsetmacro{\Nv}{\Lv*cos(\alf)+\Dv*sin(\alf)}
+  \pgfmathsetmacro{\Av}{\Dv*cos(\alf)-\Lv*sin(\alf)}
+  % corrente
+  \foreach \yy in {-0.7,-0.1,0.5} {\draw[-Latex, grigio!70] (-3.6,\yy) -- (-2.5,\yy);}
+  \node[grigio] at (-3.05,1.0) {$V_{\infty}$};
+  % profilo NACA 0012 cabrato di alfa, con il quarto di corda nell'origine
+  \begin{scope}[rotate=-\alf, scale=6.5, shift={(-0.25,0)}]
+    \filldraw[fill=bluchiaro, draw=blu, thick]
+      plot[domain=0:1, samples=70, smooth] (\x, {0.6*(0.2969*sqrt(\x)-0.1260*\x-0.3516*\x^2+0.2843*\x^3-0.1015*\x^4)})
+      -- plot[domain=1:0, samples=70, smooth] (\x, {-0.6*(0.2969*sqrt(\x)-0.1260*\x-0.3516*\x^2+0.2843*\x^3-0.1015*\x^4)}) -- cycle;
+    \draw[grigio, dashed, thin] (-0.08,0) -- (1.25,0);
+  \end{scope}
+  % riferimento orizzontale e angolo di incidenza
+  \draw[grigio, dotted] (0,0) -- (5.6,0);
+  \draw[grigio] (4.6,0) arc (0:-\alf:4.6);
+  \node[grigio] at ({4.85*cos(\alf/2)},{-4.85*sin(\alf/2)}) {$\alpha$};
+  % risultante
+  \draw[-Latex, grigio, thick] (0,0) -- (\Dv,\Lv) node[above=1pt, etich] {$R$};
+  % assi vento: D, L
+  \draw[-Latex, rame, very thick] (0,0) -- (0,\Lv) node[left=5pt, etich] {$L$};
+  \draw[-Latex, rame, very thick] (0,0) -- (\Dv,0);
+  \node[rame, etich] at (0.45,-0.28) {$D$};
+  % assi corda: N, A
+  \draw[-Latex, verde, very thick] (0,0) -- ({\Nv*sin(\alf)},{\Nv*cos(\alf)}) node[right=2pt, etich] {$N$};
+  \draw[-Latex, verde, very thick] (0,0) -- ({\Av*cos(\alf)},{-\Av*sin(\alf)});
+  \node[verde, etich] at (-1.05,0.75) {$A<0$};
+  \draw[verde, thin] (-0.8,0.62) -- ({0.6*\Av*cos(\alf)},{-0.6*\Av*sin(\alf)+0.04});
+  \fill (0,0) circle (1.3pt);
+\end{tikzpicture}
+\caption{Un profilo NACA 0012 a incidenza $\alpha$ (qui esagerata a $15^{\circ}$ per
+leggibilità; forze non in scala). La risultante $R$ è disegnata nel quarto di corda, che
+per un profilo simmetrico è, in prima approssimazione, il centro di pressione. La forza
+aerodinamica ha componenti $(D,L)$ negli assi vento e $(A,N)$ negli assi corda: si
+passa dalle une alle altre moltiplicando per
+$\cos\alpha\pm i\sen\alpha$.}
+\label{fig:profilo-assi}
+\end{figure}
+
+\subsection{Potenze e radici}
+
+\begin{corollario}[Formula di De Moivre]\label{cor:de-moivre}\index{formula di De Moivre}
+Se $z=\rho(\cos\vartheta+i\sen\vartheta)$, per ogni $n\in\N$
+\begin{equation}\label{eq:de-moivre}
+  z^{n}=\rho^{n}(\cos n\vartheta+i\sen n\vartheta).
+\end{equation}
+La formula vale anche per $n=0$ e, se $z\neq0$, per $n$ intero negativo.
+\end{corollario}
+
+\begin{schema}
+\Ipotesi{$z=\rho(\cos\vartheta+i\sen\vartheta)$; \ $n\in\N$, oppure $n=0$, oppure
+$n\in\Z$ negativo e $z\neq0$.}
+\Tesi{$z^{n}=\rho^{n}(\cos n\vartheta+i\sen n\vartheta)$.}
+\end{schema}
+
+\begin{strategia}
+Per $n\in\N$ si procede per induzione: per il \cref{teo:prodotto-trigonometrico}, ogni
+moltiplicazione per $z$ moltiplica il modulo per $\rho$ e aggiunge $\vartheta$
+all'argomento. Il caso $n=0$ si riduce alla convenzione $z^{0}=1$; per gli esponenti
+negativi si scrive $z^{-m}=1/z^{m}$ e si usa la formula del quoziente.
+\end{strategia}
+
+\begin{dimostrazione}
+Per $n=1$ è ovvia; se vale per $n$, per la \eqref{eq:prodotto-trigonometrico}
+$z^{n+1}=z^{n}\cdot z=\rho^{n}\rho\bigl[\cos(n\vartheta+\vartheta)+i\sen(n\vartheta+\vartheta)\bigr]$,
+che è la \eqref{eq:de-moivre} con $n+1$. Per $n=0$ entrambi i membri valgono $1$; per
+$n=-m$ con $m\in\N$, si applica la \eqref{eq:quoziente-trigonometrico} a $1/z^{m}$.
+\end{dimostrazione}
+
+Un numero complesso $w$ si dice \emph{radice $n$-esima} di $z$ se risulta $w^{n}=z$.
+Nel campo reale un numero positivo ha una sola radice $n$-esima positiva, e i numeri
+negativi non hanno radici di ordine pari; nel campo complesso la situazione è molto più
+regolare.
+
+\begin{teorema}[Radici $n$-esime di un numero complesso]\label{teo:radici-complesse}\index{radice $n$-esima!di un numero complesso}
+Sia $z=\rho(\cos\vartheta+i\sen\vartheta)\neq0$ e sia $n\in\N$. Allora $z$ ha esattamente
+$n$ radici $n$-esime distinte, date da
+\begin{equation}\label{eq:radici-complesse}
+  w_{k}=\sqrt[n]{\rho}\,\Bigl(\cos\frac{\vartheta+2k\pi}{n}+i\sen\frac{\vartheta+2k\pi}{n}\Bigr),
+  \qquad k=0,1,\dots,n-1.
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$z\in\C$, $z\neq0$, in forma trigonometrica con modulo $\rho>0$ e argomento
+$\vartheta$; \ $n\in\N$.}
+\Tesi{Le soluzioni dell'equazione $w^{n}=z$ sono esattamente gli $n$ numeri distinti
+$w_{0},\dots,w_{n-1}$ della \eqref{eq:radici-complesse}.}
+\end{schema}
+
+\begin{strategia}
+Cerchiamo $w$ in forma trigonometrica, $w=r(\cos\varphi+i\sen\varphi)$. Per la formula
+di De Moivre l'equazione $w^{n}=z$ diventa un'uguaglianza tra due numeri in forma
+trigonometrica, e due numeri complessi non nulli sono uguali se e solo se hanno lo
+stesso modulo e argomenti che differiscono per un multiplo di $2\pi$. Si ottengono così
+due condizioni separate: una sul modulo, $r^{n}=\rho$, che ha l'unica soluzione
+$r=\sqrt[n]\rho$ per il \cref{teo:radice-n}; e una sull'argomento,
+$n\varphi=\vartheta+2k\pi$, che ha infinite soluzioni $\varphi=(\vartheta+2k\pi)/n$, una
+per ogni $k\in\Z$. Resta da contare quante di queste danno numeri \emph{diversi}: due
+valori di $k$ danno lo stesso $w$ se e solo se gli argomenti differiscono per un multiplo
+di $2\pi$, cioè se e solo se i due $k$ differiscono per un multiplo di $n$. I valori
+$k=0,\dots,n-1$ sono quindi tutti e soli i rappresentanti distinti.
+\end{strategia}
+
+\begin{dimostrazione}
+Poiché $z\neq0$, anche ogni radice $w$ è diversa da $0$ (se fosse $w=0$ sarebbe
+$z=w^{n}=0$); possiamo quindi scrivere $w=r(\cos\varphi+i\sen\varphi)$, con $r>0$. Per la
+\eqref{eq:de-moivre},
+\begin{equation}\label{eq:radici-passo}
+  w^{n}=z \quad\sse\quad r^{n}(\cos n\varphi+i\sen n\varphi)=\rho(\cos\vartheta+i\sen\vartheta).
+\end{equation}
+Prendendo i moduli, $r^{n}=\rho$, quindi $r=\sqrt[n]\rho$ (\cref{teo:radice-n}); allora
+la \eqref{eq:radici-passo} equivale a $\cos n\varphi=\cos\vartheta$ e
+$\sen n\varphi=\sen\vartheta$, cioè al fatto che gli angoli $n\varphi$ e $\vartheta$
+individuino lo stesso punto della circonferenza di raggio $1$; ciò accade se e solo se
+$n\varphi=\vartheta+2k\pi$ per qualche $k\in\Z$. Le radici sono dunque tutti e soli i
+numeri della \eqref{eq:radici-complesse} con $k\in\Z$.
+
+Siano $h,k\in\Z$. Gli argomenti $\frac{\vartheta+2h\pi}{n}$ e $\frac{\vartheta+2k\pi}{n}$
+differiscono di $\frac{2(h-k)\pi}{n}$, che è un multiplo intero di $2\pi$ se e solo se
+$h-k$ è un multiplo di $n$: quindi $w_{h}=w_{k}$ se e solo se $n$ divide $h-k$. In
+particolare $w_{0},\dots,w_{n-1}$ sono distinti (due indici tra $0$ e $n-1$ differiscono
+per meno di $n$, e non sono uguali). D'altra parte, ogni $k\in\Z$ si scrive come
+$k=qn+s$ con $q=\lfloor k/n\rfloor\in\Z$ e $s\in\{0,\dots,n-1\}$
+(\cref{prop:parte-intera}), e allora $w_{k}=w_{s}$. Le radici distinte sono quindi
+esattamente $n$.
+\end{dimostrazione}
+
+In particolare il modulo di una radice $n$-esima è uguale alla radice $n$-esima
+(aritmetica) del modulo, e gli argomenti delle $n$ radici sono equidistanziati di
+$2\pi/n$: \emph{le radici $n$-esime di $z$ sono i vertici di un poligono regolare di $n$
+lati inscritto nella circonferenza di centro $0$ e raggio $\sqrt[n]{\abs z}$}
+(\cref{fig:radici-unita}).
+
+\begin{esempio}[Le radici quadrate di $i$]\label{es:radici-i}
+Calcoliamo le radici quadrate del numero complesso $z=i$. In forma trigonometrica $i$ ha
+modulo uguale a $1$ e argomento uguale a $\pi/2$. Quindi, in base alla
+\eqref{eq:radici-complesse}, le due radici quadrate di $i$ hanno modulo uguale a $1$ e
+argomento uguale a
+\begin{equation}\label{eq:argomenti-radici-i}
+  \varphi_{0}=\frac{\pi/2}{2}=\frac\pi4, \qquad \varphi_{1}=\frac{\pi/2+2\pi}{2}=\frac54\pi .
+\end{equation}
+In corrispondenza si ottiene
+\begin{align*}
+  w_{0}&=\cos\frac\pi4+i\sen\frac\pi4=\frac{\sqrt2}{2}+i\,\frac{\sqrt2}{2},\\
+  w_{1}&=\cos\frac54\pi+i\sen\frac54\pi=-\frac{\sqrt2}{2}-i\,\frac{\sqrt2}{2}.
+\end{align*}
+Quindi le due radici quadrate di $i$ sono
+\begin{equation}\label{eq:radici-i}
+  \pm\Bigl(\frac{\sqrt2}{2}+i\,\frac{\sqrt2}{2}\Bigr)=\pm\frac{\sqrt2}{2}(1+i).
+\end{equation}
+Verifica: $\bigl(\frac{\sqrt2}{2}(1+i)\bigr)^{2}=\frac12(1+2i+i^{2})=\frac12\cdot2i=i$.
+\end{esempio}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[scale=1.3, every node/.style={font=\footnotesize}]
+  \draw[-Latex, grigio] (-1.45,0) -- (1.55,0) node[above left] {$\operatorname{Re}$};
+  \draw[-Latex, grigio] (0,-1.35) -- (0,1.5) node[below left] {$\operatorname{Im}$};
+  \draw[grigio!60] (0,0) circle (1);
+  \draw[blu, thick, fill=bluchiaro, fill opacity=0.5] (0:1) \foreach \k in {1,...,5} { -- (\k*60:1)} -- cycle;
+  \foreach \k in {0,...,5} {\fill[blu] (\k*60:1) circle (1.4pt);}
+  \node[below right] at (0:1) {$w_{0}$};
+  \node[above right] at (60:1) {$w_{1}$};
+  \node[above left] at (120:1) {$w_{2}$};
+  \node[below left] at (180:1) {$w_{3}$};
+  \node[below left] at (240:1) {$w_{4}$};
+  \node[below right] at (300:1) {$w_{5}$};
+  \draw[rame] (0.35,0) arc (0:60:0.35); \node[rame] at (30:0.55) {$\frac{\pi}{3}$};
+\end{tikzpicture}\hfill
+\begin{tikzpicture}[scale=1.3, every node/.style={font=\footnotesize}]
+  \draw[-Latex, grigio] (-1.45,0) -- (1.55,0) node[above left] {$\operatorname{Re}$};
+  \draw[-Latex, grigio] (0,-1.35) -- (0,1.5) node[below left] {$\operatorname{Im}$};
+  \draw[grigio!60] (0,0) circle (1);
+  \fill[verde] (90:1) circle (1.5pt) node[above right] {$i$};
+  \draw[rame, thick] (45:1) -- (225:1);
+  \fill[rame] (45:1) circle (1.5pt) node[above right] {$w_{0}$};
+  \fill[rame] (225:1) circle (1.5pt) node[below left] {$w_{1}$};
+  \draw[verde, -Latex] (0.55,0) arc (0:90:0.55); \node[verde] at (68:0.75) {$\frac\pi2$};
+  \draw[rame, -Latex] (0.3,0) arc (0:45:0.3); \node[rame] at (22:0.5) {$\frac\pi4$};
+\end{tikzpicture}
+\caption{A sinistra: le sei radici seste dell'unità $w_{k}=\cos\frac{k\pi}{3}+i\sen\frac{k\pi}{3}$
+($w_{0}=1$, $w_{1}=\frac12+i\frac{\sqrt3}{2}$, $w_{3}=-1$, \dots), vertici di un esagono
+regolare inscritto nella circonferenza unitaria. A destra: le due radici quadrate di $i$
+(\cref{es:radici-i}), $w_{0}=\frac{\sqrt2}{2}(1+i)$ e $w_{1}=-w_{0}$, con argomenti $\pi/4$
+e $5\pi/4$: il «poligono regolare di due lati» è un diametro.}
+\label{fig:radici-unita}
+\end{figure}
+
+\subsection{Equazioni di secondo grado}
+
+Possiamo ora mantenere la promessa iniziale: in $\C$ ogni equazione di secondo grado ha
+soluzione.
+
+\needspace{10\baselineskip}
+\begin{proposizione}[Equazioni di secondo grado in $\C$]\label{prop:secondo-grado-C}
+Siano $a,b,c\in\C$ con $a\neq0$, e sia $\Delta=b^{2}-4ac$. Detta $\delta$ una qualsiasi
+radice quadrata complessa di $\Delta$ (che esiste per il \cref{teo:radici-complesse},
+oppure è $\delta=0$ se $\Delta=0$), le soluzioni dell'equazione $az^{2}+bz+c=0$ sono
+\begin{equation}\label{eq:soluzioni-C}
+  z_{1,2}=\frac{-b\pm\delta}{2a},
+\end{equation}
+e valgono le relazioni \eqref{eq:viete}. In particolare, se $a,b,c$ sono reali e
+$\Delta<0$, le soluzioni sono complesse coniugate:
+$z_{1,2}=-\dfrac{b}{2a}\pm i\,\dfrac{\sqrt{-\Delta}}{2a}$.
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$a,b,c\in\C$, \ $a\neq0$; \ $\Delta=b^{2}-4ac$; \ $\delta\in\C$ con
+$\delta^{2}=\Delta$.}
+\Tesi{$az^{2}+bz+c=0\sse z=\frac{-b\pm\delta}{2a}$, \ e valgono le \eqref{eq:viete}; \
+se $a,b,c\in\R$ e $\Delta<0$, \ $z_{1,2}=-\frac{b}{2a}\pm i\frac{\sqrt{-\Delta}}{2a}$.}
+\end{schema}
+
+\begin{strategia}
+Si ripete il completamento del quadrato, che usa soltanto le proprietà di campo e
+quindi vale in $\C$ senza modifiche. L'unico ingrediente nuovo è l'esistenza di una
+radice quadrata $\delta$ di $\Delta$, garantita dal \cref{teo:radici-complesse} anche
+quando $\Delta$ non è un reale non negativo. Scritto il trinomio come prodotto di due
+fattori di primo grado, la legge di annullamento del prodotto conclude.
+\end{strategia}
+
+\begin{dimostrazione}
+Il «completamento del quadrato» usa solo gli assiomi di campo, e vale quindi anche in
+$\C$:
+\[
+  az^{2}+bz+c=a\Bigl[\Bigl(z+\frac{b}{2a}\Bigr)^{2}-\frac{b^{2}-4ac}{4a^{2}}\Bigr]
+  =a\Bigl(z+\frac{b}{2a}-\frac{\delta}{2a}\Bigr)\Bigl(z+\frac{b}{2a}+\frac{\delta}{2a}\Bigr),
+\]
+dove abbiamo usato $\delta^{2}=\Delta$ e la scomposizione $u^{2}-v^{2}=(u-v)(u+v)$. Per
+la legge di annullamento del prodotto (valida in $\C$, che è un campo) il primo membro è
+nullo se e solo se uno dei due fattori lo è, cioè se e solo se $z$ è uno dei numeri
+\eqref{eq:soluzioni-C}. Le relazioni \eqref{eq:viete} seguono sommando e moltiplicando:
+$z_{1}+z_{2}=-b/a$ e $z_{1}z_{2}=(b^{2}-\delta^{2})/(4a^{2})=c/a$. Se infine $a,b,c$ sono
+reali e $\Delta<0$, una radice quadrata di $\Delta$ è $\delta=i\sqrt{-\Delta}$, perché
+$(i\sqrt{-\Delta})^{2}=i^{2}(-\Delta)=\Delta$.
+\end{dimostrazione}
+
+Ad esempio, l'equazione $z^{2}+1=0$ da cui eravamo partiti ha $\Delta=-4$, $\delta=2i$ e
+soluzioni $z_{1,2}=\pm i$; e ora le relazioni $z_{1}+z_{2}=0$, $z_{1}z_{2}=1$ hanno
+pienamente senso: $i+(-i)=0$ e $i\cdot(-i)=-i^{2}=1$.
+
+\begin{notastorica}[Il teorema fondamentale dell'algebra]
+La \cref{prop:secondo-grado-C} è il caso più semplice di un risultato molto più
+generale, il \emph{teorema fondamentale dell'algebra}: \emph{ogni polinomio di grado
+$n\ge1$ a coefficienti complessi ha almeno una radice in $\C$} (e quindi, scomponendo,
+esattamente $n$ radici contate con la loro molteplicità). Enunciato già da Albert Girard
+(1629) e tentato da d'Alembert (1746) e da Eulero, fu dimostrato in modo sostanzialmente
+completo da Carl Friedrich Gauss nella sua tesi di dottorato (1799; la dimostrazione
+conteneva una lacuna di natura topologica, colmata solo nel Novecento), e poi da
+Jean-Robert Argand (1806, in una versione ripresa nel 1813), il dilettante incontrato
+nella nota sul piano di Gauss, che fu anche il primo a enunciarlo esplicitamente per i
+polinomi a coefficienti complessi. Il teorema dice che con $\C$ il processo di ampliamento iniziato passando da $\N$
+a $\Z$ (per sottrarre), proseguito con $\Q$ (per dividere) e con $\R$ (per estrarre radici
+e passare al limite) si \emph{chiude}: non occorrono altri numeri per risolvere le equazioni
+algebriche.
+\end{notastorica}
+
+\subsection{La forma esponenziale}
+
+Segnaliamo infine una notazione \emph{di tipo esponenziale} per i numeri complessi.
+Posto
+\begin{equation}\label{eq:eulero}
+  e^{i\vartheta}=\cos\vartheta+i\sen\vartheta \qquad (\vartheta\in\R),
+\end{equation}
+un numero complesso $z=\rho(\cos\vartheta+i\sen\vartheta)$ si potrà rappresentare nella
+forma
+\begin{equation}\label{eq:forma-esponenziale}
+  z=\rho\,e^{i\vartheta}.
+\end{equation}
+Per ora la \eqref{eq:eulero} è soltanto una \emph{definizione}, cioè un'abbreviazione:
+nel capitolo sulle serie, dopo aver definito $e^{z}$ per ogni $z\in\C$ come somma della
+serie esponenziale, vedremo che essa è in realtà un teorema, la \emph{formula di Eulero}
+(\cref{teo:formula-eulero}), che lega la funzione esponenziale alle funzioni
+trigonometriche. La notazione,
+in ogni caso, è giustificata dal fatto che si comporta come una potenza. In tal modo,
+infatti, la \eqref{eq:prodotto-trigonometrico} si riscrive come
+\begin{equation}\label{eq:prodotto-esponenziale}
+  z\cdot z'=\rho\,e^{i\vartheta}\cdot\rho'e^{i\vartheta'}=\rho\rho'\,e^{i(\vartheta+\vartheta')},
+\end{equation}
+che è la stessa regola $e^{u}e^{v}=e^{u+v}$ delle potenze reali; la formula di De Moivre
+diventa $(\rho e^{i\vartheta})^{n}=\rho^{n}e^{in\vartheta}$, e le radici
+\eqref{eq:radici-complesse} si scrivono
+$w_{k}=\sqrt[n]\rho\,e^{i(\vartheta+2k\pi)/n}$. Se $w=r\,e^{i\varphi}$ è una radice
+$n$-esima di $z=\rho\,e^{i\vartheta}$, sarà $r^{n}e^{in\varphi}=\rho\,e^{i\vartheta}$,
+perciò $r=\sqrt[n]\rho$, $\cos n\varphi=\cos\vartheta$ e $\sen n\varphi=\sen\vartheta$:
+ne seguono di nuovo le \eqref{eq:radici-complesse}.
+
+\begin{notastorica}[La «formula più bella»]
+Con $\vartheta=\pi$ la \eqref{eq:eulero} dà $e^{i\pi}=\cos\pi+i\sen\pi=-1$, cioè
+\[
+  e^{i\pi}+1=0,
+\]
+un'identità che lega le cinque costanti fondamentali della matematica: $0$, $1$, $e$,
+$\pi$, $i$. Compare, nella forma $\cos x+i\sen x=e^{ix}$, nell'\emph{Introductio in
+analysin infinitorum} di Leonhard Euler (1748); il simbolo $i$ per $\sqrt{-1}$ fu
+introdotto dallo stesso Eulero nel 1777 e reso popolare da Gauss. In un sondaggio tra
+matematici promosso dalla rivista \emph{The Mathematical Intelligencer} (1988) l'identità
+di Eulero fu votata come «il più bel teorema della matematica».
+\end{notastorica}
+
+\begin{idea}[Oscillazioni e fasori]
+Per un ingegnere i numeri complessi sono soprattutto il linguaggio delle
+\emph{oscillazioni}. Uno spostamento armonico, come la flessione all'estremità di un'ala
+che vibra, $x(t)=X\cos(\omega t+\phi)$, si scrive
+$x(t)=\operatorname{Re}\bigl(X e^{i\phi}\,e^{i\omega t}\bigr)$: il numero complesso
+$X e^{i\phi}$ (il \emph{fasore}) contiene ampiezza e fase, e il fattore $e^{i\omega t}$
+lo fa ruotare nel piano di Gauss con velocità angolare $\omega$. Sommare due oscillazioni
+della stessa frequenza diventa una somma di vettori (\cref{fig:piano-gauss}), derivare
+rispetto al tempo diventa moltiplicare per $i\omega$, cioè ruotare di $90^{\circ}$ e
+dilatare. È così che si studiano le vibrazioni strutturali, il flutter aeroelastico e i
+circuiti in corrente alternata.
+\end{idea}
+
+\begin{python}[Numeri complessi in Python]
+import cmath, math
+
+z = 3 + 2j          # in Python l'unità immaginaria si scrive j
+w = 1 - 1j
+print(z / w)                       # quoziente: (0.5+2.5j)
+print(abs(z), z.conjugate())       # modulo e coniugato
+print(cmath.polar(1j))             # (modulo, argomento) di i
+
+# Radici n-esime con la formula del teorema
+def radici(z, n):
+    rho, theta = cmath.polar(z)
+    r = rho ** (1 / n)
+    return [cmath.rect(r, (theta + 2 * k * math.pi) / n)
+            for k in range(n)]
+
+for w_k in radici(1j, 2):
+    print(f"{w_k:.6f}   (w_k)^2 = {w_k**2:.6f}")
+
+# Dagli assi vento agli assi corda (esempio): F_c = F_v * e^(i alfa)
+L, D, alfa = 1000.0, 50.0, math.radians(5)
+Fc = complex(D, L) * cmath.exp(1j * alfa)
+print(f"A = {Fc.real:.1f} N,  N = {Fc.imag:.1f} N")
+
+# Il calcolo di Bombelli: (2 + i)^3 = 2 + 11i, cioè 2 + sqrt(-121)
+print((2 + 1j) ** 3)
+\end{python}
+\begin{risultato}
+(0.5+2.5j)
+3.605551275463989 (3-2j)
+(1.0, 1.5707963267948966)
+0.707107+0.707107j   (w_k)^2 = 0.000000+1.000000j
+-0.707107-0.707107j   (w_k)^2 = 0.000000+1.000000j
+A = -37.3 N,  N = 1000.6 N
+(2+11j)
+\end{risultato}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=\textwidth]{radici_unita}
+\caption{Le radici $n$-esime dell'unità per $n=3,\dots,8$, calcolate con la
+\eqref{eq:radici-complesse} (\texttt{python/fig\_radici\_unita.py}): al crescere di $n$
+i poligoni regolari approssimano sempre meglio la circonferenza.}
+\label{fig:radici-unita-python}
+\end{figure}

@@ -1,0 +1,288 @@
+%% ----------------------------------------------------------------------------
+%%  §2.4  Calcolo combinatorio
+%% ----------------------------------------------------------------------------
+\section{Calcolo combinatorio}
+\label{sec:combinatoria}
+
+Il calcolo combinatorio è l'arte di \emph{contare senza elencare}: stabilire quanti sono
+gli oggetti di un certo tipo senza doverli scrivere uno per uno. Sia $A$ un insieme
+costituito da $n$ elementi:
+\begin{equation}\label{eq:insieme-n}
+  A=\{a_{1},a_{2},\dots,a_{n}\}.
+\end{equation}
+
+\subsection{Disposizioni e permutazioni}
+
+\begin{definizione}[Disposizione]\index{disposizione}
+Sia $k$ un numero naturale minore o uguale a $n$. Una \emph{disposizione} (semplice) di
+$k$ elementi tra gli $n$ dati è una $k$-upla ordinata $(b_{1},b_{2},\dots,b_{k})$ di
+elementi \emph{distinti} di $A$. Due disposizioni sono considerate distinte se
+differiscono per gli elementi, oppure solo per l'ordine in cui gli elementi compaiono.
+\end{definizione}
+
+Nel linguaggio del \cref{sec:invertibili}, una disposizione di $k$ elementi di $A$ non è
+altro che una funzione \emph{iniettiva} $\{1,2,\dots,k\}\to A$: il primo posto va in
+$b_{1}$, il secondo in $b_{2}$, e così via, e l'iniettività esprime il fatto che gli
+elementi sono distinti.
+
+\needspace{8\baselineskip}
+\begin{teorema}[Numero delle disposizioni]\label{teo:disposizioni}\index{disposizione!numero delle}
+Il numero $D_{n,k}$ delle disposizioni di $k$ elementi tra $n$ dati ($1\le k\le n$) è
+\begin{equation}\label{eq:disposizioni}
+  D_{n,k}=n(n-1)(n-2)\cdots(n-k+1),
+\end{equation}
+cioè il prodotto di $k$ numeri interi decrescenti a partire da $n$.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$A$ insieme di $n$ elementi; $k\in\N$, $1\le k\le n$.}
+\Tesi{Le $k$-uple ordinate di elementi distinti di $A$ sono $n(n-1)\cdots(n-k+1)$.}
+\end{schema}
+
+\begin{strategia}
+Esaminiamo un possibile modo di formare una disposizione: possiamo scegliere il primo
+elemento tra gli $n$ dati; il secondo solo tra gli $n-1$ elementi rimasti dopo la prima
+scelta; il terzo tra gli $n-2$ rimasti, e così via. Ogni scelta moltiplica il numero di
+possibilità per il numero di elementi ancora disponibili (\cref{fig:albero-disposizioni}).
+Per rendere rigoroso il «così via» facciamo induzione su $k$: ogni disposizione di $k+1$
+elementi si ottiene, in uno e un solo modo, da una disposizione di $k$ elementi (i primi
+$k$ posti) aggiungendo in coda uno degli $n-k$ elementi non ancora usati. Quindi
+$D_{n,k+1}=D_{n,k}\cdot(n-k)$: è il cosiddetto \emph{principio di moltiplicazione}.
+\end{strategia}
+
+\begin{dimostrazione}
+Procediamo per induzione su $k$, per $1\le k\le n$. Per $k=1$ le disposizioni sono le
+$1$-uple $(b_{1})$ con $b_{1}\in A$: sono $n$, in accordo con la \eqref{eq:disposizioni}.
+
+Supponiamo la formula vera per un certo $k<n$. Ogni disposizione
+$(b_{1},\dots,b_{k},b_{k+1})$ di $k+1$ elementi individua la disposizione
+$(b_{1},\dots,b_{k})$ dei suoi primi $k$ elementi e l'elemento $b_{k+1}$, che è uno degli
+$n-k$ elementi di $A$ diversi da $b_{1},\dots,b_{k}$. Viceversa, da ogni disposizione di
+$k$ elementi e da ogni scelta di uno degli $n-k$ elementi rimasti si ottiene una
+disposizione di $k+1$ elementi, e disposizioni (o scelte) diverse danno disposizioni
+diverse. Le disposizioni di $k+1$ elementi si ripartiscono quindi in $D_{n,k}$ gruppi
+(uno per ogni possibile «inizio» di lunghezza $k$), ciascuno di $n-k$ elementi:
+\[
+  D_{n,k+1}=D_{n,k}\,(n-k)=n(n-1)\cdots(n-k+1)\,(n-k),
+\]
+che è la \eqref{eq:disposizioni} con $k+1$ al posto di $k$.
+\end{dimostrazione}
+
+Così ad esempio il numero delle disposizioni di $2$ elementi su $3$ dati è
+$3\cdot2=6$. Infatti, se consideriamo l'insieme $\{a_{1},a_{2},a_{3}\}$, tutte le
+disposizioni possibili con $2$ elementi sono:
+\begin{equation}\label{eq:disposizioni-esempio}
+  (a_{1},a_{2}),\quad (a_{1},a_{3}),\quad (a_{2},a_{1}),\quad (a_{2},a_{3}),\quad
+  (a_{3},a_{1}),\quad (a_{3},a_{2}).
+\end{equation}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[
+  grow=right, level distance=2.4cm,
+  level 1/.style={sibling distance=1.9cm},
+  level 2/.style={sibling distance=0.85cm},
+  every node/.style={font=\footnotesize},
+  nodo/.style={circle, draw=blu, fill=bluchiaro, inner sep=1.5pt, minimum size=6mm},
+  edge from parent/.style={draw=grigio, -{Latex[length=1.6mm]}}]
+  \node[nodo, fill=blu, text=white] {inizio}
+    child {node[nodo] {$a_{3}$}
+      child {node[nodo] {$a_{2}$} node[right=6mm, rame] {$(a_{3},a_{2})$}}
+      child {node[nodo] {$a_{1}$} node[right=6mm, rame] {$(a_{3},a_{1})$}}}
+    child {node[nodo] {$a_{2}$}
+      child {node[nodo] {$a_{3}$} node[right=6mm, rame] {$(a_{2},a_{3})$}}
+      child {node[nodo] {$a_{1}$} node[right=6mm, rame] {$(a_{2},a_{1})$}}}
+    child {node[nodo] {$a_{1}$}
+      child {node[nodo] {$a_{3}$} node[right=6mm, rame] {$(a_{1},a_{3})$}}
+      child {node[nodo] {$a_{2}$} node[right=6mm, rame] {$(a_{1},a_{2})$}}};
+  \node[grigio, align=center] at (2.4,-3.4) {1\textsuperscript{a} scelta:\\ $3$ possibilità};
+  \node[grigio, align=center] at (4.8,-3.4) {2\textsuperscript{a} scelta:\\ $2$ possibilità};
+  \node[rame, align=center] at (7.4,-3.4) {$3\cdot2=6$\\ disposizioni};
+\end{tikzpicture}
+\caption{L'albero delle scelte per le disposizioni di $2$ elementi tra $3$: ogni
+livello moltiplica il numero dei rami per il numero di elementi ancora disponibili.}
+\label{fig:albero-disposizioni}
+\end{figure}
+
+\begin{definizione}[Permutazioni e fattoriale]\index{permutazione}\index{fattoriale}
+Una disposizione di $n$ elementi tra gli $n$ dati ($k=n$) si chiama \emph{permutazione}
+degli $n$ elementi. Ponendo $k=n$ nel \cref{teo:disposizioni} si ottiene che il numero
+delle permutazioni di $n$ elementi è
+\begin{equation}\label{eq:fattoriale}
+  n!=n\cdot(n-1)\cdot(n-2)\cdots2\cdot1;
+\end{equation}
+il simbolo $n!$, che indica il prodotto dei primi $n$ numeri naturali, si legge
+«$n$ fattoriale». Si pone inoltre, per convenzione, $0!=1$.
+\end{definizione}
+
+Una permutazione è dunque una funzione biunivoca $\{1,\dots,n\}\to A$: ogni elemento va
+in un posto, e ogni posto è occupato; componendola con la corrispondenza $a_{j}\mapsto j$
+la si può vedere come una funzione biunivoca di $A$ in sé. Tenendo conto del simbolo di fattoriale, si
+riconosce che il numero di disposizioni di $k$ elementi tra $n$ dati si può anche
+scrivere
+\begin{equation}\label{eq:disposizioni-fattoriale}
+  D_{n,k}=n(n-1)\cdots(n-k+1)=\frac{n!}{(n-k)!}\,,
+\end{equation}
+perché nella frazione i fattori da $n-k$ fino a $1$ si semplificano. La convenzione
+$0!=1$ rende la formula valida anche per $k=n$.
+
+\begin{esempio}[Estensimetri su un'ala]\label{es:estensimetri}
+Su un longherone alare sono predisposti $8$ punti di misura, e si dispone di $3$
+estensimetri collegati a tre canali \emph{diversi} della centralina di acquisizione. In
+quanti modi si può allestire la prova? Una configurazione è individuata dicendo quale
+punto è collegato al canale 1, quale al canale 2, quale al canale 3: è una disposizione
+di $3$ elementi tra $8$, e le configurazioni sono $D_{8,3}=8\cdot7\cdot6=336$. Se invece
+si chiede in quanti \emph{ordini} diversi si possono eseguire $5$ ispezioni distinte su
+un velivolo, la risposta è il numero di permutazioni di $5$ elementi: $5!=120$.
+\end{esempio}
+
+\begin{osservazione}[Disposizioni con ripetizione]\index{disposizione!con ripetizione}
+Se si ammette che gli elementi della $k$-upla possano ripetersi, ogni posto può essere
+occupato da uno qualsiasi degli $n$ elementi, indipendentemente dagli altri; lo stesso
+ragionamento per induzione dà $n^{k}$ \emph{disposizioni con ripetizione}. Ad esempio le
+stringhe di $k$ bit sono $2^{k}$: un byte ($k=8$) può assumere $256$ valori. Associando a
+ogni sottoinsieme $X$ di $A$ la stringa di $n$ bit che ha $1$ al posto $j$ se $a_{j}\in X$
+e $0$ altrimenti, si ritrova che un insieme di $n$ elementi ha $2^{n}$ sottoinsiemi
+(esercizio del \cref{sec:induzione}).
+\end{osservazione}
+
+\begin{attenzione}[Il fattoriale cresce in fretta]
+Il fattoriale cresce più rapidamente di qualsiasi potenza $a^{n}$: $10!=3\,628\,800$,
+$20!\approx2{,}4\cdot10^{18}$, e $52!$ --- il numero dei modi di mescolare un mazzo di
+carte francesi --- è circa $8\cdot10^{67}$. Questo spiega perché i problemi che
+richiedono di esaminare tutte le permutazioni (come quello del commesso viaggiatore, che
+cerca il percorso più breve tra $n$ città) diventano impraticabili anche per il più
+potente dei calcolatori già per qualche decina di elementi.
+\end{attenzione}
+
+\subsection{Combinazioni e coefficienti binomiali}
+
+\begin{definizione}[Combinazione]\index{combinazione}
+Una \emph{combinazione} di $k$ elementi tra gli $n$ dati ($0\le k\le n$) è un
+sottoinsieme di $A$ con $k$ elementi; consideriamo uguali due combinazioni che hanno gli
+stessi elementi, indipendentemente dall'ordine.
+\end{definizione}
+
+\begin{teorema}[Numero delle combinazioni]\label{teo:combinazioni}\index{combinazione!numero delle}\index{coefficiente binomiale}
+Il numero delle combinazioni di $k$ elementi tra $n$ dati è
+\begin{equation}\label{eq:combinazioni}
+  C_{n,k}=\binom{n}{k}=\frac{n!}{k!\,(n-k)!}\,.
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$A$ insieme di $n$ elementi; $0\le k\le n$.}
+\Tesi{I sottoinsiemi di $A$ con $k$ elementi sono $\dfrac{n!}{k!\,(n-k)!}$.}
+\end{schema}
+
+\begin{strategia}
+Non contiamo le combinazioni direttamente, ma le mettiamo in relazione con le
+disposizioni, che sappiamo già contare. Una disposizione è una combinazione «con
+l'ordine»: da ogni combinazione di $k$ elementi, ordinandone gli elementi in tutti i modi
+possibili, si ottengono $k!$ disposizioni diverse (le permutazioni dei suoi $k$
+elementi). E ogni disposizione proviene da una sola combinazione: quella formata dai suoi
+elementi. Dunque le disposizioni sono esattamente $k!$ volte le combinazioni, e basta
+dividere.
+\end{strategia}
+
+\begin{dimostrazione}
+Per $k=0$ c'è un solo sottoinsieme con $0$ elementi, l'insieme vuoto, e infatti
+$\frac{n!}{0!\,n!}=1$. Sia $1\le k\le n$. A ogni
+disposizione $(b_{1},\dots,b_{k})$ associamo la combinazione $\{b_{1},\dots,b_{k}\}$ dei
+suoi elementi. In questo modo l'insieme delle $D_{n,k}$ disposizioni si ripartisce in
+gruppi, uno per ogni combinazione; il gruppo corrispondente alla combinazione
+$\{c_{1},\dots,c_{k}\}$ è formato dalle $k$-uple ordinate dei suoi elementi, cioè dalle
+loro permutazioni, che sono $k!$. Quindi
+\[
+  D_{n,k}=C_{n,k}\cdot k!, \qquad\text{cioè}\qquad
+  C_{n,k}=\frac{D_{n,k}}{k!}=\frac{n!}{k!\,(n-k)!},
+\]
+dove nell'ultimo passaggio abbiamo usato la \eqref{eq:disposizioni-fattoriale}.
+\end{dimostrazione}
+
+Il simbolo $\binom nk$ si legge «$n$ su $k$» ed è chiamato \emph{coefficiente binomiale}
+(il motivo del nome sarà chiaro nel prossimo paragrafo). Grazie alla convenzione $0!=1$
+esso ha senso anche per $k=0$ e $k=n$:
+\begin{equation}\label{eq:binomiale-estremi}
+  \binom n0=\binom nn=\frac{n!}{n!\,0!}=1,
+\end{equation}
+in accordo con il fatto che c'è un solo sottoinsieme con $0$ elementi (l'insieme vuoto)
+e un solo sottoinsieme con $n$ elementi ($A$ stesso).
+
+Ritornando all'esempio di un insieme con $3$ elementi $\{a_{1},a_{2},a_{3}\}$, si hanno
+$3!/(1!\,2!)=3$ combinazioni con due elementi, che sono
+\begin{equation}\label{eq:combinazioni-esempio}
+  \{a_{1},a_{2}\},\qquad \{a_{1},a_{3}\},\qquad \{a_{2},a_{3}\};
+\end{equation}
+ciascuna corrisponde a $2!=2$ delle disposizioni \eqref{eq:disposizioni-esempio}.
+
+\begin{proposizione}[Simmetria dei coefficienti binomiali]\label{prop:simmetria-binomiale}
+Per ogni $n\in\N$ e ogni $k\in\{0,1,\dots,n\}$,
+\begin{equation}\label{eq:simmetria-binomiale}
+  \binom nk=\binom{n}{n-k}.
+\end{equation}
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$n\in\N$, \ $0\le k\le n$.}
+\Tesi{$\binom nk=\binom{n}{n-k}$.}
+\end{schema}
+
+\begin{strategia}
+Diamo due argomenti. Il primo è un calcolo: nella formula \eqref{eq:combinazioni} il
+denominatore $k!\,(n-k)!$ è simmetrico rispetto allo scambio di $k$ con $n-k$. Il
+secondo è un conteggio: si costruisce una corrispondenza biunivoca tra i due insiemi di
+sottoinsiemi contati dai due membri, associando a ogni sottoinsieme il suo complementare.
+\end{strategia}
+
+\begin{dimostrazione}
+\emph{Algebricamente}, la \eqref{eq:simmetria-binomiale} segue direttamente dalla
+definizione \eqref{eq:combinazioni}: scambiando $k$ con $n-k$ il denominatore
+$k!\,(n-k)!$ non cambia. \emph{Combinatoriamente}, scegliere i $k$ elementi da prendere
+equivale a scegliere gli $n-k$ elementi da lasciare: la funzione $X\mapsto A\setminus X$
+è una corrispondenza biunivoca tra i sottoinsiemi con $k$ elementi e quelli con $n-k$
+elementi.
+\end{dimostrazione}
+
+\begin{idea}[Due dimostrazioni, due modi di pensare]
+La proposizione precedente illustra un fenomeno frequente in combinatoria: un'identità
+tra numeri si può dimostrare \emph{calcolando} (manipolando le formule) oppure
+\emph{contando} (mostrando che i due membri contano gli stessi oggetti in due modi
+diversi). La seconda strada, quando è disponibile, è di solito più illuminante: spiega
+\emph{perché} l'identità è vera. Ritroveremo questa doppia possibilità nella formula del
+binomio di Newton.
+\end{idea}
+
+\begin{esempio}
+Riprendiamo l'\cref{es:estensimetri}, ma con $3$ estensimetri \emph{identici} collegati
+in serie a un unico canale: conta solo \emph{quali} punti sono strumentati, non l'ordine,
+e le configurazioni sono $\binom83=\frac{8\cdot7\cdot6}{3!}=56$, cioè $336/6$. Un esempio
+meno ingegneristico: le sestine possibili al SuperEnalotto, in cui si estraggono $6$
+numeri su $90$, sono $\binom{90}{6}=622\,614\,630$; giocando una sestina la probabilità
+di fare «sei» è circa una su seicento milioni.
+\end{esempio}
+
+\begin{python}[Contare ed elencare con \texttt{itertools} e \texttt{math}]
+import itertools, math
+
+A = ["a1", "a2", "a3"]
+disp = list(itertools.permutations(A, 2))   # disposizioni 2 su 3
+comb = list(itertools.combinations(A, 2))   # combinazioni 2 su 3
+print(len(disp), *(f"({x},{y})" for x, y in disp))
+print(len(comb), *(f"{{{x},{y}}}" for x, y in comb))
+
+# Le formule chiuse sono già pronte nella libreria standard
+print(math.perm(8, 3), math.comb(8, 3), math.factorial(5))
+print(math.comb(90, 6))                     # SuperEnalotto
+
+# Verifica di D(n,k) = C(n,k) * k! per tutti i casi con n <= 10
+print(all(math.perm(n, k) == math.comb(n, k) * math.factorial(k)
+          for n in range(1, 11) for k in range(0, n + 1)))
+\end{python}
+\begin{risultato}
+6 (a1,a2) (a1,a3) (a2,a1) (a2,a3) (a3,a1) (a3,a2)
+3 {a1,a2} {a1,a3} {a2,a3}
+336 56 120
+622614630
+True
+\end{risultato}

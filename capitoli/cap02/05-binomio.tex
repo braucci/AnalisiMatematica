@@ -1,0 +1,406 @@
+%% ----------------------------------------------------------------------------
+%%  §2.5  Il binomio di Newton
+%% ----------------------------------------------------------------------------
+\section{Il binomio di Newton}
+\label{sec:binomio}
+
+Un'importante applicazione dei risultati del paragrafo precedente (che peraltro è
+anche conseguenza del principio di induzione, come mostreremo nella seconda parte del
+paragrafo) è la formula che esprime la potenza $n$-esima di un binomio. Per scriverla in
+modo compatto conviene introdurre un simbolo che useremo in tutto il resto del libro.
+
+\begin{notazione}[Il simbolo di sommatoria]\index{sommatoria}
+Dati i numeri reali $c_{p},c_{p+1},\dots,c_{q}$ (con $p\le q$ interi), la loro somma si
+indica con
+\[
+  \sum_{k=p}^{q}c_{k}=c_{p}+c_{p+1}+\dots+c_{q},
+\]
+che si legge «somma per $k$ che va da $p$ a $q$ di $c_{k}$». La lettera $k$ è un
+\emph{indice muto}: $\sum_{k=p}^{q}c_{k}$ e $\sum_{j=p}^{q}c_{j}$ indicano la stessa
+somma. Valgono le proprietà (che seguono dalle proprietà associativa, commutativa e
+distributiva)
+\[
+  \sum_{k=p}^{q}(c_{k}+d_{k})=\sum_{k=p}^{q}c_{k}+\sum_{k=p}^{q}d_{k}, \qquad
+  \sum_{k=p}^{q}h\,c_{k}=h\sum_{k=p}^{q}c_{k}\quad(h\in\R),
+\]
+e la regola di \emph{traslazione dell'indice}: ponendo $j=k+1$,
+\begin{equation}\label{eq:traslazione-indice}
+  \sum_{k=p}^{q}c_{k}=\sum_{j=p+1}^{q+1}c_{j-1}.
+\end{equation}
+Con questa notazione, ad esempio, la \eqref{eq:gauss} si scrive
+$\sum_{k=1}^{n}k=\frac{n(n+1)}{2}$.
+\end{notazione}
+
+\begin{teorema}[Formula del binomio di Newton]\label{teo:binomio}\index{binomio di Newton}
+Per ogni coppia di numeri reali $a,b$ e per ogni $n\in\N$ vale l'identità
+\begin{equation}\label{eq:binomio}
+\begin{split}
+  (a+b)^{n}&=\binom n0a^{n}+\binom n1a^{n-1}b+\binom n2a^{n-2}b^{2}+\dots\\
+  &\qquad\dots+\binom nk a^{n-k}b^{k}+\dots+\binom{n}{n-1}ab^{n-1}+\binom nn b^{n}\\
+  &=\sum_{k=0}^{n}\binom nk a^{n-k}b^{k}.
+\end{split}
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$a,b\in\R$; $n\in\N$ (con la convenzione $c^{0}=1$ per ogni $c$, anche
+$c=0$, nei termini estremi della somma).}
+\Tesi{$(a+b)^{n}=\displaystyle\sum_{k=0}^{n}\binom nk a^{n-k}b^{k}$.}
+\end{schema}
+
+Diamo due dimostrazioni, che corrispondono ai due modi di pensare descritti nel
+paragrafo precedente: \emph{contare} e \emph{calcolare}.
+
+\begin{strategia}[Piano d'attacco della prima dimostrazione]
+Scriviamo $(a+b)^{n}$ come prodotto di $n$ fattori uguali e immaginiamo di svolgerlo
+con la proprietà distributiva senza raccogliere nulla: otteniamo una somma di $2^{n}$
+prodotti, ciascuno dei quali si forma scegliendo da ogni parentesi o la $a$ o la $b$
+(\cref{fig:binomio-scelte}). Un prodotto in cui la $b$ è stata scelta $k$ volte vale
+$a^{n-k}b^{k}$. Quanti sono? Tanti quanti i modi di scegliere \emph{quali} $k$ parentesi
+forniscono la $b$, cioè i sottoinsiemi di $k$ elementi di un insieme di $n$ parentesi:
+$\binom nk$. Il coefficiente binomiale deve il suo nome proprio a questo.
+\end{strategia}
+
+\begin{dimostrazione}[Prima dimostrazione (combinatoria)]
+Immaginiamo di eseguire il prodotto di $n$ fattori
+\begin{equation}\label{eq:binomio-prodotto}
+  (a+b)^{n}=(a+b)\cdot(a+b)\cdots(a+b) \qquad (n\ \text{fattori});
+\end{equation}
+applicando ripetutamente la proprietà distributiva, il risultato si scrive come somma
+algebrica di addendi, ciascuno dei quali si ottiene scegliendo un termine ($a$ oppure
+$b$) da ognuno degli $n$ fattori e moltiplicando i termini scelti. Fissiamo la nostra
+attenzione sugli addendi del tipo $a^{n-k}b^{k}$: eseguendo la moltiplicazione indicata,
+si ottiene tale addendo tante volte quante è possibile scegliere i $k$ fattori dai quali
+prendere la $b$ tra gli $n$ dati (dagli altri $n-k$ si prende necessariamente la $a$).
+Per il \cref{teo:combinazioni}, ciò avviene $\binom nk$ volte. Raccogliendo gli addendi
+uguali si ottiene la \eqref{eq:binomio}.
+\end{dimostrazione}
+
+\begin{marginfigure}
+\centering
+\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}c@{\quad}l@{\quad}c@{}}
+\toprule
+n.\ di $b$ & prodotti & tot.\\
+\midrule
+$0$ & $aaa$ & $1$\\
+$1$ & $aab,\ aba,\ baa$ & $3$\\
+$2$ & $abb,\ bab,\ bba$ & $3$\\
+$3$ & $bbb$ & $1$\\
+\bottomrule
+\end{tabular}
+\caption{Gli $2^{3}=8$ prodotti che si ottengono svolgendo $(a+b)(a+b)(a+b)$, raggruppati
+secondo il numero di $b$ scelte: $(a+b)^{3}=a^{3}+3a^{2}b+3ab^{2}+b^{3}$.}
+\label{fig:binomio-scelte}
+\end{marginfigure}
+
+La formula del binomio \eqref{eq:binomio} fornisce in particolare risultati di facile
+verifica per $n=2$ e $n=3$: infatti, per tali valori di $n$ si ottengono le ben note
+relazioni
+\begin{gather}
+  \binom20=1,\quad \binom21=2,\quad \binom22=1, \notag\\
+  \text{da cui}\quad (a+b)^{2}=a^{2}+2ab+b^{2};\\[3pt]
+  \binom30=\binom33=1,\quad \binom31=\binom32=3, \notag\\
+  \text{da cui}\quad (a+b)^{3}=a^{3}+3a^{2}b+3ab^{2}+b^{3}.
+\end{gather}
+
+\subsection{La formula di Stifel e il triangolo di Tartaglia}
+
+Le considerazioni che seguono sono utili per sviluppare esplicitamente il secondo
+membro della formula del binomio per valori di $n$ più grandi di $3$, e forniscono
+l'ingrediente della seconda dimostrazione.
+
+\begin{lemma}[Formula di Stifel]\label{lem:stifel}\index{formula di Stifel}
+Per ogni $n\in\N$ e ogni $k\in\N$ con $1\le k\le n$ vale la formula
+\begin{equation}\label{eq:stifel}
+  \binom{n}{k-1}+\binom nk=\binom{n+1}{k}.
+\end{equation}
+\end{lemma}
+
+\begin{schema}
+\Ipotesi{$n\in\N$, \ $1\le k\le n$.}
+\Tesi{$\binom{n}{k-1}+\binom nk=\binom{n+1}{k}$.}
+\end{schema}
+
+\begin{strategia}
+È un calcolo con i fattoriali: si mettono le due frazioni a denominatore comune
+raccogliendo i fattori comuni $n!$, $(k-1)!$ e $(n-k)!$, e si usano le relazioni
+$k!=k\cdot(k-1)!$ e $(n-k+1)!=(n-k+1)\cdot(n-k)!$. Dopo il calcolo daremo anche
+un'interpretazione combinatoria, che spiega l'identità senza conti.
+\end{strategia}
+
+\begin{dimostrazione}
+Dalla definizione \eqref{eq:combinazioni} otteniamo
+\begin{equation}\label{eq:stifel-calcolo}
+\begin{split}
+  \binom{n}{k-1}+\binom nk
+  &=\frac{n!}{(k-1)!\,(n-k+1)!}+\frac{n!}{k!\,(n-k)!}\\
+  &=\frac{n!}{(k-1)!\,(n-k)!}\Bigl(\frac{1}{n-k+1}+\frac1k\Bigr)\\
+  &=\frac{n!}{(k-1)!\,(n-k)!}\cdot\frac{n+1}{k\,(n-k+1)}\\
+  &=\frac{(n+1)!}{k!\,(n+1-k)!}=\binom{n+1}{k}.
+\end{split}
+\end{equation}
+Il calcolo è lecito anche per $k=n$, grazie alla convenzione $0!=1$.
+\end{dimostrazione}
+
+\begin{osservazione}[Interpretazione combinatoria della formula di Stifel]
+Consideriamo un insieme di $n+1$ elementi $\{a_{1},\dots,a_{n},a_{n+1}\}$ e contiamo i
+suoi sottoinsiemi di $k$ elementi, che sono $\binom{n+1}{k}$, dividendoli in due gruppi:
+quelli che \emph{non} contengono $a_{n+1}$, che sono i sottoinsiemi di $k$ elementi di
+$\{a_{1},\dots,a_{n}\}$, cioè $\binom nk$; e quelli che \emph{contengono} $a_{n+1}$, che
+si ottengono aggiungendo $a_{n+1}$ a un sottoinsieme di $k-1$ elementi di
+$\{a_{1},\dots,a_{n}\}$, cioè $\binom{n}{k-1}$. La somma è la \eqref{eq:stifel}.
+\end{osservazione}
+
+La proprietà \eqref{eq:stifel} permette di scrivere il seguente \emph{triangolo di
+Tartaglia} (noto anche come \emph{triangolo di Pascal}), nel quale ogni coefficiente è
+uguale alla somma dei due coefficienti più vicini della riga precedente
+(\cref{fig:tartaglia}).
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[x=0.82cm, y=0.62cm, every node/.style={font=\footnotesize\addfontfeatures{Numbers=Lining}},
+  cella/.style={circle, inner sep=1.2pt, minimum size=5.4mm, fill=bluchiaro, draw=blu!40},
+  celrame/.style={cella, fill=rame!30, draw=rame},
+  celverde/.style={cella, fill=verde!30, draw=verde}]
+  % (valori calcolati una volta per tutte: pgfmath non gestisce i fattoriali grandi)
+  \node[grigio, anchor=east] at (-5.2,-0) {$n=0$};
+  \node[cella] (t-0-0) at (0,-0) {1};
+  \node[grigio, anchor=east] at (-5.2,-1) {$n=1$};
+  \node[cella] (t-1-0) at (-0.5,-1) {1};
+  \node[cella] (t-1-1) at (0.5,-1) {1};
+  \node[grigio, anchor=east] at (-5.2,-2) {$n=2$};
+  \node[cella] (t-2-0) at (-1,-2) {1};
+  \node[cella] (t-2-1) at (0,-2) {2};
+  \node[cella] (t-2-2) at (1,-2) {1};
+  \node[grigio, anchor=east] at (-5.2,-3) {$n=3$};
+  \node[cella] (t-3-0) at (-1.5,-3) {1};
+  \node[cella] (t-3-1) at (-0.5,-3) {3};
+  \node[cella] (t-3-2) at (0.5,-3) {3};
+  \node[cella] (t-3-3) at (1.5,-3) {1};
+  \node[grigio, anchor=east] at (-5.2,-4) {$n=4$};
+  \node[cella] (t-4-0) at (-2,-4) {1};
+  \node[cella] (t-4-1) at (-1,-4) {4};
+  \node[cella] (t-4-2) at (0,-4) {6};
+  \node[cella] (t-4-3) at (1,-4) {4};
+  \node[cella] (t-4-4) at (2,-4) {1};
+  \node[grigio, anchor=east] at (-5.2,-5) {$n=5$};
+  \node[cella] (t-5-0) at (-2.5,-5) {1};
+  \node[cella] (t-5-1) at (-1.5,-5) {5};
+  \node[celrame] (t-5-2) at (-0.5,-5) {10};
+  \node[celrame] (t-5-3) at (0.5,-5) {10};
+  \node[cella] (t-5-4) at (1.5,-5) {5};
+  \node[cella] (t-5-5) at (2.5,-5) {1};
+  \node[grigio, anchor=east] at (-5.2,-6) {$n=6$};
+  \node[cella] (t-6-0) at (-3,-6) {1};
+  \node[cella] (t-6-1) at (-2,-6) {6};
+  \node[cella] (t-6-2) at (-1,-6) {15};
+  \node[celverde] (t-6-3) at (0,-6) {20};
+  \node[cella] (t-6-4) at (1,-6) {15};
+  \node[cella] (t-6-5) at (2,-6) {6};
+  \node[cella] (t-6-6) at (3,-6) {1};
+  \node[grigio, anchor=east] at (-5.2,-7) {$n=7$};
+  \node[cella] (t-7-0) at (-3.5,-7) {1};
+  \node[cella] (t-7-1) at (-2.5,-7) {7};
+  \node[celrame] (t-7-2) at (-1.5,-7) {21};
+  \node[celrame] (t-7-3) at (-0.5,-7) {35};
+  \node[cella] (t-7-4) at (0.5,-7) {35};
+  \node[cella] (t-7-5) at (1.5,-7) {21};
+  \node[cella] (t-7-6) at (2.5,-7) {7};
+  \node[cella] (t-7-7) at (3.5,-7) {1};
+  \node[grigio, anchor=east] at (-5.2,-8) {$n=8$};
+  \node[cella] (t-8-0) at (-4,-8) {1};
+  \node[cella] (t-8-1) at (-3,-8) {8};
+  \node[cella] (t-8-2) at (-2,-8) {28};
+  \node[celverde] (t-8-3) at (-1,-8) {56};
+  \node[cella] (t-8-4) at (0,-8) {70};
+  \node[cella] (t-8-5) at (1,-8) {56};
+  \node[cella] (t-8-6) at (2,-8) {28};
+  \node[cella] (t-8-7) at (3,-8) {8};
+  \node[cella] (t-8-8) at (4,-8) {1};
+  \draw[-{Latex[length=1.6mm]}, rame, thick] (t-5-2) -- (t-6-3);
+  \draw[-{Latex[length=1.6mm]}, rame, thick] (t-5-3) -- (t-6-3);
+  \draw[-{Latex[length=1.6mm]}, rame, thick] (t-7-2) -- (t-8-3);
+  \draw[-{Latex[length=1.6mm]}, rame, thick] (t-7-3) -- (t-8-3);
+  \node[rame, anchor=west] at (5.0,-5.5) {$\binom52+\binom53=\binom63$};
+  \node[rame, anchor=west] at (5.0,-7.5) {$\binom72+\binom73=\binom83$};
+\end{tikzpicture}
+\caption{Il triangolo di Tartaglia: nella riga $n$ compaiono i coefficienti
+$\binom n0,\binom n1,\dots,\binom nn$. Ogni numero è la somma dei due che gli stanno
+sopra (formula di Stifel): ad esempio $10+10=20$ e $21+35=56$. La simmetria di ogni riga
+è la \eqref{eq:simmetria-binomiale}.}
+\label{fig:tartaglia}
+\end{figure}
+
+Quindi, ad esempio, leggendo la riga $n=5$ risulta
+\begin{equation}\label{eq:binomio-5}
+  (a+b)^{5}=a^{5}+5a^{4}b+10a^{3}b^{2}+10a^{2}b^{3}+5ab^{4}+b^{5}.
+\end{equation}
+
+\subsection{La dimostrazione per induzione}
+
+Di seguito esponiamo un'ulteriore dimostrazione della formula del binomio, con il metodo
+di induzione.
+
+\needspace{8\baselineskip}
+\begin{strategia}[Piano d'attacco della seconda dimostrazione]
+Supposta vera la formula per $n$, otteniamo $(a+b)^{n+1}$ moltiplicando lo sviluppo di
+$(a+b)^{n}$ per $(a+b)$. Si ottengono due somme: in quella che proviene dalla
+moltiplicazione per $a$ l'esponente di $a$ sale di uno, in quella che proviene dalla
+moltiplicazione per $b$ sale l'esponente di $b$. Per poterle sommare termine a termine
+occorre che i termini con la stessa potenza $a^{n+1-k}b^{k}$ abbiano lo stesso indice:
+lo si ottiene traslando l'indice della seconda somma \eqref{eq:traslazione-indice}. A
+quel punto ogni potenza $a^{n+1-k}b^{k}$ ha coefficiente $\binom nk+\binom n{k-1}$, che
+per la formula di Stifel è proprio $\binom{n+1}k$. È, in formule, la costruzione del
+triangolo di Tartaglia: la riga $n+1$ si ottiene dalla riga $n$.
+\end{strategia}
+
+\begin{dimostrazione}[Seconda dimostrazione (per induzione)]
+Cominciamo con l'osservare che la formula del binomio è verificata per $n=1$; infatti
+\begin{equation}\label{eq:binomio-base}
+  (a+b)^{1}=\binom10a+\binom11b=a+b.
+\end{equation}
+Supponiamo vera la \eqref{eq:binomio} per un indice $n\in\N$ e dimostriamo la validità
+della formula analoga con $n+1$ al posto di $n$. A tal fine moltiplichiamo entrambi i
+membri della \eqref{eq:binomio} per $(a+b)$, ottenendo
+\[
+  (a+b)^{n+1}=\sum_{k=0}^{n}\binom nk a^{n+1-k}b^{k}+\sum_{k=0}^{n}\binom nk a^{n-k}b^{k+1}.
+\]
+Nella seconda somma poniamo $j=k+1$ (\eqref{eq:traslazione-indice}); poiché
+$a^{n-k}b^{k+1}=a^{n+1-j}b^{j}$, essa diventa
+$\sum_{j=1}^{n+1}\binom{n}{j-1}a^{n+1-j}b^{j}$. Rinominando $j$ in $k$ (l'indice è muto)
+e isolando il primo termine della prima somma ($k=0$) e l'ultimo della seconda
+($k=n+1$):
+\begin{equation}\label{eq:binomio-passo}
+\begin{split}
+  (a+b)^{n+1}&=a^{n+1}+\sum_{k=1}^{n}\Bigl[\binom nk+\binom n{k-1}\Bigr]a^{n+1-k}b^{k}+b^{n+1}\\
+  &=\binom{n+1}{0}a^{n+1}+\sum_{k=1}^{n}\binom{n+1}{k}a^{n+1-k}b^{k}+\binom{n+1}{n+1}b^{n+1}\\
+  &=\sum_{k=0}^{n+1}\binom{n+1}{k}a^{n+1-k}b^{k},
+\end{split}
+\end{equation}
+dove abbiamo usato la formula di Stifel \eqref{eq:stifel} per $1\le k\le n$ e la
+\eqref{eq:binomiale-estremi}. È la \eqref{eq:binomio} con $n+1$ al posto di $n$; per il
+principio di induzione la formula è dimostrata.
+\end{dimostrazione}
+
+\subsection{Conseguenze e applicazioni}
+
+\begin{corollario}\label{cor:binomio}
+Per ogni $n\in\N$:
+\begin{enumerate}
+  \item $\displaystyle\sum_{k=0}^{n}\binom nk=2^{n}$;
+  \item $\displaystyle\sum_{k=0}^{n}(-1)^{k}\binom nk=0$;
+  \item se $x\ge0$, \ $(1+x)^{n}\ge1+nx+\dfrac{n(n-1)}{2}\,x^{2}$.
+\end{enumerate}
+\end{corollario}
+
+\begin{schema}
+\Ipotesi{$n\in\N$; \ per la (iii), $x\ge0$.}
+\Tesi{(i) $\sum_{k=0}^{n}\binom nk=2^{n}$; \ (ii) $\sum_{k=0}^{n}(-1)^{k}\binom nk=0$; \
+(iii) $(1+x)^{n}\ge1+nx+\frac{n(n-1)}{2}x^{2}$.}
+\end{schema}
+
+\begin{strategia}
+La formula del binomio è un'identità in $a$ e $b$: scegliendo valori particolari si
+ottengono informazioni sui coefficienti. Con $a=b=1$ le potenze scompaiono e restano i
+soli coefficienti; con $b=-1$ compaiono i segni alterni. Per la (iii) si sfrutta il
+fatto che, se $b=x\ge0$, tutti gli addendi sono non negativi, e una somma di termini non
+negativi non è minore di una parte di essi.
+\end{strategia}
+
+\begin{dimostrazione}
+(i) e (ii) si ottengono dalla \eqref{eq:binomio} con $a=b=1$ e con $a=1$, $b=-1$. Per
+(iii), con $a=1$ e $b=x\ge0$ tutti gli addendi della \eqref{eq:binomio} sono non
+negativi; trascurando quelli con $k\ge3$ resta
+$(1+x)^{n}\ge1+\binom n1x+\binom n2x^{2}=1+nx+\frac{n(n-1)}2x^{2}$ (per $n=1$ il
+termine in $x^{2}$ è nullo e la disuguaglianza è un'uguaglianza).
+\end{dimostrazione}
+
+\begin{osservazione}
+La (i) ha un significato combinatorio: $\binom nk$ conta i sottoinsiemi con $k$
+elementi di un insieme di $n$ elementi, e sommando su tutti i $k$ si contano tutti i
+sottoinsiemi, che sono $2^{n}$ (esercizio del \cref{sec:induzione}). La (iii) è un
+rafforzamento della disuguaglianza di Bernoulli (\cref{teo:bernoulli}) per $x\ge0$, e
+ci servirà nello studio delle successioni: per esempio, per dimostrare che
+$\sqrt[n]{n}$ si avvicina a $1$ al crescere di $n$.
+\end{osservazione}
+
+\begin{esempio}[Sensibilità della portanza e della potenza alla velocità]\label{es:sensibilita}
+La portanza di un'ala è $L=\frac12\rho V^{2}SC_{L}$. Se la velocità aumenta del $2\%$,
+cioè passa da $V$ a $V(1+\epsilon)$ con $\epsilon=0{,}02$, a parità di $C_{L}$ la
+portanza diventa
+\[
+  L(1+\epsilon)^{2}=L\,(1+2\epsilon+\epsilon^{2})=L\,(1+0{,}04+0{,}0004),
+\]
+cioè aumenta del $4{,}04\%$. La potenza necessaria a vincere la resistenza è
+$P=DV=\frac12\rho V^{3}SC_{D}$; un aumento del $3\%$ della velocità ($\epsilon=0{,}03$)
+la moltiplica per
+\[
+  (1+\epsilon)^{3}=1+3\epsilon+3\epsilon^{2}+\epsilon^{3}=1+0{,}09+0{,}0027+0{,}000027
+  =1{,}092727,
+\]
+cioè più del $9\%$. La formula del binomio giustifica la regola pratica, usata
+continuamente nelle stime ingegneristiche, $(1+\epsilon)^{n}\approx1+n\epsilon$ per
+$\epsilon$ «piccolo»: l'errore commesso è costituito dai termini con $\epsilon^{2}$,
+$\epsilon^{3}$, \dots, che per $\epsilon=0{,}03$ valgono complessivamente meno di
+$0{,}003$. Una variazione percentuale piccola su una grandezza elevata alla $n$ produce,
+in prima approssimazione, una variazione percentuale $n$ volte maggiore.
+\end{esempio}
+
+\begin{notastorica}[Tartaglia, Pascal, Newton --- e prima di loro]
+Il triangolo porta in Italia il nome di Niccolò Fontana detto Tartaglia (Brescia,
+1499 circa -- Venezia, 1557), che lo pubblicò nel \emph{General trattato di numeri et misure}
+(1556), e in Francia quello di Blaise Pascal, che ne fece uno studio sistematico nel
+\emph{Traité du triangle arithmétique} (scritto nel 1654, pubblicato postumo nel 1665),
+usandolo per risolvere problemi di gioco
+d'azzardo posti dal cavaliere de Méré: è l'atto di nascita del calcolo delle
+probabilità. Ma il triangolo era noto da secoli: in Cina compare nel trattato di Yang Hui
+(1261), che lo attribuisce a Jia Xian (XI secolo); in Persia era conosciuto da al-Karaji
+e da Omar Khayyam; in India, in forma combinatoria, già nell'opera di Pingala sulla
+metrica dei versi. La formula di Stifel prende il nome da Michael Stifel
+(\emph{Arithmetica integra}, 1544). Il merito di Isaac Newton (1665) fu di estendere la
+formula agli esponenti \emph{non interi}, ottenendo uno sviluppo in serie infinita di
+$(1+x)^{\alpha}$ che ritroveremo studiando la formula di Taylor.
+\end{notastorica}
+
+\begin{python}[Il triangolo di Tartaglia costruito con la formula di Stifel]
+import sympy as sp
+
+def tartaglia(righe):
+    riga = [1]
+    for n in range(righe):
+        yield riga
+        # formula di Stifel: ogni elemento interno è la somma
+        # dei due elementi che gli stanno sopra
+        riga = ([1] + [riga[k - 1] + riga[k]
+                       for k in range(1, len(riga))] + [1])
+
+for riga in tartaglia(8):
+    print(" ".join(f"{c:3d}" for c in riga).center(40))
+
+a, b = sp.symbols("a b")
+print(sp.expand((a + b)**5))
+\end{python}
+\begin{risultato}
+                    1                   
+                  1   1                 
+                1   2   1               
+              1   3   3   1             
+            1   4   6   4   1           
+          1   5  10  10   5   1         
+        1   6  15  20  15   6   1       
+      1   7  21  35  35  21   7   1     
+a**5 + 5*a**4*b + 10*a**3*b**2 + 10*a**2*b**3 + 5*a*b**4 + b**5
+\end{risultato}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.78\textwidth]{sierpinski}
+\caption{Le prime $128$ righe del triangolo di Tartaglia, colorando i coefficienti
+dispari e lasciando in bianco i pari (\texttt{python/fig\_sierpinski.py}). Compare il
+\emph{triangolo di Sierpiński}, un frattale: la struttura si ripete identica a scale
+diverse. Il motivo è proprio la formula di Stifel, letta «modulo $2$»: pari$+$pari e
+dispari$+$dispari danno pari, pari$+$dispari dà dispari.}
+\label{fig:sierpinski}
+\end{figure}

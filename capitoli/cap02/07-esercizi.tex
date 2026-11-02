@@ -1,0 +1,212 @@
+%% ----------------------------------------------------------------------------
+%%  §2.7  Esercizi di riepilogo
+%% ----------------------------------------------------------------------------
+\section{Esercizi di riepilogo}
+\label{sec:esercizi-cap2}
+
+Come nel capitolo precedente, ogni soluzione è accompagnata da un commento sulle
+\emph{scelte logiche} che la guidano. Il lettore provi sempre prima da solo.
+
+\subsection*{Estremo superiore e inferiore}
+
+\begin{esercizio}\label{es:sup-differenze}
+Determinare estremo superiore ed estremo inferiore dell'insieme
+$A=\set{\dfrac1n-\dfrac1m : n,m\in\N}$, e stabilire se sono massimo e minimo.
+\begin{soluzione}
+Per ogni $n,m$ si ha $\frac1n\le1$ e $\frac1m>0$, quindi $\frac1n-\frac1m<1$: $1$ è un
+maggiorante, e non appartiene ad $A$. Per ogni $\epsilon>0$, scelto $n=1$ e $m>1/\epsilon$
+(Archimede), si ha $1-\frac1m>1-\epsilon$: per la \cref{prop:caratt-sup}, $\sup A=1$, e
+non è un massimo. Poiché $A$ è simmetrico ($x\in A\sse-x\in A$, scambiando $n$ e $m$),
+$\inf A=-1$, che non è un minimo. \emph{Scelta logica:} per un estremo superiore si
+dimostrano sempre due cose separate, «è un maggiorante» e «nessun numero più piccolo lo
+è»; la seconda richiede di \emph{costruire}, per ogni $\epsilon$, un elemento
+dell'insieme che supera $\sup A-\epsilon$, ed è lì che entra in gioco Archimede. La
+simmetria evita di rifare i conti per l'estremo inferiore.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Determinare estremo superiore e inferiore di $B=\set{(-1)^{n}\dfrac{n}{n+1} : n\in\N}$.
+\begin{soluzione}
+Per $n$ pari gli elementi sono $\frac{n}{n+1}=1-\frac{1}{n+1}\in[\frac23,1)$, per $n$
+dispari sono $-\frac{n}{n+1}\in(-1,-\frac12]$. Si ha dunque $-1<b<1$ per ogni $b\in B$.
+Fissato $\epsilon>0$, un $n$ pari con $\frac{1}{n+1}<\epsilon$ dà un elemento maggiore di
+$1-\epsilon$, e un $n$ dispari con la stessa proprietà dà un elemento minore di
+$-1+\epsilon$. Quindi $\sup B=1$, $\inf B=-1$, e né il massimo né il minimo esistono.
+\emph{Scelta logica:} il segno alterno suggerisce di spezzare l'insieme in due
+sottoinsiemi più semplici (indici pari e dispari), ciascuno «monotòno»; l'estremo
+superiore dell'unione è il più grande dei due estremi superiori.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}[Estremo superiore della somma]\label{es:sup-somma}
+Siano $A,B\subseteq\R$ non vuoti e limitati superiormente, e sia
+$A+B=\{a+b : a\in A,\ b\in B\}$. Dimostrare che $\sup(A+B)=\sup A+\sup B$.
+\begin{soluzione}
+Siano $M=\sup A$, $M'=\sup B$. Per ogni $a\in A$, $b\in B$ si ha $a+b\le M+M'$: $M+M'$ è
+un maggiorante di $A+B$. Dato $\epsilon>0$, per la \cref{prop:caratt-sup} applicata con
+$\epsilon/2$ esistono $a\in A$ con $a>M-\frac\epsilon2$ e $b\in B$ con
+$b>M'-\frac\epsilon2$; allora $a+b>(M+M')-\epsilon$. Quindi $\sup(A+B)=M+M'$.
+\emph{Scelta logica:} è il primo esempio del celebre «trucco dell'$\epsilon/2$», che
+useremo in moltissime dimostrazioni sui limiti: per ottenere un errore complessivo
+minore di $\epsilon$ su una somma di due termini, si chiede a ciascun termine un errore
+minore di $\epsilon/2$. Il «budget» di errore si divide tra i contributi.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Sia $A\neq\emptyset$ limitato inferiormente e sia $-A=\{-a : a\in A\}$. Dimostrare che
+$-A$ è limitato superiormente e che $\inf A=-\sup(-A)$.
+\begin{soluzione}
+$\ell$ è un minorante di $A$ se e solo se $-\ell$ è un maggiorante di $-A$ (moltiplicare
+per $-1$ rovescia le disuguaglianze, \cref{prop:ordine-prodotto}). Quindi l'insieme dei
+maggioranti di $-A$ è l'opposto dell'insieme dei minoranti di $A$, e il minimo del primo
+è l'opposto del massimo del secondo. \emph{Scelta logica:} questa simmetria permette di
+dedurre tutti i risultati sull'estremo inferiore da quelli sull'estremo superiore,
+«gratis»; è il motivo per cui nel testo ci siamo limitati a dimostrare i secondi.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}\label{es:sup-razionali}
+Dimostrare che, in $\R$, $\sup\{x\in\Q : x^{2}<2\}=\sqrt2$.
+\begin{soluzione}
+Se $x\in\Q$ e $x^{2}<2$, allora $x<\sqrt2$ (se fosse $x\ge\sqrt2>0$, sarebbe
+$x^{2}\ge2$): $\sqrt2$ è un maggiorante. Dato $\epsilon>0$, se $\epsilon\ge\sqrt2$ basta
+l'elemento $x=1>0\ge\sqrt2-\epsilon$; se $\epsilon\in(0,\sqrt2)$, per la densità di
+$\Q$ (\cref{teo:densita-Q}) esiste $x\in\Q$ con $\sqrt2-\epsilon<x<\sqrt2$; essendo
+$0<x<\sqrt2$, si ha $x^{2}<2$, cioè $x$ appartiene all'insieme. \emph{Scelta logica:}
+confrontare con l'\emph{Attenzione} del \cref{sec:sup}: lo stesso insieme non ha estremo
+superiore in $\Q$, mentre in $\R$ lo ha. La densità di $\Q$ garantisce che l'insieme si
+avvicini quanto si vuole a $\sqrt2$, la completezza di $\R$ garantisce che $\sqrt2$ ci sia.
+\end{soluzione}
+\end{esercizio}
+
+\subsection*{Calcolo combinatorio e binomio}
+
+\begin{esercizio}[Anagrammi]
+Quanti sono gli anagrammi (anche privi di significato) della parola ELICA? E della
+parola AEREO?
+\begin{soluzione}
+ELICA ha $5$ lettere distinte: gli anagrammi sono le permutazioni, $5!=120$. In AEREO la
+lettera E compare due volte. Se distinguessimo le due E (E$_1$, E$_2$) avremmo $5!=120$
+parole; ma ogni anagramma «vero» corrisponde a $2!=2$ di queste parole (quelle che
+differiscono solo per lo scambio di E$_1$ ed E$_2$). Gli anagrammi sono quindi
+$120/2=60$. \emph{Scelta logica:} è lo stesso ragionamento con cui abbiamo contato le
+combinazioni (\cref{teo:combinazioni}): si conta un insieme più grande e più facile, e
+si divide per il numero di oggetti che vengono identificati tra loro. In generale, una
+parola di $n$ lettere in cui le lettere si ripetono $n_{1},n_{2},\dots,n_{r}$ volte ha
+$\frac{n!}{n_{1}!\,n_{2}!\cdots n_{r}!}$ anagrammi.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Determinare il coefficiente di $x^{3}$ nello sviluppo di $(2x-1)^{7}$.
+\begin{soluzione}
+Per la \eqref{eq:binomio} con $a=2x$ e $b=-1$, il termine generico è
+$\binom7k(2x)^{7-k}(-1)^{k}$; si ha $x^{3}$ per $7-k=3$, cioè $k=4$, e il coefficiente
+è $\binom74\,2^{3}(-1)^{4}=35\cdot8=280$. \emph{Scelta logica:} non si sviluppa tutta la
+potenza, si individua solo l'indice $k$ del termine richiesto. Attenzione ai segni: il
+fattore $(-1)^{k}$ va sempre portato con sé.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Dimostrare che $\displaystyle\sum_{k=1}^{n}k\binom nk=n\,2^{n-1}$.
+\begin{soluzione}
+Per $n=1$ entrambi i membri valgono $1$; sia $n\ge2$.
+\emph{Calcolando:} per $1\le k\le n$ si ha
+$k\binom nk=\frac{n!}{(k-1)!\,(n-k)!}=n\binom{n-1}{k-1}$, quindi, traslando l'indice,
+$\sum_{k=1}^{n}k\binom nk=n\sum_{j=0}^{n-1}\binom{n-1}{j}=n\,2^{n-1}$ per il
+\cref{cor:binomio}(i). \emph{Contando:} entrambi i membri contano i modi di scegliere, in
+un gruppo di $n$ persone, una commissione con un presidente. A sinistra si sceglie prima
+la commissione ($k$ membri, $\binom nk$ modi) e poi il presidente tra i suoi membri ($k$
+modi); a destra si sceglie prima il presidente ($n$ modi) e poi, per ciascuna delle
+altre $n-1$ persone, se far parte o no della commissione ($2^{n-1}$ modi).
+\emph{Scelta logica:} come nella \cref{prop:simmetria-binomiale}, la stessa identità
+ammette una prova algebrica e una combinatoria; la seconda spiega il risultato.
+\end{soluzione}
+\end{esercizio}
+
+\subsection*{Numeri complessi}
+
+\begin{esercizio}
+Calcolare $(1+i)^{10}$.
+\begin{soluzione}
+Sviluppare con il binomio sarebbe faticoso. In forma trigonometrica,
+$1+i=\sqrt2\bigl(\cos\frac\pi4+i\sen\frac\pi4\bigr)$; per la formula di De Moivre,
+$(1+i)^{10}=(\sqrt2)^{10}\bigl(\cos\frac{10\pi}{4}+i\sen\frac{10\pi}{4}\bigr)
+=32\bigl(\cos\frac{\pi}{2}+i\sen\frac\pi2\bigr)=32\,i$, essendo
+$\frac{10\pi}{4}=\frac\pi2+2\pi$. \emph{Scelta logica:} la forma algebrica è adatta
+alle somme, quella trigonometrica (o esponenziale) ai prodotti e alle potenze; scegliere
+la rappresentazione giusta trasforma un calcolo lungo in un calcolo di una riga.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Risolvere in $\C$ l'equazione $z^{3}=-8$ e rappresentare le soluzioni nel piano di Gauss.
+\begin{soluzione}
+$-8=8(\cos\pi+i\sen\pi)$. Per il \cref{teo:radici-complesse} le radici hanno modulo
+$\sqrt[3]8=2$ e argomenti $\frac{\pi+2k\pi}{3}$, $k=0,1,2$, cioè $\frac\pi3$, $\pi$,
+$\frac53\pi$:
+\[
+  w_{0}=2\Bigl(\frac12+i\frac{\sqrt3}{2}\Bigr)=1+i\sqrt3, \qquad w_{1}=-2, \qquad
+  w_{2}=1-i\sqrt3 .
+\]
+Sono i vertici di un triangolo equilatero inscritto nella circonferenza di raggio $2$.
+Nel campo reale avremmo trovato soltanto $w_{1}=-2$. \emph{Scelta logica:} si scrive il
+secondo membro in forma trigonometrica \emph{prima} di applicare la formula; un errore
+comune è dimenticare che l'argomento di un numero reale negativo è $\pi$, non $0$.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Dimostrare che, per $z\neq0$, si ha $\abs z=1$ se e solo se $\dfrac1z=\bar z$. Qual è
+il significato geometrico?
+\begin{soluzione}
+Da $z\bar z=\abs z^{2}$ (\cref{prop:coniugato-modulo}) segue $\frac1z=\frac{\bar
+z}{\abs z^{2}}$; quindi $\frac1z=\bar z$ se e solo se $\abs z^{2}=1$, cioè $\abs z=1$.
+Geometricamente: sulla circonferenza unitaria l'inversione $z\mapsto1/z$ coincide con la
+simmetria rispetto all'asse reale, perché l'inverso ha argomento opposto
+(\eqref{eq:quoziente-trigonometrico}) e, per i numeri di modulo $1$, lo stesso modulo.
+\emph{Scelta logica:} l'identità $z\bar z=\abs z^{2}$ è il ponte tra inverso, coniugato e
+modulo; usarla evita di passare alle coordinate $x$, $y$ e riduce la dimostrazione a una
+riga.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}[Con Python]
+Verificare il calcolo di Bombelli: calcolare con Python le tre radici cubiche
+complesse di $2+11i$ (con la funzione \texttt{radici} del \cref{sec:complessi}) e
+controllare che una di esse sia $2+i$. Quali sono le altre due? Perché sommando la
+radice $2+i$ di $2+11i$ con la radice $2-i$ di $2-11i$ si ottiene la soluzione reale $x=4$
+dell'equazione $x^{3}=15x+4$, mentre altre scelte delle radici non funzionano?
+\begin{soluzione}
+\begin{python}
+import cmath, math
+
+def radici(z, n):
+    rho, theta = cmath.polar(z)
+    r = rho ** (1 / n)
+    return [cmath.rect(r, (theta + 2 * k * math.pi) / n)
+            for k in range(n)]
+
+for w in radici(2 + 11j, 3):
+    print(f"{w:.6f}")
+\end{python}
+\begin{risultato}
+2.000000+1.000000j
+-1.866025+1.232051j
+-0.133975-2.232051j
+\end{risultato}
+Si ottengono $2+i$ e altri due numeri, circa $-1{,}866+1{,}232\,i$ e
+$-0{,}134-2{,}232\,i$: sono $(2+i)\omega$ e $(2+i)\omega^{2}$, dove
+$\omega=-\frac12+i\frac{\sqrt3}{2}$ è una radice cubica dell'unità (le radici cubiche di
+un numero si ottengono da una di esse moltiplicando per le radici cubiche di $1$). Nella
+formula di Cardano le due radici cubiche non sono indipendenti: il loro prodotto deve
+valere $p/3=5$. Infatti $(2+i)(2-i)=5$; le altre coppie ammissibili,
+$(2+i)\omega+(2-i)\bar\omega$ e $(2+i)\omega^{2}+(2-i)\bar\omega^{2}$, danno le altre due
+soluzioni reali, $-2\pm\sqrt3$. \emph{Scelta logica:} il calcolatore conferma i numeri,
+ma è la teoria (struttura delle radici, \cref{teo:radici-complesse}) a spiegare
+perché le soluzioni sono tre e come si accoppiano.
+\end{soluzione}
+\end{esercizio}

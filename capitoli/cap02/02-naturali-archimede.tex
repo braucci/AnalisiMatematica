@@ -1,0 +1,774 @@
+%% ----------------------------------------------------------------------------
+%%  §2.2  Proprietà di N, proprietà di Archimede, densità di Q
+%% ----------------------------------------------------------------------------
+\section{I numeri naturali, la proprietà di Archimede, la densità di \texorpdfstring{$\Q$}{Q}}
+\label{sec:archimede}
+
+Alla luce delle nozioni introdotte nel paragrafo precedente riportiamo di seguito alcune
+proprietà dell'insieme dei numeri naturali e dell'insieme dei numeri razionali. Nell'insieme
+$\R$, a partire dall'elemento $1$, si possono determinare gli elementi $2=1+1$, $3=2+1$ e
+così via; tali elementi costituiscono l'insieme $\N=\{1,2,3,\dots\}$ dei numeri naturali
+(\cref{sec:nzq}), i cui elementi sono ordinati secondo le relazioni $1<2<3<\cdots$. Il
+principio di induzione (\cref{teo:induzione}) precisa il significato dei puntini: $\N$ è
+il più piccolo sottoinsieme di $\R$ che contiene $1$ e che, insieme a ogni suo elemento
+$n$, contiene anche $n+1$.
+
+\subsection{Due proprietà caratteristiche di \texorpdfstring{$\N$}{N}}
+
+Cominciamo con un lemma tecnico che rende rigorosa un'evidenza: tra due naturali
+consecutivi non ci sono altri naturali.
+
+\begin{lemma}[Struttura di $\N$]\label{lem:struttura-N}
+\leavevmode
+\begin{enumerate}
+  \item Per ogni $n\in\N$ si ha $n\ge1$.
+  \item Se $n\in\N$ e $n>1$, allora $n-1\in\N$.
+  \item Se $n,m\in\N$ e $m>n$, allora $m\ge n+1$.
+\end{enumerate}
+\end{lemma}
+
+\begin{schema}
+\Ipotesi{$n,m\in\N$; \ il principio di induzione (\cref{teo:induzione}).}
+\Tesi{(i) $n\ge1$; \ (ii) $n>1\implica n-1\in\N$; \ (iii) $m>n\implica m\ge n+1$.}
+\end{schema}
+
+\begin{strategia}
+Tutte e tre le proprietà riguardano «tutti i numeri naturali», e l'unico strumento che
+abbiamo per dimostrare qualcosa per tutti i naturali è il principio di induzione. Per
+(i) e (ii) l'induzione è immediata. Per (iii) si fa induzione su $n$, tenendo $m$
+generico: il caso $n=1$ si riduce a (i) e (ii); nel passo induttivo, se $m>n+1$ si
+«toglie $1$» a $m$ (lecito per (ii)) e ci si riconduce all'ipotesi induttiva.
+\end{strategia}
+
+\begin{dimostrazione}
+(i) La proprietà vale per $n=1$; se $n\ge1$ allora $n+1\ge1+1>1$ (si ricordi che $0<1$,
+\cref{es:zero-minore-uno}). Per induzione vale per ogni $n$.
+
+(ii) Sia $\mathcal{P}(n)$ la proposizione «$n=1$ oppure $n-1\in\N$». $\mathcal{P}(1)$ è
+vera. Se vale $\mathcal{P}(n)$, allora $\mathcal{P}(n+1)$ è vera perché
+$(n+1)-1=n\in\N$. Dunque $\mathcal{P}(n)$ vale per ogni $n$; se $n>1$, allora $n\neq1$, e
+quindi $n-1\in\N$.
+
+(iii) Sia $\mathcal{P}(n)$ la proposizione «per ogni $m\in\N$, se $m>n$ allora
+$m\ge n+1$». Per $n=1$: se $m>1$, per (ii) $m-1\in\N$ e per (i) $m-1\ge1$, cioè $m\ge2$.
+Supponiamo vera $\mathcal{P}(n)$ e sia $m\in\N$ con $m>n+1$. Allora $m>1$, quindi
+$m-1\in\N$ e $m-1>n$; per l'ipotesi induttiva $m-1\ge n+1$, cioè $m\ge n+2$. Questo è
+$\mathcal{P}(n+1)$.
+\end{dimostrazione}
+
+Con ragionamenti analoghi (per induzione) si prova che la somma e il prodotto di numeri
+naturali sono numeri naturali; lo diamo per acquisito. L'insieme $\N$ gode di due
+proprietà caratteristiche, che enunciamo e dimostriamo.
+
+\begin{teorema}[Principio del buon ordinamento]\label{teo:buon-ordinamento}\index{principio del buon ordinamento}
+Ogni sottoinsieme non vuoto di $\N$ ha minimo.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$A\subseteq\N$, \ $A\neq\emptyset$.}
+\Tesi{Esiste $\min A$.}
+\end{schema}
+
+\begin{strategia}
+Ragioniamo per assurdo: supponiamo che $A$ non abbia minimo e dimostriamo che allora $A$ è
+vuoto. L'idea è di «risalire» i naturali uno alla volta con l'induzione, mostrando che
+nessuno di essi può stare in $A$: se $1,2,\dots,n$ non stanno in $A$ e ci stesse $n+1$,
+allora $n+1$ sarebbe il più piccolo elemento di $A$ (non ci sono naturali tra $n$ e
+$n+1$, \cref{lem:struttura-N}(iii)) --- ma avevamo supposto che il minimo non ci fosse.
+\end{strategia}
+
+\begin{dimostrazione}
+Supponiamo per assurdo che $A$ non abbia minimo, e sia $\mathcal{P}(n)$ la proposizione
+«nessun naturale $k\le n$ appartiene ad $A$».
+
+\emph{Base.} Se fosse $1\in A$, poiché $1\le a$ per ogni $a\in A$ (\cref{lem:struttura-N}(i)),
+$1$ sarebbe il minimo di $A$: escluso. Dunque $1\notin A$; e poiché l'unico naturale
+$k\le1$ è $k=1$ (per il \cref{lem:struttura-N}(i) e la proprietà antisimmetrica),
+$\mathcal{P}(1)$ è vera.
+
+\emph{Passo induttivo.} Supponiamo vera $\mathcal{P}(n)$. Se fosse $n+1\in A$, allora
+ogni $a\in A$ verificherebbe $a>n$ (per $\mathcal{P}(n)$), quindi $a\ge n+1$ per il
+\cref{lem:struttura-N}(iii): $n+1$ sarebbe il minimo di $A$, escluso. Quindi
+$n+1\notin A$; e poiché i naturali $k\le n+1$ sono quelli $\le n$ e $n+1$ stesso
+(ancora per il lemma), vale $\mathcal{P}(n+1)$.
+
+Per il principio di induzione $\mathcal{P}(n)$ vale per ogni $n$; in particolare ogni
+$n\in\N$ non appartiene ad $A$ (si applichi $\mathcal{P}(n)$ con $k=n$). Dunque
+$A=\emptyset$, contro l'ipotesi.
+\end{dimostrazione}
+
+\begin{teorema}\label{teo:max-N}
+Ogni sottoinsieme non vuoto di $\N$, limitato superiormente, ha massimo.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$A\subseteq\N$, \ $A\neq\emptyset$, \ $A$ limitato superiormente.}
+\Tesi{Esiste $\max A$.}
+\end{schema}
+
+\begin{strategia}
+Per il \cref{teo:esistenza-sup}, $A$ ha un estremo superiore $M$; dobbiamo provare che
+$M\in A$. Per la caratterizzazione \eqref{eq:caratt-sup} con $\epsilon=1$, c'è un
+elemento $n\in A$ «vicino» a $M$, precisamente $n>M-1$. Ora sfruttiamo il fatto che gli
+elementi di $A$ sono naturali, dunque «distano almeno $1$» l'uno dall'altro: un elemento
+di $A$ più grande di $n$ dovrebbe essere $\ge n+1>M$, impossibile. Quindi $n$ è il
+massimo.
+\end{strategia}
+
+\begin{dimostrazione}
+Sia $M=\sup A$, che esiste per il \cref{teo:esistenza-sup}. Per la
+\cref{prop:caratt-sup} con $\epsilon=1$, esiste $n\in A$ con $n>M-1$. Se esistesse
+$m\in A$ con $m>n$, per il \cref{lem:struttura-N}(iii) sarebbe $m\ge n+1>M$, contro il
+fatto che $M$ è un maggiorante di $A$. Dunque $m\le n$ per ogni $m\in A$, e $n\in A$:
+$n=\max A$.
+\end{dimostrazione}
+
+\begin{osservazione}
+I due teoremi si estendono ai sottoinsiemi di $\Z$: \emph{ogni sottoinsieme non vuoto di
+$\Z$ limitato inferiormente ha minimo, e ogni sottoinsieme non vuoto di $\Z$ limitato
+superiormente ha massimo}. Basta «traslare» l'insieme dentro $\N$: se $A\subseteq\Z$ ha un
+minorante $\ell$ e $k\in\N$ è tale che $k>-\ell$, l'insieme $\{a+k : a\in A\}$ è contenuto
+in $\N$, e il suo minimo, diminuito di $k$, è il minimo di $A$ (l'esistenza di un tale $k$
+è garantita dalla proprietà di Archimede, che dimostriamo subito e la cui dimostrazione
+non usa questa osservazione, quindi non c'è circolarità). Per il massimo si applica il
+risultato sul minimo all'insieme $-A=\{-a : a\in A\}$, che è limitato inferiormente se
+$A$ è limitato superiormente.
+\end{osservazione}
+
+\subsection{La proprietà di Archimede}
+
+Tenendo conto delle proprietà precedenti e del teorema di esistenza dell'estremo
+superiore si può dimostrare il risultato seguente, che nel \cref{cap:numeri} abbiamo già
+usato una volta (nella dimostrazione del \cref{teo:Q-non-completo}) aggirandolo.
+
+\begin{teorema}[Proprietà di Archimede]\label{teo:archimede}\index{proprietà di Archimede}
+Per ogni $x\in\R$ esiste $n\in\N$ tale che $n>x$.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$x\in\R$.}
+\Tesi{$\esiste n\in\N : n>x$. \ Equivalentemente: $\N$ non è limitato superiormente,
+$\sup\N=+\infty$.}
+\end{schema}
+
+\begin{strategia}
+La tesi dice che $\N$ non ha maggioranti; ragioniamo per assurdo supponendo che ne abbia.
+Allora, per il \cref{teo:esistenza-sup}, $\N$ avrebbe un \emph{minimo} maggiorante $M$.
+Ma $\N$ è «invariante per traslazione di $1$»: se $n\in\N$ anche $n+1\in\N$. Quindi
+$n+1\le M$ per ogni $n$, cioè $n\le M-1$ per ogni $n$: anche $M-1$ sarebbe un
+maggiorante, e più piccolo di $M$. Assurdo. Si noti che l'ingrediente decisivo è la
+completezza: senza l'esistenza del sup il ragionamento non parte.
+\end{strategia}
+
+\begin{dimostrazione}
+Se la proprietà di Archimede fosse falsa, esisterebbe $x\in\R$ con $n\le x$ per ogni
+$n\in\N$: l'insieme $\N$ sarebbe limitato superiormente e quindi, per il
+\cref{teo:esistenza-sup}, dotato di estremo superiore $M\in\R$. In particolare, per ogni
+numero naturale $n$ sarebbe $n\le M$. Poiché anche $n+1$ è un numero naturale,
+risulterebbe $n+1\le M$, cioè $n\le M-1$, per ogni $n\in\N$; il che è assurdo perché
+$M-1$ sarebbe un maggiorante di $\N$, contrariamente al fatto che $M$ è il più piccolo dei
+maggioranti.
+\end{dimostrazione}
+
+In altre parole, la proprietà di Archimede afferma che l'insieme $\N$ dei numeri naturali
+non è limitato superiormente. Ne seguono alcune conseguenze di uso continuo.
+
+\begin{corollario}\label{cor:archimede}
+\leavevmode
+\begin{enumerate}
+  \item Per ogni $\epsilon>0$ esiste $n\in\N$ tale che $\dfrac1n<\epsilon$; quindi
+  $\inf\set{\dfrac1n : n\in\N}=0$.
+  \item Se $a>0$ e $b\in\R$, esiste $n\in\N$ tale che $na>b$.
+\end{enumerate}
+\end{corollario}
+
+\begin{schema}
+\Ipotesi{(i) $\epsilon>0$; \ (ii) $a>0$, \ $b\in\R$.}
+\Tesi{(i) $\esiste n\in\N : \frac1n<\epsilon$, \ e quindi $\inf\{1/n : n\in\N\}=0$; \
+(ii) $\esiste n\in\N : na>b$.}
+\end{schema}
+
+\begin{strategia}
+Entrambe le affermazioni sono la proprietà di Archimede applicata a un numero reale
+scelto in modo opportuno: $1/\epsilon$ per la (i), $b/a$ per la (ii). Le disuguaglianze
+richieste si ottengono poi moltiplicando o dividendo per numeri positivi, che non
+cambiano il verso. Per l'estremo inferiore si usa la caratterizzazione
+\eqref{eq:caratt-inf}.
+\end{strategia}
+
+\begin{dimostrazione}
+(i) Per il \cref{teo:archimede} esiste $n>1/\epsilon$, cioè $1/n<\epsilon$. Poiché
+$1/n>0$ per ogni $n$, lo zero è un minorante di $\{1/n\}$, e per quanto appena visto è
+il massimo dei minoranti (\eqref{eq:caratt-inf}). (ii) Per il \cref{teo:archimede}
+esiste $n>b/a$; moltiplicando per $a>0$ si ottiene $na>b$.
+\end{dimostrazione}
+
+\begin{idea}[Il significato fisico della proprietà di Archimede]
+La forma (ii) del corollario è quella originale, geometrica: \emph{dati due segmenti, un
+opportuno multiplo del più corto supera il più lungo}. Con un righello da $30$ cm si può
+misurare (riportandolo un numero sufficiente di volte) la lunghezza di qualsiasi
+corridoio; con un passo di integrazione $\Delta t$, per piccolo che sia, una simulazione
+numerica raggiunge in un numero finito di passi qualsiasi istante finale. In una
+«grandezza non archimedea» esisterebbero invece segmenti \emph{infinitesimi}, che
+riportati un numero qualsiasi di volte non raggiungono mai un segmento dato: i numeri
+reali non contengono quantità di questo tipo.
+\end{idea}
+
+\begin{notastorica}[Archimede, Eudosso e gli infinitesimi]
+Il principio porta il nome di Archimede di Siracusa (287--212 a.C.), che lo enuncia come
+postulato nel trattato \emph{Sulla sfera e il cilindro} e lo usa sistematicamente nel
+\emph{metodo di esaustione}, con cui calcolò l'area del segmento di parabola e il volume
+della sfera; nella prefazione alla \emph{Quadratura della parabola} lo stesso Archimede
+osserva però che il lemma era già stato usato dai geometri precedenti, e la tradizione
+lo attribuisce a Eudosso di Cnido (IV secolo a.C.); una sua forma compare nella definizione~4 del libro~V degli \emph{Elementi} di Euclide.
+Per tutto il Seicento e il Settecento, Leibniz e i suoi successori calcolarono con gli
+«infinitesimi», quantità più piccole di ogni numero positivo eppure non nulle: grandezze,
+appunto, non archimedee. L'Analisi dell'Ottocento li bandì, sostituendoli con la nozione
+di limite. Furono riabilitati in modo rigoroso solo nel 1961 da Abraham Robinson con
+l'\emph{analisi non standard}, che lavora in un campo ordinato più grande di $\R$ nel quale
+la proprietà di Archimede, per l'appunto, non vale.
+\end{notastorica}
+
+\subsection{La parte intera}
+
+\begin{proposizione}[Parte intera]\label{prop:parte-intera}\index{parte intera}
+Per ogni $x\in\R$ esiste uno e un solo $m\in\Z$ tale che
+\begin{equation}\label{eq:parte-intera}
+  m\le x<m+1.
+\end{equation}
+Il numero $m$ si chiama \emph{parte intera} di $x$ e si indica con $\lfloor x\rfloor$
+(oppure con $[x]$).
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$x\in\R$.}
+\Tesi{$\esiste!\,m\in\Z : m\le x<m+1$.}
+\end{schema}
+
+\begin{strategia}
+Per l'esistenza, $m$ dev'essere «il più grande intero $\le x$»: lo otterremo come
+massimo dell'insieme degli interi minori o uguali a $x$. Per non uscire da $\N$, dove
+abbiamo i teoremi già pronti, trasliamo tutto di un naturale $k$ abbastanza grande
+(fornito da Archimede) e usiamo invece il \emph{minimo} dei naturali che superano $x+k$.
+Per l'unicità si osserva che due interi che soddisfano la \eqref{eq:parte-intera}
+distano meno di $1$, e due interi distinti distano almeno $1$.
+\end{strategia}
+
+\begin{dimostrazione}
+\emph{Esistenza.} Per il \cref{teo:archimede} esiste $k\in\N$ con $k>-x$, cioè $x+k>0$,
+e (di nuovo per Archimede) l'insieme $T=\{j\in\N : j>x+k\}$ è non vuoto. Per il
+\cref{teo:buon-ordinamento} $T$ ha minimo $j_{0}$. Allora $j_{0}>x+k$; inoltre
+$j_{0}-1\le x+k$: se $j_{0}=1$ ciò segue da $x+k>0$, altrimenti $j_{0}-1\in\N$
+(\cref{lem:struttura-N}(ii)) e $j_{0}-1\notin T$ perché è minore del minimo. Posto
+$m=j_{0}-1-k\in\Z$, le due disuguaglianze $j_{0}-1\le x+k<j_{0}$ diventano $m\le x<m+1$.
+
+\emph{Unicità.} Se anche $m'\in\Z$ verifica $m'\le x<m'+1$, sommando $m\le x<m+1$ con
+$-m'-1<-x\le-m'$ si ottiene $-1<m-m'<1$. Ma un intero non nullo $h$ ha $\abs{h}\in\N$,
+quindi $\abs{h}\ge1$ (\cref{lem:struttura-N}(i)); dunque $m-m'=0$.
+\end{dimostrazione}
+
+\begin{marginfigure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=5.4cm, height=4.6cm, xmin=-2.4, xmax=3.4, ymin=-2.6, ymax=3.4,
+  axis lines=left, xtick={-2,-1,0,1,2,3}, ytick={-2,-1,0,1,2,3}]
+  \foreach \k in {-2,...,2} {
+    \addplot[curva, domain=\k:\k+0.97] {\k};
+    \addplot[only marks, mark=*, mark size=1.2pt, blu] coordinates {(\k,\k)};
+    \addplot[only marks, mark=o, mark size=1.2pt, blu, fill=white] coordinates {(\k+1,\k)};}
+\end{axis}
+\end{tikzpicture}
+\caption{Il grafico della funzione parte intera $y=\lfloor x\rfloor$: una «scala» con
+gradini chiusi a sinistra e aperti a destra.}
+\label{fig:parte-intera}
+\end{marginfigure}
+
+Ad esempio $\lfloor 2{,}7\rfloor=2$, $\lfloor 3\rfloor=3$, $\lfloor-2{,}7\rfloor=-3$
+(\emph{non} $-2$: $-3\le-2{,}7<-2$). In Python la parte intera è
+\texttt{math.floor}, da non confondere con \texttt{int}, che tronca verso lo zero:
+\texttt{int(-2.7)} restituisce \texttt{-2}.
+
+\subsection{La densità dei razionali}
+
+Dalla proprietà di Archimede si ricava che l'insieme $\Q$ dei numeri razionali è
+\emph{denso} in $\R$.
+
+\begin{definizione}[Insieme denso]\index{insieme!denso}
+Un insieme $D\subseteq\R$ si dice \emph{denso} in $\R$ se per ogni coppia $a,b$ di numeri
+reali con $a<b$ esiste un elemento di $D$ compreso fra $a$ e $b$.
+\end{definizione}
+
+\begin{teorema}[Densità dei numeri razionali]\label{teo:densita-Q}\index{densità!dei razionali}
+L'insieme $\Q$ dei numeri razionali è denso in $\R$: per ogni $a,b\in\R$ con $a<b$
+esiste $q\in\Q$ tale che $a<q<b$.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$a,b\in\R$, \ $a<b$.}
+\Tesi{$\esiste m\in\Z,\ n\in\N : \ a<\dfrac{m}{n}<b$.}
+\end{schema}
+
+\begin{strategia}
+Cerchiamo una frazione $m/n$ nell'intervallo $(a,b)$. L'idea è di scegliere prima il
+\emph{denominatore} $n$ in modo che la «griglia» delle frazioni di denominatore $n$,
+cioè i punti $\dots,-\frac1n,0,\frac1n,\frac2n,\dots$, abbia un passo $\frac1n$ più
+piccolo della lunghezza $b-a$ dell'intervallo: allora almeno un punto della griglia deve
+cadere dentro (\cref{fig:densita-Q}). Il denominatore lo fornisce Archimede ($n>1/(b-a)$).
+Come numeratore prendiamo il primo intero che supera $na$, cioè $m=\lfloor na\rfloor+1$:
+è il primo punto della griglia a destra di $a$, e non può «scavalcare» $b$ perché il passo
+è troppo corto.
+\end{strategia}
+
+\begin{dimostrazione}
+Per il \cref{teo:archimede} esiste $n\in\N$ con $n>\frac{1}{b-a}$; per cui risulterà
+$nb-na>1$. Sia $m=\lfloor na\rfloor+1$ (\cref{prop:parte-intera}); allora
+$m-1\le na<m$, e quindi
+\[
+  na<m=(m-1)+1\le na+1<na+(nb-na)=nb .
+\]
+Dalle disuguaglianze $na<m<nb$, dividendo per $n>0$, segue $a<\frac mn<b$.
+\end{dimostrazione}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[x=1.05cm, every node/.style={font=\footnotesize}]
+  \draw[-Latex, grigio] (-0.3,0) -- (10.5,0);
+  \foreach \k in {0,...,10} {\draw[grigio] (\k,0.09) -- (\k,-0.09);}
+  \node[below=3pt, grigio] at (4,0) {$\frac{m-1}{n}$};
+  \node[below=3pt, verde] at (5,0) {$\frac{m}{n}$};
+  \node[below=3pt, grigio] at (6,0) {$\frac{m+1}{n}$};
+  \fill[blu] (4.35,0) circle (2pt) node[above=3pt, blu] {$a$};
+  \fill[blu] (5.7,0) circle (2pt) node[above=3pt, blu] {$b$};
+  \fill[verde] (5,0) circle (2.3pt);
+  \draw[grigio, decorate, decoration={brace, amplitude=3pt}] (7,0.25) -- (8,0.25) node[midway, above=3pt] {passo $\frac1n<b-a$};
+  \draw[blu, thick] (4.35,-0.55) -- (5.7,-0.55);
+  \node[blu, below] at (5.03,-0.6) {$b-a$};
+\end{tikzpicture}
+\caption{L'idea della dimostrazione del \cref{teo:densita-Q}: se il passo $1/n$ della
+griglia delle frazioni di denominatore $n$ è più corto dell'intervallo $(a,b)$, almeno
+un punto $m/n$ della griglia cade all'interno.}
+\label{fig:densita-Q}
+\end{figure}
+
+\begin{corollario}[Densità degli irrazionali]\label{cor:densita-irrazionali}
+Anche l'insieme $\R\setminus\Q$ dei numeri irrazionali è denso in $\R$.
+\end{corollario}
+
+\begin{schema}
+\Ipotesi{$a,b\in\R$, \ $a<b$.}
+\Tesi{$\esiste t\in\R\setminus\Q : a<t<b$.}
+\end{schema}
+
+\begin{strategia}
+Non occorre ripetere la costruzione: basta «spostare» il problema. Traslato
+l'intervallo $(a,b)$ di $-\sqrt2$, il teorema di densità vi trova un razionale $q$;
+riportato indietro, $q+\sqrt2$ cade in $(a,b)$ ed è irrazionale. Al posto di $\sqrt2$
+andrebbe bene qualsiasi irrazionale fissato.
+\end{strategia}
+
+\begin{dimostrazione}
+Siano $a<b$. Applicando il \cref{teo:densita-Q} alla coppia $a-\sqrt2<b-\sqrt2$ si trova
+$q\in\Q$ con $a-\sqrt2<q<b-\sqrt2$, cioè $a<q+\sqrt2<b$ (l'esistenza di $\sqrt2$ in
+$\R$ è garantita dal \cref{teo:radice-n}); e $q+\sqrt2$ è irrazionale,
+perché somma di un razionale e di un irrazionale (esercizio del \cref{sec:nzq}).
+\end{dimostrazione}
+
+\begin{osservazione}[Denso non vuol dire «pieno»]
+Il \cref{teo:densita-Q} e il \cref{cor:densita-irrazionali} dicono che razionali e
+irrazionali sono «mescolati» in modo inestricabile: in ogni intervallo, per piccolo che
+sia, ci sono infiniti razionali e infiniti irrazionali. Eppure $\Q$ ha i «buchi» del
+\cref{teo:Q-non-completo}: essere denso non significa essere completo. È una distinzione
+sottile che si rivela profonda: Cantor dimostrò nel 1874 che i razionali si possono
+mettere in fila e numerare (sono un'infinità \emph{numerabile}), mentre i reali no. In
+un senso preciso, «quasi tutti» i numeri reali sono irrazionali.
+\end{osservazione}
+
+\begin{python}[La dimostrazione della densità, trasformata in un algoritmo]
+# Il teorema di densità è costruttivo: la dimostrazione dice
+# esattamente quali n e m scegliere. Traduciamola in codice, con
+# l'aritmetica esatta delle frazioni.
+from fractions import Fraction as F
+import math
+
+def razionale_tra(a, b):
+    """Restituisce m/n con a < m/n < b, seguendo la dimostrazione."""
+    assert a < b
+    n = math.floor(1 / (b - a)) + 1     # Archimede: n > 1/(b - a)
+    m = math.floor(n * a) + 1           # primo intero che supera n*a
+    q = F(m, n)
+    assert a < q < b                    # la tesi del teorema
+    return q
+
+print(razionale_tra(F(1, 3), F(1, 2)))         # tra 1/3 e 1/2
+print(razionale_tra(math.sqrt(2), 1.4143))     # tra √2 e 1.4143
+print(razionale_tra(math.pi, math.pi + 1e-6))  # intervallo minuscolo
+\end{python}
+\begin{risultato}
+3/7
+16363/11570
+3141593/1000000
+\end{risultato}
+
+\begin{esercizio}
+Dimostrare che tra due numeri reali distinti esistono \emph{infiniti} numeri razionali.
+\begin{soluzione}
+Siano $a<b$. Per il \cref{teo:densita-Q} esiste $q_{1}\in(a,b)$ razionale; applicandolo
+di nuovo a $(a,q_{1})$ si trova $q_{2}\in(a,q_{1})$, poi $q_{3}\in(a,q_{2})$ e così via:
+per induzione si costruisce una successione di razionali $q_{1}>q_{2}>q_{3}>\cdots$
+tutti distinti e tutti in $(a,b)$. \emph{Scelta logica:} «infiniti» si dimostra
+esibendo un procedimento che non si arresta mai; il teorema di densità è il «motore»
+che a ogni passo produce un elemento nuovo.
+\end{soluzione}
+\end{esercizio}
+
+\subsection{Approfondimento: i numeri reali in forma decimale}
+\label{subsec:forma-decimale}
+
+Fin dalla scuola siamo abituati a pensare un numero reale come un \emph{allineamento
+decimale}, eventualmente illimitato: $\frac14=0{,}25$, $\frac13=0{,}333\ldots$,
+$\sqrt2=1{,}41421356\ldots$. Negli assiomi del \cref{sec:assiomi}, però, di cifre non si
+parla affatto, e i puntini non hanno per ora alcun significato preciso. Seguendo
+\cite{giusti}, mostriamo che la rappresentazione decimale è una \emph{conseguenza} degli
+assiomi: le cifre di un numero si ricavano dalla parte intera, e il numero si ricostruisce
+dalle sue cifre con l'estremo superiore. Le serie numeriche, con le quali un allineamento
+decimale si legge come una somma infinita, arriveranno solo nel \cref{cap:serie}: qui non
+ne avremo bisogno. Ci limitiamo ai numeri $x\ge0$; per $x<0$ si rappresenta $-x$ e si
+antepone il segno meno.
+
+\begin{definizione}[Troncamenti e cifre decimali]\label{def:allineamento-decimale}\index{rappresentazione decimale}\index{cifre decimali}
+Sia $x\ge0$. Per ogni intero $n\ge0$ il numero razionale
+\begin{equation}\label{eq:troncamento}
+  x_{n}=\frac{\lfloor10^{n}x\rfloor}{10^{n}}
+\end{equation}
+si chiama \emph{troncamento} di $x$ alla $n$-esima cifra decimale. Si pone poi
+$c_{0}=\lfloor x\rfloor$ e, per ogni $k\in\N$,
+\begin{equation}\label{eq:cifra-decimale}
+  c_{k}=\lfloor10^{k}x\rfloor-10\,\lfloor10^{k-1}x\rfloor ;
+\end{equation}
+$c_{k}$ è la \emph{$k$-esima cifra decimale} di $x$, e si scrive
+$x=c_{0}{,}c_{1}c_{2}c_{3}\ldots$ (\emph{allineamento decimale} di $x$), dove l'intero
+$c_{0}$ si scrive nel modo usuale.
+\end{definizione}
+
+Ad esempio, per $x=\frac{27}{8}$ si trova $\lfloor x\rfloor=3$, $\lfloor10x\rfloor=33$,
+$\lfloor100x\rfloor=337$, $\lfloor1000x\rfloor=3375$ e poi
+$\lfloor10^{k}x\rfloor=3375\cdot10^{k-3}$; quindi $c_{1}=33-30=3$, $c_{2}=337-330=7$,
+$c_{3}=3375-3370=5$ e $c_{k}=0$ per $k\ge4$: $\frac{27}{8}=3{,}375$. La formula
+\eqref{eq:cifra-decimale} non fa che leggere la cifra delle unità dell'intero
+$\lfloor10^{k}x\rfloor$: moltiplicare per $10^{k}$ sposta la virgola di $k$ posti verso
+destra, e la parte intera butta via ciò che resta dopo la virgola.
+
+\begin{teorema}[Esistenza dell'allineamento decimale]\label{teo:cifre-decimali}
+Sia $x\ge0$, con troncamenti $x_{n}$ e cifre $c_{k}$ come nella
+\cref{def:allineamento-decimale}. Allora:
+\begin{enumerate}
+  \item $c_{k}\in\{0,1,\dots,9\}$ per ogni $k\in\N$;
+  \item per ogni $n\ge0$ (la somma è vuota se $n=0$)
+  \begin{equation}\label{eq:troncamento-stima}
+    x_{n}=c_{0}+\sum_{k=1}^{n}\frac{c_{k}}{10^{k}},
+    \qquad x_{n}\le x<x_{n}+\frac{1}{10^{n}} ;
+  \end{equation}
+  \item $x=\sup\{x_{n} : n\ge0\}$;
+  \item le cifre non sono \emph{definitivamente uguali a $9$}: non esiste $m\in\N$ tale
+  che $c_{k}=9$ per ogni $k>m$.
+\end{enumerate}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$x\ge0$; \ $x_{n}=\lfloor10^{n}x\rfloor/10^{n}$, \ $c_{0}=\lfloor x\rfloor$, \
+$c_{k}=\lfloor10^{k}x\rfloor-10\lfloor10^{k-1}x\rfloor$.}
+\Tesi{(i) $c_{k}\in\{0,\dots,9\}$; \ (ii) $x_{n}=c_{0}+\sum_{k=1}^{n}c_{k}10^{-k}$ e
+$x_{n}\le x<x_{n}+10^{-n}$; \ (iii) $x=\sup_{n}x_{n}$; \ (iv) per nessun $m$ si ha
+$c_{k}=9$ per ogni $k>m$.}
+\end{schema}
+
+\begin{strategia}
+Tutto discende dalla doppia disuguaglianza che definisce la parte intera
+(\cref{prop:parte-intera}), scritta per l'intero $m_{n}=\lfloor10^{n}x\rfloor$:
+$m_{n}\le10^{n}x<m_{n}+1$. Dividendo per $10^{n}$ si ottiene la stima (ii):
+\emph{il troncamento approssima $x$ per difetto con un errore minore di $10^{-n}$}.
+Moltiplicando invece per $10$ la disuguaglianza scritta per $m_{k-1}$ si chiude $10^{k}x$
+tra due interi che distano $10$, e questo costringe la cifra $c_{k}$ tra $0$ e $9$; la
+formula di $x_{n}$ come somma delle cifre è una somma telescopica. Il punto (iii) è la
+caratterizzazione dell'estremo superiore, con la proprietà di Archimede a garantire che
+l'errore $10^{-n}$ diventi piccolo quanto si vuole. Il punto (iv) si prova per assurdo:
+una coda di soli $9$ spingerebbe i troncamenti tanto vicino al numero $x_{m}+10^{-m}$ da
+costringere $x$ a coincidere con esso, mentre la stima (ii) lo vieta.
+\end{strategia}
+
+\begin{dimostrazione}
+Poniamo $m_{n}=\lfloor10^{n}x\rfloor\in\Z$, cosicché $x_{n}=m_{n}/10^{n}$ e, per la
+\eqref{eq:parte-intera},
+\begin{equation}\label{eq:mn-parte-intera}
+  m_{n}\le10^{n}x<m_{n}+1 \qquad\text{per ogni } n\ge0 .
+\end{equation}
+Useremo un fatto elementare: \emph{se $j\in\Z$ e $j\le t$, allora $j\le\lfloor t\rfloor$}.
+Infatti, se fosse $j>\lfloor t\rfloor$, l'intero $j-\lfloor t\rfloor$ sarebbe positivo,
+quindi $\ge1$ (\cref{lem:struttura-N}(i)), e risulterebbe $j\ge\lfloor t\rfloor+1>t$.
+
+(i) Moltiplicando per $10$ la \eqref{eq:mn-parte-intera} scritta con $n=k-1$ si ottiene
+$10\,m_{k-1}\le10^{k}x<10\,m_{k-1}+10$. L'intero $10\,m_{k-1}$ non supera $10^{k}x$, e
+quindi $10\,m_{k-1}\le m_{k}$; d'altra parte $m_{k}\le10^{k}x<10\,m_{k-1}+10$. Dunque
+$c_{k}=m_{k}-10\,m_{k-1}$ è un intero con $0\le c_{k}<10$, cioè $c_{k}\in\{0,1,\dots,9\}$.
+
+(ii) Dividendo la \eqref{eq:mn-parte-intera} per $10^{n}>0$ si ha
+$x_{n}\le x<x_{n}+10^{-n}$. Inoltre $c_{k}10^{-k}=m_{k}10^{-k}-m_{k-1}10^{-(k-1)}
+=x_{k}-x_{k-1}$, e la somma è telescopica:
+\[
+  c_{0}+\sum_{k=1}^{n}\frac{c_{k}}{10^{k}}=x_{0}+\sum_{k=1}^{n}(x_{k}-x_{k-1})=x_{n}.
+\]
+
+(iii) Per la (ii), $x$ è un maggiorante dell'insieme dei troncamenti. Osserviamo poi che
+\begin{equation}\label{eq:dieci-meno-n}
+  \perogni\epsilon>0\ \ \esiste n\in\N : \ \frac{1}{10^{n}}<\epsilon ,
+\end{equation}
+e che la stessa disuguaglianza vale allora per ogni indice più grande, perché le potenze
+di $10$ crescono. Infatti per il \cref{cor:archimede}(i) esiste $n$ con $\frac1n<\epsilon$,
+e per la disuguaglianza di Bernoulli (\cref{teo:bernoulli}) $10^{n}=(1+9)^{n}\ge1+9n>n$,
+quindi $\frac{1}{10^{n}}<\frac1n<\epsilon$. Fissato $\epsilon>0$ e scelto $n$ come nella
+\eqref{eq:dieci-meno-n}, la (ii) dà $x_{n}>x-10^{-n}>x-\epsilon$. Per la
+\cref{prop:caratt-sup}, $x=\sup_{n}x_{n}$.
+
+(iv) Supponiamo per assurdo che sia $c_{k}=9$ per ogni $k>m$, e poniamo $y=x_{m}+10^{-m}$.
+Per $n>m$, usando la (ii) e l'identità $9\cdot10^{-k}=10^{-(k-1)}-10^{-k}$, che rende
+telescopica anche questa somma,
+\[
+  x_{n}=x_{m}+\sum_{k=m+1}^{n}\frac{9}{10^{k}}=x_{m}+\frac{1}{10^{m}}-\frac{1}{10^{n}}
+  =y-\frac{1}{10^{n}} .
+\]
+D'altra parte la (ii) con $n=m$ dà $x<y$, e con $n>m$ dà $x\ge x_{n}=y-10^{-n}$. Dunque
+$0<y-x\le10^{-n}$ per ogni $n>m$, contro la \eqref{eq:dieci-meno-n} con $\epsilon=y-x$.
+\end{dimostrazione}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[x=0.8cm, every node/.style={font=\scriptsize}]
+  % prima riga: [1, 2] diviso in decimi
+  \draw[grigio] (0,0) -- (10,0);
+  \foreach \k in {0,...,10} {\draw[grigio] (\k,0.08) -- (\k,-0.08);}
+  \fill[rame!30] (4,-0.09) rectangle (5,0.09);
+  \draw[rame, thick] (4,0) -- (5,0);
+  \foreach \p/\lab in {0/1, 4/{1{,}4}, 5/{1{,}5}, 10/2} {\node[below=2pt] at (\p,0) {$\lab$};}
+  \fill[blu] (4.142,0) circle (1.5pt) node[above=2pt] {$\sqrt2$};
+  \node[anchor=west] at (10.3,0) {$x_{1}=1{,}4$, \ $c_{1}=4$};
+  % seconda riga: [1,4; 1,5] diviso in centesimi
+  \begin{scope}[yshift=-1.7cm]
+  \draw[grigio] (0,0) -- (10,0);
+  \foreach \k in {0,...,10} {\draw[grigio] (\k,0.08) -- (\k,-0.08);}
+  \fill[rame!30] (1,-0.09) rectangle (2,0.09);
+  \draw[rame, thick] (1,0) -- (2,0);
+  \foreach \p/\lab in {0/{1{,}4}, 1/{1{,}41}, 2/{1{,}42}, 10/{1{,}5}} {\node[below=2pt] at (\p,0) {$\lab$};}
+  \fill[blu] (1.421,0) circle (1.5pt) node[above=2pt] {$\sqrt2$};
+  \node[anchor=west] at (10.3,0) {$x_{2}=1{,}41$, \ $c_{2}=1$};
+  \end{scope}
+  % terza riga: [1,41; 1,42] diviso in millesimi
+  \begin{scope}[yshift=-3.4cm]
+  \draw[grigio] (0,0) -- (10,0);
+  \foreach \k in {0,...,10} {\draw[grigio] (\k,0.08) -- (\k,-0.08);}
+  \fill[rame!30] (4,-0.09) rectangle (5,0.09);
+  \draw[rame, thick] (4,0) -- (5,0);
+  \foreach \p/\lab in {0/{1{,}41}, 10/{1{,}42}} {\node[below=2pt] at (\p,0) {$\lab$};}
+  \node[below=2pt, anchor=north east] at (4.1,0) {$1{,}414$};
+  \node[below=2pt, anchor=north west] at (4.9,0) {$1{,}415$};
+  \fill[blu] (4.2136,0) circle (1.5pt) node[above=2pt] {$\sqrt2$};
+  \node[anchor=west] at (10.3,0) {$x_{3}=1{,}414$, \ $c_{3}=4$};
+  \end{scope}
+  % la lente: l'intervallo evidenziato diventa la riga successiva
+  \draw[grigio, dashed] (4,-0.5) -- (0,-1.45);
+  \draw[grigio, dashed] (5,-0.5) -- (10,-1.45);
+  \draw[grigio, dashed] (1,-2.2) -- (0,-3.15);
+  \draw[grigio, dashed] (2,-2.2) -- (10,-3.15);
+\end{tikzpicture}
+\caption{Le cifre decimali come una lente d'ingrandimento. A ogni passo l'intervallo
+$[x_{n},x_{n}+10^{-n})$ che contiene $x=\sqrt2$ (in color rame) viene diviso in dieci
+parti uguali, e la cifra $c_{n+1}$ dice in quale delle dieci cade $x$. I troncamenti
+$x_{n}$, estremi sinistri degli intervalli, crescono e hanno $x$ come estremo superiore
+(\cref{teo:cifre-decimali}).}
+\label{fig:decimali-lente}
+\end{figure}
+
+Il teorema precedente va dal numero alle cifre. Il cammino inverso, dalle cifre al numero,
+è quello in cui interviene in modo essenziale la completezza di $\R$: assegnate
+arbitrariamente le cifre, occorre \emph{trovare} un numero che le abbia.
+
+\begin{teorema}[Ogni allineamento rappresenta un numero reale]\label{teo:allineamento-numero}
+Siano $c_{0}\ge0$ un intero e $c_{1},c_{2},c_{3},\dots$ cifre di $\{0,1,\dots,9\}$, e
+poniamo
+\[
+  s_{n}=c_{0}+\sum_{k=1}^{n}\frac{c_{k}}{10^{k}} \qquad (n\ge0).
+\]
+Allora l'insieme $\{s_{n} : n\ge0\}$ è limitato superiormente, e il suo estremo superiore
+$s$ verifica $s_{n}\le s\le s_{n}+10^{-n}$ per ogni $n$. Inoltre:
+\begin{enumerate}
+  \item se le cifre $c_{k}$ non sono definitivamente uguali a $9$, l'allineamento decimale
+  di $s$ è proprio $c_{0}{,}c_{1}c_{2}c_{3}\ldots$, ed $s$ è l'unico numero reale con
+  questa proprietà;
+  \item se invece $c_{k}=9$ per ogni $k>m$, allora $s=s_{m}+10^{-m}$, e le cifre di $s$
+  sono nulle dalla $(m+1)$-esima in poi.
+\end{enumerate}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$c_{0}\in\Z$, $c_{0}\ge0$; \ $c_{k}\in\{0,\dots,9\}$ per $k\in\N$; \
+$s_{n}=c_{0}+\sum_{k=1}^{n}c_{k}10^{-k}$.}
+\Tesi{Esiste $s=\sup_{n}s_{n}$, e $s_{n}\le s\le s_{n}+10^{-n}$; \ (i) se le cifre non
+sono definitivamente $9$, le cifre di $s$ sono le $c_{k}$, ed $s$ è l'unico reale con
+queste cifre; \ (ii) se $c_{k}=9$ per $k>m$, allora $s=s_{m}+10^{-m}$, con cifre nulle
+dopo la $m$-esima.}
+\end{schema}
+
+\begin{strategia}
+Le somme $s_{n}$ crescono, perché si aggiungono termini $\ge0$, ma non possono crescere
+troppo: ciò che si aggiunge dopo l'indice $n$ è al più $\sum_{k>n}9\cdot10^{-k}$, una
+somma telescopica minore di $10^{-n}$. Quindi $s_{n}+10^{-n}$ è un maggiorante, e il
+candidato naturale per il numero cercato è $s=\sup_{n}s_{n}$: è la completezza di $\R$
+(\cref{teo:esistenza-sup}) a garantire che \emph{esista}. Per il punto (i) si migliora la
+stima in una disuguaglianza stretta, $s<s_{n}+10^{-n}$, sfruttando una cifra $c_{j}\le8$
+con $j>n$; a quel punto $10^{n}s$ è stretto tra l'intero $10^{n}s_{n}$ e il suo
+successivo, e l'unicità della parte intera dice che $s_{n}$ è il troncamento di $s$. Il
+punto (ii) è un calcolo diretto, chiuso dalla caratterizzazione dell'estremo superiore.
+\end{strategia}
+
+\begin{dimostrazione}
+Le $s_{n}$ crescono, perché $s_{n}-s_{n-1}=c_{n}10^{-n}\ge0$. Se $m>n$, poiché
+$c_{k}\le9$ e $9\cdot10^{-k}=10^{-(k-1)}-10^{-k}$,
+\begin{equation}\label{eq:coda-decimale}
+  s_{m}-s_{n}=\sum_{k=n+1}^{m}\frac{c_{k}}{10^{k}}\le\sum_{k=n+1}^{m}\frac{9}{10^{k}}
+  =\frac{1}{10^{n}}-\frac{1}{10^{m}}<\frac{1}{10^{n}} .
+\end{equation}
+Dunque $s_{m}<s_{n}+10^{-n}$ se $m>n$, e $s_{m}\le s_{n}$ se $m\le n$: il numero
+$s_{n}+10^{-n}$ è un maggiorante di tutte le $s_{m}$. In particolare (con $n=0$)
+l'insieme delle $s_{m}$ è limitato superiormente da $c_{0}+1$, e per il
+\cref{teo:esistenza-sup} esiste $s=\sup_{m}s_{m}$; si ha $s\ge s_{n}$ perché $s$ è un
+maggiorante, e $s\le s_{n}+10^{-n}$ perché $s$ è il minimo dei maggioranti.
+
+(i) Fissato $n\ge0$, per ipotesi esiste $j>n$ con $c_{j}\le8$. Per $m\ge j$, ripetendo la
+stima \eqref{eq:coda-decimale} ma usando $c_{j}\le9-1$ nel termine di indice $j$,
+\[
+  s_{m}-s_{n}\le\frac{1}{10^{n}}-\frac{1}{10^{m}}-\frac{1}{10^{j}}
+  <\frac{1}{10^{n}}-\frac{1}{10^{j}} ;
+\]
+per $m<j$ si ha $s_{m}\le s_{j}$, e la stessa disuguaglianza vale ancora. Dunque
+$s_{n}+10^{-n}-10^{-j}$ è un maggiorante delle $s_{m}$, e
+\[
+  s_{n}\le s\le s_{n}+\frac{1}{10^{n}}-\frac{1}{10^{j}}<s_{n}+\frac{1}{10^{n}} .
+\]
+Moltiplicando per $10^{n}$ si ottiene $10^{n}s_{n}\le10^{n}s<10^{n}s_{n}+1$, e
+$10^{n}s_{n}=10^{n}c_{0}+\sum_{k=1}^{n}c_{k}10^{n-k}$ è un intero. Per l'unicità nella
+\cref{prop:parte-intera}, $\lfloor10^{n}s\rfloor=10^{n}s_{n}$: il troncamento $n$-esimo
+di $s$ è $s_{n}$. Allora $\lfloor s\rfloor=s_{0}=c_{0}$ e, per $k\in\N$, la $k$-esima
+cifra di $s$ è $10^{k}s_{k}-10\cdot10^{k-1}s_{k-1}=10^{k}(s_{k}-s_{k-1})=c_{k}$. Se infine
+$y\ge0$ ha le stesse cifre di $s$, per la \eqref{eq:troncamento-stima} i suoi troncamenti
+sono $y_{n}=s_{n}$, e per il \cref{teo:cifre-decimali}(iii)
+$y=\sup_{n}y_{n}=\sup_{n}s_{n}=s$.
+
+(ii) Se $c_{k}=9$ per ogni $k>m$, la stima \eqref{eq:coda-decimale} è un'uguaglianza:
+$s_{n}=s_{m}+10^{-m}-10^{-n}$ per $n>m$. Il numero $y=s_{m}+10^{-m}$ è quindi un
+maggiorante delle $s_{n}$ (per $n\le m$ si ha $s_{n}\le s_{m}<y$) e, dato $\epsilon>0$,
+scelto $n>m$ con $10^{-n}<\epsilon$ come nella \eqref{eq:dieci-meno-n}, si ha
+$s_{n}>y-\epsilon$:
+per la \cref{prop:caratt-sup}, $s=y$. Infine $10^{n}s=10^{n-m}(10^{m}s_{m}+1)$ è intero
+per $n\ge m$, quindi $\lfloor10^{n}s\rfloor=10^{n}s$, e per $k>m$ la $k$-esima cifra di
+$s$ è $10^{k}s-10\cdot10^{k-1}s=0$.
+\end{dimostrazione}
+
+\begin{osservazione}[Le code di $9$ e il legame con le serie]\label{oss:allineamenti-nove}
+I due teoremi stabiliscono una corrispondenza biunivoca tra i numeri reali $x\ge0$ e gli
+allineamenti decimali $c_{0}{,}c_{1}c_{2}\ldots$ le cui cifre non sono definitivamente
+uguali a $9$. Gli allineamenti esclusi non sono «sbagliati»: per il
+\cref{teo:allineamento-numero}(ii) rappresentano, tramite l'estremo superiore, numeri che
+hanno anche un allineamento finito, ad esempio
+\[
+  0{,}4999\ldots=\sup\{0{,}4;\ 0{,}49;\ 0{,}499;\ \dots\}=0{,}5 ,
+\]
+e allo stesso modo $0{,}999\ldots=1$. Nel \cref{cap:serie} un allineamento sarà letto
+come somma della serie $\sum_{k}c_{k}10^{-k}$: poiché le somme parziali crescono, la somma
+è il loro estremo superiore (\cref{teo:monotone}), e i due punti di vista coincidono. Lì
+vedremo anche che un allineamento periodico rappresenta un razionale
+(\cref{prop:periodici}); il viceversa è l'\cref{es:decimali-periodici}. Infine, il numero
+$10$ non ha nulla di speciale: in base $b\ge2$ le cifre stanno in $\{0,\dots,b-1\}$ e si
+escludono le code di cifre $b-1$. I calcolatori usano la base $2$, in cui $\frac1{10}$ è
+periodico: per questo \texttt{0.1} non è esattamente un decimo e
+\texttt{0.1 + 0.2 == 0.3} è falso (\emph{Attenzione} alla fine del \cref{sec:assiomi}).
+\end{osservazione}
+
+\begin{python}[Le cifre di un numero, dalla definizione]
+# Le cifre di x dalla definizione c_k = [b^k x] - b [b^(k-1) x],
+# in aritmetica intera esatta: m(k) deve restituire [b^k x].
+import math
+from fractions import Fraction as F
+
+def cifre(m, n, b=10):
+    """Restituisce la stringa 'c_0,c_1c_2...c_n' nella base b."""
+    c = [m(k) - b * m(k - 1) for k in range(1, n + 1)]
+    return f"{m(0)}," + "".join(str(ck) for ck in c)
+
+# [10^k sqrt(2)] è il più grande intero j con j^2 <= 2 * 10^(2k)
+print("sqrt(2) =", cifre(lambda k: math.isqrt(2 * 100**k), 40))
+# 1/7: le cifre si ripetono con periodo 6
+print("1/7     =", cifre(lambda k: math.floor(F(10**k, 7)), 36))
+# 1/10 in base 2: periodico, quindi 0.1 non è esatto in un float
+print("1/10    =", cifre(lambda k: math.floor(F(2**k, 10)), 36, b=2))
+print("valore esatto di 0.1:", F(0.1))
+\end{python}
+\begin{risultato}
+sqrt(2) = 1,4142135623730950488016887242096980785696
+1/7     = 0,142857142857142857142857142857142857
+1/10    = 0,000110011001100110011001100110011001
+valore esatto di 0.1: 3602879701896397/36028797018963968
+\end{risultato}
+
+Le cifre di $\sqrt2$ sono ottenute senza numeri in virgola mobile: per un intero
+$j\ge0$, $j\le10^{k}\sqrt2$ equivale a $j^{2}\le2\cdot10^{2k}$, e \texttt{math.isqrt}
+trova esattamente il più grande di tali $j$. È l'antica estrazione della radice «cifra
+per cifra». L'ultima riga mostra il razionale (di denominatore $2^{55}$) che il
+calcolatore memorizza al posto di $\frac1{10}$.
+
+\begin{notastorica}[Stevin e l'«arte dei decimi»]
+Le frazioni con denominatore $10$, $100$, $1000,\dots$ erano già note a matematici
+cinesi e arabi, ma il loro uso sistematico in Europa si deve all'ingegnere fiammingo Simon
+Stevin (1548--1620), che nel 1585 pubblicò a Leida un opuscolo di una trentina di pagine,
+\emph{De Thiende} («Il decimo»), tradotto in francese lo stesso anno come \emph{La Disme}.
+Lo dedicava ad astronomi, agrimensori, stazzatori di botti, zecchieri e mercanti: a
+chiunque dovesse fare conti precisi con grandezze continue. Scriveva i decimali indicando
+in un cerchietto l'esponente della potenza di un decimo, ad esempio $7{,}3486$ come
+7\,\textcircled{\tiny 0}\,3\,\textcircled{\tiny 1}\,4\,\textcircled{\tiny 2}\,8\,%
+\textcircled{\tiny 3}\,6\,\textcircled{\tiny 4}; la notazione, ripresa e semplificata da
+Clavio e da Nepero, divenne quella attuale. Stevin prevedeva anche che monete, pesi e
+misure sarebbero diventati decimali: accadde due secoli dopo, con il sistema metrico. Nella
+sua \emph{Arithmétique}, dello stesso 1585, sosteneva infine che le radici e gli
+irrazionali sono numeri a pieno titolo, e non quantità «assurde» o «sorde». Era, osserva
+\cite{giusti}, la risposta che l'età dei mercanti dava all'incommensurabile scoperto dai
+pitagorici: di $\sqrt2$ non si chiedeva che cosa fosse, ma come calcolarlo con tutte le
+cifre necessarie. Ne resta traccia nella definizione scolastica di numero irrazionale come
+«decimale illimitato non periodico», che prende per definizione ciò che abbiamo appena
+dimostrato come teorema: le cifre esistono perché $\R$ è completo, non viceversa.
+\end{notastorica}
+
+\begin{esercizio}[I razionali hanno allineamento periodico]\label{es:decimali-periodici}
+Sia $x=\frac pq$, con $p\ge0$ intero e $q\in\N$. Dimostrare che le cifre decimali di $x$
+sono definitivamente periodiche: esistono $i\ge0$ e $\ell\in\N$ tali che
+$c_{k+\ell}=c_{k}$ per ogni $k>i$.
+\begin{soluzione}
+Siano $m_{k}=\lfloor10^{k}x\rfloor$ e $r_{k}=10^{k}p-q\,m_{k}$: moltiplicando per $q$ la
+\eqref{eq:mn-parte-intera} si trova $0\le r_{k}<q$, cioè $r_{k}$ è il resto della
+divisione di $10^{k}p$ per $q$. Allora
+\[
+  10^{k+1}x=\frac{10\,(q\,m_{k}+r_{k})}{q}=10\,m_{k}+\frac{10\,r_{k}}{q},
+\]
+e poiché $\lfloor h+t\rfloor=h+\lfloor t\rfloor$ per ogni intero $h$ (per l'unicità della
+parte intera), $m_{k+1}=10\,m_{k}+\lfloor10\,r_{k}/q\rfloor$. Dunque
+\[
+  c_{k+1}=\Bigl\lfloor\frac{10\,r_{k}}{q}\Bigr\rfloor, \qquad
+  r_{k+1}=10\,r_{k}-q\,c_{k+1} :
+\]
+cifra e resto successivi dipendono \emph{soltanto} dal resto $r_{k}$: è la divisione in
+colonna. I $q+1$ resti $r_{0},\dots,r_{q}$ stanno in $\{0,\dots,q-1\}$, che ha $q$
+elementi, quindi due coincidono: $r_{i}=r_{i+\ell}$ con $\ell\ge1$. Da lì la divisione
+ricomincia identica: per induzione $r_{k+\ell}=r_{k}$ per $k\ge i$, e quindi
+$c_{k+\ell}=c_{k}$ per $k>i$. Per $\frac17$ i resti sono $1,3,2,6,4,5,1,\dots$ e il periodo
+è $142857$. \emph{Scelta logica:} invece di una formula per le cifre, si cerca una
+grandezza che ne determina il seguito (il resto) e che assume un numero finito di valori:
+appena un valore si ripete, si ripete tutto («principio dei cassetti»).
+\end{soluzione}
+\end{esercizio}

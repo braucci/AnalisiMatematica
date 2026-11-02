@@ -1,0 +1,58 @@
+%% ============================================================================
+%%  CAPITOLO 2 — Complementi ai numeri reali
+%%  Fonte principale per argomenti e dimostrazioni: Marcellini–Sbordone, cap. 2
+%%  (§12 estremo superiore, §13 calcolo combinatorio, §14 binomio di Newton,
+%%  §15 numeri complessi). Il capitolo è suddiviso in file nella cartella cap02/.
+%% ============================================================================
+\aperturacapitolo{Complementi ai numeri reali}{cap:complementi}
+
+\epigraph{I numeri immaginari sono un meraviglioso rifugio dello spirito divino, quasi
+un anfibio tra l'essere e il non essere.}{Gottfried Wilhelm Leibniz (1702)}
+
+\lettrine[lines=3, findent=2pt, nindent=0pt]{N}{el capitolo} precedente abbiamo fissato
+le regole del gioco: gli assiomi dei numeri reali. Tra essi l'assioma di completezza è
+apparso come il più misterioso, e insieme come il più importante: è l'unico che
+distingue $\R$ da $\Q$. In questo capitolo impariamo a usarlo davvero. Lo trasformeremo
+in uno strumento di lavoro, il concetto di \emph{estremo superiore}, che è la chiave di
+quasi tutti i teoremi di esistenza dell'Analisi: l'esistenza del limite delle
+successioni monotòne, il teorema di Bolzano--Weierstrass, il teorema di Weierstrass sui
+massimi e minimi delle funzioni continue, e così via (si riveda lo schema della
+\cref{fig:schema-teoremi}).
+
+Con l'estremo superiore manterremo anche tre promesse fatte nel \cref{cap:numeri}:
+dimostreremo la \emph{proprietà di Archimede} (i numeri naturali non sono limitati),
+l'esistenza della \emph{radice $n$-esima} di ogni numero reale positivo, e daremo
+finalmente senso alla potenza $a^{x}$ con esponente $x$ reale qualsiasi, provando che
+la funzione esponenziale è una corrispondenza biunivoca tra $\R$ e $(0,+\infty)$.
+
+Nella seconda parte del capitolo cambiamo registro: il \emph{calcolo combinatorio}
+insegna a contare senza elencare, e conduce alla \emph{formula del binomio di Newton}.
+In appendice, infine, ampliamo $\R$ al campo $\C$ dei \emph{numeri complessi}, nel quale
+ogni equazione di secondo grado ha soluzione e la moltiplicazione assume un significato
+geometrico sorprendente: è una rotazione.
+
+\medskip
+\noindent\textbf{In questo capitolo.}
+\begin{itemize}
+  \item Massimo, minimo, maggioranti, estremo superiore e inferiore; il teorema di
+  esistenza dell'estremo superiore (\S\ref{sec:sup}).
+  \item Le proprietà di $\N$, la proprietà di Archimede, la parte intera, la densità di
+  $\Q$ e degli irrazionali (\S\ref{sec:archimede}).
+  \item Approfondimento: i numeri reali in forma decimale (\S\ref{subsec:forma-decimale}).
+  \item L'esistenza della radice $n$-esima e la funzione esponenziale a esponente reale
+  (\S\ref{sec:esponenziale-reale}).
+  \item Disposizioni, permutazioni, combinazioni (\S\ref{sec:combinatoria}).
+  \item La formula del binomio di Newton e il triangolo di Tartaglia (\S\ref{sec:binomio}).
+  \item I numeri complessi: forma algebrica, trigonometrica, esponenziale; radici
+  $n$-esime (\S\ref{sec:complessi}).
+  \item Punti fondamentali del capitolo (\S\ref{sec:sintesi-cap02}).
+\end{itemize}
+
+\input{capitoli/cap02/01-sup-inf}
+\input{capitoli/cap02/02-naturali-archimede}
+\input{capitoli/cap02/03-radici-esponenziale}
+\input{capitoli/cap02/04-combinatoria}
+\input{capitoli/cap02/05-binomio}
+\input{capitoli/cap02/06-complessi}
+\input{capitoli/cap02/07-esercizi}
+\input{capitoli/cap02/08-sintesi}

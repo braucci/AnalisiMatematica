@@ -1,0 +1,572 @@
+%% ----------------------------------------------------------------------------
+%%  §2.1  Massimo, minimo, estremo superiore, estremo inferiore
+%% ----------------------------------------------------------------------------
+\section{Massimo, minimo, estremo superiore, estremo inferiore}
+\label{sec:sup}
+
+\subsection{Massimo e minimo}
+
+\begin{definizione}[Massimo e minimo]\index{massimo}\index{minimo}
+Sia $A$ un insieme di numeri reali. Il \emph{massimo} di $A$, se esiste, è un numero
+$M$ dell'insieme $A$ che è maggiore o uguale a ogni altro elemento dell'insieme; il
+\emph{minimo} di $A$, se esiste, è un numero $m$ dell'insieme $A$ che è minore o uguale a
+ogni altro elemento di $A$. In simboli:
+\begin{align}
+  M=\max A \quad&\sse\quad \begin{cases} M\ge a \quad \perogni a\in A,\\ M\in A;\end{cases}
+  \label{eq:max-def}\\[2pt]
+  m=\min A \quad&\sse\quad \begin{cases} m\le a \quad \perogni a\in A,\\ m\in A.\end{cases}
+  \label{eq:min-def}
+\end{align}
+\end{definizione}
+
+Si osservi che la definizione ha \emph{due} richieste, e che la seconda --- $M\in A$ ---
+è quella che più spesso si dimentica. Non tutti gli insiemi di numeri reali hanno il
+massimo e il minimo. Ad esempio, se $A$ è costituito da tutti i numeri reali positivi,
+$A$ non ha né massimo né minimo: non esiste il più piccolo numero reale positivo (se $a>0$
+allora anche $a/2$ è positivo, e $a/2<a$), e lo zero non è il minimo, perché non
+appartiene ad $A$; analogamente, per ogni $a>0$ il numero $a+1$ è un elemento di $A$
+maggiore di $a$.
+
+\begin{proposizione}[Unicità del massimo e del minimo]\label{prop:unicita-max}
+Se un insieme $A\subseteq\R$ ha massimo, il massimo è unico; lo stesso vale per il minimo.
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$A\subseteq\R$; \ $M_{1}$ e $M_{2}$ verificano entrambi la \eqref{eq:max-def}.}
+\Tesi{$M_{1}=M_{2}$ (e analogamente per il minimo).}
+\end{schema}
+
+\begin{strategia}
+Lo schema è quello di tutte le dimostrazioni di unicità (\cref{prop:unicita}): si
+suppone che esistano due massimi $M_{1}$ e $M_{2}$ e si prova che coincidono. L'idea è
+di usare le due richieste della definizione «incrociate»: $M_{1}$ è un elemento di $A$,
+quindi $M_{2}$, che è maggiore o uguale di \emph{tutti} gli elementi di $A$, è maggiore
+o uguale di $M_{1}$; e viceversa. L'antisimmetria dell'ordine conclude.
+\end{strategia}
+
+\begin{dimostrazione}
+Se $M_{1}$ e $M_{2}$ sono due massimi di un insieme $A$, allora per definizione
+\[
+  M_{1}\ge a, \qquad M_{2}\ge a, \qquad \perogni a\in A;
+\]
+ma dato che $M_{1}$ ed $M_{2}$ sono elementi di $A$, posto $a$ rispettivamente uguale a
+$M_{2}$ e ad $M_{1}$ nelle relazioni precedenti, si ottiene $M_{1}\ge M_{2}$ e
+$M_{2}\ge M_{1}$, cioè $M_{1}=M_{2}$ per la proprietà antisimmetrica
+\ref{ass:antisimmetrica}. Per il minimo si procede allo stesso modo.
+\end{dimostrazione}
+
+\subsection{Maggioranti, minoranti, insiemi limitati}
+
+\begin{definizione}[Maggioranti, minoranti, insiemi limitati]\index{maggiorante}\index{minorante}\index{insieme!limitato}
+Sia $A\subseteq\R$. Un numero reale $L$ si dice un \emph{maggiorante} di $A$ se $L\ge a$
+per ogni $a\in A$; analogamente un numero reale $\ell$ è un \emph{minorante} di $A$ se
+$\ell\le a$ per ogni $a\in A$. Diciamo che $A$ è \emph{limitato superiormente} se ammette
+almeno un maggiorante, \emph{limitato inferiormente} se ammette almeno un minorante, e
+\emph{limitato} se è limitato sia superiormente sia inferiormente:
+\begin{equation}\label{eq:limitato}
+  A \text{ limitato} \quad\sse\quad \esiste \ell,L\in\R : \ \ell\le a\le L \quad \perogni a\in A.
+\end{equation}
+\end{definizione}
+
+È bene notare esplicitamente che un insieme non sempre ammette maggioranti o minoranti.
+Se $A$ è di nuovo l'insieme dei numeri reali positivi, $A$ non ammette alcun maggiorante,
+mentre lo zero (e anche qualsiasi numero reale negativo) è un minorante di $A$. Si noti
+anche che i maggioranti, quando esistono, non sono mai uno solo: se $L$ è un maggiorante,
+lo è anche ogni numero $L'>L$. Un maggiorante di $A$ che appartiene ad $A$ è, per
+definizione, il massimo di $A$.
+
+\begin{idea}[Maggioranti e tolleranze]
+Un'immagine concreta. In un banco prova si misura più volte il carico di rottura di un
+lotto di rivetti; l'insieme $A$ dei valori misurati è limitato superiormente, e un
+qualsiasi maggiorante $L$ è un valore che \emph{nessun} rivetto del lotto ha superato.
+Di maggioranti ce ne sono infiniti --- un valore assurdamente alto come $10^{9}$ newton lo
+è senz'altro, ma non dice nulla --- e l'informazione utile è il \emph{più piccolo} dei
+maggioranti, la stima più stretta possibile. L'estremo superiore che stiamo per definire
+è esattamente questo: il miglior maggiorante.
+\end{idea}
+
+Tenendo presente la definizione \eqref{eq:modulo} del valore assoluto, si riconosce
+facilmente la seguente caratterizzazione degli insiemi limitati, che useremo
+moltissime volte.
+
+\begin{proposizione}\label{prop:limitato-modulo}
+Un insieme $A\subseteq\R$ è limitato se e soltanto se esiste un numero $M>0$ tale che
+\begin{equation}\label{eq:limitato-modulo}
+  \abs{a}\le M \qquad \perogni a\in A.
+\end{equation}
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$A\subseteq\R$.}
+\Tesi{$\bigl(\esiste\ell,L : \ell\le a\le L\ \perogni a\in A\bigr) \ \sse\ \bigl(\esiste M>0 : \abs{a}\le M\ \perogni a\in A\bigr)$.}
+\end{schema}
+
+\begin{strategia}
+Le due condizioni dicono la stessa cosa in due modi diversi: la prima chiude $A$ in un
+intervallo $[\ell,L]$ qualsiasi, la seconda in un intervallo \emph{simmetrico} $[-M,M]$.
+Da un intervallo simmetrico si passa a uno qualsiasi gratis ($\ell=-M$, $L=M$); per il
+viceversa basta allargare $[\ell,L]$ fino a renderlo simmetrico, scegliendo $M$ uguale al
+più grande tra $\abs{\ell}$ e $\abs{L}$ (e almeno uguale a $1$, per avere $M>0$ anche
+nel caso degenere $\ell=L=0$). Lo strumento tecnico è la
+\cref{prop:modulo-r}, che traduce $\abs{a}\le M$ nella doppia disuguaglianza
+$-M\le a\le M$.
+\end{strategia}
+
+\begin{dimostrazione}
+Se per ipotesi vale la \eqref{eq:limitato-modulo}, allora dalla proprietà
+\eqref{eq:mod-le} relativa al valore assoluto si ottiene
+\begin{equation}\label{eq:limitato-passo1}
+  -M\le a\le M \qquad \perogni a\in A,
+\end{equation}
+e quindi vale la \eqref{eq:limitato} con $\ell=-M$ e $L=M$. Viceversa, se vale la
+\eqref{eq:limitato}, allora vale anche la \eqref{eq:limitato-modulo} (o
+equivalentemente la \eqref{eq:limitato-passo1}) con $M=\max\{\abs{\ell},\abs{L},1\}$,
+perché
+\begin{equation}\label{eq:limitato-passo2}
+  -M\le-\abs{\ell}\le\ell\le a\le L\le\abs{L}\le M \qquad \perogni a\in A,
+\end{equation}
+dove abbiamo usato $-\abs{x}\le x\le\abs{x}$ (\cref{teo:triangolare},
+\eqref{eq:triang-passo1}). Il valore $1$ è stato incluso nel massimo solo per garantire
+$M>0$ anche nel caso $\ell=L=0$.
+\end{dimostrazione}
+
+\subsection{Il teorema di esistenza dell'estremo superiore}
+
+Il risultato che segue, alla base della definizione di estremo superiore, è
+conseguenza dell'assioma di completezza \ref{ass:completezza} ed è, di fatto, il modo in
+cui quell'assioma verrà usato in tutto il resto del libro.
+
+\begin{teorema}[Esistenza dell'estremo superiore]\label{teo:esistenza-sup}\index{estremo superiore!esistenza}
+Sia $A$ un insieme non vuoto di numeri reali, limitato superiormente. Allora l'insieme
+dei maggioranti di $A$ ha minimo.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$A\subseteq\R$, \ $A\neq\emptyset$, \ $A$ limitato superiormente.}
+\Tesi{Detto $B=\{L\in\R : L\ge a\ \perogni a\in A\}$ l'insieme dei maggioranti di $A$,
+esiste $\min B$.}
+\end{schema}
+
+\begin{strategia}
+L'assioma di completezza parla di \emph{due} insiemi separati, $A$ «a sinistra» e $B$ «a
+destra». Abbiamo $A$; ci serve un secondo insieme che stia tutto alla sua destra, e il
+candidato naturale è proprio l'insieme $B$ dei maggioranti: per definizione ogni $b\in B$
+è $\ge$ di ogni $a\in A$. L'assioma fornisce allora un elemento separatore $M$. Resta da
+leggere che cosa dice la doppia disuguaglianza $a\le M\le b$: la metà sinistra dice che
+$M$ è un maggiorante, cioè $M\in B$; la metà destra che $M$ è minore o uguale di ogni
+elemento di $B$. Le due cose insieme sono la definizione di minimo di $B$.
+\end{strategia}
+
+\begin{dimostrazione}
+Indichiamo con $B$ l'insieme costituito dai maggioranti di $A$. $B$ è non vuoto, perché
+$A$ è limitato superiormente; anche $A$ è non vuoto per ipotesi, e per definizione di
+maggiorante $a\le b$ per ogni $a\in A$ e $b\in B$. Applichiamo l'assioma di completezza
+\ref{ass:completezza} ai due insiemi $A$, $B$: esiste un numero reale $M$ tale che
+\begin{equation}\label{eq:separatore-sup}
+  a\le M\le b \qquad \perogni a\in A, \quad \perogni b\in B.
+\end{equation}
+Dato che $M$ è maggiore o uguale a tutti gli elementi di $A$, $M$ è un maggiorante di
+$A$; cioè $M\in B$. Inoltre $M$ è minore o uguale a tutti gli elementi di $B$. Quindi, in
+base alla definizione \eqref{eq:min-def}, $M$ è il minimo di $B$.
+\end{dimostrazione}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[scale=1.0, every node/.style={font=\footnotesize}]
+  \draw[-Latex, grigio] (-0.5,0) -- (11.3,0);
+  % l'insieme A
+  \foreach \x in {0.4,0.9,1.6,2.2,2.9,3.4,3.9,4.3,4.6,4.8,4.9} \fill[blu] (\x,0) circle (1.7pt);
+  \draw[blu, thick, decorate, decoration={brace, amplitude=4pt, mirror}] (0.3,-0.3) -- (5.0,-0.3)
+    node[midway, below=5pt] {insieme $A$};
+  % i maggioranti
+  \fill[rame!25] (5.0,-0.12) rectangle (11.0,0.12);
+  \draw[rame, thick] (5.0,-0.12) -- (5.0,0.12);
+  \draw[rame, thick, decorate, decoration={brace, amplitude=4pt}] (5.0,0.35) -- (11.0,0.35)
+    node[midway, above=5pt] {maggioranti di $A$: l'insieme $B$};
+  \fill[verde] (5.0,0) circle (2.3pt);
+  \draw[verde] (5.0,-0.12) -- (5.0,-0.55);
+  \node[verde, anchor=north west] at (5.05,-0.3) {$M=\sup A=\min B$};
+\end{tikzpicture}
+\caption{L'estremo superiore è il «primo» dei maggioranti: l'insieme $B$ dei maggioranti
+di $A$ è una semiretta chiusa $[M,+\infty)$, e il suo estremo sinistro $M$ è $\sup A$.
+Il teorema di esistenza garantisce che la semiretta è \emph{chiusa}, cioè che il primo
+maggiorante esiste.}
+\label{fig:sup-maggioranti}
+\end{figure}
+
+In base al teorema precedente, poniamo la seguente definizione.
+
+\begin{definizione}[Estremo superiore]\index{estremo superiore}
+Sia $A$ un insieme di numeri reali non vuoto e limitato superiormente. Diciamo che
+$M\in\R$ è l'\emph{estremo superiore} di $A$, e scriviamo $M=\sup A$, se $M$ è il minimo
+dei maggioranti di $A$.
+\end{definizione}
+
+Per la \cref{prop:unicita-max} applicata all'insieme dei maggioranti, l'estremo
+superiore è unico, e quindi è lecito parlare dell'estremo superiore, con l'articolo
+determinativo. La
+definizione, così com'è, è poco maneggevole: per verificare che un numero è il minimo
+dei maggioranti dovremmo confrontarlo con \emph{tutti} i maggioranti. La proposizione
+che segue la traduce in una forma operativa, quella che useremo nella pratica.
+
+\begin{proposizione}[Caratterizzazione dell'estremo superiore]\label{prop:caratt-sup}
+Sia $A\subseteq\R$ non vuoto e limitato superiormente, e sia $M\in\R$. Allora
+\begin{equation}\label{eq:caratt-sup}
+  M=\sup A \quad\sse\quad
+  \begin{cases}
+    \text{(i)}\ \ M\ge a \quad \perogni a\in A;\\[2pt]
+    \text{(ii)}\ \perogni\epsilon>0\ \ \esiste a\in A : \ M-\epsilon<a.
+  \end{cases}
+\end{equation}
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$A\neq\emptyset$ limitato superiormente; $M\in\R$.}
+\Tesi{$M$ è il minimo dei maggioranti di $A$ \emph{se e solo se} $M$ è un maggiorante
+(i) e nessun numero più piccolo di $M$ lo è (ii).}
+\end{schema}
+
+\begin{strategia}
+La condizione (i) è la prima metà della definizione di minimo dei maggioranti: dice che
+$M$ è un maggiorante. La condizione (ii) è la seconda metà, letta «al contrario»: dire
+che $M$ è il \emph{più piccolo} maggiorante equivale a dire che ogni numero più piccolo
+di $M$, che possiamo sempre scrivere come $M-\epsilon$ con $\epsilon>0$, \emph{non} è un
+maggiorante; e «$M-\epsilon$ non è un maggiorante» significa, negando la definizione,
+che c'è un elemento di $A$ che lo supera. Tutta la dimostrazione è un esercizio di
+\emph{negazione} di un'affermazione con il «per ogni».
+\end{strategia}
+
+\begin{dimostrazione}
+($\implica$) Sia $M=\sup A$. Allora $M$ è un maggiorante, cioè vale (i). Sia $\epsilon>0$;
+il numero $M-\epsilon$ è minore di $M$, e poiché $M$ è il \emph{minimo} dei maggioranti,
+$M-\epsilon$ non è un maggiorante. Negare «$M-\epsilon\ge a$ per ogni $a\in A$» significa
+affermare che esiste $a\in A$ con $M-\epsilon<a$: è la (ii).
+
+($\Leftarrow$) Supponiamo che valgano (i) e (ii). Per (i), $M$ è un maggiorante. Sia
+$L$ un qualsiasi maggiorante di $A$ e supponiamo per assurdo $L<M$. Posto
+$\epsilon=M-L>0$, per (ii) esiste $a\in A$ con $a>M-\epsilon=L$, contro il fatto che $L$ è
+un maggiorante. Dunque $L\ge M$ per ogni maggiorante $L$: $M$ è il minimo dei
+maggioranti, cioè $M=\sup A$.
+\end{dimostrazione}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[scale=1.0, every node/.style={font=\footnotesize}]
+  \draw[-Latex, grigio] (-0.5,0) -- (11.3,0);
+  \foreach \x in {0.6,1.4,2.3,3.1,3.9,4.6,5.2,5.8,6.3,6.7,7.0,7.25,7.45,7.6,7.7} \fill[blu] (\x,0) circle (1.6pt);
+  \fill[verde] (7.9,0) circle (2.2pt) node[above=4pt] {$M$};
+  \draw[rosso, thick] (6.5,-0.15) -- (6.5,0.15) node[above=2pt] {$M-\epsilon$};
+  \fill[rossochiaro, opacity=0.7] (6.5,-0.1) rectangle (7.9,0.1);
+  \foreach \x in {6.7,7.0,7.25,7.45,7.6,7.7} \fill[blu] (\x,0) circle (1.6pt);
+  \draw[rosso, decorate, decoration={brace, amplitude=3pt, mirror}] (6.5,-0.3) -- (7.9,-0.3)
+    node[midway, below=4pt, text width=4.2cm, align=center] {qui cade sempre almeno\\ un elemento di $A$, per ogni $\epsilon>0$};
+  \node[blu, below=4pt] at (2.5,-0.1) {$A$};
+\end{tikzpicture}
+\caption{La caratterizzazione \eqref{eq:caratt-sup}: per quanto piccolo si scelga
+$\epsilon>0$, nell'intervallo $(M-\epsilon,M]$ c'è sempre qualche elemento di $A$. Non
+è detto che $M$ stesso appartenga ad $A$.}
+\label{fig:caratt-sup}
+\end{figure}
+
+Analogamente si verifica che, se $A$ è un insieme non vuoto di numeri reali limitato
+inferiormente, allora l'insieme dei minoranti di $A$ ha massimo (basta ripetere la
+dimostrazione del \cref{teo:esistenza-sup} scambiando i ruoli dei due insiemi
+nell'assioma di completezza).
+
+\begin{definizione}[Estremo inferiore]\index{estremo inferiore}
+Sia $A\subseteq\R$ non vuoto e limitato inferiormente. Si dice che un numero $m$ è
+l'\emph{estremo inferiore} di $A$, e si scrive $m=\inf A$, se $m$ è il massimo dei
+minoranti di $A$. Come per l'estremo superiore, ciò equivale a:
+\begin{equation}\label{eq:caratt-inf}
+  m=\inf A \quad\sse\quad
+  \begin{cases}
+    m\le a \quad \perogni a\in A;\\[2pt]
+    \perogni\epsilon>0\ \ \esiste a\in A : \ m+\epsilon>a.
+  \end{cases}
+\end{equation}
+\end{definizione}
+
+Quindi: \emph{se un insieme non vuoto è limitato superiormente, esiste l'estremo
+superiore ed è un numero reale; se un insieme non vuoto è limitato inferiormente,
+esiste l'estremo inferiore ed è un numero reale.}
+
+\begin{osservazione}[Estremo superiore e massimo]\label{oss:sup-max}
+Se $A$ ha massimo, allora $\max A=\sup A$: il massimo è un maggiorante che appartiene ad
+$A$, e ogni altro maggiorante $L$ deve essere $\ge\max A$ proprio perché $\max A\in A$.
+Viceversa, se $\sup A\in A$, allora $\sup A$ è il massimo di $A$. In sintesi:
+\emph{l'estremo superiore esiste sempre} (per gli insiemi non vuoti e limitati
+superiormente), \emph{il massimo esiste se e solo se l'estremo superiore appartiene
+all'insieme}. L'estremo superiore è il «massimo che c'è sempre», il prezzo da pagare è
+che non sta necessariamente nell'insieme.
+\end{osservazione}
+
+\begin{osservazione}[Completezza ed estremo superiore sono la stessa cosa]\label{oss:completezza-sup}
+Abbiamo dedotto il \cref{teo:esistenza-sup} dall'assioma di completezza. Vale anche il
+viceversa: se in un sistema di numeri che soddisfa gli assiomi delle operazioni e
+dell'ordine ogni insieme non vuoto e limitato superiormente ha estremo superiore, allora
+vale l'assioma di completezza. Infatti, siano $A$ e $B$ non vuoti con $a\le b$ per ogni
+$a\in A$, $b\in B$. Ogni $b\in B$ è un maggiorante di $A$, quindi $A$ è limitato
+superiormente ed esiste $c=\sup A$. Allora $a\le c$ per ogni $a\in A$ (perché $c$ è un
+maggiorante) e $c\le b$ per ogni $b\in B$ (perché $c$ è il \emph{minimo} dei maggioranti
+e $b$ è un maggiorante). Dunque $c$ separa $A$ e $B$. Per questo motivo molti testi assumono come assioma di
+completezza direttamente l'esistenza dell'estremo superiore, mentre altri, come
+\cite{tao1}, costruiscono $\R$ a partire da $\Q$ e dimostrano questa proprietà come
+teorema: le diverse impostazioni sono equivalenti.
+\end{osservazione}
+
+\begin{osservazione}[Nel modello di Dedekind il sup è un'unione]\label{oss:modello-dedekind}
+Chi costruisce $\R$ a partire da $\Q$ ottiene il \cref{teo:esistenza-sup} quasi senza
+fatica. Nel modello delle sezioni di $\Q$ costruito nel \S\ref{subsec:modello-reali}
+(\cref{def:sezione-Q}) una sezione $(A,B)$ è determinata dalla sua classe inferiore $A$, e
+l'ordinamento è l'inclusione delle classi inferiori. Se $X$ è un insieme non vuoto di
+sezioni, tutte precedute da una stessa sezione, l'unione $\Sigma$ delle loro classi
+inferiori è ancora la classe inferiore di una sezione $\sigma$: è non vuota, non è tutto
+$\Q$, è «chiusa verso sinistra» e non ha massimo, come nella dimostrazione del
+\cref{teo:completezza-modello}. Ogni elemento di $X$ precede $\sigma$, e ogni maggiorante
+di $X$, che contiene tutte quelle classi inferiori, contiene anche la loro unione:
+$\sigma$ è il minimo dei maggioranti, cioè $\sigma=\sup X$. Il postulato diventa una
+semplice proprietà degli insiemi; la fatica si sposta sulle operazioni e sugli assiomi di
+campo, dove le sezioni sono molto meno maneggevoli (si veda anche \cite{giusti}).
+\end{osservazione}
+
+\begin{attenzione}[In $\Q$ l'estremo superiore può non esistere]
+Il \cref{teo:esistenza-sup} è falso nel campo dei razionali. L'insieme
+$A=\{a\in\Q : a^{2}<2\}$ è non vuoto e limitato superiormente in $\Q$ (ad esempio $2$ è un
+maggiorante razionale), ma \emph{non ha un minimo maggiorante razionale}: il
+\cref{teo:Q-non-completo} mostra precisamente che nessun razionale separa $A$ dai
+razionali positivi con quadrato maggiore di $2$. In $\R$, invece, $\sup A$ esiste ed è
+$\sqrt2$: l'esistenza di $\sqrt2$ segue dal \cref{teo:radice-n}, e il fatto che sia
+proprio l'estremo superiore di $A$ dalla densità di $\Q$ (\cref{es:sup-razionali}).
+\end{attenzione}
+
+\begin{notastorica}[Bolzano e il «principio dell'estremo superiore»]
+Il primo a enunciare e usare consapevolmente l'esistenza dell'estremo superiore fu il
+sacerdote e matematico boemo Bernard Bolzano (1781--1848), nel saggio \emph{Rein
+analytischer Beweis} (1817), dedicato alla dimostrazione «puramente analitica» del
+teorema dei valori intermedi. Bolzano voleva liberare l'Analisi dal ricorso
+all'intuizione geometrica («la curva deve pur attraversare l'asse, visto che passa da
+sopra a sotto»), e capì che serviva una proprietà dei numeri che garantisse l'esistenza
+di un «confine» per ogni insieme limitato. Il suo lavoro, pubblicato a Praga in tedesco,
+rimase però quasi sconosciuto per decenni; l'estremo superiore entrò nell'uso comune solo
+con le lezioni berlinesi di Karl Weierstrass, negli anni Sessanta dell'Ottocento.
+\end{notastorica}
+
+\subsection{I simboli \texorpdfstring{$+\infty$}{+∞} e \texorpdfstring{$-\infty$}{−∞}}
+
+È utile introdurre i simboli $+\infty$ e $-\infty$ per descrivere gli insiemi
+\emph{non} limitati. Precisamente, sia $A$ un insieme non vuoto. L'estremo superiore di
+$A$ è $+\infty$ se $A$ non è limitato superiormente; l'estremo inferiore di $A$ è
+$-\infty$ se $A$ non è limitato inferiormente. In simboli:
+\begin{align}
+  \sup A=+\infty \quad&\sse\quad \perogni L\in\R\ \ \esiste a\in A : \ a>L; \label{eq:sup-infinito}\\
+  \inf A=-\infty \quad&\sse\quad \perogni \ell\in\R\ \ \esiste a\in A : \ a<\ell. \label{eq:inf-infinito}
+\end{align}
+Nelle relazioni sopra scritte ci si può limitare a considerare $L>0$ e $\ell<0$ (se un
+numero positivo non è un maggiorante, non lo è nessun numero più piccolo). Si noti che
+la \eqref{eq:sup-infinito} non è altro che la negazione di «$A$ è limitato
+superiormente».
+
+Facendo uso dei simboli $+\infty$ e $-\infty$ si può quindi affermare che \emph{ogni
+insieme non vuoto di numeri reali ammette sia estremo superiore sia estremo inferiore};
+se l'insieme è limitato superiormente l'estremo superiore è finito, e se è limitato
+inferiormente l'estremo inferiore è finito.
+
+\begin{attenzione}[$+\infty$ non è un numero reale]
+I simboli $\pm\infty$ non sono elementi di $\R$, e con essi non si possono eseguire le
+operazioni come con i numeri: scrivere $\sup A=+\infty$ è soltanto un modo abbreviato di
+dire che $A$ non ha maggioranti. Nel seguito del corso, studiando i limiti, introdurremo
+la \emph{retta reale estesa} $\overline{\R}=\R\cup\{-\infty,+\infty\}$ e daremo regole
+precise (e limitate) per operare con questi simboli.
+\end{attenzione}
+
+\subsection{Esempi}
+
+\begin{esempio}\label{es:sup-semiretta}
+Se $A=\{x\in\R : x>0\}$, allora
+\begin{equation}\label{eq:es-semiretta}
+  \sup A=+\infty, \qquad \inf A=0,
+\end{equation}
+e il massimo e il minimo di $A$ non esistono. Infatti, per ogni $L>0$ il numero $L+1$
+appartiene ad $A$ ed è maggiore di $L$: vale la \eqref{eq:sup-infinito}. Inoltre $0$ è
+un minorante, e per ogni $\epsilon>0$ il numero $a=\epsilon/2\in A$ verifica
+$a<0+\epsilon$: per la \eqref{eq:caratt-inf}, $\inf A=0$. Poiché $0\notin A$, il minimo
+non esiste (\cref{oss:sup-max}).
+\end{esempio}
+
+\begin{esempio}\label{es:sup-B}
+Sia $B=\set{\dfrac{n-1}{n} : n\in\N}=\set{0,\ \tfrac12,\ \tfrac23,\ \tfrac34,\ \dots}$
+(l'insieme è schematizzato nella \cref{fig:insiemi-B-C}). Risulta
+\begin{equation}\label{eq:es-B}
+  \sup B=1, \qquad \inf B=\min B=0.
+\end{equation}
+Infatti $\frac{n-1}{n}=1-\frac1n$ è minore di $1$ per ogni $n$, e maggiore o uguale a
+$0$, con uguaglianza per $n=1$: dunque $0=\min B=\inf B$ e $1$ è un maggiorante. Per
+provare che $1$ è il \emph{minimo} maggiorante, fissato $\epsilon>0$ cerchiamo
+$n\in\N$ con
+\[
+  1-\frac1n>1-\epsilon \quad\sse\quad \frac1n<\epsilon \quad\sse\quad n>\frac1\epsilon .
+\]
+Un tale $n$ esiste per la \emph{proprietà di Archimede}, che dimostreremo nel prossimo
+paragrafo (\cref{teo:archimede}) senza usare questo esempio: nessun circolo vizioso.
+Poiché $1\notin B$, l'insieme $B$ non ha massimo.
+\end{esempio}
+
+\begin{esempio}\label{es:sup-C}
+Se infine $C=\set{\dfrac{n+1}{n} : n\in\N}=\set{2,\ \tfrac32,\ \tfrac43,\ \tfrac54,\ \dots}$,
+si trova
+\begin{equation}\label{eq:es-C}
+  \sup C=\max C=2, \qquad \inf C=1.
+\end{equation}
+Il lettore ripeta il ragionamento dell'esempio precedente, osservando che
+$\frac{n+1}{n}=1+\frac1n$. Qui la situazione è rovesciata: il massimo esiste, il minimo
+no.
+\end{esempio}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[x=9cm, every node/.style={font=\footnotesize}]
+  % insieme B
+  \draw[-Latex, grigio] (-0.06,0) -- (1.12,0);
+  \foreach \n in {1,...,80} {\fill[blu] ({(\n-1)/\n},0) circle (1.2pt);}
+  \draw[rosso, thick, fill=white] (1,0) circle (2.2pt);
+  \foreach \n/\lab in {1/0, 2/\tfrac12, 3/\tfrac23, 4/\tfrac34, 5/\tfrac45} {
+    \node[below=2pt] at ({(\n-1)/\n},0) {$\lab$};}
+  \node[above=3pt, blu] at (0,0) {$0=\min B$};
+  \node[above=3pt, rosso] at (1,0) {$1=\sup B\notin B$};
+  \node[left=6pt, blu] at (-0.06,0) {$B$};
+  % insieme C
+  \begin{scope}[yshift=-1.5cm, x=9cm]
+  \draw[-Latex, grigio] (-0.06,0) -- (1.12,0);
+  \foreach \n in {1,...,80} {\fill[rame] ({1/\n},0) circle (1.2pt);}
+  \draw[rosso, thick, fill=white] (0,0) circle (2.2pt);
+  \foreach \n/\lab in {1/2, 2/\tfrac32, 3/\tfrac43, 4/\tfrac54, 5/\tfrac65} {
+    \node[below=2pt] at ({1/\n},0) {$\lab$};}
+  \node[above=3pt, rosso] at (0,0) {$1=\inf C\notin C$};
+  \node[above=3pt, rame] at (1,0) {$2=\max C$};
+  \node[left=6pt, rame] at (-0.06,0) {$C$};
+  \end{scope}
+\end{tikzpicture}
+\caption{Gli insiemi $B=\{(n-1)/n\}$ e $C=\{(n+1)/n\}$ degli \cref{es:sup-B,es:sup-C}
+(la seconda retta è traslata: l'origine del disegno corrisponde a $1$). Gli elementi si
+accumulano verso un estremo che non appartiene all'insieme (cerchietto rosso).}
+\label{fig:insiemi-B-C}
+\end{figure}
+
+\begin{esempio}[Velocità limite: un estremo superiore che non è un massimo]\label{es:velocita-limite}
+Un paracadutista in caduta libera, di peso $W$, è soggetto alla resistenza
+aerodinamica $D=\tfrac12\rho V^{2}SC_{D}$. La velocità cresce, tendendo al valore per cui
+la resistenza eguaglierebbe il peso; questa \emph{velocità limite} si ottiene da $W=\tfrac12\rho V_{t}^{2}SC_{D}$:
+\[
+  V_{t}=\sqrt{\frac{2W}{\rho\,S\,C_{D}}}\,.
+\]
+Con $W=800$~N, $\rho=1{,}225$~kg/m$^{3}$ e $SC_{D}=0{,}5$~m$^{2}$ (posizione «a
+pancia in giù») si trova $V_{t}\approx51{,}1$~m/s, cioè circa $184$~km/h. Risolvendo l'equazione del moto (lo faremo nel capitolo sulle equazioni
+differenziali) si trova che, partendo da fermo, la velocità all'istante $t$ è
+\[
+  V(t)=V_{t}\,\frac{1-e^{-2gt/V_{t}}}{1+e^{-2gt/V_{t}}}\,.
+\]
+L'insieme $E=\{V(t): t\ge0\}$ delle velocità effettivamente raggiunte ha
+$\inf E=\min E=0$ (all'istante iniziale) e $\sup E=V_{t}$; ma
+$V_{t}\notin E$, perché la frazione è sempre strettamente minore di $1$. La
+velocità limite è un estremo superiore che \emph{non} è un massimo: il paracadutista vi
+si avvicina quanto si vuole (dopo una quindicina di secondi la differenza è inferiore
+all'$1\%$), ma non la raggiunge mai (\cref{fig:velocita-limite}). In termini della
+\cref{prop:caratt-sup}: per ogni tolleranza $\epsilon>0$ esiste un istante $t$ in cui
+$V(t)>V_{t}-\epsilon$.
+\end{esempio}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.92\textwidth, height=5.2cm, xmin=-0.5, xmax=22, ymin=-4, ymax=62,
+  xlabel={$t$ [s]}, ylabel={$V$ [m/s]}, xtick={5,10,15,20}, ytick={10,20,30,40,51.1},
+  yticklabels={10,20,30,40,$V_{t}$}]
+  \addplot[tratteggio, domain=0:22] {51.1};
+  \addplot[curva, domain=0:21.5, samples=150] {51.1*tanh(9.81*x/51.1)};
+  \addplot[only marks, mark=*, mark size=1.2pt, rame] coordinates {(0,0)};
+  \node[font=\scriptsize, rame, anchor=south west] at (axis cs:1.0,0.6) {$\min E=V(0)=0$};
+  \node[font=\scriptsize, grigio, anchor=south east] at (axis cs:21.5,51.5) {$\sup E=V_{t}$ (mai raggiunto)};
+\end{axis}
+\end{tikzpicture}
+\caption{La velocità di un paracadutista in caduta libera: cresce sempre, si avvicina
+quanto si vuole alla velocità limite $V_{t}$ (tratteggiata), ma non la raggiunge mai.}
+\label{fig:velocita-limite}
+\end{figure}
+
+\subsection{Estremi di una funzione}
+
+\begin{definizione}[Estremo superiore e inferiore di una funzione]\index{funzione!limitata}
+Siano $A$ e $B$ due sottoinsiemi di $\R$ e $f$ una funzione da $A$ verso $B$. Per ogni
+sottoinsieme $X$ di $A$, l'estremo inferiore (risp.\ superiore) dell'insieme immagine
+$f(X)$ si chiama \emph{estremo inferiore} (risp.\ \emph{superiore}) \emph{di $f$ su
+$X$}, e si scrive
+\begin{equation}\label{eq:sup-funzione}
+  \inf_{x\in X}f(x)=\inf f(X), \qquad \sup_{x\in X}f(x)=\sup f(X).
+\end{equation}
+Se $f(X)$ è limitato inferiormente (risp.\ superiormente) si dice che la funzione $f$ è
+\emph{limitata inferiormente} (risp.\ \emph{superiormente}) su $X$; se $f(X)$ è
+limitato, si dice che $f$ è \emph{limitata} su $X$. Se $\sup f(X)$ appartiene a $f(X)$,
+cioè se esiste $x_{0}\in X$ con $f(x_{0})=\sup_{X}f$, si dice che $f$ \emph{ha massimo}
+su $X$ e che $x_{0}$ è un \emph{punto di massimo}.
+\end{definizione}
+
+\begin{esempio}\label{es:sup-funzione}
+Sia $f(x)=\dfrac{x}{1+x}$ su $X=[0,+\infty)$. Si ha $f(0)=0\le f(x)$, quindi
+$\min_{X}f=0$. Inoltre $f(x)=1-\frac{1}{1+x}<1$ per ogni $x\ge0$, dunque $1$ è un
+maggiorante; e per ogni $\epsilon\in(0,1)$, scelto $x>\frac{1-\epsilon}{\epsilon}$, si ha
+$1+x>\frac1\epsilon$, cioè $\frac{1}{1+x}<\epsilon$, cioè $f(x)>1-\epsilon$ (per
+$\epsilon\ge1$ la richiesta è ancora più debole: basta $x=1$, perché
+$f(1)=\frac12>0\ge1-\epsilon$). Per la
+\cref{prop:caratt-sup}, $\sup_{X}f=1$, ma $f$ non ha massimo: è la stessa situazione
+della velocità limite. La funzione $g(x)=1/x$ su $(0,1]$, invece, non è limitata
+superiormente: $\sup_{(0,1]}g=+\infty$ (per ogni $L>1$ si ha $g(1/(2L))=2L>L$).
+\end{esempio}
+
+\begin{marginfigure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=5.3cm, height=4.2cm, xmin=-0.5, xmax=10, ymin=-0.15, ymax=1.3,
+  xtick={5}, ytick={1}]
+  \addplot[tratteggio, domain=0:10] {1};
+  \addplot[curva, domain=0:9.8, samples=100] {x/(1+x)};
+\end{axis}
+\end{tikzpicture}
+\caption{$f(x)=x/(1+x)$ su $[0,+\infty)$: il minimo vale $0$, l'estremo superiore vale
+$1$ e non è un massimo.}
+\end{marginfigure}
+
+\begin{python}[Calcolare un estremo superiore per bisezione]
+# Se A è chiuso verso sinistra (x in A e y < x implicano y in A),
+# come A = {x : x^3 < 5}, l'estremo superiore si approssima per
+# bisezione: si tengono un punto a in A e un maggiorante b, e si
+# dimezza ogni volta l'intervallo [a, b].
+def sup_bisezione(appartiene, a, b, tol=1e-12):
+    """a deve stare in A, b deve essere un maggiorante di A."""
+    while b - a > tol:
+        m = (a + b) / 2
+        if appartiene(m):
+            a = m          # m sta in A: il sup è almeno m
+        else:
+            b = m          # m non sta in A: è un maggiorante
+    return a, b
+
+# A = {x : x^3 < 5}: 0 sta in A, 5 è un maggiorante, e sup A è
+# la radice cubica di 5
+a, b = sup_bisezione(lambda x: x**3 < 5, 0.0, 5.0)
+print(f"{a:.14f} <= sup A <= {b:.14f}")
+print(f"5 ** (1/3) = {5 ** (1/3):.14f}")
+\end{python}
+\begin{risultato}
+1.70997594667654 <= sup A <= 1.70997594667710
+5 ** (1/3) = 1.70997594667670
+\end{risultato}
+
+Il programma funziona perché l'insieme $A$ ha una struttura particolare (è un intervallo
+che si estende verso sinistra): per un insieme qualsiasi, stabilire se un numero è un
+maggiorante richiederebbe di confrontarlo con \emph{tutti} gli elementi, cosa che un
+calcolatore non può fare in un numero finito di passi. È un primo esempio di come la
+nozione di estremo superiore, pur essendo «esistenziale», possa diventare costruttiva in
+casi concreti. La dimostrazione del \cref{teo:radice-n}, più avanti, si basa sulla stessa
+intuizione --- «stringere» il valore cercato tra gli elementi dell'insieme e i suoi
+maggioranti --- ma invece di procedere per bisezione ragiona direttamente sull'estremo
+superiore.

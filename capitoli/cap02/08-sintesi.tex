@@ -1,0 +1,72 @@
+%% ----------------------------------------------------------------------------
+%%  §2.8  Punti fondamentali del capitolo
+%% ----------------------------------------------------------------------------
+\section{Punti fondamentali del capitolo}
+\label{sec:sintesi-cap02}
+
+L'idea centrale del capitolo è che l'assioma di completezza diventa uno strumento di
+lavoro nella forma dell'\emph{estremo superiore}: con esso si dimostrano la proprietà di
+Archimede, l'esistenza delle radici $n$-esime e la biiettività dell'esponenziale. La
+seconda parte insegna a contare (calcolo combinatorio, binomio di Newton) e amplia $\R$
+al campo $\C$, nel quale ogni equazione di secondo grado ha soluzione.
+
+\begin{puntichiave}
+\item \textbf{Estremo superiore.} Se $A\subseteq\R$ è non vuoto e limitato superiormente,
+l'insieme dei suoi maggioranti ha minimo, che si chiama $\sup A$
+(\cref{teo:esistenza-sup}); questa proprietà equivale all'assioma di completezza
+(\cref{oss:completezza-sup}) ed è falsa in $\Q$.
+\item \textbf{Caratterizzazione.} $M=\sup A$ se e solo se $M\ge a$ per ogni $a\in A$ e,
+per ogni $\epsilon>0$, esiste $a\in A$ con $a>M-\epsilon$ (\cref{prop:caratt-sup});
+analogamente per $\inf A$, con le disuguaglianze rovesciate.
+\item \textbf{Sup e massimo.} Il massimo esiste se e solo se $\sup A\in A$
+(\cref{oss:sup-max}): errore tipico è confondere i due concetti. Se $A$ non è limitato
+superiormente si scrive $\sup A=+\infty$, ma $\pm\infty$ non sono numeri reali.
+\item \textbf{Proprietà di $\N$.} Ogni sottoinsieme non vuoto di $\N$ ha minimo
+(\cref{teo:buon-ordinamento}); se è anche limitato superiormente, ha massimo
+(\cref{teo:max-N}).
+\item \textbf{Proprietà di Archimede.} Per ogni $x\in\R$ esiste $n\in\N$ con $n>x$
+(\cref{teo:archimede}); ne seguono $\inf\{1/n : n\in\N\}=0$ e, per $a>0$, l'esistenza di
+$n$ con $na>b$ (\cref{cor:archimede}), e la parte intera (\cref{prop:parte-intera}).
+\item \textbf{Densità.} Tra due reali distinti cadono sempre un razionale e un
+irrazionale (\cref{teo:densita-Q,cor:densita-irrazionali}); ma essere denso non
+significa essere completo.
+\item \textbf{Radici $n$-esime.} Per ogni $y\ge0$ e $n\in\N$ esiste un unico $x\ge0$ con
+$x^{n}=y$, ottenuto come $\sup\{t\ge0 : t^{n}<y\}$ (\cref{teo:radice-n}).
+\item \textbf{Esponenziale reale.} Per $a>1$ si pone
+$a^{x}=\sup\{a^{y} : y\in\Q,\ y<x\}$ (\cref{def:potenza-reale}): la funzione $a^{x}$ è
+una biiezione strettamente crescente di $\R$ su $(0,+\infty)$, decrescente se $0<a<1$
+(\cref{teo:esponenziale}); il logaritmo è quindi definito su tutto $(0,+\infty)$.
+\item \textbf{Contare senza elencare.} Le disposizioni di $k$ oggetti tra $n$ sono
+$n!/(n-k)!$, le permutazioni $n!$, le combinazioni $\binom nk=\frac{n!}{k!\,(n-k)!}$
+(\cref{teo:disposizioni,teo:combinazioni}); prima di applicare una formula occorre
+chiedersi se l'ordine conta.
+\item \textbf{Binomio di Newton.} $(a+b)^{n}=\sum_{k=0}^{n}\binom nk a^{n-k}b^{k}$
+(\cref{teo:binomio}); i coefficienti soddisfano la formula di Stifel
+$\binom n{k-1}+\binom nk=\binom{n+1}k$ (\cref{lem:stifel}), e per $x\ge0$ vale
+$(1+x)^{n}\ge1+nx+\frac{n(n-1)}2x^{2}$ (\cref{cor:binomio}).
+\item \textbf{Applicazioni aeronautiche.} La velocità limite di un paracadutista è un
+estremo superiore che non è un massimo (\cref{es:velocita-limite}); la stima
+$(1+\epsilon)^{n}\approx1+n\epsilon$ quantifica la sensibilità della portanza ($\propto
+V^{2}$) e della potenza ($\propto V^{3}$) alla velocità (\cref{es:sensibilita}).
+\item \textbf{Il campo complesso.} $\C=\R^{2}$, con il prodotto
+\eqref{eq:prodotto-complessi}, è un campo (\cref{teo:C-campo}) in cui $i^{2}=-1$, ma
+non è ordinabile (\cref{prop:C-non-ordinabile}); vale $z\bar z=\abs z^{2}$ e la
+disuguaglianza triangolare (\cref{prop:coniugato-modulo}).
+\item \textbf{Forma trigonometrica.} Scritto $z=\rho(\cos\vartheta+i\sen\vartheta)$,
+o in breve $z=\rho e^{i\vartheta}$, nel prodotto i moduli si moltiplicano e gli
+argomenti si sommano (\cref{teo:prodotto-trigonometrico}), da cui la formula di De
+Moivre (\cref{cor:de-moivre}) e la rotazione dagli assi vento agli assi corda
+(\cref{es:assi-profilo}).
+\item \textbf{Radici complesse.} Ogni $z\neq0$ ha esattamente $n$ radici $n$-esime, che
+per $n\ge3$ sono i vertici di un poligono regolare (\cref{teo:radici-complesse}); in
+$\C$ ogni equazione di
+secondo grado ha soluzione (\cref{prop:secondo-grado-C}).
+\end{puntichiave}
+
+\paragraph{Il filo del discorso.} L'estremo superiore è il motore dei teoremi di
+esistenza, ma finora l'abbiamo applicato a insiemi «statici». Nel \cref{cap:successioni}
+lo useremo per studiare i limiti di successioni: una successione monotòna e limitata
+converge proprio al suo estremo superiore o inferiore (\cref{teo:monotone}), e da qui
+nasceranno il numero $e$ e il teorema di Bolzano--Weierstrass. La formula di Eulero,
+qui introdotta come notazione, sarà dimostrata nel capitolo sulle serie
+(\cref{teo:formula-eulero}).

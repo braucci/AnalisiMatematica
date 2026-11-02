@@ -1,0 +1,469 @@
+%% ----------------------------------------------------------------------------
+%%  §2.3  Radici n-esime e funzione esponenziale a esponente reale
+%% ----------------------------------------------------------------------------
+\section{Radici \texorpdfstring{$n$}{n}-esime e potenze a esponente reale}
+\label{sec:esponenziale-reale}
+
+Nel \cref{sec:potenze} abbiamo definito la radice $n$-esima come funzione inversa della
+potenza $x\mapsto x^{n}$, rimandando a più avanti la prova che ogni numero $y\ge0$
+\emph{ha} una radice $n$-esima; e abbiamo usato potenze $a^{x}$ con esponente reale senza
+averle definite. Con l'estremo superiore possiamo ora colmare entrambe le lacune.
+
+\subsection{L'esistenza della radice \texorpdfstring{$n$}{n}-esima}
+
+Premettiamo una stima elementare, che controlla di quanto cambia una potenza quando
+cambia la base.
+
+\begin{lemma}[Stima della differenza di due potenze]\label{lem:stima-potenze}
+Siano $0\le v<u$ e $n\in\N$. Allora
+\begin{equation}\label{eq:stima-potenze}
+  n\,v^{n-1}(u-v)\ \le\ u^{n}-v^{n}\ \le\ n\,u^{n-1}(u-v).
+\end{equation}
+\end{lemma}
+
+\begin{schema}
+\Ipotesi{$0\le v<u$; \ $n\in\N$ (con la convenzione $v^{0}=1$ anche per $v=0$).}
+\Tesi{$n\,v^{n-1}(u-v)\le u^{n}-v^{n}\le n\,u^{n-1}(u-v)$.}
+\end{schema}
+
+\begin{strategia}
+La chiave è la scomposizione
+$u^{n}-v^{n}=(u-v)\bigl(u^{n-1}+u^{n-2}v+\dots+uv^{n-2}+v^{n-1}\bigr)$, che generalizza
+$u^{2}-v^{2}=(u-v)(u+v)$. Nella parentesi ci sono $n$ addendi, ciascuno dei quali è
+compreso tra il più piccolo, $v^{n-1}$, e il più grande, $u^{n-1}$. Stimando ogni
+addendo dal basso e dall'alto si ottengono le due disuguaglianze.
+\end{strategia}
+
+\begin{dimostrazione}
+Per $n=1$ la \eqref{eq:stima-potenze} si riduce a $u-v\le u-v\le u-v$. Sia $n\ge2$.
+Poiché $u>0$, possiamo applicare la formula della progressione geometrica
+(\cref{prop:geometrica}) con ragione $x=v/u\neq1$ e $n-1$ al posto di $n$:
+\[
+  1+\frac vu+\Bigl(\frac vu\Bigr)^{2}+\dots+\Bigl(\frac vu\Bigr)^{n-1}
+  =\frac{1-(v/u)^{n}}{1-v/u}.
+\]
+Moltiplicando entrambi i membri per $u^{n-1}(u-v)=u^{n}(1-v/u)$ si trova
+\begin{equation}\label{eq:scomposizione-potenze}
+  u^{n}-v^{n}=(u-v)\bigl(u^{n-1}+u^{n-2}v+\dots+u\,v^{n-2}+v^{n-1}\bigr).
+\end{equation}
+Il generico addendo della parentesi è $u^{n-1-k}v^{k}$, con $0\le k\le n-1$; poiché
+$0\le v<u$, per la monotonia delle potenze (\cref{prop:potenza-crescente}) risulta
+$v^{n-1}\le u^{n-1-k}v^{k}\le u^{n-1}$. Sommando gli $n$ addendi, la parentesi è compresa
+tra $n v^{n-1}$ e $n u^{n-1}$; moltiplicando per $u-v>0$ si ottiene la tesi.
+\end{dimostrazione}
+
+\begin{teorema}[Esistenza e unicità della radice $n$-esima]\label{teo:radice-n}\index{radice $n$-esima!esistenza}
+Per ogni $y\ge0$ e ogni $n\in\N$ esiste uno e un solo numero reale $x\ge0$ tale che
+$x^{n}=y$.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$y\in\R$, $y\ge0$; \ $n\in\N$.}
+\Tesi{$\esiste!\,x\ge0 : x^{n}=y$ \ (il simbolo $\esiste!$ si legge «esiste uno e un solo»).}
+\end{schema}
+
+\begin{strategia}
+È la generalizzazione del ragionamento con cui nel \cref{sec:nzq} abbiamo «stretto»
+$\sqrt2$ tra i razionali con quadrato minore e maggiore di $2$; ora però, grazie
+all'estremo superiore, possiamo \emph{costruire} il numero cercato. Consideriamo
+l'insieme $S=\{t\ge0 : t^{n}<y\}$ dei candidati «troppo piccoli» e poniamo $x=\sup S$.
+Dimostriamo che $x^{n}=y$ escludendo le altre due possibilità.
+\begin{itemize}
+  \item Se fosse $x^{n}<y$, $x$ sarebbe ancora «troppo piccolo», e si potrebbe aumentarlo
+  di poco, $x+h$, restando in $S$: ma $x$ è un maggiorante di $S$.
+  \item Se fosse $x^{n}>y$, $x$ sarebbe «troppo grande», e si potrebbe diminuirlo di
+  poco, $x-h$, ottenendo ancora un maggiorante di $S$: ma $x$ è il \emph{minimo}
+  maggiorante.
+\end{itemize}
+In entrambi i casi il lavoro tecnico consiste nello scegliere $h$ abbastanza piccolo,
+e il \cref{lem:stima-potenze} dice esattamente quanto. L'unicità segue dalla stretta
+monotonia della potenza.
+\end{strategia}
+
+\begin{dimostrazione}
+Se $y=0$ basta prendere $x=0$. Sia $y>0$ e consideriamo
+\[
+  S=\{t\in\R : t\ge0,\ t^{n}<y\}.
+\]
+$S$ è non vuoto: $0\in S$. $S$ è limitato superiormente da $\max\{1,y\}$: se infatti
+$t>\max\{1,y\}$, allora $t>1$ e quindi $t^{n}\ge t>y$, cioè $t\notin S$. Per il
+\cref{teo:esistenza-sup} esiste $x=\sup S$. Inoltre $x>0$: il numero
+$t_{0}=\frac12\min\{1,y\}$ verifica $0<t_{0}<1$, dunque $t_{0}^{n}\le t_{0}<y$, cioè
+$t_{0}\in S$ e $x\ge t_{0}>0$.
+
+\emph{Non può essere $x^{n}<y$.} Supponiamolo per assurdo e scegliamo $h$ con
+\[
+  0<h<1 \qquad\text{e}\qquad h<\frac{y-x^{n}}{n(x+1)^{n-1}} .
+\]
+Per il \cref{lem:stima-potenze} con $u=x+h$, $v=x$, e poiché $x+h<x+1$,
+\[
+  (x+h)^{n}\le x^{n}+n(x+h)^{n-1}h\le x^{n}+n(x+1)^{n-1}h<x^{n}+(y-x^{n})=y .
+\]
+Dunque $x+h\in S$, contro il fatto che $x$ è un maggiorante di $S$ e $x+h>x$.
+
+\emph{Non può essere $x^{n}>y$.} Supponiamolo per assurdo e scegliamo $h$ con
+\[
+  0<h<x \qquad\text{e}\qquad h<\frac{x^{n}-y}{n\,x^{n-1}} .
+\]
+Per il \cref{lem:stima-potenze} con $u=x$, $v=x-h\ge0$,
+\[
+  (x-h)^{n}\ge x^{n}-n\,x^{n-1}h>x^{n}-(x^{n}-y)=y .
+\]
+Allora $x-h$ è un maggiorante di $S$: se $t\in S$, si ha $t^{n}<y<(x-h)^{n}$, e quindi
+$t<x-h$ (se fosse $t\ge x-h\ge0$, per la monotonia delle potenze sarebbe
+$t^{n}\ge(x-h)^{n}$). Ma $x-h<x$, contro il fatto che $x$ è il \emph{minimo} dei
+maggioranti.
+
+Esclusi entrambi i casi, deve essere $x^{n}=y$: per la dicotomia
+\ref{ass:dicotomia} vale $x^{n}\le y$ oppure $x^{n}\ge y$, e in nessuno dei due casi la
+disuguaglianza può essere stretta. Infine, se anche $x'\ge0$ verifica
+$x'^{n}=y$, non può essere né $x'<x$ né $x'>x$, perché la potenza $n$-esima è
+strettamente crescente su $[0,+\infty)$ (\cref{prop:potenza-crescente}): dunque $x'=x$.
+\end{dimostrazione}
+
+\begin{marginfigure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=5.3cm, height=4.8cm, xmin=-0.15, xmax=1.95, ymin=-0.3, ymax=4.2,
+  xtick={1.587}, xticklabels={$x$}, ytick={4}, yticklabels={$y$}]
+  \addplot[tratteggio, domain=0:1.9] {4};
+  \addplot[curva, domain=0:1.62, samples=80] {x^3};
+  \addplot[blu!35, line width=3.5pt] coordinates {(0,0) (1.587,0)};
+  \addplot[tratteggio] coordinates {(1.587,0) (1.587,4)};
+  \node[font=\scriptsize, blu] at (axis cs:0.32,0.5) {$S$};
+  \node[font=\scriptsize, blu] at (axis cs:1.15,2.6) {$t^{n}$};
+\end{axis}
+\end{tikzpicture}
+\caption{La dimostrazione del \cref{teo:radice-n} (qui $n=3$, $y=4$): l'insieme $S$ dei
+$t\ge0$ con $t^{n}<y$ è l'intervallo $[0,x)$, e il suo estremo superiore $x$ è la
+radice cercata.}
+\label{fig:radice-sup}
+\end{marginfigure}
+
+\begin{corollario}\label{cor:radice-2}
+Esiste un unico numero reale positivo $\sqrt2$ tale che $(\sqrt2)^{2}=2$; esso è
+irrazionale (\cref{teo:radice2}). Più in generale, la funzione radice $n$-esima
+$x\mapsto\sqrt[n]{x}$ è ben definita su $[0,+\infty)$ ed è l'inversa della potenza
+$x\mapsto x^{n}$ ristretta a $[0,+\infty)$, come anticipato nella \eqref{eq:radice}; per
+il \cref{teo:monotona-invertibile} è strettamente crescente.
+\end{corollario}
+
+\needspace{10\baselineskip}
+\begin{schema}
+\Ipotesi{$n\in\N$; \ la potenza $x\mapsto x^{n}$ ristretta a $[0,+\infty)$.}
+\Tesi{Esiste un unico $\sqrt2>0$ con $(\sqrt2)^{2}=2$, ed è irrazionale; la potenza
+$x\mapsto x^{n}$ è una biiezione di $[0,+\infty)$ su sé stesso, la cui inversa
+$\sqrt[n]{x}$ è strettamente crescente.}
+\end{schema}
+
+\begin{strategia}
+Il \cref{teo:radice-n} dice esattamente che la potenza $n$-esima, ristretta a
+$[0,+\infty)$, è suriettiva su $[0,+\infty)$ (esistenza) e iniettiva (unicità). Insieme
+alla stretta monotonia della potenza, il criterio di invertibilità fornisce l'inversa e
+ne garantisce la monotonia. L'affermazione su $\sqrt2$ è il caso $n=2$, $y=2$.
+\end{strategia}
+
+\begin{dimostrazione}
+Con $n=2$ e $y=2$ il \cref{teo:radice-n} fornisce un unico $x\ge0$ con $x^{2}=2$; si ha
+$x>0$ perché $0^{2}=0\neq2$, e $x\notin\Q$ per il \cref{teo:radice2}. In generale, la
+funzione $f(x)=x^{n}$ manda $[0,+\infty)$ in $[0,+\infty)$, è suriettiva per il
+\cref{teo:radice-n} ed è strettamente crescente per la \cref{prop:potenza-crescente}.
+Per il \cref{teo:monotona-invertibile} è invertibile, e l'inversa
+$\sqrt[n]{\cdot}\colon[0,+\infty)\to[0,+\infty)$ è strettamente crescente.
+\end{dimostrazione}
+
+\begin{osservazione}[Radici di ordine dispari dei numeri negativi]
+Se $n$ è dispari, $(-x)^{n}=-x^{n}$ (regola dei segni applicata $n$ volte); quindi per
+$y<0$ il numero $x=-\sqrt[n]{-y}$ verifica $x^{n}=y$, ed è l'unico. Per $n$ dispari la
+potenza $x\mapsto x^{n}$ è dunque una biiezione di $\R$ su $\R$, e si pone ad esempio
+$\sqrt[3]{-8}=-2$. Per $n$ pari, invece, $x^{n}\ge0$ per ogni $x$ e i numeri negativi non
+hanno radici $n$-esime reali: è precisamente questo il «difetto» di $\R$ che i numeri
+complessi del \cref{sec:complessi} rimedieranno.
+\end{osservazione}
+
+\begin{osservazione}[Dalla radice $n$-esima a ogni polinomio]\label{oss:radice-polinomi}
+Nella dimostrazione del \cref{teo:radice-n} la forma di $t^{n}$ è servita solo a
+stimare di quanto cambia la potenza quando la base cambia di poco
+(\cref{lem:stima-potenze}). Sommando stime analoghe per i monomi, si vede che ogni
+polinomio $P$ conserva il segno vicino ai punti in cui non si annulla; e allora lo stesso
+ragionamento sull'estremo superiore di $\{t\in[s,u] : P(t)<0\}$ prova che \emph{un
+polinomio negativo in $s$ e positivo in $u>s$ si annulla in $(s,u)$}. È la strada di
+\cite{giusti}, che ottiene le radici come caso particolare ($P(t)=t^{n}-y$); il
+\cref{cap:funzioni-continue} estenderà il risultato a tutte le funzioni continue
+(\cref{teo:permanenza-segno-continue,teo:zeri}).
+\end{osservazione}
+
+\subsection{Potenze a esponente razionale: monotonia}
+
+Grazie al \cref{teo:radice-n} le potenze a esponente razionale della
+\eqref{eq:potenza-razionale}, $a^{m/n}=\sqrt[n]{a^{m}}$ per $a>0$, sono ben definite. Ci
+servirà la loro monotonia rispetto all'esponente, che dimostriamo.
+
+\begin{lemma}[Monotonia delle potenze razionali]\label{lem:monotonia-razionale}
+Sia $a>1$. Se $y,z\in\Q$ e $y<z$, allora $a^{y}<a^{z}$. Inoltre, per ogni $K>0$ esiste
+$m\in\N$ tale che $a^{m}>K$ e $a^{-m}<1/K$.
+\end{lemma}
+
+\begin{schema}
+\Ipotesi{$a>1$; \ $y,z\in\Q$, $y<z$; \ $K>0$.}
+\Tesi{$a^{y}<a^{z}$; \ $\esiste m\in\N : a^{m}>K$ \ e \ $a^{-m}<1/K$.}
+\end{schema}
+
+\begin{strategia}
+Riduciamo i due esponenti allo stesso denominatore, $y=p/q$ e $z=r/q$ con $p<r$
+interi: tutto si riduce a confrontare due potenze \emph{intere} della stessa base
+$b=a^{1/q}$, e $b>1$. Per la seconda parte serve una stima dal basso di $a^{m}$ che cresca
+illimitatamente con $m$: la disuguaglianza di Bernoulli, scrivendo $a=1+(a-1)$, dà
+$a^{m}\ge1+m(a-1)$, e la proprietà di Archimede fa il resto.
+\end{strategia}
+
+\begin{dimostrazione}
+Scriviamo $y=p/q$ e $z=r/q$ con $p,r\in\Z$, $q\in\N$, $p<r$, e poniamo $b=a^{1/q}$. Si ha
+$b>1$: se fosse $b\le1$, sarebbe $a=b^{q}\le1$. Per ogni $k\in\N$ è $b^{k}>1$ (per
+induzione: se $b^{k}>1$, allora $b^{k+1}=b^{k}\,b>b^{k}>1$), dunque
+$a^{z}=b^{r}=b^{p}\,b^{r-p}>b^{p}=a^{y}$, essendo $r-p\in\N$ e $b^{p}>0$.
+
+Per la seconda parte, per la disuguaglianza di Bernoulli (\cref{teo:bernoulli}) con
+$x=a-1>0$ si ha $a^{m}=(1+(a-1))^{m}\ge1+m(a-1)$; per la proprietà di Archimede esiste
+$m>\frac{K-1}{a-1}$, e per tale $m$ risulta $a^{m}\ge1+m(a-1)>K$, cioè anche
+$a^{-m}=1/a^{m}<1/K$.
+\end{dimostrazione}
+
+\begin{lemma}[di densità]\label{lem:densita-esponenziale}\index{lemma di densità}
+Sia $a>1$. Per ogni coppia $\alpha,\beta$ di numeri reali con $0<\alpha<\beta$ esiste
+$y\in\Q$ tale che
+\[
+  \alpha<a^{y}<\beta .
+\]
+In altre parole, l'immagine $\{a^{y} : y\in\Q\}$ della funzione esponenziale definita
+sui razionali è densa in $(0,+\infty)$.
+\end{lemma}
+
+\begin{schema}
+\Ipotesi{$a>1$; \ $0<\alpha<\beta$.}
+\Tesi{$\esiste y\in\Q : \alpha<a^{y}<\beta$.}
+\end{schema}
+
+\begin{strategia}
+Cerchiamo $y$ della forma $(m+1)/n$. Elevando alla $n$, la condizione
+$\alpha<a^{(m+1)/n}<\beta$ diventa $\alpha^{n}<a^{m+1}<\beta^{n}$: dobbiamo trovare una
+potenza intera di $a$ dentro l'intervallo $(\alpha^{n},\beta^{n})$. Le potenze intere
+$a^{0},a^{1},a^{2},\dots$ crescono «a salti» di un fattore $a$; se l'intervallo è
+abbastanza «largo in senso moltiplicativo», cioè se $\beta^{n}/\alpha^{n}>a$, una potenza
+ci cade dentro per forza. Basta quindi scegliere $n$ grande, in modo che
+$(\beta/\alpha)^{n}>a$, e prendere come $a^{m}$ l'ultima potenza che non supera
+$\alpha^{n}$: la successiva, $a^{m+1}$, supera $\alpha^{n}$ ma non può superare
+$\beta^{n}$. È la stessa idea della densità di $\Q$ (\cref{fig:densita-Q}), in versione
+moltiplicativa. Per semplicità trattiamo prima il caso $\alpha\ge1$, poi ci riconduciamo
+a esso.
+\end{strategia}
+
+\begin{dimostrazione}
+\emph{Primo caso: $\alpha\ge1$.} Poiché $\beta/\alpha>1$, per il
+\cref{lem:monotonia-razionale} (applicato con base $\beta/\alpha$) esiste $n\in\N$ tale
+che $(\beta/\alpha)^{n}>a$, cioè $\beta^{n}>a\,\alpha^{n}$. Consideriamo l'insieme
+\[
+  T=\{m\in\N\cup\{0\} : a^{m}\le\alpha^{n}\}.
+\]
+$T$ è non vuoto, perché $a^{0}=1\le\alpha^{n}$ (essendo $\alpha\ge1$), ed è limitato
+superiormente: per il \cref{lem:monotonia-razionale} esiste $\bar m$ con
+$a^{\bar m}>\alpha^{n}$, e allora ogni $m\in T$ verifica $m<\bar m$. Per il
+\cref{teo:max-N} (o banalmente, se $T=\{0\}$) $T$ ha massimo $m$. Allora $m+1\notin T$,
+cioè $a^{m+1}>\alpha^{n}$; e d'altra parte
+\[
+  a^{m+1}=a\cdot a^{m}\le a\,\alpha^{n}<\beta^{n}.
+\]
+Dunque $\alpha^{n}<a^{m+1}<\beta^{n}$, e per la stretta monotonia della radice $n$-esima
+(\cref{cor:radice-2}) $\alpha<a^{(m+1)/n}<\beta$: basta porre $y=(m+1)/n$.
+
+\emph{Caso generale: $0<\alpha<1$.} Per il \cref{lem:monotonia-razionale} esiste
+$k\in\N$ con $a^{k}>1/\alpha$, cioè $a^{k}\alpha>1$. Applicando il primo caso alla
+coppia $a^{k}\alpha<a^{k}\beta$ si trova $y'\in\Q$ con $a^{k}\alpha<a^{y'}<a^{k}\beta$;
+dividendo per $a^{k}$ si ottiene $\alpha<a^{y'-k}<\beta$, e $y=y'-k$ è razionale.
+\end{dimostrazione}
+
+\subsection{La funzione esponenziale su \texorpdfstring{$\R$}{R}}
+
+Siamo pronti per definire $a^{x}$ con $x$ reale. Il lemma di densità suggerisce
+l'idea: $a^{x}$ deve essere l'estremo superiore delle potenze $a^{y}$ con esponente
+razionale $y<x$ (\cref{fig:esponenziale-sup}).
+
+\begin{definizione}[Potenza a esponente reale]\label{def:potenza-reale}\index{funzione!esponenziale}\index{potenza a esponente reale}
+Sia $a>1$ e $x\in\R$. Si pone
+\begin{equation}\label{eq:esponenziale-sup}
+  a^{x}=\sup\{a^{y} : y\in\Q,\ y<x\}.
+\end{equation}
+Se $0<a<1$ si pone $a^{x}=(1/a)^{-x}$, e se $a=1$ si pone $1^{x}=1$.
+\end{definizione}
+
+La definizione è ben posta: l'insieme $E_{x}=\{a^{y} : y\in\Q,\ y<x\}$ è non vuoto
+(contiene $a^{\lfloor x\rfloor-1}$) e limitato superiormente (per il
+\cref{lem:monotonia-razionale}, $a^{y}<a^{r}$ per ogni $y\in E_{x}$, dove $r$ è un
+qualsiasi razionale maggiore di $x$, ad esempio $r=\lfloor x\rfloor+1$). Inoltre
+$a^{x}\ge a^{\lfloor x\rfloor-1}>0$.
+
+\begin{teorema}[La funzione esponenziale]\label{teo:esponenziale}\index{funzione!esponenziale!biiettività}
+Sia $a>1$. Allora:
+\begin{enumerate}
+  \item se $x\in\Q$, la \eqref{eq:esponenziale-sup} restituisce il valore $a^{x}$ già
+  noto (\emph{coerenza});
+  \item la funzione $x\mapsto a^{x}$ è strettamente crescente su $\R$;
+  \item per ogni $c>0$ esiste uno e un solo $x\in\R$ tale che $a^{x}=c$.
+\end{enumerate}
+Quindi la funzione esponenziale è una biiezione strettamente crescente di $\R$ su
+$(0,+\infty)$. Per $0<a<1$ essa è una biiezione strettamente decrescente di $\R$ su
+$(0,+\infty)$.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$a>1$; potenze razionali con le proprietà dei \cref{lem:monotonia-razionale,lem:densita-esponenziale}.}
+\Tesi{(i) coerenza su $\Q$; \ (ii) $x_{1}<x_{2}\implica a^{x_{1}}<a^{x_{2}}$; \
+(iii) $\perogni c>0\ \esiste!\,x\in\R : a^{x}=c$.}
+\end{schema}
+
+\begin{strategia}
+Le tre affermazioni si dimostrano con due soli strumenti, usati più volte: la
+caratterizzazione dell'estremo superiore (\cref{prop:caratt-sup}) e la possibilità di
+«infilare» un razionale ovunque, sia sull'asse degli esponenti (densità di $\Q$,
+\cref{teo:densita-Q}) sia sull'asse dei valori (\cref{lem:densita-esponenziale}).
+\begin{itemize}
+  \item Per (i) mostriamo che il vecchio valore $a^{x}$ è il minimo maggiorante di
+  $E_{x}$: è un maggiorante per la monotonia razionale, ed è il \emph{minimo} perché sotto
+  di esso, per il lemma di densità, cade sempre qualche $a^{y}$ con $y<x$.
+  \item Per (ii), dati $x_{1}<x_{2}$, infiliamo due razionali $r_{1}<r_{2}$ tra di essi:
+  $a^{r_{1}}$ è un maggiorante di $E_{x_{1}}$ e $a^{r_{2}}$ è un elemento di $E_{x_{2}}$.
+  \item Per (iii) imitiamo la dimostrazione del \cref{teo:radice-n}: definiamo $x$ come
+  estremo superiore degli esponenti razionali $y$ con $a^{y}<c$, ed escludiamo per assurdo
+  sia $a^{x}<c$ sia $a^{x}>c$, usando questa volta il lemma di densità al posto delle
+  stime esplicite.
+\end{itemize}
+\end{strategia}
+
+\begin{dimostrazione}
+(i) Sia $x\in\Q$ e indichiamo provvisoriamente con $P$ il valore della potenza razionale
+$a^{x}$. Per il \cref{lem:monotonia-razionale}, $a^{y}<P$ per ogni razionale $y<x$:
+$P$ è un maggiorante di $E_{x}$. Sia $\epsilon>0$; se $\epsilon\ge P$ ogni elemento di
+$E_{x}$, essendo positivo, supera $P-\epsilon\le0$; supponiamo quindi $0<\epsilon<P$. Per il
+\cref{lem:densita-esponenziale} esiste $y\in\Q$ con $P-\epsilon<a^{y}<P$, e
+necessariamente $y<x$ (se fosse $y\ge x$, sarebbe $a^{y}\ge P$). Dunque $a^{y}\in E_{x}$ e
+$a^{y}>P-\epsilon$; per la \cref{prop:caratt-sup}, $\sup E_{x}=P$.
+
+(ii) Siano $x_{1}<x_{2}$. Applicando due volte il \cref{teo:densita-Q} si trovano due
+razionali $r_{1},r_{2}$ con $x_{1}<r_{1}<r_{2}<x_{2}$. Se $y\in\Q$ e $y<x_{1}$, allora
+$y<r_{1}$ e $a^{y}<a^{r_{1}}$: dunque $a^{r_{1}}$ è un maggiorante di $E_{x_{1}}$, e
+$a^{x_{1}}\le a^{r_{1}}$. D'altra parte $r_{2}<x_{2}$, quindi $a^{r_{2}}\in E_{x_{2}}$ e
+$a^{r_{2}}\le a^{x_{2}}$. In conclusione
+\[
+  a^{x_{1}}\le a^{r_{1}}<a^{r_{2}}\le a^{x_{2}} .
+\]
+
+(iii) Sia $c>0$ e consideriamo $S=\{y\in\Q : a^{y}<c\}$. Per il
+\cref{lem:monotonia-razionale} esiste $m\in\N$ con $a^{-m}<c$, quindi $-m\in S$ e $S$ è
+non vuoto; esiste anche $m'\in\N$ con $a^{m'}>c$, e allora ogni $y\in S$ verifica $y<m'$
+(se fosse $y\ge m'$ sarebbe $a^{y}\ge a^{m'}>c$): $S$ è limitato superiormente. Sia
+$x=\sup S$.
+\begin{itemize}
+  \item Se fosse $a^{x}<c$, per il \cref{lem:densita-esponenziale} esisterebbe
+  $r\in\Q$ con $a^{x}<a^{r}<c$. Allora $r\in S$, e quindi $r\le x$; ma da $a^{r}>a^{x}$ e
+  dalla (ii) segue $r>x$. Assurdo.
+  \item Se fosse $a^{x}>c$, esisterebbe $r\in\Q$ con $c<a^{r}<a^{x}$, e dalla (ii)
+  $r<x$. Poiché $x=\sup S$ e $r<x$, per la \cref{prop:caratt-sup} (con $\epsilon=x-r$)
+  esiste $y\in S$ con $y>r$; allora $a^{y}>a^{r}>c$, contro il fatto che $y\in S$.
+  Assurdo.
+\end{itemize}
+Dunque $a^{x}=c$. L'unicità segue dalla stretta monotonia (ii). Infine, il caso
+$0<a<1$ segue dalla definizione $a^{x}=(1/a)^{-x}$, essendo $1/a>1$: la composizione di
+$x\mapsto-x$ (decrescente) con un esponenziale crescente è decrescente.
+\end{dimostrazione}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.92\textwidth, height=6cm, xmin=0.9, xmax=1.62, ymin=1.9, ymax=3.1,
+  xtick={1,1.2,1.4,1.4142,1.6}, xticklabels={$1$,$1{,}2$,\makebox[0pt][r]{$1{,}4$\,},\makebox[0pt][l]{\,$\sqrt2$},$1{,}6$},
+  ytick={2,2.5,2.6651}, yticklabels={$2$,$2{,}5$,$2^{\sqrt2}$}, axis lines=left]
+  \addplot[curva, domain=0.9:1.6, samples=100] {2^x};
+  \addplot[tratteggio] coordinates {(0.9,2.66514) (1.41421,2.66514) (1.41421,1.9)};
+  \foreach \y in {1,1.2,1.3,1.4,1.41,1.414} {
+    \addplot[only marks, mark=*, mark size=1.5pt, rame] coordinates {(\y,{2^\y})};}
+  \addplot[only marks, mark=o, mark size=2.2pt, verde, thick] coordinates {(1.41421,2.66514)};
+  \node[font=\scriptsize, rame, anchor=west, align=left] at (axis cs:1.0,2.82)
+    {punti $(y,2^{y})$ con $y\in\Q$, $y<\sqrt2$:\\ $y=1;\ 1{,}2;\ 1{,}3;\ 1{,}4;\ 1{,}41;\ 1{,}414$};
+\end{axis}
+\end{tikzpicture}
+\caption{La definizione \eqref{eq:esponenziale-sup}: $2^{\sqrt2}$ è l'estremo superiore
+dei valori $2^{y}$ con $y$ razionale minore di $\sqrt2$. I punti color rame,
+calcolati con esponenti razionali, salgono verso $2^{\sqrt2}\approx2{,}665$ senza mai
+superarlo.}
+\label{fig:esponenziale-sup}
+\end{figure}
+
+\begin{osservazione}[Che cosa abbiamo guadagnato]
+Il \cref{teo:esponenziale} chiude un conto aperto nel \cref{sec:potenze}: la funzione
+logaritmo, definita come inversa dell'esponenziale dalla \eqref{eq:log-def}, è ora definita su
+\emph{tutto} $(0,+\infty)$, perché ogni $c>0$ è della forma $a^{x}$. Si noti che per
+ottenere la suriettività non abbiamo usato il teorema dell'esistenza degli zeri, che
+richiede la continuità, ma direttamente l'estremo superiore. Le proprietà algebriche
+$a^{x}a^{z}=a^{x+z}$, $(a^{x})^{z}=a^{xz}$, $(ab)^{x}=a^{x}b^{x}$, note per esponenti
+razionali, si estendono agli esponenti reali con ragionamenti dello stesso tipo
+(approssimando $x$ e $z$ con razionali); le dimostreremo in modo più semplice quando
+avremo a disposizione la continuità della funzione esponenziale. Si noti anche che,
+per $a>1$, vale pure $a^{x}=\inf\{a^{q} : q\in\Q,\ q>x\}$: per la (ii) ogni $a^{q}$ con
+$q>x$ è maggiore di $a^{x}$, e per ogni $\epsilon>0$ il \cref{lem:densita-esponenziale}
+fornisce un razionale $r$ con $a^{x}<a^{r}<a^{x}+\epsilon$, e necessariamente $r>x$. Dunque
+$a^{x}$ è l'\emph{unico} numero che separa le potenze con esponente razionale minore di
+$x$ da quelle con esponente razionale maggiore di $x$, come anticipato nel
+\cref{sec:potenze}. Per $0<a<1$ si può verificare (esercizio) che
+$a^{x}=\sup\{a^{y} : y\in\Q,\ y>x\}$, che è la definizione adottata in
+\cite{marcellini-sbordone}.
+\end{osservazione}
+
+\begin{notastorica}[Esponenti frazionari, negativi, irrazionali]
+La notazione esponenziale moderna $a^{3}$, $a^{4}$ è di Cartesio (\emph{La Géométrie},
+1637), che però per il quadrato scriveva ancora di solito $aa$. L'idea di una potenza con
+esponente frazionario è molto più antica: nel Trecento Nicole Oresme, nel \emph{De
+proportionibus proportionum}, ne faceva già uso, sia pure senza la notazione moderna. In
+forma sistematica, gli esponenti negativi e frazionari furono introdotti da John Wallis
+(\emph{Arithmetica infinitorum}, 1656) e resi d'uso comune da Newton, che in una lettera
+del 1676 destinata a Leibniz (la \emph{Epistola prior}, inviata tramite Oldenburg)
+scriveva tranquillamente $a^{1/2}$, $a^{-1}$, $a^{3/4}$. Gli esponenti irrazionali
+comparivano già nel Settecento (Eulero, nell'\emph{Introductio} del 1748, osserva che
+$a^{\sqrt7}$ è compreso tra $a^{2}$ e $a^{3}$), ma senza una definizione rigorosa, che
+poteva venire solo con una teoria dei numeri reali. Fino ad allora anche l'esistenza della
+radice $n$-esima (\cref{teo:radice-n}) era trattata come una proprietà evidente del
+sistema numerico, da usare senza dimostrazione \cite{giusti}; e Dedekind, presentando nel
+1872 le sue sezioni, notava con una punta di orgoglio che solo ora si potevano dare vere
+dimostrazioni di uguaglianze come $\sqrt2\cdot\sqrt3=\sqrt6$, che a quanto gli risultava
+nessuno aveva mai dimostrato. Una curiosità
+che mostra quanto la questione sia profonda: nel 1900 Hilbert pose, come settimo dei suoi
+celebri problemi, la domanda se $2^{\sqrt2}$ fosse trascendente (cioè non radice di
+alcun polinomio a coefficienti interi). La risposta, affermativa, fu data da Rodion
+Kuzmin nel 1930; il caso generale del problema fu risolto nel 1934--35 dal teorema di
+Gelfond--Schneider.
+\end{notastorica}
+
+\begin{python}[Approssimare $2^{\sqrt2}$ con esponenti razionali]
+# Approssimiamo √2 per difetto con i troncamenti decimali y_k
+# (numeri razionali) e calcoliamo 2**y_k: per la definizione di
+# potenza reale come sup, i valori crescono e si avvicinano
+# a 2**√2 senza superarlo.
+from fractions import Fraction as F
+import math
+
+r2 = math.sqrt(2)
+for k in range(1, 8):
+    y = F(math.floor(r2 * 10**k), 10**k)   # troncamento < √2
+    print(f"y = {str(y):>15s} = {float(y):.7f}"
+          f"   2^y = {2 ** float(y):.10f}")
+print(f"{'2^√2':>37s} = {2 ** r2:.10f}")
+\end{python}
+\begin{risultato}
+y =             7/5 = 1.4000000   2^y = 2.6390158215
+y =         141/100 = 1.4100000   2^y = 2.6573716282
+y =         707/500 = 1.4140000   2^y = 2.6647496502
+y =       7071/5000 = 1.4142000   2^y = 2.6651190885
+y =   141421/100000 = 1.4142100   2^y = 2.6651375618
+y = 1414213/1000000 = 1.4142130   2^y = 2.6651431038
+y = 2828427/2000000 = 1.4142135   2^y = 2.6651440275
+                                 2^√2 = 2.6651441427
+\end{risultato}
