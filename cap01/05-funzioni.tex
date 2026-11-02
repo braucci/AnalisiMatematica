@@ -1,0 +1,223 @@
+%% ----------------------------------------------------------------------------
+%%  §1.5  Funzioni e rappresentazione cartesiana
+%% ----------------------------------------------------------------------------
+\section{Funzioni e rappresentazione cartesiana}
+\label{sec:funzioni}
+
+\begin{definizione}[Funzione]\index{funzione}\index{dominio}\index{immagine}
+Siano $A$ e $B$ due insiemi. Una \emph{funzione} di $A$ in $B$ è una legge che a ogni
+elemento di $A$ fa corrispondere \emph{uno e un solo} elemento di $B$. Se indichiamo con
+$f$ tale funzione, scriveremo
+\[
+  f\colon A\to B, \qquad\text{oppure}\qquad y=f(x),
+\]
+intendendo che a ogni elemento $x\in A$ corrisponde, tramite la funzione $f$, l'elemento
+$y=f(x)\in B$. Si dice che $A$ è il \emph{dominio} o \emph{insieme di definizione} di
+$f$; il valore $f(x)$ si chiama anche \emph{immagine} di $x$ mediante $f$, e $x$ si
+chiama \emph{argomento} o \emph{variabile indipendente}.
+\end{definizione}
+
+\begin{marginfigure}
+\centering
+\begin{tikzpicture}[scale=0.8]
+  \draw[blu, thick] (0,0) ellipse (0.9 and 1.4) node[above=1.4cm, font=\scriptsize] {$A$};
+  \draw[rame, thick] (3,0) ellipse (0.9 and 1.4) node[above=1.4cm, font=\scriptsize] {$B$};
+  \foreach \y/\n in {0.8/1, 0.2/2, -0.4/3, -1.0/4} \fill[blu] (0,\y) circle (1.6pt) node[left, font=\scriptsize] {$x_{\n}$};
+  \foreach \y/\n in {0.9/1, 0.3/2, -0.3/3, -0.9/4} \fill[rame] (3,\y) circle (1.6pt) node[right, font=\scriptsize] {$y_{\n}$};
+  \draw[-Latex, grigio] (0.1,0.8) -- (2.9,0.3);
+  \draw[-Latex, grigio] (0.1,0.2) -- (2.9,0.3);
+  \draw[-Latex, grigio] (0.1,-0.4) -- (2.9,-0.9);
+  \draw[-Latex, grigio] (0.1,-1.0) -- (2.9,0.9);
+  \node[font=\scriptsize, grigio] at (1.5,1.7) {$f$};
+\end{tikzpicture}
+\caption{Una funzione $f\colon A\to B$: da ogni elemento di $A$ parte \emph{una sola}
+freccia. Due frecce possono arrivare sullo stesso elemento di $B$, e qualche elemento di
+$B$ può non essere raggiunto.}
+\label{fig:frecce}
+\end{marginfigure}
+
+Nel linguaggio degli insiemi del paragrafo precedente, una funzione può essere definita
+in modo del tutto rigoroso come un sottoinsieme $G$ del prodotto cartesiano $A\times B$
+con la proprietà che per ogni $x\in A$ esiste \emph{una e una sola} coppia $(x,y)\in G$:
+quella coppia definisce $y=f(x)$. L'insieme $G$ si chiama \emph{grafico} della
+funzione, e la definizione «per frecce» della \cref{fig:frecce} e quella «per grafico»
+sono equivalenti.
+
+Il simbolo $f(\ )$ indica un complesso di operazioni che devono effettuarsi su $x$ per
+ottenere $y$ (il \emph{valore} di $f$), come negli esempi seguenti:
+\begin{align}
+  f(x)&=2x+1, \label{eq:f1}\\
+  f(x)&=1/x, \label{eq:f2}\\
+  f(x)&=\sqrt{x}, \label{eq:f3}\\
+  f(x)&=\begin{cases}0 & \text{se } x\in\Z,\\ 1 & \text{altrimenti.}\end{cases}\label{eq:f4}
+\end{align}
+Nella \eqref{eq:f1} occorre moltiplicare $x$ per $2$ e sommare $1$; nella \eqref{eq:f2}
+occorre calcolare l'inverso di $x$; nella \eqref{eq:f3} si deve calcolare la radice
+quadrata di $x$; nella \eqref{eq:f4} occorre riconoscere se $x$ è intero oppure no, e di
+conseguenza assegnare a $f(x)$ il valore $0$ oppure $1$.
+La funzione \eqref{eq:f1} è definita per ogni $x$ reale; in altre parole il suo dominio è
+tutto $\R$. La funzione \eqref{eq:f2} è definita per $x\neq0$, quindi il suo dominio è
+$A=\{x\in\R : x\neq0\}$. Il dominio della \eqref{eq:f3} è $A=\{x\in\R : x\ge0\}$,
+mentre la \eqref{eq:f4} è definita su tutto $\R$. In questo libro, quando una funzione è
+assegnata mediante una formula senza che sia specificato il dominio, si intende che il
+dominio è il più grande sottoinsieme di $\R$ in cui la formula ha senso (il cosiddetto
+\emph{dominio naturale}).
+
+\begin{attenzione}[Una funzione non è una formula]
+La \eqref{eq:f4} mostra che una funzione può essere definita «a pezzi», senza una
+formula unica; esistono funzioni definite in modo ancora più indiretto, come la funzione
+definita per $n\in\N$ da «$f(n)$ è la $n$-esima cifra decimale di $\pi$». Ciò che conta è che a ogni $x$ del dominio
+corrisponda \emph{uno e un solo} valore. Per lo stesso motivo la «legge» $y^{2}=x$ non
+definisce una funzione di $x$: a $x=4$ corrisponderebbero due valori, $y=2$ e $y=-2$.
+\end{attenzione}
+
+\begin{notastorica}[Da Leibniz a Dirichlet: l'idea di funzione]
+Nella \emph{Géométrie} (1637) di Cartesio una curva è descritta da un'equazione
+$P(x,y)=0$ tra le coordinate dei suoi punti: una \emph{relazione} tra due variabili, non
+ancora la dipendenza dell'una dall'altra. La parola \emph{funzione} compare in un
+manoscritto di Gottfried Wilhelm Leibniz (1646--1716) del 1673, e poi a stampa negli
+anni Novanta del Seicento: per Leibniz erano «funzioni» i segmenti associati ai punti di
+una curva, come l'ordinata, la tangente o la normale. Nella sua corrispondenza con
+Johann Bernoulli (1667--1748) la parola cominciò a indicare una quantità formata a
+partire da una variabile, e nel 1718 Bernoulli ne diede la prima definizione esplicita:
+una quantità composta in qualsiasi modo da una grandezza variabile e da costanti.
+Leonhard Euler (1707--1783), che rese d'uso comune la notazione $f(x)$, fece della
+funzione il concetto centrale dell'Analisi con l'\emph{Introductio in analysin
+infinitorum} (1748); per lui, però, una funzione era un'\emph{espressione analitica},
+cioè una formula costruita a partire dalla variabile con le operazioni algebriche e le
+funzioni elementari (sulle conseguenze di questa idea si veda la nota storica del
+\cref{sec:continue}). Nelle \emph{Institutiones calculi differentialis} (1755) Eulero
+allargò la definizione a ogni modo in cui una quantità dipende da un'altra, e il distacco
+definitivo dalla formula venne con Dirichlet (\cref{oss:dirichlet}): la sua idea di
+corrispondenza arbitraria è la «legge» della nostra definizione. La formulazione come
+sottoinsieme del prodotto cartesiano, cioè come grafico, si è imposta nel Novecento con
+la teoria degli insiemi.
+\end{notastorica}
+
+\subsection{Rappresentazione cartesiana}
+
+Ricordiamo brevemente come effettuare la \emph{rappresentazione cartesiana}\index{piano cartesiano}
+di una funzione. Riferendoci alla \cref{fig:piano-cartesiano}, consideriamo due rette
+perpendicolari che si intersecano in un punto $O$, \emph{origine} degli assi. Fissiamo
+sulle due rette una direzione positiva e un'unità di misura. Chiamiamo \emph{asse delle
+ascisse}, o asse $x$, una delle due rette, e \emph{asse delle ordinate}, o asse $y$,
+l'altra.
+
+A ogni numero reale $x$ corrisponde in modo biunivoco un punto $P_{1}$ dell'asse delle
+$x$, scelto in modo che il segmento $OP_{1}$ abbia lunghezza uguale a $\abs{x}$ e stia
+dalla parte positiva se $x>0$. Analogamente a ogni numero reale $y$ corrisponde un
+punto $P_{2}$ dell'asse $y$. Tracciamo due rette parallele agli assi e passanti
+rispettivamente per $P_{1}$ e $P_{2}$. Il punto $P$ di incontro delle due rette
+corrisponde in modo biunivoco alla coppia di numeri reali $(x,y)$: il piano «è»
+l'insieme $\R\times\R=\R^{2}$ delle coppie ordinate.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[scale=0.9]
+  \draw[-Latex, grigio] (-0.8,0) -- (5.5,0) node[below, font=\footnotesize] {$x$};
+  \draw[-Latex, grigio] (0,-0.8) -- (0,3.5) node[left, font=\footnotesize] {$y$};
+  \node[below left, font=\footnotesize] at (0,0) {$O$};
+  \fill[blu] (3.8,2.4) circle (2pt) node[above right, font=\footnotesize] {$P=(x,y)$};
+  \draw[tratteggio] (3.8,0) -- (3.8,2.4) -- (0,2.4);
+  \fill[rame] (3.8,0) circle (1.6pt) node[below, font=\footnotesize] {$P_{1}$};
+  \fill[rame] (0,2.4) circle (1.6pt) node[left, font=\footnotesize] {$P_{2}$};
+  \draw[decorate, decoration={brace, amplitude=3pt, mirror}, grigio] (0,-0.35) -- (3.8,-0.35) node[midway, below=3pt, font=\scriptsize] {$x$};
+  \draw[decorate, decoration={brace, amplitude=3pt}, grigio] (-0.35,0) -- (-0.35,2.4) node[midway, left=3pt, font=\scriptsize] {$y$};
+\end{tikzpicture}
+\caption{Il piano cartesiano: al punto $P$ corrisponde la coppia ordinata $(x,y)$ delle
+sue coordinate, e viceversa.}
+\label{fig:piano-cartesiano}
+\end{figure}
+
+\begin{definizione}[Grafico]\index{grafico}
+Se è assegnata una funzione $f\colon A\to\R$ con $A\subseteq\R$, l'insieme dei punti
+del piano di coordinate $(x,f(x))$, al variare di $x\in A$,
+\[
+  G_{f}=\{(x,y)\in\R^{2} : x\in A,\ y=f(x)\},
+\]
+si chiama \emph{grafico} della funzione.
+\end{definizione}
+
+Un sottoinsieme $G$ di $A\times\R$ è il grafico di una funzione definita in $A$ se e
+solo se ogni retta verticale $x=x_{0}$, con $x_{0}\in A$, lo interseca in
+\emph{esattamente un} punto:
+è la traduzione geometrica dell'«uno e un solo» della definizione di funzione. Nella
+\cref{fig:quattro-grafici} abbiamo riportato i grafici delle quattro funzioni
+\eqref{eq:f1}--\eqref{eq:f4}; il lettore verifichi i disegni \emph{per punti}, cioè
+assegnando alla variabile indipendente $x$ dei valori su cui calcolare semplicemente la
+funzione: ad esempio, nel caso \eqref{eq:f3}, $x=0,1,4,9,\dots$
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=5.6cm, height=4.6cm, xmin=-2.2, xmax=2.2, ymin=-2.5, ymax=4,
+  xtick={-1,1}, ytick={1,3}, title={\footnotesize $y=2x+1$}, title style={at={(0.5,0.9)}}]
+  \addplot[curva, domain=-2:1.4] {2*x+1};
+\end{axis}
+\end{tikzpicture}\hfill
+\begin{tikzpicture}
+\begin{axis}[width=5.6cm, height=4.6cm, xmin=-3, xmax=3, ymin=-3, ymax=3,
+  xtick={1}, ytick={1}, title={\footnotesize $y=1/x$}, title style={at={(0.5,0.9)}}]
+  \addplot[curva, domain=0.34:3] {1/x};
+  \addplot[curva, domain=-3:-0.34] {1/x};
+  \addplot[tratteggio] coordinates {(1,0) (1,1) (0,1)};
+\end{axis}
+\end{tikzpicture}\\[2mm]
+\begin{tikzpicture}
+\begin{axis}[width=5.6cm, height=4.6cm, xmin=-0.6, xmax=5.4, ymin=-0.6, ymax=2.8,
+  xtick={1,2,3,4,5}, ytick={1,2}, title={\footnotesize $y=\sqrt{x}$}, title style={at={(0.5,0.9)}}]
+  \addplot[curva, domain=0:5.2, samples=100] {sqrt(x)};
+  \foreach \p in {0,1,4} {\addplot[only marks, mark=*, mark size=1.3pt, blu] coordinates {(\p,{sqrt(\p)})};}
+\end{axis}
+\end{tikzpicture}\hfill
+\begin{tikzpicture}
+\begin{axis}[width=5.6cm, height=4.6cm, xmin=-3.3, xmax=3.3, ymin=-0.6, ymax=1.8,
+  xtick={-2,-1,1,2}, ytick={1}, title={\footnotesize $y=0$ se $x\in\Z$, $y=1$ altrimenti}, title style={at={(0.5,0.9)}}]
+  \addplot[curva] coordinates {(-3.3,1) (3.3,1)};
+  \foreach \k in {-3,...,3} {
+    \addplot[only marks, mark=*, mark size=1.3pt, blu] coordinates {(\k,0)};
+    \addplot[only marks, mark=o, mark size=1.3pt, blu, fill=white] coordinates {(\k,1)};}
+\end{axis}
+\end{tikzpicture}
+\caption{I grafici delle quattro funzioni \eqref{eq:f1}--\eqref{eq:f4}. Nell'ultimo, i
+cerchietti vuoti indicano punti che \emph{non} appartengono al grafico: sugli interi la
+funzione vale $0$, non $1$.}
+\label{fig:quattro-grafici}
+\end{figure}
+
+\begin{python}[Disegnare un grafico per punti con \texttt{matplotlib}]
+# Il calcolatore disegna i grafici proprio "per punti": sceglie
+# molti valori di x, calcola f(x) e unisce i punti con segmenti.
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.linspace(0, 5, 200)          # 200 valori di x tra 0 e 5
+y = np.sqrt(x)                      # f(x) = radice di x, su tutti
+
+fig, ax = plt.subplots(figsize=(4, 3))
+ax.plot(x, y, color="#1F4E79", lw=1.5, label=r"$y=\sqrt{x}$")
+ax.plot([0, 1, 4], [0, 1, 2], "o", color="#B4662F")  # punti facili
+ax.set_xlabel("x"); ax.set_ylabel("y"); ax.legend()
+ax.grid(alpha=0.3)
+fig.tight_layout()
+fig.savefig("figure/radice.png", dpi=220)
+\end{python}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.55\textwidth]{radice}
+\caption{Il grafico di $y=\sqrt{x}$ prodotto dal programma precedente
+(\texttt{python/fig\_radice.py}). I tre punti evidenziati sono quelli calcolabili «a
+mente»: $(0,0)$, $(1,1)$, $(4,2)$.}
+\label{fig:radice-python}
+\end{figure}
+
+\begin{attenzione}[Dove il calcolatore sbaglia]
+Se si prova a disegnare con lo stesso metodo la funzione $y=1/x$ su un intervallo che
+contiene $0$, il programma unirà con un segmento l'ultimo punto a sinistra di $0$ (con
+$y$ molto negativo) e il primo a destra (con $y$ molto positivo), tracciando una linea
+verticale che \emph{non fa parte del grafico}. Allo stesso modo, la funzione
+\eqref{eq:f4} disegnata «per punti» appare come la retta $y=1$: con $200$ punti
+equispaziati è facile non cadere mai esattamente su un intero. Il grafico al calcolatore
+è uno strumento prezioso, ma va sempre interpretato alla luce della definizione.
+\end{attenzione}

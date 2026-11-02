@@ -1,0 +1,74 @@
+%% ----------------------------------------------------------------------------
+%%  §1.12  Punti fondamentali del capitolo
+%% ----------------------------------------------------------------------------
+\section{Punti fondamentali del capitolo}
+\label{sec:sintesi-cap01}
+
+Il capitolo ha fissato le regole del gioco: gli undici assiomi dei numeri reali, tra i
+quali l'assioma di completezza è l'unico che distingue $\R$ da $\Q$. Su questa base
+abbiamo costruito il linguaggio che useremo in tutto il libro (insiemi, funzioni,
+induzione) e il catalogo delle funzioni elementari.
+
+\begin{puntichiave}
+\item \textbf{Gli assiomi.} $\R$ soddisfa le proprietà di campo (A1)--(A6), le proprietà
+dell'ordinamento (O1)--(O4) e l'assioma di completezza (\cref{ass:completezza}): se $A$ e
+$B$ sono non vuoti e $a\le b$ per ogni $a\in A$ e $b\in B$, esiste $c\in\R$ con
+$a\le c\le b$ per ogni $a\in A$ e $b\in B$. Ogni altra proprietà si dimostra.
+\item \textbf{Le regole dell'algebra sono teoremi.} La legge di annullamento del prodotto
+(\cref{prop:annullamento}), la regola dei segni (\cref{prop:segni}) e il cambio di verso
+di una disuguaglianza moltiplicata per $c\le0$ (\cref{prop:ordine-prodotto}) discendono
+dagli assiomi; la divisione per zero è impossibile perché porterebbe a $0=1$.
+\item \textbf{Il linguaggio degli insiemi.} Due insiemi si dimostrano uguali per doppia
+inclusione; le classi di una relazione di equivalenza formano una partizione
+(\cref{prop:classi}); la relazione $\le$ è un ordine totale su $\R$.
+\item \textbf{$\Q$ non è completo.} Nessun razionale ha quadrato $2$
+(\cref{teo:radice2}), e gli insiemi \eqref{eq:AB-radice2} non sono separati da alcun
+razionale (\cref{teo:Q-non-completo}): $\Q$ soddisfa (A1)--(A6) e (O1)--(O4), ma non la
+completezza, che in $\R$ garantisce l'esistenza di $\sqrt2$.
+\item \textbf{Funzioni.} Una funzione associa a ogni elemento del dominio \emph{uno e un
+solo} valore; è invertibile se e solo se è biunivoca, e allora
+$f^{-1}\circ f=\mathrm{id}_{A}$ e $f\circ f^{-1}=\mathrm{id}_{B}$.
+\item \textbf{Criterio di invertibilità.} Una funzione $f\colon A\to B$ suriettiva e
+strettamente monotòna è invertibile, e $f^{-1}$ è strettamente monotòna dello stesso tipo
+(\cref{teo:monotona-invertibile}); senza ipotesi di continuità il viceversa è falso.
+\item \textbf{Valore assoluto.} Per $r\ge0$ si ha $\abs{x}\le r\sse-r\le x\le r$
+(\cref{prop:modulo-r}); valgono la disuguaglianza triangolare
+$\abs{x_{1}+x_{2}}\le\abs{x_{1}}+\abs{x_{2}}$ (\cref{teo:triangolare}) e la
+$\bigl|\abs{x_{1}}-\abs{x_{2}}\bigr|\le\abs{x_{1}-x_{2}}$ (\cref{cor:triangolare-inversa}).
+\item \textbf{Potenze, esponenziali, logaritmi.} La potenza $x^{n}$ è strettamente
+crescente per $x\ge0$ (\cref{prop:potenza-crescente}); per $a>0$, $a\neq1$,
+l'esponenziale $a^{x}$ è strettamente monotòna e il logaritmo ne è l'inversa,
+$y=\log_{a}x\sse a^{y}=x$ per $x>0$; il logaritmo trasforma prodotti in somme
+(\cref{prop:log-proprieta}), ed è questo il principio del regolo calcolatore.
+\item \textbf{Trigonometria.} Gli angoli si misurano in radianti; $\sen x$ e $\cos x$
+hanno periodo $2\pi$, $\tg x$ ha periodo $\pi$; $\sen^{2}x+\cos^{2}x=1$ e, per
+$0<x<\pi/2$, $0<\sen x<x<\tg x$ \eqref{eq:sen-x-tg}, l'unico fatto geometrico che
+useremo per derivare le funzioni trigonometriche.
+\item \textbf{Il principio di induzione.} Se $\mathcal{P}(1)$ è vera e
+$\mathcal{P}(n)\implica\mathcal{P}(n+1)$ per ogni $n\in\N$, allora $\mathcal{P}(n)$ è vera
+per ogni $n\in\N$ (\cref{teo:induzione}); con esso si provano le formule delle somme
+(\cref{prop:gauss}, \cref{prop:geometrica}, \cref{prop:quadrati},
+\cref{prop:telescopica}).
+\item \textbf{Disuguaglianza di Bernoulli.} Per $x\ge-1$ e $n\in\N$ si ha
+$(1+x)^{n}\ge1+nx$ (\cref{teo:bernoulli}); l'ipotesi $x\ge-1$ è essenziale: per $n=3$ e
+$x=-4$ la disuguaglianza è falsa.
+\item \textbf{Errori tipici.} $f^{-1}$ non è il reciproco $1/f$; la controimmagine
+$f^{-1}(Y)$ ha senso anche se $f$ non è invertibile; la relazione $y^{2}=x$ non definisce
+una funzione di $x$; un'affermazione verificata in mille casi non è dimostrata.
+\item \textbf{Il calcolatore e i numeri reali.} I numeri in virgola mobile sono un insieme
+finito che non soddisfa gli assiomi (\texttt{0.1 + 0.2 == 0.3} è falso): si confrontano
+con una tolleranza (\texttt{math.isclose}), e i grafici «per punti» vanno interpretati
+alla luce della definizione.
+\item \textbf{Per l'ingegnere.} Il radiante è l'unità naturale delle velocità angolari
+($v=\omega r$); la bisezione approssima $\sqrt2$ con un errore controllato a priori, che
+si dimezza a ogni passo, ed è il metodo che ritroveremo per gli zeri delle funzioni
+continue.
+\end{puntichiave}
+
+\paragraph{Il filo del discorso.} Il capitolo lascia aperte tre questioni, tutte legate
+alla completezza: l'esistenza della radice $n$-esima di ogni numero positivo, finora
+soltanto annunciata; la proprietà di Archimede, aggirata nella dimostrazione del
+\cref{teo:Q-non-completo}; il significato di $a^{x}$ per $x$ irrazionale. Il prossimo
+capitolo trasforma l'assioma di completezza in uno strumento di lavoro, l'estremo
+superiore, primo anello della catena dei teoremi di esistenza
+(\cref{fig:schema-teoremi}), e con esso risolve tutte e tre le questioni.
