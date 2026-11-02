@@ -1,0 +1,208 @@
+%% ============================================================================
+%%  teoremi.sty — ambienti per teoremi, definizioni, schema Ipotesi/Tesi,
+%%  piano d'attacco delle dimostrazioni, note storiche, esercizi, Python.
+%%
+%%  Copyright (c) 2026 Biagio Raucci.  Rilasciato con licenza CC BY-SA 4.0.
+%% ============================================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{stile/teoremi}[2026/11/01 v0.1 ambienti del libro di Analisi Matematica]
+
+\RequirePackage{amsthm}
+\RequirePackage{thmtools}
+\RequirePackage[most]{tcolorbox}
+\tcbuselibrary{breakable,skins,listings,theorems}
+
+%% ---------------------------------------------------------------- stili amsthm
+% Numerazione unica per tutti gli enunciati, per capitolo: 1.1, 1.2, ...
+\declaretheoremstyle[
+  headfont=\sffamily\bfseries\color{blu},
+  notefont=\sffamily\mdseries\color{blu}, notebraces={(}{)},
+  bodyfont=\normalfont\itshape,
+  headpunct={.}, postheadspace=0.6em,
+  spaceabove=2pt, spacebelow=2pt]{stileTeorema}
+\declaretheoremstyle[
+  headfont=\sffamily\bfseries\color{rame},
+  notefont=\sffamily\mdseries\color{rame}, notebraces={(}{)},
+  bodyfont=\normalfont,
+  headpunct={.}, postheadspace=0.6em,
+  spaceabove=2pt, spacebelow=2pt]{stileDefinizione}
+\declaretheoremstyle[
+  headfont=\sffamily\bfseries\color{grigio},
+  notefont=\sffamily\mdseries\color{grigio}, notebraces={(}{)},
+  bodyfont=\normalfont,
+  headpunct={.}, postheadspace=0.6em,
+  spaceabove=2pt, spacebelow=2pt]{stileNota}
+
+\declaretheorem[style=stileTeorema, name=Teorema, numberwithin=chapter]{teorema}
+\declaretheorem[style=stileTeorema, name=Proposizione, sharenumber=teorema]{proposizione}
+\declaretheorem[style=stileTeorema, name=Lemma, sharenumber=teorema]{lemma}
+\declaretheorem[style=stileTeorema, name=Corollario, sharenumber=teorema]{corollario}
+\declaretheorem[style=stileTeorema, name=Assioma, sharenumber=teorema]{assioma}
+\declaretheorem[style=stileDefinizione, name=Definizione, sharenumber=teorema]{definizione}
+\declaretheorem[style=stileNota, name=Esempio, sharenumber=teorema]{esempio}
+\declaretheorem[style=stileNota, name=Osservazione, sharenumber=teorema]{osservazione}
+\declaretheorem[style=stileNota, name=Esercizio, sharenumber=teorema]{esercizio}
+\declaretheorem[style=stileNota, name=Notazione, sharenumber=teorema]{notazione}
+
+%% ---------------------------------------------------------------- cornici tcolorbox
+\tcbset{
+  scatola/.style={
+    enhanced, breakable, boxrule=0pt, arc=1.5pt, outer arc=1.5pt,
+    left=8pt, right=8pt, top=6pt, bottom=6pt,
+    before skip=10pt plus 2pt, after skip=10pt plus 2pt,
+    fontupper=\normalsize},
+  scatolaTeorema/.style={scatola, colback=bluchiaro, borderline west={2.5pt}{0pt}{blu}},
+  scatolaDefinizione/.style={scatola, colback=ramechiaro, borderline west={2.5pt}{0pt}{rame}},
+  scatolaNota/.style={scatola, colback=grigiochiaro, borderline west={2.5pt}{0pt}{grigio}},
+}
+\tcolorboxenvironment{teorema}{scatolaTeorema}
+\tcolorboxenvironment{proposizione}{scatolaTeorema}
+\tcolorboxenvironment{lemma}{scatolaTeorema}
+\tcolorboxenvironment{corollario}{scatolaTeorema}
+\tcolorboxenvironment{assioma}{scatolaTeorema}
+\tcolorboxenvironment{definizione}{scatolaDefinizione}
+\tcolorboxenvironment{esempio}{scatolaNota}
+\tcolorboxenvironment{osservazione}{scatolaNota}
+\tcolorboxenvironment{esercizio}{scatolaNota}
+\tcolorboxenvironment{notazione}{scatolaNota}
+
+%% ---------------------------------------------------------------- cleveref
+\crefname{teorema}{teorema}{teoremi}
+\Crefname{teorema}{Teorema}{Teoremi}
+\crefname{proposizione}{proposizione}{proposizioni}
+\Crefname{proposizione}{Proposizione}{Proposizioni}
+\crefname{lemma}{lemma}{lemmi}
+\Crefname{lemma}{Lemma}{Lemmi}
+\crefname{corollario}{corollario}{corollari}
+\Crefname{corollario}{Corollario}{Corollari}
+\crefname{assioma}{assioma}{assiomi}
+\Crefname{assioma}{Assioma}{Assiomi}
+\crefname{definizione}{definizione}{definizioni}
+\Crefname{definizione}{Definizione}{Definizioni}
+\crefname{esempio}{esempio}{esempi}
+\Crefname{esempio}{Esempio}{Esempi}
+\crefname{osservazione}{osservazione}{osservazioni}
+\Crefname{osservazione}{Osservazione}{Osservazioni}
+\crefname{esercizio}{esercizio}{esercizi}
+\Crefname{esercizio}{Esercizio}{Esercizi}
+\crefname{notazione}{notazione}{notazioni}
+\Crefname{notazione}{Notazione}{Notazioni}
+\crefname{equation}{la}{le}
+\Crefname{equation}{La}{Le}
+\crefname{figure}{figura}{figure}
+\Crefname{figure}{Figura}{Figure}
+\crefname{table}{tabella}{tabelle}
+\Crefname{table}{Tabella}{Tabelle}
+\crefname{chapter}{capitolo}{capitoli}
+\Crefname{chapter}{Capitolo}{Capitoli}
+\crefname{section}{paragrafo}{paragrafi}
+\Crefname{section}{Paragrafo}{Paragrafi}
+
+%% ---------------------------------------------------------------- schema Ipotesi / Tesi
+%  Uso:
+%     \begin{schema}
+%       \Ipotesi{ $a \le b$ e $c \ge 0$ }
+%       \Tesi{ $ac \le bc$ }
+%     \end{schema}
+%  Ogni voce può contenere un ambiente itemize per elencare più ipotesi.
+\newlength{\schemaetichetta}
+\setlength{\schemaetichetta}{1.55cm}
+\newenvironment{schema}{%
+  \begin{tcolorbox}[enhanced, breakable, boxrule=0.4pt, colframe=blu!60, colback=white,
+      arc=1pt, left=6pt, right=6pt, top=4pt, bottom=4pt,
+      before skip=6pt, after skip=10pt,
+      title={\sffamily\footnotesize\bfseries Schema dell'enunciato}, colbacktitle=blu!8,
+      coltitle=blu, titlerule=0pt, toptitle=2pt, bottomtitle=2pt]
+  \setlength{\parindent}{0pt}\setlength{\parskip}{0pt}}%
+  {\end{tcolorbox}}
+% una riga dello schema: etichetta a sinistra, contenuto (anche su più righe,
+% anche con liste) a destra, allineati sulla prima riga di base
+\newcommand{\schemariga}[2]{\par\noindent
+  \makebox[\schemaetichetta][l]{\sffamily\bfseries\color{blu}\footnotesize #1}%
+  \parbox[t]{\dimexpr\linewidth-\schemaetichetta\relax}{\strut #2\strut}\par\vspace{3pt}}
+\newcommand{\Ipotesi}[1]{\schemariga{Ipotesi}{#1}}
+\newcommand{\Tesi}[1]{\schemariga{Tesi}{#1}}
+
+%% ---------------------------------------------------------------- piano d'attacco
+%  La sezione in cui spieghiamo "come" affronteremo la dimostrazione.
+\newtcolorbox{strategia}[1][Piano d'attacco]{
+  enhanced, breakable, colback=verdechiaro, colframe=verde, boxrule=0pt,
+  borderline west={2.5pt}{0pt}{verde}, arc=1.5pt,
+  left=8pt, right=8pt, top=6pt, bottom=6pt,
+  before skip=8pt, after skip=8pt,
+  fonttitle=\sffamily\bfseries, coltitle=verde, colbacktitle=verdechiaro,
+  title={\florilegiumornament[size=1.1em,ink=2F6B4F]{leaf}\; #1},
+  attach title to upper={\par\vspace{2pt}}, fontupper=\small}
+
+%% ---------------------------------------------------------------- dimostrazione
+\renewenvironment{proof}[1][Dimostrazione]{\par
+  \pushQED{\qed}\normalfont
+  \begin{tcolorbox}[enhanced, breakable, boxrule=0pt, colback=white,
+      borderline west={1pt}{0pt}{blu!50}, arc=0pt,
+      left=8pt, right=0pt, top=2pt, bottom=2pt, before skip=6pt, after skip=10pt]
+  \noindent{\sffamily\bfseries\color{blu}#1.}\hspace{0.6em}\ignorespaces}
+  {\popQED\end{tcolorbox}}
+\renewcommand{\qedsymbol}{\textcolor{blu}{$\blacksquare$}}
+\newenvironment{dimostrazione}[1][Dimostrazione]{\begin{proof}[#1]}{\end{proof}}
+
+%% ---------------------------------------------------------------- note storiche, attenzione, idea
+\newtcolorbox{notastorica}[1][Nota storica]{
+  enhanced, breakable, colback=ramechiaro, boxrule=0pt, arc=1.5pt,
+  borderline west={2.5pt}{0pt}{rame},
+  left=8pt, right=8pt, top=6pt, bottom=6pt, before skip=10pt, after skip=10pt,
+  fonttitle=\sffamily\bfseries, coltitle=rame, colbacktitle=ramechiaro,
+  title={\florilegiumornament[size=1.1em,ink=B4662F]{flower}\; #1},
+  attach title to upper={\par\vspace{2pt}}, fontupper=\small}
+\newtcolorbox{attenzione}[1][Attenzione]{
+  enhanced, breakable, colback=rossochiaro, boxrule=0pt, arc=1.5pt,
+  borderline west={2.5pt}{0pt}{rosso},
+  left=8pt, right=8pt, top=6pt, bottom=6pt, before skip=8pt, after skip=8pt,
+  fonttitle=\sffamily\bfseries, coltitle=rosso, colbacktitle=rossochiaro,
+  title={#1}, attach title to upper={\par\vspace{2pt}}, fontupper=\small}
+\newtcolorbox{idea}[1][Idea]{
+  enhanced, breakable, colback=white, colframe=grigio!50, boxrule=0.4pt, arc=1.5pt,
+  left=8pt, right=8pt, top=4pt, bottom=4pt, before skip=8pt, after skip=8pt,
+  fonttitle=\sffamily\bfseries, coltitle=grigio, colbacktitle=white,
+  title={#1}, attach title to upper={\par\vspace{2pt}}, fontupper=\small}
+
+%% ---------------------------------------------------------------- punti fondamentali
+%  \begin{puntichiave} \item \textbf{...} ... \end{puntichiave}
+%  Riquadro con l'elenco dei concetti salienti, alla fine di ogni capitolo.
+\newtcolorbox{puntichiave}{
+  enhanced, breakable, colback=bluchiaro, boxrule=0pt, arc=1.5pt,
+  borderline west={2.5pt}{0pt}{blu},
+  left=8pt, right=8pt, top=6pt, bottom=6pt, before skip=10pt, after skip=10pt,
+  before upper={\begin{itemize}[leftmargin=1.3em, itemsep=4pt, topsep=2pt,
+    label={\textcolor{blu}{\small$\blacktriangleright$}}]},
+  after upper={\end{itemize}}}
+
+%% ---------------------------------------------------------------- soluzioni degli esercizi
+\newenvironment{soluzione}{\par\smallskip\noindent{\sffamily\bfseries\color{grigio}Soluzione.}\hspace{0.5em}\small\ignorespaces}{\par\smallskip}
+
+%% ---------------------------------------------------------------- codice Python
+%  \begin{python}[titolo] ... \end{python}
+\newtcblisting{python}[1][]{
+  enhanced, breakable, listing only, colback=violachiaro, colframe=viola!60,
+  boxrule=0.4pt, arc=1.5pt, left=4pt, right=4pt, top=3pt, bottom=3pt,
+  before skip=8pt, after skip=8pt,
+  fonttitle=\sffamily\bfseries\footnotesize, coltitle=viola, colbacktitle=violachiaro,
+  title={\texttt{Python}\ifstrempty{#1}{}{ --- #1}},
+  listing options={style=python}}
+%  Output di una sessione Python (testo semplice). Il riquadro non si spezza mai
+%  tra due pagine (tutti gli output del libro sono brevi).
+\newtcblisting{risultato}{
+  enhanced, unbreakable, listing only, colback=grigiochiaro, colframe=grigio!40,
+  boxrule=0.4pt, arc=1.5pt, left=4pt, right=4pt, top=3pt, bottom=3pt,
+  before skip=4pt, after skip=8pt,
+  title={\sffamily\bfseries\footnotesize Output}, coltitle=grigio, colbacktitle=grigiochiaro,
+  listing options={basicstyle=\ttfamily\footnotesize, numbers=none, breaklines=true}}
+
+%% ---------------------------------------------------------------- apertura di capitolo
+%  \aperturacapitolo{Titolo}{label}{testo introduttivo}
+%  Stampa il capitolo e decora la pagina con il giardino di florilegium.
+\newcommand{\aperturacapitolo}[2]{%
+  \chapter{#1}\label{#2}%
+  \AddToShipoutPictureBG*{\AtPageLowerLeft{\margingardengrown}}%
+  \thispagestyle{empty}}
+
+\endinput

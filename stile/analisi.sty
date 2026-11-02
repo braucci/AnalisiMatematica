@@ -1,0 +1,200 @@
+%% ============================================================================
+%%  analisi.sty — impostazioni generali del libro "Analisi Matematica"
+%%  (layout, font, colori, pacchetti).  Da compilare con LuaLaTeX.
+%%
+%%  Copyright (c) 2026 Biagio Raucci.  Rilasciato con licenza CC BY-SA 4.0.
+%% ============================================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{stile/analisi}[2026/11/01 v0.1 stile del libro di Analisi Matematica]
+
+\ifdefined\directlua\else
+  \PackageError{analisi}{Questo libro richiede LuaLaTeX}{Compila con: latexmk -lualatex main}
+\fi
+
+%% ---------------------------------------------------------------- lingua
+\RequirePackage[italian]{babel}
+\RequirePackage[autostyle,italian=guillemets]{csquotes}
+
+%% ---------------------------------------------------------------- font
+\RequirePackage{fontspec}
+\RequirePackage{amsmath,amssymb}
+% mathtools va caricato prima di unicode-math: altrimenti \underbrace e
+% \overbrace escono con i glifi sbagliati.
+\RequirePackage{mathtools}
+\RequirePackage{unicode-math}
+% Testo: TeX Gyre Pagella (Palatino) se disponibile, altrimenti Latin Modern.
+\IfFontExistsTF{texgyrepagella-math.otf}{%
+  \setmainfont{TeX Gyre Pagella}[Ligatures=TeX, Numbers=OldStyle]
+  \setmathfont{TeX Gyre Pagella Math}
+}{%
+  \setmainfont{Latin Modern Roman}[Ligatures=TeX]
+  \setmathfont{Latin Modern Math}
+}
+\setsansfont{TeX Gyre Heros}[Scale=MatchLowercase]
+\IfFontExistsTF{DejaVuSansMono.ttf}{%
+  \setmonofont{DejaVu Sans Mono}[Scale=0.84]}{%
+  \setmonofont{Latin Modern Mono}[Scale=MatchLowercase]}
+\RequirePackage{microtype}
+
+%% ---------------------------------------------------------------- layout
+% Pagina con margine esterno ampio (stile "kaobook" / Tufte): il testo occupa
+% una colonna di 118 mm, il margine esterno ospita note, figure e, nelle
+% pagine di apertura dei capitoli, il giardino di florilegium.
+\RequirePackage[a4paper,twoside,
+  inner=22mm, outer=70mm, top=28mm, bottom=30mm,
+  textwidth=118mm, marginparsep=7mm, marginparwidth=52mm,
+  headheight=14pt, headsep=8mm, footskip=12mm]{geometry}
+% I riquadri (enunciati, codice, output) non si spezzano sempre in modo
+% elegante: con \raggedbottom lo spazio residuo resta in fondo alla pagina,
+% invece di allargare in modo innaturale lo spazio tra un riquadro e l'altro.
+\raggedbottom
+\RequirePackage{emptypage}
+\RequirePackage{ragged2e}
+\RequirePackage{setspace}
+\setlength{\parskip}{0pt plus 1pt}
+\setlength{\parindent}{1.2em}
+\emergencystretch=1.5em
+
+%% ---------------------------------------------------------------- colori
+\RequirePackage[table]{xcolor}
+\definecolor{blu}{HTML}{1F4E79}      % colore principale (titoli, teoremi)
+\definecolor{bluchiaro}{HTML}{E8EFF7} % sfondo dei teoremi
+\definecolor{rame}{HTML}{B4662F}     % accento (definizioni, note storiche)
+\definecolor{ramechiaro}{HTML}{FBF1E8}
+\definecolor{verde}{HTML}{2F6B4F}    % strategie / piano d'attacco
+\definecolor{verdechiaro}{HTML}{EBF4EE}
+\definecolor{grigio}{HTML}{5A5A5A}
+\definecolor{grigiochiaro}{HTML}{F3F3F3}
+\definecolor{rosso}{HTML}{8E1B3A}    % avvertenze, errori comuni
+\definecolor{rossochiaro}{HTML}{FBECEF}
+\definecolor{viola}{HTML}{4B3B8F}    % python
+\definecolor{violachiaro}{HTML}{F0EEF8}
+
+%% ---------------------------------------------------------------- grafica
+\RequirePackage{graphicx}
+\graphicspath{{figure/}}
+\RequirePackage{tikz}
+\usetikzlibrary{arrows.meta,calc,decorations.pathreplacing,decorations.markings,
+  patterns,positioning,shapes.geometric,backgrounds,intersections,fit}
+\RequirePackage{pgfplots}
+\pgfplotsset{compat=1.18,
+  every axis/.append style={
+    axis lines=middle, axis line style={-Latex, thin, grigio},
+    tick label style={font=\scriptsize}, label style={font=\footnotesize},
+    xlabel style={at={(ticklabel* cs:1)}, anchor=west},
+    ylabel style={at={(ticklabel* cs:1)}, anchor=south},
+    samples=200, line width=0.9pt, grid=none},
+  curva/.style={blu, line width=1pt},
+  curva2/.style={rame, line width=1pt},
+  curva3/.style={verde, line width=1pt},
+  tratteggio/.style={grigio, dashed, thin}}
+\tikzset{curva/.style={blu, line width=1pt}, curva2/.style={rame, line width=1pt},
+  curva3/.style={verde, line width=1pt}, tratteggio/.style={grigio, dashed, thin}}
+\RequirePackage{float}
+\RequirePackage{caption,subcaption}
+\captionsetup{font={small}, labelfont={bf,color=blu}, labelsep=period, justification=justified}
+\RequirePackage{sidenotes}     % \sidenote, \marginnote, marginfigure
+\captionsetup[marginfigure]{font=footnotesize}
+\RequirePackage{wrapfig}
+
+%% ---------------------------------------------------------------- tabelle e liste
+\RequirePackage{booktabs,array,tabularx,colortbl,multicol}
+\RequirePackage{enumitem}
+\RequirePackage{needspace}   % per non lasciare titoli isolati a fondo pagina
+% spazio per i numeri di pagina a tre cifre nell'indice
+\renewcommand{\@pnumwidth}{2.2em}
+\renewcommand{\@tocrmarg}{3em}
+\setlist{nosep, leftmargin=*, itemsep=2pt}
+\setlist[enumerate,1]{label=(\roman*)}
+\setlist[itemize,1]{label=\textcolor{blu}{\textbullet}}
+
+%% ---------------------------------------------------------------- matematica
+\RequirePackage{cancel}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\sen}{\operatorname{sen}}   % notazione italiana
+\newcommand{\tg}{\operatorname{tg}}
+\newcommand{\arcsen}{\operatorname{arcsen}}
+\newcommand{\abs}[1]{\lvert #1\rvert}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\parti}[1]{\mathcal{P}(#1)}
+\newcommand{\tc}{\;:\;}                   % "tale che" negli insiemi
+\newcommand{\implica}{\Rightarrow}
+\newcommand{\sse}{\Leftrightarrow}
+\newcommand{\perogni}{\forall\,}
+\newcommand{\esiste}{\exists\,}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\im}{im}
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+
+%% ---------------------------------------------------------------- codice
+\RequirePackage{listings}
+\lstdefinestyle{python}{
+  language=Python,
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\color{viola}\bfseries,
+  commentstyle=\color{grigio}\itshape,
+  stringstyle=\color{verde},
+  numberstyle=\tiny\color{grigio},
+  numbers=left, numbersep=6pt,
+  showstringspaces=false, breaklines=true,
+  tabsize=4, columns=fullflexible, keepspaces=true,
+  literate={à}{{\`a}}1 {è}{{\`e}}1 {é}{{\'e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+           {√}{{$\surd$}}1 {≤}{{$\le$}}1 {≥}{{$\ge$}}1 {π}{{$\pi$}}1 {²}{{$^2$}}1}
+\lstset{style=python}
+
+%% ---------------------------------------------------------------- titoli
+\RequirePackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\sffamily}
+  {\color{grigio}\Large Capitolo \thechapter}
+  {4pt}
+  {\color{blu}\Huge\bfseries\raggedright}
+  [\vspace{2pt}{\color{rame}\titlerule[1pt]}]
+\titlespacing*{\chapter}{0pt}{20pt}{30pt}
+\titleformat{\section}
+  {\normalfont\sffamily\Large\bfseries\color{blu}}{\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\sffamily\large\bfseries\color{blu}}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalfont\sffamily\normalsize\bfseries\color{blu}}{\thesubsubsection}{1em}{}
+\titlespacing*{\section}{0pt}{3.2ex plus 1ex minus .2ex}{1.6ex plus .2ex}
+
+%% ---------------------------------------------------------------- testatine
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+% La testatina occupa la colonna di testo e il margine esterno: il numero di
+% pagina sta sul bordo esterno; nelle pagine dispari il titolo del paragrafo è
+% a sinistra e il nome dell'autore, con il numero di pagina, in alto a destra.
+\fancyheadoffset[LE,RO]{\dimexpr\marginparsep+\marginparwidth\relax}
+\fancyhead[LE]{\small\sffamily\color{grigio}\thepage\quad\nouppercase{\leftmark}}
+\fancyhead[LO]{\small\sffamily\color{grigio}\nouppercase{\rightmark}}
+\fancyhead[RO]{\small\sffamily\color{grigio}\textit{B.~Raucci}\quad\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\chaptermark}[1]{\markboth{Capitolo \thechapter.\ #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
+\fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}}
+
+%% ---------------------------------------------------------------- epigrafi e capilettera
+\RequirePackage{epigraph}
+\setlength{\epigraphwidth}{0.8\textwidth}
+\setlength{\epigraphrule}{0pt}
+\renewcommand{\textflush}{flushright}
+\renewcommand{\epigraphsize}{\small\itshape}
+\RequirePackage{lettrine}
+
+%% ---------------------------------------------------------------- indice analitico
+\RequirePackage{imakeidx}
+\makeindex[title=Indice analitico, columns=2, intoc]
+
+%% ---------------------------------------------------------------- hyperref (per ultimo)
+\RequirePackage[hidelinks, colorlinks=true, linkcolor=blu, citecolor=rame, urlcolor=rame,
+  pdftitle={Analisi Matematica}, pdfauthor={Biagio Raucci}]{hyperref}
+\RequirePackage{bookmark}
+\RequirePackage[italian,nameinlink,capitalise,noabbrev]{cleveref}
+\endinput
