@@ -1,0 +1,201 @@
+%% ----------------------------------------------------------------------------
+%%  §7.8  Esercizi di riepilogo
+%% ----------------------------------------------------------------------------
+\section{Esercizi di riepilogo}
+\label{sec:esercizi-cap7}
+
+Come nei capitoli precedenti, ogni soluzione è accompagnata da una nota sulla
+\emph{scelta logica} che la guida.
+
+\needspace{8\baselineskip}
+\subsection*{Domini e limiti}
+
+\begin{esercizio}
+Determinare il dominio della funzione $f(x,y)=\log(1-x^{2}-y^{2})+\sqrt{y-x^{2}}$.
+\begin{soluzione}
+Il logaritmo richiede $1-x^{2}-y^{2}>0$, cioè $x^{2}+y^{2}<1$: l'interno del cerchio di
+centro l'origine e raggio $1$, circonferenza esclusa. La radice richiede $y\ge x^{2}$: la
+regione che sta sopra la parabola $y=x^{2}$, parabola compresa. Il dominio è
+l'intersezione delle due regioni: la parte del cerchio aperto che sta sopra la parabola
+(o su di essa). Le due curve si incontrano dove $y=x^{2}$ e $x^{2}+y^{2}=1$, cioè
+$y^{2}+y-1=0$, $y=\frac{\sqrt5-1}2$: nei due punti
+$\bigl(\pm\sqrt{(\sqrt5-1)/2},\,(\sqrt5-1)/2\bigr)$, che stanno sulla circonferenza e sono
+quindi esclusi dal dominio.
+\emph{Scelta logica:} quando la funzione è somma di più termini, il dominio è
+l'intersezione dei
+domini dei singoli termini; ogni condizione si traduce in una regione delimitata da una
+curva, e conviene disegnarle tutte prima di intersecarle.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}\label{es:limite-xy2}
+Stabilire se esiste $\displaystyle\lim_{(x,y)\to(0,0)}\frac{xy^{2}}{x^{2}+y^{4}}$.
+\begin{soluzione}
+Lungo gli assi $y=0$ e $x=0$ la funzione è nulla; lungo la retta $y=mx$, con $m\neq0$,
+$\frac{m^{2}x^{3}}{x^{2}+m^{4}x^{4}}=\frac{m^{2}x}{1+m^{4}x^{2}}\to0$. Lungo tutte le rette il limite
+è $0$; ma lungo la parabola $x=y^{2}$ la funzione vale $\frac{y^{4}}{2y^{4}}=\frac12$. Per la
+\cref{prop:restrizione-curva} il limite non esiste. \emph{Scelta logica:} il denominatore
+mette sullo stesso piano $x^{2}$ e $y^{4}$, cioè $x$ e $y^{2}$: la curva «giusta» per
+smascherare la funzione è quella lungo la quale i due termini sono dello stesso ordine,
+$x=y^{2}$. È lo stesso fenomeno della funzione $g$ dell'avvertenza «Le rette non bastano».
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Calcolare $\displaystyle\lim_{(x,y)\to(0,0)}\frac{\sen(xy)}{x}$, nel dominio $x\neq0$, e
+$\displaystyle\lim_{(x,y)\to(0,0)}\frac{x^{3}+y^{3}}{x^{2}+y^{2}}$.
+\begin{soluzione}
+Per la disuguaglianza $\abs{\sen t}\le\abs t$ si ha
+$\Bigl|\frac{\sen(xy)}{x}\Bigr|\le\frac{\abs{xy}}{\abs x}=\abs y\le\sqrt{x^{2}+y^{2}}$, che tende a $0$:
+il primo limite vale $0$. Per il secondo, in coordinate polari,
+$\Bigl|\frac{\rho^{3}(\cos^{3}\vartheta+\sen^{3}\vartheta)}{\rho^{2}}\Bigr|\le2\rho$, e per la
+\cref{prop:coordinate-polari} il limite vale $0$. \emph{Scelta logica:} in entrambi i
+casi si cerca una maggiorazione che dipenda soltanto dalla distanza dall'origine; nel
+primo caso la scorciatoia $\frac{\sen(xy)}{xy}\to1$ richiederebbe di trattare a parte i
+punti con $y=0$, mentre la disuguaglianza li comprende tutti.
+\end{soluzione}
+\end{esercizio}
+
+\needspace{8\baselineskip}
+\subsection*{Derivate parziali, differenziabilità, piano tangente}
+
+\begin{esercizio}
+Verificare che la funzione $f(x,y)=\operatorname{arctg}\frac yx$, per $x>0$, soddisfa
+l'equazione $x\,f_{x}+y\,f_{y}=0$, e che $g(x,y)=\sqrt{x^{2}+y^{2}}$ soddisfa
+$x\,g_{x}+y\,g_{y}=g$ per $(x,y)\neq(0,0)$. Interpretare i risultati.
+\begin{soluzione}
+Con la regola della catena,
+$f_{x}=\frac1{1+y^{2}/x^{2}}\cdot\bigl(-\frac y{x^{2}}\bigr)=-\frac{y}{x^{2}+y^{2}}$ e
+$f_{y}=\frac{x}{x^{2}+y^{2}}$, da cui $xf_{x}+yf_{y}=\frac{-xy+xy}{x^{2}+y^{2}}=0$. Per $g$, dalla
+\eqref{eq:norma-derivate}, $xg_{x}+yg_{y}=\frac{x^{2}+y^{2}}g=g$. Per interpretare i
+risultati, si osservi che la combinazione $xf_{x}+yf_{y}$ è, a meno del fattore
+$\sqrt{x^{2}+y^{2}}$, la derivata direzionale nella direzione radiale
+(\cref{teo:derivata-direzionale}: entrambe le funzioni sono di classe $C^{1}$, e quindi
+differenziabili, fuori dall'origine). La funzione $f$ è l'angolo polare, costante lungo
+le semirette uscenti dall'origine, e la sua derivata radiale è nulla; $g$ è la distanza
+dall'origine, che lungo una semiretta cresce proporzionalmente. Sono casi particolari
+del teorema di Eulero sulle funzioni omogenee (\cref{teo:eulero-omogenee}): $f$ è
+omogenea di grado $0$ e $g$ di grado $1$, e il teorema afferma che ogni funzione $h$
+differenziabile e omogenea di grado $\alpha$ verifica $xh_{x}+yh_{y}=\alpha h$.
+\emph{Scelta logica:} le derivate si calcolano con la regola della catena, tenendo
+costante l'altra variabile; per interpretare la combinazione $xf_{x}+yf_{y}$ conviene
+riconoscervi una derivata direzionale, quella lungo il raggio.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Verificare il teorema di Schwarz per la funzione $f(x,y)=e^{xy}\sen y$.
+\begin{soluzione}
+Si ha $f_{x}=y\,e^{xy}\sen y$ e $f_{y}=x\,e^{xy}\sen y+e^{xy}\cos y$. Derivando la prima
+rispetto a $y$ con la regola del prodotto,
+$f_{xy}=e^{xy}\sen y+xy\,e^{xy}\sen y+y\,e^{xy}\cos y$; derivando la seconda rispetto a $x$,
+$f_{yx}=e^{xy}\sen y+xy\,e^{xy}\sen y+y\,e^{xy}\cos y$. Le due espressioni coincidono, come
+previsto dal teorema, perché $f$ è di classe $C^{\infty}$ su $\R^{2}$.
+\emph{Scelta logica:} il calcolo delle due derivate miste per strade diverse è un
+ottimo controllo
+degli errori di calcolo, proprio perché il risultato è noto in anticipo.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}\label{es:non-differenziabile}
+Mostrare che la funzione $f(x,y)=\sqrt{\abs{xy}}$ è continua su $\R^{2}$ e ha le derivate
+parziali nell'origine, ma non è differenziabile nell'origine.
+\begin{soluzione}
+La continuità segue dal \cref{teo:continue-piano}, perché $f$ è composizione delle
+funzioni continue $xy$, $\abs t$, $\sqrt t$. La funzione è nulla sugli assi, quindi
+$f_{x}(0,0)=f_{y}(0,0)=0$. Se fosse differenziabile, il limite
+\eqref{eq:differenziabile} sarebbe $\lim\frac{\sqrt{\abs{hk}}}{\sqrt{h^{2}+k^{2}}}=0$; ma lungo la
+bisettrice $k=h$ il rapporto vale $\frac{\abs h}{\sqrt2\,\abs h}=\frac1{\sqrt2}$, e il limite, se
+esistesse, dovrebbe valere $\frac1{\sqrt2}$ (\cref{prop:restrizione-curva}). Dunque $f$ non
+è differenziabile in $(0,0)$. L'esempio mostra che la seconda implicazione della
+\eqref{eq:classi-differenziabilita} non si inverte. Poiché $f(tx,ty)=\abs t\,f(x,y)$, il
+grafico di $f$ è un cono con il vertice nell'origine, e, come $\abs x$ in una variabile,
+nel vertice non ammette piano tangente.
+\emph{Scelta logica:} per escludere la differenziabilità basta trovare una curva lungo
+la quale il rapporto della \eqref{eq:differenziabile} non tende a zero.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Scrivere l'equazione del piano tangente al paraboloide $z=x^{2}+y^{2}$ nel punto
+$(1,1,2)$, e verificare che il paraboloide sta tutto sopra di esso.
+\begin{soluzione}
+Si ha $f_{x}=2x$, $f_{y}=2y$, quindi $f_{x}(1,1)=f_{y}(1,1)=2$, e la
+\eqref{eq:piano-tangente} dà $z=2+2(x-1)+2(y-1)=2x+2y-2$. La differenza tra la funzione e
+il piano è $x^{2}+y^{2}-2x-2y+2=(x-1)^{2}+(y-1)^{2}\ge0$, nulla soltanto nel punto di
+tangenza. \emph{Scelta logica:} la funzione è un polinomio, quindi di classe $C^{1}$ e
+differenziabile ovunque (\cref{teo:differenziale}); la verifica finale è la versione in
+due variabili della convessità del \cref{sec:convessita}: il grafico sta sopra il piano
+tangente.
+\end{soluzione}
+\end{esercizio}
+
+\needspace{8\baselineskip}
+\subsection*{Estremi e ottimizzazione}
+
+\begin{esercizio}
+Determinare e classificare i punti critici di $f(x,y)=x^{3}+y^{3}-3xy$.
+\begin{soluzione}
+Il sistema $f_{x}=3x^{2}-3y=0$, $f_{y}=3y^{2}-3x=0$ dà $y=x^{2}$ e $x^{4}=x$, cioè $x=0$ oppure
+$x=1$: i punti critici sono $(0,0)$ e $(1,1)$. Si ha $f_{xx}=6x$, $f_{xy}=-3$, $f_{yy}=6y$,
+quindi $H=36xy-9$. In $(0,0)$, $H=-9<0$: sella. In $(1,1)$, $H=27>0$ ed $f_{xx}=6>0$:
+minimo relativo, con $f(1,1)=-1$; non è assoluto, perché $f(x,0)=x^{3}\to-\infty$ per
+$x\to-\infty$. I risultati coincidono con l'ultima parte dell'output del programma del
+\cref{sec:estremi-due}. \emph{Scelta logica:} nei sistemi polinomiali conviene ricavare
+una variabile dall'equazione più semplice e sostituirla nell'altra, riducendosi a
+un'equazione in una sola incognita.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}[Il serbatoio di superficie minima]\label{es:serbatoio}
+Un serbatoio aperto in alto, a forma di parallelepipedo, deve contenere il volume $V$.
+Determinare le dimensioni che rendono minima la superficie (e quindi il peso della
+lamiera).
+\begin{soluzione}
+Siano $x$, $y$ i lati di base e $z$ l'altezza, con $xyz=V$. La superficie del fondo e delle
+quattro pareti è $xy+2xz+2yz$; ricavando $z=\frac V{xy}$ si ottiene una funzione di due
+variabili nel quadrante $x>0$, $y>0$:
+\[
+  S(x,y)=xy+\frac{2V}y+\frac{2V}x .
+\]
+I punti critici risolvono $S_{x}=y-\frac{2V}{x^{2}}=0$ e $S_{y}=x-\frac{2V}{y^{2}}=0$; da
+$x^{2}y=2V=xy^{2}$ segue $x=y$, e quindi l'unico punto critico è $(x^{*},y^{*})$, con
+$x^{*}=y^{*}=\sqrt[3]{2V}$ e $z=\frac V{(x^{*})^{2}}=\frac12\sqrt[3]{2V}$: l'altezza è metà
+del lato di base. In tale punto $S_{xx}=\frac{4V}{x^{3}}=2$, $S_{yy}=2$,
+$S_{xy}=1$, quindi $H=3>0$ ed $S_{xx}>0$: è un minimo relativo. È anche il minimo
+assoluto. Infatti, posto $m=S(x^{*},y^{*})$, $a=\frac{2V}m$ e $b=\frac ma$, si ha
+$S(x,y)>m$ se $x\le a$ (perché $S>\frac{2V}x\ge\frac{2V}a=m$), e analogamente se $y\le a$;
+e anche se $x,y\ge a$ e uno dei due è $\ge b$ (perché $S>xy\ge ab=m$). Dunque $S>m$ sul
+bordo del quadrato $[a,b]\times[a,b]$ e fuori di esso; in particolare $(x^{*},y^{*})$ è
+interno al quadrato. Sul quadrato $S$ ha minimo assoluto per il teorema di Weierstrass
+(\cref{oss:weierstrass-piano}); questo minimo è $\le m$, quindi non si trova sul bordo, è
+interno, ed è dunque un punto critico (\cref{teo:fermat-due}): l'unico, $(x^{*},y^{*})$.
+Poiché fuori dal quadrato $S>m$, questo è il minimo assoluto in tutto il quadrante.
+\emph{Scelta logica:} il vincolo $xyz=V$ permette di eliminare una variabile e di
+ridurre il problema a una funzione di due variabili senza vincoli; il problema con il
+vincolo si potrebbe trattare direttamente con il metodo dei moltiplicatori di Lagrange,
+che si studia in Analisi Matematica 2.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}[La velocità sulla superficie di un cilindro]
+Il potenziale della corrente attorno a un cilindro di raggio $1$, investito da una
+corrente uniforme di velocità unitaria, è $\varphi(x,y)=x+\frac x{x^{2}+y^{2}}$. Calcolare le
+componenti della velocità $u=\varphi_{x}$, $v=\varphi_{y}$, verificare che sulla circonferenza
+$x^{2}+y^{2}=1$ la velocità è tangente alla circonferenza, e calcolarne il modulo nel
+punto $(0,1)$.
+\begin{soluzione}
+Si ha $u=1+\frac{y^{2}-x^{2}}{(x^{2}+y^{2})^{2}}$ e $v=-\frac{2xy}{(x^{2}+y^{2})^{2}}$. Sulla
+circonferenza unitaria $u=1+y^{2}-x^{2}$ e $v=-2xy$; la componente radiale della velocità
+è $ux+vy=x+xy^{2}-x^{3}-2xy^{2}=x(1-x^{2}-y^{2})=0$: la velocità è tangente, cioè la
+circonferenza $x^{2}+y^{2}=1$, contorno del cilindro, è una linea di corrente, che il
+fluido non attraversa. Nel punto $(0,1)$ si ha
+$u=2$, $v=0$: la velocità è il \emph{doppio} di quella della corrente indisturbata. Per il
+teorema di Bernoulli, lì la pressione è minima: è il «picco di depressione» che, su un
+profilo alare, genera gran parte della portanza. \emph{Scelta logica:} la tangenza si
+verifica annullando il prodotto scalare tra la velocità e il vettore $(x,y)$, che è
+normale alla circonferenza (è, a meno di un fattore, il gradiente di $x^{2}+y^{2}$, normale
+alle curve di livello). Che $\varphi$ sia armonica è stato verificato nel
+\cref{sec:schwarz}.
+\end{soluzione}
+\end{esercizio}

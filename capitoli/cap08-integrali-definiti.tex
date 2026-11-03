@@ -1,0 +1,70 @@
+%% ============================================================================
+%%  CAPITOLO 8 — Integrali definiti
+%%  Fonte principale per argomenti e dimostrazioni: Marcellini–Sbordone, cap. 8
+%%  (§61 il metodo di esaustione; §62 definizioni e notazioni; §63 proprietà
+%%  degli integrali definiti; §64 il teorema della media; appendice: §65
+%%  uniforme continuità, teorema di Cantor, funzioni lipschitziane; §66
+%%  integrabilità delle funzioni continue).
+%% ============================================================================
+\aperturacapitolo{Integrali definiti}{cap:integrali-definiti}
+
+\epigraph{Also zuerst: Was hat man unter $\int_{a}^{b}f(x)\,dx$ zu verstehen?\\[2pt]
+\upshape(Dunque, per prima cosa: che cosa si deve intendere con
+$\int_{a}^{b}f(x)\,dx$?)}{Bernhard Riemann, \emph{Über die Darstellbarkeit einer
+Function durch eine trigonometrische Reihe} (1854), \S4}
+
+\lettrine[lines=3, findent=2pt, nindent=0pt]{S}{e la derivata} risponde alla domanda
+«quanto rapidamente varia una grandezza?», l'integrale risponde alla domanda inversa:
+«quanto si accumula una grandezza che varia?». Lo spazio percorso da un velivolo durante
+la corsa di decollo è l'accumulo della sua velocità nel tempo; la portanza totale di
+un'ala è l'accumulo della portanza delle singole «strisce» lungo l'apertura; la
+superficie alare è l'accumulo delle corde. In tutti questi casi la grandezza da
+accumulare non è costante, e il prodotto «base per altezza», che basterebbe se lo
+fosse, va sostituito da un procedimento più raffinato.
+
+Il procedimento risale ad Archimede: si suddivide l'intervallo in tanti piccoli
+intervalli, in ciascuno dei quali la grandezza è \emph{quasi} costante, e si sommano i
+contributi. Si ottengono così due stime, una per difetto e una per eccesso, tanto più
+vicine quanto più fine è la suddivisione. L'integrale definito è il numero, se esiste ed
+è unico, che separa tutte le stime per difetto da tutte le stime per eccesso: una
+definizione che poggia direttamente sull'assioma di completezza del
+\cref{cap:numeri}. Studieremo le proprietà dell'integrale (additività, linearità,
+confronto), il teorema della media e, in appendice, il risultato che rende la teoria
+davvero utilizzabile: \emph{ogni funzione continua in un intervallo chiuso e limitato è
+integrabile}. Per dimostrarlo introdurremo la nozione di \emph{uniforme continuità}.
+Il calcolo effettivo degli integrali, attraverso il legame con le derivate scoperto da
+Newton e Leibniz, sarà l'argomento del prossimo capitolo; qui ne vedremo soltanto un
+primo, sorprendente indizio. Seguiremo il testo di riferimento
+\cite{marcellini-sbordone}, con qualche integrazione da \cite{giusti}.
+
+\medskip
+\noindent\textbf{In questo capitolo.}
+\begin{itemize}
+  \item Il metodo di esaustione: l'area del settore di parabola
+  (\S\ref{sec:esaustione}).
+  \item Approfondimento: la quadratura della parabola di Archimede
+  (\S\ref{subsec:archimede-parabola}).
+  \item Partizioni, somme integrali, integrale definito secondo Riemann; il criterio
+  di integrabilità (\S\ref{sec:integrale-definito}).
+  \item Approfondimento: l'integrale con le funzioni a scala
+  (\S\ref{subsec:funzioni-scala}).
+  \item Proprietà: additività, linearità, confronto, valore assoluto; l'area con segno
+  (\S\ref{sec:proprieta-integrale}).
+  \item Il teorema della media; corda media e corda media aerodinamica di un'ala
+  (\S\ref{sec:media}).
+  \item Appendice: uniforme continuità, teorema di Cantor, funzioni lipschitziane
+  (\S\ref{sec:uniforme-continuita}).
+  \item Appendice: integrabilità delle funzioni continue e delle funzioni monotòne;
+  le somme di Riemann e le formule di quadratura (\S\ref{sec:integrabilita-continue}).
+  \item Esercizi di riepilogo (\S\ref{sec:esercizi-cap8}).
+  \item Punti fondamentali del capitolo (\S\ref{sec:sintesi-cap08}).
+\end{itemize}
+
+\input{capitoli/cap08/01-esaustione}
+\input{capitoli/cap08/02-definizione}
+\input{capitoli/cap08/03-proprieta}
+\input{capitoli/cap08/04-media}
+\input{capitoli/cap08/05-uniforme-continuita}
+\input{capitoli/cap08/06-integrabilita}
+\input{capitoli/cap08/07-esercizi}
+\input{capitoli/cap08/08-sintesi}

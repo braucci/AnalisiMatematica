@@ -1,0 +1,468 @@
+%% ----------------------------------------------------------------------------
+%%  §10.6  Esercizi di riepilogo
+%% ----------------------------------------------------------------------------
+\section{Esercizi di riepilogo}
+\label{sec:esercizi-cap10}
+
+Come nei capitoli precedenti, ogni soluzione è accompagnata da una nota sulla
+\emph{scelta logica} che la guida.
+
+\needspace{8\baselineskip}
+\subsection*{Sviluppi di Taylor}
+
+\begin{esercizio}[La formula di Machin]\label{es:machin}
+Verificare la formula di Machin \eqref{eq:machin}:
+$\frac\pi4=4\operatorname{arctg}\frac15-\operatorname{arctg}\frac1{239}$.
+\begin{soluzione}
+Dividendo le formule di addizione \eqref{eq:addizione-sen} e \eqref{eq:addizione-cos} per
+$\cos\alpha\cos\beta$ si ottiene $\tg(\alpha\pm\beta)=\frac{\tg\alpha\pm\tg\beta}{1\mp\tg\alpha\,\tg\beta}$. Sia $\alpha=\operatorname{arctg}\frac15$.
+Allora
+\[
+\begin{gathered}
+  \tg2\alpha=\frac{2/5}{1-1/25}=\frac5{12}, \qquad
+  \tg4\alpha=\frac{2\cdot5/12}{1-25/144}=\frac{120}{119},\\
+  \tg\Bigl(4\alpha-\frac\pi4\Bigr)=\frac{\frac{120}{119}-1}{1+\frac{120}{119}}=\frac1{239} .
+\end{gathered}
+\]
+Poiché $0<\alpha<\frac15$ (si ha $\operatorname{arctg}x<x$ per $x>0$: per la \eqref{eq:sviluppo-arctg}
+con $n=0$, il resto $R(x)=-\int_{0}^{x}\frac{t^{2}}{1+t^{2}}\,dt$ è negativo), risulta
+$-\frac\pi4<4\alpha-\frac\pi4<\frac45-\frac\pi4<\frac\pi2$; in $(-\frac\pi2,\frac\pi2)$ la tangente è invertibile, e
+quindi $4\alpha-\frac\pi4=\operatorname{arctg}\frac1{239}$. \emph{Scelta logica:} un'identità tra
+arcotangenti si dimostra calcolando la tangente di entrambi i membri; ma la tangente non
+è iniettiva, ed è indispensabile controllare che gli angoli cadano nell'intervallo in cui
+essa è invertibile.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}\label{es:sviluppo-tangente}
+Determinare il polinomio di Taylor di ordine $5$ della funzione $\tg x$ in $x_{0}=0$.
+\begin{soluzione}
+La funzione $\tg x$ è derivabile infinite volte in $(-\frac\pi2,\frac\pi2)$ ed è dispari; le sue
+derivate di ordine pari sono dispari, e quindi nulle in $0$. Il polinomio cercato ha
+dunque la forma $x+a_{3}x^{3}+a_{5}x^{5}$ (il coefficiente di $x$ è $\tg'(0)=1$), e
+$\tg x=x+a_{3}x^{3}+a_{5}x^{5}+o(x^{5})$. Moltiplicando per
+$\cos x=1-\frac{x^{2}}2+\frac{x^{4}}{24}+o(x^{5})$ e usando le regole della \cref{prop:algebra-o},
+\[
+  \sen x=\tg x\cos x=x+\Bigl(a_{3}-\frac12\Bigr)x^{3}+\Bigl(a_{5}-\frac{a_{3}}2+\frac1{24}\Bigr)x^{5}+o(x^{5}) .
+\]
+Per l'unicità del polinomio di Taylor (\cref{prop:unicita-taylor}) i coefficienti devono
+coincidere con quelli di $\sen x=x-\frac{x^{3}}6+\frac{x^{5}}{120}+o(x^{5})$: $a_{3}-\frac12=-\frac16$, cioè
+$a_{3}=\frac13$, e $a_{5}=\frac1{120}+\frac16-\frac1{24}=\frac2{15}$. Dunque
+\[
+  \tg x=x+\frac{x^{3}}3+\frac{2x^{5}}{15}+o(x^{6}) ,
+\]
+dove il resto è $o(x^{6})$ perché anche il coefficiente di $x^{6}$ è nullo.
+\emph{Scelta logica:} invece di calcolare cinque derivate della tangente, sempre più complicate, si
+usa la relazione $\sen x=\tg x\cos x$ tra funzioni di cui conosciamo gli sviluppi, e
+l'unicità permette di identificare i coefficienti (\emph{metodo dei coefficienti
+indeterminati}).
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Determinare lo sviluppo di Mac Laurin di ordine $5$ di $\arcsen x$.
+\begin{soluzione}
+Per la \eqref{eq:derivata-arcsen}, $D\arcsen x=(1-x^{2})^{-1/2}$. Dalla \eqref{eq:taylor-potenza}
+con $b=-\frac12$, $(1+u)^{-1/2}=1-\frac u2+\frac38\,u^{2}+o(u^{2})$, e con $u=-t^{2}$ (\cref{lem:sostituzione-o})
+\[
+  \frac1{\sqrt{1-t^{2}}}=1+\frac{t^{2}}2+\frac38\,t^{4}+o(t^{4}) .
+\]
+Integrando termine a termine tra $0$ e $x$, per la \eqref{eq:integrazione-termine} e poiché
+$\arcsen0=0$,
+\[
+  \arcsen x=x+\frac{x^{3}}6+\frac3{40}\,x^{5}+o(x^{5}) .
+\]
+\emph{Scelta logica:} come per l'arcotangente, si sviluppa la derivata, che è una
+potenza di un binomio, e si integra; il \cref{lem:integrazione-o} garantisce che il resto
+integrato è ancora trascurabile, con un ordine in più.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}\label{es:derivata-decima}
+Sia $f(x)=\sen(x^{2})$. Calcolare $f^{(9)}(0)$ e $f^{(10)}(0)$.
+\begin{soluzione}
+Dalla \eqref{eq:taylor-sen} con $n=2$ e la sostituzione $t=x^{2}$,
+\[
+  \sen(x^{2})=x^{2}-\frac{x^{6}}6+\frac{x^{10}}{120}+o(x^{12}) .
+\]
+Il polinomio a secondo membro, di grado $10$, approssima $f$ con un errore $o(x^{10})$; per
+l'unicità è il polinomio di Taylor di ordine $10$, il cui coefficiente di $x^{k}$ è
+$\frac{f^{(k)}(0)}{k!}$. Dunque $f^{(9)}(0)=0$ e $\frac{f^{(10)}(0)}{10!}=\frac1{120}$, cioè
+$f^{(10)}(0)=\frac{3\,628\,800}{120}=30\,240$. \emph{Scelta logica:} calcolare dieci derivate di
+$\sen(x^{2})$ sarebbe proibitivo; l'unicità del polinomio di Taylor permette di leggere le
+derivate nei coefficienti di uno sviluppo ottenuto per sostituzione.
+\end{soluzione}
+\end{esercizio}
+
+\needspace{8\baselineskip}
+\subsection*{Limiti e parti principali}
+
+\begin{esercizio}
+Calcolare (a) $\displaystyle\lim_{x\to0}\frac{\log(1+x)-\sen x}{x^{2}}$; \
+(b) $\displaystyle\lim_{x\to0}\frac{e^{x^{2}}-\cos x-\frac32x^{2}}{x^{4}}$; \
+(c) $\displaystyle\lim_{x\to0}\frac{\tg x-\sen x}{x^{3}}$.
+\begin{soluzione}
+(a) Il denominatore ha ordine $2$: basta sviluppare al secondo ordine.
+$\log(1+x)=x-\frac{x^{2}}2+o(x^{2})$ e $\sen x=x+o(x^{2})$, dunque il numeratore è
+$-\frac{x^{2}}2+o(x^{2})$ e il limite vale $-\frac12$.
+
+(b) Occorre il quarto ordine. Con $t=x^{2}$ nello sviluppo dell'esponenziale,
+$e^{x^{2}}=1+x^{2}+\frac{x^{4}}2+o(x^{4})$; inoltre $\cos x=1-\frac{x^{2}}2+\frac{x^{4}}{24}+o(x^{5})$. Il
+numeratore è
+$x^{2}+\frac{x^{2}}2-\frac32\,x^{2}+\bigl(\frac12-\frac1{24}\bigr)x^{4}+o(x^{4})=\frac{11}{24}\,x^{4}+o(x^{4})$, e il
+limite vale $\frac{11}{24}$.
+
+(c) Per l'\cref{es:sviluppo-tangente}, $\tg x-\sen x=\frac{x^{3}}3+\frac{x^{3}}6+o(x^{4})=\frac{x^{3}}2+o(x^{4})$, e
+il limite vale $\frac12$.
+
+\emph{Scelta logica:} l'ordine dello sviluppo è dettato dal denominatore (la sua parte
+principale); se i termini del numeratore si elidono fino a quell'ordine, il limite è
+zero, altrimenti la \cref{prop:parte-principale} lo fornisce subito.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Calcolare $\displaystyle\lim_{n\to+\infty}n^{2}\Bigl(1-n\sen\frac1n\Bigr)$.
+\begin{soluzione}
+Con $x=\frac1n\to0$ il limite è quello di $\frac{1}{x^{2}}\bigl(1-\frac{\sen x}x\bigr)=\frac{x-\sen x}{x^{3}}$. Poiché
+$x-\sen x=\frac{x^{3}}6+o(x^{4})$, il limite vale $\frac16$. \emph{Scelta logica:} un limite di
+successione che contiene $\frac1n$ in funzioni elementari si riconduce, mediante la
+definizione di limite con le successioni, a un limite di funzione per $x\to0$, dove gli
+sviluppi di Taylor sono disponibili.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}\label{es:verifica-19-30}
+Determinare la parte principale, per $x\to0$, di $N(x)=3x^{3}-3x\cos x+\sen3x$, e
+dedurre che la funzione dell'\cref{es:limite-taylor-2} è un infinitesimo equivalente a
+$\frac{19}{30}\,x$.
+\begin{soluzione}
+Nell'\cref{es:limite-taylor-2} gli sviluppi fino all'ordine $4$ hanno dato $N(x)=o(x^{4})$.
+Aggiungiamo un termine: $\cos x=1-\frac{x^{2}}2+\frac{x^{4}}{24}+o(x^{5})$, quindi
+$3x\cos x=3x-\frac32x^{3}+\frac18x^{5}+o(x^{6})$, e
+$\sen3x=3x-\frac92x^{3}+\frac{243}{120}x^{5}+o(x^{6})$. Allora
+\[
+  N(x)=\Bigl(-\frac18+\frac{81}{40}\Bigr)x^{5}+o(x^{6})=\frac{19}{10}\,x^{5}+o(x^{6}) .
+\]
+Per la \cref{prop:parte-principale} con $p=5$, $q=4$, la funzione $\frac{N(x)}{3x^{4}}$ è
+$\frac{19}{30}\,x\,(1+o(1))$. \emph{Scelta logica:} quando tutti i termini fino a un certo ordine si
+elidono, il limite è zero; per sapere \emph{come} la funzione tende a zero occorre
+spingere lo sviluppo fino al primo termine superstite.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Determinare l'ordine di infinitesimo e la parte principale di $f(x)=\sen x-x\cos x$ per
+$x\to0$, e calcolare $\displaystyle\lim_{x\to0}\frac{\sen x-x\cos x}{x-\sen x}$.
+\begin{soluzione}
+$\sen x=x-\frac{x^{3}}6+o(x^{4})$ e $x\cos x=x-\frac{x^{3}}2+o(x^{4})$, dunque
+$f(x)=\frac{x^{3}}3+o(x^{4})$: $f$ è un infinitesimo di ordine $3$ con parte principale $\frac{x^{3}}3$.
+Poiché $x-\sen x=\frac{x^{3}}6+o(x^{4})$, per la \cref{prop:parte-principale} il limite vale
+$\frac{1/3}{1/6}=2$. \emph{Scelta logica:} con il teorema di L'Hôpital occorrerebbero più
+applicazioni successive, con derivate sempre più lunghe; con gli sviluppi bastano due
+righe.
+\end{soluzione}
+\end{esercizio}
+
+\needspace{8\baselineskip}
+\subsection*{Resto e stime}
+
+\begin{esercizio}\label{es:log-disuguaglianza}
+Dimostrare che per ogni $x>0$ si ha $x-\frac{x^{2}}2<\log(1+x)<x$.
+\begin{soluzione}
+Sia $f(x)=\log(1+x)$: $f'(x)=\frac1{1+x}$, $f''(x)=-\frac1{(1+x)^{2}}$, $f'''(x)=\frac2{(1+x)^{3}}$. Per il
+\cref{teo:resto-lagrange-generale}, applicato in $(-1,+\infty)$ con $x_{0}=0$, esistono
+$x_{1},x_{2}\in(0,x)$ tali che
+\[
+\begin{aligned}
+  \log(1+x)&=x-\frac{x^{2}}{2(1+x_{1})^{2}}<x,\\
+  \log(1+x)&=x-\frac{x^{2}}2+\frac{x^{3}}{3(1+x_{2})^{3}}>x-\frac{x^{2}}2 .
+\end{aligned}
+\]
+\emph{Scelta logica:} quando la derivata $f^{(n+1)}$ ha segno costante, il resto di
+Lagrange ha segno noto, e la formula di Taylor diventa una disuguaglianza.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Calcolare $\sqrt{1{,}1}$ con un errore inferiore a $10^{-4}$.
+\begin{soluzione}
+Sia $f(x)=\sqrt{1+x}$, $x_{0}=0$, $x=\frac1{10}$. Le derivate sono
+$f'=\frac12(1+x)^{-1/2}$, $f''=-\frac14(1+x)^{-3/2}$, $f'''=\frac38(1+x)^{-5/2}$. Con $n=1$ la stima
+\eqref{eq:stima-resto} dà $\abs{R_{1}}\le\frac14\cdot\frac{10^{-2}}2=1{,}25\cdot10^{-3}$, insufficiente. Con
+$n=2$, poiché $0<f'''\le\frac38$ in $[0,\frac1{10}]$,
+\[
+  0<R_{2}\Bigl(\frac1{10}\Bigr)\le\frac38\cdot\frac{10^{-3}}{6}=6{,}25\cdot10^{-5}<10^{-4} ,
+\]
+e $T_{2}(\frac1{10})=1+\frac1{20}-\frac1{800}=1{,}04875$. Dunque
+$1{,}04875<\sqrt{1{,}1}\le1{,}0488125$ (il valore esatto è $1{,}0488088\ldots$).
+\emph{Scelta logica:} si aumenta $n$ finché la stima del resto scende sotto la precisione richiesta;
+il segno di $f'''$ dice inoltre da che parte sta l'errore.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}[L'integrale della campana di Gauss]\label{es:integrale-gauss-taylor}
+Calcolare $\int_{0}^{1}e^{-x^{2}}\,dx$ con un errore inferiore a $10^{-5}$, e confrontare il risultato
+con le stime dell'\cref{es:stima-gaussiana}.
+\begin{soluzione}
+Per il \cref{teo:resto-lagrange} applicato a $g(t)=e^{-t}$ con centro $0$, per ogni $t>0$
+esiste $\tau\in(0,t)$ tale che
+\[
+  e^{-t}=\sum_{k=0}^{n}\frac{(-t)^{k}}{k!}+R_{n}(t), \qquad R_{n}(t)=(-1)^{n+1}\frac{e^{-\tau}}{(n+1)!}\,t^{n+1} ;
+\]
+dunque $\abs{R_{n}(t)}\le\frac{t^{n+1}}{(n+1)!}$, e $R_{n}(t)$ ha il segno di $(-1)^{n+1}$. Con $t=x^{2}$ la
+funzione $R_{n}(x^{2})$, differenza di funzioni continue, è integrabile in $[0,1]$, e per
+la linearità e il confronto (\cref{teo:confronto-integrali,teo:valore-assoluto})
+\[
+\begin{gathered}
+  \int_{0}^{1}e^{-x^{2}}dx=\sum_{k=0}^{n}\frac{(-1)^{k}}{k!\,(2k+1)}+E_{n},\\
+  \abs{E_{n}}\le\int_{0}^{1}\frac{x^{2n+2}}{(n+1)!}\,dx=\frac1{(n+1)!\,(2n+3)} .
+\end{gathered}
+\]
+Per $n=6$ la stima vale $\frac1{75\,600}\approx1{,}3\cdot10^{-5}$, insufficiente; per $n=7$ vale
+$\frac1{685\,440}<1{,}5\cdot10^{-6}$, e inoltre $E_{7}\ge0$, perché $R_{7}\ge0$. Dunque
+\[
+\begin{aligned}
+  \int_{0}^{1}e^{-x^{2}}dx&\simeq1-\frac13+\frac1{10}-\frac1{42}+\frac1{216}-\frac1{1320}
+  +\frac1{9360}-\frac1{75\,600}\\
+  &=0{,}7468228\ldots
+\end{aligned}
+\]
+per difetto, con un errore inferiore a $1{,}5\cdot10^{-6}$: $0{,}7468228<\int_{0}^{1}e^{-x^{2}}dx<0{,}7468243$.
+Otto termini bastano dove le somme integrali dell'\cref{es:stima-gaussiana}, con
+$10\,000$ suddivisioni, lasciano un'incertezza di $6\cdot10^{-5}$. \emph{Scelta logica:} se la
+funzione integranda non ha una primitiva elementare, la si sostituisce con un polinomio
+di Taylor, che si integra esattamente; la stima del resto, integrata, certifica
+l'errore.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}[Freccia dell'ala con portanza ellittica]\label{es:freccia-ellittica}
+Con le notazioni del \cref{sec:applicazioni-integrali} e della \cref{prop:freccia}, sia
+$T(y)=\int_{y}^{s}l$ il taglio (da non confondere con un polinomio di Taylor). Dimostrare
+che
+\[
+  \int_{0}^{s}(s-t)M(t)\,dt=\frac{s^{2}}2M(0)-\frac{s^{3}}6T(0)+\frac16\int_{0}^{s}(s-t)^{3}l(t)\,dt ,
+\]
+e dedurne che per la distribuzione ellittica $l(y)=l_{0}\sqrt{1-(y/s)^{2}}$ la freccia
+all'estremità vale $v(s)=\frac{l_{0}s^{4}}{EI}\bigl(\frac\pi{32}-\frac1{45}\bigr)$, cioè
+$1-\frac{32}{45\pi}\approx0{,}774$ volte quella dovuta a un carico uniforme con la stessa portanza
+totale.
+\begin{soluzione}
+Si integra per parti due volte, usando $M'=-T$, $T'=-l$ e $M(s)=T(s)=0$
+(\cref{prop:taglio-momento}). Con la primitiva $-\frac{(s-t)^{2}}2$ di $s-t$,
+\[
+\begin{aligned}
+  \int_{0}^{s}(s-t)M\,dt&=\Bigl[-\frac{(s-t)^{2}}2M\Bigr]_{0}^{s}-\int_{0}^{s}\frac{(s-t)^{2}}2\,T\,dt\\
+  &=\frac{s^{2}}2M(0)-\int_{0}^{s}\frac{(s-t)^{2}}2\,T\,dt ;
+\end{aligned}
+\]
+con la primitiva $-\frac{(s-t)^{3}}6$ di $\frac{(s-t)^{2}}2$,
+$\int_{0}^{s}\frac{(s-t)^{2}}2T\,dt=\frac{s^{3}}6T(0)-\frac16\int_{0}^{s}(s-t)^{3}l\,dt$, e la formula segue.
+Per la distribuzione ellittica, dall'\cref{es:taglio-ellittico}, $M(0)=\frac{l_{0}s^{2}}3$ e
+$T(0)=\frac\pi4l_{0}s$; con $t=sw$,
+$\int_{0}^{s}(s-t)^{3}l\,dt=l_{0}s^{4}\int_{0}^{1}(1-w)^{3}\sqrt{1-w^{2}}\,dw$. Sviluppando il cubo e usando
+\[
+\begin{gathered}
+  \int_{0}^{1}\!\sqrt{1-w^{2}}\,dw=\frac\pi4, \qquad \int_{0}^{1}\!w\sqrt{1-w^{2}}\,dw=\frac13,\\
+  \int_{0}^{1}\!w^{2}\sqrt{1-w^{2}}\,dw=\frac\pi{16}, \qquad \int_{0}^{1}\!w^{3}\sqrt{1-w^{2}}\,dw=\frac2{15}
+\end{gathered}
+\]
+(il secondo e il quarto con $u=1-w^{2}$, il terzo con $w=\sen\theta$), si trova
+$\int_{0}^{1}(1-w)^{3}\sqrt{1-w^{2}}\,dw=\frac\pi4-1+\frac{3\pi}{16}-\frac2{15}=\frac{7\pi}{16}-\frac{17}{15}$. Allora
+\[
+  EI\,v(s)=l_{0}s^{4}\Bigl[\frac16-\frac\pi{24}+\frac16\Bigl(\frac{7\pi}{16}-\frac{17}{15}\Bigr)\Bigr]
+  =l_{0}s^{4}\Bigl(\frac\pi{32}-\frac1{45}\Bigr) .
+\]
+Con $l_{0}=\frac4\pi\cdot\frac Wb$ e, per il carico uniforme $l=\frac Wb$, $EI\,v(s)=\frac{W}{b}\frac{s^{4}}8$, il
+rapporto è $\frac{32}\pi\bigl(\frac\pi{32}-\frac1{45}\bigr)=1-\frac{32}{45\pi}\approx0{,}7736$, in accordo con il
+calcolo numerico del \cref{sec:resto-integrale}. \emph{Scelta logica:} ogni integrazione
+per parti trasferisce una derivata dal peso polinomiale alle grandezze della trave,
+scendendo da $M$ a $T$ e da $T$ al carico $l$, che è noto esplicitamente; i termini di
+bordo all'estremità libera si annullano perché lì taglio e momento sono nulli.
+\end{soluzione}
+\end{esercizio}
+
+\needspace{8\baselineskip}
+\subsection*{Taylor e calcolo numerico}
+
+\begin{esercizio}[L'errore delle differenze finite]\label{es:errore-differenze}
+Sia $f$ di classe $C^{3}$ in un intervallo contenente $[x-h,x+h]$, con $h>0$, e siano
+$M_{2}$ e $M_{3}$ i massimi di $\abs{f''}$ e di $\abs{f'''}$ in quell'intervallo. Dimostrare che
+\[
+\begin{aligned}
+  \Bigl|\frac{f(x+h)-f(x)}h-f'(x)\Bigr|&\le\frac{M_{2}}2\,h ,\\
+  \Bigl|\frac{f(x+h)-f(x-h)}{2h}-f'(x)\Bigr|&\le\frac{M_{3}}6\,h^{2} .
+\end{aligned}
+\]
+\begin{soluzione}
+Per il \cref{teo:resto-lagrange} con $n=1$, $f(x+h)=f(x)+f'(x)h+\frac{f''(\xi)}2h^{2}$ con $\xi$
+tra $x$ e $x+h$: dividendo per $h$ si ottiene la prima stima. Con $n=2$,
+\[
+  f(x\pm h)=f(x)\pm f'(x)h+\frac{f''(x)}2h^{2}\pm\frac{f'''(\xi_{\pm})}6h^{3} ,
+\]
+con $\xi_{+}\in(x,x+h)$ e $\xi_{-}\in(x-h,x)$. Sottraendo, i termini con $f(x)$ e con $f''(x)$ si
+elidono:
+\[
+  \frac{f(x+h)-f(x-h)}{2h}-f'(x)=\frac{f'''(\xi_{+})+f'''(\xi_{-})}{12}\,h^{2} ,
+\]
+che in valore assoluto non supera $\frac{2M_{3}}{12}h^{2}=\frac{M_{3}}6h^{2}$. Sono le leggi osservate
+numericamente nel \cref{cap:derivate}: dividendo $h$ per $10$, l'errore della differenza in
+avanti si divide per $10$, quello della differenza centrata per $100$. \emph{Scelta
+logica:} la simmetria della differenza centrata fa elidere il termine di secondo ordine;
+per vederlo basta scrivere la formula di Taylor nei due punti $x\pm h$ e sottrarre.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}[La convergenza quadratica del metodo di Newton]\label{es:newton-quadratico}
+Sia $f$ di classe $C^{2}$ in un intervallo $I$ contenente una radice $r$ di $f$, con $f'\neq0$
+in $I$, e sia $x_{n+1}=x_{n}-\frac{f(x_{n})}{f'(x_{n})}$ la successione del metodo di Newton
+(\cref{es:newton}). Dimostrare che, se $x_{n}\in I$, esiste $\xi$ tra $x_{n}$ e $r$ tale che
+\[
+  x_{n+1}-r=\frac{f''(\xi)}{2f'(x_{n})}\,(x_{n}-r)^{2} ,
+\]
+e dedurne che, se $\abs{f''}\le M_{2}$ e $\abs{f'}\ge m_{1}>0$ in $I$, l'errore verifica
+$\abs{x_{n+1}-r}\le\frac{M_{2}}{2m_{1}}\abs{x_{n}-r}^{2}$.
+\begin{soluzione}
+Per il \cref{teo:resto-lagrange} con centro $x_{n}$, calcolato in $r$,
+$0=f(r)=f(x_{n})+f'(x_{n})(r-x_{n})+\frac{f''(\xi)}2(r-x_{n})^{2}$. Dividendo per $f'(x_{n})$ e
+ricordando che $\frac{f(x_{n})}{f'(x_{n})}=x_{n}-x_{n+1}$,
+\[
+  0=x_{n}-x_{n+1}+r-x_{n}+\frac{f''(\xi)}{2f'(x_{n})}(r-x_{n})^{2} ,
+\]
+che è la tesi. La stima segue maggiorando $\abs{f''(\xi)}$ con $M_{2}$ e minorando $\abs{f'(x_{n})}$
+con $m_{1}$. Se l'errore è dell'ordine di $10^{-k}$, al passo successivo è dell'ordine di
+$10^{-2k}$ (a meno della costante $\frac{M_{2}}{2m_{1}}$): il numero di cifre esatte all'incirca
+raddoppia a ogni iterazione, come si era osservato nel \cref{cap:derivate}. \emph{Scelta
+logica:} l'errore del metodo di Newton è il resto della formula di Taylor di ordine $1$,
+perché il metodo sostituisce $f$ con la sua retta tangente; il resto di Lagrange lo
+rende esplicito.
+\end{soluzione}
+\end{esercizio}
+
+\needspace{8\baselineskip}
+\subsection*{Applicazioni aeronautiche}
+
+\begin{esercizio}[Arco e corda di cerchio massimo]
+Due aeroporti distano $s=1000$~km lungo un cerchio massimo della Terra ($R=6371$~km).
+Stimare di quanto la corda che li congiunge (la distanza in linea retta) è più corta
+dell'arco, e controllare l'errore della stima.
+\begin{soluzione}
+L'angolo al centro è $\frac sR$, e la corda vale $2R\sen\frac s{2R}$. Posto $u=\frac s{2R}$, la
+differenza è $s-2R\sen u=2R(u-\sen u)$. Per il \cref{teo:resto-lagrange} con $n=4$
+($T_{4}(u)=u-\frac{u^{3}}6$, e $\abs{\sen^{(5)}}=\abs{\cos}\le1$),
+$u-\sen u=\frac{u^{3}}6-R_{4}(u)$ con $\abs{R_{4}(u)}\le\frac{u^{5}}{120}$. Dunque
+\[
+  s-2R\sen\frac s{2R}=\frac{s^{3}}{24R^{2}}+E, \qquad
+  \abs E\le2R\,\frac{u^{5}}{120}=\frac{s^{5}}{1920R^{4}} .
+\]
+Numericamente $\frac{s^{3}}{24R^{2}}\approx1{,}0265$~km e $\abs E\le3{,}2\cdot10^{-4}$~km: la corda è più corta
+dell'arco di circa $1026$~m, con un'incertezza di qualche decimetro.
+\emph{Scelta logica:} la differenza di due quantità quasi uguali si calcola sviluppando,
+in modo che la cancellazione avvenga «sulla carta» e non nel calcolo numerico; il resto
+di Lagrange certifica l'accuratezza della stima.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}[L'orizzonte, al secondo ordine]\label{es:orizzonte-secondo-ordine}
+Con le notazioni del riquadro sulla distanza dell'orizzonte (\cref{sec:taylor-peano}),
+dimostrare che per $h\to0$
+\[
+  d=R\arccos\frac R{R+h}=\sqrt{2Rh}\,\Bigl(1-\frac{5h}{12R}+o(h)\Bigr) ,
+\]
+e spiegare la colonna «differenza» della tabella prodotta dal programma.
+\begin{soluzione}
+Posto $\varepsilon=\frac hR$, l'angolo $\vartheta$ verifica $\cos\vartheta=\frac1{1+\varepsilon}$, e quindi
+$1-\cos\vartheta=\frac\varepsilon{1+\varepsilon}=\varepsilon-\varepsilon^{2}+o(\varepsilon^{2})$. D'altra parte
+$1-\cos\vartheta=\frac{\vartheta^{2}}2-\frac{\vartheta^{4}}{24}+o(\vartheta^{5})$. Al primo ordine si trova
+$\vartheta^{2}=2\varepsilon+o(\varepsilon)$, dunque $\vartheta^{4}=4\varepsilon^{2}+o(\varepsilon^{2})$ e, poiché
+$\frac{\vartheta^{5}}{\varepsilon^{2}}\to0$, anche $o(\vartheta^{5})=o(\varepsilon^{2})$. Allora
+\[
+  \frac{\vartheta^{2}}2=\varepsilon-\varepsilon^{2}+\frac{\varepsilon^{2}}6+o(\varepsilon^{2}) ,
+  \qquad\text{cioè}\qquad
+  \vartheta^{2}=2\varepsilon\Bigl(1-\frac56\,\varepsilon+o(\varepsilon)\Bigr) ,
+\]
+e, con lo sviluppo $(1+u)^{1/2}=1+\frac u2+o(u)$, $\vartheta=\sqrt{2\varepsilon}\,\bigl(1-\frac5{12}\,\varepsilon+o(\varepsilon)\bigr)$.
+Moltiplicando per $R$ si ottiene la tesi. L'approssimazione $\sqrt{2Rh}$ \emph{sovrastima}
+dunque la distanza, di circa $\sqrt{2Rh}\,\frac{5h}{12R}$: per $h=10$~km sono
+$356{,}96\cdot\frac{50}{76\,452}\approx0{,}233$~km, proprio la differenza calcolata dal programma.
+\emph{Scelta logica:} per conoscere l'errore di un'approssimazione «al primo ordine» si
+spinge lo sviluppo all'ordine successivo; qui l'incognita $\vartheta$ compare in uno
+sviluppo, e la si ricava per approssimazioni successive.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}[La correzione di compressibilità del tubo di Pitot]
+\label{es:compressibilita}
+In un flusso subsonico di un gas perfetto con $\gamma=1{,}4$, la pressione totale $p_{0}$
+misurata dal tubo di Pitot e la pressione statica $p$ sono legate al numero di Mach $M$
+dalla relazione isentropica $\frac{p_{0}}p=\bigl(1+\frac{\gamma-1}2M^{2}\bigr)^{\gamma/(\gamma-1)}=\bigl(1+\frac{M^{2}}5\bigr)^{7/2}$,
+mentre la pressione dinamica vale $q=\frac\gamma2pM^{2}=0{,}7\,pM^{2}$. Dimostrare che
+\[
+  \frac{p_{0}-p}{q}=1+\frac{M^{2}}4+\frac{M^{4}}{40}+o(M^{4}) \qquad (M\to0) ,
+\]
+e valutare l'errore che si commette usando l'equazione di Bernoulli incomprimibile
+$p_{0}-p=q$ a $M=0{,}3$.
+\begin{soluzione}
+Dalla \eqref{eq:taylor-potenza} con $b=\frac72$,
+$(1+u)^{7/2}=1+\frac72u+\frac{35}8u^{2}+\frac{35}{16}u^{3}+o(u^{3})$, e con $u=\frac{M^{2}}5$
+(\cref{lem:sostituzione-o} e \cref{prop:algebra-o})
+\[
+  \frac{p_{0}}p=1+0{,}7\,M^{2}+0{,}175\,M^{4}+0{,}0175\,M^{6}+o(M^{6}) .
+\]
+Sottraendo $1$ e dividendo per $\frac qp=0{,}7\,M^{2}$, per la \eqref{eq:o-quoziente},
+$\frac{p_{0}-p}q=1+0{,}25\,M^{2}+0{,}025\,M^{4}+o(M^{4})$. A $M=0{,}3$ la correzione vale
+$\frac{0{,}09}4+\frac{0{,}0081}{40}\approx0{,}0227$: a velocità assegnata, l'equazione di Bernoulli
+incomprimibile sottostima la pressione di impatto $p_{0}-p$ di circa il $2{,}3\%$.
+Viceversa, se dalla pressione di impatto misurata si deduce la velocità con l'equazione
+incomprimibile, la si \emph{sovrastima}; poiché la velocità è proporzionale alla radice
+di $p_{0}-p$, l'errore è circa la metà, l'$1{,}1\%$.
+Il risultato è coerente con la regola pratica secondo cui la compressibilità è
+trascurabile fino a $M\approx0{,}3$ (regola che di solito si giustifica con la variazione
+relativa di densità, circa $\frac{M^{2}}2\approx4{,}5\%$ a $M=0{,}3$).
+\emph{Scelta logica:} lo sviluppo del binomio con esponente reale trasforma
+una relazione esatta ma poco trasparente in una correzione «a potenze di $M^{2}$», il cui
+primo termine misura l'effetto della compressibilità.
+\end{soluzione}
+\end{esercizio}
+
+\begin{python}[Verifica degli esercizi]
+import math
+import sympy as sp
+
+x, M = sp.symbols('x M')
+print(sp.series(sp.tan(x), x, 0, 7))
+print(sp.series(sp.asin(x), x, 0, 7))
+print(sp.diff(sp.sin(x**2), x, 10).subs(x, 0))
+for e in (sp.log(1 + x) - sp.sin(x),
+          sp.exp(x**2) - sp.cos(x) - sp.Rational(3, 2) * x**2,
+          sp.tan(x) - sp.sin(x)):
+    k = sp.Poly(sp.series(e, x, 0, 6).removeO(), x).monoms()[-1][0]
+    print(f"limite = {sp.limit(e / x**k, x, 0)}  (ordine {k})")
+
+R, s = 6371.0, 1000.0
+print(f"arco - corda = {1000 * (s - 2*R*math.sin(s/(2*R))):.2f} m"
+      f",  s^3/(24R^2) = {1000 * s**3 / (24 * R**2):.2f} m")
+
+r = sp.Rational
+esatto = ((1 + M**2 / 5)**r(7, 2) - 1) / (r(7, 10) * M**2)
+print(sp.series(esatto, M, 0, 6))
+for m in (0.1, 0.3, 0.5, 0.7):
+    serie = 1 + m**2 / 4 + m**4 / 40
+    print(f"M = {m}:  esatto {float(esatto.subs(M, m)):.5f}"
+          f"   serie {serie:.5f}")
+\end{python}
+\begin{risultato}
+x + x**3/3 + 2*x**5/15 + O(x**7)
+x + x**3/6 + 3*x**5/40 + O(x**7)
+30240
+limite = -1/2  (ordine 2)
+limite = 11/24  (ordine 4)
+limite = 1/2  (ordine 3)
+arco - corda = 1026.22 m,  s^3/(24R^2) = 1026.53 m
+1 + M**2/4 + M**4/40 + O(M**6)
+M = 0.1:  esatto 1.00250   serie 1.00250
+M = 0.3:  esatto 1.02270   serie 1.02270
+M = 0.5:  esatto 1.06407   serie 1.06406
+M = 0.7:  esatto 1.12858   serie 1.12850
+\end{risultato}

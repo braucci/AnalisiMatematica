@@ -1,0 +1,205 @@
+%% ----------------------------------------------------------------------------
+%%  §9.5  Integrazione per parti
+%% ----------------------------------------------------------------------------
+\section{Integrazione per parti}
+\label{sec:per-parti}
+
+Il metodo di integrazione per decomposizione in somma si basa sulla regola di
+derivazione della somma; il metodo di integrazione per parti, che descriviamo ora, si
+basa sulla regola di derivazione del prodotto.
+
+\begin{teorema}[Formula di integrazione per parti]\label{teo:per-parti}
+\index{integrazione!per parti}
+Se $f$ e $g$ sono due funzioni derivabili con derivata continua in un intervallo $I$,
+risulta
+\begin{equation}\label{eq:per-parti}
+  \int f(x)\,g'(x)\,dx=f(x)\,g(x)-\int f'(x)\,g(x)\,dx .
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$, $g$ derivabili in $I$, con $f'$, $g'$ continue.}
+\Tesi{$\int fg'\,dx=fg-\int f'g\,dx$ (a meno di costanti additive).}
+\end{schema}
+
+\begin{strategia}
+La regola di Leibniz $(fg)'=f'g+fg'$ dice che $fg$ è una primitiva di $f'g+fg'$. Basta
+integrare entrambi i membri e usare la linearità; la continuità delle derivate garantisce
+che gli integrali indefiniti abbiano senso.
+\end{strategia}
+
+\begin{dimostrazione}
+Le funzioni $f'g$ e $fg'$ sono continue (prodotti di funzioni continue, poiché $f$ e $g$,
+derivabili, sono continue), e quindi ammettono primitive. Per la regola di derivazione
+del prodotto \eqref{eq:derivata-prodotto},
+\[
+  \bigl[f(x)\,g(x)\bigr]'=f'(x)\,g(x)+f(x)\,g'(x) ,
+\]
+cioè $fg$ è una primitiva di $f'g+fg'$. Per la linearità \eqref{eq:linearita-indefinito},
+\[
+  f(x)\,g(x)+c=\int f'(x)\,g(x)\,dx+\int f(x)\,g'(x)\,dx ,
+\]
+e la tesi si ottiene portando a primo membro il primo integrale del secondo membro (la
+costante arbitraria si incorpora negli integrali indefiniti).
+\end{dimostrazione}
+
+La funzione $f$ si chiama \emph{fattore finito}, la funzione $g'$ \emph{fattore
+differenziale}. L'ipotesi che $f'$ e $g'$ siano continue assicura che gli integrali nella
+\eqref{eq:per-parti} siano ben definiti; non la si confonda con la condizione, più debole,
+che $f$ e $g$ siano continue. Il metodo è utile quando l'integrale a secondo membro è più
+semplice di quello di partenza: conviene scegliere come fattore finito una funzione che
+si semplifica derivando (un polinomio, un logaritmo, un'arcotangente) e come fattore
+differenziale una funzione di cui si conosce una primitiva.
+
+\begin{esempio}[Integrazioni per parti]\label{es:per-parti}
+\begin{enumerate}[label=\textup{(\alph*)}]
+  \item Con $f(x)=x$ e $g'(x)=\cos x$, quindi $g(x)=\sen x$:
+  \[
+    \int x\cos x\,dx=x\sen x-\int\sen x\,dx=x\sen x+\cos x+c .
+  \]
+  Si sarebbe potuto scegliere $g(x)=\sen x+k$, con $k$ costante: il risultato finale non
+  cambia, perché $k$ compare nei due termini $x(\sen x+k)$ e $-\int(\sen x+k)\,dx$ e si
+  elide.
+  \item Con $f(x)=x^{2}$, $g'(x)=\cos x$, e poi di nuovo per parti con $f(x)=x$,
+  $g'(x)=\sen x$:
+  \[
+  \begin{aligned}
+    \int x^{2}\cos x\,dx&=x^{2}\sen x-2\int x\sen x\,dx\\
+    &=x^{2}\sen x+2x\cos x-2\sen x+c .
+  \end{aligned}
+  \]
+  \item Con $f(x)=\log x$ e $g'(x)=1$, in $(0,+\infty)$:
+  \begin{equation}\label{eq:integrale-log}
+    \int\log x\,dx=x\log x-\int\frac1x\cdot x\,dx=x\log x-x+c .
+  \end{equation}
+  Allo stesso modo $\int\operatorname{arctg}x\,dx=x\operatorname{arctg}x-\int\frac x{1+x^{2}}\,dx
+  =x\operatorname{arctg}x-\frac12\log(1+x^{2})+c$.
+  \item Con fattore finito $x$ e fattore differenziale $e^{x}$:
+  $\int x\,e^{x}dx=x\,e^{x}-\int e^{x}dx=(x-1)\,e^{x}+c$.
+\end{enumerate}
+\end{esempio}
+
+Talvolta, dopo due integrazioni per parti, ricompare l'integrale di partenza: si ottiene
+allora un'equazione da cui ricavarlo.
+
+\begin{esempio}[Integrali «ciclici»]\label{es:per-parti-ciclico}
+Sia $I=\int e^{x}\sen x\,dx$. Con fattore finito $e^{x}$ e fattore differenziale $\sen x$,
+e poi ancora per parti con fattore finito $e^{x}$ e fattore differenziale $\cos x$,
+\[
+  I=-e^{x}\cos x+\int e^{x}\cos x\,dx=-e^{x}\cos x+e^{x}\sen x-I .
+\]
+Per ricavare $I$ conviene ragionare su una primitiva: se $F$ è una primitiva di
+$e^{x}\sen x$, l'uguaglianza dice che $F=e^{x}(\sen x-\cos x)-F+k$ per una costante $k$, e
+quindi
+\begin{equation}\label{eq:integrale-exp-sen}
+  \int e^{x}\sen x\,dx=\frac{e^{x}}2\,(\sen x-\cos x)+c ,
+\end{equation}
+come si verifica derivando. Con lo stesso metodo si ritrova la \eqref{eq:integrale-cos2}:
+\[
+\begin{aligned}
+  \int\cos^{2}x\,dx&=\sen x\cos x+\int\sen^{2}x\,dx\\
+  &=\sen x\cos x+\int(1-\cos^{2}x)\,dx\\
+  &=\sen x\cos x+x-\int\cos^{2}x\,dx ,
+\end{aligned}
+\]
+da cui $\int\cos^{2}x\,dx=\frac12(\sen x\cos x+x)+c$.
+\end{esempio}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[x=1.15cm, y=1.0cm]
+  \fill[blu!20] (1.2,0) -- plot[domain=1.2:4.6, samples=40, smooth]
+    (\x,{0.6+0.12*\x*\x}) -- (4.6,0) -- cycle;
+  \fill[rame!28] (0,0.7728) -- plot[domain=1.2:4.6, samples=40, smooth]
+    (\x,{0.6+0.12*\x*\x}) -- (0,3.1392) -- cycle;
+  \draw[curva] plot[domain=1.0:4.8, samples=50, smooth] (\x,{0.6+0.12*\x*\x});
+  \draw[-Latex, grigio] (-0.2,0) -- (5.4,0) node[right, font=\scriptsize] {$u=g(x)$};
+  \draw[-Latex, grigio] (0,-0.2) -- (0,3.7) node[above, font=\scriptsize] {$v=f(x)$};
+  \draw[tratteggio] (1.2,0) -- (1.2,0.7728) -- (0,0.7728);
+  \draw[tratteggio] (4.6,0) -- (4.6,3.1392) -- (0,3.1392);
+  \node[font=\scriptsize, below] at (1.2,0) {$g(a)$};
+  \node[font=\scriptsize, below] at (4.6,0) {$g(b)$};
+  \node[font=\scriptsize, left] at (0,0.7728) {$f(a)$};
+  \node[font=\scriptsize, left] at (0,3.1392) {$f(b)$};
+  \node[font=\scriptsize, blu] at (3.1,0.75) {$\int_{a}^{b}f\,g'\,dx$};
+  \node[font=\scriptsize, rame] at (1.25,2.3) {$\int_{a}^{b}f'g\,dx$};
+\end{tikzpicture}
+\caption{Interpretazione geometrica dell'integrazione per parti, per $f$ e $g$ crescenti.
+La curva è descritta dal punto $(u,v)=(g(x),f(x))$ al variare di $x\in[a,b]$. L'area
+azzurra, sotto la curva, è $\int v\,du=\int_{a}^{b}f\,g'\,dx$; l'area in color rame, a sinistra
+della curva, è $\int u\,dv=\int_{a}^{b}f'g\,dx$. Insieme formano il rettangolo grande meno il
+rettangolo piccolo: la loro somma è $f(b)g(b)-f(a)g(a)$, cioè la
+\eqref{eq:per-parti-definito}.}
+\label{fig:per-parti}
+\end{figure}
+
+Tenendo conto della formula fondamentale, la \eqref{eq:per-parti} dà la regola di
+integrazione per parti per gli integrali definiti.
+
+\needspace{8\baselineskip}
+\begin{teorema}[Integrazione per parti negli integrali definiti]
+\label{teo:per-parti-definito}
+Se $f$ e $g$ sono derivabili con derivata continua in $[a,b]$,
+\begin{equation}\label{eq:per-parti-definito}
+  \int_{a}^{b}f(x)\,g'(x)\,dx=\Bigl[f(x)\,g(x)\Bigr]_{a}^{b}-\int_{a}^{b}f'(x)\,g(x)\,dx .
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$, $g$ derivabili in $[a,b]$, con $f'$, $g'$ continue.}
+\Tesi{la \eqref{eq:per-parti-definito}.}
+\end{schema}
+
+\begin{strategia}
+Si applica la formula fondamentale alla funzione continua $f'g+fg'$, di cui $fg$ è una
+primitiva, e si usa la linearità dell'integrale definito.
+\end{strategia}
+
+\begin{dimostrazione}
+La funzione $f'g+fg'$ è continua in $[a,b]$ e ha per primitiva $fg$; per il
+\cref{teo:formula-fondamentale} e la linearità (\cref{teo:linearita}),
+$\int_{a}^{b}f'g\,dx+\int_{a}^{b}fg'\,dx=f(b)g(b)-f(a)g(a)$, che è la tesi.
+\end{dimostrazione}
+
+Ad esempio, $\int_{0}^{\pi}x\sen x\,dx=\bigl[-x\cos x\bigr]_{0}^{\pi}+\int_{0}^{\pi}\cos x\,dx=\pi+0=\pi$,
+e per la \eqref{eq:integrale-log} $\int_{1}^{e}\log x\,dx=\bigl[x\log x-x\bigr]_{1}^{e}=0-(-1)=1$.
+Nel \cref{sec:applicazioni-integrali} useremo la \eqref{eq:per-parti-definito} per calcolare
+il momento flettente alla radice di un'ala.
+
+\begin{python}[Verifica delle integrazioni per parti]
+import sympy as sp
+
+x = sp.symbols("x", real=True)
+for f in [x * sp.cos(x), x**2 * sp.cos(x), sp.log(x), sp.atan(x),
+          sp.exp(x) * sp.sin(x)]:
+    F = sp.integrate(f, x)
+    ok = sp.simplify(sp.diff(F, x) - f) == 0
+    print(f"f = {f}:  F = {F}")
+    print(f"    verifica F' = f: {ok}")
+print("int_0^pi x sen x dx =",
+      sp.integrate(x * sp.sin(x), (x, 0, sp.pi)))
+print("int_1^e  log x dx   =", sp.integrate(sp.log(x), (x, 1, sp.E)))
+\end{python}
+\begin{risultato}
+f = x*cos(x):  F = x*sin(x) + cos(x)
+    verifica F' = f: True
+f = x**2*cos(x):  F = x**2*sin(x) + 2*x*cos(x) - 2*sin(x)
+    verifica F' = f: True
+f = log(x):  F = x*log(x) - x
+    verifica F' = f: True
+f = atan(x):  F = x*atan(x) - log(x**2 + 1)/2
+    verifica F' = f: True
+f = exp(x)*sin(x):  F = exp(x)*sin(x)/2 - exp(x)*cos(x)/2
+    verifica F' = f: True
+int_0^pi x sen x dx = pi
+int_1^e  log x dx   = 1
+\end{risultato}
+
+\begin{notastorica}[La formula di integrazione per parti]
+La formula è implicita nel «teorema di trasmutazione» con cui Leibniz, nel 1673, calcolò
+l'area del cerchio trasformandola in quella di un'altra figura, e che lo condusse alla
+celebre serie $\frac\pi4=1-\frac13+\frac15-\frac17+\cdots$. In forma esplicita compare nei trattati
+del Settecento, ad esempio nel \emph{Methodus incrementorum} di Brook Taylor (1715). È anche l'origine della formula di Taylor
+con resto integrale, che si ottiene integrando ripetutamente per parti
+$f(b)-f(a)=\int_{a}^{b}f'(x)\,dx$.
+\end{notastorica}

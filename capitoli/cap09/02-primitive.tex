@@ -1,0 +1,303 @@
+%% ----------------------------------------------------------------------------
+%%  §9.2  Primitive. Formula fondamentale del calcolo integrale
+%% ----------------------------------------------------------------------------
+\section{Primitive. Formula fondamentale del calcolo integrale}
+\label{sec:primitive}
+
+\begin{definizione}[Primitiva]\label{def:primitiva}\index{primitiva}
+Sia $f$ una funzione definita in un intervallo $I$. Una funzione $F$ si dice una
+\emph{primitiva} di $f$ in $I$ se $F$ è derivabile in $I$ e $F'(x)=f(x)$ per ogni $x\in I$.
+\end{definizione}
+
+Ad esempio, una primitiva di $f(x)=x$ in $\R$ è $F(x)=\frac{x^{2}}2$; una primitiva di
+$\sen x$ è $-\cos x$; una primitiva di $\frac1x$ nell'intervallo $(0,+\infty)$ è $\log x$.
+Con la definizione di primitiva, il teorema fondamentale si enuncia così: \emph{se $f$ è
+continua in $[a,b]$, la funzione integrale $F(x)=\int_{a}^{x}f(t)\,dt$ è una primitiva di
+$f$}. Più in generale, se $f$ è continua in un intervallo $I$ qualsiasi (aperto,
+semiaperto o illimitato) e $c\in I$, la funzione $\int_{c}^{x}f(t)\,dt$ è una primitiva di
+$f$ in $I$: basta applicare il \cref{teo:fondamentale} in un intervallo chiuso e
+limitato contenuto in $I$ che contenga $c$ e il punto $x$ considerato, con $x$ al suo
+interno se $x$ non è un estremo di $I$. Dunque:
+
+\begin{center}
+\emph{ogni funzione continua in un intervallo ammette primitive.}
+\end{center}
+
+Non tutte le funzioni, però, ammettono primitive, neppure se sono integrabili. La
+funzione $f$ che vale $-1$ per $x<0$ e $1$ per $x\ge0$ è integrabile in $[-1,1]$, ma non ha
+primitive: se fosse $G'=f$ in $[-1,1]$, la derivata $G'$ non si annullerebbe mai e
+cambierebbe segno, contro il lemma di Darboux (\cref{lem:darboux}). Viceversa, esistono
+funzioni discontinue che ammettono primitive, come la derivata di $x^{2}\sen\frac1x$
+(\cref{oss:f2-non-C1}).
+
+\subsection{Le primitive di una funzione in un intervallo}
+
+Se $F$ è una primitiva di $f$, anche $F+c$ lo è, qualunque sia la costante $c$, perché la
+derivata di una costante è nulla. Il teorema seguente afferma che in un intervallo non
+ce ne sono altre.
+
+\begin{teorema}[Caratterizzazione delle primitive in un intervallo]
+\label{teo:caratterizzazione-primitive}
+Se $F$ e $G$ sono due primitive di una stessa funzione $f$ in un intervallo $I$, esiste
+una costante $c$ tale che
+\begin{equation}\label{eq:primitive-costante}
+  G(x)=F(x)+c \qquad\perogni x\in I .
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$I$ intervallo; \ $F'=G'=f$ in $I$.}
+\Tesi{$G-F$ è costante in $I$.}
+\end{schema}
+
+\begin{strategia}
+La differenza $H=G-F$ ha derivata nulla in $I$. Una funzione con derivata nulla in un
+intervallo è costante: è una conseguenza del teorema di Lagrange, già dimostrata nel
+\cref{cap:applicazioni-derivate}. L'ipotesi che $I$ sia un intervallo serve proprio a
+poter applicare il teorema di Lagrange tra due punti qualsiasi.
+\end{strategia}
+
+\begin{dimostrazione}
+Sia $H=G-F$; allora $H$ è derivabile in $I$ e $H'(x)=G'(x)-F'(x)=f(x)-f(x)=0$ per ogni
+$x\in I$. Fissato $x_{0}\in I$, sia $x\in I$ con $x\neq x_{0}$. Poiché $I$ è un intervallo,
+contiene l'intervallo chiuso di estremi $x_{0}$ e $x$, nel quale $H$ è continua (perché
+derivabile) con derivata nulla; per il \cref{cor:funzioni-costanti}, $H$ è costante in
+tale intervallo, e quindi $H(x)=H(x_{0})$. Posto $c=H(x_{0})$, si ha $G(x)=F(x)+c$ per ogni
+$x\in I$.
+\end{dimostrazione}
+
+L'ipotesi che il dominio sia un intervallo è essenziale. Le funzioni $F(x)=\log\abs x$ e
+\[
+  G(x)=\begin{cases} \log\abs x+1 & \text{se } x>0,\\ \log\abs x+2 & \text{se } x<0 \end{cases}
+\]
+hanno entrambe derivata $\frac1x$ in $\R\setminus\set{0}$ (lo verificheremo nella
+\eqref{eq:derivata-log-abs}), ma la loro differenza non è costante: su ciascuno dei due
+intervalli $(-\infty,0)$ e $(0,+\infty)$ la costante può essere scelta indipendentemente.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[name=p1, width=0.52\textwidth, height=5cm, axis lines=middle,
+  xmin=-0.4, xmax=6.6, ymin=-2.3, ymax=3.4, xtick=\empty,
+  ytick=\empty, title={\scriptsize primitive di $\cos x$: $\sen x+c$}, clip=false]
+  \addplot[curva3, domain=-0.3:6.4, samples=100] {sin(deg(x))-1};
+  \addplot[curva, domain=-0.3:6.4, samples=100] {sin(deg(x))};
+  \addplot[curva2, domain=-0.3:6.4, samples=100] {sin(deg(x))+1};
+  \addplot[curva3, domain=-0.3:6.4, samples=100] {sin(deg(x))+2};
+  \addplot[tratteggio] coordinates {(1.2,-2.2) (1.2,3.3)};
+  \addplot[grigio, thick] coordinates {(0.4,-0.358) (2.0,0.222)};
+  \addplot[grigio, thick] coordinates {(0.4,0.642) (2.0,1.222)};
+  \addplot[grigio, thick] coordinates {(0.4,1.642) (2.0,2.222)};
+  \addplot[grigio, thick] coordinates {(0.4,2.642) (2.0,3.222)};
+  \addplot[only marks, mark=*, mark size=1.1pt, grigio] coordinates
+    {(1.2,-0.068) (1.2,0.932) (1.2,1.932) (1.2,2.932)};
+  \node[font=\scriptsize, anchor=north] at (axis cs:1.2,-2.25) {$x_{0}$};
+\end{axis}
+\begin{axis}[at={(p1.east)}, anchor=west, xshift=0.7cm, width=0.46\textwidth,
+  height=5cm, axis lines=middle, xmin=-0.3, xmax=3.6, ymin=-0.2, ymax=1.35,
+  xtick={1.5708,3.1416}, xticklabels={$\frac\pi2$,$\pi$}, ytick={1},
+  title={\scriptsize $\int_{0}^{\pi}\sen x\,dx=2$}]
+  \addplot[draw=none, fill=blu!22, domain=0:3.1416, samples=60] {sin(deg(x))}
+    \closedcycle;
+  \addplot[curva, domain=0:3.1416, samples=80] {sin(deg(x))};
+  \node[font=\scriptsize, blu] at (axis cs:1.5708,0.42) {area $=2$};
+\end{axis}
+\end{tikzpicture}
+\caption{A sinistra, alcune primitive di $\cos x$: i loro grafici si ottengono l'uno
+dall'altro per traslazione verticale, e nello stesso punto $x_{0}$ hanno tangenti
+parallele, di pendenza $\cos x_{0}$. A destra, l'area sotto un arco di sinusoide, calcolata
+con la formula fondamentale \eqref{eq:formula-fondamentale}.}
+\label{fig:primitive}
+\end{figure}
+
+\subsection{La formula fondamentale}
+
+Il risultato seguente riconduce il calcolo degli integrali definiti alla ricerca delle
+primitive.
+
+\begin{teorema}[Formula fondamentale del calcolo integrale]\label{teo:formula-fondamentale}
+\index{formula fondamentale del calcolo integrale}
+Sia $f$ una funzione continua in $[a,b]$ e sia $G$ una primitiva di $f$ in $[a,b]$. Allora
+\begin{equation}\label{eq:formula-fondamentale}
+  \int_{a}^{b}f(x)\,dx=\Bigl[G(x)\Bigr]_{a}^{b}=G(b)-G(a) .
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$ continua in $[a,b]$; \ $G'=f$ in $[a,b]$.}
+\Tesi{$\int_{a}^{b}f=G(b)-G(a)$.}
+\end{schema}
+
+\begin{strategia}
+La funzione integrale $F(x)=\int_{a}^{x}f$ è una primitiva di $f$ (teorema fondamentale),
+come $G$. Per la caratterizzazione delle primitive, $G=F+c$; la costante si determina
+calcolando in $x=a$, dove $F$ si annulla, e la tesi si ottiene calcolando in $x=b$.
+\end{strategia}
+
+\begin{dimostrazione}
+Per il \cref{teo:fondamentale}, $F(x)=\int_{a}^{x}f(t)\,dt$ è una primitiva di $f$ in
+$[a,b]$; per il \cref{teo:caratterizzazione-primitive} esiste una costante $c$ tale che
+\[
+  G(x)=F(x)+c=c+\int_{a}^{x}f(t)\,dt \qquad\perogni x\in[a,b] .
+\]
+Per $x=a$ si ottiene $G(a)=c+0=c$; sostituendo, $G(x)=G(a)+\int_{a}^{x}f(t)\,dt$, e per
+$x=b$ si ha la tesi.
+\end{dimostrazione}
+
+Il simbolo $\bigl[G(x)\bigr]_{a}^{b}$ indica la differenza $G(b)-G(a)$; si scrive anche
+$G(x)\big|_{a}^{b}$. La formula vale anche se $a>b$, per la \eqref{eq:estremi-invertiti}.
+
+\begin{esempio}[Primi integrali calcolati con la formula fondamentale]
+\label{es:formula-fondamentale}
+Ecco alcuni integrali che il \cref{cap:integrali-definiti} non permetteva di calcolare, o
+permetteva di calcolare soltanto con fatica.
+\begin{enumerate}[label=\textup{(\alph*)}]
+  \item Il settore di parabola: $G(x)=\frac{x^{3}}3$ è una primitiva di $x^{2}$, e
+  \[
+    \int_{0}^{b}x^{2}\,dx=\Bigl[\frac{x^{3}}3\Bigr]_{0}^{b}=\frac{b^{3}}3 .
+  \]
+  Il risultato di Archimede,
+  che ci era costato un paragrafo, si ottiene in una riga.
+  \item L'arco di sinusoide (\cref{fig:primitive}, a destra):
+  $\int_{0}^{\pi}\sen x\,dx=\bigl[-\cos x\bigr]_{0}^{\pi}=-\cos\pi+\cos0=2$.
+  \item Poiché $D\operatorname{arctg}x=\frac1{1+x^{2}}$ \eqref{eq:derivata-arctg},
+  $\int_{0}^{1}\frac{dx}{1+x^{2}}=\operatorname{arctg}1-\operatorname{arctg}0=\frac\pi4$: è il
+  valore annunciato negli esercizi del \cref{cap:integrali-definiti}, e quindi anche
+  $\sum_{k=1}^{n}\frac n{n^{2}+k^{2}}\to\frac\pi4$ (\cref{es:limiti-riemann}).
+  \item Poiché $D\,2^{x}=2^{x}\log2$ \eqref{eq:derivata-ax}, una primitiva di $2^{x}$ è
+  $\frac{2^{x}}{\log2}$, e $\int_{0}^{1}2^{x}\,dx=\frac{2-1}{\log2}=\frac1{\log2}$, come avevamo
+  trovato con le progressioni geometriche (\cref{es:integrale-esponenziale}).
+\end{enumerate}
+\end{esempio}
+
+\begin{osservazione}[La formula fondamentale senza il teorema fondamentale]
+\label{oss:formula-fondamentale-integrabili}
+La formula \eqref{eq:formula-fondamentale} vale anche se $f$ è soltanto integrabile in
+$[a,b]$, purché abbia una primitiva $G$ in $[a,b]$. Infatti, per ogni partizione
+$P=\set{x_{0},\dots,x_{n}}$, il teorema di Lagrange applicato a $G$ in ciascun intervallo
+$[x_{k-1},x_{k}]$ fornisce punti $\xi_{k}$ con $G(x_{k})-G(x_{k-1})=f(\xi_{k})\,\Delta x_{k}$, e
+sommando (la somma a primo membro è telescopica)
+\[
+  G(b)-G(a)=\sum_{k=1}^{n}f(\xi_{k})\,\Delta x_{k} ,
+\]
+che è una somma di Riemann, compresa tra $s(P)$ e $S(P)$. Il numero $G(b)-G(a)$ è dunque un
+elemento separatore tra le somme inferiori e superiori di $f$, e poiché $f$ è
+integrabile coincide con l'integrale. Questa dimostrazione mostra anche perché la
+formula funziona: in una qualsiasi partizione, l'incremento totale di $G$ è la somma
+degli incrementi sui singoli intervalli, ciascuno uguale a «derivata per ampiezza».
+\end{osservazione}
+
+\begin{idea}[Spazio percorso e velocità]
+Se $s(t)$ è la posizione di un velivolo lungo la pista e la velocità $v(t)=s'(t)$ è
+continua, la formula fondamentale dà
+\begin{equation}\label{eq:spazio-velocita}
+  s(t_{1})-s(t_{0})=\int_{t_{0}}^{t_{1}}v(t)\,dt :
+\end{equation}
+lo spazio percorso è l'area sotto il grafico della velocità. È la giustificazione
+promessa nel \cref{cap:integrali-definiti} per la corsa di decollo e per il variometro
+dell'aliante: la quota $h(t)$ ha derivata $v_{z}(t)$, e la variazione di quota è
+$\int v_{z}\,dt$. Allo stesso modo, il teorema della media per gli integrali diventa il
+teorema di Lagrange per la primitiva: $\frac1{b-a}\int_{a}^{b}f=\frac{G(b)-G(a)}{b-a}=G'(\xi)=f(\xi)$
+per un $\xi\in(a,b)$, come avevamo anticipato.
+\end{idea}
+
+\subsection{Approfondimento: la formula fondamentale per le funzioni regolari a tratti}
+\label{subsec:regolari-tratti}
+
+Nelle applicazioni si incontrano spesso funzioni continue che sono derivabili tranne che in
+un numero finito di punti, dove il grafico ha un punto angoloso: $\abs x$, la funzione
+integrale $\abs x-1$ del \cref{sec:teorema-fondamentale}, o, come vedremo, il momento
+flettente di un'ala che porta un motore. Seguendo \cite{giusti}, estendiamo a queste
+funzioni la formula fondamentale.
+
+\begin{definizione}[Funzione regolare a tratti]\label{def:regolare-tratti}
+\index{funzione!regolare a tratti}
+Una funzione $G:[a,b]\to\R$ si dice \emph{regolare a tratti} se esistono punti
+$a=z_{0}<z_{1}<\dots<z_{r}=b$ tali che, in ciascuno degli intervalli aperti
+$(z_{k-1},z_{k})$, $G$ è derivabile con derivata $G'$ continua e limitata.
+\end{definizione}
+
+Nei punti $z_{k}$ la derivata può non esistere. Assegnandole in quei punti valori
+arbitrari si ottiene però una funzione limitata e continua tranne che in un numero finito
+di punti, quindi integrabile (\cref{es:continua-tratti}), il cui integrale non dipende dai
+valori scelti (\cref{es:valore-in-un-punto}): è questo il numero che indichiamo con
+$\int_{a}^{b}G'(x)\,dx$.
+
+\begin{teorema}[Formula fondamentale per le funzioni regolari a tratti]
+\label{teo:formula-regolari-tratti}
+Se $G$ è continua in $[a,b]$ e regolare a tratti, allora
+\begin{equation}\label{eq:formula-regolari-tratti}
+  \int_{a}^{b}G'(x)\,dx=G(b)-G(a) .
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$G$ continua in $[a,b]$; \ $G$ derivabile, con $G'$ continua e limitata, in
+ciascun intervallo $(z_{k-1},z_{k})$.}
+\Tesi{$\int_{a}^{b}G'(x)\,dx=G(b)-G(a)$.}
+\end{schema}
+
+\begin{strategia}
+Per l'additività basta ragionare su un intervallo $[z_{k-1},z_{k}]$, negli estremi del
+quale $G$ può non essere derivabile. Ce ne teniamo lontani: in un intervallo $[t,s]$ più
+piccolo vale la formula ordinaria; poi facciamo tendere $t$ e $s$ agli estremi, usando
+la continuità della funzione integrale e quella di $G$, che è dunque essenziale.
+\end{strategia}
+
+\begin{dimostrazione}
+Fissato $k$, poniamo $\alpha=z_{k-1}$, $\beta=z_{k}$; sia $g$ una funzione uguale a $G'$
+in $(\alpha,\beta)$, con valori arbitrari in $\alpha$ e $\beta$, e sia
+$\Phi(x)=\int_{\alpha}^{x}g(t)\,dt$ per $x\in[\alpha,\beta]$. Se $\alpha<t<s<\beta$, la
+funzione $G$ è derivabile in $[t,s]$ con derivata continua, e per l'additività e il
+\cref{teo:formula-fondamentale}
+\[
+  \Phi(s)-\Phi(t)=\int_{t}^{s}G'(x)\,dx=G(s)-G(t) .
+\]
+La funzione $\Phi$ è continua in $[\alpha,\beta]$ (\cref{prop:integrale-lipschitz}), e
+così pure $G$, per ipotesi. Facendo tendere $t$ ad $\alpha$ da destra si ottiene
+$\Phi(s)=G(s)-G(\alpha)$ per ogni $s\in(\alpha,\beta)$, perché $\Phi(\alpha)=0$; facendo
+poi tendere $s$ a $\beta$ da sinistra, $\Phi(\beta)=G(\beta)-G(\alpha)$, cioè
+$\int_{z_{k-1}}^{z_{k}}G'=G(z_{k})-G(z_{k-1})$. Sommando su $k$ e usando l'additività
+(\cref{teo:additivita}), il secondo membro è una somma telescopica che vale $G(b)-G(a)$.
+\end{dimostrazione}
+
+\begin{osservazione}[La continuità di $G$ è essenziale]\label{oss:regolari-tratti-salti}
+La funzione segno $G$, che vale $-1$ per $x<0$, $0$ in $0$ e $1$ per $x>0$, è regolare a tratti
+in $[-1,1]$, con derivata nulla per $x\neq0$: dunque $\int_{-1}^{1}G'=0$, mentre
+$G(1)-G(-1)=2$. La differenza è il salto in $0$: la derivata «non vede» i salti. In
+generale, se $G$ è regolare a tratti, continua in $a$ e in $b$, e nei punti interni
+$z_{k}$ ha limiti destro e sinistro, la stessa dimostrazione (dove ora, per $t\to z_{k-1}^{+}$
+e $s\to z_{k}^{-}$, compaiono i limiti laterali di $G$) dà
+\[
+  \int_{a}^{b}G'(x)\,dx=G(b)-G(a)-\sum_{k=1}^{r-1}\sigma_{k}, \qquad
+  \sigma_{k}=\lim_{x\to z_{k}^{+}}G(x)-\lim_{x\to z_{k}^{-}}G(x) .
+\]
+\end{osservazione}
+
+\begin{esempio}[Una funzione integranda con un salto]\label{es:integranda-salto}
+Sia $f(x)=-1$ per $x<0$ e $f(x)=x$ per $x\ge0$. La funzione $f$ non ha primitive in
+$[-1,2]$ (se fosse $H'=f$, la derivata di $H(x)+\frac x2$ non si annullerebbe mai e
+cambierebbe segno, contro il \cref{lem:darboux}), ma fuori dall'origine è la derivata di
+\[
+  G(x)=\begin{cases} -x & \text{se } x<0,\\[2pt] \dfrac{x^{2}}2+c & \text{se } x\ge0, \end{cases}
+\]
+qualunque sia la costante $c$. Con $c=0$ la funzione $G$ è continua e regolare a tratti, e
+per il \cref{teo:formula-regolari-tratti} $\int_{-1}^{2}f=G(2)-G(-1)=2-1=1$, come conferma
+il calcolo spezzato in $0$. Con $c\neq0$, invece, $G$ ha in $0$ il salto $\sigma_{1}=c$, e
+$G(2)-G(-1)=1+c$ è sbagliato proprio di $c$: le costanti dei diversi tratti vanno scelte
+in modo da «incollare» i pezzi di $G$ con continuità.
+\end{esempio}
+
+\begin{notastorica}[Derivate non integrabili: Volterra e Lebesgue]
+Nell'\cref{oss:formula-fondamentale-integrabili} e nel \cref{teo:formula-regolari-tratti}
+abbiamo supposto la derivata integrabile. L'ipotesi sembra superflua quando la derivata è
+limitata; invece nel 1881 Vito Volterra, allora studente di Ulisse Dini alla Scuola
+Normale di Pisa, costruì una funzione derivabile in ogni punto, con derivata limitata ma
+non integrabile secondo Riemann, perché discontinua in un insieme che non ha misura
+nulla (nel senso della nota storica del \S\ref{sec:integrabilita-continue}): per essa il
+primo membro della formula fondamentale non esiste. La questione fu risolta da Henri
+Lebesgue: con il suo integrale, introdotto nella tesi del 1902, ogni derivata limitata è
+integrabile e la formula $\int_{a}^{b}G'=G(b)-G(a)$ vale sempre. Non a caso le sue lezioni
+del 1904 si intitolano \emph{Leçons sur l'intégration et la recherche des fonctions
+primitives}: ritrovare una funzione dalla sua derivata è il problema di questo capitolo.
+\end{notastorica}

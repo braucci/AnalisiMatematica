@@ -1,0 +1,80 @@
+%% ============================================================================
+%%  CAPITOLO 9 — Integrali indefiniti
+%%  Fonte principale per argomenti e dimostrazioni: Marcellini–Sbordone, cap. 9
+%%  (§67 teorema fondamentale del calcolo integrale; §68 primitive, formula
+%%  fondamentale; §69 l'integrale indefinito; §70 integrazione per decomposizione
+%%  in somma; §71 funzioni razionali; §72 integrazione per parti; §73 integrazione
+%%  per sostituzione; §74 calcolo di aree di figure piane; appendice: §75 integrali
+%%  impropri; §76 definizione di logaritmo, esponenziale, potenza).
+%% ============================================================================
+\aperturacapitolo{Integrali indefiniti}{cap:integrali-indefiniti}
+
+\epigraph{Data aequatione quotcunque fluentes quantitates involvente, fluxiones
+invenire; et vice versa.\\[2pt]
+\upshape(Data un'equazione che contenga un numero qualsiasi di quantità fluenti,
+trovarne le flussioni; e viceversa.)}{Isaac Newton, soluzione dell'anagramma inviato a
+Leibniz nell'\emph{Epistola posterior} (1676)}
+
+\lettrine[lines=3, findent=2pt, nindent=0pt]{N}{el capitolo precedente} abbiamo
+definito l'integrale come elemento separatore tra somme inferiori e superiori, e lo
+abbiamo calcolato con fatica in pochissimi casi: $x$, $x^{2}$, $x^{3}$, $2^{x}$, sempre
+ricorrendo a formule ad hoc per le somme. Avevamo però notato una curiosa
+coincidenza: la derivata dell'area $\frac{b^{3}}3$ del settore di parabola, pensata
+come funzione dell'estremo $b$, è proprio $b^{2}$, il valore della funzione integranda.
+In questo capitolo trasformiamo la coincidenza in un teorema, il \emph{teorema
+fondamentale del calcolo integrale}: integrazione e derivazione sono operazioni
+inverse l'una dell'altra. È la scoperta di Newton e di Leibniz che ha dato origine al
+calcolo infinitesimale, e la sua conseguenza pratica è enorme: per calcolare
+$\int_{a}^{b}f(x)\,dx$ basta conoscere una funzione $G$ la cui derivata sia $f$, cioè
+una \emph{primitiva} di $f$, e calcolare $G(b)-G(a)$.
+
+Il problema del calcolo degli integrali diventa così quello della ricerca delle
+primitive, cioè degli \emph{integrali indefiniti}. Leggendo «al contrario» le regole di
+derivazione otterremo gli integrali immediati e i tre metodi generali di integrazione:
+per decomposizione in somma, per parti, per sostituzione, insieme a un procedimento
+sistematico per le funzioni razionali. Li applicheremo al calcolo di aree, tra cui
+quella del cerchio e dell'ellisse (verificando ciò che avevamo ammesso nel
+\cref{cap:integrali-definiti}), e a un problema centrale delle costruzioni aeronautiche:
+il taglio e il momento flettente lungo l'apertura di un'ala. Nelle appendici
+estenderemo l'integrale agli intervalli illimitati e alle funzioni non limitate, e
+mostreremo come il logaritmo, e con esso l'esponenziale e le potenze, si possa
+\emph{definire} mediante un integrale. Seguiremo il testo di riferimento
+\cite{marcellini-sbordone}.
+
+\medskip
+\noindent\textbf{In questo capitolo.}
+\begin{itemize}
+  \item La funzione integrale e il teorema fondamentale del calcolo integrale
+  (\S\ref{sec:teorema-fondamentale}).
+  \item Primitive e formula fondamentale del calcolo integrale (\S\ref{sec:primitive}).
+  \item Approfondimento: la formula fondamentale per le funzioni regolari a tratti
+  (\S\ref{subsec:regolari-tratti}).
+  \item L'integrale indefinito, gli integrali immediati, la decomposizione in somma
+  (\S\ref{sec:integrale-indefinito}).
+  \item L'integrazione delle funzioni razionali (\S\ref{sec:razionali}).
+  \item L'integrazione per parti (\S\ref{sec:per-parti}).
+  \item L'integrazione per sostituzione (\S\ref{sec:sostituzione}).
+  \item Approfondimento: le sostituzioni standard per le funzioni razionali di $\sen x$ e
+  $\cos x$ e di $x$ e $\sqrt{x^{2}+a}$ (\S\ref{subsec:sostituzioni-standard}).
+  \item Aree di figure piane e applicazioni: cerchio, ellisse, spazio percorso, taglio e
+  momento flettente in un'ala (\S\ref{sec:applicazioni-integrali}).
+  \item Appendice: integrali impropri (\S\ref{sec:impropri}).
+  \item Approfondimento: un integrale convergente ma non assolutamente convergente
+  (\S\ref{subsec:seno-su-x}).
+  \item Appendice: logaritmo, esponenziale e potenza definiti mediante un integrale
+  (\S\ref{sec:logaritmo-integrale}).
+  \item Esercizi di riepilogo (\S\ref{sec:esercizi-cap9}).
+  \item Punti fondamentali del capitolo (\S\ref{sec:sintesi-cap09}).
+\end{itemize}
+
+\input{capitoli/cap09/01-teorema-fondamentale}
+\input{capitoli/cap09/02-primitive}
+\input{capitoli/cap09/03-integrale-indefinito}
+\input{capitoli/cap09/04-razionali}
+\input{capitoli/cap09/05-per-parti}
+\input{capitoli/cap09/06-sostituzione}
+\input{capitoli/cap09/07-applicazioni}
+\input{capitoli/cap09/08-impropri}
+\input{capitoli/cap09/09-logaritmo}
+\input{capitoli/cap09/10-esercizi}
+\input{capitoli/cap09/11-sintesi}

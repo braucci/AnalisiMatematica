@@ -1,0 +1,238 @@
+%% ----------------------------------------------------------------------------
+%%  §10.3  La formula di Taylor con il resto integrale
+%% ----------------------------------------------------------------------------
+\section{La formula di Taylor con il resto integrale}
+\label{sec:resto-integrale}
+
+Il resto di Peano descrive il comportamento dell'errore $R_{n}(x)=f(x)-T_{n}(x)$ per
+$x\to x_{0}$, ma non dice nulla sul suo valore per un $x$ \emph{fissato}: sapere che
+$R_{n}(x)=o\bigl((x-x_{0})^{n}\bigr)$ non permette di affermare, ad esempio, che l'errore
+commesso calcolando $\sen\frac1{10}$ con il polinomio $x-\frac{x^{3}}6$ è minore di $10^{-7}$. Per
+questo occorre un'espressione esplicita del resto. Se la funzione è abbastanza regolare,
+il calcolo integrale la fornisce.
+
+\begin{teorema}[Formula di Taylor con il resto integrale]\label{teo:resto-integrale}
+\index{formula di Taylor!con il resto integrale}
+Sia $f$ derivabile $n+1$ volte nell'intervallo $[a,b]$, con derivata $f^{(n+1)}$ continua
+(cioè $f$ di classe $C^{n+1}$ in $[a,b]$), e sia $x_{0}\in[a,b]$. Allora il resto
+$R_{n}(x)=f(x)-T_{n}(x)$ della formula di Taylor di ordine $n$ con centro $x_{0}$ si
+rappresenta nella forma
+\begin{equation}\label{eq:resto-integrale}
+  R_{n}(x)=\int_{x_{0}}^{x}\frac{(x-t)^{n}}{n!}\,f^{(n+1)}(t)\,dt \qquad\perogni x\in[a,b] .
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f\in C^{n+1}([a,b])$; \ $x_{0}\in[a,b]$.}
+\Tesi{$f(x)=\displaystyle\sum_{k=0}^{n}\frac{f^{(k)}(x_{0})}{k!}(x-x_{0})^{k}
++\int_{x_{0}}^{x}\frac{(x-t)^{n}}{n!}\,f^{(n+1)}(t)\,dt$ per ogni $x\in[a,b]$.}
+\end{schema}
+
+\begin{strategia}
+Procediamo per induzione su $n$. Per $n=0$ la tesi è la formula fondamentale del calcolo
+integrale: $f(x)-f(x_{0})=\int_{x_{0}}^{x}f'(t)\,dt$. Per passare da $n$ a $n+1$ osserviamo che
+$R_{n}$ e $R_{n+1}$ differiscono per un solo termine,
+$R_{n}(x)-R_{n+1}(x)=\frac{f^{(n+1)}(x_{0})}{(n+1)!}(x-x_{0})^{n+1}$: dobbiamo «estrarre» questo termine
+dall'integrale \eqref{eq:resto-integrale}. Lo strumento è l'integrazione per parti nella
+variabile $t$ (con $x$ fissato), derivando $f^{(n+1)}$ e integrando il peso
+$\frac{(x-t)^{n}}{n!}$, la cui primitiva $-\frac{(x-t)^{n+1}}{(n+1)!}$ si annulla per $t=x$: in questo modo il
+termine di bordo in $t=x$ scompare, e quello in $t=x_{0}$ è proprio il termine cercato.
+\end{strategia}
+
+\begin{dimostrazione}
+Dimostriamo per induzione su $n\ge0$ la proposizione
+\begin{quote}
+$P(n)$: \emph{per ogni funzione $f$ di classe $C^{n+1}$ in $[a,b]$ e per ogni
+$x_{0},x\in[a,b]$ vale la \eqref{eq:resto-integrale}.}
+\end{quote}
+
+\emph{Base} ($n=0$). Il polinomio di Taylor di ordine $0$ è la costante $f(x_{0})$, e
+$R_{0}(x)=f(x)-f(x_{0})$. Poiché $f'$ è continua, per la formula fondamentale del calcolo
+integrale (\cref{teo:formula-fondamentale})
+\[
+  \int_{x_{0}}^{x}f'(t)\,dt=\Bigl[f(t)\Bigr]_{t=x_{0}}^{t=x}=f(x)-f(x_{0})=R_{0}(x) ,
+\]
+che è la \eqref{eq:resto-integrale} per $n=0$ (si ricordi che $0!=1$ e $(x-t)^{0}=1$).
+
+\emph{Passo induttivo.} Supponiamo vera $P(n)$ e sia $f$ di classe $C^{n+2}$ in $[a,b]$. In
+particolare $f$ è di classe $C^{n+1}$, e per l'ipotesi induttiva
+\[
+  R_{n}(x)=\int_{x_{0}}^{x}\frac{(x-t)^{n}}{n!}\,f^{(n+1)}(t)\,dt .
+\]
+Fissato $x$, integriamo per parti (\cref{teo:per-parti-definito}) con
+$F(t)=f^{(n+1)}(t)$, di classe $C^{1}$, e $G(t)=-\frac{(x-t)^{n+1}}{(n+1)!}$, che ha derivata
+$G'(t)=\frac{(x-t)^{n}}{n!}$. Il teorema è enunciato per un intervallo $[\alpha,\beta]$ con $\alpha<\beta$, ma
+vale anche quando l'estremo inferiore supera quello superiore, perché scambiando gli
+estremi entrambi i membri cambiano segno; possiamo quindi usarlo anche se $x<x_{0}$.
+Poiché $G(x)=0$,
+\begin{align*}
+  R_{n}(x)&=\int_{x_{0}}^{x}G'(t)F(t)\,dt
+  =\Bigl[G(t)F(t)\Bigr]_{t=x_{0}}^{t=x}-\int_{x_{0}}^{x}G(t)F'(t)\,dt\\
+  &=\frac{(x-x_{0})^{n+1}}{(n+1)!}\,f^{(n+1)}(x_{0})
+  +\int_{x_{0}}^{x}\frac{(x-t)^{n+1}}{(n+1)!}\,f^{(n+2)}(t)\,dt .
+\end{align*}
+D'altra parte $T_{n+1}(x)=T_{n}(x)+\frac{f^{(n+1)}(x_{0})}{(n+1)!}(x-x_{0})^{n+1}$, e quindi
+\[
+\begin{aligned}
+  R_{n+1}(x)&=R_{n}(x)-\frac{f^{(n+1)}(x_{0})}{(n+1)!}(x-x_{0})^{n+1}\\
+  &=\int_{x_{0}}^{x}\frac{(x-t)^{n+1}}{(n+1)!}\,f^{(n+2)}(t)\,dt ,
+\end{aligned}
+\]
+che è la \eqref{eq:resto-integrale} con $n+1$ al posto di $n$. Dunque vale $P(n+1)$, e per il
+principio di induzione la tesi è dimostrata per ogni $n$.
+\end{dimostrazione}
+
+\begin{osservazione}[Il significato del peso]
+La \eqref{eq:resto-integrale} dice che l'errore è una «media pesata» della derivata
+$f^{(n+1)}$ lungo l'intervallo di estremi $x_{0}$ e $x$, con peso $\frac{(x-t)^{n}}{n!}$. Per $n=1$,
+\[
+  f(x)=f(x_{0})+f'(x_{0})(x-x_{0})+\int_{x_{0}}^{x}(x-t)\,f''(t)\,dt :
+\]
+la distanza tra il grafico e la retta tangente in $x_{0}$ dipende soltanto dalla derivata
+seconda. Se $f''\ge0$, per $x>x_{0}$ l'integrando è non negativo, e per $x<x_{0}$ si ha
+$\int_{x_{0}}^{x}(x-t)f''(t)\,dt=\int_{x}^{x_{0}}(t-x)f''(t)\,dt\ge0$: il grafico di una funzione con
+derivata seconda non negativa sta sopra ciascuna delle sue rette tangenti, come sappiamo
+dallo studio della convessità (\cref{cap:applicazioni-derivate}). Il peso $(x-t)$ è
+massimo vicino a $x_{0}$ e nullo in $t=x$: la curvatura che si trova vicino al centro dello
+sviluppo «pesa» di più, perché il suo effetto si accumula lungo tutto il tratto
+successivo.
+\end{osservazione}
+
+\begin{esempio}[L'esponenziale supera i suoi polinomi di Taylor]\label{es:exp-maggiore-taylor}
+Sia $f(x)=e^{x}$, $x_{0}=0$. Poiché $f^{(n+1)}(t)=e^{t}>0$, per $x>0$ l'integrando della
+\eqref{eq:resto-integrale} è positivo in $(0,x)$, e quindi $R_{n}(x)>0$:
+\begin{equation}\label{eq:exp-maggiore-taylor}
+  e^{x}>1+x+\frac{x^{2}}2+\dots+\frac{x^{n}}{n!} \qquad\perogni x>0,\ \perogni n\ge0 .
+\end{equation}
+In particolare, con $x=1$, $e>\sum_{k=0}^{n}\frac1{k!}$ per ogni $n$: le somme $\sum_{k=0}^{n}\frac1{k!}$ sono
+approssimazioni \emph{per difetto} di $e$. Nel \cref{sec:tabulazione} maggioreremo
+l'errore $R_{n}(1)$, e otterremo così anche approssimazioni per eccesso.
+\end{esempio}
+
+\subsection{Un'applicazione: la freccia di un'ala a sbalzo}
+
+Il resto integrale ha un'interpretazione fisica immediata nella teoria della trave. Nel
+\cref{sec:applicazioni-integrali} abbiamo modellato la semiala come una trave incastrata
+alla radice $y=0$ e libera all'estremità $y=s$, caricata dalla portanza distribuita
+$l(y)$, e ne abbiamo calcolato il momento flettente
+$M(y)=\int_{y}^{s}(\eta-y)\,l(\eta)\,d\eta$ \eqref{eq:taglio-momento}. Indichiamo con $v(y)$ lo
+spostamento verticale (la \emph{freccia}) della linea d'asse nella stazione $y$. Nella
+teoria di Eulero--Bernoulli la curvatura $\frac1\rho$ della linea d'asse deformata è
+proporzionale al momento flettente, $\frac1\rho=\frac M{EI}$, dove $E$ è il modulo di
+elasticità del materiale e $I$ il momento d'inerzia del second'ordine della sezione
+rispetto all'asse neutro; supponiamo per ora $E$ e $I$ costanti. La curvatura del grafico
+di $v$ vale $\frac{v''}{(1+v'^{2})^{3/2}}$ e, per piccole rotazioni ($\abs{v'}\ll1$), si riduce a $v''$.
+Con $v$ positivo verso l'alto e $M>0$ per una portanza diretta verso l'alto (la
+convenzione del \cref{sec:applicazioni-integrali}; molti testi usano la convenzione
+opposta e scrivono $v''=-\frac M{EI}$), si ottiene l'equazione della linea elastica
+\begin{equation}\label{eq:linea-elastica}
+  v''(y)=\frac{M(y)}{EI} .
+\end{equation}
+L'incastro impone $v(0)=0$ e $v'(0)=0$: alla radice l'ala non si sposta e non ruota.
+
+\begin{proposizione}[Freccia di una trave a sbalzo]\label{prop:freccia}
+Sia $l$ continua in $[0,s]$, e sia $v$ di classe $C^{2}$ in $[0,s]$, soluzione della
+\eqref{eq:linea-elastica} con $v(0)=v'(0)=0$. Allora
+\begin{equation}\label{eq:freccia}
+  v(y)=\frac1{EI}\int_{0}^{y}(y-t)\,M(t)\,dt \qquad\perogni y\in[0,s] .
+\end{equation}
+In particolare, per un carico uniforme $l(y)=l$ la freccia all'estremità vale
+$v(s)=\frac{l\,s^{4}}{8EI}$.
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$l$ continua; \ $v\in C^{2}([0,s])$; \ $v''=\frac M{EI}$; \ $v(0)=v'(0)=0$.}
+\Tesi{$v(y)=\frac1{EI}\int_{0}^{y}(y-t)M(t)\,dt$; \ con carico uniforme $v(s)=\frac{ls^{4}}{8EI}$.}
+\end{schema}
+
+\begin{strategia}
+È la formula di Taylor di ordine $1$ con centro nell'incastro e resto integrale: il
+polinomio di Taylor $v(0)+v'(0)y$ è nullo per le condizioni di incastro, e resta soltanto
+il resto, in cui $v''$ si sostituisce con la \eqref{eq:linea-elastica}. Per il carico
+uniforme si calcola $M$ e un integrale di potenze.
+\end{strategia}
+
+\begin{dimostrazione}
+Per il \cref{teo:resto-integrale} con $n=1$ e $x_{0}=0$,
+\[
+  v(y)=v(0)+v'(0)\,y+\int_{0}^{y}(y-t)\,v''(t)\,dt=\frac1{EI}\int_{0}^{y}(y-t)\,M(t)\,dt .
+\]
+Se $l$ è costante, $M(t)=l\int_{t}^{s}(\eta-t)\,d\eta=\frac l2(s-t)^{2}$, e
+\[
+  v(s)=\frac l{2EI}\int_{0}^{s}(s-t)^{3}\,dt=\frac l{2EI}\Bigl[-\frac{(s-t)^{4}}4\Bigr]_{0}^{s}
+  =\frac{l\,s^{4}}{8EI} . \qedhere
+\]
+\end{dimostrazione}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[x=1.6cm, y=1.6cm]
+  \fill[pattern=north east lines, pattern color=grigio] (-0.25,-0.9) rectangle (0,1.3);
+  \draw[thick] (0,-0.9) -- (0,1.3);
+  \draw[tratteggio] (0,0) -- (4.2,0);
+  \draw[blu, very thick, domain=0:4, samples=60]
+    plot (\x, {0.9*(\x/4)^2*(6-4*(\x/4)+(\x/4)^2)/3});
+  \foreach \y in {0.25,0.75,...,3.75} {
+    \pgfmathsetmacro{\v}{0.9*(\y/4)^2*(6-4*(\y/4)+(\y/4)^2)/3}
+    \pgfmathsetmacro{\h}{0.6*sqrt(1-(\y/4)^2)}
+    \draw[rame, -{Stealth[length=1.6mm]}] (\y,\v-0.06-\h) -- (\y,\v-0.06);
+  }
+  \node[rame, font=\scriptsize] at (1.0,-0.62) {$l(y)$};
+  \draw[grigio, {Stealth[length=1.2mm]}-{Stealth[length=1.2mm]}] (3,0) -- (3,0.601);
+  \node[font=\scriptsize] at (3,0.8) {$v(y)$};
+  \draw[{Stealth[length=1.6mm]}-{Stealth[length=1.6mm]}] (4.15,0) -- (4.15,0.9)
+    node[midway, right, font=\scriptsize] {$v(s)$};
+  \draw[-{Stealth[length=1.8mm]}] (0,-1.05) -- (4.4,-1.05) node[right, font=\scriptsize] {$y$};
+  \draw (4,-1.0) -- (4,-1.1) node[below, font=\scriptsize] {$s$};
+  \draw (3,-1.0) -- (3,-1.1) node[below, font=\scriptsize] {$y$};
+  \node[font=\scriptsize, below] at (0,-1.1) {$0$};
+\end{tikzpicture}
+\caption{La semiala come trave a sbalzo: incastrata alla radice, si inflette verso l'alto
+sotto la portanza distribuita $l(y)$. Il polinomio di Taylor della freccia $v$ con
+centro nell'incastro è nullo, e la freccia coincide con il resto integrale
+\eqref{eq:freccia}. Gli spostamenti sono fortemente esagerati, e la deformata e il
+profilo del carico sono soltanto qualitativi.}
+\label{fig:linea-elastica}
+\end{figure}
+
+La \eqref{eq:freccia} si legge così: il tratto $[t,t+dt]$ della trave, dove il momento vale
+$M(t)$, ruota di un angolo $\frac{M(t)}{EI}\,dt$, e questa rotazione, propagata con braccio $y-t$
+fino alla stazione $y$, produce lo spostamento $(y-t)\frac{M(t)}{EI}\,dt$. Il peso $(y-t)$ del
+resto integrale è proprio questo braccio. Per la semiala del
+\cref{es:taglio-ellittico} ($W=10\,000$~N, $b=10$~m) e una rigidezza flessionale
+$EI=2\cdot10^{6}$~N\,m$^{2}$ (un valore puramente indicativo), il carico uniforme
+$l=\frac Wb=1000$~N/m dà una freccia all'estremità di circa $3{,}9$~cm; con la
+distribuzione ellittica, che concentra la portanza verso la radice, la freccia scende a
+circa $3{,}0$~cm, cioè si riduce di circa il $23\%$ (il rapporto esatto è calcolato
+nell'\cref{es:freccia-ellittica}). Il programma calcola le due frecce integrando
+numericamente. Si noti infine che la dimostrazione della \cref{prop:freccia} non usa la
+costanza di $EI$: per un'ala reale, rastremata, la rigidezza $EI(t)$ diminuisce verso
+l'estremità, e la stessa formula di Taylor dà $v(y)=\int_{0}^{y}(y-t)\frac{M(t)}{EI(t)}\,dt$, purché
+$EI$ sia continua e positiva.
+
+\begin{python}[Freccia all'estremità della semiala]
+import math
+from scipy.integrate import quad
+
+W, b, EI = 10000.0, 10.0, 2.0e6            # N, m, N*m^2
+s = b / 2
+carichi = {
+    "uniforme": lambda y: W / b,
+    "ellittico": lambda y: 4 * W / (math.pi * b)
+                           * math.sqrt(max(0.0, 1 - (y / s)**2)),
+}
+v_tip = {}
+for nome, l in carichi.items():
+    M = lambda t: quad(lambda e: (e - t) * l(e), t, s)[0]
+    v_tip[nome] = quad(lambda t: (s - t) * M(t), 0, s)[0] / EI
+    print(f"{nome:9s}:  v(s) = {100 * v_tip[nome]:.3f} cm")
+print(f"formula l*s^4/(8EI): {100 * (W/b) * s**4 / (8*EI):.3f} cm")
+print(f"rapporto ellittico/uniforme = "
+      f"{v_tip['ellittico'] / v_tip['uniforme']:.4f}")
+\end{python}
+\begin{risultato}
+uniforme :  v(s) = 3.906 cm
+ellittico:  v(s) = 3.022 cm
+formula l*s^4/(8EI): 3.906 cm
+rapporto ellittico/uniforme = 0.7736
+\end{risultato}

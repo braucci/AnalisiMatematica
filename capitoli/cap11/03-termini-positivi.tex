@@ -1,0 +1,78 @@
+%% ----------------------------------------------------------------------------
+%%  §11.3  Serie a termini non negativi
+%% ----------------------------------------------------------------------------
+\section{Serie a termini non negativi}
+\label{sec:serie-positive}
+
+Diremo che una serie $\sum a_{k}$ è \emph{a termini non negativi} se $a_{n}\ge0$ per ogni $n$,
+e \emph{a termini positivi} se $a_{n}>0$ per ogni $n$. Per queste serie la situazione è
+particolarmente semplice, perché la successione delle somme parziali è monotòna: da
+$a_{n+1}\ge0$ segue
+\begin{equation}\label{eq:somme-crescenti}
+  s_{n+1}=s_{n}+a_{n+1}\ge s_{n} \qquad\perogni n\in\N .
+\end{equation}
+
+\begin{teorema}[sulle serie a termini non negativi]\label{teo:serie-positive}
+\index{serie!a termini non negativi}
+Una serie a termini non negativi non può essere indeterminata: è convergente oppure
+divergente positivamente. Più precisamente, è convergente se e solo se la successione
+delle sue somme parziali è limitata, e in tal caso
+\begin{equation}\label{eq:somma-sup}
+  \sum_{k=1}^{\infty}a_{k}=\sup_{n\in\N}s_{n} .
+\end{equation}
+\end{teorema}
+
+\needspace{5\baselineskip}
+\begin{schema}
+\Ipotesi{$a_{n}\ge0$ per ogni $n$.}
+\Tesi{$s_{n}$ ha limite, finito o $+\infty$; \ $\sum a_{k}<+\infty$ $\sse$ $s_{n}$ limitata; \
+$\sum a_{k}=\sup s_{n}$.}
+\end{schema}
+
+\begin{strategia}
+Per la \eqref{eq:somme-crescenti} la successione $s_{n}$ è crescente, e il teorema sulle
+successioni monotòne dice tutto: il limite esiste ed è l'estremo superiore, finito se e
+solo se la successione è limitata superiormente. Inferiormente $s_{n}$ è limitata da $s_{1}$.
+\end{strategia}
+
+\begin{dimostrazione}
+Per la \eqref{eq:somme-crescenti} la successione $s_{n}$ è crescente; per il teorema sulle
+successioni monotòne (\cref{teo:monotone}) essa ha limite, e $\lim s_{n}=\sup_{n}s_{n}$.
+Il limite non può essere $-\infty$, perché $s_{n}\ge s_{1}$ per ogni $n$, e quindi la serie è
+convergente o divergente a $+\infty$. Inoltre $\sup_{n}s_{n}<+\infty$ se e solo se $s_{n}$ è
+limitata superiormente, cioè (essendo $s_{n}\ge s_{1}$) limitata.
+\end{dimostrazione}
+
+In particolare, \emph{la somma di una serie convergente a termini non negativi è
+maggiore o uguale a ciascuna delle sue somme parziali}. Per una serie a termini non
+negativi si scrive spesso $\sum a_{k}<+\infty$ per dire che la serie converge, e la
+condizione necessaria (\cref{teo:condizione-necessaria}) diventa un criterio di
+divergenza: se $a_{n}$ non tende a zero, la serie diverge a $+\infty$.
+
+\begin{esempio}\label{es:k-su-k1}
+La serie $\sum_{k=1}^{\infty}\frac k{k+1}$ è a termini positivi, quindi convergente o divergente
+a $+\infty$. Non è convergente, perché il suo termine generale tende a $1$ e non a $0$.
+Dunque $\sum_{k=1}^{\infty}\frac k{k+1}=+\infty$.
+\end{esempio}
+
+\begin{esempio}[La serie dei reciproci dei fattoriali]\label{es:serie-fattoriali}
+Consideriamo la serie a termini positivi $\sum_{k=0}^{\infty}\frac1{k!}$ (con $0!=1$). Per $k\ge1$
+si ha $k!=1\cdot2\cdots k\ge2^{k-1}$, perché ciascuno dei $k-1$ fattori $2,3,\dots,k$ è almeno
+$2$. Quindi, per la formula della progressione geometrica (\cref{prop:geometrica}),
+\[
+  s_{n}=1+\sum_{k=1}^{n}\frac1{k!}\le1+\sum_{k=1}^{n}\frac1{2^{k-1}}=1+\frac{1-2^{-n}}{1-\frac12}<3 :
+\]
+le somme parziali sono limitate, e la serie converge, con somma compresa tra $s_{1}=2$ e
+$3$. La stima del resto \eqref{eq:stima-e} della formula di Taylor dice di più:
+$0<e-\sum_{k=0}^{n}\frac1{k!}<\frac3{(n+1)!}\to0$, e quindi
+\begin{equation}\label{eq:e-serie}
+  \sum_{k=0}^{\infty}\frac1{k!}=1+1+\frac12+\frac1{3!}+\frac1{4!}+\dots=e .
+\end{equation}
+Il teorema sulle serie a termini non negativi ha garantito l'\emph{esistenza} della
+somma con un ragionamento elementare; la formula di Taylor ne ha fornito il
+\emph{valore}. (Lo stesso valore si ottiene anche senza Taylor, direttamente dalla
+definizione di $e$ come limite di $\bigl(1+\frac1n\bigr)^{n}$: si veda
+l'\cref{oss:e-due-vie}.) È il metodo efficiente per il calcolo di $e$ annunciato nel
+\cref{cap:successioni}: undici termini danno sette cifre decimali esatte, mentre la
+successione $\bigl(1+\frac1n\bigr)^{n}$ ne dà appena cinque con $n=10^{6}$.
+\end{esempio}

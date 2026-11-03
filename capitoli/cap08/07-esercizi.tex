@@ -1,0 +1,338 @@
+%% ----------------------------------------------------------------------------
+%%  §8.7  Esercizi di riepilogo
+%% ----------------------------------------------------------------------------
+\section{Esercizi di riepilogo}
+\label{sec:esercizi-cap8}
+
+Come nei capitoli precedenti, ogni soluzione è accompagnata da una nota sulla
+\emph{scelta logica} che la guida.
+
+\needspace{8\baselineskip}
+\subsection*{Somme integrali e definizione}
+
+\begin{esercizio}\label{es:integrale-x3}
+Dimostrare per induzione che $\sum_{k=1}^{n}k^{3}=\bigl(\frac{n(n+1)}2\bigr)^{2}$ e dedurne
+che $\int_{0}^{b}x^{3}\,dx=\frac{b^{4}}4$ per ogni $b>0$.
+\begin{soluzione}
+Per $n=1$ entrambi i membri valgono $1$. Se la formula vale per $n$, allora
+$\sum_{k=1}^{n+1}k^{3}=\frac{n^{2}(n+1)^{2}}4+(n+1)^{3}=\frac{(n+1)^{2}}4\bigl(n^{2}+4n+4\bigr)
+=\frac{(n+1)^{2}(n+2)^{2}}4$, che è la formula per $n+1$. Per la partizione uniforme di
+$[0,b]$ e la funzione crescente $x^{3}$, $M_{k}=x_{k}^{3}$ e $m_{k}=x_{k-1}^{3}$:
+\[
+  S(P_{n})=\frac bn\sum_{k=1}^{n}\frac{k^{3}b^{3}}{n^{3}}=\frac{b^{4}}4\cdot\frac{(n+1)^{2}}{n^{2}},
+  \qquad
+  s(P_{n})=\frac{b^{4}}4\cdot\frac{(n-1)^{2}}{n^{2}} ,
+\]
+con $S(P_{n})-s(P_{n})=\frac{b^{4}}n\to0$ (somma telescopica, come nella
+\eqref{eq:monotone-S-s}). Per il \cref{cor:limite-somme} l'integrale è il limite comune,
+$\frac{b^{4}}4$. \emph{Scelta logica:} lo schema è quello del settore di parabola; i
+risultati $\frac{b^{2}}2$, $\frac{b^{3}}3$, $\frac{b^{4}}4$ suggeriscono
+$\int_{0}^{b}x^{p}\,dx=\frac{b^{p+1}}{p+1}$, e la derivata rispetto a $b$ di ciascuno è
+$b^{p}$: è ancora l'indizio dell'\cref{oss:indizio-tfc}.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}\label{es:integrale-esponenziale}
+Calcolare $\int_{0}^{1}2^{x}\,dx$ con le somme integrali relative alla partizione
+uniforme.
+\begin{soluzione}
+La funzione è crescente, quindi $M_{k}=2^{k/n}$. Posto $q=2^{1/n}$, la somma superiore è
+una progressione geometrica (\cref{prop:geometrica}):
+\[
+  S(P_{n})=\frac1n\sum_{k=1}^{n}q^{k}=\frac1n\cdot\frac{q\,(q^{n}-1)}{q-1}
+  =2^{1/n}\cdot\frac{1/n}{2^{1/n}-1},
+\]
+perché $q^{n}=2$. Per il limite notevole \eqref{eq:ln-exp}, calcolato lungo la
+successione $\frac1n\to0$, $\frac{2^{1/n}-1}{1/n}\to\log2$; inoltre $2^{1/n}\to1$. Dunque
+$S(P_{n})\to\frac1{\log2}$. Per il \cref{teo:integrabilita-monotone},
+$S(P_{n})-s(P_{n})=\frac1n(2-1)\to0$, e quindi anche $s(P_{n})\to\frac1{\log2}$: per il
+\cref{cor:limite-somme}
+$\int_{0}^{1}2^{x}\,dx=\frac1{\log2}\approx1{,}4427$. \emph{Scelta logica:} per gli
+esponenziali la partizione uniforme trasforma la somma in una progressione geometrica
+(nel procedimento di Fermat la progressione geometrica compariva invece nei nodi della
+partizione); il calcolo si chiude con un limite notevole del
+\cref{cap:funzioni-continue}.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}\label{es:integrale-a-b}
+Dimostrare che, per $0\le a<b$, $\int_{a}^{b}x\,dx=\frac{b^{2}-a^{2}}2$ e
+$\int_{a}^{b}x^{2}\,dx=\frac{b^{3}-a^{3}}3$, e calcolare la media integrale di $x^{2}$ in
+$[a,b]$.
+\begin{soluzione}
+Per l'additività (\cref{teo:additivita}), $\int_{0}^{b}=\int_{0}^{a}+\int_{a}^{b}$, quindi
+$\int_{a}^{b}x^{2}\,dx=\frac{b^{3}}3-\frac{a^{3}}3$ per la \eqref{eq:integrale-x2}, e
+analogamente per $x$. La media è
+$\frac{b^{3}-a^{3}}{3(b-a)}=\frac{a^{2}+ab+b^{2}}3$. \emph{Scelta logica:} l'additività
+permette di ottenere l'integrale su un intervallo qualsiasi da quelli con primo estremo
+nell'origine, senza nuove somme.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}\label{es:valore-in-un-punto}
+Sia $f$ integrabile in $[a,b]$ e sia $g$ una funzione che differisce da $f$ in un solo
+punto $\bar x$. Dimostrare che $g$ è integrabile e che $\int_{a}^{b}g=\int_{a}^{b}f$.
+\begin{soluzione}
+La funzione $h=g-f$ è nulla tranne che in $\bar x$, dove vale $d\neq0$; supponiamo
+$d>0$ (altrimenti si ragiona su $-h$). In ogni intervallo di una partizione $P$ esistono
+punti diversi da $\bar x$, quindi $m_{k}=0$ e $s(P,h)=0$; inoltre $M_{k}=d$ negli intervalli
+(al più due) che contengono $\bar x$, e $M_{k}=0$ negli altri, quindi
+$0\le S(P,h)\le2d\abs P$. Per la partizione uniforme $P_{n}$, $S(P_{n},h)-s(P_{n},h)\to0$, e
+per il \cref{cor:limite-somme} $h$ è integrabile con integrale $0$. Per la linearità,
+$g=f+h$ è integrabile e $\int g=\int f+0$. Ripetendo il ragionamento, la conclusione vale
+anche se $g$ differisce da $f$ in un numero finito di punti. \emph{Scelta logica:} un
+punto «non ha larghezza», e i rettangoli che lo contengono hanno area totale piccola
+quanto l'ampiezza della partizione. Modificando $f$ in \emph{infiniti} punti, invece,
+l'integrabilità si può perdere: la funzione di Dirichlet si ottiene dalla funzione
+nulla cambiandone il valore nei razionali.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Sia $f(x)=x$ per $x\in\Q$ e $f(x)=0$ per $x\notin\Q$. Calcolare l'integrale inferiore e
+l'integrale superiore di $f$ in $[0,1]$.
+\begin{soluzione}
+In ogni intervallo $[x_{k-1},x_{k}]$ ci sono irrazionali, dove $f=0$, e razionali
+arbitrariamente vicini a $x_{k}$, per la densità di $\Q$; poiché
+$0\le f(x)\le x\le x_{k}$ in $[x_{k-1},x_{k}]$, risulta $m_{k}=0$ e $M_{k}=x_{k}$. Dunque $s(P,f)=0$ per ogni $P$, e $s(f)=0$; e
+$S(P,f)=\sum x_{k}\Delta x_{k}=S(P,\mathrm{id})$ è la somma superiore della funzione
+$\mathrm{id}(x)=x$, quindi $S(f)=\inf_{P}S(P,\mathrm{id})=\int_{0}^{1}x\,dx=\frac12$. Poiché
+$0\neq\frac12$, $f$ non è integrabile. \emph{Scelta logica:} le somme di $f$ si
+riconducono a quelle di funzioni note (la funzione nulla e l'identità); l'esempio
+mostra che $s(f)$ e $S(f)$ possono essere entrambi calcolabili e diversi.
+\end{soluzione}
+\end{esercizio}
+
+\needspace{8\baselineskip}
+\subsection*{Proprietà, simmetrie, stime}
+
+\begin{esercizio}\label{es:riflessione}
+Sia $f$ integrabile in $[-a,a]$, con $a>0$. Dimostrare che
+$\int_{-a}^{0}f(x)\,dx=\int_{0}^{a}f(-t)\,dt$, e dedurne che
+$\int_{-a}^{a}f=0$ se $f$ è dispari e $\int_{-a}^{a}f=2\int_{0}^{a}f$ se $f$ è pari.
+\begin{soluzione}
+Sia $g(t)=f(-t)$ per $t\in[0,a]$. A ogni partizione $P=\set{x_{0},\dots,x_{n}}$ di
+$[0,a]$ corrisponde la partizione $-P=\set{-x_{n},\dots,-x_{0}}$ di $[-a,0]$, e la
+corrispondenza è biunivoca. I valori di $g$ in $[x_{k-1},x_{k}]$ sono i valori di $f$ in
+$[-x_{k},-x_{k-1}]$, intervallo della stessa ampiezza: quindi $s(P,g)=s(-P,f)$ e
+$S(P,g)=S(-P,f)$. Gli insiemi delle somme inferiori e superiori di $g$ in $[0,a]$
+coincidono con quelli di $f$ in $[-a,0]$, e così gli integrali. Se $f$ è dispari,
+$f(-t)=-f(t)$, e per l'additività e la linearità
+$\int_{-a}^{a}f=\int_{0}^{a}f(-t)\,dt+\int_{0}^{a}f=-\int_{0}^{a}f+\int_{0}^{a}f=0$; se $f$ è pari
+si ottiene $2\int_{0}^{a}f$. \emph{Scelta logica:} una trasformazione che manda partizioni
+in partizioni conservando le ampiezze, e valori in valori, conserva le somme integrali
+e quindi l'integrale. Ritroviamo così il valore $0$ trovato numericamente per
+$x^{3}-3x$ in $[-2,2]$, e la simmetria delle due semiali nell'\cref{es:corda-media}.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}\label{es:scala-traslazione}
+Sia $f$ integrabile in $[a,b]$. Dimostrare che, per ogni $\alpha>0$ e ogni $c\in\R$,
+\[
+  \int_{\alpha a}^{\alpha b}f\Bigl(\frac x\alpha\Bigr)dx=\alpha\int_{a}^{b}f(t)\,dt, \qquad
+  \int_{a+c}^{b+c}f(x-c)\,dx=\int_{a}^{b}f(t)\,dt .
+\]
+\begin{soluzione}
+Si ragiona come nell'esercizio precedente. La corrispondenza $P\mapsto\alpha P$ è
+biunivoca tra le partizioni di $[a,b]$ e quelle di $[\alpha a,\alpha b]$; la funzione
+$x\mapsto f(x/\alpha)$ assume nell'intervallo $[\alpha x_{k-1},\alpha x_{k}]$ gli stessi
+valori che $f$ assume in $[x_{k-1},x_{k}]$, mentre le ampiezze si moltiplicano per
+$\alpha$. Quindi tutte le somme inferiori e superiori si moltiplicano per $\alpha$, e
+così l'integrale. Per la traslazione le ampiezze non cambiano. \emph{Scelta logica:}
+sono i primi, semplicissimi casi della \emph{formula di cambiamento di variabile} che
+studieremo nel prossimo capitolo.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}\label{es:portanza-ellittica-esatta}
+Calcolare la portanza totale $L=\int_{-b/2}^{b/2}l(y)\,dy$ per la distribuzione
+ellittica \eqref{eq:portanza-ellittica}.
+\begin{soluzione}
+La funzione $l$ è continua, quindi integrabile. Con la formula di cambiamento di scala
+dell'esercizio precedente, con $\alpha=\frac b2$,
+\[
+  L=l_{0}\int_{-b/2}^{b/2}\sqrt{1-\Bigl(\frac{2y}b\Bigr)^{2}}\,dy
+  =l_{0}\,\frac b2\int_{-1}^{1}\sqrt{1-t^{2}}\,dt .
+\]
+L'ultimo integrale è l'area, nel senso della \eqref{eq:area-rettangoloide}, del
+rettangoloide di $\sqrt{1-t^{2}}$ in $[-1,1]$, cioè del semicerchio di raggio $1$. Nel
+\cref{teo:area-cerchio} l'area del cerchio è stata definita in altro modo, come limite
+delle aree dei poligoni inscritti; \emph{ammettendo per ora} che le due definizioni diano
+lo stesso valore (lo verificheremo nel prossimo capitolo calcolando direttamente
+l'integrale), si ha $\int_{-1}^{1}\sqrt{1-t^{2}}\,dt=\frac\pi2$. Dunque $L=\frac\pi4\,l_{0}b$, e il volo livellato $L=W$ richiede
+$l_{0}=\frac{4W}{\pi b}$. \emph{Scelta logica:} il cambiamento di scala riconduce
+qualsiasi distribuzione ellittica alla stessa funzione di riferimento, il semicerchio
+unitario: per questo $\pi$ compare nelle formule dell'aerodinamica delle ali, come nella
+resistenza indotta $C_{Di}=\frac{C_{L}^{2}}{\pi AR}$.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Dimostrare che $\frac12\le\int_{0}^{1}\frac{dx}{1+x^{2}}\le1$, e migliorare la stima con la
+partizione $P=\set{0,\frac12,1}$.
+\begin{soluzione}
+La funzione è decrescente in $[0,1]$, quindi integrabile, con minimo $\frac12$ e massimo
+$1$: la prima stima segue dalla \eqref{eq:positivita-stima}. Con la partizione $P$, per
+la decrescenza $m_{1}=f(\frac12)=\frac45$, $M_{1}=1$, $m_{2}=\frac12$, $M_{2}=\frac45$, e
+\[
+  s(P)=\frac12\Bigl(\frac45+\frac12\Bigr)=0{,}65, \qquad
+  S(P)=\frac12\Bigl(1+\frac45\Bigr)=0{,}9 .
+\]
+La media dei due valori, $0{,}775$, è la formula dei trapezi con $n=2$. Nel prossimo
+capitolo vedremo che l'integrale vale $\frac\pi4\approx0{,}785$. \emph{Scelta logica:} per
+una funzione monotòna gli estremi su ogni intervallo si leggono negli estremi
+dell'intervallo, e ogni punto aggiunto alla partizione migliora entrambe le stime.
+\end{soluzione}
+\end{esercizio}
+
+\needspace{8\baselineskip}
+\subsection*{Il teorema della media}
+
+\begin{esercizio}
+Durante la corsa di decollo un velivolo accelera uniformemente da fermo fino alla
+velocità di rotazione $V=30$~m/s in $T=20$~s, con velocità $v(t)=at$. Calcolare la
+lunghezza della corsa, la velocità media e l'istante in cui essa viene raggiunta.
+\begin{soluzione}
+L'accelerazione è $a=\frac VT=1{,}5$~m/s$^{2}$. Lo spazio percorso è il limite delle
+somme $\sum v(t_{k})\,\Delta t_{k}$, cioè l'integrale della velocità (lo giustificheremo
+con il teorema fondamentale): per la \eqref{eq:integrale-x},
+$\int_{0}^{T}at\,dt=\frac{aT^{2}}2=\frac{VT}2=300$~m. La velocità media è
+$\frac1T\int_{0}^{T}v=\frac V2=15$~m/s, raggiunta all'istante $t_{0}=\frac T2=10$~s,
+come garantisce il teorema della media. \emph{Scelta logica:} con accelerazione costante
+la velocità è lineare, la sua media è la semisomma dei valori estremi e l'area sotto il
+grafico è quella di un triangolo.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}\label{es:media-interno}
+(a) Sia $g$ continua e non negativa in $[a,b]$, con $\int_{a}^{b}g=0$. Dimostrare che $g$
+è identicamente nulla. (b) Dedurne che nel teorema della media il punto $x_{0}$ si può
+scegliere \emph{interno} all'intervallo $[a,b]$.
+\begin{soluzione}
+(a) Se fosse $g(x_{1})=\eta>0$ per qualche $x_{1}$, per la permanenza del segno
+(\cref{teo:permanenza-segno-continue}) applicata a $g-\frac\eta2$ si avrebbe
+$g\ge\frac\eta2$ in un intervallo $[c,d]\subseteq[a,b]$ con $c<d$. Per l'additività e il
+confronto, $\int_{a}^{b}g\ge\int_{c}^{d}g\ge\frac\eta2(d-c)>0$, contro l'ipotesi.
+(b) Se $f$ è costante, ogni punto va bene. Altrimenti $m<M$; se fosse
+$y_{0}=\frac1{b-a}\int f=M$, la funzione $g=M-f$ sarebbe continua, non negativa, con
+integrale nullo e non identicamente nulla, contro la (a); dunque $y_{0}<M$, e
+analogamente $y_{0}>m$. Siano $x_{1}$, $x_{2}$ punti di minimo e di massimo: applicando il
+teorema degli zeri (\cref{teo:zeri}) alla funzione $f-y_{0}$ (oppure a $y_{0}-f$, se
+$x_{2}<x_{1}$) nell'intervallo di estremi $x_{1}$ e $x_{2}$,
+negli estremi del quale essa ha segni opposti e diversi da zero, si trova $x_{0}$
+strettamente compreso tra $x_{1}$ e $x_{2}$, quindi interno ad $[a,b]$, con
+$f(x_{0})=y_{0}$. \emph{Scelta logica:} una funzione continua positiva in un punto è
+positiva in tutto un intervallo, e un intervallo «pesa» nell'integrale; la (a) si usa
+spesso, ad esempio per dimostrare che due funzioni continue con gli stessi integrali
+su ogni intervallo coincidono.
+\end{soluzione}
+\end{esercizio}
+
+\needspace{8\baselineskip}
+\subsection*{Uniforme continuità}
+
+\begin{esercizio}\label{es:uno-su-x-non-uniforme}
+Dimostrare che $f(x)=\frac1x$ non è uniformemente continua in $(0,1]$, mentre è
+lipschitziana, e quindi uniformemente continua, in ogni semiretta $[a,+\infty)$ con
+$a>0$.
+\begin{soluzione}
+I punti $x_{n}=\frac1n$ e $x_{n}'=\frac1{n+1}$ distano $\frac1{n(n+1)}$, che tende a zero,
+mentre $\abs{f(x_{n})-f(x_{n}')}=1$: con $\epsilon_{0}=1$, nessun $\delta$ soddisfa la
+\eqref{eq:uniforme-continuita}. In $[a,+\infty)$, invece,
+$\bigl|\frac1x-\frac1{x'}\bigr|=\frac{\abs{x-x'}}{xx'}\le\frac{\abs{x-x'}}{a^{2}}$: la
+funzione è lipschitziana con $L=\frac1{a^{2}}$, in accordo con il
+\cref{teo:lipschitz-derivata}, perché $\abs{f'(x)}=\frac1{x^{2}}\le\frac1{a^{2}}$.
+\emph{Scelta logica:} per negare l'uniforme continuità si cercano coppie di punti
+sempre più vicine con valori lontani, e conviene cercarle dove il grafico è più
+ripido, cioè vicino a $0$.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Stabilire se le funzioni $\sen\frac1x$ e $x\sen\frac1x$ sono uniformemente continue in
+$(0,1]$.
+\begin{soluzione}
+Per $\sen\frac1x$ si scelgano $x_{n}=\frac1{\pi/2+2n\pi}$ e $x_{n}'=\frac1{3\pi/2+2n\pi}$:
+distano meno di $\frac1{n^{2}}$, mentre i valori sono $1$ e $-1$; la funzione non è
+uniformemente continua. Invece $x\sen\frac1x$, posto $f(0)=0$, diventa continua in
+$[0,1]$, perché $\abs{x\sen\frac1x}\le\abs x\to0$; per il teorema di Cantor è
+uniformemente continua in $[0,1]$, e quindi anche in $(0,1]$. \emph{Scelta logica:} una
+funzione continua in $(0,1]$ che si prolunga per continuità in $0$ è uniformemente
+continua per Cantor; si può dimostrare che vale anche il viceversa, e $\sen\frac1x$,
+che non ha limite per $x\to0^{+}$, non si prolunga.
+\end{soluzione}
+\end{esercizio}
+
+\needspace{8\baselineskip}
+\subsection*{Somme di Riemann e integrabilità}
+
+\begin{esercizio}\label{es:limiti-riemann}
+Calcolare i limiti
+\[
+  \text{(a)}\ \lim_{n\to+\infty}\sum_{k=1}^{n}\frac{k^{2}}{n^{3}}, \qquad
+  \text{(b)}\ \lim_{n\to+\infty}\sum_{k=1}^{n}\frac n{n^{2}+k^{2}}
+\]
+riconoscendo nelle somme delle somme di Riemann.
+\begin{soluzione}
+(a) $\sum\frac{k^{2}}{n^{3}}=\frac1n\sum\bigl(\frac kn\bigr)^{2}$ è la somma di Riemann di $x^{2}$
+in $[0,1]$ con la partizione uniforme e i punti $\xi_{k}=\frac kn$ (estremi destri); per
+il \cref{teo:riemann-continue} tende a $\int_{0}^{1}x^{2}\,dx=\frac13$. (b) Raccogliendo
+$n^{2}$ al denominatore, $\frac n{n^{2}+k^{2}}=\frac1n\cdot\frac1{1+(k/n)^{2}}$: la somma è la
+somma di Riemann di $\frac1{1+x^{2}}$ in $[0,1]$ con gli estremi destri, e tende a
+$\int_{0}^{1}\frac{dx}{1+x^{2}}$, che vedremo valere $\frac\pi4$. \emph{Scelta logica:}
+una somma di $n$ termini con un fattore $\frac1n$ e la dipendenza da $k$ soltanto
+attraverso $\frac kn$ è una somma di Riemann: il teorema di convergenza trasforma un
+limite di successione in un integrale.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}\label{es:continua-tratti}
+Sia $f$ limitata in $[a,b]$ e continua in $(a,b)$. Dimostrare che $f$ è integrabile
+in $[a,b]$, e dedurne che è integrabile ogni funzione limitata che sia continua tranne
+che in un numero finito di punti (ad esempio $\sen\frac1x$, con un valore qualsiasi in
+$0$, nell'intervallo $[0,1]$).
+\begin{soluzione}
+Sia $\abs f\le K$ e sia $\epsilon>0$. Scegliamo $\eta>0$ con $\eta<\frac{b-a}2$ e
+$4K\eta<\frac\epsilon2$. In $[a+\eta,b-\eta]$ la funzione è continua, quindi integrabile,
+ed esiste una sua partizione $P'$ con $S(P')-s(P')<\frac\epsilon2$. La partizione
+$P=P'\cup\set{a,b}$ di $[a,b]$ ha in più i due intervalli $[a,a+\eta]$ e $[b-\eta,b]$, in
+ciascuno dei quali $M_{k}-m_{k}\le2K$; dunque
+$S(P)-s(P)<\frac\epsilon2+2\cdot2K\eta<\epsilon$, e $f$ è integrabile per il criterio. Se i
+punti di discontinuità sono in numero finito, si spezza $[a,b]$ in intervalli che li
+hanno come estremi, si applica il risultato a ciascuno e si conclude con il
+\cref{lem:sottointervallo}(b). \emph{Scelta logica:} vicino ai punti in cui non si sa
+nulla sulla continuità si rinuncia a controllare l'oscillazione e si controlla invece
+l'ampiezza degli intervalli; poiché $f$ è limitata, il loro contributo è piccolo. È lo stesso principio
+dell'\cref{es:valore-in-un-punto}.
+\end{soluzione}
+\end{esercizio}
+
+Il programma seguente verifica numericamente alcuni risultati degli esercizi.
+
+\begin{python}[Verifiche numeriche degli esercizi]
+import math
+
+def punto_medio(f, a, b, n=100000):
+    """Formula del punto medio con n intervalli."""
+    h = (b - a) / n
+    return h * sum(f(a + (k + 0.5) * h) for k in range(n))
+
+i2 = punto_medio(lambda x: 2**x, 0, 1)
+print(f"int_0^1 2^x dx = {i2:.8f}   1/log 2 = {1 / math.log(2):.8f}")
+sc = punto_medio(lambda t: math.sqrt(1 - t * t), -1, 1)
+print(f"int_-1^1 sqrt(1 - t^2) dt = {sc:.6f}"
+      f"   pi/2 = {math.pi / 2:.6f}")
+for n in (10, 100, 10000):
+    a = sum(k * k for k in range(1, n + 1)) / n**3
+    b = sum(n / (n * n + k * k) for k in range(1, n + 1))
+    print(f"n = {n:5d}:  somma (a) = {a:.6f}   somma (b) = {b:.6f}")
+print(f"1/3 = {1 / 3:.6f}   pi/4 = {math.pi / 4:.6f}")
+\end{python}
+\begin{risultato}
+int_0^1 2^x dx = 1.44269504   1/log 2 = 1.44269504
+int_-1^1 sqrt(1 - t^2) dt = 1.570796   pi/2 = 1.570796
+n =    10:  somma (a) = 0.385000   somma (b) = 0.759981
+n =   100:  somma (a) = 0.338350   somma (b) = 0.782894
+n = 10000:  somma (a) = 0.333383   somma (b) = 0.785373
+1/3 = 0.333333   pi/4 = 0.785398
+\end{risultato}

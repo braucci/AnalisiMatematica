@@ -1,0 +1,220 @@
+%% ----------------------------------------------------------------------------
+%%  §9.3  L'integrale indefinito. Integrali immediati. Decomposizione in somma
+%% ----------------------------------------------------------------------------
+\section{L'integrale indefinito}
+\label{sec:integrale-indefinito}
+
+Nel paragrafo precedente abbiamo ricondotto il calcolo di un integrale definito alla
+ricerca di una primitiva della funzione integranda. È perciò naturale porre la
+definizione seguente.
+
+\begin{definizione}[Integrale indefinito]\label{def:integrale-indefinito}
+\index{integrale indefinito}
+Sia $f$ una funzione continua in un intervallo $I$. L'insieme di tutte le primitive di
+$f$ in $I$ si chiama \emph{integrale indefinito} di $f$ e si indica con il simbolo
+\begin{equation}\label{eq:integrale-indefinito}
+  \int f(x)\,dx .
+\end{equation}
+\end{definizione}
+
+Per il \cref{teo:caratterizzazione-primitive}, se $F$ è una primitiva di $f$ in $I$,
+\begin{equation}\label{eq:integrale-indefinito-c}
+  \int f(x)\,dx=F(x)+c ,
+\end{equation}
+dove $c$ è una costante arbitraria: la scrittura significa che l'insieme delle
+primitive è $\set{F+c \tc c\in\R}$. C'è una differenza sostanziale tra l'integrale
+definito $\int_{a}^{b}f(x)\,dx$, che è un \emph{numero}, e l'integrale indefinito $\int f(x)\,dx$,
+che è un \emph{insieme di funzioni}; il legame tra i due è la formula fondamentale
+\eqref{eq:formula-fondamentale}. Nella pratica si scrive $\int f(x)\,dx=F(x)+c$ e si dice,
+con un abuso di linguaggio, che $F$ «è» l'integrale indefinito di $f$.
+
+Poiché la derivata di una somma è la somma delle derivate e la derivata di $cF$ è
+$cF'$ (\cref{teo:operazioni-derivate}), se $F$ e $G$ sono primitive di $f$ e $g$, allora
+$F+G$ è una primitiva di $f+g$ e $cF$ è una primitiva di $cf$. In termini di integrali
+indefiniti,
+\begin{equation}\label{eq:linearita-indefinito}
+\begin{gathered}
+  \int\bigl[f(x)+g(x)\bigr]dx=\int f(x)\,dx+\int g(x)\,dx,\\
+  \int c\,f(x)\,dx=c\int f(x)\,dx \quad (c\neq0),
+\end{gathered}
+\end{equation}
+in analogia con la linearità dell'integrale definito (\cref{teo:linearita}). Le
+uguaglianze vanno intese a meno di costanti additive.
+
+\subsection{Integrali immediati}
+
+Leggendo da destra a sinistra la tabella delle derivate elementari
+(\cref{tab:derivate-elementari}) e le derivate delle funzioni trigonometriche inverse
+\eqref{eq:derivata-arcsen}, \eqref{eq:derivata-arctg} si ottengono gli \emph{integrali immediati} della
+\cref{tab:integrali-immediati}. Ciascuno si verifica derivando il secondo membro, e
+ciascuno vale in ogni intervallo in cui la funzione integranda è continua.
+
+\begin{table}[htb]
+\centering
+\renewcommand{\arraystretch}{1.9}
+\begin{tabular}{@{}l@{\qquad}l@{}}
+\toprule
+$\displaystyle\int x^{b}\,dx=\frac{x^{b+1}}{b+1}+c \quad (b\neq-1)$ &
+$\displaystyle\int\frac{dx}x=\log\abs x+c$\\
+$\displaystyle\int e^{x}\,dx=e^{x}+c$ &
+$\displaystyle\int a^{x}\,dx=\frac{a^{x}}{\log a}+c \quad (a>0,\ a\neq1)$\\
+$\displaystyle\int\sen x\,dx=-\cos x+c$ &
+$\displaystyle\int\cos x\,dx=\sen x+c$\\
+$\displaystyle\int\frac{dx}{\cos^{2}x}=\tg x+c$ &
+$\displaystyle\int\frac{dx}{\sqrt{1-x^{2}}}=\arcsen x+c$\\
+$\displaystyle\int\frac{dx}{1+x^{2}}=\operatorname{arctg}x+c$ & \\
+\bottomrule
+\end{tabular}
+\caption{Integrali immediati. Ciascuna formula vale in ogni intervallo in cui la
+funzione integranda è continua: ad esempio, la prima con $b=-2$ vale in $(-\infty,0)$ e
+in $(0,+\infty)$, la seconda in ciascuno dei due intervalli che non contengono lo zero.}
+\label{tab:integrali-immediati}
+\end{table}
+
+A proposito del logaritmo, osserviamo che
+\begin{equation}\label{eq:derivata-log-abs}
+  D\log\abs x=\frac1x \qquad\perogni x\neq0 .
+\end{equation}
+Per $x>0$ è la \eqref{eq:derivata-log}. Per $x<0$ si ha $\abs x=-x$, e per la regola di
+derivazione delle funzioni composte
+\[
+  D\log\abs x=D\log(-x)=\frac1{-x}\cdot(-1)=\frac1x \qquad (x<0) .
+\]
+Dunque $\int\frac{dx}x=\log\abs x+c$, intendendo che l'integrale è considerato in un intervallo
+che non contiene il punto $x=0$.
+
+\subsection{Integrali immediati di funzioni composte}
+
+Molti integrali si riconducono a quelli della tabella grazie alla regola di derivazione
+delle funzioni composte (\cref{teo:derivata-composta}). Se $G$ è una primitiva di $g$ e
+$\varphi$ è derivabile, allora $D\,G(\varphi(x))=g(\varphi(x))\,\varphi'(x)$, cioè
+\begin{equation}\label{eq:composta-indefinito}
+  \int g\bigl(\varphi(x)\bigr)\,\varphi'(x)\,dx=G\bigl(\varphi(x)\bigr)+c .
+\end{equation}
+In particolare, per una funzione $\varphi$ derivabile (positiva nella prima formula se $b$
+non è intero, non nulla se $b$ è intero negativo; non nulla nella seconda),
+\begin{equation}\label{eq:integrali-composti}
+\begin{aligned}
+  \int\varphi(x)^{b}\,\varphi'(x)\,dx&=\frac{\varphi(x)^{b+1}}{b+1}+c \qquad (b\neq-1),\\
+  \int\frac{\varphi'(x)}{\varphi(x)}\,dx&=\log\abs{\varphi(x)}+c,\\
+  \int e^{\varphi(x)}\varphi'(x)\,dx&=e^{\varphi(x)}+c,\\
+  \int\frac{\varphi'(x)}{1+\varphi^{2}(x)}\,dx&=\operatorname{arctg}\varphi(x)+c .
+\end{aligned}
+\end{equation}
+Il caso più frequente è quello di un argomento lineare, $\varphi(x)=\alpha x+\beta$ con
+$\alpha\neq0$: allora $\varphi'=\alpha$, e
+\begin{equation}\label{eq:argomento-lineare}
+  \int g(\alpha x+\beta)\,dx=\frac1\alpha\,G(\alpha x+\beta)+c ;
+\end{equation}
+ad esempio, $\int\cos2x\,dx=\frac12\sen2x+c$ e $\int e^{-3x}\,dx=-\frac13e^{-3x}+c$.
+
+\begin{esempio}[Integrali di funzioni composte]\label{es:integrali-composti}
+\begin{enumerate}[label=\textup{(\alph*)}]
+  \item In $\tg x=\frac{\sen x}{\cos x}$ il numeratore è, a meno del segno, la derivata
+  del denominatore:
+  \begin{equation}\label{eq:integrale-tg}
+    \int\tg x\,dx=-\int\frac{-\sen x}{\cos x}\,dx=-\log\abs{\cos x}+c .
+  \end{equation}
+  \item $\int\frac x{1+x^{2}}\,dx=\frac12\int\frac{2x}{1+x^{2}}\,dx=\frac12\log(1+x^{2})+c$ (il valore
+  assoluto non serve, perché $1+x^{2}>0$).
+  \item $\int x\,e^{x^{2}}dx=\frac12\int e^{x^{2}}\,2x\,dx=\frac12e^{x^{2}}+c$.
+  \item $\int\sen x\cos x\,dx=\int\sen x\,D(\sen x)\,dx=\frac12\sen^{2}x+c$.
+  \item $\int\frac{dx}{x\log x}=\int\frac{1/x}{\log x}\,dx=\log\abs{\log x}+c$, in $(0,1)$ o in
+  $(1,+\infty)$.
+\end{enumerate}
+\end{esempio}
+
+\subsection{Integrazione per decomposizione in somma}
+
+In molti casi il calcolo dell'integrale indefinito di una funzione si riconduce a quello
+di integrali già noti, o più semplici, decomponendo la funzione integranda nella somma
+di due o più funzioni e applicando la linearità \eqref{eq:linearita-indefinito}.
+
+\begin{esempio}[Quattro decomposizioni]\label{es:decomposizione}
+\begin{enumerate}[label=\textup{(\alph*)}]
+  \item Sommando e sottraendo $1$ al numeratore:
+  \[
+  \begin{aligned}
+    \int\frac x{x+1}\,dx&=\int\frac{x+1-1}{x+1}\,dx=\int\Bigl(1-\frac1{x+1}\Bigr)dx\\
+    &=x-\log\abs{x+1}+c .
+  \end{aligned}
+  \]
+  \item Poiché $\tg^{2}x=\frac{\sen^{2}x}{\cos^{2}x}=\frac{1-\cos^{2}x}{\cos^{2}x}=\frac1{\cos^{2}x}-1$,
+  \[
+    \int\tg^{2}x\,dx=\int\Bigl(\frac1{\cos^{2}x}-1\Bigr)dx=\tg x-x+c .
+  \]
+  \item Scrivendo $1=\sen^{2}x+\cos^{2}x$ al numeratore, la frazione si scinde:
+  \[
+  \begin{aligned}
+    \int\frac{dx}{\sen x\cos x}&=\int\Bigl(\frac{\sen x}{\cos x}+\frac{\cos x}{\sen x}\Bigr)dx\\
+    &=-\log\abs{\cos x}+\log\abs{\sen x}+c=\log\abs{\tg x}+c .
+  \end{aligned}
+  \]
+  \item Dalla formula di duplicazione $\cos2x=\cos^{2}x-\sen^{2}x=1-2\sen^{2}x$
+  \eqref{eq:duplicazione} si ha $\sen^{2}x=\frac{1-\cos2x}2$, e per la
+  \eqref{eq:argomento-lineare}
+  \begin{equation}\label{eq:integrale-sen2}
+  \begin{split}
+    \int\sen^{2}x\,dx&=\frac12\int(1-\cos2x)\,dx=\frac x2-\frac{\sen2x}4+c\\
+    &=\frac12\,(x-\sen x\cos x)+c ,
+  \end{split}
+  \end{equation}
+  dove nell'ultimo passaggio si è usata la duplicazione $\sen2x=2\sen x\cos x$. Ne segue
+  \begin{equation}\label{eq:integrale-cos2}
+    \int\cos^{2}x\,dx=\int(1-\sen^{2}x)\,dx=\frac12\,(x+\sen x\cos x)+c .
+  \end{equation}
+\end{enumerate}
+\end{esempio}
+
+Il calcolo simbolico permette di verificare rapidamente un integrale indefinito. Il
+programma seguente usa \texttt{sympy}: per ciascuna funzione calcola una primitiva $F$
+e controlla che $F'-f$ si semplifichi a zero.
+
+\begin{python}[Integrali indefiniti con sympy, e la loro verifica]
+import sympy as sp
+
+x = sp.symbols("x", real=True)
+esempi = [x / (x + 1), sp.tan(x)**2, sp.sin(x)**2, sp.tan(x),
+          x * sp.exp(x**2), 1 / (x * sp.log(x))]
+for f in esempi:
+    F = sp.integrate(f, x)
+    verifica = sp.simplify(sp.diff(F, x) - f)
+    print(f"f = {f}")
+    print(f"    F = {F}      F' - f = {verifica}")
+\end{python}
+\begin{risultato}
+f = x/(x + 1)
+    F = x - log(x + 1)      F' - f = 0
+f = tan(x)**2
+    F = -x + sin(x)/cos(x)      F' - f = 0
+f = sin(x)**2
+    F = x/2 - sin(x)*cos(x)/2      F' - f = 0
+f = tan(x)
+    F = -log(cos(x))      F' - f = 0
+f = x*exp(x**2)
+    F = exp(x**2)/2      F' - f = 0
+f = 1/(x*log(x))
+    F = log(log(x))      F' - f = 0
+\end{risultato}
+
+Si osservi che \texttt{sympy} non scrive la costante arbitraria e scrive $\log(x+1)$,
+$\log(\cos x)$, $\log(\log x)$ senza valore assoluto: le sue primitive sono corrette
+negli intervalli in cui l'argomento del logaritmo è positivo (per $\cos x<0$, ad
+esempio, \texttt{sympy} lavora in campo complesso). Il risultato di un programma di
+calcolo simbolico va sempre letto con senso critico, controllando l'intervallo in cui
+vale.
+
+\begin{notastorica}[Le tavole degli integrali e i limiti del calcolo]
+Tra le prime raccolte sistematiche di integrali indefiniti vi furono quelle delle
+\emph{Institutiones calculi integralis} di Eulero (1768--1770), che fissarono per più di
+un secolo i metodi che studieremo nei prossimi paragrafi. Ci si accorse presto che
+alcune funzioni elementari molto semplici, come $e^{-x^{2}}$, $\frac{\sen x}x$, $\frac1{\log x}$,
+resistevano a ogni tentativo di integrazione: Joseph Liouville dimostrò, in una serie di
+memorie del 1833--1841, che le loro primitive non si possono esprimere mediante un numero
+finito di funzioni elementari. Le primitive esistono (per il teorema fondamentale), ma
+definiscono funzioni nuove, come la funzione degli errori $\operatorname{erf}$, che si
+calcolano numericamente. Nel 1969 Robert Risch pubblicò un algoritmo (completo nel caso delle funzioni
+trascendenti) che decide se una funzione elementare ha una primitiva elementare e, in
+caso affermativo, la calcola: i programmi di calcolo simbolico come \texttt{sympy} ne
+implementano versioni parziali, affiancate da procedimenti euristici.
+\end{notastorica}

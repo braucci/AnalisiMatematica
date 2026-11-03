@@ -1,0 +1,173 @@
+%% ----------------------------------------------------------------------------
+%%  §11.2  Proprietà delle serie
+%% ----------------------------------------------------------------------------
+\section{Proprietà delle serie}
+\label{sec:proprieta-serie}
+
+Poiché il carattere e la somma di una serie sono definiti mediante il limite delle somme
+parziali, le proprietà dei limiti di successioni si traducono in proprietà delle serie.
+Cominciamo dalla linearità.
+
+\begin{proposizione}[Linearità]\label{prop:linearita-serie}
+\index{serie!linearità}
+\begin{enumerate}[label=\textup{(\roman*)}]
+  \item Se le serie $\sum a_{k}$ e $\sum b_{k}$ sono regolari e la somma
+  $\sum_{k=1}^{\infty}a_{k}+\sum_{k=1}^{\infty}b_{k}$ ha significato in $\overline\R$ (cioè non è della forma
+  $+\infty-\infty$), allora la serie $\sum(a_{k}+b_{k})$ è regolare e
+  \begin{equation}\label{eq:serie-somma}
+    \sum_{k=1}^{\infty}(a_{k}+b_{k})=\sum_{k=1}^{\infty}a_{k}+\sum_{k=1}^{\infty}b_{k} .
+  \end{equation}
+  \item Se la serie $\sum a_{k}$ è regolare e $c\neq0$ è un numero reale, anche la serie
+  $\sum c\,a_{k}$ è regolare e
+  \begin{equation}\label{eq:serie-costante}
+    \sum_{k=1}^{\infty}c\,a_{k}=c\sum_{k=1}^{\infty}a_{k} ,
+  \end{equation}
+  con le usuali regole dei segni se la serie diverge. Se $\sum a_{k}$ converge, la
+  \eqref{eq:serie-costante} vale anche per $c=0$.
+\end{enumerate}
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{(i) $\sum a_{k}$, $\sum b_{k}$ regolari, con somme non della forma $+\infty-\infty$; \
+(ii) $\sum a_{k}$ regolare, $c\neq0$.}
+\Tesi{$\sum(a_{k}+b_{k})=\sum a_{k}+\sum b_{k}$; \ $\sum c\,a_{k}=c\sum a_{k}$.}
+\end{schema}
+
+\begin{strategia}
+Le somme parziali di $\sum(a_{k}+b_{k})$ e di $\sum c\,a_{k}$ si ottengono da quelle delle serie date
+con le operazioni corrispondenti, perché per le somme \emph{finite} le proprietà
+associativa, commutativa e distributiva valgono senza restrizioni. Il passaggio al limite
+è allora garantito dai teoremi sulle operazioni con i limiti, che escludono proprio le
+forme indeterminate $+\infty-\infty$ e $0\cdot\infty$.
+\end{strategia}
+
+\begin{dimostrazione}
+Le somme parziali di $\sum(a_{k}+b_{k})$ e di $\sum c\,a_{k}$ sono, per le proprietà delle
+somme finite, $\sum_{k=1}^{n}(a_{k}+b_{k})=\sum_{k=1}^{n}a_{k}+\sum_{k=1}^{n}b_{k}$ e
+$\sum_{k=1}^{n}c\,a_{k}=c\sum_{k=1}^{n}a_{k}$. La tesi segue dai teoremi sulle operazioni con i
+limiti, nel caso finito (\cref{teo:operazioni-limiti}) e in quello infinito
+(\cref{teo:operazioni-infinite}), esclusi appunto i casi di indeterminazione.
+\end{dimostrazione}
+
+Ad esempio, dalla serie di Mengoli si ricava subito
+$\sum_{k=1}^{\infty}\frac3{k(k+1)}=3$. Si osservi che la somma di due serie indeterminate può
+essere convergente: $\sum(-1)^{k}$ e $\sum(-1)^{k+1}$ sono indeterminate, ma la loro somma è la
+serie con tutti i termini nulli.
+
+\subsection{Il resto di una serie}
+
+Le prime somme parziali di una serie possono essere qualsiasi: il carattere dipende
+soltanto da ciò che accade «in fondo». Per precisare questa idea, data la serie
+$\sum_{k=1}^{\infty}a_{k}$ e fissato $n\in\N$, consideriamo la serie \emph{resto $n$-esimo}
+\begin{equation}\label{eq:serie-resto}
+  \sum_{k=n+1}^{\infty}a_{k}=a_{n+1}+a_{n+2}+a_{n+3}+\cdots ,
+\end{equation}
+ottenuta trascurando i primi $n$ termini.
+
+\begin{teorema}[del resto]\label{teo:resto-serie}\index{serie!resto}
+Per ogni $n\in\N$ la serie resto $n$-esimo \eqref{eq:serie-resto} ha lo stesso carattere
+della serie $\sum_{k=1}^{\infty}a_{k}$. Se la serie converge e $s$ è la sua somma, detta
+$R_{n}=\sum_{k=n+1}^{\infty}a_{k}$ la somma del resto, si ha
+\begin{equation}\label{eq:resto-serie}
+  s=s_{n}+R_{n} \qquad\text{e}\qquad \lim_{n\to+\infty}R_{n}=0 .
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$\sum_{k=1}^{\infty}a_{k}$ serie qualsiasi; \ $n\in\N$ fissato.}
+\Tesi{$\sum_{k=n+1}^{\infty}a_{k}$ ha lo stesso carattere di $\sum_{k=1}^{\infty}a_{k}$; \ se
+$\sum a_{k}=s\in\R$, allora $R_{n}=s-s_{n}\to0$.}
+\end{schema}
+
+\begin{strategia}
+Le somme parziali del resto sono differenze di somme parziali della serie data:
+$\sum_{k=n+1}^{m}a_{k}=s_{m}-s_{n}$. Con $n$ fissato, $s_{n}$ è una costante, e le due successioni
+(nell'indice $m$) hanno lo stesso comportamento. Che il resto tenda a zero è allora la
+definizione di convergenza riletta.
+\end{strategia}
+
+\begin{dimostrazione}
+Fissato $n$, per ogni $m>n$ la somma parziale $(m-n)$-esima del resto è
+\[
+  \sum_{k=n+1}^{m}a_{k}=\sum_{k=1}^{m}a_{k}-\sum_{k=1}^{n}a_{k}=s_{m}-s_{n} .
+\]
+Poiché $s_{n}$ non dipende da $m$, la successione $m\mapsto s_{m}-s_{n}$ ha limite (finito o
+infinito) se e solo se lo ha $s_{m}$, e i due limiti differiscono per la costante $s_{n}$.
+Dunque il resto e la serie hanno lo stesso carattere, e se $s_{m}\to s$ si ha
+$R_{n}=\lim_{m\to+\infty}(s_{m}-s_{n})=s-s_{n}$. Infine $R_{n}=s-s_{n}\to s-s=0$ per $n\to+\infty$.
+\end{dimostrazione}
+
+Il teorema ha una conseguenza pratica importante: \emph{modificare un numero finito di
+termini non cambia il carattere di una serie} (ne cambia, in generale, la somma). Infatti
+due serie che differiscono soltanto nei primi $n$ termini hanno lo stesso resto
+$n$-esimo. Per questo, nei criteri di convergenza che seguono, le ipotesi potranno essere
+richieste soltanto «da un certo indice in poi». Il teorema dice anche che cosa significhi
+calcolare la somma di una serie con una somma parziale: l'errore commesso è esattamente
+il resto $R_{n}$, e tutto il problema consiste nello \emph{stimarlo}, come abbiamo già fatto
+con la formula di Taylor nel \cref{cap:taylor}.
+
+\subsection{Il criterio di Cauchy}
+
+Il criterio di convergenza di Cauchy per le successioni (\cref{teo:criterio-cauchy}),
+applicato alle somme parziali, fornisce una condizione necessaria e sufficiente per la
+convergenza di una serie che non richiede di conoscerne la somma.
+
+\begin{teorema}[Criterio di Cauchy per le serie]\label{teo:cauchy-serie}
+\index{criterio di Cauchy!per le serie}
+La serie $\sum_{k=1}^{\infty}a_{k}$ è convergente se e solo se per ogni $\epsilon>0$ esiste
+$\nu\in\N$ tale che
+\begin{equation}\label{eq:cauchy-serie}
+  \Bigl|\sum_{k=n+1}^{n+p}a_{k}\Bigr|=\abs{a_{n+1}+a_{n+2}+\dots+a_{n+p}}<\epsilon
+  \qquad\perogni n>\nu,\ \perogni p\in\N .
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$a_{k}$ successione di numeri reali.}
+\Tesi{$\sum a_{k}$ convergente $\sse$ $\perogni\epsilon>0\ \esiste\nu$:
+$\bigl|\sum_{k=n+1}^{n+p}a_{k}\bigr|<\epsilon$ per ogni $n>\nu$ e ogni $p\in\N$.}
+\end{schema}
+
+\begin{strategia}
+La serie converge se e solo se la successione $s_{n}$ converge, cioè, per il criterio di
+Cauchy, se e solo se $s_{n}$ è di Cauchy. Resta da tradurre la condizione
+$\abs{s_{m}-s_{n}}<\epsilon$ in termini degli $a_{k}$: per $m=n+p>n$, la differenza $s_{m}-s_{n}$ è
+la somma dei termini da $a_{n+1}$ a $a_{n+p}$.
+\end{strategia}
+
+\begin{dimostrazione}
+Per il \cref{teo:criterio-cauchy}, la serie converge se e solo se per ogni $\epsilon>0$ esiste
+$\nu$ tale che $\abs{s_{m}-s_{n}}<\epsilon$ per ogni $m,n>\nu$. Poiché $\abs{s_{m}-s_{n}}=\abs{s_{n}-s_{m}}$ e
+$\abs{s_{n}-s_{n}}=0$, basta considerare le coppie con $m>n$; scritto $m=n+p$ con $p\in\N$,
+\[
+  s_{m}-s_{n}=\sum_{k=1}^{n+p}a_{k}-\sum_{k=1}^{n}a_{k}=\sum_{k=n+1}^{n+p}a_{k} ,
+\]
+e la condizione diventa la \eqref{eq:cauchy-serie}.
+\end{dimostrazione}
+
+Con $p=1$ la \eqref{eq:cauchy-serie} dà $\abs{a_{n+1}}<\epsilon$ per $n>\nu$: si ritrova la condizione
+necessaria del \cref{teo:condizione-necessaria}. Il criterio dice di più: non basta che
+i singoli termini siano piccoli, devono essere piccoli anche tutti i «blocchi» di termini
+consecutivi, comunque lunghi. Lo useremo per dimostrare il teorema sulla convergenza
+assoluta (\S\ref{sec:convergenza-assoluta}) e, nel \S\ref{sec:serie-armonica}, per una terza
+dimostrazione della divergenza della serie armonica.
+
+\begin{osservazione}[Parentesi in una serie]\label{oss:parentesi}
+Raggruppare con parentesi termini consecutivi di una serie regolare non ne cambia la
+somma: le somme parziali della serie raggruppata sono una estratta $s_{n_{1}},s_{n_{2}},\dots$
+delle somme parziali della serie data, e un'estratta ha lo stesso limite della
+successione (\cref{prop:estratta-limite}). Il viceversa è falso: la serie
+$(1-1)+(1-1)+(1-1)+\cdots$ ha tutti i termini nulli e somma $0$, ma togliendo le parentesi si
+ottiene la serie indeterminata $1-1+1-1+\cdots$. Le parentesi si possono togliere
+liberamente soltanto se si sa già che la serie senza parentesi è regolare.
+\end{osservazione}
+
+\begin{osservazione}[Termini nulli]\label{oss:termini-nulli}
+Inserire o togliere termini nulli in una serie non ne cambia né il carattere né la
+somma. Togliendo gli zeri, infatti, le somme parziali della nuova serie sono un'estratta
+di quelle della serie data, e ne hanno lo stesso limite; viceversa, inserendo degli zeri
+le somme parziali si ripetono, nello stesso ordine, e le nuove somme parziali hanno lo
+stesso limite delle vecchie (se una successione tende a $s$, vi tende anche quella
+ottenuta ripetendo un numero finito di volte ciascun termine, come si verifica subito
+con la definizione di limite).
+\end{osservazione}

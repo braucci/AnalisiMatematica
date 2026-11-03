@@ -1,0 +1,290 @@
+%% ----------------------------------------------------------------------------
+%%  §8.4  Il teorema della media
+%% ----------------------------------------------------------------------------
+\section{Il teorema della media}
+\label{sec:media}
+
+La media aritmetica di $n$ numeri $y_{1},\dots,y_{n}$ è $\frac1n\sum y_{k}$. Che cosa si
+deve intendere per valore medio di una funzione $f$ in un intervallo $[a,b]$, cioè di
+infiniti valori? Campioniamo $f$ in $n$ punti $\xi_{k}$, uno in ciascun intervallo della
+partizione uniforme di $[a,b]$, i cui intervalli hanno ampiezza $\frac{b-a}n$: la media
+aritmetica dei campioni è
+\[
+  \frac1n\sum_{k=1}^{n}f(\xi_{k})=\frac1{b-a}\sum_{k=1}^{n}f(\xi_{k})\,\frac{b-a}n
+  =\frac{\sigma(P_{n},\xi)}{b-a} ,
+\]
+cioè una somma di Riemann divisa per la lunghezza dell'intervallo. Per la
+\eqref{eq:riemann-stima}, se $S(P_{n})-s(P_{n})\to0$ (e vedremo nel
+\cref{sec:integrabilita-continue} che ciò accade, ad esempio, per tutte le funzioni
+continue), queste medie aritmetiche tendono a $\frac1{b-a}\int_{a}^{b}f$. È naturale
+allora la definizione seguente.
+
+\begin{definizione}[Media integrale]\label{def:media-integrale}\index{media integrale}
+Sia $f$ integrabile in $[a,b]$, con $a<b$. Il numero
+\begin{equation}\label{eq:media-integrale}
+  \frac1{b-a}\int_{a}^{b}f(x)\,dx
+\end{equation}
+si chiama \emph{media integrale}, o \emph{valor medio}, di $f$ in $[a,b]$.
+\end{definizione}
+
+\begin{proposizione}[Primo teorema della media]\label{prop:media-stima}
+Se $f$ è integrabile in $[a,b]$ e $m\le f(x)\le M$ per ogni $x\in[a,b]$, allora
+\begin{equation}\label{eq:media-stima}
+  m\le\frac1{b-a}\int_{a}^{b}f(x)\,dx\le M .
+\end{equation}
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$f$ integrabile in $[a,b]$, $a<b$; \ $m\le f\le M$ in $[a,b]$.}
+\Tesi{la media integrale di $f$ è compresa tra $m$ e $M$.}
+\end{schema}
+
+\begin{strategia}
+È la seconda delle \eqref{eq:positivita-stima}, divisa per la quantità positiva
+$b-a$.
+\end{strategia}
+
+\begin{dimostrazione}
+Per la \eqref{eq:positivita-stima}, $m(b-a)\le\int_{a}^{b}f\le M(b-a)$; dividendo tutti i
+membri per $b-a>0$, che non cambia il verso delle disuguaglianze, si ottiene la tesi.
+\end{dimostrazione}
+
+Se $f$ è continua, la media non è soltanto compresa tra il minimo e il massimo:
+è uno dei valori di $f$.
+
+\begin{teorema}[della media]\label{teo:media}\index{teorema!della media}
+Sia $f$ una funzione continua nell'intervallo $[a,b]$. Esiste un punto
+$x_{0}\in[a,b]$ tale che
+\begin{equation}\label{eq:teorema-media}
+  \int_{a}^{b}f(x)\,dx=f(x_{0})\,(b-a) .
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$ continua in $[a,b]$, $a<b$.}
+\Tesi{$\esiste x_{0}\in[a,b]$ : $\frac1{b-a}\int_{a}^{b}f(x)\,dx=f(x_{0})$.}
+\end{schema}
+
+\begin{strategia}
+Tre risultati, ciascuno dei quali richiede la continuità, si concatenano. Il
+\cref{teo:integrabilita-continue} dell'appendice garantisce che l'integrale esiste. Il
+teorema di Weierstrass fornisce il minimo $m$ e il massimo $M$ di $f$, e per il primo
+teorema della media la media integrale è compresa tra $m$ e $M$. Infine il secondo
+teorema dei valori intermedi assicura che $f$ assume ogni valore compreso tra il suo
+minimo e il suo massimo, e quindi anche la media.
+\end{strategia}
+
+\begin{dimostrazione}
+Per il \cref{teo:integrabilita-continue}, $f$ è integrabile in $[a,b]$. Per il teorema
+di Weierstrass (\cref{teo:weierstrass}) esistono il minimo $m$ e il massimo $M$ di $f$ in
+$[a,b]$, e per la \cref{prop:media-stima} il numero
+\[
+  y_{0}=\frac1{b-a}\int_{a}^{b}f(x)\,dx
+\]
+verifica $m\le y_{0}\le M$. Per il secondo teorema dei valori intermedi
+(\cref{teo:valori-intermedi-2}) esiste $x_{0}\in[a,b]$ con $f(x_{0})=y_{0}$, cioè
+$f(x_{0})=\frac1{b-a}\int_{a}^{b}f(x)\,dx$, che equivale alla \eqref{eq:teorema-media}.
+\end{dimostrazione}
+
+Si noti che il rinvio al \cref{teo:integrabilita-continue} non crea circoli viziosi:
+la sua dimostrazione, nell'appendice, usa soltanto il teorema di Cantor sull'uniforme
+continuità e il criterio di integrabilità, e non il teorema della media.
+
+Se $f\ge0$, il teorema ha un'interpretazione geometrica immediata
+(\cref{fig:media}): l'area del rettangoloide di $f$ è uguale all'area di un rettangolo
+che ha per base l'intervallo $[a,b]$ e per altezza un valore $f(x_{0})$ opportuno, cioè
+non scelto a caso, ma determinato dalla funzione. Equivalentemente, la parte del
+rettangolo che sta sopra il grafico ha la stessa area della parte del rettangoloide che
+sporge dal rettangolo.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[name=m1, width=0.38\textwidth, height=0.36\textwidth, axis lines=left,
+  xmin=0, xmax=2.3, ymin=0, ymax=4.4, xtick={0.3,2}, xticklabels={$a$,$b$},
+  ytick=\empty, title={\scriptsize rettangoloide $A$}]
+  \addplot[draw=none, fill=blu!22, domain=0.3:2, samples=50] {0.8+0.75*x^2}
+    \closedcycle;
+  \addplot[curva, domain=0.2:2.1, samples=50] {0.8+0.75*x^2};
+  \node[font=\scriptsize, blu] at (axis cs:1.2,0.8) {$A$};
+\end{axis}
+\begin{axis}[at={(m1.east)}, anchor=west, xshift=0.45cm, name=m2,
+  width=0.38\textwidth, height=0.36\textwidth, axis lines=left, xmin=0, xmax=2.3,
+  ymin=0, ymax=4.4, xtick={0.3,1.25,2}, xticklabels={$a$,$x_{0}$,$b$},
+  ytick=\empty, title={\scriptsize rettangolo $R$},
+  tick label style={font=\scriptsize}, clip=false]
+  \fill[rame!25] (axis cs:0.3,0) rectangle (axis cs:2,1.9725);
+  \draw[rame, thick] (axis cs:0.3,0) rectangle (axis cs:2,1.9725);
+  \addplot[curva, dashed, domain=0.2:2.1, samples=50] {0.8+0.75*x^2};
+  \addplot[tratteggio] coordinates {(1.25,0) (1.25,1.9725)};
+  \node[font=\scriptsize, rame, anchor=south] at (axis cs:0.72,1.9725) {$f(x_{0})$};
+  \node[font=\scriptsize, rame] at (axis cs:1.6,0.8) {$R$};
+\end{axis}
+\begin{axis}[at={(m2.east)}, anchor=west, xshift=0.45cm, width=0.38\textwidth,
+  height=0.36\textwidth, axis lines=left, xmin=0, xmax=2.3, ymin=0, ymax=4.4,
+  xtick={0.3,1.25,2}, xticklabels={$a$,$x_{0}$,$b$}, ytick=\empty,
+  title={\scriptsize area $C$ = area $D$}]
+  \addplot[fill=rame!35, draw=none, domain=0.3:1.25, samples=30] {0.8+0.75*x^2}
+    -- (axis cs:0.3,1.9725) -- cycle;
+  \addplot[fill=blu!30, draw=none, domain=1.25:2, samples=30] {0.8+0.75*x^2}
+    -- (axis cs:2,1.9725) -- cycle;
+  \draw[rame, thick] (axis cs:0.3,0) rectangle (axis cs:2,1.9725);
+  \addplot[curva, domain=0.2:2.1, samples=50] {0.8+0.75*x^2};
+  \addplot[tratteggio] coordinates {(1.25,0) (1.25,1.9725)};
+  \node[font=\scriptsize] at (axis cs:0.52,1.68) {$C$};
+  \node[font=\scriptsize] at (axis cs:1.86,2.55) {$D$};
+\end{axis}
+\end{tikzpicture}
+\caption{Il teorema della media per una funzione positiva: il rettangoloide $A$ (a
+sinistra) e il rettangolo $R$ di base $[a,b]$ e altezza $f(x_{0})$ (al centro) hanno la
+stessa area; a destra, la parte $C$ del rettangolo che sta sopra il grafico e la parte
+$D$ del rettangoloide che sporge dal rettangolo hanno la stessa area.}
+\label{fig:media}
+\end{figure}
+
+\begin{esempio}[Media di $x^{2}$]\label{es:media-x2}
+Per la \eqref{eq:integrale-x2}, la media integrale di $f(x)=x^{2}$ in $[0,b]$ è
+$\frac1b\cdot\frac{b^{3}}3=\frac{b^{2}}3$, e il punto del teorema della media è
+$x_{0}=\frac b{\sqrt3}\approx0{,}577\,b$. Non è il punto medio $\frac b2$: la media dei
+valori non è il valore nel punto medio, e per questa funzione, che cresce sempre più
+rapidamente, la supera ($\frac{b^{2}}3>\frac{b^{2}}4$).
+\end{esempio}
+
+\begin{osservazione}[La continuità è essenziale]\label{oss:media-discontinua}
+Sia $f(x)=-1$ per $0\le x<1$ e $f(x)=1$ per $1\le x\le2$. Per $0<\delta<1$, la
+partizione $P_{\delta}=\set{0,1-\delta,1,2}$ ha
+\[
+  s(P_{\delta})=-(1-\delta)-\delta+1=0, \qquad S(P_{\delta})=-(1-\delta)+\delta+1=2\delta ,
+\]
+perché soltanto nell'intervallo $[1-\delta,1]$ la funzione assume entrambi i valori. Per
+il \cref{cor:limite-somme}, con $\delta=\frac1n$, $f$ è integrabile in $[0,2]$ e
+$\int_{0}^{2}f=0$. La media integrale è dunque $0$, ma $f$ assume soltanto i valori
+$\pm1$: la tesi del teorema della media è falsa. L'ipotesi violata è la continuità nel
+punto $1$.
+\end{osservazione}
+
+\subsection{Corda media e corda media aerodinamica}
+
+\begin{esempio}[L'ala trapezia]\label{es:corda-media}
+Consideriamo un'ala trapezia di apertura $b$, con corda alla radice $c_{r}$ e corda
+all'estremità $c_{t}$, e indichiamo con $s=\frac b2$ la semiapertura e con $S$ la
+superficie alare, secondo l'uso aeronautico (in questo esempio $s$ e $S$ non sono somme
+integrali). Lungo la semiala
+la corda varia linearmente:
+\begin{equation}\label{eq:corda-trapezia}
+  c(y)=c_{r}-\frac{c_{r}-c_{t}}s\,y, \qquad 0\le y\le s .
+\end{equation}
+La superficie della semiala è l'area del rettangoloide di $c$ sull'intervallo $[0,s]$;
+per la linearità, la \eqref{eq:integrale-costante} e la \eqref{eq:integrale-x},
+\[
+  \int_{0}^{s}c(y)\,dy=c_{r}s-\frac{c_{r}-c_{t}}s\cdot\frac{s^{2}}2=\frac{c_{r}+c_{t}}2\,s .
+\]
+Le due semiali sono simmetriche, e i loro integrali coincidono
+(\cref{es:riflessione}); quindi la superficie alare è
+$S=(c_{r}+c_{t})\,s=\frac{c_{r}+c_{t}}2\,b$, l'area del trapezio, come deve essere.
+La \emph{corda media geometrica} è la media integrale della corda:
+\begin{equation}\label{eq:corda-media}
+  \bar c=\frac1s\int_{0}^{s}c(y)\,dy=\frac{c_{r}+c_{t}}2=\frac Sb ,
+\end{equation}
+e l'allungamento si scrive $AR=\frac{b^{2}}S=\frac b{\bar c}$. Il teorema della media
+garantisce l'esistenza di una stazione $y_{0}$ in cui la corda è uguale alla corda
+media; qui, per la linearità di $c$, è $y_{0}=\frac s2$.
+
+In aerodinamica è ancora più importante la \emph{corda media aerodinamica}, una media
+\emph{pesata} della corda in cui ogni striscia pesa in proporzione alla propria area:
+\[
+  c_{MA}=\frac{\int_{0}^{s}c(y)\cdot c(y)\,dy}{\int_{0}^{s}c(y)\,dy}
+  =\frac2S\int_{0}^{s}c(y)^{2}\,dy .
+\]
+È la lunghezza di riferimento per il coefficiente di momento di beccheggio, e la
+posizione del baricentro di un velivolo si esprime in percentuale di $c_{MA}$.
+Sviluppando il quadrato $c(y)^{2}=c_{r}^{2}-2c_{r}ky+k^{2}y^{2}$, con
+$k=\frac{c_{r}-c_{t}}s$, e usando le \eqref{eq:integrale-costante}, \eqref{eq:integrale-x}
+e \eqref{eq:integrale-x2},
+\[
+  \int_{0}^{s}c(y)^{2}\,dy=c_{r}^{2}s-c_{r}ks^{2}+\frac{k^{2}s^{3}}3
+  =\frac s3\bigl(c_{r}^{2}+c_{r}c_{t}+c_{t}^{2}\bigr),
+\]
+e quindi
+\begin{equation}\label{eq:corda-media-aerodinamica}
+  c_{MA}=\frac23\cdot\frac{c_{r}^{2}+c_{r}c_{t}+c_{t}^{2}}{c_{r}+c_{t}} ,
+  \qquad
+  y_{MA}=\frac s3\cdot\frac{c_{r}+2c_{t}}{c_{r}+c_{t}} ,
+\end{equation}
+dove $y_{MA}$ è la stazione in cui $c(y_{MA})=c_{MA}$, che si ricava risolvendo
+un'equazione di primo grado. Per un velivolo leggero con $b=11$~m, $c_{r}=1{,}6$~m e
+$c_{t}=1{,}1$~m si ottengono la superficie $S=14{,}85$~m$^{2}$, la corda media
+$\bar c=1{,}35$~m e l'allungamento $AR\approx8{,}15$; la corda media aerodinamica è
+$c_{MA}\approx1{,}365$~m, alla stazione $y_{MA}\approx2{,}58$~m
+(\cref{fig:corda-media}).
+\end{esempio}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[x=1.15cm, y=1.15cm]
+  \fill[blu!10] (0,0) -- (5.5,0.125) -- (5.5,1.225) -- (0,1.6) -- cycle;
+  \draw[blu, thick] (0,0) -- (5.5,0.125) -- (5.5,1.225) -- (0,1.6) -- cycle;
+  \draw[grigio, -Latex] (0,-0.5) -- (6.3,-0.5) node[right, font=\scriptsize] {$y$};
+  \draw[grigio] (0,-0.58) -- (0,-0.42) node[below=3pt, font=\scriptsize] {$0$};
+  \draw[grigio] (5.5,-0.58) -- (5.5,-0.42) node[below=3pt, font=\scriptsize] {$s$};
+  \draw[verde!70!black, very thick] (2.75,0.0625) -- (2.75,1.4125);
+  \draw[rame, very thick] (2.58,0.0586) -- (2.58,1.4240);
+  \draw[grigio, densely dashed] (2.75,-0.5) -- (2.75,0.0625);
+  \draw[grigio, densely dashed] (2.58,-0.5) -- (2.58,0.0586);
+  \node[font=\scriptsize, anchor=north west, inner sep=1pt] at (2.73,-0.56) {$y_{0}$};
+  \node[font=\scriptsize, anchor=north east, inner sep=1pt] at (2.60,-0.56) {$y_{MA}$};
+  \node[font=\scriptsize, verde!70!black, anchor=west] at (2.8,0.75) {$\bar c$};
+  \node[font=\scriptsize, rame, anchor=east] at (2.53,0.75) {$c_{MA}$};
+  \node[font=\scriptsize, anchor=east] at (-0.05,0.8) {$c_{r}$};
+  \node[font=\scriptsize, anchor=west] at (5.55,0.675) {$c_{t}$};
+  \draw[grigio] (0,0) -- (0,1.6);
+\end{tikzpicture}
+\caption{Pianta della semiala trapezia dell'\cref{es:corda-media}, con
+$c_{r}=1{,}6$~m, $c_{t}=1{,}1$~m e $s=5{,}5$~m: la corda media geometrica $\bar c$ si
+trova a metà semiala, la corda media aerodinamica $c_{MA}$, un po' più lunga, a
+$y_{MA}\approx2{,}58$~m dalla radice.}
+\label{fig:corda-media}
+\end{figure}
+
+Il programma seguente verifica i valori dell'esempio calcolando le medie integrali con
+somme di Riemann ai punti medi, che anticipano la formula di quadratura del
+\cref{sec:integrabilita-continue}.
+
+\begin{python}[Corda media e corda media aerodinamica]
+b, cr, ct = 11.0, 1.6, 1.1           # apertura e corde [m]
+s = b / 2                            # semiapertura
+
+def c(y):
+    """Corda della semiala trapezia alla stazione y."""
+    return cr - (cr - ct) * y / s
+
+def media(g, a, b, n=1000):
+    """Media integrale di g con una somma ai punti medi."""
+    h = (b - a) / n
+    return sum(g(a + (k + 0.5) * h) for k in range(n)) / n
+
+c_med = media(c, 0, s)               # corda media geometrica
+S = 2 * s * c_med                    # superficie alare
+c_ma = media(lambda y: c(y)**2, 0, s) / c_med
+ex = 2 / 3 * (cr**2 + cr * ct + ct**2) / (cr + ct)
+print(f"S = {S:.4f} m^2   (esatto {(cr + ct) * s:.4f})")
+print(f"corda media  = {c_med:.4f} m   AR = {b**2 / S:.3f}")
+print(f"corda m.a.   = {c_ma:.4f} m   (esatto {ex:.4f})")
+y0 = (cr - c_med) * s / (cr - ct)    # c(y0) = corda media
+y_ma = (cr - c_ma) * s / (cr - ct)   # c(y_ma) = corda m.a.
+print(f"stazioni: y0 = {y0:.3f} m,  y_ma = {y_ma:.3f} m")
+\end{python}
+\begin{risultato}
+S = 14.8500 m^2   (esatto 14.8500)
+corda media  = 1.3500 m   AR = 8.148
+corda m.a.   = 1.3654 m   (esatto 1.3654)
+stazioni: y0 = 2.750 m,  y_ma = 2.580 m
+\end{risultato}
+
+\begin{osservazione}[Media integrale e teorema di Lagrange]
+Il teorema della media per gli integrali e il teorema di Lagrange
+(\cref{teo:lagrange}) si somigliano: entrambi affermano che una media («globale») è
+uguale a un valore («locale») assunto in un punto opportuno. Nel prossimo capitolo
+vedremo che non si tratta di un'analogia: grazie al teorema fondamentale del calcolo
+integrale, il primo diventa un caso particolare del secondo.
+\end{osservazione}

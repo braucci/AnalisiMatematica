@@ -1,0 +1,479 @@
+%% ----------------------------------------------------------------------------
+%%  §7.4  Derivate successive. Teorema di Schwarz
+%% ----------------------------------------------------------------------------
+\section{Derivate successive. Teorema di Schwarz}
+\label{sec:schwarz}
+
+Sia $f$ una funzione di due variabili definita in un intorno circolare $I_{\delta}$ di un
+punto di $\R^{2}$, e supponiamo che in tutti i punti di $I_{\delta}$ esistano le derivate
+parziali $f_{x}(x,y)$ e $f_{y}(x,y)$. Queste sono a loro volta funzioni di due
+variabili, e possono ammettere derivate parziali:
+\begin{equation}\label{eq:derivate-seconde-def}
+  \frac{\partial}{\partial x}f_{x}, \qquad \frac{\partial}{\partial y}f_{x}, \qquad
+  \frac{\partial}{\partial x}f_{y}, \qquad \frac{\partial}{\partial y}f_{y} .
+\end{equation}
+Esse si chiamano \emph{derivate parziali seconde} di $f$ e si indicano rispettivamente con
+i simboli
+\begin{equation}\label{eq:derivate-seconde-notazioni}
+\begin{gathered}
+  f_{xx}, \qquad f_{xy}, \qquad f_{yx}, \qquad f_{yy},\\
+  \text{oppure}\qquad
+  \frac{\partial^{2}f}{\partial x^{2}}, \quad \frac{\partial^{2}f}{\partial x\,\partial y}, \quad
+  \frac{\partial^{2}f}{\partial y\,\partial x}, \quad \frac{\partial^{2}f}{\partial y^{2}} .
+\end{gathered}
+\end{equation}
+Le $f_{xy}$, $f_{yx}$ si dicono \emph{derivate seconde miste}, le $f_{xx}$, $f_{yy}$
+\emph{derivate seconde pure}. Nella notazione con i pedici l'ordine di derivazione si
+legge da sinistra a destra: $f_{xy}=(f_{x})_{y}$ si ottiene derivando prima rispetto a $x$
+e poi rispetto a $y$.
+
+\begin{attenzione}[Una questione di convenzioni]
+Nella notazione $\frac{\partial^{2}f}{\partial x\,\partial y}$ l'ordine di derivazione non è
+uniforme nella letteratura: molti testi, interpretando il simbolo come
+$\frac{\partial}{\partial x}\bigl(\frac{\partial f}{\partial y}\bigr)$, lo usano per $f_{yx}$.
+Nel seguito useremo soprattutto i pedici, il cui significato è univoco; vedremo comunque
+che, sotto ipotesi molto generali, le due derivate miste coincidono e la questione
+diventa irrilevante.
+\end{attenzione}
+
+\begin{esempio}[Le derivate seconde di $x^{y}$]\label{es:derivate-xy}
+La funzione $f(x,y)=x^{y}$, definita nel semipiano $D=\set{(x,y)\in\R^{2} : x>0}$, per $y$
+fissato è una potenza, mentre per $x$ fissato è un esponenziale, che ai fini della
+derivazione rispetto a $y$ conviene scrivere nella forma $f(x,y)=e^{y\log x}$. Le derivate
+parziali prime valgono
+\begin{equation}\label{eq:xy-prime}
+  f_{x}=y\,x^{y-1}, \qquad f_{y}=x^{y}\log x ;
+\end{equation}
+le derivate seconde pure sono $f_{xx}=y(y-1)x^{y-2}$ e $f_{yy}=x^{y}(\log x)^{2}$. Per
+ottenere $f_{xy}$ deriviamo $f_{x}$ rispetto a $y$ con la regola del prodotto, e per
+$f_{yx}$ deriviamo $f_{y}$ rispetto a $x$:
+\begin{equation}\label{eq:xy-miste}
+\begin{aligned}
+  f_{xy}&=x^{y-1}+y\,x^{y-1}\log x=x^{y-1}(1+y\log x),\\
+  f_{yx}&=y\,x^{y-1}\log x+x^{y}\cdot\frac1x=x^{y-1}(y\log x+1).
+\end{aligned}
+\end{equation}
+\end{esempio}
+
+Il lettore avrà notato che, con passaggi intermedi differenti, si è ottenuto lo stesso
+risultato. Ciò non è casuale ed è formalizzato nell'importante teorema che segue.
+
+\begin{teorema}[di Schwarz]\label{teo:schwarz}\index{teorema!di Schwarz}
+Sia $f$ una funzione definita in un intorno circolare $I_{\delta}$ di $(x_{0},y_{0})$, nel
+quale esistono le derivate $f_{x}$, $f_{y}$, $f_{xy}$, $f_{yx}$. Se le derivate miste
+$f_{xy}$ e $f_{yx}$ sono continue in $(x_{0},y_{0})$, allora
+\begin{equation}\label{eq:schwarz}
+  f_{xy}(x_{0},y_{0})=f_{yx}(x_{0},y_{0}) .
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{\begin{itemize}[nosep, leftmargin=1.2em]
+  \item $f_{x}$, $f_{y}$, $f_{xy}$, $f_{yx}$ esistono in $I_{\delta}(x_{0},y_{0})$;
+  \item $f_{xy}$ e $f_{yx}$ sono continue in $(x_{0},y_{0})$.
+\end{itemize}}
+\Tesi{$f_{xy}(x_{0},y_{0})=f_{yx}(x_{0},y_{0})$.}
+\end{schema}
+
+\begin{strategia}
+Consideriamo il rettangolo di vertici opposti $(x_{0},y_{0})$ e $(x,y)$
+(\cref{fig:schwarz}) e la combinazione dei valori di $f$ nei quattro vertici
+\[
+  \Delta=f(x,y)-f(x,y_{0})-f(x_{0},y)+f(x_{0},y_{0}),
+\]
+una specie di «rapporto incrementale doppio». La stessa quantità $\Delta$ si può leggere
+in due modi: come incremento, tra $x_{0}$ e $x$, della funzione $F(s)=f(s,y)-f(s,y_{0})$,
+oppure come incremento, tra $y_{0}$ e $y$, della funzione $G(t)=f(x,t)-f(x_{0},t)$. Applicando
+due volte il teorema di Lagrange nel primo modo si trova
+$\Delta=f_{xy}(x_{1},y_{1})(x-x_{0})(y-y_{0})$; nel secondo modo
+$\Delta=f_{yx}(x_{2},y_{2})(x-x_{0})(y-y_{0})$. Quindi il valore di $f_{xy}$ in un punto del
+rettangolo coincide con quello di $f_{yx}$ in un altro punto del rettangolo; facendo tendere il rettangolo al punto
+$(x_{0},y_{0})$, la continuità delle derivate miste fa il resto.
+\end{strategia}
+
+\begin{dimostrazione}
+Sia $(x,y)\in I_{\delta}$ con $x\neq x_{0}$ e $y\neq y_{0}$. Il rettangolo chiuso di vertici
+opposti $(x_{0},y_{0})$ e $(x,y)$ è contenuto in $I_{\delta}$: infatti ogni suo punto
+$(s,t)$ verifica $\abs{s-x_{0}}\le\abs{x-x_{0}}$ e $\abs{t-y_{0}}\le\abs{y-y_{0}}$, e quindi
+dista da $(x_{0},y_{0})$ non più di $(x,y)$. Definiamo
+\begin{equation}\label{eq:schwarz-FG}
+\begin{aligned}
+  F(s)&=f(s,y)-f(s,y_{0}) \qquad (y \text{ fissato}),\\
+  G(t)&=f(x,t)-f(x_{0},t) \qquad (x \text{ fissato}).
+\end{aligned}
+\end{equation}
+Risulta
+\[
+\begin{aligned}
+  F(x)-F(x_{0})&=f(x,y)-f(x,y_{0})-\bigl[f(x_{0},y)-f(x_{0},y_{0})\bigr],\\
+  G(y)-G(y_{0})&=f(x,y)-f(x_{0},y)-\bigl[f(x,y_{0})-f(x_{0},y_{0})\bigr],
+\end{aligned}
+\]
+per cui
+\begin{equation}\label{eq:schwarz-uguaglianza}
+  F(x)-F(x_{0})=G(y)-G(y_{0}) .
+\end{equation}
+La funzione $F$ è derivabile nell'intervallo di estremi $x_{0}$, $x$, con
+$F'(s)=f_{x}(s,y)-f_{x}(s,y_{0})$. Per il teorema di Lagrange (\cref{teo:lagrange}) esiste
+$x_{1}$ nell'intervallo di estremi $x_{0}$, $x$ tale che
+\[
+  F(x)-F(x_{0})=F'(x_{1})(x-x_{0})=\bigl[f_{x}(x_{1},y)-f_{x}(x_{1},y_{0})\bigr](x-x_{0}).
+\]
+Applicando di nuovo il teorema di Lagrange alla funzione $t\mapsto f_{x}(x_{1},t)$, che
+è derivabile con derivata $f_{xy}(x_{1},t)$, nell'intervallo di estremi $y_{0}$, $y$,
+otteniamo un punto $y_{1}$ di tale intervallo per cui
+\begin{equation}\label{eq:schwarz-F}
+  F(x)-F(x_{0})=f_{xy}(x_{1},y_{1})(x-x_{0})(y-y_{0}) .
+\end{equation}
+Procedendo in modo analogo con la funzione $G$ nell'intervallo di estremi $y_{0}$, $y$,
+troviamo $y_{2}$ e poi $x_{2}$ tali che
+\begin{equation}\label{eq:schwarz-G}
+\begin{split}
+  G(y)-G(y_{0})&=\bigl[f_{y}(x,y_{2})-f_{y}(x_{0},y_{2})\bigr](y-y_{0})\\
+  &=f_{yx}(x_{2},y_{2})(x-x_{0})(y-y_{0}).
+\end{split}
+\end{equation}
+Confrontando le \eqref{eq:schwarz-uguaglianza}, \eqref{eq:schwarz-F}, \eqref{eq:schwarz-G}
+e dividendo per $(x-x_{0})(y-y_{0})\neq0$ si ottiene
+\begin{equation}\label{eq:schwarz-punti}
+  f_{xy}(x_{1},y_{1})=f_{yx}(x_{2},y_{2}),
+\end{equation}
+dove i punti $(x_{1},y_{1})$ e $(x_{2},y_{2})$ appartengono al rettangolo. Scegliamo ora
+$(x,y)=(x_{0}+\frac rn,\,y_{0}+\frac rn)$, con $r>0$ fissato abbastanza piccolo e
+$n\in\N$, $n\ge1$. I punti corrispondenti $(x_{1},y_{1})$, $(x_{2},y_{2})$ distano da
+$(x_{0},y_{0})$ meno di $\frac{\sqrt2\,r}{n}$, e quindi tendono a $(x_{0},y_{0})$ per
+$n\to+\infty$. Per la continuità di $f_{xy}$ e $f_{yx}$ in $(x_{0},y_{0})$
+(\cref{oss:limite-piano-successioni}), passando al limite nella \eqref{eq:schwarz-punti}
+si ottiene la tesi.
+\end{dimostrazione}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[scale=1.0]
+  \draw[-Latex, grigio] (-0.3,0) -- (6.2,0) node[right, black] {$x$};
+  \draw[-Latex, grigio] (0,-0.3) -- (0,3.6) node[above, black] {$y$};
+  \draw[blu, dashed] (1.5,0.8) rectangle (5,3);
+  \foreach \p/\lab/\pos in {(1.5,0.8)/{(x_{0},y_{0})}/below left,
+      (5,0.8)/{(x,y_{0})}/below right, (1.5,3)/{(x_{0},y)}/above left,
+      (5,3)/{(x,y)}/above right}
+    {\fill[blu] \p circle (1.5pt); \node[font=\scriptsize, \pos] at \p {$\lab$};}
+  \fill[rame] (3.9,1.6) circle (1.5pt) node[right, font=\scriptsize] {$(x_{1},y_{1})$};
+  \fill[verde] (2.4,2.3) circle (1.5pt) node[right, font=\scriptsize] {$(x_{2},y_{2})$};
+  \draw[tratteggio] (1.5,0) node[below, black, font=\scriptsize] {$x_{0}$} -- (1.5,0.8);
+  \draw[tratteggio] (5,0) node[below, black, font=\scriptsize] {$x$} -- (5,0.8);
+  \draw[tratteggio] (0,0.8) node[left, black, font=\scriptsize] {$y_{0}$} -- (1.5,0.8);
+  \draw[tratteggio] (0,3) node[left, black, font=\scriptsize] {$y$} -- (1.5,3);
+\end{tikzpicture}
+\caption{I punti usati nella dimostrazione del teorema di Schwarz: i quattro vertici del
+rettangolo, nei quali si calcola $f$, e i due punti interni $(x_{1},y_{1})$ e
+$(x_{2},y_{2})$ forniti dal teorema di Lagrange, nei quali le derivate miste coincidono.}
+\label{fig:schwarz}
+\end{figure}
+
+\begin{osservazione}[Le ipotesi di continuità non si possono omettere]
+\label{oss:schwarz-controesempio}
+Se le derivate seconde miste non sono continue, non necessariamente sono uguali.
+Consideriamo la funzione
+\begin{equation}\label{eq:schwarz-controesempio}
+  g(x,y)=\frac{x^{3}y}{x^{2}+y^{2}} \quad\text{per }(x,y)\neq(0,0), \qquad g(0,0)=0 .
+\end{equation}
+La funzione è nulla sugli assi, quindi $g_{x}(0,0)=g_{y}(0,0)=0$. Per $(x,y)\neq(0,0)$,
+\[
+  g_{x}=\frac{3x^{2}y(x^{2}+y^{2})-2x^{4}y}{(x^{2}+y^{2})^{2}}, \qquad
+  g_{y}=\frac{x^{3}(x^{2}+y^{2})-2x^{3}y^{2}}{(x^{2}+y^{2})^{2}} .
+\]
+In particolare $g_{x}(0,y)=0$ per ogni $y$, e $g_{y}(x,0)=x$ per ogni $x$. Quindi
+\begin{align*}
+  g_{xy}(0,0)&=\lim_{k\to0}\frac{g_{x}(0,k)-g_{x}(0,0)}{k}=0,\\
+  g_{yx}(0,0)&=\lim_{h\to0}\frac{g_{y}(h,0)-g_{y}(0,0)}{h}=1 :
+\end{align*}
+le due derivate miste nell'origine sono diverse. Il teorema di Schwarz non è
+contraddetto: le derivate miste di $g$ esistono in ogni punto, ma non sono continue
+nell'origine.
+\end{osservazione}
+
+\begin{python}[Il teorema di Schwarz e il suo controesempio]
+import sympy as sp
+
+x, y, h = sp.symbols("x y h", real=True)
+f = x**y                                 # definita per x > 0
+fxy = sp.diff(f, x, y)              # prima rispetto a x, poi a y
+fyx = sp.diff(f, y, x)              # prima rispetto a y, poi a x
+print("f_xy =", sp.simplify(fxy), "   f_yx =", sp.simplify(fyx))
+print("f_xy - f_yx =", sp.simplify(fxy - fyx))
+
+# il controesempio: g = x^3 y / (x^2 + y^2), g(0, 0) = 0
+g = x**3 * y / (x**2 + y**2)
+gx0y = sp.simplify(sp.diff(g, x).subs(x, 0))   # g_x(0, y), y != 0
+gyx0 = sp.simplify(sp.diff(g, y).subs(y, 0))   # g_y(x, 0), x != 0
+print("g_x(0, y) =", gx0y, "   g_y(x, 0) =", gyx0)
+# g_x(0,0) = g_y(0,0) = 0 (g è nulla sugli assi), quindi:
+print("g_xy(0,0) =", sp.limit(gx0y.subs(y, h) / h, h, 0),
+      "   g_yx(0,0) =", sp.limit(gyx0.subs(x, h) / h, h, 0))
+\end{python}
+\begin{risultato}
+f_xy = x**(y - 1)*(y*log(x) + 1)    f_yx = x**(y - 1)*(y*log(x) + 1)
+f_xy - f_yx = 0
+g_x(0, y) = 0    g_y(x, 0) = x
+g_xy(0,0) = 0    g_yx(0,0) = 1
+\end{risultato}
+
+Il teorema di Schwarz fornisce informazioni anche sulle derivate di ordine superiore:
+applicandolo, ad esempio, alla derivata parziale $f_{x}$, si trova $f_{xxy}=f_{xyx}$, purché
+tali derivate terze siano continue. Pertanto, se una funzione di due variabili ha
+derivate parziali continue fino al terzo ordine, le derivate terze distinte sono al più
+quattro: $f_{xxx}$, $f_{xxy}$,
+$f_{xyy}$, $f_{yyy}$. Conta soltanto quante volte si deriva rispetto a ciascuna variabile,
+non l'ordine.
+
+\begin{idea}[L'equazione di Laplace e le correnti potenziali]
+In aerodinamica una corrente piana incompressibile e irrotazionale si descrive con un
+\emph{potenziale di velocità} $\varphi(x,y)$, le cui derivate parziali sono le componenti
+della velocità: $u=\varphi_{x}$, $v=\varphi_{y}$. La conservazione della massa impone
+$u_{x}+v_{y}=0$, cioè
+\begin{equation}\label{eq:laplace}
+  \varphi_{xx}+\varphi_{yy}=0 ,
+\end{equation}
+l'\emph{equazione di Laplace}; le sue soluzioni si dicono \emph{funzioni armoniche}.
+L'irrotazionalità, $v_{x}=u_{y}$, è invece automatica: è proprio il teorema di Schwarz,
+$\varphi_{yx}=\varphi_{xy}$. Sono armoniche, per $(x,y)\neq(0,0)$, il potenziale di una
+\emph{sorgente} $\log\sqrt{x^{2}+y^{2}}$ (che è, a meno del fattore $\frac12$, la prima delle funzioni
+\eqref{eq:radiali}), quello di un \emph{vortice} $\operatorname{arctg}\frac yx$ (nei punti
+con $x\neq0$) e quello di una \emph{doppietta} $\frac{x}{x^{2}+y^{2}}$. Sommando la corrente uniforme $\varphi=x$ e la
+doppietta si ottiene la corrente attorno a un cilindro circolare: è il primo passo della
+teoria classica dei profili alari, che conduce al teorema di Kutta--Žukovskij sulla
+portanza. Il programma verifica l'equazione di Laplace con \texttt{sympy}.
+\end{idea}
+
+\begin{python}[Funzioni armoniche delle correnti potenziali]
+import sympy as sp
+
+x, y = sp.symbols("x y", real=True)
+lap = lambda u: sp.simplify(sp.diff(u, x, 2) + sp.diff(u, y, 2))
+for nome, phi in (("sorgente", sp.log(sp.sqrt(x**2 + y**2))),
+                  ("vortice", sp.atan(y / x)),
+                  ("doppietta", x / (x**2 + y**2)),
+                  ("cilindro", x + x / (x**2 + y**2)),
+                  ("non armonica", x**2 + y**2)):
+    print(f"{nome:13} phi = {str(phi):24}  laplaciano = {lap(phi)}")
+\end{python}
+\begin{risultato}
+sorgente      phi = log(sqrt(x**2 + y**2))    laplaciano = 0
+vortice       phi = atan(y/x)                 laplaciano = 0
+doppietta     phi = x/(x**2 + y**2)           laplaciano = 0
+cilindro      phi = x + x/(x**2 + y**2)       laplaciano = 0
+non armonica  phi = x**2 + y**2               laplaciano = 4
+\end{risultato}
+
+\begin{notastorica}[Eulero, Clairaut, Schwarz, Peano]
+L'uguaglianza delle derivate miste fu data per scontata da Nicolaus Bernoulli già nel
+1721, e usata da Leonhard Euler in una memoria sulle famiglie di curve scritta nel 1734 (e
+pubblicata nel 1740). Alexis Clairaut, nelle ricerche sul calcolo integrale del
+1739--1740, se ne servì per un problema che abbiamo appena incontrato: riconoscere quando
+un'espressione $M\,dx+N\,dy$ è il differenziale di una funzione $\varphi$. Se lo è, si ha
+$M=\varphi_{x}$ e $N=\varphi_{y}$, e l'uguaglianza delle derivate miste impone
+$M_{y}=N_{x}$; per una corrente piana, con $M=u$ e $N=v$, è la condizione di
+irrotazionalità $u_{y}=v_{x}$. Eulero raccolse questi risultati, insieme al teorema sulle
+funzioni omogenee (\cref{subsec:funzioni-omogenee}), nel capitolo sulle funzioni di più
+variabili delle \emph{Institutiones calculi differentialis} (1755). Le loro dimostrazioni,
+e quelle che seguirono per oltre un secolo, da Lagrange (1797) a Cauchy (1823), erano
+incomplete. Nel 1867 Lorenz Leonard Lindelöf,
+analizzando sistematicamente le dimostrazioni precedenti, mostrò con un controesempio che
+una qualche ipotesi è necessaria; la prima dimostrazione rigorosa, con ipotesi di
+continuità del tipo di quelle del \cref{teo:schwarz}, fu data da Hermann Amandus Schwarz
+nel 1873. Il controesempio oggi classico, $\frac{xy(x^{2}-y^{2})}{x^{2}+y^{2}}$, dello stesso
+tipo di quello dell'\cref{oss:schwarz-controesempio}, fu presentato da Giuseppe Peano nel
+1884, nelle note al \emph{Calcolo differenziale} di Genocchi.
+\end{notastorica}
+
+\subsection{Approfondimento: un primo sguardo alle equazioni alle derivate parziali}
+\label{subsec:edp-primo-sguardo}
+\index{equazione!alle derivate parziali}
+
+L'equazione di Laplace \eqref{eq:laplace} è il primo esempio che incontriamo di
+\emph{equazione alle derivate parziali}: una relazione tra una funzione incognita di più
+variabili e le sue derivate parziali, che si dice di ordine $k$ se vi compaiono derivate
+fino all'ordine $k$. Accanto a quella di Laplace, la fisica matematica ha altre due
+equazioni modello del secondo ordine, nelle quali una delle variabili è il tempo $t$:
+\begin{align}
+  u_{t}&=k\,u_{xx} &&\text{(equazione del calore)},\label{eq:calore}\\
+  u_{tt}&=c^{2}u_{xx} &&\text{(equazione delle onde)},\label{eq:onde}
+\end{align}
+con $k>0$ e $c>0$ costanti. La prima descrive la temperatura $u(x,t)$ nel punto di
+ascissa $x$ di una sbarra omogenea, all'istante $t$; la costante $k$ è la diffusività
+termica del materiale. La seconda descrive lo spostamento $u(x,t)$ di una corda vibrante,
+oppure la perturbazione di pressione di un'onda sonora in un condotto; vedremo che $c$ è
+la velocità con cui le perturbazioni si propagano. Con gli strumenti di questo capitolo
+possiamo verificare che alcune funzioni esplicite le risolvono, e capire da esse
+\emph{che cosa} le equazioni descrivono.
+
+\needspace{9\baselineskip}
+\begin{proposizione}[Soluzione di d'Alembert dell'equazione delle onde]\label{prop:dalembert}
+\index{equazione!delle onde}
+Siano $F$ e $G$ funzioni di una variabile derivabili due volte in $\R$, e sia $c>0$.
+Allora la funzione
+\begin{equation}\label{eq:dalembert}
+  u(x,t)=F(x-ct)+G(x+ct)
+\end{equation}
+soddisfa l'equazione delle onde \eqref{eq:onde} in ogni punto $(x,t)\in\R^{2}$.
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$F$, $G$ derivabili due volte in $\R$; \ $c>0$.}
+\Tesi{$u(x,t)=F(x-ct)+G(x+ct)$ verifica $u_{tt}=c^{2}u_{xx}$ in $\R^{2}$.}
+\end{schema}
+
+\begin{strategia}
+Ogni derivata parziale è la derivata di una funzione di una variabile composta con la
+funzione lineare $x-ct$ (oppure $x+ct$): basta la regola della catena del
+\cref{teo:derivata-composta}. La funzione interna ha derivata $1$ rispetto a $x$ e $\mp c$
+rispetto a $t$; derivando due volte, il fattore $\mp c$ compare al quadrato e produce il
+$c^{2}$ dell'equazione.
+\end{strategia}
+
+\begin{dimostrazione}
+Fissato $t$, la funzione $x\mapsto F(x-ct)$ è la composta di $F$ con la funzione
+$x\mapsto x-ct$, che ha derivata $1$; per il \cref{teo:derivata-composta}
+$\frac{\partial}{\partial x}F(x-ct)=F'(x-ct)$ e, derivando ancora,
+$\frac{\partial^{2}}{\partial x^{2}}F(x-ct)=F''(x-ct)$. Fissato $x$, la funzione
+$t\mapsto x-ct$ ha derivata $-c$, quindi
+\[
+  \frac{\partial}{\partial t}F(x-ct)=-c\,F'(x-ct), \qquad
+  \frac{\partial^{2}}{\partial t^{2}}F(x-ct)=c^{2}F''(x-ct).
+\]
+Allo stesso modo, con $+c$ al posto di $-c$, le derivate seconde di $G(x+ct)$ rispetto a
+$x$ e a $t$ valgono $G''(x+ct)$ e $c^{2}G''(x+ct)$. Sommando,
+$u_{tt}=c^{2}\bigl[F''(x-ct)+G''(x+ct)\bigr]=c^{2}u_{xx}$.
+\end{dimostrazione}
+
+Il significato della \eqref{eq:dalembert} è trasparente: il grafico di $x\mapsto F(x-ct)$
+è quello di $F$ traslato di $ct$ verso destra, quindi $F(x-ct)$ è un'onda che viaggia
+verso destra con velocità $c$ senza deformarsi, e $G(x+ct)$ un'onda che viaggia verso
+sinistra. Ad esempio, $u=\frac12\bigl[F(x-ct)+F(x+ct)\bigr]$ vale $F(x)$ per $t=0$ e ha
+$u_{t}(x,0)=\frac12\bigl[-cF'(x)+cF'(x)\bigr]=0$: è la corda che, deformata con il profilo $F$,
+viene lasciata andare da ferma. Il profilo si divide in due metà uguali, che si
+allontanano in versi opposti (\cref{fig:edp-onde-calore}, a sinistra).
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=\textwidth]{edp_onde_calore}
+\caption{A sinistra, la soluzione $u=\frac12[F(x-ct)+F(x+ct)]$ dell'equazione delle onde,
+con $F(x)=e^{-4x^{2}}$ e $c=1$: il profilo iniziale si divide in due onde che viaggiano
+senza deformarsi in versi opposti. A destra, la soluzione \eqref{eq:gaussiana-calore}
+dell'equazione del calore, con $k=1$: la campana si abbassa e si allarga
+(\texttt{python/fig\_edp\_onde\_calore.py}).}
+\label{fig:edp-onde-calore}
+\end{figure}
+
+\index{equazione!del calore}Per l'equazione del calore la verifica è altrettanto diretta. La funzione
+$u=e^{-kn^{2}t}\sen(nx)$, con $n\in\N$, ha $u_{t}=-kn^{2}u$ e $u_{xx}=-n^{2}u$, e quindi
+soddisfa la \eqref{eq:calore}: un profilo sinusoidale di temperatura si smorza
+esponenzialmente, tanto più in fretta quanto più è fitto. Più istruttiva è la funzione,
+definita per $t>0$,
+\begin{equation}\label{eq:gaussiana-calore}
+  u(x,t)=\frac{1}{\sqrt{4\pi kt}}\,e^{-x^{2}/(4kt)},
+\end{equation}
+che il programma più avanti verifica. Per $t$ piccolo è una campana alta e stretta: il
+calore depositato in un punto della sbarra all'istante iniziale. Col tempo la campana si
+abbassa e si allarga, con una larghezza proporzionale a $\sqrt{kt}$
+(\cref{fig:edp-onde-calore}, a destra): là un profilo viaggia senza deformarsi, qui si
+smussa e si diffonde.
+
+\begin{esempio}[Le onde di Mach]\label{es:onde-mach}
+Un profilo alare sottile sia investito da una corrente supersonica, con numero di Mach
+$M>1$. Se le perturbazioni prodotte dal profilo sono piccole, il loro potenziale di
+velocità $\varphi(x,y)$, con l'asse $x$ nella direzione della corrente, soddisfa l'equazione
+linearizzata
+\begin{equation}\label{eq:mach-linearizzata}
+  (M^{2}-1)\,\varphi_{xx}-\varphi_{yy}=0 .
+\end{equation}
+Posto $\beta=\sqrt{M^{2}-1}$, è l'equazione delle onde \eqref{eq:onde} con $y$ al posto di $t$
+e $\beta$ al posto di $c$; per la \cref{prop:dalembert} è risolta da
+$\varphi=F(x-\beta y)+G(x+\beta y)$. Sopra il profilo, dove le perturbazioni sono portate a
+valle, si ha $\varphi=F(x-\beta y)$: la perturbazione è costante lungo le rette
+$x-\beta y=\text{costante}$, inclinate sulla direzione della corrente di un angolo $\mu$ con
+$\tg\mu=\frac1\beta$, cioè $\sen\mu=\frac1M$. Sono le \emph{onde di Mach}, e $\mu$ è
+l'\emph{angolo di Mach}: per $M=2$ si ha $\mu=30^{\circ}$. In regime subsonico, $M<1$,
+l'equazione diventa $(1-M^{2})\varphi_{xx}+\varphi_{yy}=0$, e la sostituzione
+$\varphi(x,y)=\Phi\bigl(x,\sqrt{1-M^{2}}\,y\bigr)$ la riconduce all'equazione di Laplace
+$\Phi_{xx}+\Phi_{yy}=0$ (è la base della regola di Prandtl--Glauert): non ci sono più
+direzioni privilegiate, e il profilo «si fa sentire» in tutto il campo, anche a monte.
+\end{esempio}
+
+\needspace{7\baselineskip}
+\begin{python}[Soluzioni esplicite delle equazioni delle onde e del calore]
+import math
+import sympy as sp
+
+x, y, t, n = sp.symbols("x y t n", real=True)
+k, c, M = sp.symbols("k c M", positive=True)
+F, G, d = sp.Function("F"), sp.Function("G"), sp.diff
+onde = lambda u: sp.simplify(d(u, t, 2) - c**2 * d(u, x, 2))
+calore = lambda u: sp.simplify(d(u, t) - k * d(u, x, 2))
+print("u_tt - c^2 u_xx per F(x-ct)+G(x+ct):",
+      onde(F(x - c*t) + G(x + c*t)))
+print("u_t - k u_xx per e^(-kn^2 t)sen(nx):",
+      calore(sp.exp(-k * n**2 * t) * sp.sin(n*x)))
+gauss = sp.exp(-x**2 / (4*k*t)) / sp.sqrt(4 * sp.pi * k * t)
+print("u_t - k u_xx per la gaussiana:      ", calore(gauss))
+# onde di Mach: (M^2 - 1) phi_xx - phi_yy = 0 per phi = F(x - beta y)
+beta = sp.sqrt(M**2 - 1)
+phi = F(x - beta * y)
+print("(M^2-1) phi_xx - phi_yy:",
+      sp.simplify((M**2 - 1) * d(phi, x, 2) - d(phi, y, 2)))
+for Mach in (1.2, 1.5, 2.0, 3.0):
+    mu = math.degrees(math.asin(1 / Mach))
+    print(f"M = {Mach:.1f}:  angolo di Mach = {mu:5.2f} gradi")
+\end{python}
+\begin{risultato}
+u_tt - c^2 u_xx per F(x-ct)+G(x+ct): 0
+u_t - k u_xx per e^(-kn^2 t)sen(nx): 0
+u_t - k u_xx per la gaussiana:       0
+(M^2-1) phi_xx - phi_yy: 0
+M = 1.2:  angolo di Mach = 56.44 gradi
+M = 1.5:  angolo di Mach = 41.81 gradi
+M = 2.0:  angolo di Mach = 30.00 gradi
+M = 3.0:  angolo di Mach = 19.47 gradi
+\end{risultato}
+
+Al crescere di $M$ l'angolo di Mach diminuisce e le onde si ripiegano all'indietro.
+
+\begin{osservazione}[Tre equazioni modello e la fluidodinamica computazionale]
+\label{oss:edp-cfd}
+Le equazioni di Laplace, del calore e delle onde sono i prototipi di tre famiglie, dette
+rispettivamente \emph{ellittiche}, \emph{paraboliche} e \emph{iperboliche}, dai
+comportamenti molto diversi. Nelle prime ogni punto risente di tutto il contorno: è il
+caso delle correnti subsoniche a potenziale, che i \emph{metodi a pannelli} calcolano
+distribuendo sulla superficie del velivolo sorgenti, vortici e doppiette come quelli
+dell'idea «L'equazione di Laplace e le correnti potenziali». Le seconde descrivono la
+diffusione: nei fluidi è la quantità di moto a diffondere, con la viscosità cinematica
+$\nu$ al posto di $k$, e lo spessore della zona rallentata vicino a una parete cresce come
+$\sqrt{\nu t}$, come la larghezza della campana \eqref{eq:gaussiana-calore}; è il primo
+passo verso la teoria dello strato limite. Le terze descrivono propagazioni a velocità
+finita lungo direzioni privilegiate, come l'acustica e le correnti supersoniche
+dell'\cref{es:onde-mach}. Le equazioni di Navier--Stokes, risolte dai codici di CFD,
+mescolano i tre comportamenti, e un buon metodo numerico rispetta la natura di ciascuno:
+nelle regioni iperboliche, ad esempio, gli schemi \emph{upwind} prendono l'informazione
+dalla direzione da cui arrivano le onde.
+\end{osservazione}
+
+\begin{notastorica}[Le equazioni della fisica matematica]
+Le equazioni alle derivate parziali compaiono, ancora sporadiche, nella prima metà del
+Settecento. Nella stessa memoria del 1747 in cui scrisse l'equazione della corda vibrante
+(si veda la nota storica del \S\ref{sec:derivate-parziali}), d'Alembert ne diede la
+soluzione come somma di due onde che viaggiano in versi opposti, cioè la
+\cref{prop:dalembert}; il dibattito che ne seguì con Eulero e con Daniel Bernoulli su quali
+funzioni $F$ e $G$ fossero ammissibili pesò a lungo sul concetto stesso di funzione
+(nota storica del \S\ref{sec:continue}). L'equazione di
+Laplace nacque invece dai fluidi: Eulero la scrisse per il potenziale di velocità di una
+corrente incomprimibile nei \emph{Principia motus fluidorum}, presentati all'Accademia di
+Berlino nel 1752; Pierre-Simon Laplace la ritrovò nel 1782 per il potenziale
+gravitazionale, e Siméon-Denis Poisson, nel 1813, mostrò che dentro la materia va corretta
+con un secondo membro proporzionale alla densità. Con Fourier, che nel 1807 presentò
+l'equazione del calore, con Laplace e con Poisson, la scuola francese fece delle equazioni
+alle derivate parziali uno dei campi principali dell'analisi; a Cauchy e a Sof'ja
+Kovalevskaja (1874) si deve un teorema di esistenza delle soluzioni. Riemann,
+infine, osservò che una funzione armonica con valori assegnati sul bordo di un dominio si
+ottiene minimizzando un integrale (il «principio di Dirichlet»); ma che il minimo esista
+non è affatto ovvio, e lo dimostrò soltanto David Hilbert, nel 1900.
+\end{notastorica}

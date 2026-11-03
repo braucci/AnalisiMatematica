@@ -1,0 +1,152 @@
+%% ----------------------------------------------------------------------------
+%%  §7.6  Funzioni di tre o più variabili reali
+%% ----------------------------------------------------------------------------
+\section{Funzioni di tre o più variabili reali}
+\label{sec:n-variabili}
+
+Indichiamo con $\R^{3}$ l'insieme delle \emph{terne ordinate} di numeri reali e, più in
+generale, con $\R^{n}$ l'insieme delle \emph{$n$-ple ordinate}:
+\begin{equation}\label{eq:Rn}
+\begin{gathered}
+  \R^{3}=\set{(x,y,z) : x,y,z\in\R},\\
+  \R^{n}=\set{(x_{1},x_{2},\dots,x_{n}) : x_{i}\in\R\ \perogni i=1,\dots,n}.
+\end{gathered}
+\end{equation}
+Una legge $f$ che a ogni elemento di un insieme $D\subseteq\R^{n}$ fa corrispondere uno e
+un solo numero reale è detta una \emph{funzione di $n$ variabili} e si denota con
+$f(x_{1},x_{2},\dots,x_{n})$, oppure, nel caso $n=3$, con $f(x,y,z)$; l'insieme $D$ è il
+\emph{dominio} di $f$. La distanza tra due punti di $\R^{n}$ è
+$\sqrt{(x_{1}-y_{1})^{2}+\dots+(x_{n}-y_{n})^{2}}$, e con essa si definiscono gli intorni
+(sferici, se $n=3$), i limiti e la continuità esattamente come nel piano. Vediamo più in
+dettaglio le derivate parziali.
+
+\begin{definizione}[Derivate parziali in $\R^{n}$]\label{def:parziali-n}
+La \emph{derivata parziale} di $f$ rispetto alla variabile $x_{i}$ nel punto
+$(x_{1},\dots,x_{n})$ è il limite
+\begin{equation}\label{eq:parziale-n}
+  \lim_{h\to0}\frac{f(x_{1},\dots,x_{i}+h,\dots,x_{n})-f(x_{1},\dots,x_{i},\dots,x_{n})}{h},
+\end{equation}
+purché esista e sia finito; si denota con uno dei simboli $f_{x_{i}}$,
+$\frac{\partial f}{\partial x_{i}}$, $D_{x_{i}}f$, $D_{i}f$. Il vettore
+$\nabla f=(f_{x_{1}},\dots,f_{x_{n}})$ è il \emph{gradiente} di $f$.
+\end{definizione}
+
+Anche qui si deriva rispetto a una variabile considerando costanti tutte le altre. Ad
+esempio, le derivate parziali della funzione di tre variabili
+\begin{equation}\label{eq:f-tre-variabili}
+  f(x,y,z)=x^{2}+y^{2}+z^{2}+xyz
+\end{equation}
+sono $f_{x}=2x+yz$, $f_{y}=2y+xz$, $f_{z}=2z+xy$. La funzione di $n$ variabili detta
+\emph{modulo} o \emph{norma},
+\begin{equation}\label{eq:norma}
+  f(x_{1},\dots,x_{n})=\sqrt{x_{1}^{2}+x_{2}^{2}+\dots+x_{n}^{2}},
+\end{equation}
+che misura la distanza del punto dall'origine, ammette in ogni punto diverso
+dall'origine le derivate parziali
+\begin{equation}\label{eq:norma-derivate}
+  f_{x_{i}}=\frac{2x_{i}}{2\sqrt{x_{1}^{2}+\dots+x_{n}^{2}}}=\frac{x_{i}}{f},
+  \qquad i=1,2,\dots,n,
+\end{equation}
+come si vede derivando la radice con la regola della catena. Il gradiente della norma è
+quindi il versore $\frac{(x_{1},\dots,x_{n})}{f}$, diretto radialmente verso l'esterno:
+la distanza dall'origine cresce più rapidamente allontanandosi in direzione radiale.
+
+\begin{esempio}[La portanza come funzione di tre variabili]\label{es:portanza-tre}
+La portanza $L(\rho,V,C_{L})=\frac12\rho SV^{2}C_{L}$ è una funzione di tre variabili, con
+\[
+  \frac{\partial L}{\partial\rho}=\frac12SV^{2}C_{L}=\frac L\rho, \qquad
+  \frac{\partial L}{\partial V}=\rho SVC_{L}=\frac{2L}V, \qquad
+  \frac{\partial L}{\partial C_{L}}=\frac{L}{C_{L}} .
+\]
+Moltiplicando ciascuna derivata per la variabile corrispondente e dividendo per $L$ si
+ottengono le \emph{sensibilità relative} $1$, $2$, $1$: una variazione percentuale piccola
+della velocità produce una variazione percentuale \emph{doppia} della portanza, mentre
+le variazioni di densità e di $C_{L}$ si trasmettono in egual misura. Ad esempio, salendo
+di quota a velocità e assetto costanti, la portanza diminuisce nella stessa proporzione
+della densità; per ristabilire l'equilibrio occorre aumentare $C_{L}$ oppure la velocità,
+e per quest'ultima basta un aumento percentuale pari a circa la metà. Daremo un
+fondamento preciso a questi ragionamenti con il differenziale, nel
+\cref{sec:differenziabilita}.
+\end{esempio}
+
+Come per le funzioni di due variabili, si definiscono le \emph{derivate parziali
+seconde} $f_{x_{i}x_{j}}=(f_{x_{i}})_{x_{j}}$, che vengono a costituire la seguente
+matrice quadrata $n\times n$, detta \emph{matrice hessiana}:
+\begin{equation}\label{eq:matrice-hessiana}
+  \begin{pmatrix}
+    f_{x_{1}x_{1}} & f_{x_{1}x_{2}} & \cdots & f_{x_{1}x_{n}}\\
+    f_{x_{2}x_{1}} & f_{x_{2}x_{2}} & \cdots & f_{x_{2}x_{n}}\\
+    \vdots & \vdots & \ddots & \vdots\\
+    f_{x_{n}x_{1}} & f_{x_{n}x_{2}} & \cdots & f_{x_{n}x_{n}}
+  \end{pmatrix}.
+\end{equation}
+Applicando il teorema di Schwarz alla funzione delle sole due variabili $x_{i}$, $x_{j}$
+che si ottiene lasciando fissate tutte le altre, con il ruolo di parametri, si ottiene
+\begin{equation}\label{eq:schwarz-n}
+  f_{x_{i}x_{j}}=f_{x_{j}x_{i}} \qquad\perogni i,j=1,\dots,n,
+\end{equation}
+purché tali derivate seconde esistano e siano continue. Pertanto la matrice hessiana è
+\emph{simmetrica} nel caso in cui tutte le derivate parziali seconde siano continue. Con
+le stesse definizioni e la stessa dimostrazione del \cref{teo:fermat-due} si prova che in
+un punto di massimo o di minimo relativo interno al dominio risulta
+\begin{equation}\label{eq:fermat-n}
+  f_{x_{1}}=f_{x_{2}}=\dots=f_{x_{n}}=0,
+\end{equation}
+nell'ipotesi che le derivate parziali prime esistano nel punto.
+
+\begin{osservazione}[La condizione sufficiente in $n$ variabili]\label{oss:hessiana-n}
+Una condizione sufficiente per i massimi e i minimi, in termini della matrice hessiana,
+esiste ma è più complessa della formulazione data nel caso di due variabili. Per una
+funzione con derivate seconde continue in un intorno del punto critico, essa si
+esprime dicendo che la matrice hessiana nel punto critico è \emph{definita positiva}
+(minimo) o \emph{definita negativa} (massimo), nozioni che si studiano nei corsi di
+Geometria; se la forma quadratica associata assume valori di segno opposto lungo due
+direzioni, il punto critico è di sella. Un criterio pratico, dovuto a Sylvester, afferma
+che una matrice simmetrica è definita positiva se e solo se sono positivi i minori
+principali «di nord-ovest», cioè i determinanti delle sottomatrici formate dalle prime
+$k$ righe e colonne, per $k=1,\dots,n$; è definita negativa se e solo se tali minori
+hanno segni alterni, a cominciare da un negativo. Per $n=2$ si ritrovano le condizioni
+$f_{xx}>0$ (oppure $f_{xx}<0$) e $H>0$ del \cref{teo:hessiano}. Come vedremo nel
+\cref{sec:differenziabilita} (per $n=2$; la dimostrazione è identica per $n$ qualsiasi),
+la derivata seconda nel punto critico $P$ della restrizione di $f$ alla retta per $P$ di
+direzione $v$ è la forma quadratica $v^{T}H(P)\,v$: è questo il motivo per cui, se essa
+assume valori di segno opposto per due direzioni, $P$ è un punto di sella.
+\end{osservazione}
+
+Il programma seguente trova i punti critici della funzione \eqref{eq:f-tre-variabili} e,
+per ciascuno, calcola la forma quadratica $v^{T}Hv$ per i $26$ vettori $v$ con componenti
+in $\set{-1,0,1}$ non tutte nulle.
+
+\begin{python}[Punti critici di una funzione di tre variabili]
+import itertools
+import sympy as sp
+
+x, y, z = sp.symbols("x y z", real=True)
+f = x**2 + y**2 + z**2 + x*y*z
+grad = [sp.diff(f, v) for v in (x, y, z)]
+H = sp.hessian(f, (x, y, z))
+print("grad f =", grad)
+# direzioni di prova v; la derivata seconda lungo v è v^T H v
+dirs = [sp.Matrix(v) for v in itertools.product((-1, 0, 1), repeat=3)
+        if any(v)]
+for P in sp.solve(grad, [x, y, z], dict=True):
+    q = [int((v.T * H.subs(P) * v)[0]) for v in dirs]
+    c = ", ".join(f"{int(P[s]):2d}" for s in (x, y, z))
+    print(f"P = ({c}):  min v^T H v = {min(q):2d},"
+          f"  max v^T H v = {max(q)}")
+\end{python}
+\begin{risultato}
+grad f = [2*x + y*z, x*z + 2*y, x*y + 2*z]
+P = (-2, -2, -2):  min v^T H v = -6,  max v^T H v = 10
+P = (-2,  2,  2):  min v^T H v = -6,  max v^T H v = 10
+P = ( 0,  0,  0):  min v^T H v =  2,  max v^T H v = 6
+P = ( 2, -2,  2):  min v^T H v = -6,  max v^T H v = 10
+P = ( 2,  2, -2):  min v^T H v = -6,  max v^T H v = 10
+\end{risultato}
+
+Nell'origine la matrice hessiana è $2I$, il doppio della matrice identità, e
+$v^{T}Hv=2(v_{1}^{2}+v_{2}^{2}+v_{3}^{2})>0$ per ogni $v\neq0$: è definita positiva, e
+l'origine è un punto di minimo relativo (come si vede anche osservando che, vicino
+all'origine, il termine cubico $xyz$ è trascurabile rispetto a $x^{2}+y^{2}+z^{2}$). Negli
+altri quattro punti critici, del tipo $(\pm2,\pm2,\pm2)$ con prodotto delle coordinate
+negativo, la forma quadratica assume valori di segno opposto: sono punti di sella.

@@ -1,0 +1,70 @@
+%% ============================================================================
+%%  CAPITOLO 7 — Funzioni di più variabili
+%%  Fonte principale per argomenti e dimostrazioni: Marcellini–Sbordone, cap. 7
+%%  (§54 funzioni di due variabili, dominio, rappresentazione cartesiana;
+%%  §55 limiti e continuità; §56 derivate parziali, gradiente; §57 derivate
+%%  successive, teorema di Schwarz; §58 massimi e minimi relativi; §59 funzioni
+%%  di tre o più variabili; appendice §60 differenziabilità).
+%% ============================================================================
+\aperturacapitolo{Funzioni di più variabili}{cap:piu-variabili}
+
+\epigraph{On ne trouvera point de Figures dans cet Ouvrage. Les méthodes que j'y
+expose ne demandent ni constructions, ni raisonnemens géométriques ou méchaniques, mais
+seulement des opérations algébriques.\\[2pt]
+\upshape(Non si troveranno figure in quest'opera. I metodi che vi espongo non
+richiedono né costruzioni, né ragionamenti geometrici o meccanici, ma soltanto
+operazioni algebriche.)}{Joseph-Louis Lagrange, \emph{Méchanique analitique} (1788),
+avvertenza}
+
+\lettrine[lines=3, findent=2pt, nindent=0pt]{Q}{uasi tutte} le grandezze che un
+ingegnere incontra dipendono da più di una variabile. La portanza di un'ala dipende
+dalla densità dell'aria, dalla velocità e dall'assetto; la pressione atmosferica dipende
+dalla posizione e dalla quota; la sollecitazione in un longherone dipende dal punto
+della sezione e dalla posizione lungo l'apertura. In questo capitolo diamo alcuni cenni
+dell'analisi delle funzioni di più variabili reali, un argomento che in genere viene
+ripreso e approfondito in un corso di Analisi Matematica di secondo anno, ma che è
+troppo importante per le applicazioni per rimandarlo del tutto.
+
+Vedremo che molte idee del calcolo per le funzioni di una variabile si estendono in modo
+naturale: il limite e la continuità si definiscono sostituendo la distanza nel piano al
+valore assoluto; la derivata diventa la \emph{derivata parziale}, che si calcola
+derivando rispetto a una variabile e tenendo ferme le altre; la condizione di Fermat
+$f'(x_{0})=0$ diventa l'annullarsi del \emph{gradiente}. Vedremo anche che non tutto si
+estende senza sorprese: una funzione può avere entrambe le derivate parziali in un punto
+senza essere continua in quel punto, e le derivate seconde miste possono dipendere
+dall'ordine di derivazione. Queste sorprese ci condurranno, in appendice, alla nozione
+di \emph{differenziabilità}, la vera generalizzazione della derivabilità. Malgrado
+l'epigrafe di Lagrange, il capitolo è ricchissimo di figure: per le funzioni di due
+variabili il grafico è una superficie, e vederla aiuta moltissimo. Seguiremo il testo di
+riferimento \cite{marcellini-sbordone}.
+
+\medskip
+\noindent\textbf{In questo capitolo.}
+\begin{itemize}
+  \item Funzioni di due variabili, grafici, curve di livello, domini
+  (\S\ref{sec:due-variabili}).
+  \item Limiti e continuità nel piano (\S\ref{sec:limiti-piano}).
+  \item Derivate parziali, gradiente, derivate direzionali (\S\ref{sec:derivate-parziali}).
+  \item Derivate successive e teorema di Schwarz; l'equazione di Laplace
+  (\S\ref{sec:schwarz}).
+  \item Approfondimento: un primo sguardo alle equazioni alle derivate parziali
+  (\S\ref{subsec:edp-primo-sguardo}).
+  \item Massimi e minimi relativi; il metodo dei minimi quadrati (\S\ref{sec:estremi-due}).
+  \item Funzioni di tre o più variabili (\S\ref{sec:n-variabili}).
+  \item Appendice: differenziabilità, piano tangente, dimostrazione del criterio
+  dell'hessiano (\S\ref{sec:differenziabilita}).
+  \item Approfondimento: funzioni omogenee e teorema di Eulero
+  (\S\ref{subsec:funzioni-omogenee}).
+  \item Esercizi di riepilogo (\S\ref{sec:esercizi-cap7}).
+  \item Punti fondamentali del capitolo (\S\ref{sec:sintesi-cap07}).
+\end{itemize}
+
+\input{capitoli/cap07/01-due-variabili}
+\input{capitoli/cap07/02-limiti-continuita}
+\input{capitoli/cap07/03-derivate-parziali}
+\input{capitoli/cap07/04-schwarz}
+\input{capitoli/cap07/05-massimi-minimi}
+\input{capitoli/cap07/06-piu-variabili}
+\input{capitoli/cap07/07-differenziabilita}
+\input{capitoli/cap07/08-esercizi}
+\input{capitoli/cap07/09-sintesi}

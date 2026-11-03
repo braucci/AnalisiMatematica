@@ -1,0 +1,225 @@
+%% ----------------------------------------------------------------------------
+%%  §7.3  Derivate parziali. Gradiente
+%% ----------------------------------------------------------------------------
+\section{Derivate parziali. Gradiente}
+\label{sec:derivate-parziali}
+
+Sia $f$ una funzione di due variabili definita in un intorno circolare $I_{\delta}$ di un
+punto $(x,y)$. In particolare $f$ è definita, oltre che in $(x,y)$, anche nei punti
+$(x+h,y)$ con $\abs h<\delta$, che stanno sulla retta orizzontale per $(x,y)$, e nei punti
+$(x,y+k)$ con $\abs k<\delta$, sulla retta verticale. Fermando una delle due variabili si
+ottiene una funzione di una sola variabile, che possiamo derivare.
+
+\begin{definizione}[Derivate parziali]\label{def:derivate-parziali}\index{derivata!parziale}
+La \emph{derivata parziale di $f$ rispetto a $x$} nel punto $(x,y)$ è il limite
+\begin{equation}\label{eq:derivata-parziale-x}
+  \lim_{h\to0}\frac{f(x+h,y)-f(x,y)}{h},
+\end{equation}
+se esiste ed è finito; si indica con uno dei simboli
+\begin{equation}\label{eq:notazioni-parziale-x}
+  f_{x}, \qquad f_{x}(x,y), \qquad \frac{\partial f}{\partial x}, \qquad D_{x}f .
+\end{equation}
+Analogamente, la \emph{derivata parziale di $f$ rispetto a $y$} nel punto $(x,y)$ è il
+limite
+\begin{equation}\label{eq:derivata-parziale-y}
+  \lim_{k\to0}\frac{f(x,y+k)-f(x,y)}{k},
+\end{equation}
+se esiste ed è finito, e si indica con $f_{y}$, $f_{y}(x,y)$, $\frac{\partial f}{\partial y}$,
+$D_{y}f$.
+\end{definizione}
+
+Si noti che la \eqref{eq:derivata-parziale-x} è il limite del rapporto incrementale di una
+funzione di \emph{una} variabile: posto $g(t)=f(t,y)$, con $y$ fissato che gioca il ruolo
+di parametro, è $f_{x}(x,y)=g'(x)$. Per questo motivo \emph{le derivate parziali si
+calcolano con le stesse regole di derivazione delle funzioni di una variabile,
+considerando l'altra variabile costante}. Geometricamente, $f_{x}(x_{0},y_{0})$ è la
+pendenza della curva che si ottiene sezionando il grafico con il piano verticale
+$y=y_{0}$, e $f_{y}(x_{0},y_{0})$ quella della sezione con il piano $x=x_{0}$
+(\cref{fig:derivate-parziali}).
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.62\textwidth]{derivate_parziali}
+\caption{Il significato geometrico delle derivate parziali per
+$f(x,y)=3-\frac{x^{2}}2-\frac{y^{2}}4$ nel punto $(x_{0},y_{0})=(1,1)$. La sezione con il
+piano $y=y_{0}$ (rame) ha nel punto $(x_{0},y_{0},f(x_{0},y_{0}))$ tangente di pendenza
+$f_{x}(1,1)=-1$; la sezione con il piano $x=x_{0}$ (verde) ha tangente di pendenza
+$f_{y}(1,1)=-\frac12$ (\texttt{python/fig\_derivate\_parziali.py}).}
+\label{fig:derivate-parziali}
+\end{figure}
+
+\begin{esempio}[Calcolo di derivate parziali]\label{es:derivate-parziali}
+Per la funzione
+\begin{equation}\label{eq:parziali-es1}
+  f(x,y)=x^{2}+xy^{2}, \qquad (x,y)\in\R^{2},
+\end{equation}
+nel derivare rispetto a $x$ si considera $y$ costante, come se fosse, ad esempio,
+$y^{2}=9$ e si dovesse derivare la funzione $x\mapsto x^{2}+9x$; si ottiene
+$f_{x}(x,y)=2x+y^{2}$. Analogamente, derivando rispetto a $y$ con $x$ costante,
+$f_{y}(x,y)=2xy$. La funzione $f(x,y)=\sen(xy)$, il cui grafico è nella
+\cref{fig:superfici}, ha derivate parziali $f_{x}=y\cos(xy)$ e $f_{y}=x\cos(xy)$ in ogni
+punto di $\R^{2}$ (regola della catena). La funzione $f(x,y)=e^{x}$ è costante rispetto a
+$y$: le sue derivate parziali sono $f_{x}=e^{x}$ e $f_{y}=0$.
+\end{esempio}
+
+\begin{python}[Derivate parziali con sympy e controllo numerico]
+import sympy as sp
+
+x, y = sp.symbols("x y", real=True)
+for f in (x**2 + x*y**2, sp.sin(x*y), sp.exp(x), x + 2*y):
+    gx, gy = sp.diff(f, x), sp.diff(f, y)
+    print(f"f = {str(f):13}  f_x = {str(gx):10}  f_y = {gy}")
+
+# controllo numerico con i rapporti incrementali, nel punto (1, 2)
+F = sp.lambdify((x, y), x**2 + x*y**2)
+h = 1e-6
+print("f_x(1,2) ~", round((F(1 + h, 2) - F(1, 2)) / h, 4),
+      "  f_y(1,2) ~", round((F(1, 2 + h) - F(1, 2)) / h, 4))
+\end{python}
+\begin{risultato}
+f = x**2 + x*y**2  f_x = 2*x + y**2  f_y = 2*x*y
+f = sin(x*y)       f_x = y*cos(x*y)  f_y = x*cos(x*y)
+f = exp(x)         f_x = exp(x)      f_y = 0
+f = x + 2*y        f_x = 1           f_y = 2
+f_x(1,2) ~ 6.0   f_y(1,2) ~ 4.0
+\end{risultato}
+
+\begin{esempio}[Sensibilità della resistenza all'allungamento alare]\label{es:sensibilita-AR}
+Con la polare parabolica, il coefficiente di resistenza dipende dal coefficiente di
+portanza e dall'allungamento alare:
+\begin{equation}\label{eq:CD-CL-AR}
+  C_{D}(C_{L},AR)=C_{D0}+\frac{C_{L}^{2}}{\pi e\,AR} .
+\end{equation}
+Le derivate parziali misurano la \emph{sensibilità} di $C_{D}$ a ciascuna delle due
+variabili, a parità dell'altra:
+\[
+  \frac{\partial C_{D}}{\partial C_{L}}=\frac{2C_{L}}{\pi e\,AR}, \qquad
+  \frac{\partial C_{D}}{\partial AR}=-\frac{C_{L}^{2}}{\pi e\,AR^{2}} .
+\]
+La seconda è negativa: aumentando l'allungamento la resistenza indotta diminuisce, ma
+sempre meno, perché il modulo della derivata decresce come $\frac1{AR^{2}}$; ed è tanto
+maggiore in modulo quanto più alto è $C_{L}$, cioè nel volo lento, in salita e in
+virata. È il motivo per cui alianti e velivoli da alta quota hanno ali molto allungate.
+\end{esempio}
+
+\begin{python}[Sensibilità di $C_{D}$ a $C_{L}$ e ad $AR$]
+import math
+
+# C_D(C_L, AR) = C_D0 + C_L^2 / (pi e AR): sensibilità parziali
+CD0, e = 0.025, 0.8
+CD = lambda CL, AR: CD0 + CL**2 / (math.pi * e * AR)
+dCD_dCL = lambda CL, AR: 2 * CL / (math.pi * e * AR)
+dCD_dAR = lambda CL, AR: -CL**2 / (math.pi * e * AR**2)
+print("  C_L  AR     C_D     dC_D/dC_L   dC_D/dAR")
+for CL, AR in ((0.5, 8), (1.0, 8), (1.0, 12)):
+    print(f"  {CL:.1f}  {AR:2d}   {CD(CL, AR):.5f}   "
+          f"{dCD_dCL(CL, AR):.5f}    {dCD_dAR(CL, AR):.6f}")
+\end{python}
+\begin{risultato}
+  C_L  AR     C_D     dC_D/dC_L   dC_D/dAR
+  0.5   8   0.03743   0.04974    -0.001554
+  1.0   8   0.07474   0.09947    -0.006217
+  1.0  12   0.05816   0.06631    -0.002763
+\end{risultato}
+
+\subsection{Il gradiente e le derivate direzionali}
+
+\begin{definizione}[Gradiente]\label{def:gradiente}\index{gradiente}
+Se $f$ ammette le derivate parziali $f_{x}$, $f_{y}$ nel punto $(x,y)$, si chiama
+\emph{gradiente} di $f$ in $(x,y)$ il vettore di $\R^{2}$ che ha per componenti le
+derivate parziali:
+\begin{equation}\label{eq:gradiente}
+  \nabla f(x,y)=\operatorname{grad}f(x,y)=\bigl(f_{x}(x,y),\,f_{y}(x,y)\bigr).
+\end{equation}
+\end{definizione}
+
+Il simbolo $\nabla$ si legge «nabla» (dal nome di un'arpa fenicia, di forma triangolare).
+Le derivate parziali descrivono come varia $f$ quando ci si sposta parallelamente agli
+assi; ci si può però spostare in qualunque direzione. Sia $v=(\cos\vartheta,\sen\vartheta)$
+un \emph{versore}, cioè un vettore di lunghezza $1$; la \emph{derivata direzionale} di $f$
+nel punto $P=(x,y)$ secondo la direzione $v$ è il limite
+\begin{equation}\label{eq:derivata-direzionale}
+  \frac{\partial f}{\partial v}(x,y)=\lim_{t\to0}\frac{f(x+t\cos\vartheta,\,y+t\sen\vartheta)-f(x,y)}{t},
+\end{equation}
+se esiste finito. Per $\vartheta=0$ si ritrova $f_{x}$, per $\vartheta=\frac\pi2$ si ritrova
+$f_{y}$. Il gradiente ha una proprietà notevole: \emph{se non è nullo, indica la direzione
+di massima pendenza del grafico}. Lo verifichiamo qui per le funzioni lineari; il caso
+generale, per le funzioni differenziabili, è trattato nel \cref{sec:differenziabilita}.
+
+\begin{proposizione}[Gradiente di una funzione lineare]\label{prop:gradiente-lineare}
+Sia $f(x,y)=ax+by+c$, con $(a,b)\neq(0,0)$. Allora $\nabla f=(a,b)$ in ogni punto, e per
+ogni versore $v=(\cos\vartheta,\sen\vartheta)$
+\begin{equation}\label{eq:direzionale-lineare}
+  \frac{\partial f}{\partial v}=a\cos\vartheta+b\sen\vartheta=\abs{\nabla f}\cos(\vartheta-\varphi),
+\end{equation}
+dove $\abs{\nabla f}=\sqrt{a^{2}+b^{2}}$ e $\varphi$ è l'angolo che il gradiente forma con
+l'asse $x$. In particolare la derivata direzionale è massima, e uguale a $\abs{\nabla f}$,
+nella direzione del gradiente; è minima nella direzione opposta; è nulla nelle direzioni
+perpendicolari al gradiente, che sono quelle delle curve di livello.
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$f(x,y)=ax+by+c$, $(a,b)\neq(0,0)$; $v=(\cos\vartheta,\sen\vartheta)$.}
+\Tesi{$\frac{\partial f}{\partial v}=\abs{\nabla f}\cos(\vartheta-\varphi)$: massima per
+$v$ parallelo e concorde a $\nabla f$, nulla per $v$ perpendicolare.}
+\end{schema}
+
+\begin{strategia}
+Per una funzione lineare il rapporto incrementale è costante, e la derivata direzionale
+si calcola subito. Scrivendo il gradiente in forma polare,
+$(a,b)=\abs{\nabla f}(\cos\varphi,\sen\varphi)$, la formula di sottrazione del coseno
+trasforma $a\cos\vartheta+b\sen\vartheta$ in un solo coseno, di cui si conoscono massimo e
+minimo.
+\end{strategia}
+
+\begin{dimostrazione}
+Si ha $f_{x}=a$ e $f_{y}=b$. Inoltre
+$f(x+t\cos\vartheta,y+t\sen\vartheta)-f(x,y)=t(a\cos\vartheta+b\sen\vartheta)$, quindi il rapporto
+incrementale in \eqref{eq:derivata-direzionale} è costante e uguale a
+$a\cos\vartheta+b\sen\vartheta$. Poiché $(a,b)\neq(0,0)$, posto $r=\sqrt{a^{2}+b^{2}}$ esiste
+$\varphi$ con $a=r\cos\varphi$ e $b=r\sen\varphi$; per la formula di sottrazione
+\eqref{eq:addizione-cos},
+\[
+  a\cos\vartheta+b\sen\vartheta=r(\cos\varphi\cos\vartheta+\sen\varphi\sen\vartheta)=r\cos(\vartheta-\varphi).
+\]
+Il massimo $r$ si ha per $\vartheta=\varphi$, il minimo $-r$ per $\vartheta=\varphi+\pi$, e il
+valore $0$ per $\vartheta=\varphi\pm\frac\pi2$. Infine, le curve di livello
+$ax+by+c=\text{costante}$ sono rette di direzione $(-b,a)$, perpendicolare a $(a,b)$.
+\end{dimostrazione}
+
+Per esempio, la funzione $f(x,y)=x+2y$ ha gradiente costante $(1,2)$: questo vettore
+indica la direzione e il verso, nel piano di base, in cui conviene muoversi per ottenere
+il massimo incremento di $f$ a parità di percorso. Il grafico di una funzione lineare è
+un piano; per una funzione qualunque, nel \cref{sec:differenziabilita} vedremo che
+vicino a ogni punto il grafico si confonde con un piano (il \emph{piano tangente}), e
+che per questo la proprietà vale in generale.
+
+\begin{idea}[La forza di gradiente di pressione]
+Su una particella d'aria agisce, per effetto delle differenze di pressione, una forza
+per unità di massa uguale a $-\frac1\rho\nabla p$: la forza è diretta come l'opposto del
+gradiente, cioè dalle alte verso le basse pressioni, perpendicolarmente alle isobare, ed è
+tanto più intensa quanto più le isobare sono fitte (\cref{fig:livello}, a sinistra). Se la
+Terra non ruotasse, il vento soffierebbe proprio così; nella realtà la forza di Coriolis
+lo devia, e alle quote alte il vento scorre quasi parallelo alle isobare (vento
+geostrofico). La stessa forza governa lo strato limite sul profilo di un'ala: dove la
+pressione cresce nel verso del moto (\emph{gradiente avverso}) la corrente rallenta e può
+separarsi dalla superficie, provocando lo stallo.
+\end{idea}
+
+\begin{notastorica}[La nascita delle derivate parziali e del simbolo $\partial$]
+Le derivate parziali nacquero insieme al calcolo, ma si affermarono negli anni Trenta e
+Quaranta del Settecento, nei lavori di Eulero, di Clairaut e di d'Alembert sulla
+meccanica dei corpi continui: nel 1747 d'Alembert scrisse l'equazione della corda
+vibrante, la prima equazione alle derivate parziali della fisica matematica. Nessuno,
+però, si fermò a darne una definizione esplicita: le si calcolava trattando come
+costanti le altre variabili, esattamente come facciamo noi, e soltanto la revisione
+critica dell'Ottocento rivelò che cosa esse non dicono
+(\cref{sec:differenziabilita}). Per molto tempo si usò lo stesso simbolo $d$ delle
+derivate ordinarie, specificando a parole la variabile. Il simbolo $\partial$ compare
+già in una memoria di Condorcet del 1770; nella forma $\frac{\partial u}{\partial x}$ fu
+usato da Adrien-Marie Legendre nel 1786, poi abbandonato, e reintrodotto in modo
+definitivo da Carl Gustav Jacobi nel 1841. Il simbolo $\nabla$ e il nome «nabla» si
+affermarono nell'Ottocento con il calcolo vettoriale di Hamilton, Tait, Maxwell e
+Gibbs (il nome fu suggerito a Tait, intorno al 1870, dal biblista William Robertson
+Smith).
+\end{notastorica}

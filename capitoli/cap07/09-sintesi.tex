@@ -1,0 +1,83 @@
+%% ----------------------------------------------------------------------------
+%%  §7.9  Punti fondamentali del capitolo
+%% ----------------------------------------------------------------------------
+\section{Punti fondamentali del capitolo}
+\label{sec:sintesi-cap07}
+
+L'idea centrale del capitolo è che il calcolo in più variabili si costruisce riducendosi
+alle funzioni di una variabile: si fissa una variabile, o ci si muove lungo una retta o
+una curva, e si usano i teoremi già noti. La riduzione però non basta sempre: le
+informazioni raccolte lungo poche direzioni non controllano un intero intorno, e la
+nozione che lo fa davvero è la differenziabilità.
+
+\begin{puntichiave}
+\item \textbf{Funzioni di due variabili.} Una funzione $f:D\to\R$, con
+$D\subseteq\R^{2}$, ha per grafico una superficie e si descrive bene con le curve di
+livello $\set{(x,y)\in D \tc f(x,y)=c}$; il dominio naturale si trova risolvendo
+disequazioni in due variabili (\cref{def:funzione-due-variabili,def:curve-livello}).
+\item \textbf{Limiti e continuità.} La definizione con $\varepsilon$ e $\delta$ usa la
+distanza nel piano ed equivale a quella con le successioni di punti; polinomi, somme,
+prodotti, quozienti e composizioni di funzioni continue sono continui
+(\cref{def:limite-piano,oss:limite-piano-successioni,teo:continue-piano}).
+\item \textbf{Esistenza e non esistenza del limite.} Se lungo due curve che tendono a
+$P_{0}$ la funzione ha limiti diversi, il limite non esiste; ma l'accordo lungo tutte le
+rette non basta, come mostra $\frac{x^{2}y}{x^{4}+y^{2}}$ lungo $y=x^{2}$. Per provare
+l'esistenza serve una maggiorazione di $\abs{f-\ell}$ che dipenda soltanto dalla
+distanza $\rho$ da $P_{0}$ e tenda a $0$
+(\cref{prop:restrizione-curva,prop:coordinate-polari}).
+\item \textbf{Derivate parziali e gradiente.} $f_{x}$ è la derivata della funzione di
+una variabile $x\mapsto f(x,y)$, con $y$ fissato, e si calcola con le regole usuali;
+$\nabla f=(f_{x},f_{y})$. L'esistenza delle derivate parziali in un punto non implica la
+continuità: $\frac{xy}{x^{2}+y^{2}}$, nulla nell'origine, le ha ma non è continua
+(\cref{def:derivate-parziali,def:gradiente} e \eqref{eq:f-discontinua}).
+\item \textbf{Teorema di Schwarz.} Se $f_{x}$, $f_{y}$, $f_{xy}$, $f_{yx}$ esistono in un
+intorno di $(x_{0},y_{0})$ e le derivate miste sono continue in $(x_{0},y_{0})$, allora
+$f_{xy}(x_{0},y_{0})=f_{yx}(x_{0},y_{0})$; senza la continuità le derivate miste possono
+differire (\cref{teo:schwarz,oss:schwarz-controesempio}).
+\item \textbf{Condizione necessaria per gli estremi.} In un punto di massimo o di minimo
+relativo \emph{interno} al dominio, in cui esistono le derivate parziali, il gradiente
+è nullo. La condizione non è sufficiente: per $y^{2}-x^{2}$ l'origine è un punto di
+sella (\cref{teo:fermat-due}).
+\item \textbf{Criterio dell'hessiano.} Se $f$ ha derivate prime e seconde continue
+vicino al punto critico e $H=f_{xx}f_{yy}-f_{xy}^{2}$: per $H>0$ e $f_{xx}>0$ si ha un
+minimo relativo stretto, per $H>0$ e $f_{xx}<0$ un massimo relativo stretto, per $H<0$
+una sella; per $H=0$ il criterio non decide (\cref{teo:hessiano}).
+\item \textbf{Minimi quadrati.} La retta $C_{D}=b+aX$ che minimizza la somma dei
+quadrati dei residui si ottiene annullando il gradiente di $S(a,b)$: le equazioni
+normali \eqref{eq:equazioni-normali} hanno un'unica soluzione se gli $X_{i}$ non sono
+tutti uguali, e la soluzione è il minimo assoluto (\cref{fig:minimi-quadrati}).
+\item \textbf{Funzioni di $n$ variabili.} Derivate parziali e gradiente si definiscono
+allo stesso modo; la matrice hessiana è simmetrica se le derivate seconde sono continue,
+e un punto critico è di minimo (massimo) relativo se l'hessiana vi è definita
+positiva (negativa) (\cref{def:parziali-n,oss:hessiana-n}).
+\item \textbf{Differenziabilità.} $f$ è differenziabile in un punto se l'incremento è
+approssimato dal differenziale $f_{x}h+f_{y}k$ con un errore $o\bigl(\sqrt{h^{2}+k^{2}}\bigr)$;
+allora $f$ è continua e il suo grafico ha piano tangente
+(\cref{def:differenziabile,teo:differenziabile-continua}).
+\item \textbf{Derivate direzionali.} Se $f$ è differenziabile, la derivata nella
+direzione del versore $v$ è $\nabla f\cdot v$: il gradiente indica la direzione di
+massima crescita ed è perpendicolare alle curve di livello. Il viceversa è falso: tutte
+le derivate direzionali possono esistere senza che $f$ sia continua
+(\cref{teo:derivata-direzionale}).
+\item \textbf{Teorema del differenziale.} Se $f_{x}$, $f_{y}$ esistono vicino a un
+punto e sono continue nel punto, $f$ vi è differenziabile; dunque $C^{1}$ implica
+differenziabile, che implica $C^{0}$, e nessuna delle due implicazioni si inverte
+(\cref{teo:differenziale,es:non-differenziabile}).
+\item \textbf{Errori da evitare.} Dedurre l'esistenza di un limite dai soli percorsi
+rettilinei; scambiare l'esistenza delle derivate parziali o direzionali con la
+differenziabilità; applicare il criterio dell'hessiano quando $H=0$, o a un punto non
+interno al dominio.
+\item \textbf{Applicazioni aeronautiche.} Le derivate parziali misurano la sensibilità
+di $C_{D}$ a $C_{L}$ e ad $AR$ e quella della portanza a $\rho$, $V$, $C_{L}$ (in
+termini relativi $1$, $2$, $1$); il differenziale stima la propagazione degli errori in
+$\rho=\frac p{RT}$, dove gli errori relativi si sommano
+(\cref{es:sensibilita-AR,es:portanza-tre,es:propagazione-errori}).
+\end{puntichiave}
+
+\paragraph{Il filo del discorso.} Restano aperti, e appartengono a un secondo corso,
+gli estremi vincolati (i moltiplicatori di Lagrange), la formula di Taylor in più
+variabili e l'integrazione su domini del piano. Il prossimo capitolo torna alle funzioni
+di una variabile e affronta il problema inverso della derivazione: come si
+\emph{accumula} una grandezza che varia. Le somme inferiori e superiori con cui vi si
+costruisce l'integrale definito sono anche il modello degli integrali doppi, con cui si
+calcola il volume sotto il grafico di una funzione di due variabili.

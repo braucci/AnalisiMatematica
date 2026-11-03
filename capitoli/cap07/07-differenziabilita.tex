@@ -1,0 +1,590 @@
+%% ----------------------------------------------------------------------------
+%%  §7.7  Appendice: differenziabilità
+%% ----------------------------------------------------------------------------
+\section{Appendice: differenziabilità}
+\label{sec:differenziabilita}
+
+È ben noto che, per le funzioni di una variabile reale, la derivabilità in un punto
+implica la continuità della funzione nel punto (\cref{teo:derivabile-continua}). Non vale
+una proprietà analoga per le derivate parziali: esistono funzioni $f(x,y)$, definite in un
+intorno di un punto $(x_{0},y_{0})$, che hanno le derivate parziali
+$f_{x}(x_{0},y_{0})$, $f_{y}(x_{0},y_{0})$ pur non essendo continue in $(x_{0},y_{0})$.
+Consideriamo infatti la funzione
+\begin{equation}\label{eq:f-discontinua}
+  f(x,y)=\frac{xy}{x^{2}+y^{2}} \quad\text{se }(x,y)\neq(0,0), \qquad f(0,0)=0 .
+\end{equation}
+La funzione si annulla, oltre che in $(0,0)$, in tutti gli altri punti degli assi
+coordinati; pertanto
+\[
+  f_{x}(0,0)=\lim_{h\to0}\frac{f(h,0)-f(0,0)}{h}=\lim_{h\to0}0=0,
+\]
+e analogamente $f_{y}(0,0)=0$. Però $f$ non è continua in $(0,0)$, perché non ha limite
+per $(x,y)\to(0,0)$: lungo la retta $y=x$ vale costantemente $\frac12$, lungo la retta
+$y=-x$ vale $-\frac12$ (\cref{es:xy-su-x2y2,fig:discontinua}). Il motivo è chiaro: le
+derivate parziali descrivono il comportamento di $f$ soltanto lungo due rette, e non
+vedono che cosa accade nelle altre direzioni. La nozione naturale per le funzioni di più
+variabili, che estende davvero il concetto di derivabilità, è quella di
+\emph{differenziabilità}.
+
+\begin{definizione}[Funzione differenziabile]\label{def:differenziabile}
+\index{funzione!differenziabile}\index{differenziale}
+Una funzione $f$, definita in un intorno del punto $(x,y)$, è \emph{differenziabile} in
+$(x,y)$ se esistono in tale punto le derivate parziali $f_{x}$, $f_{y}$ e se risulta
+\begin{equation}\label{eq:differenziabile}
+  \lim_{(h,k)\to(0,0)}\frac{f(x+h,y+k)-f(x,y)-f_{x}(x,y)\,h-f_{y}(x,y)\,k}{\sqrt{h^{2}+k^{2}}}=0 .
+\end{equation}
+In tal caso la funzione lineare $(h,k)\mapsto f_{x}(x,y)\,h+f_{y}(x,y)\,k$ si chiama il
+\emph{differenziale} di $f$ in $(x,y)$. Indicando con $(x_{0},y_{0})$ il punto e con
+$(x,y)$ il punto variabile, il piano
+\begin{equation}\label{eq:piano-tangente}
+  z=f(x_{0},y_{0})+f_{x}(x_{0},y_{0})(x-x_{0})+f_{y}(x_{0},y_{0})(y-y_{0})
+\end{equation}
+si chiama \emph{piano tangente} al grafico di $f$ nel punto $(x_{0},y_{0},f(x_{0},y_{0}))$.
+\end{definizione}
+
+La \eqref{eq:differenziabile} è la generalizzazione della
+\cref{prop:approssimazione-lineare}: dice che
+$f(x+h,y+k)=f(x,y)+f_{x}h+f_{y}k+o\bigl(\sqrt{h^{2}+k^{2}}\bigr)$, cioè che vicino al punto il
+grafico di $f$ si confonde con il piano tangente, con un errore trascurabile rispetto alla
+distanza. Si può dare una definizione apparentemente più generale, senza richiedere a
+priori l'esistenza delle derivate parziali, chiedendo che esistano due numeri $a$, $b$
+con $f(x+h,y+k)=f(x,y)+ah+bk+o\bigl(\sqrt{h^{2}+k^{2}}\bigr)$; ponendo $k=0$ si vede subito che
+necessariamente $a=f_{x}(x,y)$, e analogamente $b=f_{y}(x,y)$.
+
+\begin{teorema}[La differenziabilità implica la continuità]\label{teo:differenziabile-continua}
+Ogni funzione differenziabile in un punto $(x,y)$ è continua in $(x,y)$.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$ differenziabile in $(x,y)$.}
+\Tesi{$f(x+h,y+k)\to f(x,y)$ per $(h,k)\to(0,0)$.}
+\end{schema}
+
+\begin{strategia}
+Si procede come per il \cref{teo:derivabile-continua}: l'incremento $f(x+h,y+k)-f(x,y)$ si
+scrive come la somma del resto della \eqref{eq:differenziabile}, moltiplicato per
+$\sqrt{h^{2}+k^{2}}$, e del differenziale $f_{x}h+f_{y}k$. Entrambi tendono a zero.
+\end{strategia}
+
+\begin{dimostrazione}
+Poniamo $\rho=\sqrt{h^{2}+k^{2}}$ e, per $(h,k)\neq(0,0)$,
+\[
+  \varepsilon(h,k)=\frac{f(x+h,y+k)-f(x,y)-f_{x}(x,y)\,h-f_{y}(x,y)\,k}{\rho},
+\]
+che tende a $0$ per l'ipotesi di differenziabilità. Allora
+\[
+  \abs{f(x+h,y+k)-f(x,y)}=\Bigl|\varepsilon(h,k)+f_{x}\frac h\rho+f_{y}\frac k\rho\Bigr|\,\rho
+  \le\bigl\{\abs{\varepsilon(h,k)}+\abs{f_{x}}+\abs{f_{y}}\bigr\}\,\rho,
+\]
+perché $\abs h\le\rho$ e $\abs k\le\rho$. Per $(h,k)\to(0,0)$ la quantità tra parentesi
+graffe è limitata e $\rho\to0$: il secondo membro tende a zero, e quindi
+$f(x+h,y+k)\to f(x,y)$, che è la continuità di $f$ nel punto $(x,y)$.
+\end{dimostrazione}
+
+La funzione \eqref{eq:f-discontinua} non è continua nell'origine, e quindi, per il
+teorema appena dimostrato, non vi è differenziabile, benché abbia le derivate parziali.
+
+\subsection{Derivate direzionali e significato del gradiente}
+
+\begin{teorema}[Derivate direzionali delle funzioni differenziabili]\label{teo:derivata-direzionale}
+\index{derivata!direzionale}
+Se $f$ è differenziabile nel punto $P=(x,y)$, allora per ogni versore
+$v=(\cos\vartheta,\sen\vartheta)$ esiste la derivata direzionale \eqref{eq:derivata-direzionale},
+e risulta
+\begin{equation}\label{eq:direzionale-gradiente}
+  \frac{\partial f}{\partial v}(P)=f_{x}(P)\cos\vartheta+f_{y}(P)\sen\vartheta .
+\end{equation}
+Di conseguenza, se $\nabla f(P)\neq(0,0)$, la derivata direzionale è massima, e uguale a
+$\abs{\nabla f(P)}$, nella direzione del gradiente, ed è nulla nelle direzioni
+perpendicolari al gradiente.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$ differenziabile in $P$; $v=(\cos\vartheta,\sen\vartheta)$.}
+\Tesi{$\frac{\partial f}{\partial v}(P)=\nabla f(P)\cdot v$; massima nella direzione di
+$\nabla f(P)$.}
+\end{schema}
+
+\begin{strategia}
+Basta scegliere, nella \eqref{eq:differenziabile}, l'incremento $(h,k)=tv$, che ha
+lunghezza $\abs t$: il rapporto incrementale lungo la direzione $v$ differisce da
+$f_{x}\cos\vartheta+f_{y}\sen\vartheta$ per una quantità infinitesima. La seconda parte è poi
+la stessa trigonometria della \cref{prop:gradiente-lineare}.
+\end{strategia}
+
+\begin{dimostrazione}
+Con $(h,k)=(t\cos\vartheta,t\sen\vartheta)$, $t\neq0$, si ha $\sqrt{h^{2}+k^{2}}=\abs t$ e
+\begin{multline*}
+  \frac{f(x+t\cos\vartheta,y+t\sen\vartheta)-f(x,y)}{t}-\bigl(f_{x}\cos\vartheta+f_{y}\sen\vartheta\bigr)\\
+  =\frac{\abs t}{t}\,\varepsilon(t\cos\vartheta,t\sen\vartheta),
+\end{multline*}
+dove $\varepsilon$ è la funzione della dimostrazione precedente. Il punto
+$(t\cos\vartheta,t\sen\vartheta)$ dista $\abs t$ dall'origine; quindi, per la definizione di
+limite \eqref{eq:limite-piano-simboli} applicata alla \eqref{eq:differenziabile}, per ogni
+$\eta>0$ esiste $\delta>0$ tale che $\abs{\varepsilon(t\cos\vartheta,t\sen\vartheta)}<\eta$ non appena
+$0<\abs t<\delta$, cioè $\varepsilon(t\cos\vartheta,t\sen\vartheta)\to0$ per $t\to0$; mentre $\frac{\abs t}t=\pm1$ è limitata: il secondo membro tende a zero, e si ottiene la
+\eqref{eq:direzionale-gradiente}. Per la seconda parte, scritto
+$\nabla f(P)=r(\cos\varphi,\sen\varphi)$ con $r=\abs{\nabla f(P)}>0$, si ha come nella
+\cref{prop:gradiente-lineare} $\frac{\partial f}{\partial v}=r\cos(\vartheta-\varphi)$, che è
+massima per $\vartheta=\varphi$ e nulla per $\vartheta=\varphi\pm\frac\pi2$.
+\end{dimostrazione}
+
+Le direzioni perpendicolari al gradiente sono quelle in cui $f$, al primo ordine, non
+varia: sono le direzioni delle tangenti alle curve di livello. Il gradiente è quindi
+perpendicolare alle curve di livello e punta verso i valori crescenti di $f$, come si
+vede nella \cref{fig:livello} (dove sono disegnati i vettori $-\nabla p$, che puntano
+invece verso le pressioni decrescenti). Per la funzione \eqref{eq:f-discontinua}, che non è
+differenziabile nell'origine, la formula \eqref{eq:direzionale-gradiente} è falsa: si
+avrebbe $\frac{\partial f}{\partial v}(0,0)=0$ in ogni direzione, mentre, ad esempio, lungo
+la bisettrice il rapporto incrementale $\frac{f(t/\sqrt2,t/\sqrt2)}{t}=\frac1{2t}$ non ha
+limite.
+
+\begin{attenzione}[Le derivate direzionali non bastano]
+Il \cref{teo:derivata-direzionale} non si inverte: una funzione può avere in un punto la
+derivata direzionale secondo \emph{ogni} direzione senza essere differenziabile, e
+nemmeno continua. Riprendiamo la funzione $g(x,y)=\frac{x^{2}y}{x^{4}+y^{2}}$
+dell'avvertenza «Le rette non bastano», ponendo $g(0,0)=0$. Per
+$v=(\cos\vartheta,\sen\vartheta)$ con $\sen\vartheta\neq0$ si ha
+\[
+  \frac{g(t\cos\vartheta,t\sen\vartheta)}{t}
+  =\frac{\cos^{2}\vartheta\,\sen\vartheta}{t^{2}\cos^{4}\vartheta+\sen^{2}\vartheta},
+\]
+che tende a $\frac{\cos^{2}\vartheta}{\sen\vartheta}$ per $t\to0$; per $\sen\vartheta=0$
+la funzione è nulla e la derivata direzionale vale $0$. Tutte le derivate direzionali
+esistono, ma $g$ non è continua nell'origine (vale $\frac12$ lungo la parabola $y=x^{2}$),
+e quindi non è differenziabile; coerentemente, la \eqref{eq:direzionale-gradiente} è
+falsa, perché $\nabla g(0,0)=(0,0)$. Non basta neppure che la
+\eqref{eq:direzionale-gradiente} sia verificata: per la funzione
+$\frac{x^{4}y}{x^{8}+y^{2}}$, posta uguale a $0$ nell'origine, tutte le derivate
+direzionali nell'origine sono nulle, come il gradiente, eppure lungo la curva $y=x^{4}$
+la funzione vale costantemente $\frac12$. Per stabilire la differenziabilità serve
+dunque la definizione, oppure il teorema del differenziale che segue.
+\end{attenzione}
+
+\subsection{Il teorema del differenziale}
+
+Verificare la differenziabilità con la definizione è spesso laborioso. Un importante
+criterio è espresso dal teorema seguente.
+
+\begin{teorema}[del differenziale]\label{teo:differenziale}\index{teorema!del differenziale}
+Se $f$ ammette derivate parziali prime in un intorno del punto $(x,y)$, e queste sono
+continue in $(x,y)$, allora $f$ è differenziabile in $(x,y)$.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f_{x}$, $f_{y}$ esistono in un intorno di $(x,y)$ e sono continue in $(x,y)$.}
+\Tesi{vale la \eqref{eq:differenziabile}.}
+\end{schema}
+
+\begin{strategia}
+Andiamo dal punto $(x,y)$ al punto $(x+h,y+k)$ in due tappe, parallele agli assi:
+prima da $(x,y)$ a $(x,y+k)$ in verticale, poi da $(x,y+k)$ a $(x+h,y+k)$ in
+orizzontale. Su ciascuna tappa la funzione dipende da una sola variabile, e il teorema di
+Lagrange esprime l'incremento con una derivata parziale calcolata in un punto
+intermedio. La continuità delle derivate parziali garantisce che queste differiscano di
+poco da quelle nel punto $(x,y)$.
+\end{strategia}
+
+\begin{dimostrazione}
+Sia $I_{\delta}$ un intorno di $(x,y)$ in cui esistono $f_{x}$ e $f_{y}$, e sia
+$\sqrt{h^{2}+k^{2}}<\delta$. Applicando due volte il teorema di Lagrange (relativo a funzioni
+di una variabile) abbiamo
+\begin{equation}\label{eq:differenziale-lagrange}
+\begin{split}
+  f(x+h,y+k)-f(x,y)&=\bigl[f(x+h,y+k)-f(x,y+k)\bigr]\\
+  &\quad+\bigl[f(x,y+k)-f(x,y)\bigr]\\
+  &=f_{x}(x(h),y+k)\,h+f_{y}(x,y(k))\,k,
+\end{split}
+\end{equation}
+dove $x(h)$ è un punto opportuno dell'intervallo di estremi $x$, $x+h$, mentre $y(k)$ è un
+punto opportuno dell'intervallo di estremi $y$, $y+k$ (i segmenti percorsi stanno in
+$I_{\delta}$, per lo stesso argomento usato nella dimostrazione del teorema di
+Schwarz). Si noti in particolare che $x(h)\to x$ e $y(k)\to y$ per $(h,k)\to(0,0)$. Si
+ottiene la stima
+\begin{equation}\label{eq:differenziale-stima}
+\begin{split}
+  &\Bigl|\frac{f(x+h,y+k)-f(x,y)-f_{x}(x,y)h-f_{y}(x,y)k}{\sqrt{h^{2}+k^{2}}}\Bigr|\\
+  &\quad\le\abs{f_{x}(x(h),y+k)-f_{x}(x,y)}\frac{\abs h}{\sqrt{h^{2}+k^{2}}}\\
+  &\qquad+\abs{f_{y}(x,y(k))-f_{y}(x,y)}\frac{\abs k}{\sqrt{h^{2}+k^{2}}}\\
+  &\quad\le\abs{f_{x}(x(h),y+k)-f_{x}(x,y)}+\abs{f_{y}(x,y(k))-f_{y}(x,y)} .
+\end{split}
+\end{equation}
+Per l'ipotesi di continuità delle derivate parziali $f_{x}$ e $f_{y}$ nel punto $(x,y)$,
+l'ultimo membro della \eqref{eq:differenziale-stima} tende a zero per $(h,k)\to(0,0)$,
+perché i punti $(x(h),y+k)$ e $(x,y(k))$ tendono a $(x,y)$; perciò anche il primo membro
+tende a zero.
+\end{dimostrazione}
+
+Se una funzione $f$ è continua in un insieme aperto $D$ si dice anche che è \emph{di
+classe $C^{0}$ in $D$} e si scrive $f\in C^{0}(D)$; se ammette derivate parziali prime
+continue in $D$ si dice che è \emph{di classe $C^{1}$ in $D$} e si scrive $f\in C^{1}(D)$;
+più in generale $f\in C^{k}(D)$, con $k\in\N$, significa che $f$ ammette derivate
+parziali continue in $D$ fino all'ordine $k$. Infine, se $f\in C^{k}(D)$ per ogni $k$, si
+scrive $f\in C^{\infty}(D)$. Con queste notazioni, il teorema del differenziale e la
+proprietà di continuità si riassumono così:
+\begin{equation}\label{eq:classi-differenziabilita}
+  f\in C^{1}(D)\ \implica\ f \text{ differenziabile in } D\ \implica\ f\in C^{0}(D).
+\end{equation}
+Nessuna delle due implicazioni si inverte. L'\cref{es:non-differenziabile} presenta una
+funzione continua non differenziabile. Una funzione differenziabile ovunque ma non di
+classe $C^{1}$ è invece $f(x,y)=x^{2}\sen\frac1x$ per $x\neq0$, $f(0,y)=0$: è la funzione $f_{2}$
+dell'\cref{oss:f2-non-C1}, pensata come funzione di due variabili. Nei punti $(0,y)$ si ha
+$f(h,y+k)-f(0,y)=h^{2}\sen\frac1h$ (o $0$ se $h=0$), che in valore assoluto non supera
+$h^{2}\le h^{2}+k^{2}$: con $f_{x}(0,y)=f_{y}(0,y)=0$ la \eqref{eq:differenziabile} è verificata, e
+$f$, che fuori dall'asse $y$ è di classe $C^{1}$, è differenziabile ovunque; ma $f_{x}=2x\sen\frac1x-\cos\frac1x$ non è continua nei
+punti dell'asse $y$, e quindi $f\notin C^{1}(\R^{2})$.
+
+\begin{esempio}[Propagazione degli errori di misura]\label{es:propagazione-errori}
+Il differenziale fornisce la regola pratica per stimare l'errore su una grandezza
+calcolata da altre misurate. La densità dell'aria si ricava dalla pressione $p$ e dalla
+temperatura assoluta $T$ con l'equazione di stato, $\rho=\frac p{RT}$. Le derivate
+parziali sono $\rho_{p}=\frac1{RT}=\frac\rho p$ e $\rho_{T}=-\frac p{RT^{2}}=-\frac\rho T$, continue
+per $T>0$; per il teorema del differenziale
+\[
+  \Delta\rho\approx\rho_{p}\Delta p+\rho_{T}\Delta T, \qquad
+  \frac{\Delta\rho}{\rho}\approx\frac{\Delta p}{p}-\frac{\Delta T}{T}, \qquad
+  \Bigl|\frac{\Delta\rho}{\rho}\Bigr|\lesssim\frac{\abs{\Delta p}}{p}+\frac{\abs{\Delta T}}{T} :
+\]
+gli errori relativi, al primo ordine, si sommano. Il programma confronta questa stima
+con una simulazione in cui $p$ e $T$ variano a caso nei rispettivi intervalli di
+incertezza.
+\end{esempio}
+
+\begin{python}[Propagazione degli errori: differenziale e simulazione]
+import numpy as np
+
+R = 287.05
+rho = lambda p, T: p / (R * T)           # densità dell'aria
+p0, T0, dp, dT = 101325.0, 288.15, 300.0, 1.5   # misure e incertezze
+r0 = rho(p0, T0)
+lin = r0 * (dp / p0 + dT / T0)           # stima con il differenziale
+rng = np.random.default_rng(1)
+p = p0 + rng.uniform(-dp, dp, 100000)
+T = T0 + rng.uniform(-dT, dT, 100000)
+print(f"rho = {r0:.5f} kg/m^3")
+print(f"errore massimo (differenziale): {lin:.5f}"
+      f"  ({lin / r0:.2%})")
+print(f"errore massimo osservato (simulazione): "
+      f"{np.max(np.abs(rho(p, T) - r0)):.5f}")
+\end{python}
+\begin{risultato}
+rho = 1.22501 kg/m^3
+errore massimo (differenziale): 0.01000  (0.82%)
+errore massimo osservato (simulazione): 0.01003
+\end{risultato}
+
+La stima lineare coincide con l'errore massimo osservato a meno di qualche unità del
+quinto decimale: la piccola differenza è dovuta ai termini del second'ordine che il
+differenziale trascura (il caso peggiore esatto, con $p=p_{0}+\Delta p$ e $T=T_{0}-\Delta T$,
+dà $0{,}010056$).
+
+\subsection{La derivata lungo un segmento e la formula di Taylor}
+
+Per dimostrare il criterio dell'hessiano studiamo $f$ lungo un segmento uscente dal
+punto critico: ci servono la derivata prima e seconda di una funzione di due variabili
+lungo un segmento, e una formula di Taylor di ordine due con un resto più preciso di
+quello di Peano.
+
+\begin{lemma}[Derivate lungo un segmento]\label{lem:derivata-segmento}
+Sia $f\in C^{1}\bigl(I_{\delta}(P_{0})\bigr)$, con $P_{0}=(x_{0},y_{0})$, e sia $(h,k)$ con
+$0<\sqrt{h^{2}+k^{2}}<\delta$. La funzione di una variabile
+\begin{equation}\label{eq:g-segmento}
+  g(t)=f(x_{0}+th,\,y_{0}+tk)
+\end{equation}
+è derivabile in un intervallo aperto contenente $[0,1]$, con
+\begin{equation}\label{eq:g-primo}
+  g'(t)=f_{x}(P_{t})\,h+f_{y}(P_{t})\,k, \qquad P_{t}=(x_{0}+th,\,y_{0}+tk).
+\end{equation}
+Se inoltre $f\in C^{2}\bigl(I_{\delta}(P_{0})\bigr)$, allora $g$ è derivabile due volte, $g''$ è
+continua e
+\begin{equation}\label{eq:g-secondo}
+  g''(t)=f_{xx}(P_{t})\,h^{2}+2f_{xy}(P_{t})\,hk+f_{yy}(P_{t})\,k^{2} .
+\end{equation}
+\end{lemma}
+
+\begin{schema}
+\Ipotesi{$f\in C^{1}$ (risp.\ $C^{2}$) in $I_{\delta}(P_{0})$; $0<\sqrt{h^{2}+k^{2}}<\delta$.}
+\Tesi{$g'(t)=f_{x}(P_{t})h+f_{y}(P_{t})k$; \ (se $f\in C^{2}$)
+$g''(t)=f_{xx}h^{2}+2f_{xy}hk+f_{yy}k^{2}$ in $P_{t}$, continua.}
+\end{schema}
+
+\begin{strategia}
+La derivata di $g$ è la derivata di $f$ nella direzione del segmento, moltiplicata per la
+lunghezza di $(h,k)$: per le funzioni differenziabili (e le funzioni di classe $C^{1}$ lo
+sono, per il teorema del differenziale) essa si calcola con il gradiente. La derivata
+seconda si ottiene applicando lo stesso risultato alla funzione $hf_{x}+kf_{y}$, e il
+teorema di Schwarz riunisce i due termini misti.
+\end{strategia}
+
+\begin{dimostrazione}
+Posto $r=\sqrt{h^{2}+k^{2}}$, i punti $P_{t}$ stanno in $I_{\delta}(P_{0})$ per
+$\abs t<\frac\delta r$, e $\frac\delta r>1$. Sia $v=\frac1r(h,k)$, che è un versore. Per il
+teorema del differenziale $f$ è differenziabile in ogni punto $P_{t}$, e per il
+\cref{teo:derivata-direzionale}
+\begin{align*}
+  g'(t)&=\lim_{s\to0}\frac{f(P_{t}+s(h,k))-f(P_{t})}{s}
+  =r\lim_{s\to0}\frac{f(P_{t}+sr\,v)-f(P_{t})}{sr}\\
+  &=r\,\frac{\partial f}{\partial v}(P_{t})=f_{x}(P_{t})h+f_{y}(P_{t})k .
+\end{align*}
+Se $f\in C^{2}$, la funzione $\varphi=hf_{x}+kf_{y}$ è di classe $C^{1}$, e $g'(t)=\varphi(P_{t})$.
+Applicando a $\varphi$ quanto appena dimostrato,
+$g''(t)=h\,\varphi_{x}(P_{t})+k\,\varphi_{y}(P_{t})=h(hf_{xx}+kf_{yx})+k(hf_{xy}+kf_{yy})$, calcolato in
+$P_{t}$, che per il teorema di Schwarz ($f_{xy}=f_{yx}$) è la \eqref{eq:g-secondo}. Infine
+$g''$ è continua: se $t_{n}\to t$, allora $P_{t_{n}}\to P_{t}$ (le coordinate convergono,
+\eqref{eq:distanza-componenti}), e per la continuità delle derivate seconde
+(\cref{oss:limite-piano-successioni}) $f_{xx}(P_{t_{n}})\to f_{xx}(P_{t})$, e così per le
+altre; quindi $g''(t_{n})\to g''(t)$.
+\end{dimostrazione}
+
+\begin{lemma}[Formula di Taylor con il resto di Lagrange]\label{lem:taylor-lagrange}
+\index{formula di Taylor!con il resto di Lagrange}
+Sia $g$ derivabile due volte in un intervallo aperto contenente $[0,1]$. Esiste
+$\tau\in(0,1)$ tale che
+\begin{equation}\label{eq:taylor-lagrange}
+  g(1)=g(0)+g'(0)+\frac12g''(\tau) .
+\end{equation}
+\end{lemma}
+
+\begin{schema}
+\Ipotesi{$g$ derivabile due volte in un intervallo aperto contenente $[0,1]$.}
+\Tesi{esiste $\tau\in(0,1)$ con $g(1)=g(0)+g'(0)+\frac12g''(\tau)$.}
+\end{schema}
+
+\begin{strategia}
+È la formula di Taylor di ordine $1$ con il resto scritto in un punto intermedio, come
+nella formula degli accrescimenti finiti \eqref{eq:accrescimenti-finiti}, che ne è il
+caso di ordine $0$. Il resto $g(1)-g(0)-g'(0)$ si confronta con $t^{2}$ mediante il teorema
+di Cauchy, che produce un rapporto tra $g'$ e $2t$; un'ulteriore applicazione del
+teorema di Lagrange a $g'$ fa comparire la derivata seconda.
+\end{strategia}
+
+\begin{dimostrazione}
+Applichiamo il teorema di Cauchy (\cref{teo:cauchy}) nell'intervallo $[0,1]$ alle
+funzioni $G(t)=g(t)-g(0)-g'(0)\,t$ e $K(t)=t^{2}$, osservando che $K'(t)=2t\neq0$ per
+$t\in(0,1)$. Poiché $G(0)=K(0)=0$ e $K(1)=1$, esiste $\tau_{1}\in(0,1)$ tale che
+\[
+  g(1)-g(0)-g'(0)=\frac{G(1)-G(0)}{K(1)-K(0)}=\frac{G'(\tau_{1})}{K'(\tau_{1})}
+  =\frac{g'(\tau_{1})-g'(0)}{2\tau_{1}} .
+\]
+Per il teorema di Lagrange applicato a $g'$ nell'intervallo $[0,\tau_{1}]$, esiste
+$\tau\in(0,\tau_{1})$ con $g'(\tau_{1})-g'(0)=g''(\tau)\,\tau_{1}$; sostituendo si ottiene la
+\eqref{eq:taylor-lagrange}.
+\end{dimostrazione}
+
+\subsection{La dimostrazione del criterio dell'hessiano}
+\label{sec:dim-hessiano}
+
+Siamo ora in grado di dimostrare il \cref{teo:hessiano}. Indichiamo, per ogni punto $P$
+vicino a $(x_{0},y_{0})$ e ogni $(h,k)$, la forma quadratica
+\begin{equation}\label{eq:forma-quadratica}
+  Q_{P}(h,k)=f_{xx}(P)\,h^{2}+2f_{xy}(P)\,hk+f_{yy}(P)\,k^{2} ,
+\end{equation}
+che per il \cref{lem:derivata-segmento} è la derivata seconda di $f$ lungo il segmento di
+direzione $(h,k)$.
+
+\begin{dimostrazione}[Dimostrazione del \cref{teo:hessiano}]
+\emph{Passo 1: segno della forma quadratica.} Siano $A=f_{xx}(P)$, $B=f_{xy}(P)$,
+$C=f_{yy}(P)$. Se $A\neq0$, completando il quadrato si ha l'identità
+\begin{equation}\label{eq:completamento-quadrato}
+\begin{split}
+  A\,Q_{P}(h,k)&=A^{2}h^{2}+2ABhk+ACk^{2}\\
+  &=(Ah+Bk)^{2}+(AC-B^{2})k^{2} .
+\end{split}
+\end{equation}
+Se $A>0$ e $AC-B^{2}=Hf(P)>0$, il secondo membro è positivo per $(h,k)\neq(0,0)$ (se $k=0$
+il primo addendo è $A^{2}h^{2}>0$), e quindi $Q_{P}(h,k)>0$.
+
+\emph{Passo 2: il minimo.} Supponiamo $Hf(x_{0},y_{0})>0$ e $f_{xx}(x_{0},y_{0})>0$. Le
+funzioni $Hf$ e $f_{xx}$ sono continue (\cref{teo:continue-piano}); per il teorema della
+permanenza del segno, che vale per le funzioni continue di due variabili con la stessa
+dimostrazione del caso di una variabile, esiste $\delta>0$ tale che $Hf>0$ e $f_{xx}>0$ in
+tutto $I_{\delta}(x_{0},y_{0})$, intorno nel quale supponiamo $f$ di classe $C^{2}$. Sia
+$0<\sqrt{h^{2}+k^{2}}<\delta$ e sia $g(t)=f(x_{0}+th,y_{0}+tk)$. Per il
+\cref{lem:derivata-segmento}, $g'(0)=f_{x}(x_{0},y_{0})h+f_{y}(x_{0},y_{0})k=0$, perché il
+punto è critico; per il \cref{lem:taylor-lagrange} esiste $\tau\in(0,1)$ con
+\[
+  f(x_{0}+h,y_{0}+k)-f(x_{0},y_{0})=g(1)-g(0)=\frac12g''(\tau)=\frac12Q_{P_{\tau}}(h,k)>0,
+\]
+dove l'ultima disuguaglianza segue dal passo 1, perché $P_{\tau}\in I_{\delta}$. Dunque
+$f(x,y)>f(x_{0},y_{0})$ per ogni $(x,y)\neq(x_{0},y_{0})$ in $I_{\delta}$: il punto è di minimo
+relativo stretto.
+
+\emph{Passo 3: il massimo.} Se $Hf(x_{0},y_{0})>0$ e $f_{xx}(x_{0},y_{0})<0$, si applica il
+passo 2 alla funzione $-f$, che ha lo stesso hessiano (il prodotto $f_{xx}f_{yy}$ e il
+quadrato $f_{xy}^{2}$ non cambiano cambiando segno a $f$) e derivata seconda
+$(-f)_{xx}=-f_{xx}>0$.
+
+\emph{Passo 4: la sella.} Sia $Hf(x_{0},y_{0})=AC-B^{2}<0$, con $A$, $B$, $C$ calcolati in
+$(x_{0},y_{0})$. Troviamo due direzioni lungo le quali la forma quadratica ha segni
+opposti. Se $A\neq0$, si prenda $(h,k)=(1,0)$, che dà $Q=A$, e $(h,k)=(-B,A)$, che per la
+\eqref{eq:completamento-quadrato} dà $A\,Q=(AC-B^{2})A^{2}$, cioè $Q=A(AC-B^{2})$, di segno
+opposto ad $A$. Se $A=0$, allora $-B^{2}<0$, cioè $B\neq0$, e $Q(1,k)=k(2B+Ck)$ ha, per $k$
+piccolo, il segno di $2Bk$, che cambia con il segno di $k$. Poiché
+$Q(\lambda h,\lambda k)=\lambda^{2}Q(h,k)$, moltiplicando $(h,k)$ per un $\lambda>0$ piccolo il
+segno della forma non cambia: possiamo quindi supporre $\sqrt{h^{2}+k^{2}}<\delta$, dove
+$I_{\delta}$ è un intorno in cui $f$ ha derivate prime e seconde continue. Sia dunque $(h,k)$
+una tale direzione con $Q_{(x_{0},y_{0})}(h,k)>0$, e sia $g(t)=f(x_{0}+th,y_{0}+tk)$: si ha $g'(0)=0$ e
+$g''(0)=Q_{(x_{0},y_{0})}(h,k)>0$, con $g''$ continua, e per il criterio della derivata
+seconda (\cref{teo:test-derivata-seconda}) $t=0$ è un punto di minimo relativo stretto
+di $g$: lungo questa direzione, arbitrariamente vicino a $(x_{0},y_{0})$, la funzione assume
+valori maggiori di $f(x_{0},y_{0})$. Lungo una direzione con $Q<0$, allo stesso modo,
+assume valori minori. Dunque $(x_{0},y_{0})$ non è né di massimo né di minimo relativo.
+\end{dimostrazione}
+
+\begin{notastorica}[Il differenziale da Leibniz a Fréchet]
+Per Leibniz il differenziale $dy$ era un incremento «infinitamente piccolo», e la formula
+$dz=\frac{\partial z}{\partial x}dx+\frac{\partial z}{\partial y}dy$ fu usata liberamente per
+tutto il Settecento. La distinzione tra derivate parziali e differenziabilità non poteva
+allora neppure emergere: le funzioni studiate erano espressioni analitiche «regolari», per
+le quali le due nozioni vanno di pari passo. Quando, nell'Ottocento, con la revisione
+critica avviata da Cauchy, gli infinitesimi furono sostituiti dai limiti e si cominciò a
+considerare funzioni qualsiasi, ci si accorse che l'esistenza delle derivate parziali non
+basta a giustificare quella formula, e che occorre una condizione più forte. La definizione moderna di
+differenziabilità, che chiede che l'incremento sia approssimato da una funzione lineare
+con un errore trascurabile rispetto alla distanza, fu formulata da Otto Stolz nel 1893 e
+ripresa all'inizio del Novecento da William Henry Young e da Maurice Fréchet, che la
+estese agli spazi di funzioni: è la nozione che sta alla base dell'analisi moderna e dei
+metodi numerici, dai metodi di Newton in più variabili ai codici di fluidodinamica
+computazionale.
+\end{notastorica}
+
+\subsection{Approfondimento: funzioni omogenee e teorema di Eulero}
+\label{subsec:funzioni-omogenee}
+\index{funzione!omogenea}\index{teorema!di Eulero sulle funzioni omogenee}
+
+Molte formule dell'ingegneria sono prodotti di potenze delle variabili: la portanza
+$\frac12\rho SV^{2}C_{L}$, o il coefficiente di resistenza indotta
+$C_{Di}=\frac{C_{L}^{2}}{\pi e\,AR}$ dell'\cref{es:sensibilita-AR}. Moltiplicando tutte le
+variabili per uno stesso fattore $t>0$, la funzione risulta moltiplicata per una potenza
+di $t$. Queste funzioni si dicono \emph{omogenee}, e il loro gradiente soddisfa
+un'identità notevole, scoperta da Eulero (si veda la nota storica del \S\ref{sec:schwarz}).
+Come nel resto del paragrafo, ci limitiamo alle funzioni di due variabili.
+
+\begin{definizione}[Funzione omogenea]\label{def:funzione-omogenea}
+Un insieme $D\subseteq\R^{2}\setminus\{(0,0)\}$ si dice un \emph{cono} se, per ogni
+$(x,y)\in D$ e ogni $t>0$, anche $(tx,ty)\in D$. Sia $D$ un cono aperto e
+sia $\alpha\in\R$. Una funzione $f:D\to\R$ si dice \emph{omogenea di grado $\alpha$} se
+\begin{equation}\label{eq:omogenea}
+  f(tx,ty)=t^{\alpha}f(x,y) \qquad\perogni(x,y)\in D,\ \perogni t>0 .
+\end{equation}
+\end{definizione}
+
+Sono omogenei di grado $n$, nel cono $\R^{2}\setminus\{(0,0)\}$, i polinomi i cui monomi
+hanno tutti grado $n$, come $x^{2}+3xy$ ($n=2$). La norma $\sqrt{x^{2}+y^{2}}$ e la funzione
+$\sqrt{\abs{xy}}$ dell'\cref{es:non-differenziabile} sono omogenee di grado $1$: i loro
+grafici sono coni con il vertice nell'origine. La funzione $\frac{xy}{x^{2}+y^{2}}$
+dell'\cref{es:xy-su-x2y2} e l'angolo polare $\operatorname{arctg}\frac yx$, nel semipiano
+$x>0$, sono omogenee di grado $0$; e una funzione omogenea di grado $0$ è costante su ogni
+semiretta uscente dall'origine, perché $f(tx,ty)=f(x,y)$. Il potenziale della doppietta
+$\frac{x}{x^{2}+y^{2}}$ ha grado $-1$; il coefficiente $C_{Di}(C_{L},AR)$, definito nel
+semipiano $AR>0$, ha grado $2-1=1$.
+
+\begin{teorema}[di Eulero sulle funzioni omogenee]\label{teo:eulero-omogenee}
+Sia $D$ un cono aperto e sia $\alpha\in\R$.
+\begin{enumerate}[label=\textup{(\roman*)}]
+  \item Se $f:D\to\R$ è omogenea di grado $\alpha$ ed è differenziabile nel punto
+  $(x,y)\in D$, allora
+  \begin{equation}\label{eq:eulero-omogenee}
+    x\,f_{x}(x,y)+y\,f_{y}(x,y)=\alpha\,f(x,y) .
+  \end{equation}
+  \item Viceversa, se $f\in C^{1}(D)$ e la \eqref{eq:eulero-omogenee} vale in ogni punto di
+  $D$, allora $f$ è omogenea di grado $\alpha$.
+\end{enumerate}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$D$ cono aperto; \ (i) $f$ omogenea di grado $\alpha$, differenziabile in
+$(x,y)$; \ (ii) $f\in C^{1}(D)$ e $xf_{x}+yf_{y}=\alpha f$ in tutto $D$.}
+\Tesi{(i) $xf_{x}+yf_{y}=\alpha f$ nel punto $(x,y)$; \ (ii) $f(tx,ty)=t^{\alpha}f(x,y)$ per
+ogni $(x,y)\in D$ e ogni $t>0$.}
+\end{schema}
+
+\begin{strategia}
+Tutto si svolge sulla semiretta che esce dall'origine e passa per $(x,y)$, lungo la quale
+si studia la funzione di una variabile $\psi(t)=f(tx,ty)$. La sua derivata è, a meno del
+fattore $\sqrt{x^{2}+y^{2}}$, la derivata di $f$ nella direzione radiale, che per le
+funzioni differenziabili si calcola con il gradiente (\cref{teo:derivata-direzionale}):
+si trova $\psi'(t)=xf_{x}(tx,ty)+yf_{y}(tx,ty)$. L'omogeneità dice invece che
+$\psi(t)=t^{\alpha}\psi(1)$. Per (i) basta confrontare le due espressioni di $\psi'(1)$; per
+(ii) si mostra che $t^{-\alpha}\psi(t)$ ha derivata nulla, e quindi è costante.
+\end{strategia}
+
+\begin{dimostrazione}
+Sia $(x,y)\in D$, e siano $r=\sqrt{x^{2}+y^{2}}>0$ e
+$v=\frac1r(x,y)$, che è un versore. Per $t>0$ il punto $P_{t}=(tx,ty)$ sta in $D$; poniamo
+$\psi(t)=f(P_{t})$. Per $s\neq0$ con $t+s>0$ si ha
+\[
+  \frac{\psi(t+s)-\psi(t)}{s}=\frac{f(P_{t}+s(x,y))-f(P_{t})}{s}
+  =r\,\frac{f(P_{t}+sr\,v)-f(P_{t})}{sr} .
+\]
+Se $f$ è differenziabile in $P_{t}$, per il \cref{teo:derivata-direzionale} l'ultima
+frazione tende, per $s\to0$, alla derivata direzionale
+$\frac{\partial f}{\partial v}(P_{t})=f_{x}(P_{t})\frac xr+f_{y}(P_{t})\frac yr$; quindi
+$\psi$ è derivabile in $t$ e
+\begin{equation}\label{eq:psi-radiale}
+  \psi'(t)=x\,f_{x}(tx,ty)+y\,f_{y}(tx,ty) .
+\end{equation}
+
+(i) Per l'omogeneità $\psi(t)=t^{\alpha}f(x,y)$, da cui $\psi'(1)=\alpha f(x,y)$. D'altra
+parte $f$ è differenziabile in $P_{1}=(x,y)$, e la \eqref{eq:psi-radiale} con $t=1$ dà
+$\psi'(1)=xf_{x}(x,y)+yf_{y}(x,y)$: confrontando, si ottiene la tesi.
+
+(ii) Per il teorema del differenziale (\cref{teo:differenziale}) $f$ è differenziabile in
+ogni punto di $D$, e la \eqref{eq:psi-radiale} vale per ogni $t>0$. Moltiplicandola per
+$t$ e applicando l'ipotesi nel punto $P_{t}\in D$, si ottiene
+\[
+  t\,\psi'(t)=(tx)\,f_{x}(P_{t})+(ty)\,f_{y}(P_{t})=\alpha f(P_{t})=\alpha\,\psi(t).
+\]
+La funzione $\chi(t)=t^{-\alpha}\psi(t)$ ha allora, per ogni $t>0$, derivata
+$\chi'(t)=t^{-\alpha-1}\bigl[t\,\psi'(t)-\alpha\,\psi(t)\bigr]=0$. Per il
+\cref{cor:funzioni-costanti}, applicato nell'intervallo di estremi $1$ e $t$, risulta
+$\chi(t)=\chi(1)=f(x,y)$, cioè $f(tx,ty)=t^{\alpha}f(x,y)$.
+\end{dimostrazione}
+
+\begin{esempio}[Sensibilità relative e grado di omogeneità]\label{es:omogenee-sensibilita}
+Se $f>0$, dividendo la \eqref{eq:eulero-omogenee} per $f$ si ottiene
+\[
+  \frac{x\,f_{x}}{f}+\frac{y\,f_{y}}{f}=\alpha :
+\]
+\emph{le sensibilità relative di una funzione omogenea hanno per somma il grado}. Per il
+coefficiente di resistenza indotta $C_{Di}=\frac{C_{L}^{2}}{\pi e\,AR}$, omogeneo di grado
+$1$, le derivate calcolate nell'\cref{es:sensibilita-AR} danno
+\[
+  \frac{C_{L}}{C_{Di}}\,\frac{\partial C_{Di}}{\partial C_{L}}=2, \qquad
+  \frac{AR}{C_{Di}}\,\frac{\partial C_{Di}}{\partial AR}=-1,
+\]
+la cui somma è proprio $1$. Con il differenziale,
+$\frac{\Delta C_{Di}}{C_{Di}}\approx2\,\frac{\Delta C_{L}}{C_{L}}-\frac{\Delta AR}{AR}$: per volare
+con un $C_{L}$ maggiore del $10\%$ senza aumentare il coefficiente di resistenza indotta
+occorre un allungamento maggiore di circa il $20\%$. Allo stesso modo la portanza
+$L(\rho,V,C_{L})$, omogenea di grado $1+2+1=4$, ha le sensibilità relative $1$, $2$, $1$
+trovate nell'\cref{es:portanza-tre}: il teorema si estende infatti alle funzioni di $n$
+variabili, nella forma $\sum_{i}x_{i}f_{x_{i}}=\alpha f$.
+\end{esempio}
+
+\needspace{8\baselineskip}
+\begin{python}[Il teorema di Eulero verificato con sympy]
+import sympy as sp
+
+x, y = sp.symbols("x y", positive=True)
+CL, AR, e = sp.symbols("C_L AR e", positive=True)
+grado = lambda f, u, v: sp.simplify(       # per Eulero è il grado
+    (u * sp.diff(f, u) + v * sp.diff(f, v)) / f)
+for f in (x**2 + 3*x*y, sp.sqrt(x**2 + y**2), x*y / (x**2 + y**2),
+          x / (x**2 + y**2)):
+    print(f"f = {str(f):18}  (x f_x + y f_y)/f = {grado(f, x, y)}")
+CDi = CL**2 / (sp.pi * e * AR)             # resistenza indotta
+print("C_Di = C_L^2/(pi e AR): grado =", grado(CDi, CL, AR))
+\end{python}
+\begin{risultato}
+f = x**2 + 3*x*y        (x f_x + y f_y)/f = 2
+f = sqrt(x**2 + y**2)   (x f_x + y f_y)/f = 1
+f = x*y/(x**2 + y**2)   (x f_x + y f_y)/f = 0
+f = x/(x**2 + y**2)     (x f_x + y f_y)/f = -1
+C_Di = C_L^2/(pi e AR): grado = 1
+\end{risultato}
+
+Le funzioni omogenee sono anche alla base dell'\emph{analisi dimensionale}: una legge
+fisica non dipende dalle unità di misura, ed è quindi omogenea rispetto a ciascuna
+grandezza fondamentale; così si ricava, per un'ala di forma e assetto assegnati e
+trascurando viscosità e compressibilità, che la portanza è proporzionale a $\rho V^{2}S$.

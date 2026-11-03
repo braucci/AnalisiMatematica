@@ -1,0 +1,213 @@
+%% ----------------------------------------------------------------------------
+%%  §11.4  La serie geometrica
+%% ----------------------------------------------------------------------------
+\section{La serie geometrica}
+\label{sec:serie-geometrica}
+
+Per ogni numero reale $x$ consideriamo la \emph{serie geometrica} di \emph{ragione} $x$
+\begin{equation}\label{eq:serie-geometrica-def}
+  \sum_{k=0}^{\infty}x^{k}=1+x+x^{2}+\dots+x^{n}+\cdots .
+\end{equation}
+È la serie più importante di tutta la teoria: è una delle pochissime di cui si conosce
+esplicitamente la somma parziale, e servirà da termine di paragone per molte altre.
+
+\begin{teorema}[Serie geometrica]\label{teo:serie-geometrica}\index{serie!geometrica}
+La serie geometrica di ragione $x$ è convergente se $\abs x<1$, divergente
+positivamente se $x\ge1$, indeterminata se $x\le-1$. Inoltre
+\begin{equation}\label{eq:serie-geometrica}
+  \sum_{k=0}^{\infty}x^{k}=\frac1{1-x} \qquad\text{se } -1<x<1 .
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$x\in\R$.}
+\Tesi{$\sum x^{k}=\frac1{1-x}$ se $\abs x<1$; \ $\sum x^{k}=+\infty$ se $x\ge1$; \ $\sum x^{k}$
+indeterminata se $x\le-1$.}
+\end{schema}
+
+\begin{strategia}
+Per $x\neq1$ la somma parziale è nota esplicitamente, $s_{n}=\frac{1-x^{n+1}}{1-x}$, e il suo
+comportamento dipende soltanto da quello di $x^{n+1}$, che conosciamo dal capitolo sulle
+successioni. Il caso $x=1$ si tratta a parte.
+\end{strategia}
+
+\begin{dimostrazione}
+Se $x=1$, $s_{n}=n+1\to+\infty$. Se $x\neq1$, per la \cref{prop:geometrica}
+\begin{equation}\label{eq:somma-parziale-geometrica}
+  s_{n}=\sum_{k=0}^{n}x^{k}=\frac{1-x^{n+1}}{1-x} .
+\end{equation}
+Per il \cref{teo:lim-geometrica}, $x^{n+1}\to0$ se $-1<x<1$, $x^{n+1}\to+\infty$ se $x>1$, e
+$x^{n+1}$ non ha limite se $x\le-1$. Nel primo caso $s_{n}\to\frac1{1-x}$. Nel secondo, poiché
+$1-x<0$, $s_{n}=\frac{x^{n+1}-1}{x-1}\to+\infty$. Nel terzo, se $s_{n}$ avesse limite $\ell$, anche
+$x^{n+1}=1-(1-x)s_{n}$ avrebbe limite $1-(1-x)\ell$ (finito o infinito), il che è falso.
+\end{dimostrazione}
+
+Moltiplicando per una costante (\cref{prop:linearita-serie}) e trascurando i primi
+termini, si ottiene la forma in cui la serie geometrica si usa più spesso: per $\abs x<1$,
+$a\in\R$ e $m\ge0$ intero,
+\begin{equation}\label{eq:geometrica-generale}
+  \sum_{k=m}^{\infty}a\,x^{k}=a\,x^{m}+a\,x^{m+1}+\dots=\frac{a\,x^{m}}{1-x} ,
+\end{equation}
+cioè «il primo termine diviso per uno meno la ragione». Ad esempio
+$\frac12+\frac14+\frac18+\cdots=\frac{1/2}{1-1/2}=1$, come mostra la \cref{fig:quadrato-geometrico}.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[scale=3.2]
+  \fill[blu!35] (0,0) rectangle (0.5,1);
+  \fill[blu!25] (0.5,0) rectangle (1,0.5);
+  \fill[blu!17] (0.5,0.5) rectangle (0.75,1);
+  \fill[blu!11] (0.75,0.5) rectangle (1,0.75);
+  \fill[blu!7]  (0.75,0.75) rectangle (0.875,1);
+  \fill[blu!4]  (0.875,0.75) rectangle (1,0.875);
+  \draw[blu] (0,0) rectangle (1,1);
+  \draw[blu] (0.5,0) -- (0.5,1) (0.5,0.5) -- (1,0.5) (0.75,0.5) -- (0.75,1)
+    (0.75,0.75) -- (1,0.75) (0.875,0.75) -- (0.875,1) (0.875,0.875) -- (1,0.875);
+  \node[font=\small] at (0.25,0.5) {$\frac12$};
+  \node[font=\small] at (0.75,0.25) {$\frac14$};
+  \node[font=\footnotesize] at (0.625,0.75) {$\frac18$};
+  \node[font=\scriptsize] at (0.875,0.625) {$\frac1{16}$};
+  \node[font=\tiny] at (0.8125,0.875) {$\frac1{32}$};
+\end{tikzpicture}
+\caption{La serie geometrica $\frac12+\frac14+\frac18+\cdots=1$: ogni rettangolo è metà della
+parte del quadrato unitario non ancora coperta, e i rettangoli riempiono l'intero
+quadrato. Le somme parziali sono $1-\frac1{2^{n}}$.}
+\label{fig:quadrato-geometrico}
+\end{figure}
+
+\subsection{I numeri decimali periodici}
+
+Con la serie geometrica possiamo giustificare la regola, nota dalla scuola media, con
+cui un numero decimale periodico si trasforma nella sua \emph{frazione generatrice}. Un
+allineamento decimale infinito $0{,}c_{1}c_{2}c_{3}\ldots$, con cifre $c_{k}\in\{0,1,\dots,9\}$, è per
+definizione la somma della serie a termini non negativi $\sum_{k=1}^{\infty}c_{k}10^{-k}$, che
+converge perché le sue somme parziali sono limitate da $\sum_{k=1}^{\infty}9\cdot10^{-k}=1$.
+
+\begin{proposizione}[Frazione generatrice]\label{prop:periodici}
+Sia $0{,}\overline{c_{1}c_{2}\ldots c_{p}}$ un numero decimale periodico semplice con periodo di $p$
+cifre, e sia $C=c_{1}c_{2}\ldots c_{p}$ l'intero che ha quelle cifre. Allora
+\begin{equation}\label{eq:periodici}
+  0{,}\overline{c_{1}c_{2}\ldots c_{p}}=\frac C{10^{p}-1}=\frac C{99\ldots9} ,
+\end{equation}
+dove il denominatore $99\ldots9$ è formato da $p$ cifre uguali a $9$. In particolare, ogni
+numero decimale periodico è razionale.
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$0{,}\overline{c_{1}\ldots c_{p}}=\sum_{k=1}^{\infty}c_{k}10^{-k}$ con $c_{k+p}=c_{k}$; \ $C=c_{1}c_{2}\ldots c_{p}$.}
+\Tesi{$0{,}\overline{c_{1}\ldots c_{p}}=\frac C{10^{p}-1}$.}
+\end{schema}
+
+\begin{strategia}
+Le cifre si ripetono a blocchi di $p$: ogni blocco vale $C$ volte una potenza di
+$10^{-p}$, e raggruppando i termini a blocchi la serie delle cifre diventa una serie
+geometrica di ragione $10^{-p}$, di cui conosciamo la somma.
+\end{strategia}
+
+\begin{dimostrazione}
+Il numero è la somma della serie in cui il blocco di cifre si ripete: il primo blocco
+vale $C\cdot10^{-p}$, il secondo $C\cdot10^{-2p}$, e così via. Raggruppando le cifre a blocchi
+di $p$ (\cref{oss:parentesi}) e usando la \eqref{eq:geometrica-generale} con $x=10^{-p}$,
+\[
+  0{,}\overline{c_{1}\ldots c_{p}}=\sum_{j=1}^{\infty}C\,10^{-jp}=\frac{C\,10^{-p}}{1-10^{-p}}=\frac C{10^{p}-1} .
+\]
+Un numero periodico misto si riconduce a questo caso moltiplicando per una potenza di
+$10$ e sottraendo l'antiperiodo, che è un numero razionale.
+\end{dimostrazione}
+
+Ad esempio $0{,}\overline{13}=\frac{13}{99}$, e $0{,}\overline{9}=\frac99=1$: l'allineamento $0{,}999\ldots$
+\emph{non} è «un po' meno» di $1$, ma è esattamente $1$, perché la sua somma è il
+\emph{limite} delle somme parziali $1-10^{-n}$. Molte perplessità sull'uguaglianza
+$0{,}\overline9=1$ nascono proprio dal confondere una serie con le sue somme parziali.
+
+\subsection{Il paradosso di Achille}
+
+\begin{idea}[Achille e la tartaruga, in volo]
+Un velivolo $A$ insegue alla velocità $v_{A}$ un velivolo $B$ che lo precede di una
+distanza $d$ e vola sulla stessa rotta alla velocità $v_{B}<v_{A}$. Ragioniamo come
+Zenone (\cref{fig:zenone}). Nel tempo $t_{0}=\frac d{v_{A}}$ che $A$ impiega a raggiungere la
+posizione iniziale di $B$, questo avanza di $d\,\frac{v_{B}}{v_{A}}$; nel tempo $t_{1}=t_{0}\frac{v_{B}}{v_{A}}$ che
+$A$ impiega a colmare questo nuovo distacco, $B$ avanza di $d\bigl(\frac{v_{B}}{v_{A}}\bigr)^{2}$; e così
+via. I tempi $t_{k}=t_{0}q^{k}$, con $q=\frac{v_{B}}{v_{A}}<1$, sono infiniti, ma la loro somma è la
+serie geometrica
+\[
+  T=\sum_{k=0}^{\infty}\frac d{v_{A}}\,q^{k}=\frac d{v_{A}}\cdot\frac1{1-\frac{v_{B}}{v_{A}}}=\frac d{v_{A}-v_{B}} ,
+\]
+che è finita, ed è proprio il tempo che si ottiene ragionando con la velocità relativa
+$v_{A}-v_{B}$. Ad esempio, con $d=20$~km, $v_{A}=900$~km/h e $v_{B}=750$~km/h, il
+raggiungimento avviene dopo $T=\frac{20}{150}$~h, cioè $8$~minuti. Dal punto di vista matematico, il
+paradosso nasce dal supporre che infiniti intervalli di tempo debbano avere una durata
+complessiva infinita. (Aristotele, che riferisce l'argomento, rispondeva distinguendo
+l'infinito «in atto» da quello «in potenza»: un dibattito filosofico che la definizione
+di somma di una serie non esaurisce, ma rende innocuo per il calcolo.)
+\end{idea}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[x=0.95cm]
+  \draw[grigio, -{Stealth[length=2mm]}] (-0.3,0) -- (10.6,0) node[above, font=\scriptsize] {rotta};
+  \foreach \x/\lab in {0/{$A_{0}$}, 4/{$A_{1}=B_{0}$}, 6.4/{$A_{2}=B_{1}$}, 7.84/{$B_{2}$}}
+    \fill (\x,0) circle (1.4pt) node[below=2pt, font=\scriptsize] {\lab};
+  \fill (8.704,0) circle (1pt);
+  \fill (9.222,0) circle (1pt);
+  \fill (9.533,0) circle (0.8pt);
+  \draw[rame, thick] (10,-0.12) -- (10,0.12);
+  \node[rame, font=\scriptsize, below=2pt] at (10,0) {incontro};
+  \draw[blu, -{Stealth[length=1.6mm]}] (0,0.35) -- node[above, font=\scriptsize] {$t_{0}$} (4,0.35);
+  \draw[blu, -{Stealth[length=1.6mm]}] (4,0.35) -- node[above, font=\scriptsize] {$t_{1}=qt_{0}$} (6.4,0.35);
+  \draw[blu, -{Stealth[length=1.6mm]}] (6.4,0.35) -- node[above, font=\scriptsize] {$t_{2}$} (7.84,0.35);
+  \draw[blu, -{Stealth[length=1.6mm]}] (7.84,0.35) -- (8.704,0.35);
+\end{tikzpicture}
+\caption{Il ragionamento di Zenone per l'inseguimento ($q=\frac{v_{B}}{v_{A}}=0{,}6$ nel disegno):
+$A$ raggiunge successivamente le posizioni $B_{0},B_{1},B_{2},\dots$ occupate da $B$ un passo
+prima. I tratti, e i tempi, formano una progressione geometrica di ragione $q$, e la loro
+somma è finita: l'incontro avviene a distanza $\frac d{1-q}$ dal punto di partenza di $A$.}
+\label{fig:zenone}
+\end{figure}
+
+\begin{python}[Serie geometrica e frazioni generatrici]
+from fractions import Fraction as F
+
+def periodico(antiperiodo, periodo):
+    """Frazione di 0,antiperiodo(periodo), es. ('1', '6') -> 1/6."""
+    m, p = len(antiperiodo), len(periodo)
+    A = int(antiperiodo) if antiperiodo else 0
+    C = int(periodo)
+    # 0,a(c) = (A + C/(10^p - 1)) / 10^m
+    return (A + F(C, 10**p - 1)) / 10**m
+
+for a, c in (("", "13"), ("", "9"), ("1", "6"), ("", "142857")):
+    print(f"0,{a}({c}) = {periodico(a, c)}")
+
+x = 0.6                                    # somme parziali, q = 0,6
+s = [sum(x**k for k in range(n + 1)) for n in (5, 10, 20, 40)]
+print("s_n:", [round(v, 8) for v in s], " 1/(1-x) =", 1 / (1 - x))
+\end{python}
+\begin{risultato}
+0,(13) = 13/99
+0,(9) = 1
+0,1(6) = 1/6
+0,(142857) = 1/7
+s_n: [2.38336, 2.49093007, 2.49994516, 2.5]  1/(1-x) = 2.5
+\end{risultato}
+
+\begin{notastorica}[Eulero e le «somme» delle serie divergenti]
+La formula \eqref{eq:serie-geometrica} vale soltanto per $-1<x<1$, ma per tutto il
+Settecento fu usata spesso senza questa restrizione. Con $x=-1$ se ne ricava
+$1-1+1-1+\cdots=\frac12$: il camaldolese Guido Grandi, professore a Pisa, vi vide nel 1703
+un'immagine della creazione dal nulla, e Leibniz, in una lettera a Christian Wolff
+pubblicata nel 1713, difese il valore $\frac12$ osservando che le somme parziali valgono $1$
+e $0$ «con uguale probabilità». Con $x=2$ si ottiene addirittura $-1=1+2+4+8+\cdots$.
+Eulero discusse proprio questa uguaglianza nella memoria \emph{De seriebus divergentibus}
+(1760), e propose di chiamare somma di una serie l'espressione finita dal cui sviluppo
+essa nasce, qui $\frac1{1-x}$: nelle sue mani la regola condusse a scoperte profonde, in mani
+meno esperte a contraddizioni. Cauchy, nel \emph{Cours d'analyse} (1821), tagliò il nodo
+con la definizione che abbiamo adottato: una serie divergente non ha somma, e le
+operazioni sulle serie sono lecite soltanto per quelle convergenti. Nel 1826 il giovane
+Niels Henrik Abel scriveva a un amico che le serie divergenti sono «qualcosa di funesto»,
+su cui è una vergogna fondare una dimostrazione. Più tardi si capì come recuperare in
+modo coerente almeno una parte di quei valori: Ernesto Cesàro (1890) propose di
+sostituire alle somme parziali le loro medie aritmetiche, che per la serie di Grandi
+tendono proprio a $\frac12$. Nacque così la teoria della \emph{sommabilità}, che non
+contraddice la definizione di Cauchy, ma la estende.
+\end{notastorica}

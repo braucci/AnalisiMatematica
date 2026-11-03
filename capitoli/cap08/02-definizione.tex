@@ -1,0 +1,688 @@
+%% ----------------------------------------------------------------------------
+%%  §8.2  Somme integrali e integrale definito
+%% ----------------------------------------------------------------------------
+\section{Somme integrali e integrale definito}
+\label{sec:integrale-definito}
+
+Generalizziamo il procedimento del paragrafo precedente a una funzione qualsiasi,
+purché \emph{limitata}. In tutto il paragrafo $[a,b]$ è un intervallo chiuso e limitato,
+con $a<b$, e $f:[a,b]\to\R$ è una funzione limitata: esistono due costanti $m$, $M$ tali
+che
+\begin{equation}\label{eq:f-limitata}
+  m\le f(x)\le M \qquad\perogni x\in[a,b] .
+\end{equation}
+Rispetto al settore di parabola cambiano due cose. La suddivisione dell'intervallo non
+sarà più necessariamente in parti uguali; e, poiché $f$ non è più monotòna, l'altezza
+dei rettangoli inscritti e circoscritti non sarà più il valore di $f$ in un estremo,
+ma l'estremo inferiore e l'estremo superiore di $f$ nell'intervallo.
+
+\subsection{Partizioni e somme integrali}
+
+\begin{definizione}[Partizione]\label{def:partizione}\index{partizione}
+Si chiama \emph{partizione} dell'intervallo $[a,b]$ un insieme finito
+$P=\set{x_{0},x_{1},\dots,x_{n}}$ di punti, con $n\in\N$, tali che
+\begin{equation}\label{eq:partizione}
+  a=x_{0}<x_{1}<\dots<x_{k-1}<x_{k}<\dots<x_{n}=b .
+\end{equation}
+Gli $n+1$ punti individuano $n$ intervalli $I_{k}=[x_{k-1},x_{k}]$, $k=1,\dots,n$, di
+ampiezza $\Delta x_{k}=x_{k}-x_{k-1}$. Il numero $\abs P=\max_{k}\Delta x_{k}$ si chiama
+\emph{ampiezza} della partizione. Se $P$ e $Q$ sono partizioni di $[a,b]$ e
+$P\subseteq Q$, si dice che $Q$ è \emph{più fine} di $P$, o che è un
+\emph{raffinamento} di $P$.
+\end{definizione}
+
+Le ampiezze degli intervalli hanno per somma la lunghezza dell'intervallo:
+$\sum_{k=1}^{n}\Delta x_{k}=x_{n}-x_{0}=b-a$ (ancora una somma telescopica). L'esempio
+più semplice è la \emph{partizione uniforme} in $n$ parti uguali, con
+$x_{k}=a+k\frac{b-a}n$ e $\abs P=\frac{b-a}n$, che abbiamo usato nel paragrafo
+precedente. Se $P$ e $Q$ sono due partizioni di $[a,b]$, l'insieme
+\begin{equation}\label{eq:unione-partizioni}
+  R=P\cup Q ,
+\end{equation}
+ottenuto prendendo insieme i punti di $P$ e quelli di $Q$ (e ordinandoli), è ancora una
+partizione di $[a,b]$, più fine sia di $P$ sia di $Q$.
+
+\begin{definizione}[Somme integrali]\label{def:somme-integrali}\index{somma integrale}
+Sia $P=\set{x_{0},\dots,x_{n}}$ una partizione di $[a,b]$. Per $k=1,\dots,n$ poniamo
+\begin{equation}\label{eq:mk-Mk}
+\begin{aligned}
+  m_{k}&=\inf\set{f(x) \tc x\in[x_{k-1},x_{k}]},\\
+  M_{k}&=\sup\set{f(x) \tc x\in[x_{k-1},x_{k}]} .
+\end{aligned}
+\end{equation}
+Si chiamano \emph{somma integrale inferiore} e \emph{somma integrale superiore} di $f$
+relative a $P$ i numeri
+\begin{equation}\label{eq:somme-integrali}
+  s(P)=\sum_{k=1}^{n}m_{k}\,(x_{k}-x_{k-1}), \qquad
+  S(P)=\sum_{k=1}^{n}M_{k}\,(x_{k}-x_{k-1}) .
+\end{equation}
+Quando occorre ricordare la funzione si scrive $s(P,f)$ e $S(P,f)$.
+\end{definizione}
+
+Gli estremi $m_{k}$ e $M_{k}$ esistono finiti per il \cref{teo:esistenza-sup}, perché
+l'insieme dei valori di $f$ in $[x_{k-1},x_{k}]$ è non vuoto e limitato; inoltre, per la
+\eqref{eq:f-limitata}, $m\le m_{k}\le M_{k}\le M$. Moltiplicando per $\Delta x_{k}>0$ e
+sommando si ottiene la stima
+\begin{equation}\label{eq:stime-somme}
+  m(b-a)\le s(P)\le S(P)\le M(b-a) \qquad\text{per ogni partizione } P .
+\end{equation}
+Se $f\ge0$, le somme integrali hanno il chiaro significato geometrico di somme delle
+aree dei rettangoli rispettivamente inscritti nella regione sotto il grafico e
+circoscritti a essa (\cref{fig:somme-integrali}). Si noti però che $s(P)$ e $S(P)$ sono
+definite indipendentemente da ogni significato geometrico, anche se $f$ cambia segno.
+Per $f(x)=x^{2}$ in $[0,b]$ e la partizione uniforme si ha $m_{k}=x_{k-1}^{2}$ e
+$M_{k}=x_{k}^{2}$, e ritroviamo le somme $s_{n}$ e $S_{n}$ del \cref{sec:esaustione}.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.9\textwidth, height=5.6cm, axis lines=left, xmin=0, xmax=4.95,
+  ymin=0, ymax=3.1, xtick={0.3,1.3,2.5,3.3,4.5},
+  xticklabels={$a=x_{0}$,$x_{1}$,$x_{2}$,$x_{3}$,$b=x_{4}$},
+  ytick={1.345,2.424,2.733}, yticklabels={$m_{1}$,$m_{2}=M_{1}$,$M_{2}$},
+  tick label style={font=\scriptsize}, clip=false]
+  \fill[blu!20] (axis cs:0.3,0) rectangle (axis cs:1.3,1.345);
+  \fill[blu!20] (axis cs:1.3,0) rectangle (axis cs:2.5,2.424);
+  \fill[blu!20] (axis cs:2.5,0) rectangle (axis cs:3.3,1.899);
+  \fill[blu!20] (axis cs:3.3,0) rectangle (axis cs:4.5,1.413);
+  \draw[rame, thick] (axis cs:0.3,0) rectangle (axis cs:1.3,2.424);
+  \draw[rame, thick] (axis cs:1.3,0) rectangle (axis cs:2.5,2.733);
+  \draw[rame, thick] (axis cs:2.5,0) rectangle (axis cs:3.3,2.569);
+  \draw[rame, thick] (axis cs:3.3,0) rectangle (axis cs:4.5,1.899);
+  \addplot[curva, domain=0.2:4.65, samples=150] {1.7+0.8*sin(deg(1.3*x-0.9))+0.12*x};
+  \addplot[tratteggio] coordinates {(0,1.345) (0.3,1.345)};
+  \addplot[tratteggio] coordinates {(0,2.424) (1.3,2.424)};
+  \addplot[tratteggio] coordinates {(0,2.733) (1.3,2.733)};
+  \node[font=\scriptsize, blu, anchor=west] at (axis cs:4.67,1.53) {$y=f(x)$};
+\end{axis}
+\end{tikzpicture}
+\caption{Somme integrali relative a una partizione non uniforme con $n=4$ intervalli.
+L'area azzurra è la somma inferiore $s(P)$, quella racchiusa dai contorni in color rame
+è la somma superiore $S(P)$. Nel secondo intervallo il massimo $M_{2}$ è assunto in un
+punto interno, nel quarto il minimo $m_{4}$: le altezze dei rettangoli non sono, in
+generale, i valori di $f$ negli estremi.}
+\label{fig:somme-integrali}
+\end{figure}
+
+Il risultato seguente afferma che raffinando una partizione la somma inferiore
+\emph{aumenta} (o resta uguale) e quella superiore \emph{diminuisce} (o resta uguale): le
+due stime migliorano. Ne segue che \emph{ogni} somma inferiore è minore o uguale di
+\emph{ogni} somma superiore, anche relativa a un'altra partizione.
+
+\begin{lemma}[Raffinamento delle partizioni]\label{lem:raffinamento}
+Siano $P$ e $Q$ partizioni di $[a,b]$.
+\begin{enumerate}[label=\textup{(\alph*)}]
+  \item Se $P\subseteq Q$, allora $s(P)\le s(Q)\le S(Q)\le S(P)$.
+  \item In ogni caso, posto $R=P\cup Q$, risulta
+  \begin{equation}\label{eq:s-minore-S}
+    s(P)\le s(R)\le S(R)\le S(Q) .
+  \end{equation}
+\end{enumerate}
+\end{lemma}
+
+\begin{schema}
+\Ipotesi{$f$ limitata in $[a,b]$; \ $P$, $Q$ partizioni di $[a,b]$.}
+\Tesi{(a) $P\subseteq Q \implica s(P)\le s(Q)\le S(Q)\le S(P)$; \
+(b) $s(P)\le S(Q)$ per ogni coppia $P$, $Q$.}
+\end{schema}
+
+\begin{strategia}
+Il caso essenziale è quello in cui $Q$ ha un solo punto $\bar x$ in più di $P$. Allora
+le due somme inferiori differiscono soltanto per i termini relativi all'intervallo di
+$P$ che contiene $\bar x$, e tutto si riduce a un'osservazione sugli estremi inferiori:
+l'estremo inferiore di $f$ su un insieme più piccolo è \emph{maggiore o uguale} di quello
+sull'insieme più grande. Il caso generale si ottiene aggiungendo i punti di $Q$ uno alla
+volta. La (b) segue dalla (a) applicata a $R$, che raffina sia $P$ sia $Q$.
+\end{strategia}
+
+\begin{dimostrazione}
+(a) Supponiamo dapprima che $Q=P\cup\set{\bar x}$, con $x_{k-1}<\bar x<x_{k}$ per un certo
+$k$, e poniamo
+\[
+  m'=\inf\set{f(x) \tc x\in[x_{k-1},\bar x]}, \qquad
+  m''=\inf\set{f(x) \tc x\in[\bar x,x_{k}]} .
+\]
+Gli insiemi dei valori di $f$ in $[x_{k-1},\bar x]$ e in $[\bar x,x_{k}]$ sono contenuti
+nell'insieme dei valori di $f$ in $[x_{k-1},x_{k}]$; poiché $m_{k}$ è un minorante di
+quest'ultimo, è un minorante anche dei due sottoinsiemi, e quindi è minore o uguale dei
+loro estremi inferiori: $m'\ge m_{k}$, $m''\ge m_{k}$. Le somme $s(Q)$ e $s(P)$ hanno in
+comune tutti i termini tranne quelli relativi a $[x_{k-1},x_{k}]$, e dunque
+\[
+\begin{aligned}
+  s(Q)-s(P)&=m'(\bar x-x_{k-1})+m''(x_{k}-\bar x)-m_{k}(x_{k}-x_{k-1})\\
+  &\ge m_{k}\bigl[(\bar x-x_{k-1})+(x_{k}-\bar x)-(x_{k}-x_{k-1})\bigr]=0 .
+\end{aligned}
+\]
+In modo analogo, gli estremi superiori sui due sottointervalli sono minori o uguali di
+$M_{k}$, e si ottiene $S(Q)\le S(P)$. Se $Q$ contiene $p\ge2$ punti che non stanno in $P$,
+si costruisce una catena $P=Q_{0}\subset Q_{1}\subset\dots\subset Q_{p}=Q$ in cui ciascuna
+partizione si ottiene dalla precedente aggiungendo un solo punto; applicando il caso già
+dimostrato a ogni anello della catena (cioè ragionando per induzione su $p$) si ottiene
+$s(P)\le s(Q)$ e $S(Q)\le S(P)$. Infine $s(Q)\le S(Q)$ perché $m_{k}\le M_{k}$ per ogni
+intervallo di $Q$.
+
+(b) La partizione $R=P\cup Q$ è più fine sia di $P$ sia di $Q$. Applicando la (a) alla
+coppia $P\subseteq R$ si ha $s(P)\le s(R)\le S(R)$, e applicandola alla coppia
+$Q\subseteq R$ si ha $S(R)\le S(Q)$.
+\end{dimostrazione}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.62\textwidth, height=5cm, axis lines=left, xmin=0.4, xmax=4.1,
+  ymin=0, ymax=4.3, xtick={1,2.4,3.6}, xticklabels={$x_{k-1}$,$\bar x$,$x_{k}$},
+  ytick={0.85,2.04,3.84}, yticklabels={$m_{k}$,$m''=M'$,$M_{k}$},
+  tick label style={font=\scriptsize}, clip=false]
+  \fill[blu!20] (axis cs:1,0) rectangle (axis cs:3.6,0.85);
+  \fill[verde!35] (axis cs:2.4,0.85) rectangle (axis cs:3.6,2.04);
+  \fill[pattern=north east lines, pattern color=rame] (axis cs:1,2.04) rectangle
+    (axis cs:2.4,3.84);
+  \draw[rame, thick] (axis cs:1,0) rectangle (axis cs:3.6,3.84);
+  \draw[grigio] (axis cs:2.4,0) -- (axis cs:2.4,3.84);
+  \addplot[curva, domain=0.8:3.75, samples=80] {0.6+0.25*x^2};
+  \addplot[tratteggio] coordinates {(0.4,2.04) (2.4,2.04)};
+  \node[font=\scriptsize, verde!70!black] at (axis cs:3.0,1.45) {$+$};
+  \node[font=\scriptsize, rame, fill=white, inner sep=1pt] at (axis cs:1.7,2.94) {$-$};
+\end{axis}
+\end{tikzpicture}
+\caption{Aggiungendo il punto $\bar x$ all'intervallo $[x_{k-1},x_{k}]$, la somma
+inferiore guadagna il rettangolo verde, perché in $[\bar x,x_{k}]$ l'estremo inferiore
+sale da $m_{k}$ a $m''$; la somma superiore perde il rettangolo tratteggiato, perché in
+$[x_{k-1},\bar x]$ l'estremo superiore scende da $M_{k}$ a $f(\bar x)=m''$.}
+\label{fig:raffinamento}
+\end{figure}
+
+\subsection{L'integrale definito}
+
+Indichiamo con $A$ l'insieme numerico costituito dalle somme inferiori $s(P)$, al variare
+di $P$ tra tutte le partizioni di $[a,b]$, e con $B$ l'insieme delle corrispondenti somme
+superiori:
+\begin{equation}\label{eq:insiemi-A-B}
+\begin{aligned}
+  A&=\set{s(P) \tc P \text{ partizione di }[a,b]},\\
+  B&=\set{S(P) \tc P \text{ partizione di }[a,b]} .
+\end{aligned}
+\end{equation}
+Per il \cref{lem:raffinamento}(b), $a'\le b'$ per ogni $a'\in A$ e ogni $b'\in B$: i due
+insiemi sono \emph{separati}. Per l'assioma di completezza (\cref{ass:completezza})
+esiste almeno un numero reale $c$ maggiore o uguale di tutti gli elementi di $A$ e
+minore o uguale di tutti gli elementi di $B$, cioè un \emph{elemento separatore}:
+\[
+  s(P)\le c\le S(Q) \qquad\text{per ogni coppia di partizioni } P, Q .
+\]
+In generale l'elemento separatore non è unico. Per descrivere tutti gli elementi
+separatori introduciamo i numeri
+\begin{equation}\label{eq:integrali-inf-sup}
+\begin{aligned}
+  s(f)&=\sup\set{s(P) \tc P \text{ partizione di }[a,b]},\\
+  S(f)&=\inf\set{S(P) \tc P \text{ partizione di }[a,b]},
+\end{aligned}
+\end{equation}
+detti rispettivamente \emph{integrale inferiore} e \emph{integrale superiore} di $f$.
+Esistono finiti perché $A$ è non vuoto e limitato superiormente (da ogni elemento di
+$B$), e $B$ è non vuoto e limitato inferiormente (da ogni elemento di $A$).
+
+\begin{proposizione}[Gli elementi separatori]\label{prop:separatori}
+Risulta $s(f)\le S(f)$, e un numero $c$ è elemento separatore tra $A$ e $B$ se e solo se
+$s(f)\le c\le S(f)$.
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$f$ limitata in $[a,b]$; \ $A$, $B$ come in \eqref{eq:insiemi-A-B}.}
+\Tesi{$s(f)\le S(f)$; \ gli elementi separatori sono tutti e soli i numeri
+dell'intervallo $[s(f),S(f)]$.}
+\end{schema}
+
+\begin{strategia}
+Tutto discende dalla definizione di estremo superiore come \emph{minimo dei maggioranti}
+e di estremo inferiore come \emph{massimo dei minoranti}: un elemento separatore è un
+maggiorante di $A$ che è anche un minorante di $B$.
+\end{strategia}
+
+\begin{dimostrazione}
+Ogni elemento $S(Q)$ di $B$ è un maggiorante di $A$, e quindi è maggiore o uguale del
+minimo dei maggioranti: $s(f)\le S(Q)$ per ogni $Q$. Dunque $s(f)$ è un minorante di $B$,
+e quindi è minore o uguale del massimo dei minoranti: $s(f)\le S(f)$. Inoltre $c$ è
+elemento separatore se e solo se è un maggiorante di $A$ e un minorante di $B$, cioè se
+e solo se $c\ge\sup A=s(f)$ e $c\le\inf B=S(f)$.
+\end{dimostrazione}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[scale=1]
+  \draw[-Latex, grigio] (0,1.1) -- (9.4,1.1);
+  \foreach \x in {0.5,1.4,2.2,2.9,3.4,3.75,3.95} \fill[blu] (\x,1.1) circle (1.6pt);
+  \foreach \x in {8.7,7.6,6.5,5.6,5.0,4.6,4.35} \fill[rame] (\x,1.1) circle (1.6pt);
+  \draw[verde, very thick] (4.15,0.95) -- (4.15,1.25);
+  \node[font=\scriptsize, above] at (4.15,1.25) {$s(f)=S(f)$};
+  \node[font=\scriptsize, blu, below] at (2.0,1.0) {somme inferiori $s(P)$};
+  \node[font=\scriptsize, rame, below] at (6.6,1.0) {somme superiori $S(P)$};
+  \node[font=\scriptsize, anchor=west] at (9.5,1.1) {$f$ integrabile};
+  \draw[-Latex, grigio] (0,0) -- (9.4,0);
+  \foreach \x in {0.5,1.3,1.9,2.4,2.75,2.95,3.05} \fill[blu] (\x,0) circle (1.6pt);
+  \foreach \x in {8.7,7.9,7.0,6.3,5.85,5.6,5.5} \fill[rame] (\x,0) circle (1.6pt);
+  \draw[verde, very thick] (3.2,-0.15) -- (3.2,0.15);
+  \draw[verde, very thick] (5.35,-0.15) -- (5.35,0.15);
+  \fill[verde!25] (3.2,-0.06) rectangle (5.35,0.06);
+  \node[font=\scriptsize, below] at (3.2,-0.15) {$s(f)$};
+  \node[font=\scriptsize, below] at (5.35,-0.15) {$S(f)$};
+  \node[font=\scriptsize, anchor=west] at (9.5,0) {$f$ non integrabile};
+\end{tikzpicture}
+\caption{In alto, le somme inferiori e quelle superiori si addensano attorno a un unico
+elemento separatore: $f$ è integrabile. In basso, tra le une e le altre resta un
+intervallo $[s(f),S(f)]$ di elementi separatori: $f$ non è integrabile.}
+\label{fig:separatori}
+\end{figure}
+
+\begin{definizione}[Integrale definito secondo Riemann]\label{def:integrale}
+\index{integrale definito}\index{funzione!integrabile}
+Si dice che la funzione limitata $f$ è \emph{integrabile secondo Riemann} in $[a,b]$ se
+esiste un \emph{unico} elemento separatore tra gli insiemi $A$ e $B$ delle somme
+inferiori e superiori, cioè se $s(f)=S(f)$. Tale elemento si chiama \emph{integrale
+definito} di $f$ in $[a,b]$ e si indica con il simbolo
+\begin{equation}\label{eq:integrale}
+  \int_{a}^{b}f(x)\,dx=s(f)=S(f) ,
+\end{equation}
+che si legge «integrale da $a$ a $b$ di $f(x)$ in $dx$».
+\end{definizione}
+
+Il termine «definito» distingue questo integrale, che è un numero, dagli
+\emph{integrali indefiniti} del prossimo capitolo, nei quali gli estremi $a$, $b$ non
+sono fissati. Vediamo subito due esempi opposti.
+
+\begin{esempio}[Funzioni costanti]\label{es:integrale-costante}
+Se $f(x)=c$ per ogni $x\in[a,b]$, in ogni intervallo di ogni partizione si ha
+$m_{k}=M_{k}=c$, e quindi $s(P)=S(P)=c\sum\Delta x_{k}=c(b-a)$ per ogni $P$. Gli insiemi
+$A$ e $B$ si riducono entrambi al numero $c(b-a)$, che è l'unico elemento separatore:
+\begin{equation}\label{eq:integrale-costante}
+  \int_{a}^{b}c\,dx=c\,(b-a) .
+\end{equation}
+\end{esempio}
+
+\begin{esempio}[Una funzione limitata non integrabile]\label{es:dirichlet-non-integrabile}
+Consideriamo in $[0,1]$ la funzione di Dirichlet $D$ dell'\cref{oss:dirichlet}, che
+vale $1$ nei razionali e $0$ negli irrazionali. Per la densità dei razionali e degli
+irrazionali (\cref{teo:densita-Q,cor:densita-irrazionali}), ogni intervallo
+$[x_{k-1},x_{k}]$, con $x_{k-1}<x_{k}$, contiene sia punti razionali sia punti
+irrazionali, e quindi $m_{k}=0$, $M_{k}=1$. Ne segue
+\[
+  s(P)=0, \qquad S(P)=\sum_{k=1}^{n}\Delta x_{k}=1 \qquad\text{per ogni partizione } P,
+\]
+dunque $s(D)=0<1=S(D)$: ogni numero di $[0,1]$ è un elemento separatore, e $D$ non è
+integrabile secondo Riemann. La limitatezza, da sola, non basta all'integrabilità.
+\end{esempio}
+
+\subsection{Il criterio di integrabilità}
+
+Verificare l'integrabilità calcolando $s(f)$ e $S(f)$, cioè un estremo superiore e un
+estremo inferiore su \emph{tutte} le partizioni, è in genere impraticabile. Il teorema
+seguente riduce il problema alla ricerca di \emph{una sola} partizione per ogni
+tolleranza assegnata.
+
+\begin{teorema}[Criterio di integrabilità]\label{teo:criterio-integrabilita}
+\index{criterio!di integrabilità}
+Una funzione $f$ limitata in $[a,b]$ è integrabile secondo Riemann in $[a,b]$ se e solo
+se per ogni $\epsilon>0$ esiste una partizione $P$ di $[a,b]$ tale che
+\begin{equation}\label{eq:criterio-integrabilita}
+  S(P)-s(P)<\epsilon .
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$ limitata in $[a,b]$.}
+\Tesi{$f$ integrabile $\sse$ $\perogni\epsilon>0\ \esiste P$ : $S(P)-s(P)<\epsilon$.}
+\end{schema}
+
+\begin{strategia}
+\emph{Necessità}: se $s(f)=S(f)$, per le proprietà caratteristiche dell'estremo superiore
+e dell'estremo inferiore esistono una somma inferiore e una somma superiore vicine a
+meno di $\frac\epsilon2$ al valore comune, eventualmente relative a partizioni diverse
+$P$ e $Q$; la partizione $R=P\cup Q$ le migliora entrambe (\cref{lem:raffinamento}).
+\emph{Sufficienza}: $s(f)$ e $S(f)$ sono intrappolati tra $s(P)$ e $S(P)$, quindi distano
+meno di $\epsilon$; un numero non negativo minore di ogni $\epsilon>0$ è nullo.
+\end{strategia}
+
+\begin{dimostrazione}
+\emph{Necessità.} Sia $f$ integrabile, cioè $s(f)=S(f)$, e sia $\epsilon>0$. Per la
+caratterizzazione dell'estremo superiore (\cref{prop:caratt-sup}) esiste una partizione
+$P$ con $s(f)-\frac\epsilon2<s(P)$, e per quella dell'estremo inferiore
+\eqref{eq:caratt-inf} esiste una partizione $Q$ con $S(Q)<S(f)+\frac\epsilon2$. Posto
+$R=P\cup Q$, per la \eqref{eq:s-minore-S}
+\[
+  s(f)-\frac\epsilon2<s(P)\le s(R)\le S(R)\le S(Q)<S(f)+\frac\epsilon2 ,
+\]
+e quindi, essendo $s(f)=S(f)$,
+\[
+  S(R)-s(R)<\Bigl(S(f)+\frac\epsilon2\Bigr)-\Bigl(s(f)-\frac\epsilon2\Bigr)=\epsilon .
+\]
+La partizione cercata è $R$.
+
+\emph{Sufficienza.} Per ogni partizione $P$ si ha $s(P)\le s(f)$, perché $s(f)$ è un
+maggiorante delle somme inferiori, e $S(f)\le S(P)$, perché $S(f)$ è un minorante delle
+somme superiori. Insieme alla \cref{prop:separatori} si ottiene
+$s(P)\le s(f)\le S(f)\le S(P)$, e quindi
+\[
+  0\le S(f)-s(f)\le S(P)-s(P) .
+\]
+Se vale l'ipotesi, per ogni $\epsilon>0$ possiamo scegliere $P$ in modo che il secondo
+membro sia minore di $\epsilon$: il numero $S(f)-s(f)$, che non dipende da $\epsilon$, è
+non negativo e minore di ogni numero positivo, e dunque è nullo. Perciò $s(f)=S(f)$, cioè
+$f$ è integrabile.
+\end{dimostrazione}
+
+Nella pratica il criterio si usa quasi sempre attraverso una successione di partizioni,
+come abbiamo fatto per la parabola.
+
+\begin{corollario}[Integrale come limite di somme]\label{cor:limite-somme}
+Sia $f$ limitata in $[a,b]$ e sia $P_{n}$ una successione di partizioni di $[a,b]$ tale
+che $S(P_{n})-s(P_{n})\to0$. Allora $f$ è integrabile e
+\begin{equation}\label{eq:limite-somme}
+  \int_{a}^{b}f(x)\,dx=\lim_{n\to+\infty}s(P_{n})=\lim_{n\to+\infty}S(P_{n}) .
+\end{equation}
+\end{corollario}
+
+\begin{schema}
+\Ipotesi{$f$ limitata in $[a,b]$; \ $S(P_{n})-s(P_{n})\to0$.}
+\Tesi{$f$ integrabile; \ $s(P_{n})\to\int_{a}^{b}f$ e $S(P_{n})\to\int_{a}^{b}f$.}
+\end{schema}
+
+\begin{strategia}
+L'integrabilità è il criterio appena dimostrato. Poi l'integrale, come ogni elemento
+separatore, sta tra $s(P_{n})$ e $S(P_{n})$, e il teorema dei carabinieri fa il resto.
+\end{strategia}
+
+\begin{dimostrazione}
+Dato $\epsilon>0$, per la definizione di limite esiste $n$ con
+$S(P_{n})-s(P_{n})<\epsilon$, e per il \cref{teo:criterio-integrabilita} $f$ è
+integrabile. Posto $I=\int_{a}^{b}f(x)\,dx$, si ha $s(P_{n})\le I\le S(P_{n})$, quindi
+\[
+  0\le I-s(P_{n})\le S(P_{n})-s(P_{n}), \qquad 0\le S(P_{n})-I\le S(P_{n})-s(P_{n}) ,
+\]
+e per il teorema dei carabinieri (\cref{teo:carabinieri}) $I-s(P_{n})\to0$ e
+$S(P_{n})-I\to0$.
+\end{dimostrazione}
+
+\begin{esempio}[Gli integrali di $x$ e di $x^{2}$]\label{es:integrale-x-x2}
+Sia $f(x)=x$ in $[0,b]$, e sia $P_{n}$ la partizione uniforme con $x_{k}=\frac{kb}n$.
+Poiché $f$ è crescente, $m_{k}=x_{k-1}$ e $M_{k}=x_{k}$; con la somma dei primi
+$n$ numeri naturali (\cref{prop:gauss}),
+\[
+\begin{aligned}
+  S(P_{n})&=\frac bn\sum_{k=1}^{n}\frac{kb}n=\frac{b^{2}}{n^{2}}\cdot\frac{n(n+1)}2
+  =\frac{b^{2}}2\cdot\frac{n+1}n,\\
+  s(P_{n})&=\frac{b^{2}}2\cdot\frac{n-1}n ,
+\end{aligned}
+\]
+e $S(P_{n})-s(P_{n})=\frac{b^{2}}n\to0$. Per il \cref{cor:limite-somme}
+\begin{equation}\label{eq:integrale-x}
+  \int_{0}^{b}x\,dx=\frac{b^{2}}2 ,
+\end{equation}
+che è l'area del triangolo di vertici $(0,0)$, $(b,0)$, $(b,b)$, come deve essere. Allo
+stesso modo, le somme \eqref{eq:Sn-parabola}--\eqref{eq:sn-parabola} del settore di
+parabola hanno differenza $\frac{b^{3}}n\to0$, e quindi
+\begin{equation}\label{eq:integrale-x2}
+  \int_{0}^{b}x^{2}\,dx=\frac{b^{3}}3 .
+\end{equation}
+\end{esempio}
+
+Per una funzione non monotòna il calcolo di $m_{k}$ e $M_{k}$ richiede un po' più di
+lavoro. Se $f$ è derivabile, però, gli strumenti del \cref{cap:applicazioni-derivate}
+bastano: in ogni intervallo $[x_{k-1},x_{k}]$ la funzione, continua, ha massimo e minimo
+(\cref{teo:weierstrass}), e se uno di essi è assunto in un punto interno, lì la derivata
+si annulla (\cref{teo:fermat}). Dunque $m_{k}$ e $M_{k}$ vanno cercati tra i valori negli
+estremi e quelli nei punti critici interni. Il programma seguente applica questa
+osservazione a $f(x)=x^{3}-3x$ in $[-2,2]$, i cui punti critici sono $\pm1$.
+
+\begin{python}[Somme integrali di una funzione non monotòna]
+def darboux(f, a, b, n, critici=()):
+    """Somme s(P), S(P) per la partizione uniforme in n parti:
+    m_k e M_k si cercano tra gli estremi dell'intervallo e i
+    punti critici interni (Weierstrass + Fermat)."""
+    x = [a + k * (b - a) / n for k in range(n + 1)]
+    s = S = 0.0
+    for k in range(1, n + 1):
+        cand = [x[k - 1], x[k]]
+        cand += [c for c in critici if x[k - 1] < c < x[k]]
+        v = [f(t) for t in cand]
+        s += min(v) * (x[k] - x[k - 1])
+        S += max(v) * (x[k] - x[k - 1])
+    return s, S
+
+f = lambda x: x**3 - 3 * x            # punti critici: -1 e 1
+for n in (3, 30, 300, 3000):
+    s, S = darboux(f, -2, 2, n, critici=(-1, 1))
+    print(f"n = {n:4d}: s = {s:9.5f}  S = {S:8.5f}"
+          f"  S-s = {S - s:8.5f}  n(S-s) = {n * (S - s):5.2f}")
+\end{python}
+\begin{risultato}
+n =    3: s =  -7.60494  S =  7.60494  S-s = 15.20988  n(S-s) = 45.63
+n =   30: s =  -0.79826  S =  0.79826  S-s =  1.59652  n(S-s) = 47.90
+n =  300: s =  -0.08000  S =  0.08000  S-s =  0.16000  n(S-s) = 48.00
+n = 3000: s =  -0.00800  S =  0.00800  S-s =  0.01600  n(S-s) = 48.00
+\end{risultato}
+
+Le due somme si stringono attorno a $0$, il valore suggerito dalla simmetria ($f$ è
+dispari, e le aree sopra e sotto l'asse si compensano), e la differenza decresce come
+$1/n$. Il prodotto $n(S-s)$ si stabilizza intorno a $48$, e il motivo è semplice: $f$
+sale da $-2$ a $2$ in $[-2,-1]$, scende a $-2$ in $[-1,1]$ e risale a $2$ in $[1,2]$;
+in ogni intervallo $M_{k}-m_{k}$ è al più la variazione totale di $f$ in
+quell'intervallo (la somma delle sue salite e delle sue discese), e la somma di tutte le
+salite e discese in $[-2,2]$ è $4+4+4=12$. Quindi
+$S-s=\sum(M_{k}-m_{k})\frac4n\le\frac{48}n$.
+
+\subsection{Significato geometrico e notazioni}
+
+\begin{definizione}[Rettangoloide]\label{def:rettangoloide}\index{rettangoloide}
+Sia $f\ge0$ in $[a,b]$. L'insieme
+\begin{equation}\label{eq:rettangoloide}
+  R_{f}=\set{(x,y)\in\R^{2} \tc a\le x\le b,\ 0\le y\le f(x)}
+\end{equation}
+si chiama \emph{rettangoloide} (o \emph{trapezoide}) di base $[a,b]$ relativo a $f$.
+\end{definizione}
+
+Per ogni partizione $P$, la somma $s(P)$ è l'area di un plurirettangolo contenuto in
+$R_{f}$, e $S(P)$ quella di un plurirettangolo che contiene $R_{f}$
+(\cref{fig:somme-integrali}). Il criterio di integrabilità afferma che, se $f$ è
+integrabile, si possono trovare un plurirettangolo contenuto in $R_{f}$ e uno che lo
+contiene le cui aree differiscono per meno di un qualsiasi $\epsilon>0$ assegnato. È
+dunque ragionevole \emph{definire} l'area del rettangoloide come l'unico numero che
+separa le aree dei plurirettangoli inscritti da quelle dei plurirettangoli
+circoscritti:
+\begin{equation}\label{eq:area-rettangoloide}
+  \text{area }R_{f}=\int_{a}^{b}f(x)\,dx \qquad (f\ge0 \text{ integrabile}) .
+\end{equation}
+La definizione è coerente con le aree elementari: per una funzione costante si ottiene
+l'area del rettangolo, per $f(x)=x$ quella del triangolo, per $f(x)=x^{2}$ quella del
+settore di parabola calcolata da Archimede. È il punto di partenza della teoria della
+misura delle figure piane di Peano e Jordan.
+
+Nella scrittura $\int_{a}^{b}f(x)\,dx$ i numeri $a$ e $b$ si chiamano \emph{estremi di
+integrazione}, la funzione $f$ \emph{funzione integranda}, la variabile $x$
+\emph{variabile di integrazione}. Il risultato è un numero e non dipende da $x$, che è
+una variabile «muta», come l'indice di una sommatoria: $\int_{a}^{b}f(x)\,dx$,
+$\int_{a}^{b}f(t)\,dt$ e $\int_{a}^{b}f(s)\,ds$ indicano lo stesso numero. È utile
+considerare l'integrale anche quando il primo estremo non è minore del secondo: si pone
+\begin{equation}\label{eq:estremi-invertiti}
+  \int_{a}^{b}f(x)\,dx=-\int_{b}^{a}f(x)\,dx \quad (a>b), \qquad
+  \int_{a}^{a}f(x)\,dx=0 .
+\end{equation}
+
+\begin{osservazione}[Somme di Riemann]\label{oss:somme-riemann}\index{somma di Riemann}
+Data una partizione $P$, scegliamo in ciascun intervallo $[x_{k-1},x_{k}]$ un punto
+$\xi_{k}$ arbitrario e formiamo la \emph{somma di Riemann}
+\begin{equation}\label{eq:somma-riemann}
+  \sigma(P,\xi)=\sum_{k=1}^{n}f(\xi_{k})\,(x_{k}-x_{k-1}) .
+\end{equation}
+Poiché $m_{k}\le f(\xi_{k})\le M_{k}$, si ha $s(P)\le\sigma(P,\xi)\le S(P)$; se $f$ è
+integrabile, anche l'integrale sta tra $s(P)$ e $S(P)$, e quindi
+\begin{equation}\label{eq:riemann-stima}
+  \Bigl|\sigma(P,\xi)-\int_{a}^{b}f(x)\,dx\Bigr|\le S(P)-s(P) .
+\end{equation}
+Le somme di Riemann sono quelle che si calcolano in pratica, perché richiedono soltanto
+valori di $f$ e non estremi inferiori e superiori: scegliendo come $\xi_{k}$ l'estremo
+sinistro, l'estremo destro o il punto medio di ogni intervallo si ottengono le formule
+dei rettangoli che studieremo nel \cref{sec:integrabilita-continue}. La notazione di
+Leibniz ricorda proprio queste somme: il simbolo $\int$ è una «S» allungata, iniziale
+di \emph{summa}, e $dx$ ricorda le ampiezze $\Delta x_{k}$.
+\end{osservazione}
+
+\begin{notastorica}[Leibniz, Cauchy, Riemann, Darboux]
+Gottfried Wilhelm Leibniz introdusse il simbolo $\int$ in un manoscritto del 29 ottobre
+1675, sostituendo l'abbreviazione \emph{omn.} (\emph{omnia}, la «somma di tutte» le
+linee di una figura) con una S allungata, iniziale di \emph{summa}; fu poi Joseph
+Fourier, intorno al 1820, a proporre di scrivere gli estremi in basso e in alto. Per i
+successori di Leibniz, a partire da Johann Bernoulli ed Eulero, l'integrale divenne
+soprattutto l'operazione inversa della derivazione. Il primo a definirlo in modo
+autonomo, come limite di somme, fu Augustin-Louis Cauchy nel \emph{Résumé des leçons}
+del 1823, per le funzioni continue e con le somme costruite sugli estremi sinistri: il
+legame con la derivata, che per Leibniz era quasi una definizione, diventò così un
+teorema, quello fondamentale del prossimo capitolo. Cauchy deduceva l'esistenza del
+limite dal fatto che due somme relative a partizioni abbastanza fini differiscono poco,
+un passaggio che richiede la completezza dei reali, allora non ancora formulata; inoltre
+la somma dipende da tutta la partizione e non dalla sola ampiezza, e un limite «per
+ampiezza tendente a zero» sfuggiva alle definizioni di limite note (per questo nel
+\cref{teo:riemann-continue} useremo successioni di partizioni). Una teoria dei limiti
+adatta a questi casi fu proposta solo nel 1922 da Eliakim H.~Moore e Herman L.~Smith.
+Bernhard Riemann, nella dissertazione di abilitazione del 1854 sulle serie
+trigonometriche (pubblicata postuma, a cura di Dedekind, nel 1867), si pose la domanda
+dell'epigrafe e rispose con le somme \eqref{eq:somma-riemann} a punti $\xi_{k}$
+arbitrari, ammettendo funzioni qualsiasi purché limitate; diede anche il criterio di
+integrabilità. La formulazione con le somme inferiori e superiori, che abbiamo seguito,
+è dovuta a Gaston Darboux (1875); le due definizioni sono equivalenti.
+\end{notastorica}
+
+\subsection{Approfondimento: l'integrale con le funzioni a scala}
+\label{subsec:funzioni-scala}
+
+Molti testi, tra cui \cite{giusti}, definiscono l'integrale in un modo che a prima vista
+sembra diverso dal nostro: al posto delle somme inferiori e superiori usano le
+\emph{funzioni a scala} che stanno sotto e sopra $f$. Mostriamo che le due definizioni
+coincidono; la verifica richiede un po' di attenzione nei punti di suddivisione.
+
+\begin{definizione}[Funzione a scala]\label{def:funzione-scala}\index{funzione!a scala}
+Una funzione $\varphi:[a,b]\to\R$ si dice \emph{a scala} se esiste una partizione
+$P=\set{x_{0},\dots,x_{n}}$ di $[a,b]$ tale che $\varphi$ è costante in ciascun
+intervallo aperto $(x_{k-1},x_{k})$: $\varphi(x)=c_{k}$ per $x_{k-1}<x<x_{k}$. Una tale
+partizione si dice \emph{adatta} a $\varphi$; i valori di $\varphi$ nei punti $x_{k}$
+sono arbitrari. Il numero
+\begin{equation}\label{eq:integrale-scala}
+  I(\varphi)=\sum_{k=1}^{n}c_{k}\,(x_{k}-x_{k-1})
+\end{equation}
+si chiama \emph{integrale elementare} di $\varphi$.
+\end{definizione}
+
+Il numero $I(\varphi)$ non dipende dalla partizione adatta. Se si aggiunge a $P$ un
+punto $\bar x\in(x_{k-1},x_{k})$, la partizione resta adatta e il termine
+$c_{k}(x_{k}-x_{k-1})$ si spezza in $c_{k}(\bar x-x_{k-1})+c_{k}(x_{k}-\bar x)$, con la
+stessa somma; aggiungendo i punti uno alla volta, come nel \cref{lem:raffinamento}, la
+somma non cambia passando a un raffinamento. Se $P$ e $P'$ sono adatte, $P\cup P'$
+raffina entrambe, e le tre somme coincidono. Se $f\ge0$ e $\varphi\le f$, $I(\varphi)$ è
+l'area di un plurirettangolo contenuto nel rettangoloide di $f$, come una somma
+inferiore.
+
+Sia ora $f$ limitata in $[a,b]$, con $m\le f\le M$. Poniamo
+\begin{equation}\label{eq:integrali-scala}
+\begin{aligned}
+  I_{-}(f)&=\sup\set{I(\psi) \tc \psi \text{ a scala},\ \psi\le f \text{ in }[a,b]},\\
+  I^{+}(f)&=\inf\set{I(\varphi) \tc \varphi \text{ a scala},\ \varphi\ge f \text{ in }[a,b]} .
+\end{aligned}
+\end{equation}
+Gli insiemi sono non vuoti, perché le costanti $m$ e $M$ sono funzioni a scala; e se
+$\psi\le f$ è a scala, i suoi valori $c_{k}$ sono minori o uguali di $M$, quindi
+$I(\psi)\le M(b-a)$. Analogamente $I(\varphi)\ge m(b-a)$, e i due numeri sono finiti.
+
+\begin{proposizione}[Funzioni a scala e somme integrali]\label{prop:scala-darboux}
+Se $f$ è limitata in $[a,b]$, allora $I_{-}(f)=s(f)$ e $I^{+}(f)=S(f)$. In particolare
+$f$ è integrabile secondo Riemann se e solo se $I_{-}(f)=I^{+}(f)$, e in tal caso il
+valore comune è $\int_{a}^{b}f(x)\,dx$.
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$f$ limitata in $[a,b]$, \ $m\le f\le M$.}
+\Tesi{$I_{-}(f)=s(f)$ \ e \ $I^{+}(f)=S(f)$, \ con $I_{-}$, $I^{+}$ definiti dalla
+\eqref{eq:integrali-scala}.}
+\end{schema}
+
+\begin{strategia}
+Ogni somma inferiore è l'integrale elementare di una funzione a scala minorante:
+quella che vale $m_{k}$ all'interno del $k$-esimo intervallo e coincide con $f$ nei punti
+di suddivisione. Dunque $I_{-}(f)\ge s(f)$. Il viceversa è più delicato, perché una
+funzione a scala minorante può superare $m_{k}$ all'interno di un intervallo, se $f$
+assume valori piccoli soltanto negli estremi: si rimedia isolando i punti di
+suddivisione in intervallini di ampiezza $\eta$, il cui contributo è proporzionale a
+$\eta$. Per $I^{+}(f)$ basta passare a $-f$.
+\end{strategia}
+
+\begin{dimostrazione}
+\emph{$I_{-}(f)\ge s(f)$.} Sia $P=\set{x_{0},\dots,x_{n}}$ una partizione, e sia
+$\psi_{P}$ la funzione che vale $m_{k}$ in $(x_{k-1},x_{k})$ e $f(x_{k})$ nei punti
+$x_{k}$. È una funzione a scala, con $P$ adatta, e $\psi_{P}\le f$: all'interno degli
+intervalli perché $m_{k}$ è un minorante di $f$ in $[x_{k-1},x_{k}]$, nei punti di
+suddivisione per costruzione. Dunque $s(P)=I(\psi_{P})\le I_{-}(f)$ per ogni $P$, e
+passando all'estremo superiore $s(f)\le I_{-}(f)$.
+
+\emph{$I_{-}(f)\le s(f)$.} Sia $\psi\le f$ a scala, con partizione adatta
+$P=\set{x_{0},\dots,x_{n}}$ e valori $c_{k}$; come osservato, $c_{k}\le M$. Fissiamo
+$\eta$ con $0<2\eta<\min_{k}\Delta x_{k}$ e sia $Q$ la partizione ottenuta aggiungendo a
+$P$ i punti $x_{k-1}+\eta$ e $x_{k}-\eta$, per $k=1,\dots,n$. Ogni intervallo
+$[x_{k-1},x_{k}]$ si divide così in due intervallini di ampiezza $\eta$ adiacenti agli
+estremi e nell'intervallo centrale $J_{k}=[x_{k-1}+\eta,x_{k}-\eta]$. Poiché $J_{k}$ è
+contenuto in $(x_{k-1},x_{k})$, dove $f\ge\psi=c_{k}$, l'estremo inferiore di $f$ in
+$J_{k}$ è maggiore o uguale di $c_{k}$; negli intervallini è maggiore o uguale di $m$.
+La partizione $Q$ è adatta a $\psi$, e con essa
+\[
+  I(\psi)=\sum_{k=1}^{n}\bigl(c_{k}\abs{J_{k}}+2c_{k}\eta\bigr), \qquad
+  s(Q)\ge\sum_{k=1}^{n}\bigl(c_{k}\abs{J_{k}}+2m\eta\bigr),
+\]
+dove $\abs{J_{k}}$ è l'ampiezza di $J_{k}$. Sottraendo,
+\[
+  I(\psi)-s(Q)\le2\eta\sum_{k=1}^{n}(c_{k}-m)\le2n(M-m)\,\eta ,
+\]
+e quindi $I(\psi)\le s(f)+2n(M-m)\eta$. Qui $n$ dipende soltanto da $\psi$, mentre $\eta$
+si può scegliere piccolo a piacere: il numero $I(\psi)-s(f)$ è minore o uguale di ogni
+numero positivo, e quindi $I(\psi)\le s(f)$. Passando all'estremo superiore su $\psi$,
+$I_{-}(f)\le s(f)$.
+
+\emph{Integrali superiori.} Si ha $\varphi\ge f$ se e solo se $-\varphi\le-f$, e
+$I(-\varphi)=-I(\varphi)$; quindi $I^{+}(f)=-I_{-}(-f)$. D'altra parte, in ogni
+intervallo l'estremo inferiore di $-f$ è l'opposto dell'estremo superiore di $f$, per cui
+$s(P,-f)=-S(P,f)$ e $s(-f)=-S(f)$. Applicando a $-f$ quanto già dimostrato,
+$I^{+}(f)=-I_{-}(-f)=-s(-f)=S(f)$. L'ultima affermazione segue dalla
+\cref{def:integrale}.
+\end{dimostrazione}
+
+\begin{osservazione}[Integrale delle funzioni a scala]\label{oss:integrale-scala}
+Ogni funzione a scala $\varphi$ è integrabile, e $\int_{a}^{b}\varphi(x)\,dx=I(\varphi)$.
+Infatti $\varphi$, che assume un numero finito di valori, è limitata, ed è minorante e
+maggiorante di sé stessa; per la \eqref{eq:integrali-scala}, la
+\cref{prop:scala-darboux} e la \cref{prop:separatori},
+$I(\varphi)\le I_{-}(\varphi)=s(\varphi)\le S(\varphi)=I^{+}(\varphi)\le I(\varphi)$, e
+tutte le disuguaglianze sono uguaglianze. Ad esempio, una funzione nulla tranne che in
+un numero finito di punti è a scala, con integrale nullo: con la linearità del
+\cref{sec:proprieta-integrale} si ritrova l'\cref{es:valore-in-un-punto}. Le due
+definizioni sono dunque la stessa idea, l'\emph{unico elemento separatore}, vista con
+due strumenti: le somme sulle partizioni o i plurirettangoli delle funzioni a scala.
+\end{osservazione}
+
+\begin{notastorica}[Il commerciante di Lebesgue]
+Approssimare $f$ dal basso e dall'alto con funzioni costanti su intervalli è anche il
+punto di partenza della teoria della misura. Giuseppe Peano nel 1887 e Camille Jordan
+pochi anni dopo definirono la misura interna ed esterna di un insieme mediante i
+plurirettangoli contenuti nell'insieme e quelli che lo contengono, come le somme
+inferiori e superiori del rettangoloide; ma l'insieme dei razionali di $[0,1]$ ha misura
+interna $0$ ed esterna $1$, e non è misurabile. Émile Borel, nel 1898, chiese alla misura
+di essere additiva anche per successioni di insiemi disgiunti, e su questa base Henri
+Lebesgue, nella tesi \emph{Intégrale, longueur, aire} (1902), costruì un integrale nuovo.
+In una conferenza del 1926 ne spiegò l'idea con un'immagine: Riemann somma i valori di
+$f$ nell'ordine in cui li incontra percorrendo l'intervallo, come un commerciante
+disordinato che conta le monete nell'ordine in cui gli capitano in mano; Lebesgue
+invece le raggruppa per valore, come il commerciante metodico che conta quante monete
+ha di ciascun taglio. Si suddivide cioè l'insieme dei \emph{valori} di $f$, non
+l'intervallo, e si approssima $f$ con funzioni costanti su insiemi più generali degli
+intervalli, dei quali occorre conoscere la misura. Il guadagno non è soltanto una classe
+più ampia di funzioni integrabili (la funzione di Dirichlet lo è, con integrale nullo),
+ma soprattutto i teoremi di passaggio al limite sotto il segno di integrale, essenziali
+per le serie di Fourier. Non tutti gli insiemi, però, sono misurabili: nel 1905
+Giuseppe Vitali ne costruì uno che non lo è, servendosi dell'assioma della scelta,
+formulato da Ernst Zermelo l'anno prima.
+\end{notastorica}

@@ -1,0 +1,279 @@
+%% ----------------------------------------------------------------------------
+%%  §7.1  Funzioni di due variabili: dominio, grafico, curve di livello
+%% ----------------------------------------------------------------------------
+\section{Funzioni di due variabili: dominio, grafico, curve di livello}
+\label{sec:due-variabili}
+
+Indichiamo con $\R^{2}$ l'insieme delle coppie ordinate di numeri reali:
+\begin{equation}\label{eq:R2}
+  \R^{2}=\set{(x,y) : x\in\R,\ y\in\R}.
+\end{equation}
+Fissato nel piano un riferimento cartesiano ortogonale, ogni coppia $(x,y)$ individua un
+punto $P$ del piano, e viceversa. La \emph{distanza} tra due punti $P_{1}=(x_{1},y_{1})$ e
+$P_{2}=(x_{2},y_{2})$ è, per il teorema di Pitagora,
+\begin{equation}\label{eq:distanza}
+  d(P_{1},P_{2})=\sqrt{(x_{1}-x_{2})^{2}+(y_{1}-y_{2})^{2}} .
+\end{equation}
+Ci servirà spesso il confronto tra la distanza e le differenze delle coordinate: posto
+$a=x_{1}-x_{2}$ e $b=y_{1}-y_{2}$, poiché $a^{2}\le a^{2}+b^{2}\le(\abs a+\abs b)^{2}$,
+risulta
+\begin{equation}\label{eq:distanza-componenti}
+\begin{gathered}
+  \abs{x_{1}-x_{2}}\le d(P_{1},P_{2}), \qquad \abs{y_{1}-y_{2}}\le d(P_{1},P_{2}),\\
+  d(P_{1},P_{2})\le\abs{x_{1}-x_{2}}+\abs{y_{1}-y_{2}} .
+\end{gathered}
+\end{equation}
+In parole: due punti sono vicini se e soltanto se sono vicine sia le ascisse sia le
+ordinate.
+
+\begin{definizione}[Funzione di due variabili]\label{def:funzione-due-variabili}
+\index{funzione!di due variabili}\index{dominio}
+Sia $D$ un sottoinsieme di $\R^{2}$. Una legge $f$ che a ogni elemento di $D$ fa
+corrispondere uno e un solo numero reale si dice una \emph{funzione di due variabili}; si
+scrive $f:D\to\R$, oppure, per mettere in evidenza che $D\subseteq\R^{2}$,
+\begin{equation}\label{eq:z-f-xy}
+  z=f(x,y), \qquad (x,y)\in D .
+\end{equation}
+L'insieme $D$ si dice il \emph{dominio} (o \emph{insieme di definizione}) di $f$.
+L'insieme dei punti $(x,y,z)$ dello spazio con $(x,y)\in D$ e $z=f(x,y)$ si chiama il
+\emph{grafico} di $f$: è, in generale, una superficie.
+\end{definizione}
+
+Per rappresentare graficamente una funzione di due variabili si usa un riferimento
+cartesiano ortogonale di assi $x$, $y$, $z$: a ogni punto $(x,y)$ del dominio, nel piano
+di base, si associa il punto $(x,y,z)$ a quota $z=f(x,y)$. Un ingegnere aeronautico
+incontra funzioni di due variabili a ogni passo. La portanza di un velivolo al livello
+del mare, per una data superficie alare $S$, è
+\begin{equation}\label{eq:portanza-due-variabili}
+  L(V,C_{L})=\frac12\rho S V^{2}C_{L},
+\end{equation}
+una funzione della velocità $V$ e del coefficiente di portanza $C_{L}$. Prima ancora dei
+grafici, il modo tradizionale di rappresentare una funzione di due variabili è la
+\emph{tabella a doppia entrata}, come quelle dell'atmosfera standard o dei prontuari.
+
+\begin{python}[Una tabella a doppia entrata: la portanza $L(V,C_{L})$]
+rho, S, W = 1.225, 16.0, 10000.0         # kg/m^3, m^2, N
+L = lambda V, CL: 0.5 * rho * S * V**2 * CL
+
+CLs = (0.2, 0.4, 0.6, 0.8, 1.0, 1.2)
+print(" V (m/s) |" + "".join(f"   CL={c:.1f}" for c in CLs))
+for V in (30, 40, 50, 60, 70):
+    riga = "".join(f"{L(V, c):9.0f}" for c in CLs)
+    print(f"  {V:5d}  |{riga}")
+# le coppie (V, C_L) per cui L = W: C_L = 2W / (rho S V^2)
+for V in (30, 40, 50, 60, 70):
+    print(f"V = {V} m/s:  L = W per C_L = "
+          f"{2 * W / (rho * S * V**2):.3f}")
+\end{python}
+\begin{risultato}
+ V (m/s) |   CL=0.2   CL=0.4   CL=0.6   CL=0.8   CL=1.0   CL=1.2
+     30  |     1764     3528     5292     7056     8820    10584
+     40  |     3136     6272     9408    12544    15680    18816
+     50  |     4900     9800    14700    19600    24500    29400
+     60  |     7056    14112    21168    28224    35280    42336
+     70  |     9604    19208    28812    38416    48020    57624
+V = 30 m/s:  L = W per C_L = 1.134
+V = 40 m/s:  L = W per C_L = 0.638
+V = 50 m/s:  L = W per C_L = 0.408
+V = 60 m/s:  L = W per C_L = 0.283
+V = 70 m/s:  L = W per C_L = 0.208
+\end{risultato}
+
+Le ultime righe rispondono alla domanda che interessa al pilota: per sostenere il peso
+$W=10$~kN, quale coefficiente di portanza serve a ciascuna velocità? Le coppie $(V,C_{L})$
+per cui $L(V,C_{L})=W$ formano una curva del piano $(V,C_{L})$, che è un esempio della
+nozione seguente.
+
+\begin{definizione}[Curve di livello]\label{def:curve-livello}\index{curva di livello}
+Sia $f:D\to\R$ e sia $c\in\R$. L'insieme
+\begin{equation}\label{eq:curva-livello}
+  \set{(x,y)\in D : f(x,y)=c}
+\end{equation}
+si chiama \emph{insieme di livello} (o, quando è una curva, \emph{curva di livello}) di
+$f$ relativo al valore $c$.
+\end{definizione}
+
+La curva di livello $c$ è la proiezione sul piano di base della sezione del grafico con
+il piano orizzontale $z=c$. Le carte topografiche rappresentano il terreno con le sue
+curve di livello (le isoipse), le carte del tempo rappresentano la pressione con le
+isobare: in entrambi i casi una funzione di due variabili è descritta, su un foglio
+piano, dalla famiglia delle sue curve di livello (\cref{fig:livello}). Dove le curve di
+livello sono fitte, la funzione varia rapidamente; dove sono rade, varia lentamente.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=\textwidth]{livello}
+\caption{Due funzioni di due variabili descritte con le loro curve di livello. A
+sinistra, le isobare (in hPa) di un campo di pressione con un'alta $A$ e una bassa $B$; le
+frecce sono i vettori $-\nabla p$, di cui parleremo nel \cref{sec:derivate-parziali}. A
+destra, le curve di livello della portanza $L(V,C_{L})$ di un velivolo con $S=16$~m$^{2}$
+al livello del mare; la curva in rame è quella del volo livellato, $L=W$
+(\texttt{python/fig\_livello.py}).}
+\label{fig:livello}
+\end{figure}
+
+\subsection{Esempi di grafici}
+
+Il comportamento di una funzione di due variabili si comprende spesso \emph{fissando una
+delle due variabili} e studiando la funzione di una variabile che si ottiene.
+Consideriamo
+\begin{equation}\label{eq:sella}
+  f(x,y)=x^{2}-y^{2},
+\end{equation}
+definita per ogni $(x,y)\in\R^{2}$. Per $y$ fissato si ottengono le parabole
+\emph{convesse} $z=x^{2}-\text{costante}$, per $x$ fissato le parabole \emph{concave}
+$z=\text{costante}-y^{2}$. Il grafico, rappresentato nella \cref{fig:superfici} sul
+quadrato $[-1,1]\times[-1,1]$, ha la forma di una sella e si chiama \emph{paraboloide
+iperbolico}: le sue curve di livello $x^{2}-y^{2}=c$ sono iperboli. Scambiando i ruoli
+delle variabili si ottiene il grafico di $f(x,y)=y^{2}-x^{2}$, ruotato di un angolo retto.
+
+La funzione
+\begin{equation}\label{eq:rigata}
+  f(x,y)=y\,(x^{2}+x)
+\end{equation}
+ha, per $y>0$ fissato, l'andamento di una parabola convessa del tipo $z=x^{2}+x$, mentre
+per $y<0$ fissato l'andamento è quello di una parabola concava. Per $x$ fissato, invece,
+la funzione è lineare: si tratta della retta $z=\text{costante}\cdot y$. Il grafico è
+quindi unione di una famiglia di rette, e per questo si dice una \emph{superficie
+rigata}.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.95\textwidth]{superfici}
+\caption{I grafici di quattro funzioni di due variabili: il paraboloide iperbolico, la
+superficie rigata $y(x^{2}+x)$, la funzione $\cos(x^{2}+y^{2})$, invariante per
+rotazioni, e la funzione $\sen(xy)$, costante sulle iperboli $xy=t$
+(\texttt{python/fig\_superfici.py}).}
+\label{fig:superfici}
+\end{figure}
+
+La funzione
+\begin{equation}\label{eq:cos-radiale}
+  f(x,y)=\cos(x^{2}+y^{2})
+\end{equation}
+è definita per ogni $(x,y)\in\R^{2}$. Per comprenderne il grafico conviene pensarla come
+funzione composta: posto $t=\sqrt{x^{2}+y^{2}}\ge0$, distanza del punto $(x,y)$
+dall'origine, è $f(x,y)=\cos t^{2}$. La funzione è costante su ogni circonferenza
+$x^{2}+y^{2}=t^{2}$ di centro l'origine, e il suo valore è $\cos t^{2}$. Il grafico si
+ottiene quindi facendo ruotare intorno all'asse $z$ il profilo $z=\cos t^{2}$, $t\ge0$:
+si dice che $f$ è \emph{invariante per rotazioni}. Più in generale, ogni funzione della
+forma $f(x,y)=g\bigl(\sqrt{x^{2}+y^{2}}\bigr)$ è invariante per rotazioni, e il suo
+grafico è una superficie di rotazione. La funzione
+\begin{equation}\label{eq:sen-xy}
+  f(x,y)=\sen(xy)
+\end{equation}
+è invece costante sulle iperboli $xy=t$, con $t$ fissato in $\R$.
+
+Sono invarianti per rotazioni anche le funzioni
+\begin{equation}\label{eq:radiali}
+\begin{gathered}
+  \log(x^{2}+y^{2}), \qquad f_{0}(x,y)=1-\sqrt{x^{2}+y^{2}},\\
+  f_{1}(x,y)=1-\sqrt{x^{2}+y^{2}-1}, \qquad f_{2}(x,y)=1-\sqrt{x^{2}+y^{2}-2},
+\end{gathered}
+\end{equation}
+i cui grafici sono nella \cref{fig:radiali}. La prima non è definita nell'origine, dove
+$x^{2}+y^{2}=0$; il suo profilo è $z=\log t^{2}=2\log t$, $t>0$. La funzione $f_{0}$,
+definita su tutto $\R^{2}$, ha per $y=0$ il profilo $z=1-\sqrt{x^{2}}=1-\abs x$: il grafico è
+un cono, con il vertice appuntito nel punto $(0,0,1)$, dovuto al valore assoluto. La funzione
+$f_{1}$ è definita se $x^{2}+y^{2}\ge1$, cioè all'esterno del cerchio di centro
+l'origine e raggio $1$ (circonferenza compresa); analogamente $f_{2}$ è definita
+all'esterno del cerchio di raggio $\sqrt2$.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.95\textwidth]{radiali}
+\caption{Quattro funzioni invarianti per rotazioni: i grafici sono superfici di
+rotazione intorno all'asse $z$. Le ultime due sono definite soltanto all'esterno di un
+cerchio, sulla cui circonferenza il grafico ha tangente verticale
+(\texttt{python/fig\_radiali.py}).}
+\label{fig:radiali}
+\end{figure}
+
+\subsection{La determinazione del dominio}
+
+Quando una funzione è assegnata mediante un'espressione analitica, senza specificare il
+dominio, si sottintende che il dominio sia l'insieme di tutti i punti in cui
+l'espressione ha significato. Determinarlo richiede di risolvere disequazioni in due
+variabili, la cui soluzione è una regione del piano. Ad esempio, le funzioni
+\begin{equation}\label{eq:domini-esempi}
+\begin{gathered}
+  z=1-\sqrt{(1-x^{2})(1-y^{2})},\\
+  z=\sqrt{(x^{2}+y^{2}-x)(2x-x^{2}-y^{2})}
+\end{gathered}
+\end{equation}
+non sono definite su tutto $\R^{2}$. La prima è definita quando
+$(1-x^{2})(1-y^{2})\ge0$, cioè quando i fattori $1-x^{2}$ e $1-y^{2}$ hanno lo stesso
+segno (o uno dei due è nullo): o entrambi $\ge0$, cioè $\abs x\le1$ e $\abs y\le1$ (il
+quadrato centrale), oppure entrambi $\le0$, cioè $\abs x\ge1$ e $\abs y\ge1$ (le quattro
+regioni d'angolo); si veda la \cref{fig:domini}, a sinistra.
+
+La seconda è definita quando l'argomento della radice è $\ge0$. Completando i quadrati,
+\begin{equation}\label{eq:due-cerchi}
+\begin{gathered}
+  x^{2}+y^{2}-x=\Bigl(x-\frac12\Bigr)^{2}+y^{2}-\frac14,\\
+  2x-x^{2}-y^{2}=1-\bigl[(x-1)^{2}+y^{2}\bigr];
+\end{gathered}
+\end{equation}
+il primo fattore è $\ge0$ all'esterno della circonferenza $C_{1}$ di centro
+$(\frac12,0)$ e raggio $\frac12$, il secondo è $\ge0$ all'interno della circonferenza
+$C_{2}$ di centro $(1,0)$ e raggio $1$ (circonferenze comprese). Il prodotto è $\ge0$
+quando i fattori hanno lo stesso segno. Il caso «entrambi negativi» è impossibile: un
+punto interno a $C_{1}$ è anche interno a $C_{2}$, perché $C_{1}$ è contenuta nel cerchio
+delimitato da $C_{2}$ (le due circonferenze sono tangenti internamente nell'origine).
+Resta il caso «entrambi $\ge0$»: il dominio è la lunula compresa tra le due
+circonferenze (\cref{fig:domini}, a destra).
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[scale=0.85]
+  \begin{scope}
+    \clip (-2.3,-2.3) rectangle (2.3,2.3);
+    \fill[pattern=north east lines, pattern color=blu] (-1,-1) rectangle (1,1);
+    \fill[pattern=north east lines, pattern color=blu] (1,1) rectangle (2.3,2.3);
+    \fill[pattern=north east lines, pattern color=blu] (-1,1) rectangle (-2.3,2.3);
+    \fill[pattern=north east lines, pattern color=blu] (1,-1) rectangle (2.3,-2.3);
+    \fill[pattern=north east lines, pattern color=blu] (-1,-1) rectangle (-2.3,-2.3);
+    \draw[blu, thick] (-1,-2.3) -- (-1,2.3) (1,-2.3) -- (1,2.3)
+      (-2.3,-1) -- (2.3,-1) (-2.3,1) -- (2.3,1);
+  \end{scope}
+  \draw[-Latex, grigio] (-2.5,0) -- (2.6,0) node[right, black] {$x$};
+  \draw[-Latex, grigio] (0,-2.5) -- (0,2.6) node[above, black] {$y$};
+  \node[font=\scriptsize, below left] at (-1,0) {$-1$};
+  \node[font=\scriptsize, below right] at (1,0) {$1$};
+  \node[font=\scriptsize, above left] at (0,1) {$1$};
+  \node[font=\scriptsize, below left] at (0,-1) {$-1$};
+\end{tikzpicture}\hspace{1cm}
+\begin{tikzpicture}[scale=1.2]
+  \fill[pattern=north east lines, pattern color=blu] (1,0) circle (1);
+  \fill[white] (0.5,0) circle (0.5);
+  \draw[blu, thick] (1,0) circle (1);
+  \draw[blu, thick] (0.5,0) circle (0.5);
+  \draw[-Latex, grigio] (-0.4,0) -- (2.4,0) node[right, black] {$x$};
+  \draw[-Latex, grigio] (0,-1.3) -- (0,1.35) node[above, black] {$y$};
+  \node[font=\scriptsize, below] at (0.5,0) {$\frac12$};
+  \node[font=\scriptsize, below right] at (2,0) {$2$};
+  \node[font=\scriptsize, blu] at (0.5,0.27) {$C_{1}$};
+  \node[font=\scriptsize, blu] at (1.85,0.85) {$C_{2}$};
+\end{tikzpicture}
+\caption{I domini delle funzioni \eqref{eq:domini-esempi}. A sinistra,
+$(1-x^{2})(1-y^{2})\ge0$: il quadrato centrale e le quattro regioni d'angolo. A destra,
+la lunula compresa tra la circonferenza $C_{1}$ di centro $(\frac12,0)$ e raggio
+$\frac12$ e la circonferenza $C_{2}$ di centro $(1,0)$ e raggio $1$.}
+\label{fig:domini}
+\end{figure}
+
+\begin{notastorica}[Le curve di livello: da Halley alle carte del tempo]
+La rappresentazione di una grandezza che varia sulla superficie terrestre mediante linee
+che uniscono i punti in cui essa ha lo stesso valore risale all'astronomo Edmond Halley,
+che nel 1701 pubblicò una carta dell'Atlantico con le linee di uguale declinazione
+magnetica, preziose per la navigazione con la bussola. Nel 1752 il geografo francese
+Philippe Buache pubblicò una carta del canale della Manica con le linee di uguale
+profondità, e alla
+fine del Settecento le curve di livello del terreno entrarono nella cartografia
+topografica. Nell'Ottocento l'idea passò alla meteorologia: le carte sinottiche con le
+isobare permisero di riconoscere i cicloni e gli anticicloni (questo termine fu coniato
+da Francis Galton nel 1863). Oggi la stessa idea si ritrova nelle carte delle
+prestazioni dei velivoli e dei motori, e nelle visualizzazioni dei risultati delle
+simulazioni fluidodinamiche (CFD), dove le linee di uguale pressione o di uguale velocità
+si chiamano \emph{isolinee}.
+\end{notastorica}

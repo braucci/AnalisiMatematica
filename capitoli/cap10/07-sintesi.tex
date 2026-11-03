@@ -1,0 +1,102 @@
+%% ----------------------------------------------------------------------------
+%%  §10.7  Punti fondamentali del capitolo
+%% ----------------------------------------------------------------------------
+\section{Punti fondamentali del capitolo}
+\label{sec:sintesi-cap10}
+
+Il capitolo ha completato la formula di Taylor in due direzioni. Il resto di Peano,
+manipolato con l'algebra degli o piccoli, descrive l'errore \emph{vicino} al punto
+iniziale ed è lo strumento più efficace per i limiti; il resto integrale e quello di
+Lagrange ne danno invece il \emph{valore} per un $x$ fissato, e trasformano
+l'approssimazione con un polinomio in un calcolo con precisione garantita.
+
+\begin{puntichiave}
+\item \textbf{Il polinomio di Taylor senza derivate.} Un polinomio di grado $\le n$
+coincide con il proprio sviluppo di ordine $n$ in ogni punto
+(\cref{prop:polinomio-sviluppo}). Se $f$ è derivabile $n$ volte in $x_{0}$, qualunque
+polinomio di grado $\le n$ che differisce da $f$ per un $o\bigl((x-x_{0})^{n}\bigr)$ è il
+polinomio di Taylor (\cref{prop:unicita-taylor}): gli sviluppi si possono ottenere con
+qualunque procedimento, senza calcolare derivate.
+\item \textbf{Sostituzione e integrazione.} Se $g(t)=o(t^{m})$ per $t\to0$, e $\varphi(x)\to0$
+con $\varphi(x)\neq0$ per $x\neq x_{0}$, allora $g(\varphi(x))=o(\varphi(x)^{m})$
+(\cref{lem:sostituzione-o}). Se inoltre $g$ è continua vicino a $0$, allora
+$\int_{0}^{x}g(t)\,dt=o(x^{m+1})$
+(\cref{lem:integrazione-o}): lo sviluppo di una derivata continua si integra termine a
+termine. Derivare termine a termine, invece, non è lecito in generale.
+\item \textbf{L'arcotangente.} Per ogni $n\ge0$ e ogni $x\in\R$,
+$\operatorname{arctg}x=\sum_{k=0}^{n}(-1)^{k}\frac{x^{2k+1}}{2k+1}+R(x)$ con
+$\abs{R(x)}\le\frac{\abs x^{2n+3}}{2n+3}$ (\cref{prop:sviluppo-arctg}). Per $\abs x\le1$ il resto
+tende a zero (serie di Leibniz, formula di Machin per le cifre di $\pi$); per $\abs x>1$ i
+polinomi si allontanano dalla funzione (\cref{fig:taylor-arctg}).
+\item \textbf{L'algebra degli o piccoli.} Le uguaglianze con gli o piccoli si leggono
+da sinistra a destra (\cref{prop:algebra-o}): ad esempio $x^{m}\,o(x^{n})=o(x^{m+n})$,
+$o(x^{m})\,o(x^{n})=o(x^{m+n})$ e $\frac{o(x^{n})}{x^{m}}=o(x^{n-m})$ per $m\le n$. Errore tipico:
+$o(x^{n})-o(x^{n})$ non è zero, ma ancora $o(x^{n})$, e un rapporto $\frac{o(x^{n})}{o(x^{n})}$
+non ha un significato preciso.
+\item \textbf{Parti principali.} Se $\varphi(x)=a\,x^{k}+o(x^{k})$ con $a\neq0$ e $k,m\ge1$, allora
+$\varphi(x)^{m}=a^{m}x^{km}+o(x^{km})$ e $o(\varphi(x)^{m})=o(x^{km})$
+(\cref{cor:o-composto}), il che permette di comporre gli sviluppi. Se
+$f(x)=a\,x^{p}+o(x^{p})$ e $g(x)=b\,x^{q}+o(x^{q})$ con $a,b\neq0$, allora
+$\frac{f(x)}{g(x)}=\frac ab\,x^{p-q}\bigl(1+o(1)\bigr)$ (\cref{prop:parte-principale}): nel limite
+di un rapporto numeratore e denominatore si sostituiscono con le loro parti principali
+(\cref{def:parte-principale}).
+\item \textbf{Fino a che ordine sviluppare.} L'ordine è dettato dalla parte principale
+del denominatore, e il numeratore va sviluppato fino al primo termine che non si elide.
+Uno sviluppo troppo corto lascia una forma indeterminata come $\frac{o(x^{2})}{x^{3}}$
+(\cref{es:limite-taylor-1}); se tutto si elide fino all'ordine del denominatore, il
+limite è zero (\cref{es:limite-taylor-2}).
+\item \textbf{Taylor contro la cancellazione.} Nel calcolo in virgola mobile la
+differenza di due numeri grandi e quasi uguali perde cifre significative; lo sviluppo di
+Taylor esegue la sottrazione «sulla carta» ed è il rimedio sistematico
+(\cref{fig:cancellazione}).
+\item \textbf{Il resto integrale.} Se $f$ è di classe $C^{n+1}$ in $[a,b]$ e
+$x_{0},x\in[a,b]$, allora $R_{n}(x)=\int_{x_{0}}^{x}\frac{(x-t)^{n}}{n!}f^{(n+1)}(t)\,dt$
+(\cref{teo:resto-integrale}), formula che si dimostra per induzione integrando per parti.
+Ad esempio, poiché le derivate di $e^{x}$ sono positive, $e^{x}$ supera tutti i suoi
+polinomi di Taylor per $x>0$ (\cref{es:exp-maggiore-taylor}).
+\item \textbf{La freccia di un'ala a sbalzo.} Se il carico $l$ è continuo, $EI$ è
+costante e $v$, di classe $C^{2}$, verifica $v''=\frac M{EI}$ con $v(0)=v'(0)=0$, la
+formula di Taylor di ordine $1$ con resto integrale dà
+$v(y)=\frac1{EI}\int_{0}^{y}(y-t)M(t)\,dt$ (\cref{prop:freccia}). Con un carico uniforme la
+freccia all'estremità vale $\frac{l\,s^{4}}{8EI}$; a parità di portanza totale, la
+distribuzione ellittica la riduce a circa $0{,}774$ volte questo valore
+(\cref{es:freccia-ellittica}).
+\item \textbf{Il resto di Lagrange.} Se $f$ è di classe $C^{n+1}$ in $[a,b]\ni x_{0}$, per
+ogni $x\in[a,b]$ esiste $x_{1}$ tra $x_{0}$ e $x$ con
+$R_{n}(x)=\frac{f^{(n+1)}(x_{1})}{(n+1)!}\,{(x-x_{0})}^{n+1}$
+(\cref{teo:resto-lagrange}), grazie al teorema della media pesata
+(\cref{lem:media-pesata}). Basta in realtà che $f$ sia derivabile $n+1$ volte in un
+intervallo aperto (\cref{teo:resto-lagrange-generale}); per $n=0$ si ritrova il teorema
+di Lagrange. Il punto $x_{1}$ non è noto, e dipende sia da $x$ sia da $n$.
+\item \textbf{La stima del resto.} Se $f$ è di classe $C^{n+1}$ in $[a,b]\ni x_{0}$ e
+$M_{n+1}$ è il massimo di $\abs{f^{(n+1)}}$ in $[a,b]$, allora
+$\abs{R_{n}(x)}\le M_{n+1}\frac{\abs{x-x_{0}}^{n+1}}{(n+1)!}$ (\cref{cor:stima-resto}).
+Per calcolare una funzione con precisione prefissata si sceglie $x_{0}$ vicino a $x$, con
+derivate note, e si aumenta $n$ finché la stima scende sotto la tolleranza; per il seno
+conviene leggere $x-\frac{x^{3}}6$ come polinomio di ordine $4$, e non $3$
+(\cref{es:sen-un-decimo}).
+\item \textbf{Il segno del resto.} Se $f^{(n+1)}$ ha segno costante, anche il resto di
+Lagrange lo ha, e la formula di Taylor diventa una disuguaglianza: ad esempio
+$x-\frac{x^{2}}2<\log(1+x)<x$ per $x>0$ (\cref{es:log-disuguaglianza}), e
+$\abs{\sen\varphi-\varphi}\le\frac{\abs\varphi^{3}}6$ per ogni $\varphi$, che controlla
+l'approssimazione dei piccoli angoli (\cref{es:piccoli-angoli-stima}).
+\item \textbf{Il numero $e$.} Per ogni $n\ge0$ vale
+$0<e-\sum_{k=0}^{n}\frac1{k!}<\frac3{(n+1)!}$ (\cref{es:calcolo-e}): undici termini danno sette
+decimali esatti. Moltiplicando questa stima per $q!$ si dimostra che $e$ è irrazionale
+(\cref{teo:e-irrazionale}).
+\item \textbf{Applicazioni aeronautiche.} La distanza dell'orizzonte da una quota $h$ è
+$d=\sqrt{2Rh}\,\bigl(1-\frac{5h}{12R}+o(h)\bigr)$: la formula $\sqrt{2Rh}$ la sovrastima
+leggermente (\cref{es:orizzonte-secondo-ordine}). Per il tubo di Pitot, con $\gamma=1{,}4$,
+$\frac{p_{0}-p}{q}=1+\frac{M^{2}}4+\frac{M^{4}}{40}+o(M^{4})$, e a $M=0{,}3$ l'equazione di
+Bernoulli incomprimibile sottostima la pressione d'impatto di circa il $2{,}3\%$
+(\cref{es:compressibilita}).
+\end{puntichiave}
+
+\paragraph{Il filo del discorso.} Le stime del resto hanno mostrato che per alcune
+funzioni e alcuni valori di $x$ il resto $R_{n}(x)$ tende a zero per $n\to+\infty$ (per
+l'arcotangente con $\abs x\le1$, per l'esponenziale in $x=1$), mentre per l'arcotangente
+con $\abs x>1$ non tende a zero.
+Resta aperta la domanda di fondo: che senso dare a una «somma di infiniti termini», e
+quando la somma dei termini dello sviluppo restituisce proprio $f(x)$? Il
+\cref{cap:serie} risponde con la teoria delle serie numeriche e, nella sua appendice,
+con le serie di Taylor e i criteri di sviluppabilità (\cref{teo:sviluppabilita}).

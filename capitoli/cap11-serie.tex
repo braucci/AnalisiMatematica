@@ -1,0 +1,80 @@
+%% ============================================================================
+%%  CAPITOLO 11 — Serie
+%%  Fonte principale per argomenti e dimostrazioni: Marcellini–Sbordone, cap. 11
+%%  (§82 serie numeriche, condizione necessaria, criterio di Cauchy, resto;
+%%  §83 serie a termini non negativi; §84 serie geometrica; §85 serie armonica e
+%%  armonica generalizzata; §86 criteri del confronto, degli infinitesimi, del
+%%  rapporto e della radice; §87 serie alternate; §88 convergenza assoluta;
+%%  appendice: §89 serie di Taylor). Chiude il capitolo, e il volume, il paragrafo
+%%  di sintesi con «Uno sguardo oltre». Integrazioni da Giusti, Analisi 1, cap. 2
+%%  (§14 condensazione, §17 prodotti infiniti, notizie storiche) e Analisi 2,
+%%  cap. 2 (serie di potenze, notizie storiche).
+%% ============================================================================
+\aperturacapitolo{Serie}{cap:serie}
+
+\epigraph{Il più lento non sarà mai raggiunto nella corsa dal più veloce: è necessario
+infatti che l'inseguitore giunga prima là donde è partito il fuggitivo, sicché il più
+lento avrà sempre un certo vantaggio.}{Aristotele, \emph{Fisica}, VI 9, 239b, riferendo
+l'argomento di Zenone di Elea detto «l'Achille»}
+
+\lettrine[lines=3, findent=2pt, nindent=0pt]{S}{ommare infiniti numeri} sembra
+un'operazione priva di senso: nessuno può eseguire infinite addizioni. Eppure abbiamo già
+incontrato più volte somme di questo tipo. Il numero $\frac13=0{,}333\ldots$ è la «somma»
+$\frac3{10}+\frac3{100}+\frac3{1000}+\cdots$; nel \cref{cap:taylor} abbiamo scritto
+$\frac\pi4=1-\frac13+\frac15-\cdots$ e abbiamo calcolato $e$ sommando i reciproci dei fattoriali.
+Zenone di Elea, venticinque secoli fa, ne traeva la conclusione paradossale che il
+veloce Achille non avrebbe mai raggiunto la tartaruga, perché avrebbe dovuto percorrere
+infiniti tratti. La risposta al paradosso è che una somma di infiniti termini può
+benissimo avere un valore finito, purché la si \emph{definisca} nel modo giusto: come
+limite delle somme dei primi $n$ termini.
+
+In questo capitolo, l'ultimo del volume, diamo questa definizione e ne studiamo le
+conseguenze. Una serie può convergere, divergere o non avere affatto una somma, e
+raramente si sa calcolarne la somma esattamente; diventano allora essenziali i
+\emph{criteri di convergenza}, che decidono il carattere di una serie senza calcolarne la
+somma. Studieremo le serie modello, la geometrica e l'armonica, i criteri del confronto,
+del rapporto e della radice per le serie a termini positivi, le serie a segni alterni e
+la convergenza assoluta, con le sue sorprendenti conseguenze sul riordinamento dei
+termini. Nell'appendice torneremo alla formula di Taylor, facendo tendere all'infinito
+l'ordine del polinomio: nascono le \emph{serie di Taylor}, con cui le funzioni
+elementari si rappresentano come «polinomi di grado infinito». Lungo la strada
+incontreremo un'applicazione aeronautica classica: la resistenza indotta di un'ala come
+somma di una serie a termini non negativi. Seguiremo il testo di riferimento
+\cite{marcellini-sbordone}, con qualche integrazione da \cite{giusti} e \cite{giusti2}.
+
+\medskip
+\noindent\textbf{In questo capitolo.}
+\begin{itemize}
+  \item Serie numeriche, carattere di una serie, condizione necessaria per la
+  convergenza; serie telescopiche (\S\ref{sec:serie-numeriche}).
+  \item Proprietà delle serie: linearità, resto, criterio di Cauchy
+  (\S\ref{sec:proprieta-serie}).
+  \item Serie a termini non negativi (\S\ref{sec:serie-positive}).
+  \item La serie geometrica; i numeri decimali periodici; il paradosso di Zenone
+  (\S\ref{sec:serie-geometrica}).
+  \item La serie armonica e l'armonica generalizzata; il criterio dell'integrale
+  (\S\ref{sec:serie-armonica}).
+  \item Approfondimento: il criterio di condensazione di Cauchy
+  (\S\ref{subsec:condensazione}).
+  \item Criteri di convergenza: confronto, confronto asintotico, rapporto, radice; la
+  resistenza indotta di un'ala (\S\ref{sec:criteri-convergenza}).
+  \item Approfondimento: prodotti infiniti e il prodotto di Wallis
+  (\S\ref{subsec:prodotti-infiniti}).
+  \item Serie alternate e criterio di Leibniz (\S\ref{sec:serie-alternate}).
+  \item Convergenza assoluta e riordinamenti (\S\ref{sec:convergenza-assoluta}).
+  \item Appendice: serie di Taylor (\S\ref{sec:serie-taylor}).
+  \item Esercizi di riepilogo (\S\ref{sec:esercizi-cap11}).
+  \item Punti fondamentali del capitolo e uno sguardo oltre (\S\ref{sec:sintesi-cap11}).
+\end{itemize}
+
+\input{capitoli/cap11/01-serie-numeriche}
+\input{capitoli/cap11/02-proprieta}
+\input{capitoli/cap11/03-termini-positivi}
+\input{capitoli/cap11/04-geometrica}
+\input{capitoli/cap11/05-armonica}
+\input{capitoli/cap11/06-criteri}
+\input{capitoli/cap11/07-alternate}
+\input{capitoli/cap11/08-assoluta}
+\input{capitoli/cap11/09-serie-taylor}
+\input{capitoli/cap11/10-esercizi}
+\input{capitoli/cap11/11-sintesi}

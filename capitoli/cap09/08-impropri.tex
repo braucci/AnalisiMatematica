@@ -1,0 +1,372 @@
+%% ----------------------------------------------------------------------------
+%%  §9.8  Appendice: integrali impropri
+%% ----------------------------------------------------------------------------
+\section{Appendice: integrali impropri}
+\label{sec:impropri}
+
+Nei paragrafi precedenti abbiamo studiato l'integrale definito di una funzione limitata
+in un intervallo chiuso e limitato $[a,b]$. Nelle applicazioni è utile considerare anche
+integrali come
+\begin{equation}\label{eq:impropri-esempi}
+  \int_{1}^{+\infty}\frac{dx}{x^{2}}, \qquad \int_{0}^{1}\frac{dx}{\sqrt x} .
+\end{equation}
+Tali integrali non rientrano nei casi trattati: nel primo l'intervallo di integrazione
+è illimitato, nel secondo la funzione integranda non è limitata per $x\to0^{+}$. Integrali
+di questo tipo si chiamano \emph{integrali impropri}.\index{integrale improprio} Come nel
+testo di riferimento, ci limitiamo a funzioni \emph{continue} e \emph{non negative}
+nell'intervallo considerato, e accenneremo al caso generale in un'osservazione.
+
+\subsection{Intervalli illimitati}
+
+Il punto di partenza è un fatto generale sulle funzioni monotòne, analogo al teorema
+sulle successioni monotòne.
+
+\begin{lemma}[Limite all'infinito di una funzione crescente]\label{lem:monotona-infinito}
+Sia $F$ crescente in $[a,+\infty)$. Allora esiste il limite di $F(b)$ per $b\to+\infty$, ed è
+uguale a $\sup\set{F(b) \tc b\ge a}$, finito se $F$ è limitata superiormente, $+\infty$ altrimenti.
+\end{lemma}
+
+\begin{schema}
+\Ipotesi{$F$ crescente in $[a,+\infty)$.}
+\Tesi{$\lim_{b\to+\infty}F(b)=\sup_{b\ge a}F(b)\in\R\cup\set{+\infty}$.}
+\end{schema}
+
+\begin{strategia}
+È la stessa dimostrazione del teorema sulle successioni monotòne: un valore $F(b_{0})$
+vicino all'estremo superiore si trova per la caratterizzazione dell'estremo superiore, e
+la monotonia garantisce che tutti i valori successivi sono ancora più vicini.
+\end{strategia}
+
+\begin{dimostrazione}
+Sia $\ell=\sup F$ finito e sia $\epsilon>0$. Per la \cref{prop:caratt-sup} esiste $b_{0}$ con
+$F(b_{0})>\ell-\epsilon$; per $b>b_{0}$, la monotonia dà $\ell-\epsilon<F(b_{0})\le F(b)\le\ell$, cioè
+$\abs{F(b)-\ell}<\epsilon$. Se invece $F$ non è limitata superiormente, per ogni $M$ esiste $b_{0}$
+con $F(b_{0})>M$, e allora $F(b)>M$ per ogni $b>b_{0}$: $F(b)\to+\infty$.
+\end{dimostrazione}
+
+Sia ora $f$ continua e non negativa in $[a,+\infty)$, e sia $F(b)=\int_{a}^{b}f(x)\,dx$ per
+$b\ge a$. Per l'additività e la positività dell'integrale, se $b_{1}<b_{2}$ si ha
+$F(b_{2})-F(b_{1})=\int_{b_{1}}^{b_{2}}f\ge0$: $F$ è crescente (lo si vede anche dal teorema
+fondamentale, perché $F'=f\ge0$). Per il lemma, esiste il limite di $F(b)$ per
+$b\to+\infty$, ed è lecita la definizione seguente.
+
+\begin{definizione}[Integrale improprio su un intervallo illimitato]
+\label{def:improprio-illimitato}
+Sia $f$ continua e non negativa in $[a,+\infty)$. Si pone
+\begin{equation}\label{eq:improprio-illimitato}
+  \int_{a}^{+\infty}f(x)\,dx=\lim_{b\to+\infty}\int_{a}^{b}f(x)\,dx .
+\end{equation}
+L'integrale improprio si dice \emph{convergente} se il limite è finito, \emph{divergente}
+se il limite è $+\infty$.
+\end{definizione}
+
+In modo analogo si definisce l'integrale improprio di una funzione continua e non
+negativa in $(-\infty,a]$, come limite per $b\to+\infty$ di $\int_{-b}^{a}f$, e in $(-\infty,+\infty)$,
+come limite di $\int_{-b}^{b}f$. Per una funzione non negativa, quest'ultimo è convergente se e
+solo se lo sono i due integrali su $(-\infty,0]$ e su $[0,+\infty)$, e ne è la somma.
+
+\begin{esempio}[Gli integrali $\int_{1}^{+\infty}x^{-p}\,dx$]\label{es:impropri-p-infinito}
+Per $p\neq1$, per la formula fondamentale,
+\[
+  \int_{1}^{b}\frac{dx}{x^{p}}=\Bigl[\frac{x^{1-p}}{1-p}\Bigr]_{1}^{b}=\frac{b^{1-p}}{1-p}+\frac1{p-1} ,
+\]
+e per $p=1$ si ha $\int_{1}^{b}\frac{dx}x=\log b$. Passando al limite per $b\to+\infty$,
+\begin{equation}\label{eq:impropri-p-infinito}
+  \int_{1}^{+\infty}\frac{dx}{x^{p}}=
+  \begin{cases} \dfrac1{p-1} & \text{se } p>1,\\[4pt] +\infty & \text{se } p\le1 . \end{cases}
+\end{equation}
+In particolare $\int_{1}^{+\infty}\frac{dx}{x^{2}}=1$ (\cref{fig:impropri}, a sinistra): una regione
+illimitata può avere area finita.
+\end{esempio}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[name=i1, width=0.52\textwidth, height=4.6cm, axis lines=middle,
+  xmin=-0.2, xmax=8.4, ymin=-0.1, ymax=1.35, xtick={1,4,8}, ytick={1},
+  title={\scriptsize $\int_{1}^{+\infty}x^{-2}dx=1$}, clip=false]
+  \addplot[draw=none, fill=blu!22, domain=1:8.2, samples=80] {1/x^2} \closedcycle;
+  \addplot[curva, domain=0.87:8.2, samples=80] {1/x^2};
+  \addplot[curva2, dashed, domain=0.77:8.2, samples=80] {1/x};
+  \node[font=\scriptsize, rame, anchor=south] at (axis cs:6.0,0.3) {$\frac1x$: area $+\infty$};
+\end{axis}
+\begin{axis}[at={(i1.east)}, anchor=west, xshift=0.7cm, width=0.46\textwidth,
+  height=4.6cm, axis lines=middle, xmin=-0.1, xmax=1.25, ymin=-0.3, ymax=6.2,
+  xtick={1}, ytick={1,5}, title={\scriptsize $\int_{0}^{1}x^{-1/2}dx=2$}]
+  \addplot[draw=none, fill=blu!22, domain=0.026:1, samples=100] {1/sqrt(x)}
+    \closedcycle;
+  \addplot[curva, domain=0.026:1.2, samples=100] {1/sqrt(x)};
+\end{axis}
+\end{tikzpicture}
+\caption{Due integrali impropri convergenti. A sinistra, la regione illimitata sotto
+$\frac1{x^{2}}$ per $x\ge1$ ha area $1$, mentre quella sotto $\frac1x$ (tratteggio) ha area
+infinita. A destra, la regione sotto $\frac1{\sqrt x}$ in $(0,1]$, illimitata verso l'alto, ha
+area $2$.}
+\label{fig:impropri}
+\end{figure}
+
+\begin{notastorica}[Il solido iperbolico acuto di Torricelli]
+Che una figura illimitata possa avere misura finita fu una delle sorprese del Seicento.
+Intorno al 1641 Evangelista Torricelli, che di lì a poco sarebbe succeduto a Galileo come
+matematico del granduca di Toscana, studiò il solido generato dalla rotazione attorno
+all'asse $x$ della regione sotto l'iperbole $y=\frac1x$, per $x\ge1$: un «corno»
+infinitamente lungo, il \emph{solido iperbolico acuto}. Con gli indivisibili di Cavalieri
+resi «curvi» (superfici cilindriche coassiali al posto delle sezioni piane) dimostrò che
+il suo volume è uguale a quello di un cilindro finito, e pubblicò il risultato nel 1644,
+nell'\emph{Opera geometrica}, con una seconda dimostrazione alla maniera di Archimede per
+i lettori diffidenti verso gli indivisibili. In termini moderni, le sezioni
+perpendicolari all'asse sono cerchi di area $\frac\pi{x^{2}}$, e il volume è
+$\pi\int_{1}^{+\infty}\frac{dx}{x^{2}}=\pi$ per la \eqref{eq:impropri-p-infinito}, mentre la
+superficie laterale è infinita, come lascia intuire il confronto con $\int_{1}^{+\infty}\frac{dx}x$.
+Il risultato alimentò a lungo le discussioni filosofiche sull'infinito, come la polemica
+tra Thomas Hobbes e John Wallis.
+\end{notastorica}
+
+Non sempre è possibile calcolare esplicitamente una primitiva. In tal caso può essere
+utile il criterio seguente.
+
+\begin{teorema}[Criterio del confronto]\label{teo:confronto-impropri}
+\index{criterio!del confronto per gli integrali impropri}
+Siano $f$ e $g$ continue in $[a,+\infty)$, con $0\le f(x)\le g(x)$ per ogni $x\ge a$. Se
+l'integrale improprio di $g$ in $[a,+\infty)$ è convergente, anche quello di $f$ è
+convergente, e $\int_{a}^{+\infty}f\le\int_{a}^{+\infty}g$. Se l'integrale di $f$ è divergente, anche
+quello di $g$ è divergente.
+\end{teorema}
+
+\needspace{6\baselineskip}
+\begin{schema}
+\Ipotesi{$f$, $g$ continue in $[a,+\infty)$; \ $0\le f\le g$.}
+\Tesi{$\int_{a}^{+\infty}g<+\infty\implica\int_{a}^{+\infty}f<+\infty$;\\
+$\int_{a}^{+\infty}f=+\infty\implica\int_{a}^{+\infty}g=+\infty$.}
+\end{schema}
+
+\begin{strategia}
+Il confronto vale per gli integrali su $[a,b]$, per ogni $b$; i due membri hanno limite per
+$b\to+\infty$, e il confronto passa ai limiti.
+\end{strategia}
+
+\begin{dimostrazione}
+Per il \cref{teo:confronto-integrali}, $\int_{a}^{b}f\le\int_{a}^{b}g$ per ogni $b>a$. Entrambi i membri
+hanno limite per $b\to+\infty$; per il confronto dei limiti (\cref{teo:confronto-funzioni}),
+il limite del primo membro non supera quello del secondo. Se il secondo è finito, lo è
+anche il primo; se il primo è $+\infty$, lo è anche il secondo.
+\end{dimostrazione}
+
+\begin{esempio}[L'integrale di Gauss converge]\label{es:gauss-converge}
+Verifichiamo che $\int_{0}^{+\infty}e^{-x^{2}}dx<+\infty$. L'integrale converge se e solo se converge
+quello su $[1,+\infty)$, perché i due differiscono per l'integrale (finito) su $[0,1]$. Per
+$x\ge1$ si ha $1\le x$ e, moltiplicando per $e^{-x^{2}}>0$,
+\[
+  e^{-x^{2}}\le x\,e^{-x^{2}} \qquad\perogni x\ge1 .
+\]
+La funzione a destra ha il vantaggio di avere una primitiva facilmente calcolabile, per
+la \eqref{eq:integrali-composti}:
+\[
+  \int_{1}^{+\infty}x\,e^{-x^{2}}dx=\lim_{b\to+\infty}\Bigl[-\frac12e^{-x^{2}}\Bigr]_{1}^{b}
+  =\lim_{b\to+\infty}\Bigl(\frac1{2e}-\frac12e^{-b^{2}}\Bigr)=\frac1{2e} .
+\]
+Per il criterio del confronto, l'integrale di $e^{-x^{2}}$ converge. Il suo valore,
+$\int_{0}^{+\infty}e^{-x^{2}}dx=\frac{\sqrt\pi}2$, si calcola con gli integrali doppi (in un corso di Analisi
+Matematica~2); qui lo verifichiamo numericamente. La convergenza appena dimostrata,
+insieme alla parità di $e^{-x^{2}}$, giustifica gli asintoti orizzontali della funzione
+integrale nella \cref{fig:funzione-integrale}: $F(x)=\int_{0}^{x}e^{-t^{2}}dt$ è crescente e
+tende a un limite finito per $x\to+\infty$, e $F(-x)=-F(x)$.
+\end{esempio}
+
+\begin{esempio}[La velocità di fuga]\label{es:velocita-fuga}
+Il lavoro necessario per vincere la forza di gravità $F(r)=\frac{GMm}{r^{2}}$ (l'opposto del
+lavoro della forza peso) quando una massa $m$ si allontana dalla superficie terrestre
+($r=R$) fino a una distanza $r_{1}$ è, come limite delle somme
+$\sum F(r_{k})\,\Delta r_{k}$, l'integrale $\int_{R}^{r_{1}}\frac{GMm}{r^{2}}\,dr=GMm\bigl(\frac1R-\frac1{r_{1}}\bigr)$. Per
+$r_{1}\to+\infty$ si ottiene l'integrale improprio convergente
+\[
+  \int_{R}^{+\infty}\frac{GMm}{r^{2}}\,dr=\frac{GMm}R=m\,g\,R ,
+\]
+dove $g=\frac{GM}{R^{2}}$ è l'accelerazione di gravità al suolo. Un corpo lanciato con velocità
+$v$ sfugge all'attrazione terrestre (trascurando l'atmosfera) se la sua energia cinetica
+$\frac12mv^{2}$ basta a compiere questo lavoro, cioè se $v\ge\sqrt{2gR}$: con $g=9{,}81$~m/s$^{2}$ e
+$R=6371$~km si ottiene la velocità di fuga $\sqrt{2gR}\approx11{,}2$~km/s. Che il lavoro
+per portare un corpo «all'infinito» sia finito dipende dal fatto che la forza decresce
+come $r^{-2}$, cioè con esponente $p=2>1$ nella \eqref{eq:impropri-p-infinito}.
+\end{esempio}
+
+\subsection{Funzioni non limitate}
+
+In modo analogo si procede per una funzione non limitata in prossimità di un estremo
+dell'intervallo di integrazione, ad esempio dell'estremo $a$. Sia $f$ continua e non
+negativa in $(a,b]$; per $0<h<b-a$ la funzione $h\mapsto\int_{a+h}^{b}f$ è decrescente (al crescere
+di $h$ l'intervallo si restringe e la funzione integranda è non negativa), e quindi
+esiste il limite per $h\to0^{+}$ (con la stessa dimostrazione del
+\cref{lem:monotona-infinito}). Si pone
+\begin{equation}\label{eq:improprio-non-limitata}
+  \int_{a}^{b}f(x)\,dx=\lim_{h\to0^{+}}\int_{a+h}^{b}f(x)\,dx ,
+\end{equation}
+e l'integrale improprio si dice convergente se il limite è finito, divergente
+altrimenti. Vale un criterio del confronto del tutto analogo al
+\cref{teo:confronto-impropri}, con la stessa dimostrazione.
+
+\begin{esempio}[Gli integrali $\int_{0}^{1}x^{-p}\,dx$]\label{es:impropri-p-zero}
+Per $p\neq1$, $\int_{h}^{1}x^{-p}\,dx=\frac1{1-p}-\frac{h^{1-p}}{1-p}$, e per $p=1$ si ha
+$\int_{h}^{1}\frac{dx}x=-\log h$. Passando al limite per $h\to0^{+}$,
+\begin{equation}\label{eq:impropri-p-zero}
+  \int_{0}^{1}\frac{dx}{x^{p}}=
+  \begin{cases} \dfrac1{1-p} & \text{se } p<1,\\[4pt] +\infty & \text{se } p\ge1 . \end{cases}
+\end{equation}
+In particolare $\int_{0}^{1}\frac{dx}{\sqrt x}=2$ (\cref{fig:impropri}, a destra). Si noti che i ruoli di
+$p>1$ e $p<1$ sono scambiati rispetto alla \eqref{eq:impropri-p-infinito}: all'infinito
+conviene che la funzione decresca rapidamente, vicino a $0$ che cresca lentamente. Il
+tempo di salita alla quota di tangenza teorica dell'\cref{es:tempo-salita},
+$\int_{0}^{H}\frac{d\eta}{v_{z0}(1-\eta/H)}$, è un integrale di questo tipo nell'estremo $H$ (con
+$p=1$, dopo la sostituzione $\eta=H-x$), e quindi diverge.
+\end{esempio}
+
+\begin{osservazione}[Funzioni di segno qualsiasi]\label{oss:convergenza-assoluta}
+Se $f$ è continua in $[a,+\infty)$ ma cambia segno, la funzione $\int_{a}^{b}f$ non è più
+monotòna e il suo limite può non esistere. Se però $\int_{a}^{+\infty}\abs f$ converge, si dice che
+l'integrale di $f$ è \emph{assolutamente convergente}, e il limite
+$\lim_{b\to+\infty}\int_{a}^{b}f$ esiste finito. Infatti le parti positiva e negativa
+\eqref{eq:parte-positiva-negativa} verificano $0\le f^{\pm}\le\abs f$ e sono continue; per il
+criterio del confronto i loro integrali convergono, e
+$\int_{a}^{b}f=\int_{a}^{b}f^{+}-\int_{a}^{b}f^{-}$ tende alla differenza dei due limiti. Ad esempio,
+$\int_{1}^{+\infty}\frac{\sen x}{x^{2}}\,dx$ converge assolutamente, perché
+$\bigl|\frac{\sen x}{x^{2}}\bigr|\le\frac1{x^{2}}$. Esistono anche integrali convergenti ma non
+assolutamente convergenti, come $\int_{0}^{+\infty}\frac{\sen x}x\,dx$, che studieremo nel
+\S\ref{subsec:seno-su-x}.
+\end{osservazione}
+
+\begin{python}[Integrali impropri: verifiche numeriche]
+import math
+
+def punto_medio(f, a, b, n=200000):
+    h = (b - a) / n
+    return h * sum(f(a + (k + 0.5) * h) for k in range(n))
+
+for B in (1, 2, 4, 6):
+    I = punto_medio(lambda x: math.exp(-x * x), 0, B)
+    print(f"int_0^{B} exp(-x^2) dx = {I:.10f}")
+print(f"sqrt(pi)/2           = {math.sqrt(math.pi) / 2:.10f}")
+for p in (0.5, 1, 2):
+    v = [punto_medio(lambda x: x**-p, 1, B, 20000)
+         for B in (10, 100, 1000)]
+    print(f"p = {p}: int_1^B x^-p dx (B = 10, 100, 1000) =",
+          ", ".join(f"{w:.3f}" for w in v))
+g, R = 9.81, 6.371e6
+print(f"velocità di fuga = {math.sqrt(2 * g * R) / 1000:.2f} km/s")
+\end{python}
+\begin{risultato}
+int_0^1 exp(-x^2) dx = 0.7468241328
+int_0^2 exp(-x^2) dx = 0.8820813908
+int_0^4 exp(-x^2) dx = 0.8862269118
+int_0^6 exp(-x^2) dx = 0.8862269255
+sqrt(pi)/2           = 0.8862269255
+p = 0.5: int_1^B x^-p dx (B = 10, 100, 1000) = 4.325, 18.000, 61.246
+p = 1: int_1^B x^-p dx (B = 10, 100, 1000) = 2.303, 4.605, 6.908
+p = 2: int_1^B x^-p dx (B = 10, 100, 1000) = 0.900, 0.990, 0.999
+velocità di fuga = 11.18 km/s
+\end{risultato}
+
+\begin{notastorica}[L'integrale di Gauss]
+L'integrale $\int_{-\infty}^{+\infty}e^{-x^{2}}dx=\sqrt\pi$ comparve per la prima volta nei lavori di Abraham
+de Moivre (1733) sull'approssimazione della distribuzione binomiale, e il suo valore fu
+poi stabilito da Laplace e da Gauss, che lo usò nel 1809 nella teoria degli errori di
+misura legata al metodo dei minimi quadrati (\cref{sec:estremi-due}). Per questo la
+funzione $e^{-x^{2}}$, opportunamente normalizzata, si chiama «gaussiana». Gli integrali
+impropri, definiti come limiti di integrali ordinari, furono trattati sistematicamente
+da Cauchy nelle lezioni del 1823.
+\end{notastorica}
+
+\subsection{Approfondimento: un integrale convergente ma non assolutamente convergente}
+\label{subsec:seno-su-x}
+
+Se $f$ è continua in $[a,+\infty)$ e ha segno qualsiasi, diciamo che l'integrale improprio
+$\int_{a}^{+\infty}f(x)\,dx$ è \emph{convergente} se esiste finito il limite di $\int_{a}^{b}f$
+per $b\to+\infty$, e indichiamo il limite con lo stesso simbolo. Per l'\cref{oss:convergenza-assoluta},
+un integrale assolutamente convergente è convergente; il viceversa è falso, e l'esempio
+classico è quello di $\frac{\sen x}x$, che, seguendo \cite{giusti}, possiamo studiare con i
+soli strumenti di questo capitolo. Ci limitiamo all'intervallo $[1,+\infty)$: in $[0,1]$
+la funzione $\frac{\sen x}x$, prolungata con il valore $1$ in $x=0$ (per il limite notevole
+\eqref{eq:lim-senx-x}), è continua, e il suo integrale è un integrale ordinario.
+
+\begin{proposizione}[L'integrale di $\frac{\sen x}x$]\label{prop:seno-su-x}
+L'integrale improprio $\int_{1}^{+\infty}\frac{\sen x}x\,dx$ è convergente, ma non
+assolutamente convergente: $\int_{1}^{+\infty}\frac{\abs{\sen x}}x\,dx=+\infty$.
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$f(x)=\frac{\sen x}x$, continua in $[1,+\infty)$.}
+\Tesi{$\lim_{b\to+\infty}\int_{1}^{b}f$ esiste finito; \ $\int_{1}^{+\infty}\abs f=+\infty$.}
+\end{schema}
+
+\begin{strategia}
+$\frac{\sen x}x$ decresce soltanto come $\frac1x$, che da solo non basterebbe; ma le
+oscillazioni del seno producono compensazioni, che un'integrazione per parti rende
+visibili, trasformando l'integrale in uno con $\frac{\cos x}{x^{2}}$, assolutamente
+convergente. Per $\int\abs f$ si stima dal basso l'integrale su ogni arco
+$[k\pi,(k+1)\pi]$ e si confronta la somma delle stime con $\int\frac{dt}t$, che diverge.
+\end{strategia}
+
+\begin{dimostrazione}
+Per $b>1$, integrando per parti (\cref{teo:per-parti-definito}) con fattore finito
+$\frac1x$ e fattore differenziale $\sen x$,
+\begin{equation}\label{eq:seno-su-x-parti}
+\begin{split}
+  \int_{1}^{b}\frac{\sen x}x\,dx&=\Bigl[-\frac{\cos x}x\Bigr]_{1}^{b}
+  -\int_{1}^{b}\frac{\cos x}{x^{2}}\,dx\\
+  &=\cos1-\frac{\cos b}b-\int_{1}^{b}\frac{\cos x}{x^{2}}\,dx .
+\end{split}
+\end{equation}
+Per $b\to+\infty$, $\frac{\cos b}b\to0$, perché $\abs{\cos b}\le1$; l'ultimo integrale ha limite
+finito, perché $\bigl|\frac{\cos x}{x^{2}}\bigr|\le\frac1{x^{2}}$ e quindi converge assolutamente
+(\cref{oss:convergenza-assoluta} e \eqref{eq:impropri-p-infinito} con $p=2$). Dunque il primo
+membro ha limite finito.
+
+Per la seconda affermazione, sia $k\in\N$. Con la sostituzione $x=u+k\pi$, poiché
+$\abs{\sen(u+k\pi)}=\sen u$ per $u\in[0,\pi]$, si ha
+$\int_{k\pi}^{(k+1)\pi}\abs{\sen x}\,dx=\int_{0}^{\pi}\sen u\,du=2$; inoltre
+$\frac1x\ge\frac1{(k+1)\pi}$ per $x\le(k+1)\pi$. Per il confronto,
+\[
+  \int_{k\pi}^{(k+1)\pi}\frac{\abs{\sen x}}x\,dx\ge\frac2{(k+1)\pi}
+  \ge\frac2\pi\int_{k+1}^{k+2}\frac{dt}t ,
+\]
+perché $\frac1t\le\frac1{k+1}$ in $[k+1,k+2]$. Sommando per $k=1,\dots,n$ e usando l'additività,
+\[
+  \int_{1}^{(n+1)\pi}\frac{\abs{\sen x}}x\,dx\ge\int_{\pi}^{(n+1)\pi}\frac{\abs{\sen x}}x\,dx
+  \ge\frac2\pi\int_{2}^{n+2}\frac{dt}t=\frac2\pi\log\frac{n+2}2 ,
+\]
+che tende a $+\infty$. La funzione crescente $b\mapsto\int_{1}^{b}\frac{\abs{\sen x}}x\,dx$ non è
+dunque limitata, e per il \cref{lem:monotona-infinito} tende a $+\infty$.
+\end{dimostrazione}
+
+Le compensazioni tra archi positivi e negativi sono decisive, come nelle serie a segni
+alterni del \cref{cap:serie}. Il valore $\int_{0}^{+\infty}\frac{\sen x}x\,dx=\frac\pi2$ si
+calcola in Analisi Matematica~2; il programma seguente lo verifica numericamente, con la
+crescita logaritmica di $\int_{0}^{B}\frac{\abs{\sen x}}x\,dx$ prevista dalla dimostrazione.
+
+\begin{python}[Convergenza semplice e divergenza assoluta]
+import math
+
+def punto_medio(f, a, b, n):
+    h = (b - a) / n
+    return h * sum(f(a + (k + 0.5) * h) for k in range(n))
+
+f = lambda x: math.sin(x) / x
+g = lambda x: abs(math.sin(x)) / x
+print("    B   int_0^B sen x/x   int_0^B |sen x|/x   (2/pi) log B")
+for B in (10, 100, 1000, 10000):
+    I = punto_medio(f, 0, B, 100 * B)
+    J = punto_medio(g, 0, B, 100 * B)
+    L = 2 / math.pi * math.log(B)
+    print(f"{B:5d}   {I:15.6f}   {J:17.6f}   {L:12.6f}")
+print(f"pi/2 = {math.pi / 2:.6f}")
+\end{python}
+\begin{risultato}
+    B   int_0^B sen x/x   int_0^B |sen x|/x   (2/pi) log B
+   10          1.658348            2.558747       1.465871
+  100          1.562225            4.046675       2.931742
+ 1000          1.570233            5.510356       4.397614
+10000          1.570892            6.976394       5.863485
+pi/2 = 1.570796
+\end{risultato}
+
+La prima colonna si stabilizza su $\frac\pi2$; la seconda differisce dall'ultima per circa
+$1{,}11$: l'integrale di $\frac{\abs{\sen x}}x$ cresce come $\frac2\pi\log B$.

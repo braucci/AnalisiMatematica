@@ -1,0 +1,229 @@
+%% ----------------------------------------------------------------------------
+%%  §9.10  Esercizi di riepilogo
+%% ----------------------------------------------------------------------------
+\section{Esercizi di riepilogo}
+\label{sec:esercizi-cap9}
+
+Come nei capitoli precedenti, ogni soluzione è accompagnata da una nota sulla
+\emph{scelta logica} che la guida.
+
+\needspace{8\baselineskip}
+\subsection*{Teorema fondamentale e funzioni integrali}
+
+\begin{esercizio}
+Calcolare la derivata di $G(x)=\int_{x}^{x^{2}}e^{-t^{2}}\,dt$.
+\begin{soluzione}
+Per l'additività, $G(x)=\int_{0}^{x^{2}}e^{-t^{2}}dt-\int_{0}^{x}e^{-t^{2}}dt$, e per il
+\cref{cor:estremi-variabili} $G'(x)=2x\,e^{-x^{4}}-e^{-x^{2}}$. \emph{Scelta logica:} quando
+entrambi gli estremi variano, si spezza l'integrale in un punto fisso, riducendosi a due
+funzioni integrali; non serve (e non sarebbe possibile) calcolare una primitiva di
+$e^{-t^{2}}$.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Determinare i punti di massimo e di minimo relativo di
+$F(x)=\int_{0}^{x}(t^{2}-1)\,e^{-t^{2}}\,dt$.
+\begin{soluzione}
+Per il teorema fondamentale $F'(x)=(x^{2}-1)\,e^{-x^{2}}$, che è negativa in $(-1,1)$ e positiva
+fuori. Per il criterio di monotonia, $F$ cresce in $(-\infty,-1]$, decresce in $[-1,1]$ e cresce
+in $[1,+\infty)$: $x=-1$ è punto di massimo relativo, $x=1$ di minimo relativo.
+\emph{Scelta logica:} della funzione integrale si conosce la derivata, e lo studio della
+monotonia si fa come per qualsiasi funzione derivabile.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Calcolare $\displaystyle\lim_{x\to0}\frac1{x^{3}}\int_{0}^{x}\sen(t^{2})\,dt$.
+\begin{soluzione}
+Numeratore e denominatore tendono a $0$; il numeratore è derivabile con derivata
+$\sen(x^{2})$, per il teorema fondamentale. Per il teorema di L'Hôpital
+(\cref{teo:hopital}) il limite è quello di $\frac{\sen(x^{2})}{3x^{2}}$, che vale $\frac13$ per il limite
+notevole \eqref{eq:lim-senx-x}. \emph{Scelta logica:} il teorema fondamentale permette di
+applicare il teorema di L'Hôpital a quozienti in cui compare una funzione integrale; il risultato
+dice che $\int_{0}^{x}\sen(t^{2})\,dt\approx\frac{x^{3}}3$ per $x$ piccolo, come se $\sen(t^{2})$ fosse $t^{2}$.
+\end{soluzione}
+\end{esercizio}
+
+\needspace{8\baselineskip}
+\subsection*{Calcolo di integrali}
+
+\begin{esercizio}
+Calcolare (a) $\int\frac{e^{2x}}{1+e^{2x}}\,dx$; \ (b) $\int\sen^{3}x\,dx$; \ (c) $\int\frac{dx}{x^{2}+4}$; \
+(d) $\int\frac{3x+1}{x^{2}-4}\,dx$.
+\begin{soluzione}
+(a) Il numeratore è metà della derivata del denominatore: l'integrale è
+$\frac12\log(1+e^{2x})+c$. (b) Si scrive $\sen^{3}x=\sen x\,(1-\cos^{2}x)$; poiché $\sen x=-D\cos x$,
+$\int\sen^{3}x\,dx=-\cos x+\frac{\cos^{3}x}3+c$. (c) Per la \eqref{eq:argomento-lineare},
+$\frac1{x^{2}+4}=\frac14\cdot\frac1{1+(x/2)^{2}}$, e l'integrale è $\frac12\operatorname{arctg}\frac x2+c$. (d) Le radici
+del denominatore sono $\pm2$; per la \eqref{eq:fratti-semplici-distinte} con $x_{1}=2$,
+$x_{2}=-2$, $A=\frac74$, $B=\frac54$, e l'integrale è $\frac74\log\abs{x-2}+\frac54\log\abs{x+2}+c$.
+\emph{Scelta logica:} prima di ogni metodo generale conviene cercare la derivata di una
+funzione «interna» (a, b), o un'arcotangente con argomento lineare (c); il metodo dei
+fratti semplici è sistematico ma più lungo.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}\label{es:wallis}
+(a) Calcolare $\int x^{2}e^{x}\,dx$. (b) Dimostrare che, per $n\ge2$,
+$I_{n}=\int_{0}^{\pi/2}\sen^{n}x\,dx$ verifica $I_{n}=\frac{n-1}n\,I_{n-2}$, e calcolare $I_{2}$, $I_{3}$, $I_{4}$.
+\begin{soluzione}
+(a) Per parti due volte, con fattore finito $x^{2}$ e poi $x$:
+$\int x^{2}e^{x}dx=x^{2}e^{x}-2\int xe^{x}dx=(x^{2}-2x+2)\,e^{x}+c$. (b) Per parti con fattore finito
+$\sen^{n-1}x$ e fattore differenziale $\sen x$:
+\[
+\begin{aligned}
+  I_{n}&=\Bigl[-\sen^{n-1}x\cos x\Bigr]_{0}^{\pi/2}
+  +(n-1)\int_{0}^{\pi/2}\sen^{n-2}x\cos^{2}x\,dx\\
+  &=(n-1)\,(I_{n-2}-I_{n}) ,
+\end{aligned}
+\]
+perché il termine finito si annulla in entrambi gli estremi e $\cos^{2}x=1-\sen^{2}x$. Quindi
+$nI_{n}=(n-1)I_{n-2}$. Con $I_{0}=\frac\pi2$ e $I_{1}=1$: $I_{2}=\frac\pi4$, $I_{3}=\frac23$, $I_{4}=\frac{3\pi}{16}$.
+\emph{Scelta logica:} quando l'integrazione per parti riproduce un integrale dello
+stesso tipo con esponente più basso, si ottiene una \emph{formula di riduzione}; da
+questa si ricava il celebre prodotto infinito per $\pi$, che John Wallis aveva ottenuto
+nel 1656, nell'\emph{Arithmetica infinitorum}, con un procedimento di interpolazione.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Calcolare (a) $\int_{0}^{1}x\sqrt{1-x^{2}}\,dx$; \ (b) $\int\frac{dx}{e^{x}+e^{-x}}$.
+\begin{soluzione}
+(a) Con la sostituzione $w=1-x^{2}$, $dw=-2x\,dx$, che porta $x=0$ in $w=1$ e $x=1$ in $w=0$:
+$\int_{0}^{1}x\sqrt{1-x^{2}}\,dx=\frac12\int_{0}^{1}\sqrt w\,dw=\frac13$. (b) Moltiplicando numeratore e
+denominatore per $e^{x}$, $\frac1{e^{x}+e^{-x}}=\frac{e^{x}}{1+e^{2x}}$, e con $u=e^{x}$, $du=e^{x}dx$:
+$\int\frac{du}{1+u^{2}}=\operatorname{arctg}e^{x}+c$. \emph{Scelta logica:} in (a) il fattore $x$ è,
+a meno di una costante, la derivata di $1-x^{2}$: la sostituzione $w=1-x^{2}$ elimina la radice
+senza introdurre funzioni trigonometriche; nella forma definita gli estremi si
+trasformano e non occorre tornare alla variabile $x$. In (b) l'integranda è una funzione
+razionale di $e^{x}$, e la sostituzione $u=e^{x}$ la trasforma in una funzione razionale di $u$.
+\end{soluzione}
+\end{esercizio}
+
+\needspace{8\baselineskip}
+\subsection*{Aree, valori medi, applicazioni}
+
+\begin{esercizio}
+Calcolare l'area della regione compresa tra i grafici di $\sen x$ e $\cos x$ in
+$[\frac\pi4,\frac{5\pi}4]$.
+\begin{soluzione}
+In questo intervallo $\sen x\ge\cos x$ (le due funzioni si incontrano agli estremi), e per la
+\eqref{eq:area-tra-curve} l'area è
+$\int_{\pi/4}^{5\pi/4}(\sen x-\cos x)\,dx=\bigl[-\cos x-\sen x\bigr]_{\pi/4}^{5\pi/4}
+=\sqrt2+\sqrt2=2\sqrt2$. \emph{Scelta logica:} prima di integrare si stabilisce quale delle
+due funzioni è maggiore; se si scambiassero nel corso dell'intervallo, occorrerebbe
+spezzarlo nei punti di intersezione.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+La rete elettrica di bordo di molti velivoli è in corrente alternata a $400$~Hz, con
+tensione $v(t)=V_{0}\sen\omega t$. Il \emph{valore efficace} è la radice della media integrale
+di $v^{2}$ su un periodo $[0,\frac{2\pi}\omega]$. Calcolarlo, e ricavare $V_{0}$ per una rete da $115$~V
+efficaci.
+\begin{soluzione}
+Con la sostituzione $x=\omega t$ e la \eqref{eq:integrale-sen2},
+\[
+\begin{aligned}
+  \frac\omega{2\pi}\int_{0}^{2\pi/\omega}V_{0}^{2}\sen^{2}\omega t\,dt
+  &=\frac{V_{0}^{2}}{2\pi}\int_{0}^{2\pi}\sen^{2}x\,dx\\
+  &=\frac{V_{0}^{2}}{2\pi}\Bigl[\frac{x-\sen x\cos x}2\Bigr]_{0}^{2\pi}=\frac{V_{0}^{2}}2 ,
+\end{aligned}
+\]
+quindi il valore efficace è $\frac{V_{0}}{\sqrt2}$, e per $115$~V efficaci la tensione di picco è
+$V_{0}=115\sqrt2\approx162{,}6$~V. \emph{Scelta logica:} la potenza dissipata in un resistore è
+proporzionale a $v^{2}$; il valore efficace è la tensione continua che dissiperebbe la
+stessa potenza media, e la media integrale è lo strumento giusto per definirlo.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Un gas perfetto viene compresso a temperatura costante dal volume $V_{1}$ al volume $V_{2}<V_{1}$.
+Calcolare il lavoro $\int_{V_{2}}^{V_{1}}p\,dV$ necessario, e valutarlo per $1$~m$^{3}$ d'aria a
+$101\,325$~Pa compresso a metà volume.
+\begin{soluzione}
+Per la legge di Boyle, $pV=p_{1}V_{1}$ è costante, quindi $p=\frac{p_{1}V_{1}}V$ e
+$\int_{V_{2}}^{V_{1}}\frac{p_{1}V_{1}}V\,dV=p_{1}V_{1}\log\frac{V_{1}}{V_{2}}$. Con i dati,
+$101\,325\cdot\log2\approx70\,200$~J, cioè circa $70$~kJ. \emph{Scelta logica:} il lavoro di una forza
+variabile è un integrale (come nell'\cref{es:velocita-fuga}); poiché $p$ è proporzionale a
+$\frac1V$, compare il logaritmo. È la legge di Boyle (temperatura costante),
+la stessa che governa l'atmosfera isoterma del \cref{cap:applicazioni-derivate}
+(\cref{es:atmosfera-isoterma}).
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Calcolare taglio e momento flettente lungo la semiala per un carico uniforme
+$l(y)=\frac Wb$, $0\le y\le s=\frac b2$, e confrontare il momento alla radice con quello della
+distribuzione ellittica.
+\begin{soluzione}
+Per le \eqref{eq:taglio-momento}, $T(y)=\frac Wb(s-y)$; poiché $M'=-T$ e $M(s)=0$
+(\cref{prop:taglio-momento}), $M(y)=\int_{y}^{s}T=\frac W{2b}(s-y)^{2}$; alla
+radice $T(0)=\frac W2$ e $M(0)=\frac{Ws^{2}}{2b}=\frac{Wb}8$. Il rapporto con il momento ellittico
+\eqref{eq:momento-ellittico} è $\frac{Wb/(3\pi)}{Wb/8}=\frac8{3\pi}\approx0{,}85$. \emph{Scelta logica:}
+il taglio è lineare e il momento parabolico, come prevedono le relazioni $T'=-l$ e $M'=-T$
+con $l$ costante: ogni integrazione aumenta di uno il grado del polinomio.
+\end{soluzione}
+\end{esercizio}
+
+\needspace{8\baselineskip}
+\subsection*{Integrali impropri e logaritmo}
+
+\begin{esercizio}
+Stabilire il carattere e, se possibile, calcolare: (a) $\int_{0}^{+\infty}x\,e^{-x}\,dx$; \
+(b) $\int_{0}^{+\infty}\frac{dx}{1+x^{2}}$; \ (c) $\int_{2}^{+\infty}\frac{dx}{x\log x}$; \ (d) $\int_{2}^{+\infty}\frac{dx}{x\log^{2}x}$.
+\begin{soluzione}
+(a) Per parti, $\int_{0}^{b}xe^{-x}dx=\bigl[-(x+1)e^{-x}\bigr]_{0}^{b}=1-(b+1)e^{-b}\to1$, perché
+$\frac{b+1}{e^{b}}\to0$ (per il teorema di L'Hôpital, \cref{teo:hopital}): converge e vale
+$1$.
+(b) $\int_{0}^{b}\frac{dx}{1+x^{2}}=\operatorname{arctg}b\to\frac\pi2$ \eqref{eq:arctg-infinito}. (c) Una primitiva è
+$\log(\log x)$, che tende a $+\infty$: diverge. (d) Una primitiva è $-\frac1{\log x}$, e
+$\int_{2}^{b}=\frac1{\log2}-\frac1{\log b}\to\frac1{\log2}$: converge. \emph{Scelta logica:} quando
+si conosce una primitiva, si calcola l'integrale su $[a,b]$ e si passa al limite per
+$b\to+\infty$, come vuole la definizione. Gli integrali (c) e (d) mostrano che il confine
+tra convergenza e divergenza è sottile: un fattore $\log x$ in più al denominatore basta a
+far convergere l'integrale, pur crescendo $\log x$ più lentamente di qualsiasi potenza.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Usando la \eqref{eq:logaritmo-integrale}, dimostrare che $\frac{x-1}x\le\log x\le x-1$ per ogni
+$x>0$.
+\begin{soluzione}
+Sia $x>1$. Per $t\in[1,x]$ si ha $\frac1x\le\frac1t\le1$, e per il confronto
+$\frac{x-1}x\le\int_{1}^{x}\frac{dt}t\le x-1$. Se $0<x<1$, per $t\in[x,1]$ si ha $1\le\frac1t\le\frac1x$, quindi
+$1-x\le\int_{x}^{1}\frac{dt}t\le\frac{1-x}x$; cambiando segno, $\frac{x-1}x\le\log x\le x-1$. Per $x=1$ i tre
+membri sono nulli. \emph{Scelta logica:} definito il logaritmo come area, le
+disuguaglianze si ottengono confrontando l'area sotto l'iperbole con quelle di due
+rettangoli; ritroviamo, per altra via, la disuguaglianza
+dell'\cref{es:disuguaglianze-exp-log}.
+\end{soluzione}
+\end{esercizio}
+
+Il programma seguente verifica con \texttt{sympy} alcuni risultati degli esercizi.
+
+\begin{python}[Verifiche simboliche degli esercizi]
+import sympy as sp
+
+x, t = sp.symbols("x t", real=True)
+G = sp.integrate(sp.exp(-t**2), (t, x, x**2))
+print("G'(x) =", sp.simplify(sp.diff(G, x)))
+lim = sp.limit(sp.integrate(sp.sin(t**2), (t, 0, x)) / x**3, x, 0)
+print("lim =", sp.gammasimp(lim))
+print("int x^2 e^x =", sp.factor(sp.integrate(x**2 * sp.exp(x), x)))
+I = [sp.integrate(sp.sin(x)**n, (x, 0, sp.pi / 2)) for n in range(5)]
+print("I_0..I_4 =", I)
+print("int_0^oo x e^-x =",
+      sp.integrate(x * sp.exp(-x), (x, 0, sp.oo)))
+print("int_2^oo 1/(x log^2 x) =",
+      sp.integrate(1 / (x * sp.log(x)**2), (x, 2, sp.oo)))
+\end{python}
+\begin{risultato}
+G'(x) = 2*x*exp(-x**4) - exp(-x**2)
+lim = 1/3
+int x^2 e^x = (x**2 - 2*x + 2)*exp(x)
+I_0..I_4 = [pi/2, 1, pi/4, 2/3, 3*pi/16]
+int_0^oo x e^-x = 1
+int_2^oo 1/(x log^2 x) = 1/log(2)
+\end{risultato}

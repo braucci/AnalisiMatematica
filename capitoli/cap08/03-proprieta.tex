@@ -1,0 +1,460 @@
+%% ----------------------------------------------------------------------------
+%%  §8.3  Proprietà degli integrali definiti
+%% ----------------------------------------------------------------------------
+\section{Proprietà degli integrali definiti}
+\label{sec:proprieta-integrale}
+
+Esaminiamo le proprietà fondamentali dell'integrale definito di una funzione
+integrabile secondo Riemann in un intervallo chiuso e limitato. Molte hanno un chiaro
+significato geometrico quando si interpretano gli integrali di funzioni positive come
+aree; le dimostrazioni, però, non possono appoggiarsi a questo significato, perché
+l'area del rettangoloide è stata \emph{definita} mediante l'integrale. Tutte poggiano
+sul criterio di integrabilità e sul lemma di raffinamento. Cominciamo con uno strumento
+che useremo più volte.
+
+\subsection{L'oscillazione}
+
+\begin{lemma}[Oscillazione]\label{lem:oscillazione}\index{oscillazione}
+Sia $f$ limitata in un insieme non vuoto $I$, e siano $m_{I}=\inf_{I}f$,
+$M_{I}=\sup_{I}f$. Allora
+\begin{equation}\label{eq:oscillazione}
+  M_{I}-m_{I}=\sup\set{\abs{f(x)-f(x')} \tc x,x'\in I} .
+\end{equation}
+Il numero \eqref{eq:oscillazione} si chiama \emph{oscillazione} di $f$ in $I$.
+\end{lemma}
+
+\begin{schema}
+\Ipotesi{$f$ limitata in $I\neq\emptyset$.}
+\Tesi{$\sup_{I}f-\inf_{I}f=\sup_{x,x'\in I}\abs{f(x)-f(x')}$.}
+\end{schema}
+
+\begin{strategia}
+Una disuguaglianza è immediata: due valori di $f$ in $I$ stanno entrambi tra $m_{I}$ e
+$M_{I}$, quindi distano al più $M_{I}-m_{I}$. Per l'altra, si scelgono due valori
+$f(x)$ e $f(x')$ vicini quanto si vuole rispettivamente a $M_{I}$ e a $m_{I}$, come
+permette la caratterizzazione degli estremi.
+\end{strategia}
+
+\begin{dimostrazione}
+Sia $D$ l'insieme a secondo membro. Per $x,x'\in I$ si ha $m_{I}\le f(x)\le M_{I}$ e
+$m_{I}\le f(x')\le M_{I}$, quindi $f(x)-f(x')\le M_{I}-m_{I}$ e
+$f(x')-f(x)\le M_{I}-m_{I}$, cioè $\abs{f(x)-f(x')}\le M_{I}-m_{I}$: il numero
+$M_{I}-m_{I}$ è un maggiorante di $D$, e quindi $\sup D\le M_{I}-m_{I}$. Viceversa, fissato
+$\epsilon>0$, per le caratterizzazioni \eqref{eq:caratt-sup} e \eqref{eq:caratt-inf}
+esistono $x,x'\in I$ con $f(x)>M_{I}-\frac\epsilon2$ e $f(x')<m_{I}+\frac\epsilon2$, e allora
+$\abs{f(x)-f(x')}\ge f(x)-f(x')>M_{I}-m_{I}-\epsilon$. Dunque nessun numero
+$M_{I}-m_{I}-\epsilon$ è un maggiorante di $D$, e $\sup D\ge M_{I}-m_{I}$.
+\end{dimostrazione}
+
+Indicando con $\omega_{k}=M_{k}-m_{k}$ l'oscillazione di $f$ nell'intervallo
+$[x_{k-1},x_{k}]$ di una partizione $P$, la differenza tra le somme integrali si scrive
+\begin{equation}\label{eq:S-s-oscillazioni}
+  S(P)-s(P)=\sum_{k=1}^{n}\omega_{k}\,\Delta x_{k} ,
+\end{equation}
+una somma di termini non negativi: il criterio di integrabilità chiede che le
+oscillazioni, pesate con le ampiezze degli intervalli, abbiano somma piccola.
+
+\subsection{Additività rispetto all'intervallo}
+
+\begin{lemma}[Integrabilità sui sottointervalli e sull'unione]\label{lem:sottointervallo}
+\begin{enumerate}[label=\textup{(\alph*)}]
+  \item Se $f$ è integrabile in $[a,b]$ e $[c,d]\subseteq[a,b]$, allora $f$ è integrabile
+  in $[c,d]$.
+  \item Se $a<c<b$ e $f$ è integrabile in $[a,c]$ e in $[c,b]$, allora $f$ è integrabile
+  in $[a,b]$.
+\end{enumerate}
+\end{lemma}
+
+\begin{schema}
+\Ipotesi{(a) $f$ integrabile in $[a,b]$, $[c,d]\subseteq[a,b]$; \
+(b) $f$ integrabile in $[a,c]$ e in $[c,b]$.}
+\Tesi{(a) $f$ integrabile in $[c,d]$; \ (b) $f$ integrabile in $[a,b]$.}
+\end{schema}
+
+\begin{strategia}
+Si usa il criterio di integrabilità con la scrittura \eqref{eq:S-s-oscillazioni}. Per la
+(a), si aggiungono $c$ e $d$ a una partizione «buona» di $[a,b]$: i suoi intervalli
+contenuti in $[c,d]$ formano una partizione di $[c,d]$, e la corrispondente somma di
+termini non negativi è minore della somma totale. Per la (b), si uniscono due
+partizioni «buone» dei due intervalli.
+\end{strategia}
+
+\begin{dimostrazione}
+(a) Sia $\epsilon>0$. Per il \cref{teo:criterio-integrabilita} esiste una partizione $P$
+di $[a,b]$ con $S(P)-s(P)<\epsilon$; per il \cref{lem:raffinamento} anche
+$P'=P\cup\set{c,d}$ verifica $S(P')-s(P')<\epsilon$. I punti di $P'$ che stanno in
+$[c,d]$ formano una partizione $P''$ di $[c,d]$, i cui intervalli sono intervalli di
+$P'$, con gli stessi estremi inferiori e superiori di $f$. Per la
+\eqref{eq:S-s-oscillazioni}, $S(P'')-s(P'')$ è una parte della somma di termini non
+negativi che dà $S(P')-s(P')$, e quindi $S(P'')-s(P'')<\epsilon$. Per il criterio, $f$ è
+integrabile in $[c,d]$.
+
+(b) Sia $\epsilon>0$ e siano $P_{1}$, $P_{2}$ partizioni di $[a,c]$ e di $[c,b]$ con
+$S(P_{i})-s(P_{i})<\frac\epsilon2$. L'insieme $P=P_{1}\cup P_{2}$ è una partizione di
+$[a,b]$ i cui intervalli sono quelli di $P_{1}$ e quelli di $P_{2}$; quindi
+\begin{equation}\label{eq:somme-unione}
+  s(P)=s(P_{1})+s(P_{2}), \qquad S(P)=S(P_{1})+S(P_{2}),
+\end{equation}
+e $S(P)-s(P)<\epsilon$. Per il criterio, $f$ è integrabile in $[a,b]$.
+\end{dimostrazione}
+
+\begin{teorema}[Additività dell'integrale rispetto all'intervallo]\label{teo:additivita}
+\index{integrale definito!additività}
+Sia $f$ integrabile in un intervallo $[\alpha,\beta]$ e siano $a,b,c$ tre punti
+qualsiasi di $[\alpha,\beta]$. Allora
+\begin{equation}\label{eq:additivita}
+  \int_{a}^{b}f(x)\,dx=\int_{a}^{c}f(x)\,dx+\int_{c}^{b}f(x)\,dx .
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$ integrabile in $[\alpha,\beta]$; \ $a,b,c\in[\alpha,\beta]$ (in ordine
+qualsiasi).}
+\Tesi{$\int_{a}^{b}f=\int_{a}^{c}f+\int_{c}^{b}f$.}
+\end{schema}
+
+\begin{strategia}
+Gli integrali hanno senso per il \cref{lem:sottointervallo}(a), e, se gli estremi non
+sono in ordine crescente, per le convenzioni \eqref{eq:estremi-invertiti}. Il caso
+essenziale è $a<c<b$: unendo una partizione di $[a,c]$ e una di $[c,b]$, le somme
+integrali si sommano \eqref{eq:somme-unione}, e i due membri della
+\eqref{eq:additivita} risultano intrappolati in uno stesso intervallo, di ampiezza
+piccola a piacere. Gli altri ordinamenti dei tre punti si riconducono a questo grazie
+alle convenzioni, che sono state scelte proprio a questo scopo.
+\end{strategia}
+
+\begin{dimostrazione}
+\emph{Caso $a<c<b$.} Per il \cref{lem:sottointervallo}(a), $f$ è integrabile in
+$[a,b]$, in $[a,c]$ e in $[c,b]$. Sia $\epsilon>0$; per il criterio di integrabilità
+esistono partizioni $P_{1}$ di $[a,c]$ e $P_{2}$ di $[c,b]$ con
+$S(P_{i})-s(P_{i})<\frac\epsilon2$. Posto $P=P_{1}\cup P_{2}$, per la
+\eqref{eq:somme-unione} e perché l'integrale sta tra ogni somma inferiore e ogni somma
+superiore,
+\[
+  s(P_{1})+s(P_{2})=s(P)\le\int_{a}^{b}f(x)\,dx\le S(P)=S(P_{1})+S(P_{2}) .
+\]
+D'altra parte $s(P_{1})\le\int_{a}^{c}f\le S(P_{1})$ e $s(P_{2})\le\int_{c}^{b}f\le S(P_{2})$,
+e sommando
+\[
+  s(P_{1})+s(P_{2})\le\int_{a}^{c}f(x)\,dx+\int_{c}^{b}f(x)\,dx\le S(P_{1})+S(P_{2}) .
+\]
+I due membri della \eqref{eq:additivita} appartengono dunque allo stesso intervallo
+$[s(P),S(P)]$, di ampiezza minore di $\epsilon$, e distano meno di $\epsilon$. Poiché
+$\epsilon>0$ è arbitrario, sono uguali.
+
+\emph{Altri casi.} Se due dei tre punti coincidono, la tesi segue dalle convenzioni
+\eqref{eq:estremi-invertiti}: ad esempio, per $c=a$ essa si riduce a
+$\int_{a}^{b}f=0+\int_{a}^{b}f$, e per $b=a$ a $0=\int_{a}^{c}f+\int_{c}^{a}f$. Se i tre
+punti sono distinti, ma non nell'ordine $a<c<b$, si applica il caso già dimostrato
+ai tre punti riordinati. Ad esempio, se $c<a<b$, si ha
+$\int_{c}^{b}f=\int_{c}^{a}f+\int_{a}^{b}f$, da cui
+$\int_{a}^{b}f=\int_{c}^{b}f-\int_{c}^{a}f=\int_{a}^{c}f+\int_{c}^{b}f$; se $b<c<a$, dal
+caso dimostrato $\int_{b}^{a}f=\int_{b}^{c}f+\int_{c}^{a}f$, e cambiando i segni si ottiene la
+tesi. Tutti i casi si riassumono così: per le convenzioni
+\eqref{eq:estremi-invertiti}, la \eqref{eq:additivita} equivale a
+$\int_{a}^{b}f+\int_{b}^{c}f+\int_{c}^{a}f=0$, un'espressione che non cambia permutando
+ciclicamente $a$, $b$, $c$ e cambia segno scambiandone due; se vale per una
+disposizione dei tre punti, vale quindi per tutte.
+\end{dimostrazione}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[name=q1, width=0.5\textwidth, height=4.4cm, axis lines=left, xmin=0,
+  xmax=4.5, ymin=0, ymax=2.6, xtick={0.6,2.1,3.9}, xticklabels={$a$,$c$,$b$},
+  ytick=\empty]
+  \addplot[draw=none, fill=blu!20, domain=0.6:3.9, samples=80]
+    {1.3+0.5*sin(deg(1.4*x))+0.12*x} \closedcycle;
+  \addplot[curva, domain=0.3:4.2, samples=80] {1.3+0.5*sin(deg(1.4*x))+0.12*x};
+  \node[font=\small, blu] at (axis cs:2.25,0.7) {$A$};
+\end{axis}
+\begin{axis}[at={(q1.east)}, anchor=west, xshift=0.8cm, width=0.5\textwidth,
+  height=4.4cm, axis lines=left, xmin=0, xmax=4.5, ymin=0, ymax=2.6,
+  xtick={0.6,2.1,3.9}, xticklabels={$a$,$c$,$b$}, ytick=\empty]
+  \addplot[draw=none, fill=blu!20, domain=0.6:2.1, samples=40]
+    {1.3+0.5*sin(deg(1.4*x))+0.12*x} \closedcycle;
+  \addplot[draw=none, fill=rame!25, domain=2.1:3.9, samples=40]
+    {1.3+0.5*sin(deg(1.4*x))+0.12*x} \closedcycle;
+  \addplot[curva, domain=0.3:4.2, samples=80] {1.3+0.5*sin(deg(1.4*x))+0.12*x};
+  \addplot[grigio] coordinates {(2.1,0) (2.1,1.652)};
+  \node[font=\small, blu] at (axis cs:1.35,0.7) {$A_{1}$};
+  \node[font=\small, rame] at (axis cs:3.0,0.7) {$A_{2}$};
+\end{axis}
+\end{tikzpicture}
+\caption{Additività: se $f\ge0$ e $a<c<b$, la \eqref{eq:additivita} afferma che l'area
+del rettangoloide $A$ è la somma delle aree di $A_{1}$ e $A_{2}$, che non hanno punti
+interni in comune.}
+\label{fig:additivita}
+\end{figure}
+
+Il \cref{lem:sottointervallo}(b) ha una conseguenza pratica: per stabilire che una
+funzione è integrabile si può spezzare l'intervallo in un numero finito di parti e
+verificare l'integrabilità su ciascuna; l'integrale complessivo è poi la somma degli
+integrali sulle parti, per la \eqref{eq:additivita}.
+
+\subsection{Linearità}
+
+\begin{teorema}[Linearità dell'integrale]\label{teo:linearita}
+\index{integrale definito!linearità}
+Se $f$ e $g$ sono integrabili in $[a,b]$ e $c\in\R$, anche $f+g$ e $cf$ sono integrabili
+in $[a,b]$, e risulta
+\begin{align}
+  \int_{a}^{b}\bigl[f(x)+g(x)\bigr]dx&=\int_{a}^{b}f(x)\,dx+\int_{a}^{b}g(x)\,dx ;
+  \label{eq:linearita-somma}\\
+  \int_{a}^{b}c\,f(x)\,dx&=c\int_{a}^{b}f(x)\,dx .
+  \label{eq:linearita-prodotto}
+\end{align}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$, $g$ integrabili in $[a,b]$; \ $c\in\R$.}
+\Tesi{$f+g$ e $cf$ integrabili; \ $\int(f+g)=\int f+\int g$; \ $\int cf=c\int f$.}
+\end{schema}
+
+\begin{strategia}
+Per la somma, il punto chiave è una disuguaglianza tra estremi: l'estremo inferiore di
+$f+g$ in un intervallo non è minore della somma degli estremi inferiori, e
+analogamente per gli estremi superiori. Ne seguono disuguaglianze tra somme integrali
+che, con una partizione buona \emph{sia per $f$ sia per $g$} (l'unione di due
+partizioni), danno l'integrabilità di $f+g$ e intrappolano i due membri della
+\eqref{eq:linearita-somma} in uno stesso intervallo piccolo. Per il prodotto per una
+costante si osserva che moltiplicare per $c$ conserva l'ordine se $c\ge0$ e lo inverte
+se $c<0$: nel secondo caso gli estremi inferiori diventano superiori e viceversa.
+\end{strategia}
+
+\begin{dimostrazione}
+\emph{Somma.} Sia $P$ una partizione di $[a,b]$ e sia $I_{k}$ un suo intervallo. Per
+$x\in I_{k}$ si ha $f(x)+g(x)\ge m_{k}(f)+m_{k}(g)$; dunque $m_{k}(f)+m_{k}(g)$ è un
+minorante di $f+g$ in $I_{k}$, ed è minore o uguale del suo estremo inferiore. In modo
+analogo $M_{k}(f)+M_{k}(g)$ è un maggiorante di $f+g$ in $I_{k}$. Moltiplicando per
+$\Delta x_{k}$ e sommando,
+\begin{equation}\label{eq:somme-somma}
+  s(P,f)+s(P,g)\le s(P,f+g)\le S(P,f+g)\le S(P,f)+S(P,g) .
+\end{equation}
+Sia $\epsilon>0$ e siano $P_{1}$, $P_{2}$ partizioni con
+$S(P_{1},f)-s(P_{1},f)<\frac\epsilon2$ e $S(P_{2},g)-s(P_{2},g)<\frac\epsilon2$. Per il
+\cref{lem:raffinamento}, la partizione $R=P_{1}\cup P_{2}$ verifica entrambe le
+disuguaglianze, e per la \eqref{eq:somme-somma}
+\[
+  S(R,f+g)-s(R,f+g)\le\bigl[S(R,f)-s(R,f)\bigr]+\bigl[S(R,g)-s(R,g)\bigr]<\epsilon :
+\]
+per il criterio di integrabilità, $f+g$ è integrabile. Infine, per la
+\eqref{eq:somme-somma}, il numero $\int_{a}^{b}(f+g)$, compreso tra $s(R,f+g)$ e
+$S(R,f+g)$, appartiene all'intervallo $\bigl[s(R,f)+s(R,g),\,S(R,f)+S(R,g)\bigr]$, al
+quale appartiene anche $\int_{a}^{b}f+\int_{a}^{b}g$. Tale intervallo ha ampiezza minore
+di $\epsilon$; per l'arbitrarietà di $\epsilon$ i due numeri coincidono.
+
+\emph{Prodotto per una costante.} Se $c\ge0$, la funzione $t\mapsto ct$ è crescente, e
+quindi trasforma minoranti e maggioranti di un insieme in minoranti e maggioranti
+dell'insieme moltiplicato per $c$: in ogni intervallo $m_{k}(cf)=c\,m_{k}(f)$ e
+$M_{k}(cf)=c\,M_{k}(f)$. Ne segue $s(P,cf)=c\,s(P,f)$ e $S(P,cf)=c\,S(P,f)$ per ogni $P$; le
+differenze $S-s$ si moltiplicano per $c$, e il criterio dà l'integrabilità di $cf$
+(per $c>0$ basta scegliere $P$ con $S(P,f)-s(P,f)<\frac\epsilon c$; per $c=0$ la funzione
+è nulla). Inoltre $\int cf=\sup_{P}c\,s(P,f)=c\sup_{P}s(P,f)=c\int f$. Se $c<0$, la
+funzione $t\mapsto ct$ è decrescente e scambia minoranti e maggioranti: $m_{k}(cf)=c\,
+M_{k}(f)$ e $M_{k}(cf)=c\,m_{k}(f)$, quindi
+\[
+  s(P,cf)=c\,S(P,f), \qquad S(P,cf)=c\,s(P,f),
+\]
+da cui $S(P,cf)-s(P,cf)=\abs c\,\bigl[S(P,f)-s(P,f)\bigr]$.
+Ancora per il criterio $cf$ è integrabile, e
+$\int cf=\sup_{P}c\,S(P,f)=c\,\inf_{P}S(P,f)=c\int f$, perché moltiplicando un insieme per
+un numero negativo l'estremo inferiore diventa estremo superiore.
+\end{dimostrazione}
+
+Combinando le due formule, per ogni $\alpha,\beta\in\R$ si ha
+$\int_{a}^{b}(\alpha f+\beta g)=\alpha\int_{a}^{b}f+\beta\int_{a}^{b}g$; in particolare
+$\int_{a}^{b}(f-g)=\int_{a}^{b}f-\int_{a}^{b}g$. Ad esempio, per le \eqref{eq:integrale-x},
+\eqref{eq:integrale-x2} e \eqref{eq:integrale-costante},
+\[
+  \int_{0}^{1}(1+x)^{2}\,dx=\int_{0}^{1}\bigl(1+2x+x^{2}\bigr)dx
+  =1+2\cdot\frac12+\frac13=\frac73 .
+\]
+
+\subsection{Confronto e valore assoluto}
+
+\begin{teorema}[Confronto tra integrali]\label{teo:confronto-integrali}
+\index{integrale definito!confronto}
+Se $f$ e $g$ sono integrabili in $[a,b]$ e $f(x)\le g(x)$ per ogni $x\in[a,b]$, allora
+\begin{equation}\label{eq:confronto-integrali}
+  \int_{a}^{b}f(x)\,dx\le\int_{a}^{b}g(x)\,dx .
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$, $g$ integrabili in $[a,b]$, $a<b$; \ $f\le g$ in $[a,b]$.}
+\Tesi{$\int_{a}^{b}f\le\int_{a}^{b}g$.}
+\end{schema}
+
+\begin{strategia}
+Il confronto passa dalle funzioni agli estremi inferiori, da questi alle somme
+inferiori, e dalle somme inferiori al loro estremo superiore, che è l'integrale.
+\end{strategia}
+
+\begin{dimostrazione}
+In ogni intervallo $I_{k}$ di una partizione $P$, $m_{k}(f)\le f(x)\le g(x)$ per ogni
+$x\in I_{k}$, quindi $m_{k}(f)$ è un minorante di $g$ in $I_{k}$ e $m_{k}(f)\le m_{k}(g)$.
+Moltiplicando per $\Delta x_{k}>0$ e sommando, $s(P,f)\le s(P,g)\le\int_{a}^{b}g$. Il numero
+$\int_{a}^{b}g$ è dunque un maggiorante di tutte le somme inferiori di $f$, e quindi è
+maggiore o uguale del loro estremo superiore, che è $\int_{a}^{b}f$.
+\end{dimostrazione}
+
+Due conseguenze immediate, ottenute confrontando $f$ con la funzione nulla e con le
+costanti $m$, $M$ della \eqref{eq:f-limitata} (e usando la \eqref{eq:integrale-costante}),
+sono, per $a<b$,
+\begin{equation}\label{eq:positivita-stima}
+\begin{gathered}
+  f\ge0 \ \implica\ \int_{a}^{b}f(x)\,dx\ge0,\\
+  m\le f\le M \ \implica\ m(b-a)\le\int_{a}^{b}f(x)\,dx\le M(b-a) .
+\end{gathered}
+\end{equation}
+
+\begin{esempio}[Stima di un integrale non elementare]\label{es:stima-gaussiana}
+La funzione $e^{-x^{2}}$, la «campana» di Gauss che descrive la distribuzione degli
+errori di misura, è decrescente in $[0,1]$ e quindi integrabile (lo dimostreremo nel
+\cref{teo:integrabilita-monotone}). Poiché $e^{-1}\le e^{-x^{2}}\le1$ in $[0,1]$, la
+seconda delle \eqref{eq:positivita-stima} dà $\frac1e\le\int_{0}^{1}e^{-x^{2}}dx\le1$.
+Una stima migliore dal basso viene dalla disuguaglianza $e^{t}\ge1+t$
+(\cref{es:disuguaglianze-exp-log}) con $t=-x^{2}$: per il confronto, la linearità e la
+\eqref{eq:integrale-x2},
+\[
+  \int_{0}^{1}e^{-x^{2}}dx\ge\int_{0}^{1}\bigl(1-x^{2}\bigr)dx=1-\frac13=\frac23 .
+\]
+L'integrale non si può calcolare in termini di funzioni elementari: la teoria del
+prossimo capitolo non basterà, e il suo valore si ottiene numericamente. Poiché la
+funzione è decrescente, in ogni intervallo $m_{k}=f(x_{k})$ e $M_{k}=f(x_{k-1})$, e per la
+partizione uniforme la differenza $S-s$ è ancora telescopica:
+$S(P_{n})-s(P_{n})=\frac1n\bigl(f(0)-f(1)\bigr)=\frac{1-e^{-1}}n$.
+\end{esempio}
+
+\begin{python}[Somme integrali di una funzione decrescente]
+import math
+
+f = lambda x: math.exp(-x * x)        # decrescente in [0, 1]
+
+def somme_decrescente(f, a, b, n):
+    """s(P) e S(P) per la partizione uniforme, f decrescente."""
+    h = (b - a) / n
+    x = [a + k * h for k in range(n + 1)]
+    s = h * sum(f(x[k]) for k in range(1, n + 1))      # m_k
+    S = h * sum(f(x[k - 1]) for k in range(1, n + 1))  # M_k
+    return s, S
+
+for n in (10, 100, 1000, 10000):
+    s, S = somme_decrescente(f, 0.0, 1.0, n)
+    print(f"n = {n:5d}:  {s:.6f} <= I <= {S:.6f}"
+          f"   S - s = {S - s:.2e}")
+print(f"(1 - 1/e)/10000 = {(1 - math.exp(-1)) / 10000:.2e}")
+ref = math.erf(1) * math.sqrt(math.pi) / 2
+print(f"valore di riferimento (funzione erf): {ref:.6f}")
+\end{python}
+\begin{risultato}
+n =    10:  0.714605 <= I <= 0.777817   S - s = 6.32e-02
+n =   100:  0.743657 <= I <= 0.749979   S - s = 6.32e-03
+n =  1000:  0.746508 <= I <= 0.747140   S - s = 6.32e-04
+n = 10000:  0.746793 <= I <= 0.746856   S - s = 6.32e-05
+(1 - 1/e)/10000 = 6.32e-05
+valore di riferimento (funzione erf): 0.746824
+\end{risultato}
+
+\begin{teorema}[Integrale del valore assoluto]\label{teo:valore-assoluto}
+Se $f$ è integrabile in $[a,b]$, anche $\abs f$ è integrabile in $[a,b]$, e
+\begin{equation}\label{eq:valore-assoluto-integrale}
+  \Bigl|\int_{a}^{b}f(x)\,dx\Bigr|\le\int_{a}^{b}\abs{f(x)}\,dx \qquad (a<b) .
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$ integrabile in $[a,b]$, $a<b$.}
+\Tesi{$\abs f$ integrabile; \ $\bigl|\int_{a}^{b}f\bigr|\le\int_{a}^{b}\abs f$.}
+\end{schema}
+
+\begin{strategia}
+L'integrabilità di $\abs f$ non è ovvia (le somme di $\abs f$ non sono legate in modo
+semplice a quelle di $f$), ma l'oscillazione la rende evidente: per la disuguaglianza
+triangolare inversa, $\abs f$ oscilla meno di $f$ in ogni intervallo. La disuguaglianza
+segue poi dal confronto tra $-\abs f$, $f$ e $\abs f$.
+\end{strategia}
+
+\begin{dimostrazione}
+Per $x,x'$ in un intervallo $I_{k}$ di una partizione $P$, la disuguaglianza
+triangolare inversa (\cref{cor:triangolare-inversa}) dà
+$\bigl|\abs{f(x)}-\abs{f(x')}\bigr|\le\abs{f(x)-f(x')}$. Prendendo gli estremi superiori e
+usando il \cref{lem:oscillazione}, l'oscillazione di $\abs f$ in $I_{k}$ non supera
+quella di $f$, e per la \eqref{eq:S-s-oscillazioni}
+\[
+  S(P,\abs f)-s(P,\abs f)\le S(P,f)-s(P,f) \qquad\text{per ogni } P .
+\]
+Per il criterio di integrabilità, $\abs f$ è integrabile. Poiché
+$-\abs{f(x)}\le f(x)\le\abs{f(x)}$ per ogni $x$, il \cref{teo:confronto-integrali} e la
+\eqref{eq:linearita-prodotto} con $c=-1$ danno
+\[
+  -\int_{a}^{b}\abs{f(x)}\,dx\le\int_{a}^{b}f(x)\,dx\le\int_{a}^{b}\abs{f(x)}\,dx ,
+\]
+che equivale alla \eqref{eq:valore-assoluto-integrale} per la \eqref{eq:mod-le}.
+\end{dimostrazione}
+
+Il viceversa è falso: la funzione che vale $1$ nei razionali e $-1$ negli irrazionali
+non è integrabile in $[0,1]$ (in ogni intervallo $m_{k}=-1$ e $M_{k}=1$, quindi
+$S(P)-s(P)=2$ per ogni $P$), mentre il suo valore assoluto è la costante $1$.
+
+\subsection{L'area con segno}
+
+Se $f$ cambia segno, l'integrale non è più un'area, ma una differenza di aree. Poniamo
+\begin{equation}\label{eq:parte-positiva-negativa}
+  f^{+}=\max\set{f,0}=\frac{\abs f+f}2, \qquad f^{-}=\max\set{-f,0}=\frac{\abs f-f}2 ,
+\end{equation}
+dette \emph{parte positiva} e \emph{parte negativa} di $f$. Sono funzioni non negative,
+integrabili per il \cref{teo:valore-assoluto} e la linearità, e $f=f^{+}-f^{-}$,
+$\abs f=f^{+}+f^{-}$. Dunque
+\begin{equation}\label{eq:area-segno}
+\begin{aligned}
+  \int_{a}^{b}f(x)\,dx&=\int_{a}^{b}f^{+}(x)\,dx-\int_{a}^{b}f^{-}(x)\,dx,\\
+  \int_{a}^{b}\abs{f(x)}\,dx&=\int_{a}^{b}f^{+}(x)\,dx+\int_{a}^{b}f^{-}(x)\,dx :
+\end{aligned}
+\end{equation}
+l'integrale di $f$ è l'area della parte di piano compresa tra il grafico e l'asse $x$ che
+sta \emph{sopra} l'asse, meno l'area della parte che sta \emph{sotto}; l'integrale di
+$\abs f$ è l'area totale (\cref{fig:area-segno}). Se le due aree si equivalgono,
+l'integrale è nullo anche se $f$ non lo è: è ciò che abbiamo osservato per
+$x^{3}-3x$ in $[-2,2]$.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.85\textwidth, height=4.6cm, axis lines=middle, xmin=-0.2,
+  xmax=6.9, ymin=-1.5, ymax=1.8, xtick={0.3,6.2}, xticklabels={$a$,$b$},
+  ytick=\empty, clip=false]
+  \addplot[draw=none, fill=blu!25, domain=0.3:2.970, samples=50]
+    {1.2*sin(deg(1.1*x))+0.15} \closedcycle;
+  \addplot[draw=none, fill=rame!30, domain=2.970:5.598, samples=60]
+    {1.2*sin(deg(1.1*x))+0.15} \closedcycle;
+  \addplot[draw=none, fill=blu!25, domain=5.598:6.2, samples=30]
+    {1.2*sin(deg(1.1*x))+0.15} \closedcycle;
+  \addplot[curva, domain=0.1:6.5, samples=150] {1.2*sin(deg(1.1*x))+0.15};
+  \node[font=\small, blu] at (axis cs:1.5,0.6) {$+$};
+  \node[font=\small, rame] at (axis cs:4.3,-0.55) {$-$};
+  \node[font=\small, blu] at (axis cs:6.08,0.2) {$+$};
+  \node[font=\scriptsize, anchor=west] at (axis cs:6.5,1.0) {$y=f(x)$};
+\end{axis}
+\end{tikzpicture}
+\caption{L'area con segno: $\int_{a}^{b}f$ è l'area azzurra (dove $f>0$) meno l'area
+in color rame (dove $f<0$); $\int_{a}^{b}\abs f$ è la somma delle due.}
+\label{fig:area-segno}
+\end{figure}
+
+\begin{idea}[Il variometro di un aliante]
+Il variometro misura la velocità verticale $v_{z}$ di un aliante: positiva in salita,
+quando l'aliante spirala in una corrente ascensionale, negativa in planata. Se
+$v_{z}$ fosse costante in un intervallo di tempo $\Delta t$, la variazione di quota
+sarebbe $v_{z}\,\Delta t$; per una velocità variabile, la variazione di quota tra gli
+istanti $t_{0}$ e $t_{1}$ è l'integrale $\int_{t_{0}}^{t_{1}}v_{z}(t)\,dt$, cioè l'area
+\emph{con segno} sotto il grafico di $v_{z}$ (lo giustificheremo nel prossimo capitolo con
+il teorema fondamentale), mentre $\int_{t_{0}}^{t_{1}}\abs{v_{z}(t)}\,dt$ è il dislivello
+complessivo percorso in salita e in discesa. Ad esempio, se l'aliante sale a
+$3$~m/s per $120$~s, plana scendendo a $1{,}5$~m/s per $300$~s e risale a $2$~m/s per
+$90$~s, l'additività e la \eqref{eq:integrale-costante} danno una variazione di quota di
+$360-450+180=90$~m, a fronte di un dislivello complessivo di $360+450+180=990$~m. (Il
+valore di $v_{z}$ nei due istanti di passaggio da un regime all'altro non influisce
+sull'integrale, come mostra l'\cref{es:valore-in-un-punto}.)
+\end{idea}

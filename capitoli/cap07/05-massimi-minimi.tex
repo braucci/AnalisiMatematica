@@ -1,0 +1,359 @@
+%% ----------------------------------------------------------------------------
+%%  §7.5  Massimi e minimi relativi
+%% ----------------------------------------------------------------------------
+\section{Massimi e minimi relativi}
+\label{sec:estremi-due}
+
+Le definizioni di massimo e di minimo relativo si estendono senza difficoltà,
+sostituendo gli intervalli con gli intorni circolari.
+
+\begin{definizione}[Massimi e minimi relativi]\label{def:estremi-due}
+\index{massimo!relativo!in più variabili}\index{minimo!relativo!in più variabili}
+Sia $f$ una funzione di due variabili definita in un insieme $D\subseteq\R^{2}$. Un punto
+$(x_{0},y_{0})\in D$ è di \emph{massimo relativo} per $f$ in $D$ se esiste un intorno
+circolare $I_{\delta}$ di $(x_{0},y_{0})$ tale che
+\begin{equation}\label{eq:max-due}
+  f(x_{0},y_{0})\ge f(x,y) \qquad\perogni(x,y)\in I_{\delta}\cap D ;
+\end{equation}
+è di \emph{minimo relativo} se $f(x_{0},y_{0})\le f(x,y)$ per ogni
+$(x,y)\in I_{\delta}\cap D$. Se le disuguaglianze valgono in senso stretto per
+$(x,y)\neq(x_{0},y_{0})$, il massimo o il minimo si dice \emph{stretto}.
+\end{definizione}
+
+Come per le funzioni di una variabile, la derivata dà informazioni soltanto nei punti
+«interni».
+
+\begin{definizione}[Punto interno]\label{def:punto-interno}\index{punto!interno}
+Un punto $(x_{0},y_{0})$ è \emph{interno} all'insieme $D\subseteq\R^{2}$ se esiste un
+intorno circolare $I_{\delta}$ di $(x_{0},y_{0})$ contenuto in $D$. Un insieme i cui punti
+sono tutti interni si dice \emph{aperto}.
+\end{definizione}
+
+La \cref{fig:punto-interno} illustra la differenza tra i punti interni e quelli che
+stanno sul bordo dell'insieme.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[scale=1.0]
+  \draw[-Latex, grigio] (-0.3,0) -- (6.4,0) node[right, black] {$x$};
+  \draw[-Latex, grigio] (0,-0.3) -- (0,3.6) node[above, black] {$y$};
+  \fill[pattern=north east lines, pattern color=blu]
+    (0.8,3.2) .. controls (0.6,1.2) and (2.0,0.1) .. (3.5,0.6)
+    .. controls (5.0,1.1) and (6.0,2.4) .. (5.9,3.3) -- (0.8,3.2) -- cycle;
+  \draw[blu, thick]
+    (0.8,3.2) .. controls (0.6,1.2) and (2.0,0.1) .. (3.5,0.6)
+    .. controls (5.0,1.1) and (6.0,2.4) .. (5.9,3.3);
+  \fill[white] (2.2,2.0) circle (0.75);
+  \fill[pattern=north east lines, pattern color=blu!50] (2.2,2.0) circle (0.75);
+  \draw[rame, thick, dashed] (2.2,2.0) circle (0.75);
+  \fill (2.2,2.0) circle (1.5pt) node[above right, font=\scriptsize] {$(x_{0},y_{0})$};
+  \node[font=\scriptsize, fill=white, inner sep=1pt] at (2.2,1.6) {punto interno};
+  \fill (5.0216,1.507) circle (1.5pt); % punto della curva di Bézier (t = 0,4)
+  \node[font=\scriptsize, right] at (5.25,1.25) {punto non interno};
+  \node[font=\scriptsize, blu] at (4.6,2.6) {$D$};
+\end{tikzpicture}
+\caption{Un punto interno all'insieme $D$, che ha un intorno circolare tutto contenuto in
+$D$, e un punto di $D$ che sta sul bordo, ogni intorno del quale contiene punti esterni a
+$D$.}
+\label{fig:punto-interno}
+\end{figure}
+
+\begin{teorema}[Condizione necessaria per gli estremi]\label{teo:fermat-due}
+\index{teorema!di Fermat!in più variabili}
+Se $(x_{0},y_{0})$ è un punto di massimo o di minimo relativo interno al dominio $D$ di una
+funzione $f(x,y)$, e se $f$ è dotata di derivate parziali prime in $(x_{0},y_{0})$, allora
+\begin{equation}\label{eq:fermat-due}
+  f_{x}(x_{0},y_{0})=0, \qquad f_{y}(x_{0},y_{0})=0 .
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$(x_{0},y_{0})$ interno a $D$, di massimo (o minimo) relativo; esistono
+$f_{x}(x_{0},y_{0})$, $f_{y}(x_{0},y_{0})$.}
+\Tesi{$\nabla f(x_{0},y_{0})=(0,0)$.}
+\end{schema}
+
+\begin{strategia}
+Restringiamo $f$ alle rette per $(x_{0},y_{0})$ parallele agli assi. Si ottengono funzioni
+di una variabile che hanno un estremo relativo interno, e alle quali si applica il
+teorema di Fermat; le loro derivate sono proprio le derivate parziali.
+\end{strategia}
+
+\begin{dimostrazione}
+Supponiamo che $(x_{0},y_{0})$ sia un punto di massimo relativo interno; esiste allora un
+intorno circolare $I_{\delta}$, contenuto in $D$, nel quale vale la \eqref{eq:max-due}.
+Fissato $y=y_{0}$, consideriamo la funzione di una variabile reale
+$F(x)=f(x,y_{0})$, definita nell'intervallo $(x_{0}-\delta,x_{0}+\delta)$ (i punti
+$(x,y_{0})$ con $\abs{x-x_{0}}<\delta$ stanno in $I_{\delta}$). Per la \eqref{eq:max-due},
+$F(x_{0})\ge F(x)$ per ogni $x$ di tale intervallo: $x_{0}$ è un punto di massimo
+relativo interno per $F$. Per il teorema di Fermat (\cref{teo:fermat}),
+$F'(x_{0})=f_{x}(x_{0},y_{0})=0$. Si procede in modo analogo, con la funzione
+$G(y)=f(x_{0},y)$, per ottenere $f_{y}(x_{0},y_{0})=0$.
+\end{dimostrazione}
+
+I punti di massimo o di minimo interni al dominio vanno dunque ricercati tra i punti che
+annullano entrambe le derivate parziali prime; tali punti si dicono \emph{punti critici}
+(o \emph{stazionari}) della funzione: sono i punti in cui il gradiente si annulla. Come
+per le funzioni di una variabile, la condizione è necessaria ma non sufficiente: la
+funzione $y^{2}-x^{2}$ ha gradiente $(-2x,2y)$, nullo nell'origine, ma l'origine non è né
+di massimo né di minimo, perché $f(x,0)=-x^{2}<0$ e $f(0,y)=y^{2}>0$ per $x,y\neq0$. Un
+punto critico di questo tipo si chiama \emph{punto di sella}, per la forma del grafico
+(\cref{fig:superfici}).
+
+\subsection{Il criterio dell'hessiano}
+
+Il teorema che segue fornisce un criterio per stabilire la natura di un punto critico.
+Supponiamo che $f$ abbia derivate seconde continue in un insieme aperto $D$; si definisce
+il \emph{determinante hessiano} (o semplicemente \emph{hessiano})
+\begin{equation}\label{eq:hessiano}
+  H(x,y)=\begin{vmatrix} f_{xx}(x,y) & f_{xy}(x,y)\\ f_{yx}(x,y) & f_{yy}(x,y)\end{vmatrix}
+  =f_{xx}(x,y)\,f_{yy}(x,y)-\bigl(f_{xy}(x,y)\bigr)^{2},
+\end{equation}
+dove si è tenuto conto che, per il teorema di Schwarz, $f_{xy}=f_{yx}$. Talvolta, per
+mettere in luce la dipendenza dalla funzione $f$, si scrive $Hf(x,y)$.
+
+\begin{teorema}[Criterio dell'hessiano]\label{teo:hessiano}\index{criterio!dell'hessiano}
+\index{hessiano}
+Sia $f$ dotata di derivate parziali prime e seconde continue in un intorno del punto
+$(x_{0},y_{0})$, e sia $(x_{0},y_{0})$ un punto critico:
+$f_{x}(x_{0},y_{0})=f_{y}(x_{0},y_{0})=0$.
+\begin{enumerate}[label=\textup{(\roman*)}]
+  \item Se $Hf(x_{0},y_{0})>0$ e $f_{xx}(x_{0},y_{0})>0$, allora $(x_{0},y_{0})$ è un punto di
+  minimo relativo (stretto).
+  \item Se $Hf(x_{0},y_{0})>0$ e $f_{xx}(x_{0},y_{0})<0$, allora $(x_{0},y_{0})$ è un punto di
+  massimo relativo (stretto).
+  \item Se $Hf(x_{0},y_{0})<0$, allora $(x_{0},y_{0})$ non è né di massimo né di minimo
+  relativo: si dice che è un \emph{punto di sella}.
+\end{enumerate}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$ con derivate prime e seconde continue vicino a $(x_{0},y_{0})$;
+$\nabla f(x_{0},y_{0})=(0,0)$.}
+\Tesi{$H>0$, $f_{xx}>0$: minimo; \ $H>0$, $f_{xx}<0$: massimo; \ $H<0$: sella (tutto
+calcolato in $(x_{0},y_{0})$).}
+\end{schema}
+
+\begin{strategia}
+Restringiamo $f$ al segmento che congiunge $(x_{0},y_{0})$ con un punto vicino
+$(x_{0}+h,y_{0}+k)$: si ottiene una funzione di una variabile $g(t)$ con $g'(0)=0$, la cui
+derivata seconda è la \emph{forma quadratica}
+$f_{xx}h^{2}+2f_{xy}hk+f_{yy}k^{2}$. Il segno di questa forma, per tutte le direzioni $(h,k)$,
+è deciso proprio da $f_{xx}$ e da $H$ (completando il quadrato). Per rendere rigoroso il
+ragionamento occorrono due strumenti: la derivata di $f$ lungo un segmento, che richiede
+la nozione di differenziabilità, e una formula di Taylor con il resto nella forma di
+Lagrange. Per questo la dimostrazione è rinviata al \cref{sec:dim-hessiano}, in
+appendice.
+\end{strategia}
+
+Un punto critico è dunque di massimo o di minimo relativo se $Hf(x_{0},y_{0})>0$, mentre
+se $Hf(x_{0},y_{0})<0$ non è né di massimo né di minimo. Il caso $Hf(x_{0},y_{0})=0$ non è
+contemplato nell'enunciato, perché in tal caso il punto può essere di massimo, di minimo
+o di sella: nell'origine le funzioni $x^{4}+y^{4}$, $-(x^{4}+y^{4})$ e
+$x^{4}-y^{4}$ hanno tutte $H=0$, ma la prima ha un minimo, la seconda un massimo, la terza
+una sella. Si noti infine che, se $H>0$, allora $f_{xx}f_{yy}>f_{xy}^{2}\ge0$, e quindi
+$f_{xx}$ e $f_{yy}$ hanno lo stesso segno: nel criterio si può usare l'una o l'altra.
+
+\begin{esempio}[Quattro funzioni e i loro punti critici]\label{es:punti-critici}
+\begin{enumerate}[label=\textup{(\alph*)}]
+  \item La funzione $f(x,y)=x^{2}+y^{2}$ ha derivate parziali $f_{x}=2x$, $f_{y}=2y$, che si
+  annullano nel punto $(0,0)$. L'hessiano vale
+  $H=\begin{vmatrix}2&0\\0&2\end{vmatrix}=4>0$ ed $f_{xx}=2>0$: l'origine è di minimo
+  relativo. Si verifica anche direttamente che è di minimo \emph{assoluto}, perché
+  $f(0,0)=0\le x^{2}+y^{2}$ per ogni $(x,y)$.
+  \item La funzione $f(x,y)=y^{2}-x^{2}$ ha l'unico punto critico $(0,0)$, con
+  $H=\begin{vmatrix}-2&0\\0&2\end{vmatrix}=-4<0$: è un punto di sella, ben riconoscibile
+  nel grafico del paraboloide iperbolico.
+  \item La funzione $f(x,y)=x^{3}-6y(x+y)=x^{3}-6xy-6y^{2}$, definita su $\R^{2}$, ha i
+  punti critici che risolvono il sistema
+  \[
+    f_{x}=3x^{2}-6y=0, \qquad f_{y}=-6x-12y=0 .
+  \]
+  Dalla seconda equazione $x=-2y$, che sostituito nella prima dà $12y^{2}-6y=0$, cioè
+  $y=0$ oppure $y=\frac12$; in corrispondenza $x=0$ oppure $x=-1$. I punti critici sono
+  $(0,0)$ e $(-1,\frac12)$. Poiché $f_{xx}=6x$, $f_{xy}=-6$, $f_{yy}=-12$,
+  \[
+    H(x,y)=\begin{vmatrix}6x&-6\\-6&-12\end{vmatrix}=-72x-36 .
+  \]
+  Nell'origine $H(0,0)=-36<0$: è un punto di sella. Nel punto $(-1,\frac12)$ si ha
+  $H=36>0$ ed $f_{xx}(-1,\frac12)=-6<0$: è un punto di massimo relativo, con
+  $f(-1,\frac12)=\frac12$ (\cref{fig:punti-critici}, a sinistra). Non è un massimo
+  assoluto, perché $f(x,0)=x^{3}\to+\infty$ per $x\to+\infty$.
+  \item Per $f(x,y)=y\,e^{-(x^{2}+y^{2})}$ il sistema
+  \[
+    f_{x}=-2xy\,e^{-(x^{2}+y^{2})}=0, \qquad f_{y}=(1-2y^{2})\,e^{-(x^{2}+y^{2})}=0
+  \]
+  dà, dalla prima equazione, $x=0$ oppure $y=0$; ma $y=0$ è incompatibile con la seconda,
+  che richiede $y=\pm\frac{\sqrt2}2$. I punti critici sono $(0,\pm\frac{\sqrt2}2)$. Il
+  programma seguente calcola l'hessiano: in entrambi i punti $H=4e^{-1}>0$, mentre
+  $f_{xx}(0,\frac{\sqrt2}2)=-\sqrt2\,e^{-1/2}<0$ e $f_{xx}(0,-\frac{\sqrt2}2)=\sqrt2\,e^{-1/2}>0$:
+  il primo è di massimo, il secondo di minimo (\cref{fig:punti-critici}, a destra).
+\end{enumerate}
+\end{esempio}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=\textwidth]{punti_critici}
+\caption{A sinistra, le curve di livello di $x^{3}-6y(x+y)$: intorno al massimo
+$(-1,\frac12)$ sono curve chiuse; nella sella $(0,0)$ si incrociano due rami della curva
+di livello $0$ (in grigio). A destra, il grafico di $y\,e^{-(x^{2}+y^{2})}$ con il massimo e
+il minimo (\texttt{python/fig\_punti\_critici.py}).}
+\label{fig:punti-critici}
+\end{figure}
+
+\begin{python}[Ricerca e classificazione dei punti critici]
+import sympy as sp
+
+x, y = sp.symbols("x y", real=True)
+
+def classifica(f):
+    """Punti critici di f(x, y) e loro natura con l'hessiano."""
+    fx, fy = sp.diff(f, x), sp.diff(f, y)
+    H = sp.hessian(f, (x, y))
+    for P in sp.solve([fx, fy], [x, y], dict=True):
+        h = sp.simplify(H.det().subs(P))
+        fxx = sp.simplify(H[0, 0].subs(P))
+        if h > 0:
+            tipo = "minimo" if fxx > 0 else "massimo"
+        elif h < 0:
+            tipo = "sella"
+        else:
+            tipo = "H = 0: il criterio non decide"
+        print(f"({P[x]}, {P[y]}): H = {h}, f_xx = {fxx} -> {tipo}")
+
+for f in (x**2 + y**2, y**2 - x**2, x**3 - 6*y*(x + y),
+          y * sp.exp(-(x**2 + y**2)), x**3 + y**3 - 3*x*y):
+    print("f =", f)
+    classifica(f)
+\end{python}
+\begin{risultato}
+f = x**2 + y**2
+(0, 0): H = 4, f_xx = 2 -> minimo
+f = -x**2 + y**2
+(0, 0): H = -4, f_xx = -2 -> sella
+f = x**3 - 6*y*(x + y)
+(-1, 1/2): H = 36, f_xx = -6 -> massimo
+(0, 0): H = -36, f_xx = 0 -> sella
+f = y*exp(-x**2 - y**2)
+(0, -sqrt(2)/2): H = 4*exp(-1), f_xx = sqrt(2)*exp(-1/2) -> minimo
+(0, sqrt(2)/2): H = 4*exp(-1), f_xx = -sqrt(2)*exp(-1/2) -> massimo
+f = x**3 - 3*x*y + y**3
+(0, 0): H = -9, f_xx = 0 -> sella
+(1, 1): H = 27, f_xx = 6 -> minimo
+\end{risultato}
+
+L'ultima funzione dell'elenco, $x^{3}+y^{3}-3xy$, è oggetto di un esercizio del
+\cref{sec:esercizi-cap7}. Chiudiamo gli esempi con un punto di massimo in cui
+l'hessiano è nullo. La funzione $f(x,y)=\cos(x^{2}+y^{2})$ della \cref{fig:superfici} ha
+nell'origine un massimo assoluto, perché $f(0,0)=\cos0=1\ge\cos(x^{2}+y^{2})$ per ogni
+$(x,y)$; in accordo con il \cref{teo:fermat-due}, l'origine annulla il gradiente
+$\bigl(-2x\sen(x^{2}+y^{2}),\,-2y\sen(x^{2}+y^{2})\bigr)$. Ma tutte le derivate seconde,
+\begin{align*}
+  f_{xx}&=-2\sen(x^{2}+y^{2})-4x^{2}\cos(x^{2}+y^{2}),\\
+  f_{yy}&=-2\sen(x^{2}+y^{2})-4y^{2}\cos(x^{2}+y^{2}),\\
+  f_{xy}&=-4xy\cos(x^{2}+y^{2}),
+\end{align*}
+si annullano nell'origine, e così l'hessiano: il criterio non è applicabile, e la natura
+del punto si stabilisce con il confronto diretto.
+
+\subsection{Un'applicazione: il metodo dei minimi quadrati}
+
+In galleria del vento si misura il coefficiente di resistenza $C_{D,i}$ di un modello per
+alcuni valori $C_{L,i}$ del coefficiente di portanza, $i=1,\dots,n$. Vogliamo stimare i
+parametri della polare parabolica $C_{D}=C_{D0}+kC_{L}^{2}$. Posto $X_{i}=C_{L,i}^{2}$, si
+tratta di trovare la retta $C_{D}=b+aX$ che meglio approssima i punti $(X_{i},C_{D,i})$.
+Il criterio più usato, dovuto a Legendre e a Gauss, è quello dei \emph{minimi
+quadrati}: si scelgono $a$ e $b$ in modo da rendere minima la somma dei quadrati degli
+scarti (o \emph{residui})
+\begin{equation}\label{eq:minimi-quadrati}
+  S(a,b)=\sum_{i=1}^{n}\bigl(C_{D,i}-b-aX_{i}\bigr)^{2} .
+\end{equation}
+È una funzione di due variabili su tutto $\R^{2}$. I suoi punti critici risolvono il
+sistema
+\[
+  S_{a}=-2\sum_{i=1}^{n}X_{i}\bigl(C_{D,i}-b-aX_{i}\bigr)=0, \qquad
+  S_{b}=-2\sum_{i=1}^{n}\bigl(C_{D,i}-b-aX_{i}\bigr)=0,
+\]
+cioè le \emph{equazioni normali}
+\begin{equation}\label{eq:equazioni-normali}
+  a\sum_{i}X_{i}^{2}+b\sum_{i}X_{i}=\sum_{i}X_{i}C_{D,i}, \qquad
+  a\sum_{i}X_{i}+b\,n=\sum_{i}C_{D,i} .
+\end{equation}
+È un sistema lineare il cui determinante è $n\sum_{i}X_{i}^{2}-\bigl(\sum_{i}X_{i}\bigr)^{2}$.
+Questa quantità è positiva se i valori $X_{i}$ non sono tutti uguali, grazie all'identità
+\begin{equation}\label{eq:identita-lagrange}
+  n\sum_{i}X_{i}^{2}-\Bigl(\sum_{i}X_{i}\Bigr)^{2}=\frac12\sum_{i=1}^{n}\sum_{j=1}^{n}(X_{i}-X_{j})^{2},
+\end{equation}
+che si verifica sviluppando il quadrato a secondo membro. Il sistema ha quindi
+un'unica soluzione $(a^{*},b^{*})$. Le derivate seconde sono costanti:
+$S_{aa}=2\sum_{i}X_{i}^{2}>0$, $S_{ab}=2\sum_{i}X_{i}$, $S_{bb}=2n$, e l'hessiano
+$H=4\bigl[n\sum_{i}X_{i}^{2}-(\sum_{i}X_{i})^{2}\bigr]$ è positivo: per il criterio
+dell'hessiano $(a^{*},b^{*})$ è un punto di minimo relativo.
+
+In questo caso si può dire di più: il minimo è \emph{assoluto}. Indichiamo con
+$r_{i}=C_{D,i}-b^{*}-a^{*}X_{i}$ i residui nel punto di minimo; le equazioni normali dicono
+che $\sum_{i}r_{i}=0$ e $\sum_{i}X_{i}r_{i}=0$. Allora, per ogni $(\alpha,\beta)$,
+\begin{align*}
+  S(a^{*}+\alpha,b^{*}+\beta)&=\sum_{i}\bigl(r_{i}-\alpha X_{i}-\beta\bigr)^{2}\\
+  &=S(a^{*},b^{*})-2\alpha\sum_{i}X_{i}r_{i}-2\beta\sum_{i}r_{i}+\sum_{i}(\alpha X_{i}+\beta)^{2},
+\end{align*}
+e i due termini centrali sono nulli: $S(a^{*}+\alpha,b^{*}+\beta)\ge S(a^{*},b^{*})$, con
+l'uguaglianza soltanto per $\alpha=\beta=0$. Il programma applica il metodo a un insieme
+di misure simulate.
+
+\begin{python}[Stima di $C_{D0}$ e $k$ con i minimi quadrati]
+import numpy as np
+
+# "prove in galleria": C_D misurato per vari C_L (dati simulati)
+rng = np.random.default_rng(7)
+CL = np.linspace(0.0, 1.2, 13)
+CD = 0.025 + 0.0497 * CL**2 + rng.normal(0, 0.0008, CL.size)
+
+# modello C_D = b + a X con X = C_L^2: equazioni normali
+X, n = CL**2, CL.size
+A = np.array([[np.sum(X**2), np.sum(X)], [np.sum(X), n]])
+r = np.array([np.sum(X * CD), np.sum(CD)])
+a, b = np.linalg.solve(A, r)
+H = 4 * (n * np.sum(X**2) - np.sum(X)**2)   # hessiano di S(a, b)
+print(f"k = a = {a:.5f}   C_D0 = b = {b:.5f}   H = {H:.2f} > 0")
+print(f"fattore di Oswald (AR = 8): e = {1 / (np.pi * 8 * a):.3f}")
+print("controllo con numpy.polyfit:",
+      np.round(np.polyfit(X, CD, 1), 5))
+S = np.sum((CD - b - a * X)**2)
+print(f"somma dei quadrati dei residui S = {S:.3e}")
+\end{python}
+\begin{risultato}
+k = a = 0.05000   C_D0 = b = 0.02478   H = 146.69 > 0
+fattore di Oswald (AR = 8): e = 0.796
+controllo con numpy.polyfit: [0.05    0.02478]
+somma dei quadrati dei residui S = 2.858e-06
+\end{risultato}
+
+I dati erano stati simulati con $C_{D0}=0{,}025$ e $k=0{,}0497$ (cioè $e\approx0{,}8$ con
+$AR=8$), aggiungendo un rumore casuale di ampiezza tipica $0{,}0008$: il metodo recupera i
+parametri con ottima precisione (\cref{fig:minimi-quadrati}). La funzione
+\texttt{polyfit} di \texttt{numpy} risolve esattamente lo stesso problema.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=\textwidth]{minimi_quadrati}
+\caption{A sinistra, le misure simulate (rame) e la polare parabolica stimata (blu). A
+destra, gli stessi dati nel piano $(C_{L}^{2},C_{D})$, dove il modello è una retta. I
+residui, cioè i segmenti verticali grigi tra i punti e la retta, la somma dei cui quadrati
+è resa minima, sono qui così piccoli (dell'ordine di $10^{-3}$) da restare quasi nascosti
+dai punti (\texttt{python/fig\_minimi\_quadrati.py}).}
+\label{fig:minimi-quadrati}
+\end{figure}
+
+\begin{notastorica}[Gauss, Legendre e l'asteroide perduto]
+Il 1º gennaio 1801 Giuseppe Piazzi, dall'osservatorio di Palermo, scoprì Cerere, il primo
+asteroide; lo seguì per poche settimane, poi lo perse nel bagliore del Sole. Il
+ventiquattrenne Carl Friedrich Gauss, con un metodo di sua invenzione per determinare
+l'orbita da poche osservazioni affette da errori, predisse dove ritrovarlo, e alla fine
+del 1801 Cerere fu riosservato a meno di mezzo grado dalla posizione prevista. Il metodo
+dei minimi quadrati fu pubblicato per la prima volta da Adrien-Marie Legendre nel 1805;
+Gauss lo presentò nel 1809, affermando di usarlo dal 1795, e ne diede una giustificazione
+probabilistica legata alla curva che porta il suo nome. Le condizioni del secondo ordine
+per gli estremi delle funzioni di più variabili risalgono a Lagrange (1759); il
+determinante delle derivate seconde porta il nome di Otto Hesse, che lo studiò nel 1844.
+\end{notastorica}

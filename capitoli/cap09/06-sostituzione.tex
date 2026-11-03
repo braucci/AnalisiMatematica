@@ -1,0 +1,366 @@
+%% ----------------------------------------------------------------------------
+%%  §9.6  Integrazione per sostituzione
+%% ----------------------------------------------------------------------------
+\section{Integrazione per sostituzione}
+\label{sec:sostituzione}
+
+Il metodo di integrazione per decomposizione in somma si basa sulla regola di
+derivazione della somma, quello per parti sulla regola di derivazione del prodotto. Il
+metodo di integrazione per sostituzione si basa sulla regola di derivazione delle
+funzioni composte.
+
+\begin{teorema}[Formula di integrazione per sostituzione]\label{teo:sostituzione}
+\index{integrazione!per sostituzione}
+Sia $f$ una funzione continua in un intervallo $I$ e sia $g$ una funzione definita in un
+intervallo $J$, a valori in $I$, derivabile con derivata continua. Allora
+\begin{equation}\label{eq:sostituzione}
+  \Bigl[\int f(x)\,dx\Bigr]_{x=g(t)}=\int f\bigl(g(t)\bigr)\,g'(t)\,dt ,
+\end{equation}
+nel senso che, se $F$ è una primitiva di $f$ in $I$, allora $F\bigl(g(t)\bigr)$ è una
+primitiva di $f\bigl(g(t)\bigr)\,g'(t)$ in $J$.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$ continua nell'intervallo $I$; \ $g:J\to I$ derivabile con $g'$ continua.}
+\Tesi{$F'=f \implica \bigl(F\circ g\bigr)'=(f\circ g)\,g'$; \ cioè la
+\eqref{eq:sostituzione}.}
+\end{schema}
+
+\needspace{5\baselineskip}
+\begin{strategia}
+È la regola della catena letta al contrario: si deriva $F(g(t))$ e si trova
+$F'(g(t))\,g'(t)=f(g(t))\,g'(t)$.
+\end{strategia}
+
+\begin{dimostrazione}
+La funzione $f(g(t))\,g'(t)$ è continua in $J$, come prodotto della composta di funzioni
+continue per una funzione continua, e quindi ha primitive. Se $F$ è una primitiva di $f$
+in $I$, per il \cref{teo:derivata-composta}
+\[
+  \frac{d}{dt}F\bigl(g(t)\bigr)=F'\bigl(g(t)\bigr)\,g'(t)=f\bigl(g(t)\bigr)\,g'(t)
+  \qquad\perogni t\in J ,
+\]
+cioè $F\circ g$ è una primitiva di $(f\circ g)\,g'$, come volevasi dimostrare.
+\end{dimostrazione}
+
+Il primo membro della \eqref{eq:sostituzione} significa: si calcola $\int f(x)\,dx=F(x)+c$
+e poi si sostituisce $x=g(t)$, ottenendo $F(g(t))+c$. La formula non richiede che $g$ sia
+invertibile; il risultato dell'integrazione, però, è espresso in funzione di $t$. Per
+esprimerlo in funzione di $x$ occorre che $g$ sia invertibile (ad esempio strettamente
+monotòna), e si effettua l'ulteriore sostituzione $t=g^{-1}(x)$. Come vedremo, per il
+calcolo di un integrale \emph{definito} l'inversione non è necessaria.
+
+La formula si ricorda facilmente con la notazione di Leibniz. Se $x=g(t)$, la quantità
+$g'(t)\,dt$ si chiama \emph{differenziale} della funzione $g$ e si indica con $dx$:
+\begin{equation}\label{eq:differenziale-sostituzione}
+  dx=g'(t)\,dt
+\end{equation}
+(è il differenziale del \cref{sec:differenziabilita}, per una funzione di una variabile).
+Nella \eqref{eq:sostituzione} la variabile $x$ si trasforma in $g(t)$ e il simbolo $dx$ si
+trasforma secondo la \eqref{eq:differenziale-sostituzione}, come se fosse un prodotto. È
+uno dei motivi del successo della notazione di Leibniz: le regole di calcolo sono
+suggerite dai simboli stessi.
+
+La formula si usa in due direzioni. Nella prima, già incontrata nella
+\eqref{eq:composta-indefinito}, si riconosce nella funzione integranda la forma
+$f(g(t))\,g'(t)$ e si pone $x=g(t)$ per ricondursi a $\int f(x)\,dx$. Nella seconda, si
+sceglie una sostituzione $x=g(t)$ che renda più semplice la funzione integranda,
+tipicamente eliminando una radice.
+
+\begin{esempio}[Sostituzioni che eliminano una radice]\label{es:sostituzioni}
+\begin{enumerate}[label=\textup{(\alph*)}]
+  \item Nell'integrale $\int\frac{dx}{\sqrt x-3}$ è naturale porre $x=t^{2}$, con $t\ge0$
+  e $t\neq3$, così che $dx=2t\,dt$ e $\sqrt x=t$:
+  \[
+  \begin{aligned}
+    \int\frac{dx}{\sqrt x-3}&=\int\frac{2t}{t-3}\,dt=2\int\Bigl(1+\frac3{t-3}\Bigr)dt\\
+    &=2t+6\log\abs{t-3}+c ,
+  \end{aligned}
+  \]
+  e, tornando alla variabile $x$ con $t=\sqrt x$,
+  \[
+    \int\frac{dx}{\sqrt x-3}=2\sqrt x+6\log\abs{\sqrt x-3}+c .
+  \]
+  \item Con la sostituzione $2x-1=t^{2}$, cioè $x=\frac{t^{2}+1}2$ con $t\ge0$, si ha $dx=t\,dt$ e
+  $x-\sqrt{2x-1}=\frac{(t-1)^{2}}2$, che si annulla per $t=1$, cioè $x=1$:
+  \[
+    \int\frac{x+\sqrt{2x-1}}{x-\sqrt{2x-1}}\,dx=\int\frac{(t^{2}+1)/2+t}{(t-1)^{2}/2}\,t\,dt
+    =\int\frac{t^{3}+2t^{2}+t}{t^{2}-2t+1}\,dt .
+  \]
+  È l'integrale di una funzione razionale, con denominatore a radici coincidenti; la
+  divisione e la \eqref{eq:fratti-semplici-doppia} danno
+  \[
+    \frac{t^{3}+2t^{2}+t}{(t-1)^{2}}=t+4+\frac8{t-1}+\frac4{(t-1)^{2}} ,
+  \]
+  e quindi l'integrale vale
+  \[
+    \frac{t^{2}}2+4t+8\log\abs{t-1}-\frac4{t-1}+c, \qquad\text{con } t=\sqrt{2x-1} .
+  \]
+  \item Con la sostituzione $x=\sen t$, $t\in[-\frac\pi2,\frac\pi2]$, si ha $dx=\cos t\,dt$ e
+  $\sqrt{1-\sen^{2}t}=\cos t$, perché in questo intervallo $\cos t\ge0$; per la
+  \eqref{eq:integrale-cos2},
+  \begin{equation}\label{eq:integrale-semicerchio}
+  \begin{split}
+    \int\sqrt{1-x^{2}}\,dx&=\int\cos^{2}t\,dt=\frac12(t+\sen t\cos t)+c\\
+    &=\frac12\Bigl(\arcsen x+x\sqrt{1-x^{2}}\Bigr)+c .
+  \end{split}
+  \end{equation}
+  Nell'ultimo passaggio si è invertita la sostituzione: $t=\arcsen x$, $\cos t=\sqrt{1-x^{2}}$.
+\end{enumerate}
+\end{esempio}
+
+\subsection{Sostituzione negli integrali definiti}
+
+\begin{teorema}[Sostituzione negli integrali definiti]\label{teo:sostituzione-definita}
+Sia $f$ continua in un intervallo $I$ e sia $g$ derivabile con derivata continua in
+$[c,d]$, a valori in $I$, con
+\begin{equation}\label{eq:estremi-sostituzione}
+  g(c)=a, \qquad g(d)=b .
+\end{equation}
+Allora
+\begin{equation}\label{eq:sostituzione-definita}
+  \int_{a}^{b}f(x)\,dx=\int_{c}^{d}f\bigl(g(t)\bigr)\,g'(t)\,dt .
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$ continua in $I$; \ $g\in C^{1}([c,d])$, $g([c,d])\subseteq I$; \ $g(c)=a$,
+$g(d)=b$.}
+\Tesi{$\int_{a}^{b}f(x)\,dx=\int_{c}^{d}f(g(t))\,g'(t)\,dt$.}
+\end{schema}
+
+\begin{strategia}
+Con una primitiva $F$ di $f$, entrambi i membri si calcolano con la formula fondamentale:
+il primo vale $F(b)-F(a)$, il secondo, poiché $F\circ g$ è una primitiva della sua funzione
+integranda, vale $F(g(d))-F(g(c))$. Le condizioni \eqref{eq:estremi-sostituzione} dicono che
+i due numeri coincidono.
+\end{strategia}
+
+\begin{dimostrazione}
+Sia $F$ una primitiva di $f$ in $I$, che esiste perché $f$ è continua. Per la formula
+fondamentale, $\int_{a}^{b}f(x)\,dx=F(b)-F(a)$ (anche se $a>b$, per la
+\eqref{eq:estremi-invertiti}). Per il \cref{teo:sostituzione}, $F\circ g$ è una primitiva
+della funzione continua $(f\circ g)\,g'$ in $[c,d]$, e quindi, ancora per la formula
+fondamentale e per le \eqref{eq:estremi-sostituzione},
+\[
+  \int_{c}^{d}f\bigl(g(t)\bigr)\,g'(t)\,dt=F\bigl(g(d)\bigr)-F\bigl(g(c)\bigr)=F(b)-F(a) . \qedhere
+\]
+\end{dimostrazione}
+
+Si osservi che non si richiede che $g$ sia invertibile, né che sia monotòna: conta
+soltanto che $g$ porti gli estremi $c$, $d$ negli estremi $a$, $b$. Con $g(t)=\alpha t$ o
+$g(t)=t+\tau$ si ritrovano, per le funzioni continue, le formule di cambiamento di scala e
+di traslazione dell'\cref{es:scala-traslazione}; con $g(t)=-t$ quella di riflessione
+dell'\cref{es:riflessione}.
+
+\begin{esempio}[L'area del semicerchio]\label{es:semicerchio}
+Calcoliamo $\int_{-1}^{1}\sqrt{1-x^{2}}\,dx$ con la sostituzione $x=\sen t$. Poiché
+$\sen(-\frac\pi2)=-1$ e $\sen\frac\pi2=1$, per la \eqref{eq:sostituzione-definita} e la
+\eqref{eq:integrale-cos2},
+\begin{equation}\label{eq:area-semicerchio}
+\begin{split}
+  \int_{-1}^{1}\sqrt{1-x^{2}}\,dx&=\int_{-\pi/2}^{\pi/2}\cos^{2}t\,dt\\
+  &=\Bigl[\frac12(t+\sen t\cos t)\Bigr]_{-\pi/2}^{\pi/2}=\frac\pi2 .
+\end{split}
+\end{equation}
+È la verifica promessa nell'\cref{es:portanza-ellittica-esatta}: l'area del semicerchio
+unitario definita mediante l'integrale è $\frac\pi2$, in accordo con la definizione di area
+del cerchio mediante i poligoni inscritti (\cref{teo:area-cerchio}). Di conseguenza la
+portanza totale della distribuzione ellittica è davvero $L=\frac\pi4\,l_{0}b$.
+\end{esempio}
+
+\begin{python}[Verifica delle sostituzioni]
+import sympy as sp
+
+x = sp.symbols("x", real=True)
+F = (sp.asin(x) + x * sp.sqrt(1 - x**2)) / 2       # formula trovata
+d = sp.simplify(sp.diff(F, x) - sp.sqrt(1 - x**2))
+print("F' - sqrt(1-x^2) =", d)
+print("int_-1^1 sqrt(1-x^2) dx =",
+      sp.integrate(sp.sqrt(1 - x**2), (x, -1, 1)))
+t = sp.sqrt(2*x - 1)                                # esempio (b)
+G = t**2 / 2 + 4*t + 8 * sp.log(sp.Abs(t - 1)) - 4 / (t - 1)
+f = (x + sp.sqrt(2*x - 1)) / (x - sp.sqrt(2*x - 1))
+for x0 in (sp.Rational(3, 4), 3, 7):
+    d = sp.simplify(sp.diff(G, x).subs(x, x0) - f.subs(x, x0))
+    print(f"x = {x0}:  G'(x) - f(x) = {sp.nsimplify(d)}")
+\end{python}
+\begin{risultato}
+F' - sqrt(1-x^2) = 0
+int_-1^1 sqrt(1-x^2) dx = pi/2
+x = 3/4:  G'(x) - f(x) = 0
+x = 3:  G'(x) - f(x) = 0
+x = 7:  G'(x) - f(x) = 0
+\end{risultato}
+
+\begin{notastorica}[Il differenziale di Leibniz]
+Per Leibniz $dx$ era una quantità «infinitamente piccola», e l'integrale una somma di
+infiniti termini $f(x)\,dx$: in questa visione la regola di sostituzione è quasi ovvia,
+perché un rettangolino di base $dx$ si trasforma in uno di base $g'(t)\,dt$. La teoria dei
+limiti di Cauchy e Weierstrass eliminò gli infinitesimi attuali, e il simbolo $dx$
+sopravvisse come pura notazione, giustificata dai teoremi di questo paragrafo. Soltanto
+nel 1961 Abraham Robinson mostrò, con l'\emph{analisi non standard} (esposta poi nel libro
+omonimo del 1966), che gli infinitesimi di Leibniz si possono rendere rigorosi, ampliando
+i numeri reali con numeri infinitamente piccoli e infinitamente grandi.
+\end{notastorica}
+
+\subsection{Approfondimento: alcune sostituzioni standard}
+\label{subsec:sostituzioni-standard}
+
+Per alcune classi di funzioni esistono sostituzioni che riconducono \emph{sempre}
+l'integrale a quello di una funzione razionale (\cref{sec:razionali}). Ne presentiamo
+due, seguendo \cite{giusti}. Indichiamo con $R(u,v)$ una \emph{funzione razionale di due
+variabili}, quoziente di due polinomi in $u$ e $v$.
+
+\paragraph{Funzioni razionali di $\sen x$ e $\cos x$.} Si pone $t=\tg\frac x2$.
+
+\begin{proposizione}[La sostituzione $t=\tg\frac x2$]\label{prop:sostituzione-tg-mezzi}
+Per $x\in(-\pi,\pi)$, posto $t=\tg\frac x2$, cioè $x=2\operatorname{arctg}t$, si ha
+\begin{equation}\label{eq:formule-parametriche}
+  \sen x=\frac{2t}{1+t^{2}}, \qquad \cos x=\frac{1-t^{2}}{1+t^{2}}, \qquad
+  dx=\frac{2\,dt}{1+t^{2}} .
+\end{equation}
+Di conseguenza, se $f(x)=R(\sen x,\cos x)$ è continua in un intervallo $J\subseteq(-\pi,\pi)$,
+$K$ è l'intervallo descritto da $\tg\frac x2$ per $x\in J$, e $\Phi$ è una primitiva in $K$
+della funzione razionale
+\begin{equation}\label{eq:integranda-razionale-t}
+  r(t)=R\Bigl(\frac{2t}{1+t^{2}},\frac{1-t^{2}}{1+t^{2}}\Bigr)\,\frac2{1+t^{2}} ,
+\end{equation}
+allora $\Phi\bigl(\tg\frac x2\bigr)$ è una primitiva di $f$ in $J$.
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$J\subseteq(-\pi,\pi)$ intervallo; \ $f=R(\sen x,\cos x)$ continua in $J$; \ $\Phi'=r$.}
+\Tesi{le \eqref{eq:formule-parametriche}; \ $\frac{d}{dx}\Phi\bigl(\tg\frac x2\bigr)=f(x)$
+per ogni $x\in J$.}
+\end{schema}
+
+\begin{strategia}
+Si usano le formule di duplicazione nell'angolo $\frac x2$, divise per
+$\cos^{2}\frac x2+\sen^{2}\frac x2=1$, così da far comparire soltanto la tangente. Poi si
+deriva $\Phi(\tg\frac x2)$ con la regola della catena: il fattore $\frac2{1+t^{2}}$ di $r$ si
+semplifica con la derivata di $\tg\frac x2$.
+\end{strategia}
+
+\begin{dimostrazione}
+Se $x\in(-\pi,\pi)$, allora $\frac x2\in(-\frac\pi2,\frac\pi2)$ e $\cos\frac x2>0$, quindi
+$t=\tg\frac x2$ è definita. Per le formule di duplicazione \eqref{eq:duplicazione},
+dividendo numeratore e denominatore per $\cos^{2}\frac x2$,
+\[
+\begin{gathered}
+  \sen x=\frac{2\sen\frac x2\cos\frac x2}{\cos^{2}\frac x2+\sen^{2}\frac x2}
+  =\frac{2t}{1+t^{2}},\\
+  \cos x=\frac{\cos^{2}\frac x2-\sen^{2}\frac x2}{\cos^{2}\frac x2+\sen^{2}\frac x2}
+  =\frac{1-t^{2}}{1+t^{2}} .
+\end{gathered}
+\]
+La funzione $h(x)=\tg\frac x2$ è strettamente crescente in $(-\pi,\pi)$, con inversa
+$2\operatorname{arctg}t$ (la cui derivata $\frac2{1+t^{2}}$ è il fattore $dx$ della
+\eqref{eq:formule-parametriche}) e derivata $h'(x)=\frac12\bigl(1+\tg^{2}\frac x2\bigr)
+=\frac{1+t^{2}}2$. La funzione $r(t)=f(2\operatorname{arctg}t)\frac2{1+t^{2}}$ è continua in $K$
+e, per il \cref{teo:derivata-composta}, per ogni $x\in J$,
+\[
+  \frac{d}{dx}\Phi\bigl(h(x)\bigr)=r\bigl(h(x)\bigr)\,h'(x)
+  =f(x)\,\frac2{1+t^{2}}\cdot\frac{1+t^{2}}2=f(x) . \qedhere
+\]
+\end{dimostrazione}
+
+\begin{esempio}[Una primitiva che vale soltanto in un intervallo]\label{es:due-piu-coseno}
+Per $f(x)=\frac1{2+\cos x}$, che è continua in $\R$, la
+\eqref{eq:integranda-razionale-t} dà
+$r(t)=\frac{1+t^{2}}{3+t^{2}}\cdot\frac2{1+t^{2}}=\frac2{3+t^{2}}$, e per la
+\eqref{eq:argomento-lineare}
+\[
+  \int\frac{dx}{2+\cos x}=\frac2{\sqrt3}\operatorname{arctg}\Bigl(\frac1{\sqrt3}\tg\frac x2\Bigr)+c
+  \qquad\text{in }(-\pi,\pi) .
+\]
+La primitiva trovata, $G$, \emph{non} vale in tutto $\R$: per $x\to\pi^{-}$ tende a
+$\frac\pi{\sqrt3}$, per $x\to\pi^{+}$ (in $(\pi,3\pi)$ la stessa formula è ancora una
+primitiva) tende a $-\frac\pi{\sqrt3}$. Il calcolo $\bigl[G(x)\bigr]_{0}^{2\pi}=0$ è
+quindi sbagliato, come mostra il segno positivo della funzione integranda; quello
+corretto spezza l'intervallo:
+la funzione integrale $F(x)=\int_{0}^{x}f$ è continua in $[0,\pi]$ e, essendo come $G$ una
+primitiva di $f$ in $[0,\pi)$ nulla in $0$, coincide con $G$ in $[0,\pi)$
+(\cref{teo:caratterizzazione-primitive}); quindi
+$\int_{0}^{\pi}f=F(\pi)=\lim_{x\to\pi^{-}}G(x)=\frac\pi{\sqrt3}$. Poiché
+$\cos(2\pi-x)=\cos x$, la sostituzione $x=2\pi-u$ dà $\int_{\pi}^{2\pi}f=\int_{0}^{\pi}f$, e
+in conclusione $\int_{0}^{2\pi}\frac{dx}{2+\cos x}=\frac{2\pi}{\sqrt3}$.
+\end{esempio}
+
+\paragraph{Funzioni razionali di $x$ e $\sqrt{x^{2}+a}$.} Qui l'idea, dovuta a Eulero, è
+di eliminare la radice imponendo $\sqrt{x^{2}+a}=t-x$: elevando al quadrato il termine
+$x^{2}$ si cancella, e resta un'equazione di primo grado in $x$.
+
+\begin{proposizione}[La sostituzione di Eulero]\label{prop:sostituzione-eulero}
+Siano $a\neq0$ e $J$ un intervallo in cui $x^{2}+a>0$. La funzione
+$t=x+\sqrt{x^{2}+a}$ non si annulla ed è strettamente monotòna in $J$, e
+\begin{equation}\label{eq:sostituzione-eulero}
+  x=\frac{t^{2}-a}{2t}, \qquad \sqrt{x^{2}+a}=\frac{t^{2}+a}{2t}, \qquad
+  dx=\frac{t^{2}+a}{2t^{2}}\,dt ;
+\end{equation}
+la sostituzione trasforma quindi $\int R\bigl(x,\sqrt{x^{2}+a}\bigr)\,dx$ nell'integrale
+di una funzione razionale di $t$. In particolare,
+\begin{equation}\label{eq:integrale-eulero}
+  \int\frac{dx}{\sqrt{x^{2}+a}}=\log\Bigl|x+\sqrt{x^{2}+a}\Bigr|+c
+  \qquad (x\in J) .
+\end{equation}
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$a\neq0$; \ $J$ intervallo con $x^{2}+a>0$; \ $t(x)=x+\sqrt{x^{2}+a}$.}
+\Tesi{$t\neq0$ e $t$ strettamente monotòna in $J$; \ le \eqref{eq:sostituzione-eulero}; \
+la primitiva \eqref{eq:integrale-eulero}.}
+\end{schema}
+
+\begin{strategia}
+Si risolve l'equazione di primo grado descritta sopra. La derivata di $t(x)$ risulta
+proporzionale a $t$ stessa: ciò dà la monotonia, che serve per tornare alla variabile
+$x$, e mostra che $\frac1{\sqrt{x^{2}+a}}$ è del tipo $\frac{\varphi'}\varphi$.
+\end{strategia}
+
+\begin{dimostrazione}
+Se fosse $t=0$, cioè $\sqrt{x^{2}+a}=-x$, elevando al quadrato si avrebbe $a=0$: dunque
+$t\neq0$ in $J$. Da $\sqrt{x^{2}+a}=t-x$ si ricava $x^{2}+a=t^{2}-2tx+x^{2}$, cioè
+$x=\frac{t^{2}-a}{2t}$, e quindi $\sqrt{x^{2}+a}=t-x=\frac{t^{2}+a}{2t}$. La funzione $t(x)$ è
+derivabile in $J$, con
+\[
+  t'(x)=1+\frac x{\sqrt{x^{2}+a}}=\frac{t(x)}{\sqrt{x^{2}+a}} .
+\]
+Poiché $t$ è continua e non si annulla nell'intervallo $J$, per il teorema degli zeri
+(\cref{teo:zeri}) ha segno costante, e così $t'$: per il \cref{cor:derivata-positiva}
+(applicato a $t$ o a $-t$), $t$ è strettamente monotòna. La sua inversa
+$x(t)=\frac{t^{2}-a}{2t}$ ha derivata $\frac12+\frac a{2t^{2}}=\frac{t^{2}+a}{2t^{2}}$, che è il
+fattore $dx$ della \eqref{eq:sostituzione-eulero}; per il \cref{teo:sostituzione}, con
+$g(t)=\frac{t^{2}-a}{2t}$, la funzione integranda diventa
+$R\bigl(\frac{t^{2}-a}{2t},\frac{t^{2}+a}{2t}\bigr)\frac{t^{2}+a}{2t^{2}}$, razionale in $t$.
+Infine, per la seconda delle \eqref{eq:integrali-composti} con $\varphi=t(x)$,
+\[
+  \int\frac{dx}{\sqrt{x^{2}+a}}=\int\frac{t'(x)}{t(x)}\,dx=\log\abs{t(x)}+c . \qedhere
+\]
+\end{dimostrazione}
+
+\begin{esempio}[L'integrale di $\sqrt{x^{2}+1}$]\label{es:radice-x2-piu-1}
+Con $a=1$ si ha $t=x+\sqrt{x^{2}+1}>0$ e, per le \eqref{eq:sostituzione-eulero},
+\[
+  \sqrt{x^{2}+1}\,dx=\frac{(t^{2}+1)^{2}}{4t^{3}}\,dt
+  =\Bigl(\frac t4+\frac1{2t}+\frac1{4t^{3}}\Bigr)dt ,
+\]
+la cui primitiva è $\frac{t^{2}}8+\frac12\log t-\frac1{8t^{2}}$. Per tornare alla variabile
+$x$ conviene osservare che $t-\frac1t=\frac{t^{2}-1}t=2x$ e $t+\frac1t=2\sqrt{x^{2}+1}$, così che
+$\frac{t^{2}}8-\frac1{8t^{2}}=\frac18\bigl(t-\frac1t\bigr)\bigl(t+\frac1t\bigr)=\frac12x\sqrt{x^{2}+1}$:
+\[
+  \int\sqrt{x^{2}+1}\,dx=\frac12\Bigl(x\sqrt{x^{2}+1}+\log\bigl(x+\sqrt{x^{2}+1}\bigr)\Bigr)+c ,
+\]
+analoga alla \eqref{eq:integrale-semicerchio}, con il logaritmo al posto
+dell'arcoseno.
+\end{esempio}
+
+Un radicando di secondo grado qualsiasi, $\alpha x^{2}+\beta x+\gamma$, si riconduce ai
+casi precedenti completando il quadrato, come nella \cref{prop:razionali-secondo-grado}.
+Se $\alpha>0$, con $u=\sqrt\alpha\,\bigl(x+\frac\beta{2\alpha}\bigr)$ esso diventa $u^{2}+a$, e si
+applica la sostituzione di Eulero; se $\alpha<0$, con $u=\sqrt{-\alpha}\,\bigl(x+\frac\beta{2\alpha}\bigr)$
+diventa $k^{2}-u^{2}$, e la sostituzione $u=k\sen\theta$, come nell'\cref{es:sostituzioni}(c),
+porta a una funzione razionale di $\sen\theta$ e $\cos\theta$, cioè al primo caso. Sostituzioni di entrambi i tipi compaiono
+già nelle \emph{Institutiones calculi integralis} di Eulero (1768); quella con
+$\tg\frac x2$ è oggi spesso attribuita, senza riscontri documentari, a Weierstrass.
+

@@ -1,0 +1,95 @@
+%% ----------------------------------------------------------------------------
+%%  §8.8  Punti fondamentali del capitolo
+%% ----------------------------------------------------------------------------
+\section{Punti fondamentali del capitolo}
+\label{sec:sintesi-cap08}
+
+L'idea centrale del capitolo è quella di Archimede, resa rigorosa dall'assioma di
+completezza: si approssima la grandezza da accumulare per difetto e per eccesso con
+somme di rettangoli, e l'integrale è l'unico numero che separa tutte le stime per
+difetto da tutte quelle per eccesso. Le proprietà dell'integrale e il teorema della
+media discendono da questa definizione; l'uniforme continuità garantisce che ogni
+funzione continua in un intervallo chiuso e limitato sia integrabile.
+
+\begin{puntichiave}
+\item \textbf{Somme integrali.} Per $f$ limitata in $[a,b]$ e una partizione $P$,
+$s(P)=\sum m_{k}\Delta x_{k}$ e $S(P)=\sum M_{k}\Delta x_{k}$, dove $m_{k}$ e $M_{k}$
+sono l'estremo inferiore e l'estremo superiore di $f$ in $[x_{k-1},x_{k}]$.
+Raffinando la partizione $s(P)$ non diminuisce e $S(P)$ non aumenta, e ogni somma
+inferiore è minore o uguale di ogni somma superiore
+(\cref{def:somme-integrali,lem:raffinamento}).
+\item \textbf{Integrale di Riemann.} Gli elementi separatori tra somme inferiori e
+superiori sono tutti e soli i numeri di $[s(f),S(f)]$, con $s(f)=\sup_{P}s(P)$ e
+$S(f)=\inf_{P}S(P)$; $f$ è integrabile se il separatore è unico, cioè se $s(f)=S(f)$, e
+tale numero è $\int_{a}^{b}f(x)\,dx$ (\cref{prop:separatori,def:integrale}). La sola
+limitatezza non basta: per la funzione di Dirichlet $s=0$ e $S=1$
+(\cref{es:dirichlet-non-integrabile}).
+\item \textbf{Criterio di integrabilità.} Una funzione limitata è integrabile se e solo
+se per ogni $\epsilon>0$ esiste una partizione con $S(P)-s(P)<\epsilon$. In pratica
+basta una successione di partizioni con $S(P_{n})-s(P_{n})\to0$: allora l'integrale è
+il limite comune di $s(P_{n})$ e $S(P_{n})$
+(\cref{teo:criterio-integrabilita,cor:limite-somme}).
+\item \textbf{I primi integrali.} Con la partizione uniforme e le differenze
+telescopiche si ottengono $\int_{a}^{b}c\,dx=c(b-a)$, $\int_{0}^{b}x\,dx=\frac{b^{2}}2$ e
+$\int_{0}^{b}x^{2}\,dx=\frac{b^{3}}3$, l'area del settore di parabola calcolata da
+Archimede (\cref{es:integrale-costante,es:integrale-x-x2,prop:settore-parabola}).
+\item \textbf{Proprietà dell'integrale.} Per $f$, $g$ integrabili valgono l'additività
+$\int_{a}^{b}f=\int_{a}^{c}f+\int_{c}^{b}f$ (per ogni ordine di $a,b,c$, con le
+convenzioni sugli estremi), la linearità, il confronto ($f\le g$ implica
+$\int_{a}^{b}f\le\int_{a}^{b}g$) e, se $f$ è integrabile, anche $\abs f$ lo è con
+$\bigl|\int_{a}^{b}f\bigr|\le\int_{a}^{b}\abs f$
+(\cref{teo:additivita,teo:linearita,teo:confronto-integrali,teo:valore-assoluto}).
+\item \textbf{Area e area con segno.} Per $f\ge0$ integrabile l'integrale
+\emph{definisce} l'area del rettangoloide. Se $f$ cambia segno,
+$\int_{a}^{b}f=\int_{a}^{b}f^{+}-\int_{a}^{b}f^{-}$ è una differenza di aree, mentre
+$\int_{a}^{b}\abs f$ è l'area totale (\cref{def:rettangoloide,fig:area-segno}).
+\item \textbf{Teorema della media.} Se $f$ è integrabile e $m\le f\le M$ in $[a,b]$, la
+media integrale $\frac1{b-a}\int_{a}^{b}f$ è compresa tra $m$ e $M$; se $f$ è
+\emph{continua} in $[a,b]$, esiste $x_{0}\in[a,b]$ con
+$\int_{a}^{b}f=f(x_{0})\,(b-a)$, e $x_{0}$ si può scegliere interno
+(\cref{prop:media-stima,teo:media,es:media-interno}). Senza continuità la tesi può
+essere falsa (\cref{oss:media-discontinua}).
+\item \textbf{Uniforme continuità.} Nella definizione il $\delta$ dipende soltanto da
+$\epsilon$, non dal punto: conta l'ordine dei quantificatori. Le funzioni $x^{2}$ su
+$\R$ e $\frac1x$ su $(0,1]$ sono continue ma non uniformemente continue
+(\cref{def:uniformemente-continua,es:x2-non-uniforme,es:uno-su-x-non-uniforme}).
+\item \textbf{Teorema di Cantor.} Una funzione continua in un intervallo
+\emph{chiuso e limitato} è uniformemente continua; la dimostrazione, per assurdo, usa
+il teorema di Bolzano--Weierstrass, ed entrambe le ipotesi sull'intervallo sono
+necessarie (\cref{teo:cantor}).
+\item \textbf{Funzioni lipschitziane.} Una funzione lipschitziana è uniformemente
+continua; una funzione derivabile in un intervallo è lipschitziana con costante $L$ se
+e solo se $\abs{f'}\le L$. La funzione $\sqrt x$ è uniformemente continua in $[0,1]$ ma
+non lipschitziana
+(\cref{prop:lipschitz-uniforme,teo:lipschitz-derivata,es:lipschitz-esempi}).
+\item \textbf{Funzioni integrabili.} Sono integrabili in $[a,b]$ le funzioni continue
+(con $S(P)-s(P)<\epsilon$ per \emph{ogni} partizione di ampiezza minore di un
+opportuno $\delta$), le funzioni monotòne e le funzioni limitate continue tranne che in
+un numero finito di punti; modificare $f$ in un numero finito di punti non cambia
+l'integrale
+(\cref{teo:integrabilita-continue,teo:integrabilita-monotone,es:continua-tratti,es:valore-in-un-punto}).
+\item \textbf{Somme di Riemann e quadratura.} Per $f$ continua, le somme di Riemann
+relative a partizioni di ampiezza tendente a zero convergono all'integrale, con punti
+$\xi_{k}$ arbitrari. Ne derivano le formule dei rettangoli (errore dell'ordine di
+$\frac1n$ per $f$ monotòna), del punto medio e dei trapezi (ordine $\frac1{n^{2}}$ se
+$f''$ è continua) e di Cavalieri--Simpson (\cref{teo:riemann-continue,fig:quadratura}).
+\item \textbf{Errori da evitare.} Integrabilità e continuità non coincidono: esistono
+funzioni discontinue integrabili e funzioni limitate non integrabili; l'integrabilità
+di $\abs f$ non implica quella di $f$; l'integrale di una funzione che cambia segno non
+è un'area; la media integrale non è, in generale, il valore nel punto medio
+(\cref{teo:valore-assoluto,es:media-x2}).
+\item \textbf{Applicazioni aeronautiche.} Con la teoria delle strisce la portanza
+totale è l'integrale della portanza per unità di apertura; per la distribuzione
+ellittica vale $L=\frac\pi4\,l_{0}b$. La corda media geometrica è $\bar c=\frac Sb$, con
+$AR=\frac b{\bar c}$, e la corda media aerodinamica è
+$c_{MA}=\frac2S\int_{0}^{s}c(y)^{2}\,dy$
+(\cref{es:portanza-ellittica-esatta,es:corda-media}).
+\end{puntichiave}
+
+\paragraph{Il filo del discorso.} Il capitolo ha definito l'integrale e ne ha
+garantito l'esistenza per le funzioni continue e monotòne, ma il calcolo effettivo è
+rimasto faticoso: abbiamo dovuto ricorrere a formule ad hoc per le somme, e alcuni
+valori, come l'area $\frac\pi2$ del semicerchio, sono stati soltanto ammessi. Il
+prossimo capitolo trasforma l'indizio dell'\cref{oss:indizio-tfc} nel teorema
+fondamentale del calcolo integrale: per calcolare $\int_{a}^{b}f$ basterà trovare una
+primitiva $G$ di $f$ e calcolare $G(b)-G(a)$.

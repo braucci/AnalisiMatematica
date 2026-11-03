@@ -1,0 +1,220 @@
+%% ----------------------------------------------------------------------------
+%%  §11.10  Esercizi di riepilogo
+%% ----------------------------------------------------------------------------
+\section{Esercizi di riepilogo}
+\label{sec:esercizi-cap11}
+
+Come nei capitoli precedenti, ogni soluzione è accompagnata da una nota sulla
+\emph{scelta logica} che la guida.
+
+\needspace{8\baselineskip}
+\subsection*{Somme di serie}
+
+\begin{esercizio}
+Calcolare $\displaystyle\sum_{k=1}^{\infty}\frac1{k(k+2)}$.
+\begin{soluzione}
+Decomponendo in fratti semplici, $\frac1{k(k+2)}=\frac12\bigl(\frac1k-\frac1{k+2}\bigr)$. Posto
+$b_{k}=\frac1k+\frac1{k+1}$, si ha $b_{k}-b_{k+1}=\frac1k-\frac1{k+2}$, e per la \cref{prop:serie-telescopica}
+$\sum_{k=1}^{\infty}\bigl(\frac1k-\frac1{k+2}\bigr)=b_{1}-\lim b_{n}=1+\frac12=\frac32$. Per la linearità la somma
+cercata è $\frac34$. \emph{Scelta logica:} quando il termine generale è una funzione razionale,
+la decomposizione in fratti semplici può rivelare una struttura telescopica; qui i
+termini si elidono «a distanza due», e il trucco è raggruppare due addendi consecutivi
+in $b_{k}$.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Studiare la serie $\sum_{k=1}^{\infty}\log\bigl(1+\frac1k\bigr)$.
+\begin{soluzione}
+Si ha $\log\bigl(1+\frac1k\bigr)=\log(k+1)-\log k=b_{k}-b_{k+1}$ con $b_{k}=-\log k$: per la
+\cref{prop:serie-telescopica}, $s_{n}=\log(n+1)$, e poiché $b_{n}\to-\infty$ la serie diverge a
+$+\infty$. In alternativa: $\log\bigl(1+\frac1n\bigr)\sim\frac1n$, e il confronto asintotico
+(\cref{cor:confronto-asintotico}) con la serie armonica dà la divergenza.
+\emph{Scelta logica:} il termine generale tende a zero, ma la condizione necessaria non
+basta; due strade indipendenti (somma esplicita, parte principale) conducono alla stessa
+conclusione.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Calcolare $\displaystyle\sum_{k=1}^{\infty}\frac{2^{k}+3^{k}}{6^{k}}$.
+\begin{soluzione}
+Il termine generale è $\bigl(\frac13\bigr)^{k}+\bigl(\frac12\bigr)^{k}$. Per la \eqref{eq:geometrica-generale}
+con $m=1$, $\sum_{k\ge1}\bigl(\frac13\bigr)^{k}=\frac{1/3}{1-1/3}=\frac12$ e $\sum_{k\ge1}\bigl(\frac12\bigr)^{k}=1$; per la linearità
+la somma è $\frac32$. \emph{Scelta logica:} si spezza il termine generale in somma di termini
+geometrici; la linearità è lecita perché entrambe le serie convergono.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Per quali $x>0$ converge la serie $\sum_{k=0}^{\infty}(\log x)^{k}$? Calcolarne la somma.
+\begin{soluzione}
+È una serie geometrica di ragione $\log x$: converge se e solo se $\abs{\log x}<1$, cioè
+$\frac1e<x<e$, e la somma è $\frac1{1-\log x}$. Per $x\ge e$ diverge, per $0<x\le\frac1e$ è indeterminata.
+\emph{Scelta logica:} riconoscere una serie geometrica «travestita» è il primo passo di
+fronte a una serie i cui termini sono potenze di un'unica espressione.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Calcolare $\displaystyle\sum_{k=0}^{\infty}\frac k{k!}$ e $\displaystyle\sum_{k=0}^{\infty}\frac{k^{2}}{k!}$.
+\begin{soluzione}
+Per $k\ge1$, $\frac k{k!}=\frac1{(k-1)!}$; il termine con $k=0$ è nullo. Quindi
+$\sum_{k=0}^{\infty}\frac k{k!}=\sum_{j=0}^{\infty}\frac1{j!}=e$ per la \eqref{eq:e-serie} (con $j=k-1$). Analogamente
+$\frac{k^{2}}{k!}=\frac k{(k-1)!}=\frac{(k-1)+1}{(k-1)!}$, e per $k\ge2$ si ha $\frac{k-1}{(k-1)!}=\frac1{(k-2)!}$; dunque
+$\sum_{k=0}^{\infty}\frac{k^{2}}{k!}=\sum_{j=0}^{\infty}\frac1{j!}+\sum_{j=0}^{\infty}\frac1{j!}=2e$. \emph{Scelta logica:} semplificando il
+fattoriale e cambiando indice ci si riconduce alla serie esponenziale; la linearità è
+lecita perché tutte le serie coinvolte convergono.
+\end{soluzione}
+\end{esercizio}
+
+\needspace{8\baselineskip}
+\subsection*{Criteri di convergenza}
+
+\begin{esercizio}\label{es:carattere}
+Studiare il carattere delle serie
+(a) $\sum\frac{k+1}{k^{3}+2}$; \ (b) $\sum\frac1{\sqrt{k(k+1)}}$; \ (c) $\sum\frac{k^{2}}{3^{k}}$; \
+(d) $\sum\frac{k!}{(2k)!}$; \ (e) $\sum\bigl(1-\frac1k\bigr)^{k^{2}}$; \ (f) $\sum_{k\ge2}\frac1{\log k}$.
+\begin{soluzione}
+(a) Converge: $n^{2}\cdot\frac{n+1}{n^{3}+2}\to1$, criterio degli infinitesimi con $p=2$.
+(b) Diverge: $n\cdot\frac1{\sqrt{n(n+1)}}\to1$, con $p=1$.
+(c) Converge per il criterio del rapporto: $\frac{(n+1)^{2}}{3^{n+1}}\cdot\frac{3^{n}}{n^{2}}\to\frac13$.
+(d) Converge per il criterio del rapporto: $\frac{(n+1)!}{(2n+2)!}\cdot\frac{(2n)!}{n!}=\frac{n+1}{(2n+1)(2n+2)}\to0$.
+(e) Converge per il criterio della radice: $\sqrt[n]{a_{n}}=\bigl(1-\frac1n\bigr)^{n}\to\frac1e<1$
+(\cref{teo:e-generalizzato}).
+(f) Diverge per il confronto: $\log k<k$, e quindi $\frac1{\log k}>\frac1k$.
+\emph{Scelta logica:} il criterio si sceglie guardando la forma del termine generale:
+potenze di $n$ (confronto, infinitesimi), esponenziali e fattoriali (rapporto), potenze
+con esponente $n$ (radice).
+\end{soluzione}
+\end{esercizio}
+
+\needspace{7\baselineskip}
+\begin{esercizio}
+Per quali $\alpha>0$ converge la serie $\sum_{k=1}^{\infty}\bigl(e^{1/k^{\alpha}}-1\bigr)$?
+\begin{soluzione}
+I termini sono positivi. Dallo sviluppo $e^{t}-1=t+o(t)$ con $t=\frac1{n^{\alpha}}\to0$ si ha
+$e^{1/n^{\alpha}}-1\sim\frac1{n^{\alpha}}$, e per il confronto asintotico la serie ha lo stesso carattere
+dell'armonica generalizzata con $p=\alpha$: converge se e solo se $\alpha>1$. \emph{Scelta logica:}
+la parte principale del termine generale riduce ogni serie di questo tipo a una serie
+armonica generalizzata.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Quanti termini della serie $\sum\frac1{k^{3}}$ occorre sommare per avere la somma con un
+errore inferiore a $10^{-4}$?
+\begin{soluzione}
+Per la \eqref{eq:resto-integrale-serie} con $f(x)=\frac1{x^{3}}$, il resto verifica
+$R_{n}\le\int_{n}^{+\infty}\frac{dx}{x^{3}}=\frac1{2n^{2}}$. Basta $\frac1{2n^{2}}<10^{-4}$, cioè $n^{2}>5000$, $n\ge71$. La
+stima dal basso $R_{n}\ge\frac1{2(n+1)^{2}}$ mostra che non si può fare molto meglio: per $n=60$
+l'errore è certamente maggiore di $10^{-4}$. \emph{Scelta logica:} per le serie a termini
+positivi e decrescenti il criterio dell'integrale fornisce non soltanto il carattere, ma
+anche una stima del resto dall'alto e dal basso.
+\end{soluzione}
+\end{esercizio}
+
+\needspace{8\baselineskip}
+\subsection*{Serie a segni alterni e convergenza assoluta}
+
+\begin{esercizio}
+Dimostrare che $\sum_{k=1}^{\infty}(-1)^{k}\frac k{k^{2}+1}$ converge, ma non assolutamente.
+\begin{soluzione}
+La funzione $g(x)=\frac x{x^{2}+1}$ ha derivata $g'(x)=\frac{1-x^{2}}{(x^{2}+1)^{2}}\le0$ per $x\ge1$: la
+successione $a_{n}=g(n)$ è decrescente, positiva e infinitesima, e la serie converge per il
+criterio di Leibniz. La serie dei valori assoluti diverge, perché $\frac n{n^{2}+1}\sim\frac1n$.
+\emph{Scelta logica:} la monotonia di una successione definita da una funzione si
+verifica comodamente con il segno della derivata.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Calcolare $\sum_{k=1}^{\infty}\frac{(-1)^{k-1}}{k^{3}}$ con un errore inferiore a $10^{-3}$.
+\begin{soluzione}
+La serie verifica le ipotesi del criterio di Leibniz, e per la \eqref{eq:stima-leibniz}
+basta $\frac1{(n+1)^{3}}\le10^{-3}$, cioè $n+1\ge10$. La somma dei primi $9$ termini è
+$s_{9}\approx0{,}90212$, e la somma vera è compresa tra $s_{10}=s_{9}-10^{-3}$ e $s_{9}$; poiché i termini sono
+strettamente decrescenti, essa è diversa da entrambi (le estratte pari e dispari sono
+strettamente monotòne), e l'errore è strettamente minore di $10^{-3}$. Il valore è
+$0{,}901543\ldots$ \emph{Scelta logica:} la serie converge anche assolutamente, ma per la
+stima dell'errore il criterio di Leibniz è molto più preciso di quello dell'integrale
+applicato alla serie dei valori assoluti.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}\label{es:serie-xk-su-k}
+Determinare gli $x\in\R$ per cui converge la serie $\sum_{k=1}^{\infty}\frac{x^{k}}k$, e calcolarne la
+somma.
+\begin{soluzione}
+Il rapporto dei valori assoluti è $\frac{\abs x\,n}{n+1}\to\abs x$: per il \cref{cor:rapporto-assoluto}
+la serie converge assolutamente se $\abs x<1$ e non converge se $\abs x>1$. Per $x=1$ è la
+serie armonica, divergente; per $x=-1$ è l'opposto della serie armonica alternata,
+convergente. Dunque la serie converge se e solo se $-1\le x<1$, e, per la \eqref{eq:serie-log}
+con $-x$ al posto di $x$, la somma è $-\log(1-x)$. \emph{Scelta logica:} il criterio del
+rapporto decide all'interno e all'esterno dell'intervallo $(-1,1)$, ma non agli estremi,
+dove $\ell=1$: lì servono considerazioni specifiche.
+\end{soluzione}
+\end{esercizio}
+
+\needspace{8\baselineskip}
+\subsection*{Applicazioni}
+
+\begin{esercizio}[Resistenza indotta di un'ala non ellittica]
+Per un'ala simmetrica i coefficienti di Glauert valgono $\frac{A_{3}}{A_{1}}=0{,}05$, $\frac{A_{5}}{A_{1}}=0{,}01$,
+e i successivi sono trascurabili. Stimare l'aumento percentuale della resistenza indotta
+rispetto all'ala ellittica con la stessa portanza e lo stesso allungamento.
+\begin{soluzione}
+Per la \eqref{eq:resistenza-indotta}, $\delta\approx3\cdot0{,}05^{2}+5\cdot0{,}01^{2}=0{,}0075+0{,}0005=0{,}008$: la
+resistenza indotta è maggiore di circa lo $0{,}8\%$. Poiché la serie è a termini non
+negativi, trascurare i termini successivi porta a una stima \emph{per difetto} di $\delta$.
+\emph{Scelta logica:} in una serie a termini non negativi ogni somma parziale è un
+minorante della somma; il segno dell'errore di troncamento è quindi noto.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}[Un rimbalzo smorzato]
+Un corpo lasciato cadere da un'altezza $h_{0}$ rimbalza ogni volta fino a un'altezza pari a
+una frazione $r<1$ della precedente. Calcolare lo spazio totale percorso e la durata
+totale del moto, trascurando la resistenza dell'aria e la durata degli urti.
+\begin{soluzione}
+Lo spazio è $h_{0}+2rh_{0}+2r^{2}h_{0}+\dots=h_{0}+2h_{0}\frac r{1-r}=h_{0}\frac{1+r}{1-r}$. Il tempo di caduta da
+un'altezza $h$ è $\sqrt{2h/g}$, e quindi una salita e una discesa dall'altezza $r^{k}h_{0}$ durano
+$2\sqrt{2h_{0}/g}\,(\sqrt r)^{k}$. La durata totale è
+$t_{0}+2t_{0}\sum_{k\ge1}(\sqrt r)^{k}=t_{0}\frac{1+\sqrt r}{1-\sqrt r}$, con $t_{0}=\sqrt{2h_{0}/g}$: infiniti rimbalzi in
+un tempo finito (il numero $\sqrt r$ è il coefficiente di restituzione dell'urto; gli
+infiniti rimbalzi sono naturalmente un'idealizzazione del modello). Con $h_{0}=1$~m e
+$r=0{,}64$ lo spazio è $4{,}56$~m e la durata
+$9t_{0}\approx4{,}06$~s. \emph{Scelta logica:} ogni grandezza che si riduce a ogni passo di un
+fattore costante dà luogo a una serie geometrica; spazio e tempo sono due serie
+geometriche di ragioni diverse, $r$ e $\sqrt r$.
+\end{soluzione}
+\end{esercizio}
+
+\begin{python}[Verifica degli esercizi]
+import math
+import sympy as sp
+
+k = sp.symbols('k', integer=True, positive=True)
+print(sp.summation(1 / (k * (k + 2)), (k, 1, sp.oo)))
+print(sp.summation((2**k + 3**k) / 6**k, (k, 1, sp.oo)))
+print(sp.summation(k / sp.factorial(k), (k, 1, sp.oo)),
+      sp.summation(k**2 / sp.factorial(k), (k, 1, sp.oo)))
+s3 = sp.summation((-1)**(k - 1) / k**3, (k, 1, sp.oo))
+print(s3, "=", sp.N(s3, 8))
+s9 = sum((-1)**(j - 1) / j**3 for j in range(1, 10))
+print(f"s_9 = {s9:.6f}")
+n = next(n for n in range(1, 1000) if 1 / (2 * n**2) < 1e-4)
+print("termini per 1/k^3 con errore < 1e-4:", n)
+r, t0 = 0.64, math.sqrt(2 / 9.81)
+print(f"rimbalzi: spazio {(1+r)/(1-r):.2f} m, durata "
+      f"{t0 * (1 + math.sqrt(r)) / (1 - math.sqrt(r)):.2f} s")
+\end{python}
+\begin{risultato}
+3/4
+3/2
+E 2*E
+dirichlet_eta(3) = 0.90154268
+s_9 = 0.902116
+termini per 1/k^3 con errore < 1e-4: 71
+rimbalzi: spazio 4.56 m, durata 4.06 s
+\end{risultato}

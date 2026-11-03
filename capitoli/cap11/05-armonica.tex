@@ -1,0 +1,369 @@
+%% ----------------------------------------------------------------------------
+%%  §11.5  La serie armonica
+%% ----------------------------------------------------------------------------
+\section{La serie armonica}
+\label{sec:serie-armonica}
+
+La serie
+\begin{equation}\label{eq:serie-armonica}
+  \sum_{k=1}^{\infty}\frac1k=1+\frac12+\frac13+\dots+\frac1n+\cdots
+\end{equation}
+si chiama \emph{serie armonica}\index{serie!armonica}. Il suo termine generale tende a zero,
+e le somme parziali crescono molto lentamente: ci vogliono più di dodicimila termini
+perché superino $10$. Eppure la serie diverge. Poiché il risultato è importante e un po'
+sorprendente, ne diamo tre dimostrazioni, ciascuna delle quali insegna qualcosa.
+
+\begin{teorema}[Divergenza della serie armonica]\label{teo:armonica}
+La serie armonica è divergente: $\sum_{k=1}^{\infty}\frac1k=+\infty$. Più precisamente, le sue
+somme parziali $H_{n}=\sum_{k=1}^{n}\frac1k$ verificano
+\begin{equation}\label{eq:armonica-log}
+  H_{n}\ge\log(n+1) \qquad\perogni n\in\N .
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$H_{n}=\sum_{k=1}^{n}\frac1k$.}
+\Tesi{$H_{n}\ge\log(n+1)$ per ogni $n$; \ quindi $H_{n}\to+\infty$.}
+\end{schema}
+
+\begin{strategia}
+Confrontiamo la somma con un'area. Il termine $\frac1k$ è l'area di un rettangolo di base
+$[k,k+1]$ e altezza $\frac1k$, che contiene la regione sotto il grafico di $\frac1x$ nello stesso
+intervallo, perché $\frac1x\le\frac1k$ per $x\ge k$ (\cref{fig:armonica-integrale}, a sinistra).
+Sommando, $H_{n}$ supera l'integrale di $\frac1x$ tra $1$ e $n+1$, cioè $\log(n+1)$, che diverge.
+\end{strategia}
+
+\begin{dimostrazione}[Prima dimostrazione (con l'integrale)]
+Per ogni $k\in\N$ e ogni $x\in[k,k+1]$ si ha $\frac1x\le\frac1k$. Per il confronto tra integrali
+(\cref{teo:confronto-integrali}),
+\begin{equation}\label{eq:armonica-rettangolo}
+  \int_{k}^{k+1}\frac{dx}x\le\int_{k}^{k+1}\frac{dx}k=\frac1k .
+\end{equation}
+Sommando per $k$ da $1$ a $n$ e usando l'additività dell'integrale (\cref{teo:additivita})
+e la formula fondamentale del calcolo integrale,
+\[
+  H_{n}=\sum_{k=1}^{n}\frac1k\ge\sum_{k=1}^{n}\int_{k}^{k+1}\frac{dx}x=\int_{1}^{n+1}\frac{dx}x=\log(n+1) .
+\]
+Poiché $\log(n+1)\to+\infty$, per il teorema del confronto (\cref{teo:confronto-infinito})
+anche $H_{n}\to+\infty$.
+\end{dimostrazione}
+
+La seconda dimostrazione ottiene la stessa disuguaglianza senza il calcolo integrale,
+usando le proprietà del numero $e$.
+
+\begin{dimostrazione}[Seconda dimostrazione (con il numero $e$)]
+Per il \cref{teo:numero-e} si ha $\bigl(1+\frac1k\bigr)^{k}<e$ per ogni $k\in\N$. Poiché il
+logaritmo è crescente,
+\[
+  k\log\Bigl(1+\frac1k\Bigr)=\log\Bigl(1+\frac1k\Bigr)^{k}<\log e=1 ,
+\]
+cioè
+\[
+  \frac1k>\log\frac{k+1}k=\log(k+1)-\log k .
+\]
+Sommando per $k=1,\dots,n$, il secondo membro è una somma telescopica
+(\cref{prop:serie-telescopica}):
+$H_{n}>\log(n+1)-\log1=\log(n+1)$.
+\end{dimostrazione}
+
+La terza dimostrazione, la più antica, raggruppa i termini a blocchi e usa il criterio di
+Cauchy.
+
+\begin{dimostrazione}[Terza dimostrazione (con il criterio di Cauchy)]
+Per ogni $n\in\N$, il blocco dei $n$ termini da $\frac1{n+1}$ a $\frac1{2n}$ verifica
+\[
+  \sum_{k=n+1}^{2n}\frac1k=\frac1{n+1}+\frac1{n+2}+\dots+\frac1{2n}\ge n\cdot\frac1{2n}=\frac12 ,
+\]
+perché ciascuno dei suoi $n$ termini è almeno $\frac1{2n}$. Dunque la condizione
+\eqref{eq:cauchy-serie} è violata con $\epsilon=\frac12$ e $p=n$, per ogni $n$: la serie non
+converge (\cref{teo:cauchy-serie}). Essendo a termini positivi, diverge a $+\infty$
+(\cref{teo:serie-positive}).
+\end{dimostrazione}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.53\textwidth, height=4.6cm, xmin=0, xmax=8.6, ymin=0, ymax=1.15,
+  axis lines=left, xtick={1,2,...,8}, ytick={0,0.5,1}, axis on top,
+  title={\scriptsize $H_{n}\ge\int_{1}^{n+1}\frac{dx}x$}, tick label style={font=\scriptsize}]
+  \addplot[fill=blu!20, draw=blu, ybar interval]
+    coordinates {(1,1) (2,0.5) (3,0.3333) (4,0.25) (5,0.2) (6,0.1667) (7,0.1429) (8,0)};
+  \addplot[curva, domain=0.87:8.6, samples=80] {1/x};
+\end{axis}
+\end{tikzpicture}\hfill
+\begin{tikzpicture}
+\begin{axis}[width=0.53\textwidth, height=4.6cm, xmin=0, xmax=8.6, ymin=0, ymax=1.15,
+  axis lines=left, xtick={1,2,...,8}, ytick={0,0.5,1}, axis on top,
+  title={\scriptsize $H_{n+1}-1\le\int_{1}^{n+1}\frac{dx}x$}, tick label style={font=\scriptsize}]
+  \addplot[fill=rame!30, draw=rame, ybar interval]
+    coordinates {(1,0.5) (2,0.3333) (3,0.25) (4,0.2) (5,0.1667) (6,0.1429) (7,0.125) (8,0)};
+  \addplot[curva, domain=0.87:8.6, samples=80] {1/x};
+\end{axis}
+\end{tikzpicture}
+\caption{Il confronto tra la serie armonica e l'integrale di $\frac1x$. A sinistra i
+rettangoli di altezza $\frac1k$ sulle basi $[k,k+1]$ contengono la regione sotto il grafico:
+$H_{n}\ge\log(n+1)$. A destra i rettangoli di altezza $\frac1{k+1}$ sono contenuti in essa:
+$H_{n+1}-1\le\log(n+1)$. Le somme parziali sono quindi «intrappolate» tra due logaritmi.}
+\label{fig:armonica-integrale}
+\end{figure}
+
+\subsection{Il criterio dell'integrale e la serie armonica generalizzata}
+
+Il ragionamento della prima dimostrazione funziona per ogni funzione positiva e
+decrescente, e collega il carattere di una serie a quello di un integrale improprio
+(\S\ref{sec:impropri}).
+
+\begin{teorema}[Criterio dell'integrale]\label{teo:criterio-integrale}
+\index{criterio dell'integrale}
+Sia $f$ continua, non negativa e decrescente in $[1,+\infty)$, e sia $a_{k}=f(k)$. Allora
+per ogni $n\in\N$
+\begin{equation}\label{eq:criterio-integrale}
+  \int_{1}^{n+1}f(x)\,dx\le\sum_{k=1}^{n}a_{k}\le a_{1}+\int_{1}^{n}f(x)\,dx ,
+\end{equation}
+e la serie $\sum_{k=1}^{\infty}a_{k}$ converge se e solo se converge l'integrale improprio
+$\int_{1}^{+\infty}f(x)\,dx$. In tal caso il resto $R_{n}=\sum_{k=n+1}^{\infty}a_{k}$ verifica
+\begin{equation}\label{eq:resto-integrale-serie}
+  \int_{n+1}^{+\infty}f(x)\,dx\le R_{n}\le\int_{n}^{+\infty}f(x)\,dx .
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$ continua, $f\ge0$, decrescente in $[1,+\infty)$; \ $a_{k}=f(k)$.}
+\Tesi{la \eqref{eq:criterio-integrale}; \ $\sum a_{k}<+\infty$ $\sse$
+$\int_{1}^{+\infty}f<+\infty$; \ la stima \eqref{eq:resto-integrale-serie} del resto.}
+\end{schema}
+
+\begin{strategia}
+Come nella \cref{fig:armonica-integrale}: nell'intervallo $[k,k+1]$ la funzione
+decrescente sta tra $f(k+1)$ e $f(k)$, e integrando si ottiene
+$a_{k+1}\le\int_{k}^{k+1}f\le a_{k}$. Sommando si ottengono le due stime. Le somme parziali e la
+funzione integrale $b\mapsto\int_{1}^{b}f$ sono entrambe crescenti, e le stime dicono che una è
+limitata se e solo se lo è l'altra.
+\end{strategia}
+
+\begin{dimostrazione}
+Per $x\in[k,k+1]$ la monotonia dà $f(k+1)\le f(x)\le f(k)$, e per il confronto tra
+integrali
+\begin{equation}\label{eq:integrale-intrappolato}
+  a_{k+1}\le\int_{k}^{k+1}f(x)\,dx\le a_{k} \qquad\perogni k\in\N .
+\end{equation}
+Sommando la disuguaglianza di destra per $k=1,\dots,n$ si ottiene
+$\int_{1}^{n+1}f\le\sum_{k=1}^{n}a_{k}$; sommando quella di sinistra per $k=1,\dots,n-1$ si ottiene
+$\sum_{k=2}^{n}a_{k}\le\int_{1}^{n}f$, cioè la seconda delle \eqref{eq:criterio-integrale}.
+
+Poiché $f\ge0$, la funzione $F(b)=\int_{1}^{b}f$ è crescente, e per il \cref{lem:monotona-infinito}
+ha limite per $b\to+\infty$, finito se e solo se $F$ è limitata; inoltre, essendo crescente,
+$F$ è limitata se e solo se lo è la successione $F(n)$. Le \eqref{eq:criterio-integrale}
+mostrano che $s_{n}$ è limitata se e solo se $F(n)$ lo è, e per il \cref{teo:serie-positive}
+la serie converge se e solo se converge l'integrale.
+
+Infine, sommando le \eqref{eq:integrale-intrappolato} per $k$ da $n+1$ a $m$ si ha
+$\int_{n+1}^{m+1}f\le\sum_{k=n+1}^{m}a_{k}$ e, per $k$ da $n$ a $m-1$, $\sum_{k=n+1}^{m}a_{k}\le\int_{n}^{m}f$;
+per $m\to+\infty$ si ottiene la \eqref{eq:resto-integrale-serie}.
+\end{dimostrazione}
+
+\begin{teorema}[Serie armonica generalizzata]\label{teo:armonica-generalizzata}
+\index{serie!armonica generalizzata}
+La serie
+\begin{equation}\label{eq:armonica-generalizzata}
+  \sum_{k=1}^{\infty}\frac1{k^{p}}=1+\frac1{2^{p}}+\frac1{3^{p}}+\dots+\frac1{n^{p}}+\cdots
+\end{equation}
+è convergente se $p>1$ ed è divergente se $p\le1$.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$p\in\R$.}
+\Tesi{$\sum\frac1{k^{p}}<+\infty$ $\sse$ $p>1$.}
+\end{schema}
+
+\begin{strategia}
+Per $p>0$ la funzione $\frac1{x^{p}}$ è positiva e decrescente, e il criterio dell'integrale
+riduce il problema all'integrale improprio $\int_{1}^{+\infty}\frac{dx}{x^{p}}$, già calcolato nel
+\cref{cap:integrali-indefiniti}. Per $p\le0$ il termine generale non tende a zero.
+\end{strategia}
+
+\begin{dimostrazione}
+Se $p\le0$, $\frac1{k^{p}}=k^{-p}\ge1$ non tende a zero, e la serie (a termini positivi) diverge
+per il \cref{teo:condizione-necessaria}. Se $p>0$, la funzione $f(x)=x^{-p}$ è continua,
+positiva e decrescente in $[1,+\infty)$; per il \cref{teo:criterio-integrale} e la
+\eqref{eq:impropri-p-infinito}, la serie converge se e solo se $p>1$.
+\end{dimostrazione}
+
+Per $p>1$ la \eqref{eq:criterio-integrale} dà anche
+$\frac{(n+1)^{1-p}-1}{1-p}\le s_{n}\le1+\frac{1-n^{1-p}}{p-1}$, e passando al limite
+$\frac1{p-1}\le\sum_{k=1}^{\infty}\frac1{k^{p}}\le\frac p{p-1}$. Ad esempio $1\le\sum\frac1{k^{2}}\le2$; il valore esatto
+è $\frac{\pi^{2}}6\approx1{,}6449$, come scoprì Eulero nel 1734. La stima del resto
+\eqref{eq:resto-integrale-serie} con $f(x)=\frac1{x^{2}}$ dice che
+$\frac1{n+1}\le\frac{\pi^{2}}6-\sum_{k=1}^{n}\frac1{k^{2}}\le\frac1n$: con cento termini si ottiene una sola cifra
+decimale esatta (l'errore è circa $10^{-2}$).
+
+\subsection{La costante di Eulero--Mascheroni}
+
+Le somme parziali della serie armonica divergono, ma in modo molto regolare: sono vicine
+a $\log n$, e la differenza ha un limite.
+
+\begin{proposizione}[Costante di Eulero--Mascheroni]\label{prop:eulero-mascheroni}
+\index{costante di Eulero--Mascheroni}
+La successione $d_{n}=H_{n}-\log n$ è decrescente e verifica $0\le d_{n}\le1$. Il suo limite
+\begin{equation}\label{eq:eulero-mascheroni}
+  \gamma=\lim_{n\to+\infty}\Bigl(1+\frac12+\dots+\frac1n-\log n\Bigr)=0{,}5772156649\ldots
+\end{equation}
+si chiama \emph{costante di Eulero--Mascheroni}. In particolare $H_{n}=\log n+\gamma+o(1)$.
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$d_{n}=H_{n}-\log n$.}
+\Tesi{$d_{n+1}\le d_{n}$; \ $0\le d_{n}\le1$; \ quindi $d_{n}\to\gamma\in[0,1]$.}
+\end{schema}
+
+\begin{strategia}
+Basta mostrare che $d_{n}$ è monotòna e limitata. La differenza $d_{n}-d_{n+1}$ è l'area compresa,
+nell'intervallo $[n,n+1]$, tra il grafico di $\frac1x$ e il rettangolo di altezza $\frac1{n+1}$:
+è positiva. La limitazione dal basso viene dalla stima \eqref{eq:armonica-log}, che dice
+che $H_{n}$ supera $\log(n+1)$, e quindi anche $\log n$.
+\end{strategia}
+
+\begin{dimostrazione}
+Si ha $d_{n}-d_{n+1}=\log(n+1)-\log n-\frac1{n+1}=\int_{n}^{n+1}\bigl(\frac1x-\frac1{n+1}\bigr)dx\ge0$,
+perché l'integrando è non negativo in $[n,n+1]$: la successione è decrescente, e quindi
+$d_{n}\le d_{1}=1$. Inoltre, per la \eqref{eq:armonica-log},
+$d_{n}\ge\log(n+1)-\log n>0$. Per il teorema sulle successioni monotòne $d_{n}$ converge a un
+limite $\gamma\in[0,1]$.
+\end{dimostrazione}
+
+La relazione $H_{n}\approx\log n+\gamma$ spiega la lentezza della divergenza: per avere
+$H_{n}>10$ occorre $n\approx e^{10-\gamma}\approx12\,367$, e per $H_{n}>100$ un numero di termini
+dell'ordine di $10^{43}$. Non si sa ancora se $\gamma$ sia un numero razionale.
+
+\begin{python}[Serie armonica, costante di Eulero e problema di Basilea]
+import math
+
+H, n = 0.0, 0
+while H <= 10:                        # primo n con H_n > 10
+    n += 1
+    H += 1 / n
+print(f"H_n > 10 per la prima volta con n = {n}")
+
+H, N = 0.0, 1
+for k in range(1, 10**6 + 1):
+    H += 1 / k
+    if k == N:
+        print(f"n = {k:>7}:  H_n - log n = {H - math.log(k):.8f}")
+        N *= 10
+
+s = sum(1 / k**2 for k in range(1, 101))
+print(f"pi^2/6 - s_100 = {math.pi**2 / 6 - s:.6f}"
+      f"   (stima: tra {1/101:.6f} e {1/100:.6f})")
+\end{python}
+\begin{risultato}
+H_n > 10 per la prima volta con n = 12367
+n =       1:  H_n - log n = 1.00000000
+n =      10:  H_n - log n = 0.62638316
+n =     100:  H_n - log n = 0.58220733
+n =    1000:  H_n - log n = 0.57771558
+n =   10000:  H_n - log n = 0.57726566
+n =  100000:  H_n - log n = 0.57722066
+n = 1000000:  H_n - log n = 0.57721616
+pi^2/6 - s_100 = 0.009950   (stima: tra 0.009901 e 0.010000)
+\end{risultato}
+
+\subsection{Approfondimento: il criterio di condensazione di Cauchy}
+\label{subsec:condensazione}
+
+La terza dimostrazione della divergenza della serie armonica raggruppava i termini in
+blocchi sempre più lunghi. Se i blocchi hanno lunghezza $1,2,4,8,\dots$, l'idea funziona
+per ogni successione non negativa e decrescente, e conduce a un criterio, dovuto a
+Cauchy (\emph{Cours d'analyse}, 1821), che non richiede il calcolo integrale: la serie
+data ha lo stesso carattere di una serie formata soltanto dai termini di indice $2^{k}$,
+ciascuno moltiplicato per $2^{k}$, cioè per il numero dei termini del blocco che
+rappresenta.
+
+\begin{teorema}[Criterio di condensazione]\label{teo:condensazione}
+\index{criterio di condensazione}
+Sia $a_{n}$ una successione non negativa e decrescente. Allora le serie
+\begin{equation}\label{eq:condensazione}
+  \sum_{n=1}^{\infty}a_{n} \qquad\text{e}\qquad
+  \sum_{k=0}^{\infty}2^{k}a_{2^{k}}=a_{1}+2a_{2}+4a_{4}+8a_{8}+\cdots
+\end{equation}
+hanno lo stesso carattere. Più precisamente, dette $s_{n}=\sum_{j=1}^{n}a_{j}$ e
+$t_{m}=\sum_{k=0}^{m}2^{k}a_{2^{k}}$ le somme parziali delle due serie, per ogni intero $m\ge0$
+\begin{equation}\label{eq:condensazione-stime}
+  \tfrac12\,t_{m}\le s_{2^{m}} \qquad\text{e}\qquad s_{2^{m+1}-1}\le t_{m} .
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$a_{n}\ge0$; \ $a_{n+1}\le a_{n}$ per ogni $n\in\N$.}
+\Tesi{$\sum a_{n}<+\infty$ $\sse$ $\sum 2^{k}a_{2^{k}}<+\infty$; \ le stime
+\eqref{eq:condensazione-stime}.}
+\end{schema}
+
+\begin{strategia}
+Si dividono gli indici in blocchi compresi tra due potenze di $2$ consecutive. Il blocco
+da $2^{k}$ a $2^{k+1}-1$ ha $2^{k}$ termini, tutti non maggiori del primo, $a_{2^{k}}$, perché la
+successione decresce; il blocco da $2^{k-1}+1$ a $2^{k}$ ha $2^{k-1}$ termini, tutti non minori
+dell'ultimo, $a_{2^{k}}$. Sommando sui blocchi si ottengono le due stime, e per le serie a
+termini non negativi la limitatezza delle somme parziali passa dall'una all'altra.
+\end{strategia}
+
+\begin{dimostrazione}
+Per ogni $k\ge0$ il blocco degli indici $j$ con $2^{k}\le j\le2^{k+1}-1$ contiene $2^{k}$ indici,
+e per la monotonia $a_{j}\le a_{2^{k}}$; quindi la somma dei termini del blocco è al più
+$2^{k}a_{2^{k}}$. Gli indici da $1$ a $2^{m+1}-1$ sono l'unione dei blocchi con $k=0,1,\dots,m$, e
+sommando si ottiene $s_{2^{m+1}-1}\le\sum_{k=0}^{m}2^{k}a_{2^{k}}=t_{m}$.
+
+Per ogni $k\ge1$ il blocco degli indici $j$ con $2^{k-1}+1\le j\le2^{k}$ contiene $2^{k-1}$ indici, e
+$a_{j}\ge a_{2^{k}}$; la somma dei suoi termini è quindi almeno $2^{k-1}a_{2^{k}}$. Gli indici da $2$
+a $2^{m}$ sono l'unione di questi blocchi con $k=1,\dots,m$, e
+\[
+  s_{2^{m}}\ge a_{1}+\sum_{k=1}^{m}2^{k-1}a_{2^{k}}=a_{1}+\tfrac12\,(t_{m}-a_{1})\ge\tfrac12\,t_{m} .
+\]
+Le due serie sono a termini non negativi, e per il \cref{teo:serie-positive} basta
+confrontare la limitatezza delle somme parziali. Se $t_{m}\le T$ per ogni $m$, dato $n$ si
+ha $n\le2^{n+1}-1$, e poiché $s_{n}$ è crescente $s_{n}\le s_{2^{n+1}-1}\le t_{n}\le T$: le $s_{n}$ sono limitate.
+Se invece $s_{n}\le S$ per ogni $n$, la prima stima dà $t_{m}\le2s_{2^{m}}\le2S$. Dunque le due
+serie convergono o divergono insieme.
+\end{dimostrazione}
+
+Passando al limite nelle \eqref{eq:condensazione-stime}, la somma della serie data risulta
+compresa tra la metà della somma della serie condensata e la somma stessa. Il criterio
+richiede soltanto la monotonia, non una funzione continua di cui calcolare l'integrale:
+è la versione «discreta» del criterio dell'integrale.
+
+\begin{esempio}[L'armonica generalizzata senza integrali]\label{es:condensazione-armonica}
+Ritroviamo il \cref{teo:armonica-generalizzata}. Se $p\le0$, il termine generale non
+tende a zero. Se $p>0$, la successione $a_{n}=n^{-p}$ è positiva e decrescente, e
+\[
+  2^{k}a_{2^{k}}=2^{k}\,(2^{k})^{-p}=\bigl(2^{1-p}\bigr)^{k} :
+\]
+la serie condensata è la serie geometrica di ragione $2^{1-p}>0$, che converge se e solo
+se $2^{1-p}<1$, cioè $p>1$ (\cref{teo:serie-geometrica}). Per $p=1$ la serie condensata
+è $1+1+1+\cdots$: è l'argomento di Oresme. Per $p>1$ si ha anche
+$\sum_{n\ge1}\frac1{n^{p}}\le\frac1{1-2^{1-p}}$, che per $p=2$ vale $2$.
+\end{esempio}
+
+\begin{esempio}[Serie con il logaritmo]\label{es:condensazione-log}
+Sia $p>0$. I termini della serie $\sum_{n=2}^{\infty}\frac1{n(\log n)^{p}}$ sono positivi e
+decrescenti, perché il denominatore cresce; ponendo $a_{1}=a_{2}$, il che non cambia il carattere (\cref{teo:resto-serie}),
+si può applicare il criterio. Per $k\ge1$
+\[
+  2^{k}a_{2^{k}}=\frac{2^{k}}{2^{k}\,(k\log2)^{p}}=\frac1{(\log2)^{p}}\cdot\frac1{k^{p}} ,
+\]
+e la serie condensata è, a meno della costante $(\log2)^{-p}$, la serie armonica
+generalizzata di esponente $p$. Dunque $\sum_{n\ge2}\frac1{n(\log n)^{p}}$ converge se e solo se
+$p>1$. Per $p=1$ si ottiene la divergenza di $\sum\frac1{n\log n}$, una serie che, come
+vedremo nel \S\ref{sec:criteri-convergenza}, sfugge al criterio degli infinitesimi.
+\end{esempio}
+
+\begin{notastorica}[Oresme, i Bernoulli, Eulero]
+La terza dimostrazione della divergenza della serie armonica risale a Nicola d'Oresme,
+che intorno al 1350 raggruppò i termini a blocchi di lunghezza $1,2,4,8,\dots$, ciascuno di
+somma almeno $\frac12$: sono i blocchi da $\frac1{n+1}$ a $\frac1{2n}$ con $n=2^{j}$: è il criterio di
+condensazione applicato alla serie armonica. La dimostrazione cadde nell'oblio e il risultato fu ritrovato da Pietro
+Mengoli (1650) e dai fratelli Jakob e Johann Bernoulli (1689). Il problema di calcolare
+$\sum\frac1{k^{2}}$, posto da Mengoli, divenne noto come \emph{problema di Basilea}, dalla città
+dei Bernoulli, che non riuscirono a risolverlo; lo risolse nel 1734 il giovane Eulero,
+che trovò $\frac{\pi^{2}}6$ con un ragionamento audace, reso rigoroso solo in seguito. Nello
+stesso periodo Eulero introdusse la costante $\gamma$; Lorenzo Mascheroni, matematico di
+Bergamo, ne calcolò nel 1790 trentadue cifre decimali, non tutte esatte.
+\end{notastorica}

@@ -1,0 +1,254 @@
+%% ----------------------------------------------------------------------------
+%%  §9.4  Integrazione delle funzioni razionali
+%% ----------------------------------------------------------------------------
+\section{Integrazione delle funzioni razionali}
+\label{sec:razionali}
+
+È sempre possibile, in linea di principio, calcolare per decomposizione in somma
+l'integrale indefinito delle \emph{funzioni razionali}, cioè delle funzioni che sono
+rapporto di due polinomi:
+\begin{equation}\label{eq:funzione-razionale}
+  \frac{f(x)}{g(x)}=\frac{a_{m}x^{m}+a_{m-1}x^{m-1}+\dots+a_{1}x+a_{0}}
+  {b_{n}x^{n}+b_{n-1}x^{n-1}+\dots+b_{1}x+b_{0}}, \qquad a_{m},b_{n}\neq0 .
+\end{equation}
+Il procedimento si svolge in due tempi: prima ci si riconduce al caso in cui il grado del
+numeratore è minore di quello del denominatore, poi si scompone la frazione in frazioni
+«semplici», i cui integrali sono immediati.
+
+\subsection{La divisione tra polinomi}
+
+Se $m\ge n$, si esegue la \emph{divisione} tra i polinomi $f$ e $g$: come si dimostra in
+algebra (per induzione sul grado di $f$), esistono e sono unici due polinomi $q$, il
+\emph{quoziente}, e $r$, il \emph{resto}, con $r$ nullo oppure di grado minore di $n$, tali
+che
+\begin{equation}\label{eq:divisione-polinomi}
+  f(x)=g(x)\,q(x)+r(x), \qquad\text{cioè}\qquad \frac{f(x)}{g(x)}=q(x)+\frac{r(x)}{g(x)} .
+\end{equation}
+Il polinomio $q$ si integra immediatamente, e resta da integrare la funzione razionale
+$\frac rg$, nella quale il grado del numeratore è minore di quello del denominatore.
+
+\begin{esempio}[Una divisione]\label{es:divisione-polinomi}
+Dividiamo $f(x)=x^{5}-3x^{4}+x+3$ per $g(x)=x^{2}-1$, procedendo come nella divisione tra
+numeri naturali: a ogni passo si divide il termine di grado massimo del dividendo
+parziale per $x^{2}$, si moltiplica il risultato per $g$ e lo si sottrae:
+\[
+\begin{aligned}
+  x^{5}-3x^{4}+x+3-x^{3}(x^{2}-1)&=-3x^{4}+x^{3}+x+3,\\
+  -3x^{4}+x^{3}+x+3+3x^{2}(x^{2}-1)&=x^{3}-3x^{2}+x+3,\\
+  x^{3}-3x^{2}+x+3-x(x^{2}-1)&=-3x^{2}+2x+3,\\
+  -3x^{2}+2x+3+3(x^{2}-1)&=2x .
+\end{aligned}
+\]
+Il quoziente è $q(x)=x^{3}-3x^{2}+x-3$ e il resto è $r(x)=2x$. Poiché $2x$ è la derivata
+di $x^{2}-1$,
+\[
+\begin{aligned}
+  \int\frac{x^{5}-3x^{4}+x+3}{x^{2}-1}\,dx&=\int(x^{3}-3x^{2}+x-3)\,dx
+  +\int\frac{2x}{x^{2}-1}\,dx\\
+  &=\frac{x^{4}}4-x^{3}+\frac{x^{2}}2-3x+\log\abs{x^{2}-1}+c .
+\end{aligned}
+\]
+\end{esempio}
+
+\subsection{Denominatore di secondo grado}
+
+Consideriamo ora una funzione razionale $\frac{r(x)}{g(x)}$ con $g$ di secondo grado e $r$ di
+grado al più uno. Raccogliendo il coefficiente direttore di $g$ ci si riduce al caso
+\begin{equation}\label{eq:razionale-secondo-grado}
+  \frac{mx+n}{x^{2}+px+q}, \qquad \Delta=p^{2}-4q ,
+\end{equation}
+e occorre distinguere tre casi, secondo che l'equazione $x^{2}+px+q=0$ abbia due radici
+reali distinte, due radici coincidenti, o nessuna radice reale.
+
+\begin{proposizione}[Integrali delle frazioni con denominatore di secondo grado]
+\label{prop:razionali-secondo-grado}
+Siano $m,n,p,q\in\R$ e $\Delta=p^{2}-4q$.
+\begin{enumerate}[label=\textup{(\roman*)}]
+  \item Se $\Delta>0$ e $x_{1}\neq x_{2}$ sono le radici di $x^{2}+px+q$, esistono e sono unici
+  $A,B\in\R$ tali che
+  \begin{equation}\label{eq:fratti-semplici-distinte}
+  \begin{gathered}
+    \frac{mx+n}{(x-x_{1})(x-x_{2})}=\frac A{x-x_{1}}+\frac B{x-x_{2}},\\
+    A=\frac{mx_{1}+n}{x_{1}-x_{2}}, \qquad B=\frac{mx_{2}+n}{x_{2}-x_{1}},
+  \end{gathered}
+  \end{equation}
+  e quindi l'integrale vale $A\log\abs{x-x_{1}}+B\log\abs{x-x_{2}}+c$.
+  \item Se $\Delta=0$ e $x_{1}$ è la radice doppia,
+  \begin{equation}\label{eq:fratti-semplici-doppia}
+    \int\frac{mx+n}{(x-x_{1})^{2}}\,dx=m\log\abs{x-x_{1}}-\frac{mx_{1}+n}{x-x_{1}}+c .
+  \end{equation}
+  \item Se $\Delta<0$, posto $\delta=\frac{\sqrt{-\Delta}}2>0$,
+  \begin{equation}\label{eq:fratti-semplici-complesse}
+  \begin{split}
+    \int\frac{mx+n}{x^{2}+px+q}\,dx&=\frac m2\log\bigl(x^{2}+px+q\bigr)\\
+    &\quad+\frac{n-\frac{mp}2}{\delta}\,\operatorname{arctg}\frac{x+\frac p2}\delta+c .
+  \end{split}
+  \end{equation}
+\end{enumerate}
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$\frac{mx+n}{x^{2}+px+q}$, con discriminante $\Delta$ positivo, nullo o negativo.}
+\Tesi{le decomposizioni e le primitive \eqref{eq:fratti-semplici-distinte},
+\eqref{eq:fratti-semplici-doppia}, \eqref{eq:fratti-semplici-complesse}, ciascuna valida in
+ogni intervallo in cui il denominatore non si annulla.}
+\end{schema}
+
+\begin{strategia}
+Nel primo caso si cercano $A$ e $B$ imponendo che la somma delle due frazioni, ridotta
+allo stesso denominatore, abbia numeratore $mx+n$: è un'identità tra polinomi, che basta
+valutare nelle radici per trovare $A$ e $B$. Nel secondo caso si scrive il numeratore come
+$m(x-x_{1})+(mx_{1}+n)$. Nel terzo il denominatore non si scompone; si scrive il numeratore
+come multiplo della derivata $2x+p$ del denominatore (che dà un logaritmo) più una
+costante, e si completa il quadrato al denominatore, che diventa $(x+\frac p2)^{2}+\delta^{2}$
+(che dà un arcotangente).
+\end{strategia}
+
+\begin{dimostrazione}
+(i) Riducendo allo stesso denominatore, la \eqref{eq:fratti-semplici-distinte} equivale a
+\[
+  mx+n=A(x-x_{2})+B(x-x_{1}) \qquad\text{per ogni } x\neq x_{1},x_{2} .
+\]
+I due membri sono polinomi di grado al più uno che coincidono in infiniti punti, quindi
+hanno gli stessi coefficienti e coincidono per ogni $x$ (la differenza è un polinomio
+di grado al più uno con più di una radice, dunque nullo). Ponendo $x=x_{1}$ si ottiene
+$mx_{1}+n=A(x_{1}-x_{2})$, e ponendo $x=x_{2}$ si ottiene $mx_{2}+n=B(x_{2}-x_{1})$: $A$ e $B$ sono
+determinati univocamente come nella \eqref{eq:fratti-semplici-distinte}; con tali valori
+l'identità è verificata, perché due polinomi di grado al più uno che coincidono in due
+punti distinti sono uguali. L'integrale segue da $\int\frac{dx}{x-x_{i}}=\log\abs{x-x_{i}}+c$.
+
+(ii) Si ha $mx+n=m(x-x_{1})+(mx_{1}+n)$, e quindi
+$\frac{mx+n}{(x-x_{1})^{2}}=\frac m{x-x_{1}}+\frac{mx_{1}+n}{(x-x_{1})^{2}}$; poiché
+$\int(x-x_{1})^{-2}dx=-(x-x_{1})^{-1}+c$, si ottiene la \eqref{eq:fratti-semplici-doppia}.
+
+(iii) Scriviamo $mx+n=\frac m2(2x+p)+\bigl(n-\frac{mp}2\bigr)$. Il primo addendo dà, per la
+seconda delle \eqref{eq:integrali-composti}, $\frac m2\log(x^{2}+px+q)$, senza valore
+assoluto perché il denominatore, privo di radici reali, è sempre positivo. Per il
+secondo, completiamo il quadrato:
+\[
+  x^{2}+px+q=\Bigl(x+\frac p2\Bigr)^{2}+q-\frac{p^{2}}4=\Bigl(x+\frac p2\Bigr)^{2}+\delta^{2}
+  =\delta^{2}\Bigl[1+\Bigl(\frac{x+p/2}\delta\Bigr)^{2}\Bigr] ,
+\]
+con $\delta^{2}=q-\frac{p^{2}}4=-\frac\Delta4>0$. Per la \eqref{eq:argomento-lineare} con
+$\alpha=\frac1\delta$,
+\[
+\begin{aligned}
+  \int\frac{dx}{x^{2}+px+q}&=\frac1{\delta^{2}}\int\frac{dx}{1+\bigl(\frac{x+p/2}\delta\bigr)^{2}}
+  =\frac1{\delta^{2}}\cdot\delta\,\operatorname{arctg}\frac{x+p/2}\delta+c\\
+  &=\frac1\delta\operatorname{arctg}\frac{x+p/2}\delta+c ,
+\end{aligned}
+\]
+e la \eqref{eq:fratti-semplici-complesse} segue per la linearità.
+\end{dimostrazione}
+
+\begin{esempio}[I tre casi]\label{es:tre-casi}
+\begin{enumerate}[label=\textup{(\alph*)}]
+  \item $\Delta>0$. Le radici di $x^{2}-x-2$ sono $x_{1}=-1$ e $x_{2}=2$. Per la
+  \eqref{eq:fratti-semplici-distinte} con $m=1$, $n=7$: $A=\frac{-1+7}{-3}=-2$,
+  $B=\frac{2+7}3=3$, e
+  \[
+  \begin{aligned}
+    \int\frac{x+7}{x^{2}-x-2}\,dx&=\int\Bigl(\frac{-2}{x+1}+\frac3{x-2}\Bigr)dx\\
+    &=-2\log\abs{x+1}+3\log\abs{x-2}+c .
+  \end{aligned}
+  \]
+  \item $\Delta=0$. Per $\frac x{x^{2}+2x+1}=\frac x{(x+1)^{2}}$ si ha $x_{1}=-1$, $m=1$, $n=0$:
+  \[
+    \int\frac x{(x+1)^{2}}\,dx=\int\Bigl(\frac1{x+1}-\frac1{(x+1)^{2}}\Bigr)dx
+    =\log\abs{x+1}+\frac1{x+1}+c .
+  \]
+  \item $\Delta<0$. Per $\frac{1-2x}{x^{2}+2x+5}$ si ha $p=2$, $q=5$, $\delta=2$, $m=-2$, $n=1$:
+  \[
+    \int\frac{1-2x}{x^{2}+2x+5}\,dx=-\log(x^{2}+2x+5)+\frac32\operatorname{arctg}\frac{x+1}2+c .
+  \]
+  Allo stesso modo, per $\frac x{x^{2}+x+1}$ ($p=q=1$, $\delta=\frac{\sqrt3}2$, $m=1$, $n=0$),
+  \[
+    \int\frac x{x^{2}+x+1}\,dx=\frac12\log(x^{2}+x+1)-\frac{\sqrt3}3\operatorname{arctg}
+    \frac{2x+1}{\sqrt3}+c .
+  \]
+\end{enumerate}
+\end{esempio}
+
+\subsection{Denominatori di grado superiore}
+
+Il metodo si estende a denominatori di grado qualsiasi, purché se ne conoscano
+esplicitamente le radici. Si dimostra in algebra (è una conseguenza del teorema
+fondamentale dell'algebra, ricordato nel \cref{cap:complementi}) che ogni polinomio
+reale si scompone nel prodotto di fattori di primo grado $x-x_{i}$ e di fattori di secondo
+grado $x^{2}+px+q$ con $\Delta<0$, eventualmente ripetuti; e che ogni funzione razionale con
+il numeratore di grado minore del denominatore è somma di \emph{fratti semplici} del
+tipo
+\[
+  \frac A{(x-x_{i})^{k}}, \qquad \frac{Bx+C}{(x^{2}+px+q)^{k}} ,
+\]
+uno per ogni potenza di ciascun fattore che compare nel denominatore. Le costanti si
+determinano, come nella \cref{prop:razionali-secondo-grado}, imponendo l'identità dei
+numeratori.
+
+\begin{esempio}[Un denominatore di quarto grado]\label{es:quarto-grado}
+Dividendo il numeratore per il denominatore,
+$\frac{x^{5}-x+1}{x^{4}+x^{2}}=x-\frac{x^{3}+x-1}{x^{4}+x^{2}}$. Il denominatore è
+$x^{2}(x^{2}+1)$, con il fattore $x$ ripetuto due volte e il fattore irriducibile $x^{2}+1$;
+cerchiamo dunque
+\[
+  \frac{x^{3}+x-1}{x^{2}(x^{2}+1)}=\frac Ax+\frac B{x^{2}}+\frac{C+Dx}{x^{2}+1} .
+\]
+Riducendo allo stesso denominatore e uguagliando i coefficienti dei numeratori
+($x^{3}+x-1=Ax(x^{2}+1)+B(x^{2}+1)+(C+Dx)x^{2}$) si trova $A=C=1$, $B=-1$, $D=0$, e quindi
+\[
+  \int\frac{x^{5}-x+1}{x^{4}+x^{2}}\,dx=\frac{x^{2}}2-\log\abs x-\frac1x-\operatorname{arctg}x+c .
+\]
+\end{esempio}
+
+\begin{python}[Divisione, fratti semplici e integrazione con sympy]
+import sympy as sp
+
+x = sp.symbols("x", real=True)
+q, r = sp.div(x**5 - 3*x**4 + x + 3, x**2 - 1, x)
+print("quoziente:", q, "   resto:", r)
+for f in [(x + 7) / (x**2 - x - 2), x / (x**2 + 2*x + 1),
+          (1 - 2*x) / (x**2 + 2*x + 5),
+          (x**5 - x + 1) / (x**4 + x**2)]:
+    print("f =", f)
+    print("    fratti semplici:", sp.apart(f, x))
+    print("    integrale:      ", sp.integrate(f, x))
+\end{python}
+\begin{risultato}
+quoziente: x**3 - 3*x**2 + x - 3    resto: 2*x
+f = (x + 7)/(x**2 - x - 2)
+    fratti semplici: -2/(x + 1) + 3/(x - 2)
+    integrale:       3*log(x - 2) - 2*log(x + 1)
+f = x/(x**2 + 2*x + 1)
+    fratti semplici: 1/(x + 1) - 1/(x + 1)**2
+    integrale:       log(x + 1) + 1/(x + 1)
+f = (1 - 2*x)/(x**2 + 2*x + 5)
+    fratti semplici: -(2*x - 1)/(x**2 + 2*x + 5)
+    integrale:       -log(x**2 + 2*x + 5) + 3*atan(x/2 + 1/2)/2
+f = (x**5 - x + 1)/(x**4 + x**2)
+    fratti semplici: x - 1/(x**2 + 1) - 1/x + x**(-2)
+    integrale:       x**2/2 - log(x) - atan(x) - 1/x
+\end{risultato}
+
+Il calcolo simbolico conferma le decomposizioni e le primitive (ancora una volta senza
+valori assoluti nei logaritmi). Si noti però che il metodo richiede le radici del
+denominatore: per un polinomio di grado elevato esse si calcolano, in generale, soltanto
+numericamente, e la decomposizione in fratti semplici diventa un procedimento
+approssimato.
+
+\begin{notastorica}[Leibniz, Johann Bernoulli e i fratti semplici]
+Il metodo dei fratti semplici fu pubblicato quasi contemporaneamente, nel 1702, da
+Leibniz e da Johann Bernoulli sugli \emph{Acta Eruditorum}. Leibniz incontrò una
+difficoltà che lo portò ad affermare, erroneamente, che non tutte le funzioni razionali
+si possono integrare con logaritmi e arcotangenti: non riusciva a scomporre $x^{4}+1$ in
+fattori reali di secondo grado. A posteriori l'errore è evidente:
+$x^{4}+1=(x^{2}+\sqrt2\,x+1)(x^{2}-\sqrt2\,x+1)$, come si verifica moltiplicando. Il
+problema fu risolto in generale soltanto dal teorema fondamentale dell'algebra, che nacque
+dunque come questione di calcolo integrale: il primo tentativo di dimostrarlo, di Jean Le
+Rond d'Alembert (1746), compare in una memoria intitolata \emph{Recherches sur le calcul
+intégral}. La prima dimostrazione sostanzialmente completa, pubblicata da Gauss nel 1799,
+conteneva una lacuna topologica colmata da Alexander Ostrowski nel 1920. In Inghilterra la
+scuola di Newton seguiva un'altra strada: sviluppava in serie di potenze la funzione
+integranda e integrava termine a termine, senza bisogno di scomporre il denominatore. Il
+metodo era efficace per i calcoli numerici, ma non dava le formule chiuse in termini di
+logaritmi e arcotangenti cercate dai continentali.
+\end{notastorica}

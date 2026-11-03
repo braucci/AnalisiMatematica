@@ -1,0 +1,62 @@
+%% ============================================================================
+%%  CAPITOLO 10 — La formula di Taylor
+%%  Fonte principale per argomenti e dimostrazioni: Marcellini–Sbordone, cap. 10
+%%  (§77 resto di Peano, o piccolo, sviluppi delle funzioni elementari; §78 uso
+%%  della formula di Taylor nel calcolo di limiti, proprietà degli o piccoli;
+%%  §79 resto integrale; §80 resto di Lagrange; appendice: §81 tabulazione di
+%%  funzioni, stima del resto).
+%% ============================================================================
+\aperturacapitolo{La formula di Taylor}{cap:taylor}
+
+\epigraph{Théorie des fonctions analytiques, contenant les principes du calcul
+différentiel, dégagés de toute considération d'infiniment petits ou d'évanouissans, de
+limites ou de fluxions, et réduits à l'analyse algébrique des quantités finies.\\[2pt]
+\upshape(Teoria delle funzioni analitiche, contenente i principi del calcolo
+differenziale, liberati da ogni considerazione di infinitamente piccoli o di quantità
+evanescenti, di limiti o di flussioni, e ridotti all'analisi algebrica delle quantità
+finite.)}{Joseph-Louis Lagrange, frontespizio della \emph{Théorie des fonctions
+analytiques} (1797)}
+
+\lettrine[lines=3, findent=2pt, nindent=0pt]{L}{a formula di Taylor} con il resto di
+Peano è stata introdotta nel \cref{sec:taylor}, dove ne abbiamo visto le prime
+conseguenze: gli sviluppi delle funzioni elementari, il calcolo di qualche limite, le
+approssimazioni per piccoli angoli e il criterio per i punti di massimo e di minimo
+basato sulle derivate successive. In questo capitolo la riprendiamo e la completiamo in
+tre direzioni.
+
+La prima è \emph{operativa}: impariamo a manipolare gli «o piccoli» con regole precise,
+che rendono la formula di Taylor lo strumento più potente per il calcolo dei limiti, e
+a ottenere nuovi sviluppi senza calcolare derivate, componendo e integrando quelli già
+noti. La seconda è \emph{quantitativa}: il resto di Peano dice che l'errore è
+trascurabile vicino al punto iniziale, ma non quanto vale; il resto in forma integrale e
+quello nella forma di Lagrange, ricavati con il calcolo integrale, permettono di
+\emph{stimarlo}. La terza è \emph{numerica}: con queste stime si calcolano le funzioni
+elementari con precisione prefissata, come facevano i compilatori delle tavole dei
+logaritmi e come fanno, con metodi più raffinati, i computer di bordo. Lungo la
+strada calcoleremo la distanza dell'orizzonte vista da un velivolo, le cifre di $\pi$ con
+la formula di Machin, e dimostreremo che il numero $e$ è irrazionale. Seguiremo il testo
+di riferimento \cite{marcellini-sbordone}.
+
+\medskip
+\noindent\textbf{In questo capitolo.}
+\begin{itemize}
+  \item Il resto di Peano; polinomi e loro sviluppi; nuovi sviluppi per composizione e
+  per integrazione; lo sviluppo dell'arcotangente (\S\ref{sec:taylor-peano}).
+  \item L'algebra degli o piccoli e il calcolo dei limiti (\S\ref{sec:o-piccoli}).
+  \item Il resto integrale (\S\ref{sec:resto-integrale}) e il resto di Lagrange
+  (\S\ref{sec:resto-lagrange}).
+  \item Approfondimento: la forma di Cauchy del resto (\S\ref{subsec:resto-cauchy}).
+  \item Appendice: stima del resto, tabulazione, irrazionalità di $e$
+  (\S\ref{sec:tabulazione}); approfondimento: una tavola dei logaritmi
+  (\S\ref{subsec:tavola-logaritmi}).
+  \item Esercizi di riepilogo (\S\ref{sec:esercizi-cap10}).
+  \item Punti fondamentali del capitolo (\S\ref{sec:sintesi-cap10}).
+\end{itemize}
+
+\input{capitoli/cap10/01-peano}
+\input{capitoli/cap10/02-o-piccoli}
+\input{capitoli/cap10/03-resto-integrale}
+\input{capitoli/cap10/04-resto-lagrange}
+\input{capitoli/cap10/05-tabulazione}
+\input{capitoli/cap10/06-esercizi}
+\input{capitoli/cap10/07-sintesi}

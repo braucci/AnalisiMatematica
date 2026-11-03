@@ -1,0 +1,117 @@
+%% ----------------------------------------------------------------------------
+%%  §11.11  Punti fondamentali del capitolo
+%% ----------------------------------------------------------------------------
+\section{Punti fondamentali del capitolo}
+\label{sec:sintesi-cap11}
+
+Una serie è la successione delle sue somme parziali, e tutta la teoria poggia sui limiti
+di successioni. Poiché la somma si sa calcolare solo in pochi casi, il cuore del capitolo
+sono i criteri che ne decidono il carattere confrontando il termine generale con due
+modelli, la serie geometrica e l'armonica generalizzata. La convergenza assoluta estende
+i criteri alle serie di segno qualsiasi, e le serie di Taylor rappresentano le funzioni
+elementari come «polinomi di grado infinito».
+
+\begin{puntichiave}
+\item \textbf{Serie e carattere.} La serie $\sum a_{k}$ è la successione delle somme parziali
+$s_{n}=a_{1}+\dots+a_{n}$: è convergente, divergente o indeterminata secondo che $s_{n}$ abbia
+limite finito, limite infinito o nessun limite (\cref{def:serie}). Modificare un numero
+finito di termini non cambia il carattere, e per una serie convergente il resto
+$R_{n}=s-s_{n}$ tende a zero (\cref{teo:resto-serie}).
+\item \textbf{Condizione necessaria.} Se $\sum a_{k}$ converge, allora $a_{n}\to0$
+(\cref{teo:condizione-necessaria}). La condizione non è sufficiente, come mostrano la serie
+armonica e la serie telescopica $\sum\bigl(\sqrt{k+1}-\sqrt k\bigr)$: serve soltanto a escludere la
+convergenza, e usarla «in positivo» è l'errore più frequente.
+\item \textbf{Serie telescopiche e criterio di Cauchy.} Se $a_{k}=b_{k}-b_{k+1}$, allora
+$s_{n}=b_{1}-b_{n+1}$ e la serie ha il carattere della successione $b_{n}$
+(\cref{prop:serie-telescopica}). Senza conoscerne la somma, la serie converge se e solo se
+per ogni $\epsilon>0$ esiste $\nu$ tale che $\abs{a_{n+1}+\dots+a_{n+p}}<\epsilon$ per ogni $n>\nu$ e
+ogni $p\in\N$ (\cref{teo:cauchy-serie}).
+\item \textbf{Termini non negativi.} Se $a_{n}\ge0$ la serie non è mai indeterminata:
+converge se e solo se le somme parziali sono limitate, e allora $\sum a_{k}=\sup_{n}s_{n}$
+(\cref{teo:serie-positive}). Ogni somma parziale è quindi un'approssimazione per difetto
+della somma.
+\item \textbf{Le serie modello.} La serie geometrica $\sum_{k\ge0}x^{k}$ converge se e solo se
+$\abs x<1$, con somma $\frac1{1-x}$; diverge a $+\infty$ per $x\ge1$ ed è indeterminata per
+$x\le-1$ (\cref{teo:serie-geometrica}). L'armonica generalizzata $\sum\frac1{k^{p}}$ converge
+se e solo se $p>1$ (\cref{teo:armonica-generalizzata}); per $p=1$ le somme parziali
+divergono come $\log n$, e $H_{n}-\log n\to\gamma$ (\cref{teo:armonica,prop:eulero-mascheroni}).
+\item \textbf{Criterio dell'integrale.} Se $f$ è continua, non negativa e decrescente in
+$[1,+\infty)$, la serie $\sum f(k)$ e l'integrale improprio $\int_{1}^{+\infty}f(x)\,dx$
+convergono o divergono insieme, e il resto verifica
+$\int_{n+1}^{+\infty}f\le R_{n}\le\int_{n}^{+\infty}f$ (\cref{teo:criterio-integrale}).
+\item \textbf{Confronto.} Se $0\le a_{n}\le b_{n}$ da un certo indice in poi, la convergenza
+di $\sum b_{k}$ implica quella di $\sum a_{k}$, e la divergenza di $\sum a_{k}$ implica quella di
+$\sum b_{k}$ (\cref{teo:confronto-serie}). Se $a_{n}\ge0$, $b_{n}>0$ e
+$\frac{a_{n}}{b_{n}}\to L\in(0,+\infty)$, le due serie hanno lo stesso carattere
+(\cref{cor:confronto-asintotico}).
+\item \textbf{Infinitesimi e parte principale.} Se $a_{n}\ge0$ e $n^{p}a_{n}\to\ell$, la serie
+converge per $\ell<+\infty$ e $p>1$, diverge per $\ell>0$ e $p\le1$
+(\cref{teo:criterio-infinitesimi}). In pratica si determina la parte principale del
+termine generale con gli sviluppi di Taylor del \cref{cap:taylor}.
+\item \textbf{Rapporto e radice.} Se $a_{n}>0$ e $\frac{a_{n+1}}{a_{n}}\to\ell$, oppure $a_{n}\ge0$ e
+$\sqrt[n]{a_{n}}\to\ell$, la serie converge per $\ell<1$ e diverge per $\ell>1$
+(\cref{teo:criterio-rapporto-serie,teo:criterio-radice}): sono i criteri adatti a
+fattoriali e potenze di esponente $n$. Per $\ell=1$ non decidono, ed è il caso di tutte le
+serie $\sum\frac1{k^{p}}$.
+\item \textbf{Criterio di Leibniz.} Se $a_{n}\ge0$ è decrescente e infinitesima, la serie
+$\sum(-1)^{k-1}a_{k}$ converge e $\abs{s-s_{n}}\le a_{n+1}$: l'errore è maggiorato dal primo
+termine trascurato e ne ha il segno (\cref{teo:leibniz}). L'ipotesi di monotonia non si
+può omettere.
+\item \textbf{Convergenza assoluta.} Se $\sum\abs{a_{k}}$ converge, converge anche $\sum a_{k}$, e
+$\abs{\sum a_{k}}\le\sum\abs{a_{k}}$ (\cref{teo:convergenza-assoluta}); il viceversa è falso, come
+mostra la serie armonica alternata. I criteri del rapporto e della radice applicati a
+$\abs{a_{n}}$ danno la convergenza assoluta per $\ell<1$ e la non convergenza per $\ell>1$
+(\cref{cor:rapporto-assoluto}).
+\item \textbf{Riordinamenti.} Ogni riordinamento di una serie assolutamente convergente
+converge assolutamente alla stessa somma (\cref{teo:dirichlet-riordinamento}). Una serie
+semplicemente convergente si può invece riordinare in modo da ottenere qualunque somma
+in $\overline\R$ (\cref{teo:riemann-riordinamento}): riordinata con due termini positivi e
+uno negativo, la serie armonica alternata ha somma $\frac32\log2$ (\cref{es:riordinamento}).
+\item \textbf{Serie di Taylor.} La serie di Taylor di $f$ converge a $f(x)$ se e solo se il
+resto $R_{n}(x)$ tende a zero; basta che tutte le derivate siano limitate da una stessa
+costante in $[x_{0}-\delta,x_{0}+\delta]$ (\cref{teo:sviluppabilita}). Così $e^{x}$, $\sen x$ e $\cos x$
+sono somme delle loro serie per ogni $x\in\R$, $\log(1+x)$ per $-1<x\le1$ e
+$\operatorname{arctg}x$ per $\abs x\le1$ (\cref{es:serie-elementari,prop:serie-log-arctg}), mentre
+$e^{-1/x^{2}}$ non è sviluppabile in $0$ (\cref{prop:cauchy-controesempio}). Definito $e^{z}$
+con la serie, $e^{i\vartheta}=\cos\vartheta+i\sen\vartheta$ diventa un teorema (\cref{teo:formula-eulero}).
+\item \textbf{Resistenza indotta.} Nella teoria di Prandtl e Glauert
+$C_{D,i}=\frac{C_{L}^{2}}{\pi\,AR}(1+\delta)$, dove $\delta=\sum_{n\ge2}n\bigl(\frac{A_{n}}{A_{1}}\bigr)^{2}$ è la
+somma di una serie a termini non negativi \eqref{eq:resistenza-indotta}: a parità di
+$C_{L}$ e di $AR$ la resistenza indotta è minima, cioè $\delta=0$, se e solo se la
+distribuzione di circolazione è ellittica.
+\end{puntichiave}
+
+\section*{Uno sguardo oltre}
+\addcontentsline{toc}{section}{Uno sguardo oltre}
+
+Con le serie si chiude questo primo volume. Il lettore che ci ha seguiti fin qui ha
+percorso la strada che va dagli assiomi dei numeri reali al calcolo differenziale e
+integrale, e ha visto come tutto discenda, attraverso una catena di teoremi di
+esistenza, dall'assioma di completezza (\cref{fig:schema-teoremi}). Molte domande, però,
+sono rimaste aperte, e indicano la strada dei corsi successivi.
+
+\begin{itemize}
+  \item Abbiamo sommato serie di \emph{numeri}. Le serie di Taylor sono invece serie di
+  \emph{funzioni}, e per derivarle o integrarle termine a termine (ad esempio per calcolare
+  $\int_{0}^{1}e^{-x^{2}}dx$ integrando la serie esponenziale) occorre un tipo di convergenza più
+  forte, la \emph{convergenza uniforme}.
+  \item La serie di Taylor dell'arcotangente non converge per $\abs x>1$, pur essendo la
+  funzione regolarissima su tutto $\R$ (\cref{prop:serie-log-arctg,fig:taylor-arctg}). La
+  spiegazione viene dalle \emph{serie di potenze} nel campo complesso, dove la sua derivata
+  $\frac1{1+z^{2}}$ ha due singolarità, $z=\pm i$, a distanza $1$ dall'origine: il \emph{raggio di
+  convergenza} della serie (\cref{oss:raggio-convergenza}) è proprio questa distanza.
+  \item La serie di Glauert \eqref{eq:glauert} è una serie di seni: un esempio di
+  \emph{serie di Fourier}, lo strumento con cui si studiano le vibrazioni delle strutture,
+  il flutter, l'acustica e l'elaborazione dei segnali.
+  \item Le grandezze dell'ingegneria dipendono quasi sempre da più variabili: il
+  \cref{cap:piu-variabili} ne ha dato un primo assaggio, ma il calcolo integrale in più
+  variabili resta da costruire. Le leggi della fisica, poi, si esprimono con
+  \emph{equazioni differenziali}: la linea elastica \eqref{eq:linea-elastica}
+  ne è un primo esempio, e la dinamica del volo, la meccanica dei fluidi e la meccanica
+  delle strutture ne sono piene.
+\end{itemize}
+
+Sono gli argomenti dell'Analisi Matematica Due. Ma il metodo resta lo stesso che abbiamo
+cercato di praticare in queste pagine: dire con esattezza che cosa si suppone e che cosa
+si vuole dimostrare, avere un piano prima di cominciare, e verificare, anche con un
+calcolatore, che ciò che si è dimostrato descriva davvero il mondo.

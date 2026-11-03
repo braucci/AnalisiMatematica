@@ -1,0 +1,437 @@
+%% ----------------------------------------------------------------------------
+%%  §10.4  La formula di Taylor con il resto di Lagrange
+%% ----------------------------------------------------------------------------
+\section{La formula di Taylor con il resto di Lagrange}
+\label{sec:resto-lagrange}
+
+Il resto integrale è esatto, ma per stimarlo non occorre calcolare l'integrale: basta
+sapere tra quali valori varia $f^{(n+1)}$. Il peso $\frac{(x-t)^{n}}{n!}$, infatti, non cambia segno
+nell'intervallo di integrazione, e per una media pesata con peso di segno costante vale
+un analogo del teorema della media (\cref{teo:media}).
+
+\begin{lemma}[Teorema della media pesata]\label{lem:media-pesata}
+\index{teorema!della media pesata}
+Siano $g$ e $w$ continue in $[\alpha,\beta]$, con $w(t)\ge0$ per ogni $t\in[\alpha,\beta]$. Esiste un punto
+$\xi\in[\alpha,\beta]$ tale che
+\begin{equation}\label{eq:media-pesata}
+  \int_{\alpha}^{\beta}g(t)\,w(t)\,dt=g(\xi)\int_{\alpha}^{\beta}w(t)\,dt .
+\end{equation}
+\end{lemma}
+
+\begin{schema}
+\Ipotesi{$g$, $w$ continue in $[\alpha,\beta]$; \ $w\ge0$.}
+\Tesi{$\esiste\xi\in[\alpha,\beta]$ : $\int_{\alpha}^{\beta}g\,w=g(\xi)\int_{\alpha}^{\beta}w$.}
+\end{schema}
+
+\begin{strategia}
+Si stringe $g$ tra il suo minimo $m$ e il suo massimo $M$ e si moltiplica per $w\ge0$, che
+conserva le disuguaglianze; integrando si trova che il rapporto
+$\frac{\int gw}{\int w}$ è compreso tra $m$ e $M$, e il teorema dei valori intermedi fornisce il
+punto $\xi$. Va trattato a parte il caso $\int w=0$, in cui il rapporto non ha senso.
+\end{strategia}
+
+\begin{dimostrazione}
+Per il teorema di Weierstrass (\cref{teo:weierstrass}) esistono
+$m=\min_{[\alpha,\beta]}g$ e $M=\max_{[\alpha,\beta]}g$. Poiché $w\ge0$, da $m\le g(t)\le M$ segue
+$m\,w(t)\le g(t)\,w(t)\le M\,w(t)$ per ogni $t$, e per il confronto tra integrali
+(\cref{teo:confronto-integrali}), essendo $gw$ continua e quindi integrabile,
+\begin{equation}\label{eq:media-pesata-stima}
+  m\int_{\alpha}^{\beta}w(t)\,dt\le\int_{\alpha}^{\beta}g(t)\,w(t)\,dt\le M\int_{\alpha}^{\beta}w(t)\,dt .
+\end{equation}
+Se $\int_{\alpha}^{\beta}w=0$, la \eqref{eq:media-pesata-stima} dà $\int_{\alpha}^{\beta}gw=0$, e la tesi vale con
+qualunque $\xi$. Altrimenti $\int_{\alpha}^{\beta}w>0$, e dividendo si ottiene
+$m\le\frac{\int_{\alpha}^{\beta}gw}{\int_{\alpha}^{\beta}w}\le M$. Per il secondo teorema dei valori intermedi
+(\cref{teo:valori-intermedi-2}) la funzione continua $g$ assume in $[\alpha,\beta]$ tutti i valori
+compresi tra $m$ e $M$: esiste dunque $\xi$ con $g(\xi)=\frac{\int gw}{\int w}$, che è la tesi.
+\end{dimostrazione}
+
+Con $w\equiv1$ si ritrova il teorema della media. Applichiamo ora il lemma al resto
+integrale.
+
+\begin{teorema}[Formula di Taylor con il resto di Lagrange]\label{teo:resto-lagrange}
+\index{formula di Taylor!con il resto di Lagrange}
+Sia $f$ derivabile $n+1$ volte in $[a,b]$, con derivata $f^{(n+1)}$ continua, e sia
+$x_{0}\in[a,b]$. Per ogni $x\in[a,b]$ esiste un punto $x_{1}$ compreso tra $x_{0}$ e $x$ tale che
+\begin{equation}\label{eq:resto-lagrange}
+  R_{n}(x)=\frac{f^{(n+1)}(x_{1})}{(n+1)!}\,(x-x_{0})^{n+1} ,
+\end{equation}
+cioè
+\[
+  f(x)=\sum_{k=0}^{n}\frac{f^{(k)}(x_{0})}{k!}(x-x_{0})^{k}+\frac{f^{(n+1)}(x_{1})}{(n+1)!}(x-x_{0})^{n+1} .
+\]
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f\in C^{n+1}([a,b])$; \ $x_{0},x\in[a,b]$.}
+\Tesi{$\esiste x_{1}$ tra $x_{0}$ e $x$ : \ $R_{n}(x)=\frac{f^{(n+1)}(x_{1})}{(n+1)!}(x-x_{0})^{n+1}$.}
+\end{schema}
+
+\begin{strategia}
+Il resto è l'integrale \eqref{eq:resto-integrale} di $f^{(n+1)}$ contro il peso
+$\frac{(x-t)^{n}}{n!}$, che ha segno costante tra $x_{0}$ e $x$. Il \cref{lem:media-pesata} porta
+fuori dall'integrale $f^{(n+1)}$, calcolata in un punto intermedio, e l'integrale del peso
+si calcola esplicitamente. Se $x<x_{0}$ occorre prima riportare l'integrale a un intervallo
+orientato e un peso non negativo, controllando i segni.
+\end{strategia}
+
+\begin{dimostrazione}
+Se $x=x_{0}$ si ha $R_{n}(x_{0})=0$ e la tesi vale con $x_{1}=x_{0}$.
+
+\emph{Caso $x>x_{0}$.} Il peso $w(t)=\frac{(x-t)^{n}}{n!}$ è continuo e non negativo in
+$[x_{0},x]$, e
+\begin{equation}\label{eq:integrale-peso}
+  \int_{x_{0}}^{x}\frac{(x-t)^{n}}{n!}\,dt=\Bigl[-\frac{(x-t)^{n+1}}{(n+1)!}\Bigr]_{t=x_{0}}^{t=x}
+  =\frac{(x-x_{0})^{n+1}}{(n+1)!} .
+\end{equation}
+Per il \cref{teo:resto-integrale} e il \cref{lem:media-pesata} con $g=f^{(n+1)}$, esiste
+$x_{1}\in[x_{0},x]$ tale che
+\[
+  R_{n}(x)=\int_{x_{0}}^{x}\frac{(x-t)^{n}}{n!}\,f^{(n+1)}(t)\,dt
+  =f^{(n+1)}(x_{1})\,\frac{(x-x_{0})^{n+1}}{(n+1)!} .
+\]
+
+\emph{Caso $x<x_{0}$.} Scambiando gli estremi e scrivendo $(x-t)^{n}=(-1)^{n}(t-x)^{n}$,
+\[
+\begin{aligned}
+  R_{n}(x)&=-\int_{x}^{x_{0}}\frac{(x-t)^{n}}{n!}\,f^{(n+1)}(t)\,dt\\
+  &=(-1)^{n+1}\int_{x}^{x_{0}}\frac{(t-x)^{n}}{n!}\,f^{(n+1)}(t)\,dt .
+\end{aligned}
+\]
+Ora il peso $\frac{(t-x)^{n}}{n!}$ è non negativo in $[x,x_{0}]$, e il suo integrale vale
+$\frac{(x_{0}-x)^{n+1}}{(n+1)!}$; per il \cref{lem:media-pesata} esiste $x_{1}\in[x,x_{0}]$ tale che
+\[
+  R_{n}(x)=(-1)^{n+1}f^{(n+1)}(x_{1})\,\frac{(x_{0}-x)^{n+1}}{(n+1)!}
+  =f^{(n+1)}(x_{1})\,\frac{(x-x_{0})^{n+1}}{(n+1)!} ,
+\]
+perché $(-1)^{n+1}(x_{0}-x)^{n+1}=(x-x_{0})^{n+1}$.
+\end{dimostrazione}
+
+\begin{osservazione}\label{oss:lagrange-n0}
+Per $n=0$ la \eqref{eq:resto-lagrange} si riduce a
+$f(x)-f(x_{0})=R_{0}(x)=f'(x_{1})\,(x-x_{0})$: è il teorema di Lagrange
+(\cref{teo:lagrange}), di cui la formula di Taylor con il resto di Lagrange è dunque
+una generalizzazione. Si noti che il teorema di Lagrange richiede soltanto la
+derivabilità di $f$, e non la continuità di $f'$: l'ipotesi di continuità di $f^{(n+1)}$
+nel \cref{teo:resto-lagrange} è dovuta al metodo dimostrativo, che passa per il resto
+integrale, e non è necessaria. Lo mostriamo ora, generalizzando il procedimento usato
+nel \cref{lem:taylor-lagrange} del \cref{cap:piu-variabili}.
+\end{osservazione}
+
+\begin{teorema}[Resto di Lagrange, ipotesi minime]\label{teo:resto-lagrange-generale}
+Sia $f$ derivabile $n+1$ volte in un intervallo aperto $I$, e siano $x_{0},x\in I$ con
+$x\neq x_{0}$. Esiste un punto $x_{1}$ strettamente compreso tra $x_{0}$ e $x$ per cui vale la
+\eqref{eq:resto-lagrange}.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$ derivabile $n+1$ volte in $I$ aperto (nessuna ipotesi di continuità su
+$f^{(n+1)}$); \ $x_{0}\neq x$ in $I$.}
+\Tesi{$\esiste x_{1}$ strettamente tra $x_{0}$ e $x$ : \ $R_{n}(x)=\frac{f^{(n+1)}(x_{1})}{(n+1)!}(x-x_{0})^{n+1}$.}
+\end{schema}
+
+\begin{strategia}
+Confrontiamo il resto $F(t)=R_{n}(t)$ con la funzione $G(t)=(t-x_{0})^{n+1}$, che ha la
+stessa «struttura»: entrambe si annullano in $x_{0}$ insieme alle loro prime $n$
+derivate. Il rapporto $\frac{F(x)}{G(x)}$ è quindi un rapporto di incrementi, a cui si applica il
+teorema di Cauchy; il risultato è un rapporto di derivate prime, che è ancora un
+rapporto di incrementi tra $x_{0}$ e un punto intermedio, e così via. Dopo $n+1$ passi
+compaiono le derivate di ordine $n+1$: $F^{(n+1)}=f^{(n+1)}$ e $G^{(n+1)}=(n+1)!$. È lo
+stesso schema della dimostrazione del teorema di L'Hôpital, percorso al finito.
+\end{strategia}
+
+\begin{dimostrazione}
+Supponiamo $x>x_{0}$ (il caso $x<x_{0}$ è identico, con gli intervalli $[\xi,x_{0}]$ al posto
+di $[x_{0},\xi]$). Siano $F(t)=f(t)-T_{n}(t)$ e $G(t)=(t-x_{0})^{n+1}$ per $t\in I$. Poiché $T_{n}$ è
+un polinomio di grado $\le n$, $F$ è derivabile $n+1$ volte in $I$, con
+$F^{(n+1)}=f^{(n+1)}$; per il \cref{lem:derivate-taylor},
+$F^{(k)}(x_{0})=f^{(k)}(x_{0})-T_{n}^{(k)}(x_{0})=0$ per $k=0,1,\dots,n$. Inoltre
+\[
+  G^{(k)}(t)=\frac{(n+1)!}{(n+1-k)!}\,(t-x_{0})^{n+1-k} \qquad (k=0,1,\dots,n+1),
+\]
+sicché $G^{(k)}(x_{0})=0$ per $k\le n$, $G^{(k)}(t)\neq0$ per $t\neq x_{0}$, e $G^{(n+1)}\equiv(n+1)!$.
+
+Poniamo $\xi_{0}=x$ e costruiamo per ricorrenza punti $x_{0}<\xi_{n+1}<\xi_{n}<\dots<\xi_{1}<\xi_{0}$ tali
+che
+\begin{equation}\label{eq:catena-cauchy}
+  \frac{F^{(k-1)}(\xi_{k-1})}{G^{(k-1)}(\xi_{k-1})}=\frac{F^{(k)}(\xi_{k})}{G^{(k)}(\xi_{k})} \qquad (k=1,\dots,n+1) .
+\end{equation}
+Dato $\xi_{k-1}\in(x_{0},x]$, con $k\le n+1$, le funzioni $F^{(k-1)}$ e $G^{(k-1)}$ sono derivabili in
+$I$ (perché $k-1\le n$), dunque continue in $[x_{0},\xi_{k-1}]$ e derivabili in $(x_{0},\xi_{k-1})$, e
+$G^{(k)}\neq0$ in $(x_{0},\xi_{k-1})$. Per il teorema di Cauchy (\cref{teo:cauchy}) esiste
+$\xi_{k}\in(x_{0},\xi_{k-1})$ con
+\[
+  \frac{F^{(k)}(\xi_{k})}{G^{(k)}(\xi_{k})}=\frac{F^{(k-1)}(\xi_{k-1})-F^{(k-1)}(x_{0})}{G^{(k-1)}(\xi_{k-1})-G^{(k-1)}(x_{0})}
+  =\frac{F^{(k-1)}(\xi_{k-1})}{G^{(k-1)}(\xi_{k-1})} ,
+\]
+perché $F^{(k-1)}(x_{0})=G^{(k-1)}(x_{0})=0$. Concatenando le \eqref{eq:catena-cauchy} e posto
+$x_{1}=\xi_{n+1}\in(x_{0},x)$,
+\[
+  \frac{R_{n}(x)}{(x-x_{0})^{n+1}}=\frac{F(\xi_{0})}{G(\xi_{0})}=\frac{F^{(n+1)}(x_{1})}{G^{(n+1)}(x_{1})}
+  =\frac{f^{(n+1)}(x_{1})}{(n+1)!} ,
+\]
+che è la tesi.
+\end{dimostrazione}
+
+\begin{strategia}[Un'altra via]
+Invece di derivare $n+1$ volte, teniamo fisso il punto $x$ e facciamo variare il
+\emph{centro} dello sviluppo. La funzione $\Phi(t)$, valore in $x$ del polinomio di Taylor
+con centro $t$, vale $T_{n}(x)$ per $t=x_{0}$ e $f(x)$ per $t=x$; la sua derivata, per una
+cancellazione «telescopica», contiene soltanto $f^{(n+1)}$. Basta allora \emph{una sola}
+applicazione del teorema di Cauchy, confrontando $\Phi$ con $\Psi(t)=(x-t)^{n+1}$: una funzione
+ausiliaria ben scelta sostituisce la catena di passaggi della prima dimostrazione.
+\end{strategia}
+
+\begin{dimostrazione}[Seconda dimostrazione]
+Per $t\in I$ poniamo
+\begin{equation}\label{eq:taylor-centro-variabile}
+  \Phi(t)=\sum_{k=0}^{n}\frac{f^{(k)}(t)}{k!}\,(x-t)^{k}, \qquad \Psi(t)=(x-t)^{n+1} .
+\end{equation}
+Per $t=x_{0}$ la somma è il polinomio di Taylor con centro $x_{0}$ calcolato in $x$, e per
+$t=x$ sopravvive soltanto il termine con $k=0$; dunque $\Phi(x_{0})=T_{n}(x)$, $\Phi(x)=f(x)$ e
+$\Phi(x)-\Phi(x_{0})=R_{n}(x)$, mentre $\Psi(x)-\Psi(x_{0})=-(x-x_{0})^{n+1}$. Poiché $f^{(k)}$ è
+derivabile in $I$ per $k\le n$, la funzione $\Phi$ è derivabile in $I$, e per la regola del
+prodotto
+\[
+\begin{aligned}
+  \Phi'(t)&=\sum_{k=0}^{n}\frac{f^{(k+1)}(t)}{k!}(x-t)^{k}
+  -\sum_{k=1}^{n}\frac{f^{(k)}(t)}{(k-1)!}(x-t)^{k-1}\\
+  &=\frac{f^{(n+1)}(t)}{n!}\,(x-t)^{n} :
+\end{aligned}
+\]
+posto $j=k-1$, la seconda somma diventa $\sum_{j=0}^{n-1}\frac{f^{(j+1)}(t)}{j!}(x-t)^{j}$, che si elide
+con i termini della prima di indice $k\le n-1$, e resta soltanto quello con $k=n$. Inoltre
+$\Psi'(t)=-(n+1)(x-t)^{n}\neq0$ per $t\neq x$. Le funzioni $\Phi$ e $\Psi$ sono continue e derivabili
+nell'intervallo chiuso di estremi $x_{0}$ e $x$, contenuto in $I$, e $\Psi'$ non si annulla
+nei suoi punti interni; poiché il rapporto degli incrementi non cambia scambiando gli
+estremi, il teorema di Cauchy (\cref{teo:cauchy}) fornisce un punto $x_{1}$ strettamente
+compreso tra $x_{0}$ e $x$ con
+\[
+  \frac{R_{n}(x)}{-(x-x_{0})^{n+1}}=\frac{\Phi'(x_{1})}{\Psi'(x_{1})}=-\frac{f^{(n+1)}(x_{1})}{(n+1)!} ,
+\]
+dove si è semplificato il fattore $(x-x_{1})^{n}\neq0$. È la \eqref{eq:resto-lagrange}.
+\end{dimostrazione}
+
+\begin{osservazione}[Le due dimostrazioni a confronto]\label{oss:confronto-resto-lagrange}
+Entrambe le dimostrazioni usano soltanto il teorema di Cauchy, e per questo nessuna
+delle due richiede la continuità di $f^{(n+1)}$. La prima applica il teorema $n+1$ volte,
+a funzioni che si annullano in $x_{0}$ insieme alle loro derivate: è il teorema di
+L'Hôpital «al finito». La seconda lo applica una sola volta, ma a una funzione costruita
+con un'idea nuova, quella di trattare il centro dello sviluppo come variabile. La
+funzione $\Phi$ ha anche un'altra virtù: la scelta di $\Psi$ è libera, e cambiando $\Psi$ si
+ottengono altre forme del resto, come vedremo nel \S\ref{subsec:resto-cauchy}.
+\end{osservazione}
+
+In entrambe le versioni il resto di Lagrange paga, rispetto al resto integrale, un prezzo:
+il punto $x_{1}$ è soltanto «garantito». Come nel teorema di Lagrange, non sappiamo dove si
+trovi, se non che sta tra $x_{0}$ e $x$, e in generale dipende sia da $x$ sia da $n$. Per le stime, però, questo basta, come mostrano gli
+esempi che seguono.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.86\textwidth, height=6.2cm, xmin=-1.2, xmax=2.1, ymin=0, ymax=6.2,
+  axis lines=middle, xlabel={$x$}, ylabel={$y$}, clip=false,
+  xtick={0.4522,1.6}, xticklabels={$x_{1}$,$x$}, ytick=\empty]
+  \addplot[curva, domain=-1.2:1.82, samples=80] {exp(x)};
+  \addplot[curva2, tratteggio, domain=-1.2:2.05, samples=60] {1+x+x^2/2};
+  \draw[verde, very thick] (axis cs:1.6,3.88) -- (axis cs:1.6,4.953);
+  \fill[blu] (axis cs:1.6,4.953) circle (1.6pt);
+  \fill[rame] (axis cs:1.6,3.88) circle (1.6pt);
+  \draw[verde, thin] (axis cs:1.6,4.42) -- (axis cs:1.8,3.3);
+  \node[verde, font=\scriptsize, anchor=north] at (axis cs:1.8,3.3) {$R_{2}(x)$};
+  \fill (axis cs:0.4522,0) circle (1.4pt);
+  \node[blu, font=\scriptsize, anchor=west] at (axis cs:1.84,6.05) {$e^{x}$};
+  \node[rame, font=\scriptsize] at (axis cs:-0.9,1.7) {$T_{2}(x)$};
+\end{axis}
+\end{tikzpicture}
+\caption{La funzione $e^{x}$ e il suo polinomio di Taylor $T_{2}(x)=1+x+\frac{x^{2}}2$ in $x_{0}=0$.
+Per $x=1{,}6$ il resto vale $R_{2}(x)=e^{1{,}6}-3{,}88\approx1{,}073$; per il
+\cref{teo:resto-lagrange} è $R_{2}(x)=\frac{e^{x_{1}}}{6}\,x^{3}$, e risolvendo si trova
+$x_{1}=\log\frac{6R_{2}(x)}{x^{3}}\approx0{,}452$. Il punto $x_{1}$ non è il punto medio di
+$[0,x]$.}
+\label{fig:resto-lagrange}
+\end{figure}
+
+\begin{esempio}[Approssimazione dei piccoli angoli, con stima]\label{es:piccoli-angoli-stima}
+Nel \cref{sec:taylor} abbiamo osservato che l'approssimazione $\sen\varphi\approx\varphi$ ha un errore
+relativo di circa $\frac{\varphi^{2}}6$. Il resto di Lagrange trasforma l'«all'incirca» in una
+disuguaglianza valida per ogni $\varphi$. Il polinomio di Taylor del seno di ordine $2$ in
+$0$ è $T_{2}(\varphi)=\varphi$ (il coefficiente di $\varphi^{2}$ è nullo), e la derivata terza del seno è
+$-\cos$; dunque, per qualche $\varphi_{1}$ tra $0$ e $\varphi$,
+\[
+  \sen\varphi-\varphi=-\frac{\cos\varphi_{1}}{6}\,\varphi^{3} ,
+\]
+e quindi
+\begin{equation}\label{eq:stima-seno}
+  \abs{\sen\varphi-\varphi}\le\frac{\abs\varphi^{3}}6 \qquad\perogni\varphi\in\R .
+\end{equation}
+Per $\varphi=10^{\circ}\approx0{,}1745$~rad l'errore relativo $\frac{\abs{\sen\varphi-\varphi}}{\abs{\sen\varphi}}$ è quindi al
+più $\frac{\varphi^{3}/6}{\varphi-\varphi^{3}/6}\approx0{,}51\%$. Si noti l'utilità di aver scelto $n=2$ invece di
+$n=1$: i due polinomi coincidono, ma con $n=1$ si otterrebbe soltanto
+$\abs{\sen\varphi-\varphi}\le\frac{\varphi^{2}}2$, una stima molto peggiore per $\varphi$ piccolo.
+\end{esempio}
+
+\begin{python}[Il punto $x_{1}$ di Lagrange per $e^{x}$, con $x=1$]
+import math
+from scipy.integrate import quad
+
+print(" n      R_n(1)       integrale       x_1     1/(n+2)")
+for n in range(1, 8):
+    T = sum(1 / math.factorial(k) for k in range(n + 1))
+    R = math.e - T                                 # resto esatto
+    I = quad(lambda t: (1 - t)**n / math.factorial(n)
+             * math.exp(t), 0, 1)[0]               # resto integrale
+    x1 = math.log(math.factorial(n + 1) * R)       # da e^x1/(n+1)!
+    print(f"{n:2d}  {R:.9f}  {I:.9f}  {x1:.5f}  {1/(n+2):.5f}")
+\end{python}
+\begin{risultato}
+ n      R_n(1)       integrale       x_1     1/(n+2)
+ 1  0.718281828  0.718281828  0.36225  0.33333
+ 2  0.218281828  0.218281828  0.26979  0.25000
+ 3  0.051615162  0.051615162  0.21411  0.20000
+ 4  0.009948495  0.009948495  0.17716  0.16667
+ 5  0.001615162  0.001615162  0.15093  0.14286
+ 6  0.000226273  0.000226273  0.13139  0.12500
+ 7  0.000027860  0.000027860  0.11629  0.11111
+\end{risultato}
+
+Il programma conferma che il resto integrale coincide con il resto calcolato per
+differenza, e mostra che il punto $x_{1}$ si avvicina a $x_{0}=0$ al crescere di $n$, circa
+come $\frac1{n+2}$. La ragione è che il peso $(1-t)^{n}$ si concentra sempre più vicino a $x_{0}$:
+il suo baricentro in $[0,1]$ è
+\[
+  \frac{\int_{0}^{1}t\,(1-t)^{n}\,dt}{\int_{0}^{1}(1-t)^{n}\,dt}=\frac{\frac1{(n+1)(n+2)}}{\frac1{n+1}}=\frac1{n+2}
+\]
+(il numeratore si calcola con la sostituzione $u=1-t$), e la media pesata di $e^{t}$, che
+vicino a $0$ è quasi lineare, viene raggiunta in un punto vicino al baricentro.
+
+\subsection{Approfondimento: la forma di Cauchy del resto}
+\label{subsec:resto-cauchy}
+
+Il resto di Lagrange non è sempre la forma più conveniente. Sia $f(x)=\log(1+x)$, con
+$x_{0}=0$ e $-1<x<0$. Poiché $f^{(n+1)}(t)=\frac{(-1)^{n}n!}{(1+t)^{n+1}}$ (\cref{sec:taylor}), la
+\eqref{eq:resto-lagrange} dà, per qualche $x_{1}\in(x,0)$,
+\[
+  \abs{R_{n}(x)}=\frac{\abs x^{n+1}}{(n+1)(1+x_{1})^{n+1}}
+  \le\frac1{n+1}\Bigl(\frac{\abs x}{1+x}\Bigr)^{n+1} ,
+\]
+perché $1+x_{1}>1+x$. Se $-\frac12\le x<0$ il rapporto $\frac{\abs x}{1+x}$ non supera $1$, e la stima
+tende a zero per $n\to+\infty$; ma se $-1<x<-\frac12$ il rapporto supera $1$ e la stima
+diverge. Poiché di $x_{1}$ sappiamo soltanto che sta in $(x,0)$, non possiamo fare di
+meglio: il resto di Lagrange, da solo, non permette di decidere se $R_{n}(x)$ tenda a zero.
+Una forma diversa del resto, dovuta a Cauchy, supera l'ostacolo.
+
+\begin{teorema}[Forma di Cauchy del resto]\label{teo:resto-cauchy}
+\index{formula di Taylor!con il resto di Cauchy}
+Sia $f$ derivabile $n+1$ volte in un intervallo aperto $I$, e siano $x_{0},x\in I$ con
+$x\neq x_{0}$. Esiste un punto $x_{2}$ strettamente compreso tra $x_{0}$ e $x$ tale che
+\begin{equation}\label{eq:resto-cauchy}
+  R_{n}(x)=\frac{f^{(n+1)}(x_{2})}{n!}\,(x-x_{2})^{n}\,(x-x_{0}) .
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$ derivabile $n+1$ volte in $I$ aperto; \ $x_{0}\neq x$ in $I$.}
+\Tesi{$\esiste x_{2}$ strettamente compreso tra $x_{0}$ e $x$ per cui vale la
+\eqref{eq:resto-cauchy}.}
+\end{schema}
+
+\begin{strategia}
+Si riprende la funzione $\Phi$ della \eqref{eq:taylor-centro-variabile}, per la quale
+$\Phi(x)-\Phi(x_{0})=R_{n}(x)$ e $\Phi'(t)=\frac{f^{(n+1)}(t)}{n!}(x-t)^{n}$. Al teorema di Cauchy con
+$\Psi(t)=(x-t)^{n+1}$ si sostituisce il teorema di Lagrange, cioè il teorema di Cauchy con
+$\Psi(t)=t$: così la derivata $\Phi'$ viene calcolata \emph{per intero} nel punto intermedio,
+compreso il fattore $(x-t)^{n}$.
+\end{strategia}
+
+\begin{dimostrazione}
+Come nella seconda dimostrazione del \cref{teo:resto-lagrange-generale}, la funzione $\Phi$
+è continua e derivabile nell'intervallo chiuso di estremi $x_{0}$ e $x$. Per il teorema di
+Lagrange (\cref{teo:lagrange}), applicato in questo intervallo (il rapporto
+$\frac{\Phi(x)-\Phi(x_{0})}{x-x_{0}}$ non cambia scambiando gli estremi), esiste $x_{2}$ strettamente
+compreso tra $x_{0}$ e $x$ con
+\[
+\begin{aligned}
+  R_{n}(x)&=\Phi(x)-\Phi(x_{0})=\Phi'(x_{2})\,(x-x_{0})\\
+  &=\frac{f^{(n+1)}(x_{2})}{n!}\,(x-x_{2})^{n}\,(x-x_{0}) .
+\end{aligned}
+\qedhere
+\]
+\end{dimostrazione}
+
+Torniamo al logaritmo. Per $-1<x<x_{2}<0$ la \eqref{eq:resto-cauchy} dà
+\[
+  \abs{R_{n}(x)}=\frac{\abs x\,(x_{2}-x)^{n}}{(1+x_{2})^{n+1}}
+  =\frac{\abs x}{1+x_{2}}\Bigl(\frac{x_{2}-x}{1+x_{2}}\Bigr)^{n}\le\frac{\abs x^{n+1}}{1+x} .
+\]
+Infatti $\frac1{1+x_{2}}<\frac1{1+x}$; e $\frac{x_{2}-x}{1+x_{2}}\le\abs x=-x$ equivale, moltiplicando per
+$1+x_{2}>0$, a $x_{2}\le-x\,x_{2}$, cioè a $x_{2}(1+x)\le0$, che è vera. Ora la stima tende a zero
+per ogni $x\in(-1,0)$. Il punto intermedio compare due volte nel fattore
+$\frac{x_{2}-x}{1+x_{2}}$, e i due effetti si compensano: se $x_{2}$ è vicino a $x$, dove il
+denominatore $1+x_{2}$ è piccolo, è piccolo anche il numeratore $x_{2}-x$.
+
+\begin{osservazione}[Tre forme dello stesso resto]\label{oss:tre-forme-resto}
+Se $f$ è di classe $C^{n+1}$, la forma di Cauchy si ricava anche dal resto integrale,
+come fa Giusti \cite{giusti}: invece di portare fuori dall'integrale
+\eqref{eq:resto-integrale} il solo fattore $f^{(n+1)}$, con il \cref{lem:media-pesata}, si
+applica all'intero integrando $\frac{(x-t)^{n}}{n!}f^{(n+1)}(t)$ il teorema della media
+(\cref{teo:media}). Le forme di Lagrange e di Cauchy sono dunque due «riassunti» diversi
+della stessa formula integrale, e nessuna delle due è sempre la migliore. Più in
+generale, con $\Psi(t)=\abs{x-t}^{p}$ e $p>0$ la seconda dimostrazione del
+\cref{teo:resto-lagrange-generale} produce la forma del resto detta di Schlömilch e
+Roche, che per $p=n+1$ e per $p=1$ restituisce le due precedenti. Quando si sa
+stimare direttamente, il resto integrale resta il più preciso: per il logaritmo con
+$-1<x<0$ il \cref{sec:taylor-peano} ha dato $\abs{R_{n}(x)}\le\frac{\abs x^{n+1}}{(n+1)(1+x)}$, migliore
+di un fattore $n+1$. Il programma confronta le tre stime con il resto vero.
+\end{osservazione}
+
+\begin{python}[Resto di $\log(1+x)$ in $x=-0{,}8$: tre stime]
+import math
+
+x = -0.8                          # log(1+x) con x < -1/2
+q = abs(x) / (1 + x)              # = 4
+print("  n    |R_n(x)|   Lagrange     Cauchy   integrale")
+for n in (1, 2, 5, 10, 20, 40):
+    T = sum((-1)**(k + 1) * x**k / k for k in range(1, n + 1))
+    R = abs(math.log(1 + x) - T)
+    lag = q**(n + 1) / (n + 1)
+    cau = abs(x)**(n + 1) / (1 + x)
+    itg = cau / (n + 1)
+    print(f"{n:3d}  {R:.3e}  {lag:.3e}  {cau:.3e}  {itg:.3e}")
+\end{python}
+\begin{risultato}
+  n    |R_n(x)|   Lagrange     Cauchy   integrale
+  1  8.094e-01  8.000e+00  3.200e+00  1.600e+00
+  2  4.894e-01  2.133e+01  2.560e+00  8.533e-01
+  5  1.508e-01  6.827e+02  1.311e+00  2.185e-01
+ 10  3.056e-02  3.813e+05  4.295e-01  3.905e-02
+ 20  1.892e-03  2.094e+11  4.612e-02  2.196e-03
+ 40  1.192e-05  1.179e+23  5.317e-04  1.297e-05
+\end{risultato}
+
+Per $x=-0{,}8$ il rapporto $\frac{\abs x}{1+x}$ vale $4$: la stima di Lagrange cresce come
+$\frac{4^{n+1}}{n+1}$ e non dice nulla, mentre quella di Cauchy decresce come $\frac{0{,}8^{n+1}}{0{,}2}$ e
+quella integrale segue da vicino il resto vero.
+
+\begin{notastorica}[Lagrange, Cauchy e il resto]
+Per oltre mezzo secolo il teorema di Taylor rimase un risultato tra tanti, finché
+Lagrange, in una memoria del 1772 per l'Accademia di Berlino, non lo proclamò il
+principio fondamentale del calcolo differenziale. Nella \emph{Théorie des fonctions
+analytiques} (1797), il cui frontespizio è l'epigrafe di questo capitolo, tentò di
+fondare l'intero calcolo sugli sviluppi in serie, definendo la derivata come
+coefficiente del termine di primo grado, senza infinitesimi né limiti (si veda la nota
+storica del \S\ref{sec:def-derivata}). Interessato ai calcoli approssimati, Lagrange volle anche sapere
+quale errore si commette arrestando la serie, e trovò il resto del
+\cref{teo:resto-lagrange}: lo strinse tra i valori minimo e massimo di $f^{(n+1)}$ e
+concluse con la proprietà dei valori intermedi, che allora si riteneva evidente, secondo
+lo stesso schema del \cref{lem:media-pesata}. Il programma conteneva però un circolo
+vizioso, come osserva Giusti \cite{giusti}: per sapere se una funzione è uguale alla
+propria serie bisogna studiarne il resto, e quindi proprio le derivate che si volevano
+evitare. Cauchy, nel \emph{Résumé des leçons} (1823), rovesciò l'ordine: definita la
+derivata come limite, la formula di Taylor diventò un teorema, e il resto, che egli
+scrisse anche nella forma \eqref{eq:resto-cauchy}, ne divenne il contenuto essenziale.
+Cauchy mostrò inoltre, con la funzione $e^{-1/x^{2}}$ (\cref{prop:cauchy-controesempio}), che
+funzioni diverse possono avere la stessa serie di Taylor: una funzione non è determinata
+dalla sua serie, e la definizione di Lagrange non poteva reggere. Del suo programma
+sopravvissero il resto e la notazione $f'$.
+\end{notastorica}

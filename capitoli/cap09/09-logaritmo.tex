@@ -1,0 +1,252 @@
+%% ----------------------------------------------------------------------------
+%%  §9.9  Appendice: definizione di logaritmo, esponenziale, potenza
+%% ----------------------------------------------------------------------------
+\section{Appendice: logaritmo, esponenziale e potenza mediante un integrale}
+\label{sec:logaritmo-integrale}
+
+Nel \cref{cap:numeri} abbiamo introdotto le funzioni potenza, esponenziale e logaritmo a
+partire dall'espressione $a^{b}$, appoggiandoci inizialmente all'idea intuitiva di
+elevamento a potenza con esponente reale; nel \cref{cap:complementi} abbiamo dato un
+significato rigoroso ad $a^{b}$ mediante l'estremo superiore. In questo paragrafo seguiamo
+una strada diversa, basata sull'integrale definito: \emph{definiamo} il logaritmo come
+una funzione integrale, e da esso deduciamo l'esponenziale e la potenza. Supponiamo
+validi gli assiomi dei numeri reali, con il prodotto, il quoziente e le potenze $a^{n}$
+con esponente naturale, e utilizziamo soltanto risultati dimostrati senza far uso delle
+tre funzioni che vogliamo definire: in particolare, il numero $e$ definito come limite
+della successione $\bigl(1+\frac1n\bigr)^{n}$ (\cref{teo:numero-e}), il teorema fondamentale, la
+formula di sostituzione con una funzione lineare e i teoremi sulle funzioni monotòne e
+sulle funzioni inverse.
+
+La funzione $\frac1t$ è continua e decrescente per $t>0$. Poniamo, per $x>0$,
+\begin{equation}\label{eq:L-definizione}
+  L(x)=\int_{1}^{x}\frac{dt}t \qquad (x>0) .
+\end{equation}
+Per $x>1$, $L(x)$ è l'area sotto l'iperbole $y=\frac1t$ tra $1$ e $x$; per $0<x<1$ è l'opposto
+dell'area tra $x$ e $1$ (\cref{fig:logaritmo-area}).
+
+\begin{proposizione}[Proprietà della funzione $L$]\label{prop:L-proprieta}
+La funzione $L$ definita dalla \eqref{eq:L-definizione} ha le proprietà seguenti.
+\begin{enumerate}[label=\textup{(\alph*)}]
+  \item $L$ è derivabile in $(0,+\infty)$ con $L'(x)=\frac1x$; è quindi continua e strettamente
+  crescente, e $L(1)=0$.
+  \item $L(x_{1}x_{2})=L(x_{1})+L(x_{2})$ per ogni $x_{1},x_{2}>0$; in particolare
+  $L(x^{n})=n\,L(x)$ per ogni $n\in\N$ e $L\bigl(\frac1x\bigr)=-L(x)$.
+  \item $L(e)=1$.
+  \item $L$ è una biiezione di $(0,+\infty)$ su $\R$.
+\end{enumerate}
+\end{proposizione}
+
+\needspace{9\baselineskip}
+\begin{schema}
+\Ipotesi{$L(x)=\int_{1}^{x}\frac{dt}t$ per $x>0$; \ $e=\lim\bigl(1+\frac1n\bigr)^{n}$.}
+\Tesi{(a) $L'=\frac1x$, $L$ strettamente crescente, $L(1)=0$; \ (b) $L(x_{1}x_{2})=L(x_{1})+L(x_{2})$;
+\ (c) $L(e)=1$; \ (d) $L:(0,+\infty)\to\R$ biiettiva.}
+\end{schema}
+
+\begin{strategia}
+(a) è il teorema fondamentale. (b) è il cuore della questione: l'area sotto l'iperbole tra
+$x_{1}$ e $x_{1}x_{2}$ è uguale a quella tra $1$ e $x_{2}$, perché la sostituzione $t=x_{1}s$ allarga
+le basi di un fattore $x_{1}$ e riduce le altezze dello stesso fattore. (c) si ottiene
+riconoscendo in $L\bigl((1+\frac1n)^{n}\bigr)=n\,L(1+\frac1n)$ un rapporto incrementale di $L$ in $1$. Per (d),
+la (b) mostra che $L$ non è limitata né superiormente né inferiormente, e il teorema dei
+valori intermedi fa il resto.
+\end{strategia}
+
+\begin{dimostrazione}
+(a) Per il \cref{teo:fondamentale} (applicato in un intervallo chiuso contenuto in
+$(0,+\infty)$ che contenga $1$ e abbia $x$ al suo interno), $L$ è derivabile con
+$L'(x)=\frac1x>0$; per il
+\cref{cor:derivata-positiva} è strettamente crescente, ed è continua perché derivabile.
+Inoltre $L(1)=\int_{1}^{1}=0$.
+
+(b) Fissati $x_{1},x_{2}>0$, per l'additività
+\[
+  L(x_{1}x_{2})=\int_{1}^{x_{1}x_{2}}\frac{dt}t=\int_{1}^{x_{1}}\frac{dt}t+\int_{x_{1}}^{x_{1}x_{2}}\frac{dt}t .
+\]
+Nell'ultimo integrale effettuiamo la sostituzione $t=g(s)=x_{1}s$, con $g'(s)=x_{1}$,
+$g(1)=x_{1}$ e $g(x_{2})=x_{1}x_{2}$; per il \cref{teo:sostituzione-definita},
+\[
+  \int_{x_{1}}^{x_{1}x_{2}}\frac{dt}t=\int_{1}^{x_{2}}\frac{x_{1}\,ds}{x_{1}s}=\int_{1}^{x_{2}}\frac{ds}s=L(x_{2}) ,
+\]
+(se $x_{2}<1$ gli estremi sono in ordine decrescente, e le formule valgono per la
+\eqref{eq:estremi-invertiti}), e quindi $L(x_{1}x_{2})=L(x_{1})+L(x_{2})$. Per induzione su $n$ si ottiene $L(x^{n})=nL(x)$; con
+$x_{1}=x$, $x_{2}=\frac1x$ si ottiene $0=L(1)=L(x)+L\bigl(\frac1x\bigr)$.
+
+(c) Sia $x_{n}=\bigl(1+\frac1n\bigr)^{n}$. Per la (b) e poiché $L(1)=0$,
+\[
+  L(x_{n})=n\,L\Bigl(1+\frac1n\Bigr)=\frac{L(1+\frac1n)-L(1)}{\frac1n} ,
+\]
+che è il rapporto incrementale di $L$ nel punto $1$ con incremento $\frac1n$; per la (a) esso
+tende a $L'(1)=1$ (lungo la successione $h=\frac1n$, per la definizione stessa di limite di una
+funzione, \cref{def:limite-funzione}). D'altra parte $x_{n}\to e$ e $L$ è continua, quindi $L(x_{n})\to L(e)$ (per la
+\cref{prop:caratt-continuita}). Per l'unicità del limite, $L(e)=1$.
+
+(d) Per la (a), $L$ è iniettiva. Poiché $L(2)>L(1)=0$, per la (b) si ha $L(2^{n})=nL(2)\to+\infty$
+e $L(2^{-n})=-nL(2)\to-\infty$. Dato $y\in\R$, esistono quindi $n\in\N$ con $L(2^{-n})<y<L(2^{n})$, e
+per il teorema dei valori intermedi (\cref{teo:valori-intermedi-2}), applicato alla funzione
+continua $L$ nell'intervallo $[2^{-n},2^{n}]$, esiste $x$ con $L(x)=y$: $L$ è suriettiva su $\R$.
+\end{dimostrazione}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[name=g1, width=0.5\textwidth, height=4.6cm, axis lines=middle,
+  xmin=-0.1, xmax=4.4, ymin=-0.1, ymax=2.3, xtick={1,3}, xticklabels={$1$,$x$},
+  ytick={1}, title={\scriptsize $L(x)=\int_{1}^{x}\frac{dt}t$}]
+  \addplot[draw=none, fill=blu!22, domain=1:3, samples=50] {1/x} \closedcycle;
+  \addplot[curva, domain=0.45:4.3, samples=100] {1/x};
+  \node[font=\scriptsize, blu] at (axis cs:1.9,0.22) {$L(x)$};
+\end{axis}
+\begin{axis}[at={(g1.east)}, anchor=west, xshift=0.7cm, width=0.5\textwidth,
+  height=4.6cm, axis lines=middle, xmin=-0.1, xmax=4.4, ymin=-0.1, ymax=1.3,
+  xtick={1,1.5,2.5,3.75}, xticklabels={$1$,$x_{2}$,$x_{1}$,$x_{1}x_{2}$},
+  ytick=\empty, title={\scriptsize aree uguali: $L(x_{1}x_{2})-L(x_{1})=L(x_{2})$},
+  tick label style={font=\scriptsize}]
+  \addplot[draw=none, fill=blu!22, domain=1:1.5, samples=40] {1/x} \closedcycle;
+  \addplot[draw=none, fill=rame!30, domain=2.5:3.75, samples=40] {1/x} \closedcycle;
+  \addplot[curva, domain=0.8:4.3, samples=100] {1/x};
+\end{axis}
+\end{tikzpicture}
+\caption{A sinistra, il logaritmo come area sotto l'iperbole. A destra, la regione tra
+$1$ e $x_{2}$ e quella tra $x_{1}$ e $x_{1}x_{2}$ (qui $x_{1}=2{,}5$, $x_{2}=1{,}5$) hanno la stessa area: la
+seconda si ottiene dalla prima allargando le basi di un fattore $x_{1}$ e riducendo le
+altezze dello stesso fattore. È la proprietà $L(x_{1}x_{2})=L(x_{1})+L(x_{2})$.}
+\label{fig:logaritmo-area}
+\end{figure}
+
+Per la \cref{prop:L-proprieta}(d), la funzione $L$ è invertibile. Indichiamo con
+$E:\R\to(0,+\infty)$ la funzione inversa, definita da
+\begin{equation}\label{eq:E-definizione}
+  E(y)=x \quad\sse\quad L(x)=y .
+\end{equation}
+
+\needspace{9\baselineskip}
+\begin{proposizione}[Proprietà della funzione $E$]\label{prop:E-proprieta}
+La funzione $E$ è continua, strettamente crescente e derivabile in $\R$, con
+\begin{equation}\label{eq:E-proprieta}
+\begin{gathered}
+  E'(y)=E(y), \qquad E(0)=1, \qquad E(1)=e,\\
+  E(y_{1}+y_{2})=E(y_{1})\,E(y_{2}) .
+\end{gathered}
+\end{equation}
+Inoltre, per ogni $a>0$ e $n\in\N$, $E\bigl(n\,L(a)\bigr)=a^{n}$.
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$E=L^{-1}:\R\to(0,+\infty)$.}
+\Tesi{$E$ continua, strettamente crescente, $E'=E$; \ $E(0)=1$, $E(1)=e$;
+\ $E(y_{1}+y_{2})=E(y_{1})E(y_{2})$; \ $E(nL(a))=a^{n}$.}
+\end{schema}
+
+\begin{strategia}
+Le proprietà di regolarità passano dalla funzione alla sua inversa per i teoremi sulle
+funzioni inverse. Le identità algebriche si ottengono applicando $L$, che è iniettiva, a
+entrambi i membri e usando la \cref{prop:L-proprieta}.
+\end{strategia}
+
+\begin{dimostrazione}
+In ogni intervallo chiuso $[\alpha,\beta]\subset(0,+\infty)$ la funzione $L$ è continua e strettamente
+crescente; per i \cref{teo:continuita-inversa,teo:derivata-inversa} la sua inversa è
+continua e strettamente crescente in $[L(\alpha),L(\beta)]$, e derivabile con
+$E'(y)=\frac1{L'(E(y))}=E(y)$. Poiché ogni $y\in\R$ è interno a un intervallo di questo tipo,
+le proprietà valgono in tutto $\R$. Da $L(1)=0$ e $L(e)=1$ seguono $E(0)=1$ ed $E(1)=e$. Posto
+$x_{i}=E(y_{i})$, per la \cref{prop:L-proprieta}(b) $L(x_{1}x_{2})=y_{1}+y_{2}$, cioè
+$E(y_{1}+y_{2})=x_{1}x_{2}=E(y_{1})E(y_{2})$. Infine $L(a^{n})=nL(a)$, cioè $E(nL(a))=a^{n}$.
+\end{dimostrazione}
+
+L'identità $a^{n}=E\bigl(n\,L(a)\bigr)$ esprime la potenza a esponente naturale mediante
+$E$ e $L$, e suggerisce come definire la potenza con esponente reale.
+
+\begin{definizione}[Potenza con esponente reale]\label{def:potenza-integrale}
+Se $a$ e $x$ sono numeri reali, con $a>0$, si pone
+\begin{equation}\label{eq:potenza-integrale}
+  a^{x}=E\bigl(x\,L(a)\bigr) .
+\end{equation}
+\end{definizione}
+
+La definizione è coerente con quella elementare: per $x=n\in\N$ restituisce $a^{n}$ (per la
+\cref{prop:E-proprieta}); per $x=\frac mn$, con $m,n\in\N$, il numero $a^{m/n}$ così definito è
+positivo e verifica, per la \eqref{eq:E-proprieta},
+$\bigl(a^{m/n}\bigr)^{n}=E\bigl(\frac mnL(a)\bigr)^{n}=E\bigl(mL(a)\bigr)=a^{m}$, cioè è la radice $n$-esima
+positiva di $a^{m}$, come nella \eqref{eq:potenza-razionale}. Inoltre $E(0)=1=a^{0}$ e,
+poiché $E(y)\,E(-y)=E(0)=1$, si ha $a^{-m/n}=E\bigl(-\frac mnL(a)\bigr)=\frac1{a^{m/n}}$, ancora in
+accordo con la \eqref{eq:potenza-razionale}. Le due funzioni $x\mapsto E(xL(a))$ e $x\mapsto a^{x}$
+(quella del \cref{cap:complementi}, continua per il \cref{teo:continuita-esponenziale})
+sono continue in $\R$ e coincidono sui razionali; poiché ogni numero reale $x$ è limite di
+una successione di razionali (basta scegliere $q_{k}\in\Q\cap(x-\frac1k,x)$, che esiste per il
+\cref{teo:densita-Q}), per la \cref{prop:caratt-continuita} esse coincidono ovunque. In particolare, per $a=e$,
+poiché $L(e)=1$, si ha la \emph{funzione esponenziale}
+\begin{equation}\label{eq:esponenziale-integrale}
+  e^{x}=E(x) ,
+\end{equation}
+e, poiché il logaritmo naturale è la funzione inversa di $e^{x}$,
+\begin{equation}\label{eq:logaritmo-integrale}
+  \log x=L(x)=\int_{1}^{x}\frac{dt}t \qquad (x>0) .
+\end{equation}
+Risultano così definite le funzioni potenza, esponenziale e logaritmo, e si riconosce
+facilmente che esse godono delle proprietà illustrate nel \cref{cap:numeri}. Ad esempio,
+$\log(x_{1}x_{2})=\log x_{1}+\log x_{2}$ è la \cref{prop:L-proprieta}(b), che applicata a
+$\frac{x_{1}}{x_{2}}$ e $x_{2}$ dà $\log\frac{x_{1}}{x_{2}}=\log x_{1}-\log x_{2}$.
+
+\begin{python}[Il logaritmo come area e l'esponenziale come sua inversa]
+import math
+
+def L(x, n=100000):
+    """L(x) = int_1^x dt/t, formula del punto medio."""
+    h = (x - 1) / n
+    return h * sum(1 / (1 + (k + 0.5) * h) for k in range(n))
+
+def E(y):
+    """Inversa di L, per bisezione (L è crescente)."""
+    a, b = 1e-6, 1e6
+    for _ in range(80):
+        m = math.sqrt(a * b)            # bisezione «geometrica»
+        a, b = (m, b) if L(m, 2000) < y else (a, m)
+    return math.sqrt(a * b)
+
+for x in (0.5, 2, 3, 6, math.e):
+    print(f"L({x:.4f}) = {L(x):.8f}   log = {math.log(x):.8f}")
+print(f"L(2) + L(3) = {L(2) + L(3):.8f} = L(6)")
+for y in (-1, 1, 2):
+    print(f"E({y:2d}) = {E(y):.5f}   exp = {math.exp(y):.5f}")
+\end{python}
+\begin{risultato}
+L(0.5000) = -0.69314718   log = -0.69314718
+L(2.0000) = 0.69314718   log = 0.69314718
+L(3.0000) = 1.09861229   log = 1.09861229
+L(6.0000) = 1.79175947   log = 1.79175947
+L(2.7183) = 1.00000000   log = 1.00000000
+L(2) + L(3) = 1.79175947 = L(6)
+E(-1) = 0.36788   exp = 0.36788
+E( 1) = 2.71828   exp = 2.71828
+E( 2) = 7.38906   exp = 7.38906
+\end{risultato}
+
+Nella funzione \texttt{E} la bisezione sostituisce a ogni passo il rapporto $b/a$ tra gli
+estremi con la sua radice quadrata, invece di dimezzarne la differenza, perché l'intervallo di partenza $[10^{-6},10^{6}]$ copre
+molti ordini di grandezza; per contenere i tempi di calcolo vi si usa una formula meno
+precisa per $L$ ($n=2000$), e stampiamo soltanto cinque decimali, che bastano a
+riconoscere $e^{-1}$, $e$ ed $e^{2}$.
+
+\begin{notastorica}[Il logaritmo e l'iperbole]
+Che le aree sotto l'iperbole si comportino come logaritmi fu scoperto prima che si
+conoscessero il calcolo integrale e il numero $e$. La proprietà (a)
+della \cref{prop:L-proprieta} era già, in un certo senso, nella definizione cinematica di
+Nepero (1614): un punto percorre un segmento con velocità uguale alla distanza che gli
+resta da percorrere, un altro si muove con velocità costante, e il logaritmo della
+distanza residua del primo è lo spazio percorso dal secondo; la velocità di variazione
+del logaritmo è quindi inversamente proporzionale al numero. Il gesuita Grégoire de Saint-Vincent
+mostrò nel 1647 che, se le ascisse crescono in progressione geometrica, le aree
+corrispondenti sotto l'iperbole crescono in progressione aritmetica (è la nostra
+\cref{fig:logaritmo-area}); il suo allievo Alphonse Antonio de Sarasa ne dedusse nel 1649
+che tali aree hanno le proprietà dei logaritmi. Nicolaus Mercator, nella
+\emph{Logarithmotechnia} (1668), calcolò l'area sotto $\frac1{1+t}$ sviluppandola in serie e
+ottenne $\log(1+x)=x-\frac{x^{2}}2+\frac{x^{3}}3-\cdots$, da lui chiamato «logaritmo naturale».
+In quale base fossero questi logaritmi «iperbolici», come furono chiamati per tutto il
+Settecento, lo chiarì Eulero nell'\emph{Introductio in analysin infinitorum} (1748),
+definendo il logaritmo come inverso dell'esponenziale: la base è $e$, come dice la (c)
+della \cref{prop:L-proprieta}.
+L'impostazione di questo paragrafo, che fa del logaritmo una funzione integrale, è
+quella adottata da molti trattati moderni, perché rende immediate la derivabilità e la
+proprietà fondamentale del logaritmo.
+\end{notastorica}

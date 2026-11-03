@@ -1,0 +1,331 @@
+%% ----------------------------------------------------------------------------
+%%  §7.2  Limiti e continuità
+%% ----------------------------------------------------------------------------
+\section{Limiti e continuità}
+\label{sec:limiti-piano}
+
+Per le funzioni di una variabile la vicinanza tra due numeri è misurata dal valore
+assoluto della differenza; nel piano la misuriamo con la distanza
+\eqref{eq:distanza}. Il ruolo degli intervalli $(x_{0}-\delta,x_{0}+\delta)$ è preso dai
+cerchi.
+
+\begin{definizione}[Intorno circolare, punto di accumulazione]\label{def:intorno-circolare}
+\index{intorno circolare}\index{punto!di accumulazione}
+Si chiama \emph{intorno circolare} di raggio $\delta>0$ del punto $P_{0}=(x_{0},y_{0})$ il
+cerchio aperto di centro $P_{0}$ e raggio $\delta$:
+\begin{equation}\label{eq:intorno-circolare}
+\begin{split}
+  I_{\delta}(P_{0})&=\set{(x,y)\in\R^{2} : (x-x_{0})^{2}+(y-y_{0})^{2}<\delta^{2}}\\
+  &=\set{P\in\R^{2} : d(P,P_{0})<\delta}.
+\end{split}
+\end{equation}
+Sia $D\subseteq\R^{2}$. Si dice che $P_{0}\in\R^{2}$ è un \emph{punto di accumulazione}
+per $D$ se in ogni intorno circolare di $P_{0}$ cade almeno un punto di $D$ distinto da
+$P_{0}$ (\cref{fig:intorni-piano}).
+\end{definizione}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[scale=0.9]
+  \draw[-Latex, grigio] (-0.3,0) -- (4.2,0) node[right, black] {$x$};
+  \draw[-Latex, grigio] (0,-0.3) -- (0,3.2) node[above, black] {$y$};
+  \fill[blu!8] (2.2,1.5) circle (1.1);
+  \draw[blu, thick, dashed] (2.2,1.5) circle (1.1);
+  \fill (2.2,1.5) circle (1.3pt);
+  \draw[tratteggio] (0,1.5) node[left, black, font=\scriptsize] {$y_{0}$} -- (2.2,1.5)
+    -- (2.2,0) node[below, black, font=\scriptsize] {$x_{0}$};
+  \draw[rame] (2.2,1.5) -- node[above, font=\scriptsize] {$\delta$} ++(40:1.1);
+  \node[blu, font=\scriptsize] at (3.55,2.55) {$I_{\delta}(P_{0})$};
+\end{tikzpicture}\hspace{1.2cm}
+\begin{tikzpicture}[scale=0.9]
+  \draw[-Latex, grigio] (-0.3,0) -- (4.2,0) node[right, black] {$x$};
+  \draw[-Latex, grigio] (0,-0.3) -- (0,3.2) node[above, black] {$y$};
+  \fill[pattern=north east lines, pattern color=blu]
+    (1.8,1.2) .. controls (2.6,0.9) and (3.6,1.0) .. (3.8,1.9)
+    .. controls (4.0,2.8) and (2.6,3.1) .. (2.1,2.6)
+    .. controls (1.7,2.2) and (1.6,1.6) .. (1.8,1.2) -- cycle;
+  \draw[blu, thick]
+    (1.8,1.2) .. controls (2.6,0.9) and (3.6,1.0) .. (3.8,1.9)
+    .. controls (4.0,2.8) and (2.6,3.1) .. (2.1,2.6)
+    .. controls (1.7,2.2) and (1.6,1.6) .. (1.8,1.2) -- cycle;
+  \foreach \r in {0.3,0.6,0.95} \draw[rame, dashed] (1.8,1.2) circle (\r);
+  \fill (1.8,1.2) circle (1.3pt);
+  \node[font=\scriptsize, fill=white, inner sep=1pt, anchor=north east] at (1.75,1.1)
+    {$P_{0}$};
+  \node[blu, font=\scriptsize] at (3.1,2.1) {$D$};
+\end{tikzpicture}
+\caption{A sinistra, l'intorno circolare $I_{\delta}(P_{0})$: il cerchio aperto di centro
+$P_{0}=(x_{0},y_{0})$ e raggio $\delta$. A destra, un punto $P_{0}$ di accumulazione per
+l'insieme $D$: ogni intorno circolare di $P_{0}$, per quanto piccolo, contiene punti di
+$D$ diversi da $P_{0}$ (qui $P_{0}$ sta sul bordo di $D$).}
+\label{fig:intorni-piano}
+\end{figure}
+
+\begin{definizione}[Limite di una funzione di due variabili]\label{def:limite-piano}
+\index{limite!di una funzione di due variabili}
+Sia $f:D\to\R$ e sia $P_{0}=(x_{0},y_{0})$ un punto di accumulazione per $D$. Si dice
+che $f(x,y)$ \emph{converge al numero reale $\ell$} per $(x,y)$ che tende a
+$(x_{0},y_{0})$, e si scrive
+\begin{equation}\label{eq:limite-piano}
+  \lim_{(x,y)\to(x_{0},y_{0})}f(x,y)=\ell,
+\end{equation}
+se per ogni $\varepsilon>0$ esiste $\delta>0$ tale che $\abs{f(x,y)-\ell}<\varepsilon$ per ogni
+$(x,y)\in I_{\delta}(P_{0})\cap D$ diverso da $P_{0}$. In simboli:
+\begin{equation}\label{eq:limite-piano-simboli}
+\begin{gathered}
+  \perogni\varepsilon>0\ \ \esiste\delta>0 :\quad \perogni(x,y)\in D,\\
+  0<\sqrt{(x-x_{0})^{2}+(y-y_{0})^{2}}<\delta \ \implica\ \abs{f(x,y)-\ell}<\varepsilon .
+\end{gathered}
+\end{equation}
+Analogamente si definiscono i limiti $\pm\infty$.
+\end{definizione}
+
+\begin{osservazione}[Limiti e successioni]\label{oss:limite-piano-successioni}
+Una successione di punti $P_{n}=(x_{n},y_{n})$ converge a $P_{0}=(x_{0},y_{0})$ se
+$d(P_{n},P_{0})\to0$; per le \eqref{eq:distanza-componenti}, ciò equivale a $x_{n}\to x_{0}$ e
+$y_{n}\to y_{0}$. Con la stessa dimostrazione del \cref{teo:eps-delta}, nella quale basta
+sostituire il valore assoluto con la distanza, si prova che la
+\eqref{eq:limite-piano} equivale alla condizione: \emph{per ogni successione
+$P_{n}\to P_{0}$ di punti di $D$ diversi da $P_{0}$, risulta $f(P_{n})\to\ell$}. Ne segue,
+come per le funzioni di una variabile, che il limite, se esiste, è unico.
+\end{osservazione}
+
+\begin{esempio}\label{es:limite-x4-y4}
+Proviamo che
+\begin{equation}\label{eq:limite-x4-y4}
+  \lim_{(x,y)\to(0,0)}\frac{x^{4}+y^{4}}{x^{2}+y^{2}}=0 .
+\end{equation}
+Poiché $x^{4}+y^{4}\le x^{4}+y^{4}+2x^{2}y^{2}=(x^{2}+y^{2})^{2}$, per $(x,y)\neq(0,0)$ si ha
+\[
+  0\le\frac{x^{4}+y^{4}}{x^{2}+y^{2}}\le\frac{(x^{2}+y^{2})^{2}}{x^{2}+y^{2}}=x^{2}+y^{2} .
+\]
+Fissato $\varepsilon>0$ e posto $\delta=\sqrt\varepsilon$, se $0<\sqrt{x^{2}+y^{2}}<\delta$ allora
+$x^{2}+y^{2}<\varepsilon$, e quindi $\Bigl|\frac{x^{4}+y^{4}}{x^{2}+y^{2}}-0\Bigr|<\varepsilon$.
+\end{esempio}
+
+\begin{definizione}[Continuità]\label{def:continua-piano}\index{funzione!continua!in più variabili}
+Sia $f:D\to\R$ e sia $P_{0}\in D$ un punto di accumulazione per $D$. Si dice che $f$ è
+\emph{continua} in $P_{0}$ se
+\begin{equation}\label{eq:continua-piano}
+  \lim_{(x,y)\to(x_{0},y_{0})}f(x,y)=f(x_{0},y_{0}).
+\end{equation}
+Si dice che $f$ è continua in $D$ se è continua in ogni punto di $D$.
+\end{definizione}
+
+\begin{esempio}[Il prodotto $xy$ è continuo nell'origine]\label{es:xy-continua}
+Verifichiamo che $f(x,y)=xy$ è continua nell'origine, cioè che $xy\to0$ per
+$(x,y)\to(0,0)$. A tale scopo osserviamo che
+\begin{equation}\label{eq:xy-disuguaglianza}
+  \abs{xy}\le\frac12(x^{2}+y^{2}) \qquad\perogni(x,y)\in\R^{2}:
+\end{equation}
+infatti la disuguaglianza equivale a $x^{2}+y^{2}-2\abs x\abs y\ge0$, cioè a
+$(\abs x-\abs y)^{2}\ge0$. Per la \eqref{eq:xy-disuguaglianza}, risulta $\abs{xy}<\varepsilon$
+ogni volta che $x^{2}+y^{2}<2\varepsilon$: posto $\delta=\sqrt{2\varepsilon}$, da
+$\sqrt{x^{2}+y^{2}}<\delta$ segue $\abs{xy-0}<\varepsilon$.
+\end{esempio}
+
+Come accade per le funzioni di una variabile, anche le funzioni di due variabili
+ottenute componendo potenze, esponenziali, logaritmi e funzioni trigonometriche sono
+continue nel loro insieme di definizione. Il motivo è il teorema seguente.
+
+\begin{teorema}[Funzioni continue di due variabili]\label{teo:continue-piano}
+\begin{enumerate}[label=\textup{(\roman*)}]
+  \item Le funzioni $(x,y)\mapsto x$ e $(x,y)\mapsto y$ sono continue in $\R^{2}$.
+  \item Somma, differenza e prodotto di funzioni continue in $P_{0}$ sono continui in
+  $P_{0}$; lo è anche il quoziente, se il denominatore non si annulla in $P_{0}$.
+  \item Se $f$ è continua in $P_{0}$ e $g$ è una funzione di una variabile continua nel
+  punto $f(P_{0})$, allora la funzione composta $g\bigl(f(x,y)\bigr)$ è continua in $P_{0}$.
+\end{enumerate}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{(i) nessuna; \ (ii) $f$, $g$ continue in $P_{0}$; \ (iii) $f$ continua in
+$P_{0}$, $g$ continua in $f(P_{0})$.}
+\Tesi{continuità in $P_{0}$ delle funzioni coordinate, di $f\pm g$, $fg$, $f/g$, $g\circ f$.}
+\end{schema}
+
+\begin{strategia}
+Grazie all'\cref{oss:limite-piano-successioni}, la continuità in $P_{0}$ equivale a
+$f(P_{n})\to f(P_{0})$ per ogni successione $P_{n}\to P_{0}$. In questo modo le
+proprietà delle funzioni di due variabili si riducono a quelle, già note, delle
+successioni di numeri reali e delle funzioni continue di una variabile.
+\end{strategia}
+
+\begin{dimostrazione}
+(i) Per la \eqref{eq:distanza-componenti}, $\abs{x-x_{0}}\le d(P,P_{0})$: se la distanza è
+minore di $\delta=\varepsilon$, anche $\abs{x-x_{0}}<\varepsilon$. Lo stesso per $y$.
+(ii) Sia $P_{n}\to P_{0}$, con $P_{n}\in D$. Per la continuità, $f(P_{n})\to f(P_{0})$ e
+$g(P_{n})\to g(P_{0})$; per il teorema sulle operazioni con i limiti di successioni
+$f(P_{n})\pm g(P_{n})\to f(P_{0})\pm g(P_{0})$, e analogamente per il prodotto e il
+quoziente. Poiché la successione è arbitraria, si conclude con
+l'\cref{oss:limite-piano-successioni}.
+(iii) Se $P_{n}\to P_{0}$, allora $t_{n}=f(P_{n})\to f(P_{0})$; per la continuità di $g$
+nel punto $f(P_{0})$ (\cref{prop:caratt-continuita}), $g(t_{n})\to g\bigl(f(P_{0})\bigr)$.
+\end{dimostrazione}
+
+Dai punti (i) e (ii) segue che ogni polinomio in $x$ e $y$ è continuo in $\R^{2}$; dal
+punto (iii), che funzioni come $\cos(x^{2}+y^{2})$, $\sen(xy)$, $e^{-(x^{2}+y^{2})}$ sono
+continue in $\R^{2}$, e che $\log(x^{2}+y^{2})$ è continua in $\R^{2}\setminus\{(0,0)\}$.
+
+\subsection{Come si dimostra che un limite non esiste}
+
+Nel piano ci si può avvicinare a un punto lungo infinite direzioni e lungo infinite
+curve. Se il limite esiste, il risultato non può dipendere dal percorso.
+
+\begin{proposizione}[Restrizione a una curva]\label{prop:restrizione-curva}
+Sia $\lim_{(x,y)\to P_{0}}f(x,y)=\ell$, e siano $x(t)$, $y(t)$ funzioni definite per
+$0<t<r$ tali che il punto $\gamma(t)=\bigl(x(t),y(t)\bigr)$ appartenga a $D$, sia diverso
+da $P_{0}$ e tenda a $P_{0}$ per $t\to0^{+}$. Allora $f\bigl(x(t),y(t)\bigr)\to\ell$ per
+$t\to0^{+}$.
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$f(x,y)\to\ell$ per $(x,y)\to P_{0}$; $\gamma(t)\in D\setminus\{P_{0}\}$,
+$\gamma(t)\to P_{0}$ per $t\to0^{+}$.}
+\Tesi{$f(\gamma(t))\to\ell$ per $t\to0^{+}$.}
+\end{schema}
+
+\begin{strategia}
+Se $f$ è vicina a $\ell$ in tutti i punti di un intorno di $P_{0}$, lo è in particolare nei
+punti della curva che cadono in quell'intorno; e la curva, tendendo a $P_{0}$, finisce per
+restarci.
+\end{strategia}
+
+\begin{dimostrazione}
+Fissato $\varepsilon>0$, sia $\delta$ come nella \eqref{eq:limite-piano-simboli}. Poiché
+$\gamma(t)\to P_{0}$, esiste $\tau>0$ tale che $0<d\bigl(\gamma(t),P_{0}\bigr)<\delta$ per
+$0<t<\tau$; per tali $t$ risulta $\abs{f(\gamma(t))-\ell}<\varepsilon$.
+\end{dimostrazione}
+
+In forma contronominale: \emph{se lungo due curve che tendono a $P_{0}$ la funzione ha
+limiti diversi, o se lungo una curva non ha limite, il limite per $(x,y)\to P_{0}$ non
+esiste}. È il corrispondente del \cref{cor:non-esistenza}.
+
+\begin{esempio}[Una funzione con limiti diversi lungo le rette]\label{es:xy-su-x2y2}
+Sia $f(x,y)=\frac{xy}{x^{2}+y^{2}}$ per $(x,y)\neq(0,0)$. Lungo la retta $y=mx$, con
+$x\neq0$,
+\[
+  f(x,mx)=\frac{mx^{2}}{x^{2}+m^{2}x^{2}}=\frac{m}{1+m^{2}},
+\]
+che non dipende da $x$: la funzione è costante su ogni retta per l'origine, ma con un
+valore che cambia con la pendenza $m$ (vale $\frac12$ sulla retta $y=x$, $-\frac12$ sulla retta
+$y=-x$, $0$ sugli assi). Quindi il limite per $(x,y)\to(0,0)$ non esiste
+(\cref{fig:discontinua}). In coordinate polari, $x=\rho\cos\vartheta$,
+$y=\rho\sen\vartheta$, si ha $f=\cos\vartheta\sen\vartheta=\frac12\sen2\vartheta$: il valore
+dipende soltanto dall'angolo.
+\end{esempio}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.95\textwidth]{discontinua}
+\caption{La funzione $f(x,y)=\frac{xy}{x^{2}+y^{2}}$ è costante su ogni semiretta uscente
+dall'origine (a sinistra, il colore indica il valore). A destra, il valore
+$\frac12\sen2\vartheta$ sulla semiretta di angolo $\vartheta$. In ogni intorno dell'origine,
+come quello tratteggiato, la funzione assume tutti i valori di $[-\frac12,\frac12]$: non ha
+limite per $(x,y)\to(0,0)$ (\texttt{python/fig\_discontinua.py}).}
+\label{fig:discontinua}
+\end{figure}
+
+\begin{attenzione}[Le rette non bastano]
+Si potrebbe pensare che, se la funzione ha lo stesso limite lungo \emph{tutte} le rette
+per $P_{0}$, il limite esista. Non è così. Sia $g(x,y)=\frac{x^{2}y}{x^{4}+y^{2}}$ per
+$(x,y)\neq(0,0)$. Lungo l'asse $x=0$ la funzione è nulla; lungo la retta $y=mx$, con
+$m\neq0$,
+\[
+  g(x,mx)=\frac{mx^{3}}{x^{4}+m^{2}x^{2}}=\frac{mx}{x^{2}+m^{2}}\ \to\ 0 \qquad (x\to0).
+\]
+Ma lungo la parabola $y=x^{2}$ si ha $g(x,x^{2})=\frac{x^{4}}{2x^{4}}=\frac12$ per ogni
+$x\neq0$: il limite non esiste. Il programma seguente mostra i valori di $f$ e di $g$
+lungo alcuni percorsi.
+\end{attenzione}
+
+\begin{python}[Valori lungo percorsi diversi verso l'origine]
+f = lambda x, y: x * y / (x**2 + y**2)
+g = lambda x, y: x**2 * y / (x**4 + y**2)
+
+print("   t      f(t,0)  f(t,t)  f(t,2t)"
+      "    g(t,t)  g(t,3t)  g(t,t^2)")
+for t in (0.1, 0.01, 0.001, 0.0001):
+    print(f"{t:7.4f}  {f(t, 0):6.3f}  {f(t, t):6.3f}"
+          f"  {f(t, 2*t):6.3f}   {g(t, t):7.4f}"
+          f"  {g(t, 3*t):7.4f}  {g(t, t**2):7.4f}")
+\end{python}
+\begin{risultato}
+   t      f(t,0)  f(t,t)  f(t,2t)    g(t,t)  g(t,3t)  g(t,t^2)
+ 0.1000   0.000   0.500   0.400    0.0990   0.0333   0.5000
+ 0.0100   0.000   0.500   0.400    0.0100   0.0033   0.5000
+ 0.0010   0.000   0.500   0.400    0.0010   0.0003   0.5000
+ 0.0001   0.000   0.500   0.400    0.0001   0.0000   0.5000
+\end{risultato}
+
+Per dimostrare che un limite \emph{esiste} serve dunque un argomento che controlli tutti
+i punti di un intorno contemporaneamente, come nell'\cref{es:limite-x4-y4}. Uno strumento
+comodo è il passaggio alle coordinate polari.
+
+\begin{proposizione}[Criterio delle coordinate polari]\label{prop:coordinate-polari}
+Sia $f$ definita in un intorno di $P_{0}=(x_{0},y_{0})$, eccetto al più in $P_{0}$, e sia
+$\ell\in\R$. Se esiste una funzione $\omega(\rho)$, definita per $\rho>0$ piccolo, tale che
+$\omega(\rho)\to0$ per $\rho\to0^{+}$ e
+\begin{equation}\label{eq:coordinate-polari}
+  \bigl|f(x_{0}+\rho\cos\vartheta,\,y_{0}+\rho\sen\vartheta)-\ell\bigr|\le\omega(\rho)
+  \qquad\text{per ogni }\vartheta\in[0,2\pi),
+\end{equation}
+allora $\lim_{(x,y)\to P_{0}}f(x,y)=\ell$.
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{una maggiorazione di $\abs{f-\ell}$ che dipende soltanto dalla distanza $\rho$
+da $P_{0}$, \emph{non} dall'angolo $\vartheta$, e tende a $0$.}
+\Tesi{$f(x,y)\to\ell$ per $(x,y)\to P_{0}$.}
+\end{schema}
+
+\begin{strategia}
+Ogni punto $P\neq P_{0}$ si scrive come $P_{0}+\rho(\cos\vartheta,\sen\vartheta)$ con
+$\rho=d(P,P_{0})$. La maggiorazione, valendo per ogni angolo, controlla allora $f$ su
+tutta la circonferenza di raggio $\rho$, e quindi su tutto l'intorno circolare.
+\end{strategia}
+
+\begin{dimostrazione}
+Fissato $\varepsilon>0$, sia $\delta>0$ tale che $\omega(\rho)<\varepsilon$ per $0<\rho<\delta$.
+Se $0<d(P,P_{0})<\delta$, posto $\rho=d(P,P_{0})$ esiste $\vartheta$ con
+$P=(x_{0}+\rho\cos\vartheta,\,y_{0}+\rho\sen\vartheta)$, e per la \eqref{eq:coordinate-polari}
+$\abs{f(P)-\ell}\le\omega(\rho)<\varepsilon$.
+\end{dimostrazione}
+
+Ad esempio, per $f(x,y)=\frac{x^{2}y}{x^{2}+y^{2}}$ si ha
+$\abs{f(\rho\cos\vartheta,\rho\sen\vartheta)}=\rho\abs{\cos^{2}\vartheta\sen\vartheta}\le\rho$, e
+quindi $f(x,y)\to0$ per $(x,y)\to(0,0)$. È essenziale che la maggiorazione sia
+indipendente da $\vartheta$: per la funzione $g$ dell'avvertenza precedente si ha
+$g=\frac{\rho\cos^{2}\vartheta\sen\vartheta}{\rho^{2}\cos^{4}\vartheta+\sen^{2}\vartheta}$, che
+per ogni angolo \emph{fissato} tende a $0$, ma non uniformemente rispetto a $\vartheta$.
+
+\begin{osservazione}[Il teorema di Weierstrass nel piano]\label{oss:weierstrass-piano}
+Si dimostra (nei corsi di Analisi Matematica di secondo anno) che una funzione continua
+su un insieme \emph{chiuso e limitato} del piano, come un rettangolo
+$[a,b]\times[c,d]$ o un cerchio insieme alla sua circonferenza, assume massimo e minimo
+assoluti: è il teorema di Weierstrass in più variabili, che useremo come il
+\cref{teo:weierstrass} nella ricerca degli estremi.
+\end{osservazione}
+
+\begin{notastorica}[Dalla distanza agli spazi metrici: Fréchet e Hausdorff]
+In questo paragrafo abbiamo ricopiato le definizioni di limite e di continuità date per
+le funzioni di una variabile, sostituendo il valore assoluto $\abs{x-x_{0}}$ con la
+distanza $d(P,P_{0})$. Che l'operazione riesca non è un caso: quasi tutte le
+dimostrazioni usano soltanto tre proprietà della distanza, cioè che $d(P,Q)\ge0$ con
+l'uguaglianza solo per $P=Q$, che $d(P,Q)=d(Q,P)$, e la disuguaglianza triangolare.
+L'idea di fare analisi in «spazi» diversi dalla retta risale a Bernhard Riemann, che
+nella lezione di abilitazione del 1854 \emph{Sulle ipotesi che stanno alla base della
+geometria} parlò senza esitare di varietà con infinite dimensioni, come l'insieme delle
+funzioni definite in un dominio; più tardi Georg Cantor introdusse i punti di
+accumulazione e gli insiemi aperti e chiusi. Il passo decisivo fu di
+Maurice Fréchet, nella tesi \emph{Sur quelques points du calcul fonctionnel} (1906): in
+un insieme qualsiasi, purché vi sia definito tra due elementi uno «scarto»
+(\emph{écart}) con quelle proprietà, si possono definire limiti, continuità e
+compattezza (si veda anche la nota storica del \S\ref{sec:lineari}). Il nome di
+\emph{spazio metrico} si deve a Felix Hausdorff, che nei \emph{Grundzüge der
+Mengenlehre} (1914) osservò inoltre che molte nozioni dipendono soltanto dalla famiglia
+degli intorni, e non dalla distanza che li genera: è la nascita degli spazi topologici.
+La lezione, per noi, è concreta: ciò che si dimostra con la sola disuguaglianza
+triangolare vale nel piano, in $\R^{n}$ (\cref{sec:n-variabili}) e negli spazi di
+funzioni con cui lavorano i metodi numerici.
+\end{notastorica}

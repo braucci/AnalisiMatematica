@@ -1,0 +1,85 @@
+%% ----------------------------------------------------------------------------
+%%  §9.11  Punti fondamentali del capitolo
+%% ----------------------------------------------------------------------------
+\section{Punti fondamentali del capitolo}
+\label{sec:sintesi-cap09}
+
+Integrazione e derivazione sono operazioni inverse: la funzione integrale di una
+funzione continua ne è una primitiva, e un integrale definito si calcola come differenza
+dei valori di una primitiva negli estremi. Il calcolo degli integrali diventa così la
+ricerca delle primitive, per la quale bastano poche tecniche generali, ciascuna figlia di
+una regola di derivazione.
+
+\begin{puntichiave}
+\item \textbf{Funzione integrale.} Se $f$ è integrabile in $[a,b]$ e $\abs f\le K$, la
+funzione $F(x)=\int_{a}^{x}f(t)\,dt$ è lipschitziana con costante $K$, quindi continua
+(\cref{prop:integrale-lipschitz}); può però non essere derivabile: un salto di $f$
+diventa un punto angoloso di $F$.
+\item \textbf{Teorema fondamentale.} Se $f$ è continua in $[a,b]$, allora $F$ è
+derivabile e $F'(x)=f(x)$ per ogni $x\in[a,b]$ (\cref{teo:fondamentale}); se $f$ è soltanto
+integrabile, basta la continuità in un punto $x_{0}$ per avere $F'(x_{0})=f(x_{0})$
+(\cref{oss:fondamentale-puntuale}). Con la regola della
+catena, $\frac{d}{dx}\int_{c}^{\varphi(x)}f(t)\,dt=f(\varphi(x))\,\varphi'(x)$
+(\cref{cor:estremi-variabili}).
+\item \textbf{Primitive.} Ogni funzione continua in un intervallo ha primitive; in un
+intervallo due primitive della stessa funzione differiscono per una costante
+(\cref{teo:caratterizzazione-primitive}). Fuori dagli intervalli la tesi è falsa: su
+$\R\setminus\set{0}$ la costante può cambiare tra $x<0$ e $x>0$.
+\item \textbf{Formula fondamentale.} Se $f$ è continua in $[a,b]$ e $G'=f$, allora
+$\int_{a}^{b}f(x)\,dx=G(b)-G(a)$ (\cref{teo:formula-fondamentale}); la formula vale anche
+per $f$ soltanto integrabile, purché dotata di primitiva
+(\cref{oss:formula-fondamentale-integrabili}).
+\item \textbf{Integrale indefinito.} $\int f(x)\,dx=F(x)+c$ indica l'insieme delle
+primitive in un intervallo (\cref{def:integrale-indefinito}): è un insieme di funzioni,
+non un numero. Si calcola con la linearità, gli integrali immediati
+(\cref{tab:integrali-immediati}) e la regola $\int g(\varphi(x))\,\varphi'(x)\,dx
+=G(\varphi(x))+c$.
+\item \textbf{Funzioni razionali.} Si divide il numeratore per il denominatore e si
+scompone il resto in fratti semplici; con denominatore di secondo grado si ottengono
+logaritmi se $\Delta>0$, un termine $-\frac{mx_{1}+n}{x-x_{1}}$ se $\Delta=0$, un logaritmo e
+un'arcotangente se $\Delta<0$ (\cref{prop:razionali-secondo-grado}).
+\item \textbf{Integrazione per parti.} Se $f$ e $g$ hanno derivata continua,
+$\int fg'\,dx=fg-\int f'g\,dx$ (\cref{teo:per-parti}), e negli integrali definiti compare
+il termine $\bigl[fg\bigr]_{a}^{b}$ (\cref{teo:per-parti-definito}). Come fattore finito
+si sceglie una funzione che si semplifica derivando; talvolta ricompare l'integrale di
+partenza, o uno dello stesso tipo (formule di riduzione).
+\item \textbf{Integrazione per sostituzione.} Se $f$ è continua e $g$ ha derivata
+continua, $F\circ g$ è una primitiva di $(f\circ g)\,g'$ (\cref{teo:sostituzione}); negli
+integrali definiti $\int_{a}^{b}f(x)\,dx=\int_{c}^{d}f(g(t))\,g'(t)\,dt$ con $g(c)=a$,
+$g(d)=b$, senza che $g$ debba essere invertibile (\cref{teo:sostituzione-definita}).
+\item \textbf{Errori da evitare.} Una primitiva vale in un intervallo: $\int\frac{dx}x
+=\log\abs x+c$, non $\log x+c$, e i programmi di calcolo simbolico omettono spesso il valore
+assoluto. Non tutte le funzioni integrabili hanno primitive (la funzione che vale $-1$ per
+$x<0$ e $1$ per $x\ge0$ non ne ha, per il lemma di Darboux), e le primitive di $e^{-x^{2}}$ o
+di $\frac{\sen x}x$ esistono ma non sono elementari.
+\item \textbf{Aree.} La regione compresa tra i grafici di $g\le f$ continue in $[a,b]$ ha
+area $\int_{a}^{b}(f-g)\,dx$ \eqref{eq:area-tra-curve}; con le sostituzioni $x=\sen t$ e
+$x=rt$ si ottengono l'area $\pi r^{2}$ del cerchio e l'area $\pi ab$ dell'ellisse
+(\cref{es:cerchio-ellisse}).
+\item \textbf{Taglio e momento flettente.} Per un carico $l$ continuo sulla semiala,
+$T'=-l$, $M'=-T$, $T(s)=M(s)=0$ e $M(0)=\int_{0}^{s}y\,l(y)\,dy$
+(\cref{prop:taglio-momento}); la distribuzione ellittica dà $M(0)=\frac{Wb}{3\pi}$, circa il
+$15\%$ in meno del carico uniforme (\cref{es:taglio-ellittico}). Integrando si ricavano
+anche il tempo di salita e la legge della pressione nella troposfera standard
+(\cref{es:tempo-salita,es:pressione-isa}).
+\item \textbf{Integrali impropri.} Per $f$ continua e non negativa in $[a,+\infty)$,
+l'integrale improprio $\int_{a}^{+\infty}f$, limite di $\int_{a}^{b}f$ per $b\to+\infty$, esiste
+sempre, finito o $+\infty$ (\cref{def:improprio-illimitato}); $\int_{1}^{+\infty}x^{-p}\,dx$ converge se e solo se
+$p>1$, $\int_{0}^{1}x^{-p}\,dx$ se e solo se $p<1$
+(\cref{es:impropri-p-infinito,es:impropri-p-zero}), e il criterio del confronto
+(\cref{teo:confronto-impropri}) prova, ad esempio, la convergenza di
+$\int_{0}^{+\infty}e^{-x^{2}}dx$.
+\item \textbf{Il logaritmo come integrale.} Posto $L(x)=\int_{1}^{x}\frac{dt}t$ per $x>0$,
+si ha $L'=\frac1x$, $L(x_{1}x_{2})=L(x_{1})+L(x_{2})$, $L(e)=1$, e $L$ è una biiezione di
+$(0,+\infty)$ su $\R$ (\cref{prop:L-proprieta}); la sua inversa $E$ verifica $E'=E$
+(\cref{prop:E-proprieta}), e $a^{x}=E(x\,L(a))$ ritrova la potenza a esponente reale
+(\cref{def:potenza-integrale}).
+\end{puntichiave}
+
+\paragraph{Il filo del discorso.} Il calcolo integrale ci ha dato un modo nuovo di
+rappresentare una funzione di classe $C^{1}$: come integrale della sua derivata,
+$f(x)=f(x_{0})+\int_{x_{0}}^{x}f'(t)\,dt$. Nel \cref{cap:taylor} integreremo ripetutamente
+per parti questa identità, ottenendo la formula di Taylor con il resto integrale e con il
+resto di Lagrange, che permettono di \emph{stimare} l'errore delle approssimazioni
+polinomiali; la stessa formula, applicata al momento flettente di questo capitolo, darà
+la freccia di un'ala a sbalzo.
