@@ -1,0 +1,294 @@
+%% ----------------------------------------------------------------------------
+%%  §4.3  Legame tra limiti di funzioni e limiti di successioni
+%% ----------------------------------------------------------------------------
+\section{Legame tra limiti di funzioni e limiti di successioni}
+\label{sec:legame-successioni}
+
+In questo paragrafo dimostriamo il \cref{teo:eps-delta}, cioè l'equivalenza tra la
+definizione di limite «per successioni» (\cref{def:limite-funzione}) e quella con le
+disuguaglianze. Fissati $f:A\to\R$, un punto $x_{0}\in\R$ di accumulazione per $A$ e
+$\ell\in\R$, si tratta di provare che le due relazioni
+\begin{align}
+  &\perogni x_{n}\to x_{0},\quad x_{n}\in A\setminus\{x_{0}\}\ \perogni n\in\N
+  \quad\implica\quad f(x_{n})\to\ell; \label{eq:ponte-succ}\\
+  &\perogni\epsilon>0\ \esiste\delta>0 :\quad x\in A,\ \ 0<\abs{x-x_{0}}<\delta
+  \quad\implica\quad \abs{f(x)-\ell}<\epsilon \label{eq:ponte-eps}
+\end{align}
+sono fra loro equivalenti.
+
+\begin{schema}
+\Ipotesi{$f:A\to\R$; \ $x_{0}\in\R$ di accumulazione per $A$; \ $\ell\in\R$.}
+\Tesi{\eqref{eq:ponte-succ} \ $\sse$ \ \eqref{eq:ponte-eps}.}
+\end{schema}
+
+\begin{strategia}
+Le due implicazioni hanno natura molto diversa. Che la \eqref{eq:ponte-eps} implichi la
+\eqref{eq:ponte-succ} è quasi immediato: se una successione $x_{n}$ tende a $x_{0}$, i
+suoi termini finiscono per stare nell'intorno di raggio $\delta$, e lì la
+\eqref{eq:ponte-eps} controlla i valori di $f$. Il viceversa è più sottile, perché
+dalla conoscenza di $f$ lungo le successioni dobbiamo ricavare un'informazione su
+\emph{tutti} i punti di un intorno. Lo dimostriamo per assurdo: se la
+\eqref{eq:ponte-eps} fosse falsa, esisterebbe una tolleranza $\epsilon_{0}$ violata in
+ogni intorno di $x_{0}$, per quanto piccolo; scegliendo un punto «cattivo» in ciascuno
+degli intorni di raggio $\frac1n$ costruiremo una successione che tende a $x_{0}$ lungo
+la quale $f$ \emph{non} tende a $\ell$, contro la \eqref{eq:ponte-succ}.
+\end{strategia}
+
+\begin{dimostrazione}[Dimostrazione del \cref{teo:eps-delta}]
+\emph{La \eqref{eq:ponte-eps} implica la \eqref{eq:ponte-succ}.} Consideriamo una
+generica successione $x_{n}$ di punti di $A$, convergente a $x_{0}$, con $x_{n}\neq x_{0}$
+per ogni $n\in\N$, e fissiamo $\epsilon>0$; sia $\delta>0$ il numero per cui vale la
+\eqref{eq:ponte-eps}. Per la definizione di limite di successione (applicata con $\delta$
+al posto di $\epsilon$) esiste un indice $\nu$ per cui $\abs{x_{n}-x_{0}}<\delta$ per ogni
+$n>\nu$; inoltre, essendo $x_{n}\neq x_{0}$, in definitiva si ha
+\begin{equation}\label{eq:ponte-passo1}
+  x_{n}\in A, \qquad 0<\abs{x_{n}-x_{0}}<\delta \qquad\perogni n>\nu .
+\end{equation}
+Per l'ipotesi \eqref{eq:ponte-eps}, applicata con $x=x_{n}$, segue allora
+\begin{equation}\label{eq:ponte-passo2}
+  \abs{f(x_{n})-\ell}<\epsilon \qquad\perogni n>\nu,
+\end{equation}
+che, in base alla definizione di limite di successione, significa $f(x_{n})\to\ell$ per
+$n\to+\infty$.
+
+\emph{La \eqref{eq:ponte-succ} implica la \eqref{eq:ponte-eps}.} Procediamo per assurdo.
+La \eqref{eq:ponte-eps} ha la forma «per ogni $\epsilon$ esiste $\delta$ tale che per
+ogni $x$ vale una certa proprietà»; la sua negazione si ottiene scambiando i
+quantificatori «per ogni» ed «esiste» e negando la proprietà finale. Contraddire la
+\eqref{eq:ponte-eps} equivale dunque ad affermare che
+\begin{equation}\label{eq:ponte-negazione}
+\begin{split}
+  \esiste\epsilon_{0}>0 :\ \perogni\delta>0\ \esiste x\in A :\quad &0<\abs{x-x_{0}}<\delta,\\
+  &\abs{f(x)-\ell}\ge\epsilon_{0} .
+\end{split}
+\end{equation}
+Poniamo $\delta=\frac1n$, con $n\in\N$, e indichiamo con $x=x_{n}$ un punto che compare
+nella \eqref{eq:ponte-negazione} in corrispondenza di $\delta=\frac1n$. Otteniamo
+\begin{equation}\label{eq:ponte-succ-cattiva}
+  \esiste\epsilon_{0}>0 :\ \perogni n\in\N\ \esiste x_{n}\in A :\quad
+  0<\abs{x_{n}-x_{0}}<\frac1n, \quad \abs{f(x_{n})-\ell}\ge\epsilon_{0} .
+\end{equation}
+Risulta in particolare
+\begin{equation}\label{eq:ponte-carabinieri}
+  x_{n}\neq x_{0}, \qquad x_{0}-\frac1n<x_{n}<x_{0}+\frac1n \qquad\perogni n\in\N;
+\end{equation}
+perciò $x_{n}\in A\setminus\{x_{0}\}$ per ogni $n$ e $x_{n}\to x_{0}$, per il teorema dei
+carabinieri. Però $f(x_{n})$ non converge a $\ell$, perché la disuguaglianza
+$\abs{f(x_{n})-\ell}\ge\epsilon_{0}$, valida per \emph{ogni} $n\in\N$, contrasta con la
+definizione di limite di successione scritta con $\epsilon=\epsilon_{0}$ (non può
+esistere alcun $\nu$ oltre il quale $\abs{f(x_{n})-\ell}<\epsilon_{0}$). Ciò contraddice
+la \eqref{eq:ponte-succ}.
+\end{dimostrazione}
+
+\begin{osservazione}[Il caso dei punti e dei limiti infiniti]\label{oss:ponte-infinito}
+La stessa dimostrazione vale, quasi parola per parola, quando $x_{0}$ oppure $\ell$, o
+entrambi, sono infiniti, cioè prova l'equivalenza tra le definizioni
+\eqref{eq:def-lim-piu-inf}--\eqref{eq:def-lim-inf-inf} e le corrispondenti formulazioni
+della \cref{tab:intorni}. Il modo più rapido di vederlo è usare il linguaggio degli
+intorni \eqref{eq:def-intorni}, osservando che le definizioni di limite di successione,
+finito o infinito, del \cref{cap:successioni} si riassumono in un'unica frase:
+\[
+  x_{n}\to x_{0}\in\overline{\R} \quad\sse\quad
+  \begin{gathered}[t]
+    \text{per ogni intorno } U \text{ di } x_{0},\\
+    x_{n}\in U \text{ definitivamente.}
+  \end{gathered}
+\]
+Con questa frase, la prima parte della dimostrazione si ripete identica. Nella seconda,
+la negazione della \eqref{eq:def-intorni} fornisce un intorno $V_{0}$ di $\ell$ tale che
+ogni intorno $U$ di $x_{0}$ contiene un punto $x\in A\setminus\{x_{0}\}$ con
+$f(x)\notin V_{0}$; scegliendo come $U$ l'intorno di raggio $\frac1n$ se $x_{0}\in\R$,
+la semiretta $(n,+\infty)$ se $x_{0}=+\infty$ e la semiretta $(-\infty,-n)$ se
+$x_{0}=-\infty$, si costruisce una successione $x_{n}\to x_{0}$ con $f(x_{n})\notin V_{0}$
+per ogni $n$, che quindi non tende a $\ell$. Il lettore scriva per esteso il caso
+$x_{0}=+\infty$, $\ell\in\R$ (\cref{es:ponte-infinito}).
+\end{osservazione}
+
+\subsection{Il limite è una proprietà locale}
+
+Una conseguenza immediata della caratterizzazione con gli intorni è che il limite di $f$
+per $x\to x_{0}$ dipende soltanto dai valori di $f$ \emph{vicino} a $x_{0}$: modificare
+$f$ lontano da $x_{0}$ non cambia nulla.
+
+\begin{lemma}[Località del limite]\label{lem:localita}
+Siano $f:A\to\R$, $B\subseteq A$, e $x_{0}\in\overline{\R}$ di accumulazione per $B$; sia
+$\ell\in\overline{\R}$.
+\begin{enumerate}[label=\textup{(\roman*)}]
+  \item Se $\lim_{x\to x_{0}}f(x)=\ell$, anche la restrizione di $f$ a $B$ tende a $\ell$
+  per $x\to x_{0}$.
+  \item Se esiste un intorno $U_{0}$ di $x_{0}$ tale che $U_{0}\cap A\subseteq B$, vale anche il
+  viceversa: se la restrizione di $f$ a $B$ tende a $\ell$, allora
+  $\lim_{x\to x_{0}}f(x)=\ell$.
+\end{enumerate}
+\end{lemma}
+
+\begin{schema}
+\Ipotesi{$B\subseteq A$; \ $x_{0}$ di accumulazione per $B$; \ (i) $f(x)\to\ell$; \
+(ii) la restrizione di $f$ a $B$ tende a $\ell$, e $U_{0}\cap A\subseteq B$ per un
+intorno $U_{0}$ di $x_{0}$.}
+\Tesi{(i) la restrizione di $f$ a $B$ tende a $\ell$; \ (ii) $f(x)\to\ell$ per
+$x\to x_{0}$.}
+\end{schema}
+
+\begin{strategia}
+Si lavora con la definizione «per successioni». La (i) è immediata, perché le
+successioni da controllare per la restrizione sono una parte di quelle da controllare
+per $f$. Per la (ii) si osserva che una successione di punti di $A$ che tende a $x_{0}$
+entra definitivamente nell'intorno $U_{0}$, e quindi in $B$: tolti i primi termini, che
+non influiscono sul limite, è una successione di punti di $B$.
+\end{strategia}
+
+\begin{dimostrazione}
+(i) Ogni successione di punti di $B\setminus\{x_{0}\}$ che tende a $x_{0}$ è anche una
+successione di punti di $A\setminus\{x_{0}\}$: lungo di essa $f$ tende a $\ell$ per
+ipotesi.
+
+(ii) Sia $x_{n}\in A\setminus\{x_{0}\}$ con $x_{n}\to x_{0}$. Per la frase
+dell'\cref{oss:ponte-infinito}, $x_{n}\in U_{0}$ definitivamente, diciamo per $n>\nu$;
+quindi $x_{n}\in B$ per $n>\nu$. La successione traslata $x_{\nu+k}$, $k\in\N$, è
+formata da punti di $B\setminus\{x_{0}\}$ e tende a $x_{0}$: per ipotesi
+$f(x_{\nu+k})\to\ell$ per $k\to+\infty$. Ne segue $f(x_{n})\to\ell$, perché le due
+successioni $f(x_{n})$ e $f(x_{\nu+k})$ differiscono soltanto per i primi $\nu$ termini:
+se, ad esempio con $\ell\in\R$, si ha $\abs{f(x_{\nu+k})-\ell}<\epsilon$ per ogni $k>k_{0}$,
+allora $\abs{f(x_{n})-\ell}<\epsilon$ per ogni $n>\nu+k_{0}$.
+\end{dimostrazione}
+
+La parte (ii) non vale senza l'ipotesi sull'intorno: la funzione $\frac{\abs x}{x}$,
+ristretta a $B=(0,+\infty)$, tende a $1$ per $x\to0$, ma su tutto il suo dominio non ha
+limite. Il limite destro e il limite sinistro sono proprio i limiti delle restrizioni a
+$A\cap(x_{0},+\infty)$ e ad $A\cap(-\infty,x_{0})$; la proposizione seguente dice come
+ricostruire da essi il limite.
+
+\begin{proposizione}\label{prop:dx-sx}\index{limite!destro e sinistro}
+Sia $x_{0}\in\R$ di accumulazione sia per $A\cap(x_{0},+\infty)$ sia per
+$A\cap(-\infty,x_{0})$, e sia $\ell\in\overline{\R}$. Allora
+\[
+  \lim_{x\to x_{0}}f(x)=\ell \quad\sse\quad
+  \lim_{x\to x_{0}^{+}}f(x)=\lim_{x\to x_{0}^{-}}f(x)=\ell .
+\]
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$x_{0}\in\R$ di accumulazione per $A\cap(x_{0},+\infty)$ e per
+$A\cap(-\infty,x_{0})$; \ $\ell\in\overline{\R}$.}
+\Tesi{$f(x)\to\ell$ per $x\to x_{0}$ \ $\sse$ \ limite destro e limite sinistro esistono
+e valgono entrambi $\ell$.}
+\end{schema}
+
+\begin{strategia}
+Limite destro e sinistro sono limiti di restrizioni di $f$, e quindi la parte
+«$\implica$» è la (i) del lemma di località. Per il viceversa si usano le disuguaglianze:
+ciascuno dei due limiti unilaterali fornisce un $\delta$ dal proprio lato di $x_{0}$, e il
+più piccolo dei due va bene da entrambi i lati.
+\end{strategia}
+
+\begin{dimostrazione}
+L'implicazione «$\implica$» segue dal \cref{lem:localita}(i). Viceversa, supponiamo
+$\ell\in\R$ (il caso infinito è analogo, con $M$ al posto di $\epsilon$) e fissiamo
+$\epsilon>0$. Per la \eqref{eq:def-limite-dx} esiste $\delta_{1}>0$ tale che
+$\abs{f(x)-\ell}<\epsilon$ per $x\in A$, $x_{0}<x<x_{0}+\delta_{1}$; per la
+\eqref{eq:def-limite-sx} esiste $\delta_{2}>0$ tale che $\abs{f(x)-\ell}<\epsilon$ per
+$x\in A$, $x_{0}-\delta_{2}<x<x_{0}$. Posto $\delta=\min\{\delta_{1},\delta_{2}\}$, per ogni
+$x\in A$ con $0<\abs{x-x_{0}}<\delta$ si ha $x$ nel primo o nel secondo caso, e quindi
+$\abs{f(x)-\ell}<\epsilon$. Per il \cref{teo:eps-delta}, $f(x)\to\ell$.
+\end{dimostrazione}
+
+\subsection{Come si dimostra che un limite non esiste}
+
+La definizione «per successioni» è particolarmente efficace per dimostrare che un limite
+\emph{non} esiste: basta esibire due successioni lungo le quali la funzione si comporta
+in modo diverso.
+
+\begin{corollario}[Criterio di non esistenza]\label{cor:non-esistenza}
+Se esistono due successioni $x_{n}$, $x_{n}'$ di punti di $A\setminus\{x_{0}\}$, entrambe
+tendenti a $x_{0}$, tali che $f(x_{n})\to\lambda$ e $f(x_{n}')\to\lambda'$ con
+$\lambda\neq\lambda'$, allora il limite di $f(x)$ per $x\to x_{0}$ non esiste. Lo stesso
+accade se esiste una sola successione $x_{n}\in A\setminus\{x_{0}\}$, $x_{n}\to x_{0}$,
+lungo la quale $f(x_{n})$ non è regolare.
+\end{corollario}
+
+\begin{schema}
+\Ipotesi{$x_{n},x_{n}'\in A\setminus\{x_{0}\}$, \ $x_{n}\to x_{0}$, $x_{n}'\to x_{0}$, \
+$f(x_{n})\to\lambda$, $f(x_{n}')\to\lambda'$, $\lambda\neq\lambda'$ \ (oppure: $f(x_{n})$
+non regolare).}
+\Tesi{$\lim_{x\to x_{0}}f(x)$ non esiste.}
+\end{schema}
+
+\begin{strategia}
+È la negazione della \cref{def:limite-funzione}: se il limite esistesse, la funzione
+dovrebbe tendere a esso lungo \emph{tutte} le successioni ammissibili. Si ragiona per
+assurdo e si conclude con l'unicità del limite di una successione.
+\end{strategia}
+
+\begin{dimostrazione}
+Se esistesse $\lim_{x\to x_{0}}f(x)=\ell$, per la \cref{def:limite-funzione} sarebbe
+$f(x_{n})\to\ell$ e $f(x_{n}')\to\ell$, quindi $\lambda=\ell=\lambda'$ per l'unicità del
+limite di successione; nel secondo caso $f(x_{n})$ avrebbe limite $\ell$.
+\end{dimostrazione}
+
+\begin{esempio}\label{es:sen-cos-infinito}
+I limiti
+\begin{equation}\label{eq:sen-cos-infinito}
+  \lim_{x\to+\infty}\sen x, \qquad \lim_{x\to+\infty}\cos x \qquad\text{non esistono.}
+\end{equation}
+Limitiamoci al primo dei due. Se esistesse il limite $\ell$, dovremmo avere che
+$\sen x_{n}$ tende sempre allo stesso valore $\ell$ qualunque sia la successione
+$x_{n}\to+\infty$. Ma ponendo $x_{n}=2\pi n$ e $x_{n}'=2\pi n+\frac\pi2$, entrambe
+divergenti a $+\infty$, risulta $\sen x_{n}=0\to0$, mentre $\sen x_{n}'=1\to1$. Per il
+coseno si usano le stesse successioni, scambiate di ruolo.
+\end{esempio}
+
+\begin{esempio}\label{es:sen-1-x}
+Analogamente si dimostra la \eqref{eq:sen-1-x-anticipo}:
+\begin{equation}\label{eq:sen-1-x}
+  \lim_{x\to0}\sen\frac1x \qquad\text{non esiste.}
+\end{equation}
+La successione $x_{n}=\frac1{n\pi}$ converge a zero per $n\to+\infty$; in
+corrispondenza la funzione $f(x)=\sen\frac1x$ assume i valori
+\begin{equation}\label{eq:sen-1-x-a}
+  f(x_{n})=\sen\frac1{x_{n}}=\sen(n\pi)=0 .
+\end{equation}
+Perciò $f(x_{n})$ è la successione costante uguale a zero, e converge a zero.
+Analogamente, posto $x_{n}'=\frac1{\pi/2+2n\pi}$, risulta
+\begin{equation}\label{eq:sen-1-x-b}
+  f(x_{n}')=\sen\frac1{x_{n}'}=\sen\Bigl(\frac\pi2+2n\pi\Bigr)=1;
+\end{equation}
+quindi $x_{n}'\to0$, ma $f(x_{n}')\to1$, in contrasto con il fatto che $f(x_{n})\to0$.
+Ne segue che $f(x)$ non ammette limite per $x\to0$ (si veda il grafico nella
+\cref{fig:sen-1-x}). Con lo stesso argomento si vede che la funzione $g$ dell'avviso
+«Una tabella non è una dimostrazione» del \cref{sec:premessa-funzioni} non ha limite per
+$x\to0$: lungo $x_{m}=\frac1m$ si ha $\sen\frac\pi{x_{m}}=\sen(m\pi)=0$ e
+$g(x_{m})=\frac{\sen x_{m}}{x_{m}}\to1$, mentre lungo $x_{m}'=\frac2{4m+1}$ si ha
+$g(x_{m}')=\frac{\sen x_{m}'}{x_{m}'}+1\to2$.
+\end{esempio}
+
+Il programma seguente calcola i valori di $\sen\frac1x$ lungo le due successioni
+dell'\cref{es:sen-1-x}.
+
+\begin{python}[Due successioni, due limiti diversi]
+import math
+
+f = lambda x: math.sin(1 / x)
+
+# x_n = 1/(n pi) e x'_n = 1/(pi/2 + 2 n pi) tendono entrambe a 0
+print("      n      x_n        f(x_n)       x'_n        f(x'_n)")
+for n in (1, 10, 100, 1000, 10**6):
+    x = 1 / (n * math.pi)
+    y = 1 / (math.pi / 2 + 2 * n * math.pi)
+    print(f"{n:7d}   {x:.4e}  {f(x):+.2e}   {y:.4e}   {f(y):.12f}")
+\end{python}
+\begin{risultato}
+      n      x_n        f(x_n)       x'_n        f(x'_n)
+      1   3.1831e-01  +1.22e-16   1.2732e-01   1.000000000000
+     10   3.1831e-02  -1.22e-15   1.5527e-02   1.000000000000
+    100   3.1831e-03  +1.96e-15   1.5876e-03   1.000000000000
+   1000   3.1831e-04  -3.21e-13   1.5912e-04   1.000000000000
+1000000   3.1831e-07  -2.23e-10   1.5915e-07   1.000000000000
+\end{risultato}
+
+Si noti che il calcolatore non restituisce esattamente $\sen(n\pi)=0$: il numero $\pi$
+è rappresentato con un errore relativo dell'ordine di $10^{-16}$, e l'argomento
+$1/x_{n}\approx n\pi$ porta con sé un errore assoluto che cresce con $n$ (per
+$n=10^{6}$ si arriva a $2\cdot10^{-10}$). È un'ulteriore conferma che la questione
+dell'esistenza di un limite non si decide con il calcolo numerico: il programma
+\emph{illustra} il ragionamento dell'\cref{es:sen-1-x}, ma non lo sostituisce.

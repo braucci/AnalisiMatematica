@@ -1,0 +1,256 @@
+%% ----------------------------------------------------------------------------
+%%  §3.7  Successioni monotòne
+%% ----------------------------------------------------------------------------
+\section{Successioni monotòne}
+\label{sec:monotone}
+
+Abbiamo già dato nel \cref{sec:invertibili} la definizione di funzioni (strettamente)
+crescenti o decrescenti. Allo stesso modo, per le successioni diciamo che:
+
+\begin{definizione}[Successioni monotòne]\index{successione!monotòna}
+Una successione $a_{n}$ si dice
+\begin{align}
+  &\text{\emph{strettamente crescente}} \text{ se } & a_{n}&<a_{n+1} & &\perogni n\in\N; \label{eq:succ-str-cresc}\\
+  &\text{\emph{crescente}} \text{ se } & a_{n}&\le a_{n+1} & &\perogni n\in\N; \label{eq:succ-cresc}\\
+  &\text{\emph{strettamente decrescente}} \text{ se } & a_{n}&>a_{n+1} & &\perogni n\in\N; \label{eq:succ-str-decr}\\
+  &\text{\emph{decrescente}} \text{ se } & a_{n}&\ge a_{n+1} & &\perogni n\in\N. \label{eq:succ-decr}
+\end{align}
+Una successione $a_{n}$ è \emph{monotòna} se verifica una delle quattro condizioni sopra
+scritte; è \emph{strettamente monotòna} se verifica la \eqref{eq:succ-str-cresc} oppure la
+\eqref{eq:succ-str-decr}.
+\end{definizione}
+
+Basta confrontare ogni termine con il successivo: per induzione, se $a_{n}\le a_{n+1}$
+per ogni $n$, allora $a_{n}\le a_{m}$ per ogni $n\le m$, e la successione è crescente
+anche nel senso della definizione data per le funzioni. Se $a_{n}=a$ per ogni $n\in\N$,
+con $a$ numero reale fissato, si dice che $a_{n}$ è una successione \emph{costante}. Le
+successioni costanti sono allo stesso tempo crescenti e decrescenti.
+
+\begin{esempio}
+Le successioni \eqref{eq:succ-1n} e \eqref{eq:succ-n1n} sono strettamente monotòne: la
+\eqref{eq:succ-1n} $a_{n}=1/n$ è strettamente decrescente, mentre la \eqref{eq:succ-n1n}
+$a_{n}=(n-1)/n$ è strettamente crescente; infatti, se $a_{n}=1/n$, allora
+\begin{equation}\label{eq:es-monotona-1}
+  a_{n}>a_{n+1} \quad\sse\quad \frac1n>\frac1{n+1} \quad\sse\quad n+1>n,
+\end{equation}
+e l'ultima disuguaglianza è verificata per ogni $n\in\N$. Invece, se $a_{n}=(n-1)/n$,
+\begin{equation}\label{eq:es-monotona-2}
+  a_{n}<a_{n+1} \quad\sse\quad \frac{n-1}{n}<\frac{n}{n+1} \quad\sse\quad n^{2}-1<n^{2},
+\end{equation}
+e anche questa volta l'ultima disuguaglianza è verificata per ogni $n\in\N$.
+\end{esempio}
+
+Il risultato seguente è di fondamentale importanza: nello schema della
+\cref{fig:schema-teoremi} è il primo dei grandi teoremi di esistenza che seguono
+l'esistenza dell'estremo superiore, e da essa discende direttamente.
+
+\begin{teorema}[sulle successioni monotòne]\label{teo:monotone}\index{teorema!sulle successioni monotòne}
+Ogni successione monotòna ammette limite. In particolare, ogni successione monotòna e
+limitata è convergente, cioè ammette limite finito. Più precisamente:
+\begin{equation}\label{eq:lim-monotone}
+\begin{aligned}
+  a_{n}\ \text{crescente} &\implica \lim_{n\to+\infty}a_{n}=\sup_{n\in\N}a_{n};\\
+  a_{n}\ \text{decrescente} &\implica \lim_{n\to+\infty}a_{n}=\inf_{n\in\N}a_{n}.
+\end{aligned}
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$a_{n}$ monotòna (ad esempio crescente).}
+\Tesi{$a_{n}$ è regolare, e $\lim a_{n}=\sup_{n}a_{n}$ (che è finito se e solo se $a_{n}$
+è limitata superiormente, e vale $+\infty$ altrimenti).}
+\end{schema}
+
+\begin{strategia}
+Il candidato limite di una successione crescente è il «tetto» dei suoi valori, cioè
+$\ell=\sup_{n}a_{n}$. Per dimostrare che è il limite servono due cose, e ciascuna viene da
+uno dei due ingredienti:
+\begin{itemize}
+  \item i termini non superano mai $\ell$, perché $\ell$ è un maggiorante; quindi
+  $a_{n}<\ell+\epsilon$ per ogni $n$, gratis;
+  \item i termini si avvicinano a $\ell$ \emph{da sotto}: per la caratterizzazione
+  dell'estremo superiore (\cref{prop:caratt-sup}) c'è \emph{almeno un} termine $a_{\nu}$
+  maggiore di $\ell-\epsilon$; ed essendo la successione crescente, \emph{tutti} i
+  termini successivi lo sono a maggior ragione.
+\end{itemize}
+È la monotonia che trasforma «almeno un termine» in «definitivamente tutti»
+(\cref{fig:monotona-sup}): senza di essa la successione potrebbe avvicinarsi a $\ell$ e poi allontanarsene. Se la successione
+non è limitata superiormente, lo stesso ragionamento con un livello $M$ al posto di
+$\ell-\epsilon$ dà la divergenza a $+\infty$. Le successioni decrescenti si trattano in
+modo simmetrico, con l'estremo inferiore.
+\end{strategia}
+
+\begin{dimostrazione}
+Consideriamo il caso di una successione $a_{n}$ crescente e limitata superiormente.
+Posto $\ell=\sup_{n}a_{n}$, che esiste ed è finito per il \cref{teo:esistenza-sup},
+fissato $\epsilon>0$, per le proprietà dell'estremo superiore
+(\cref{prop:caratt-sup}) esiste $\nu\in\N$ tale che
+\begin{equation}\label{eq:monotone-passo1}
+  \ell-\epsilon<a_{\nu}.
+\end{equation}
+Per $n>\nu$ risulta $a_{\nu}\le a_{n}$, e d'altra parte $a_{n}\le\ell$ perché $\ell$ è un
+maggiorante; dunque
+\begin{equation}\label{eq:monotone-passo2}
+  \ell-\epsilon<a_{\nu}\le a_{n}\le\ell<\ell+\epsilon \qquad\perogni n>\nu,
+\end{equation}
+da cui $\lim_{n\to+\infty}a_{n}=\ell$.
+
+Consideriamo ora il caso di una successione $a_{n}$ crescente e non limitata
+(superiormente). Fissato $M>0$, poiché $M$ non è un maggiorante dei valori, esiste
+$\nu\in\N$ tale che $a_{\nu}>M$. Dato che $a_{n}$ è crescente, per ogni $n>\nu$ risulta
+\begin{equation}\label{eq:monotone-passo3}
+  a_{n}\ge a_{\nu}>M,
+\end{equation}
+da cui $\lim_{n\to+\infty}a_{n}=+\infty=\sup_{n}a_{n}$.
+
+In modo analogo si trattano i casi relativi a successioni decrescenti; oppure ci si
+riconduce ai precedenti osservando che, se $a_{n}$ è decrescente, la successione $-a_{n}$
+è crescente, e che $\inf_{n}a_{n}=-\sup_{n}(-a_{n})$.
+\end{dimostrazione}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.92\textwidth, height=5cm, xmin=0, xmax=21, ymin=0, ymax=2.35,
+  xtick={5,10,15,20}, extra x ticks={7}, extra x tick labels={$\nu$},
+  ytick={2}, yticklabels={$\ell=\sup a_{n}$}, xlabel={$n$}]
+  \fill[verde!15] (axis cs:0,1.7) rectangle (axis cs:21,2.3);
+  \addplot[tratteggio, domain=0:21] {2};
+  \addplot[only marks, mark=*, mark size=1.4pt, blu, samples at={1,...,20}] {2-1.6*0.78^x};
+  \addplot[tratteggio] coordinates {(7,0) (7,1.7)};
+  \node[font=\scriptsize, verde!50!black, anchor=east] at (axis cs:20.8,1.78) {$\ell-\epsilon$};
+\end{axis}
+\end{tikzpicture}
+\caption{Una successione crescente e limitata: appena un termine $a_{\nu}$ supera
+$\ell-\epsilon$, la monotonia costringe tutti i termini successivi a restare nella
+striscia $(\ell-\epsilon,\ell]$.}
+\label{fig:monotona-sup}
+\end{figure}
+
+\begin{osservazione}
+La successione \eqref{eq:succ-alt-n} $a_{n}=(-1)^{n}/n$ non è monotòna; infatti i termini di
+posto pari sono positivi, mentre quelli di posto dispari sono negativi: i termini della
+successione oscillano intorno allo zero. La successione $(-1)^{n}/n$ è quindi un
+\emph{esempio di successione convergente pur non essendo monotòna} (osserviamo che ciò non
+contraddice il teorema: infatti nel teorema non si afferma che ogni successione
+convergente è monotòna!). La successione non regolare \eqref{eq:succ-alt} $a_{n}=(-1)^{n}$
+non è monotòna; ciò è in accordo con il teorema sulle successioni monotòne, perché se la
+successione $(-1)^{n}$ fosse monotòna dovrebbe avere limite.
+\end{osservazione}
+
+Ricordando che una successione si dice regolare se essa ammette limite (finito o
+infinito), il teorema precedente afferma che \emph{ogni successione monotòna è regolare}.
+Due osservazioni tecniche ne estendono l'uso.
+
+\begin{osservazione}[Successioni definitivamente monotòne e successioni traslate]\label{oss:traslata}
+\leavevmode
+\begin{enumerate}
+  \item Il teorema vale anche per le successioni \emph{definitivamente} monotòne, cioè
+  monotòne a partire da un certo indice $n_{0}$: basta applicarlo alla successione
+  $a_{n_{0}},a_{n_{0}+1},\dots$, perché i primi termini non influiscono sul limite. In tal
+  caso, però, il limite non è più necessariamente l'estremo superiore di tutti i termini.
+  \item Se $a_{n}\to a$ (finito o infinito), allora anche la successione «traslata»
+  $a_{n+1}$ tende ad $a$: se $\abs{a_{n}-a}<\epsilon$ per $n>\nu$, a maggior ragione
+  $\abs{a_{n+1}-a}<\epsilon$ per $n>\nu$. Lo stesso vale per $a_{n+k}$, con $k\in\N$ fisso.
+\end{enumerate}
+\end{osservazione}
+
+\subsection{Un'applicazione: il metodo di Erone per le radici quadrate}
+
+Il teorema sulle successioni monotòne è lo strumento naturale per studiare le
+\emph{successioni definite per ricorrenza}\index{successione!definita per ricorrenza},
+in cui ogni termine è calcolato a partire dal precedente. È così che funzionano quasi
+tutti gli algoritmi numerici iterativi.
+
+\begin{esempio}[Il metodo di Erone]\label{es:erone}\index{metodo di Erone}
+Consideriamo la successione definita da
+\begin{equation}\label{eq:erone}
+  x_{1}=2, \qquad x_{n+1}=\frac12\Bigl(x_{n}+\frac2{x_{n}}\Bigr) \quad (n\in\N).
+\end{equation}
+L'idea è semplice: se $x_{n}$ è un'approssimazione di $\sqrt2$ per eccesso, allora
+$2/x_{n}$ lo è per difetto (il loro prodotto vale $2$), e la loro media è
+un'approssimazione migliore. Dimostriamo che $x_{n}\to\sqrt2$.
+
+\emph{Tutti i termini sono positivi}: per induzione, se $x_{n}>0$ anche $x_{n+1}>0$.
+
+\emph{Per $n\ge2$ si ha $x_{n}\ge\sqrt2$}: infatti, per ogni $n$,
+\[
+  x_{n+1}-\sqrt2=\frac{x_{n}^{2}-2\sqrt2\,x_{n}+2}{2x_{n}}=\frac{(x_{n}-\sqrt2)^{2}}{2x_{n}}\ge0
+\]
+(ed è $x_{1}=2\ge\sqrt2$ anche per $n=1$).
+
+\emph{La successione è decrescente}: per ogni $n$,
+\[
+  x_{n+1}-x_{n}=\frac{2-x_{n}^{2}}{2x_{n}}\le0,
+\]
+perché $x_{n}\ge\sqrt2$, cioè $x_{n}^{2}\ge2$.
+
+Per il \cref{teo:monotone}, essendo decrescente e limitata inferiormente da $\sqrt2$, la
+successione converge a un limite $L$, e per il \cref{cor:confronto-limiti} $L\ge\sqrt2>0$.
+Passiamo al limite nella \eqref{eq:erone}: il primo membro $x_{n+1}$ tende a $L$
+(\cref{oss:traslata}), e il secondo, per il \cref{teo:operazioni-limiti}, tende a
+$\frac12\bigl(L+\frac2L\bigr)$. Per l'unicità del limite
+$L=\frac12\bigl(L+\frac2L\bigr)$, cioè $L^{2}=2$, e quindi $L=\sqrt2$.
+\end{esempio}
+
+\begin{attenzione}[Prima l'esistenza, poi il valore]
+Il passaggio al limite nella relazione di ricorrenza è lecito \emph{solo dopo} aver
+dimostrato che il limite esiste. Senza questa precauzione si possono ottenere assurdità:
+per la successione $x_{1}=1$, $x_{n+1}=2x_{n}$ (cioè $x_{n}=2^{n-1}$), «passando al
+limite» si otterrebbe $L=2L$, cioè $L=0$; ma la successione diverge a $+\infty$.
+\end{attenzione}
+
+\begin{python}[La convergenza del metodo di Erone]
+from decimal import Decimal, getcontext
+getcontext().prec = 60              # lavoriamo con 60 cifre decimali
+
+radice_vera = Decimal(2).sqrt()
+x = Decimal(2)
+for n in range(1, 8):
+    errore = x - radice_vera
+    print(f"x_{n} = {str(x)[:34]}   errore = {float(errore):.1e}")
+    x = (x + 2 / x) / 2
+\end{python}
+\begin{risultato}
+x_1 = 2   errore = 5.9e-01
+x_2 = 1.5   errore = 8.6e-02
+x_3 = 1.41666666666666666666666666666666   errore = 2.5e-03
+x_4 = 1.41421568627450980392156862745098   errore = 2.1e-06
+x_5 = 1.41421356237468991062629557889013   errore = 1.6e-12
+x_6 = 1.41421356237309504880168962350253   errore = 9.0e-25
+x_7 = 1.41421356237309504880168872420969   errore = 2.9e-49
+\end{risultato}
+
+Il programma mostra un fenomeno notevole: a ogni passo il numero di cifre esatte
+\emph{raddoppia} (l'errore passa da $10^{-6}$ a $10^{-12}$, poi a $10^{-24}$). È la
+cosiddetta \emph{convergenza quadratica}, che si legge direttamente nella formula
+$x_{n+1}-\sqrt2=\frac{(x_{n}-\sqrt2)^{2}}{2x_{n}}$: l'errore al passo successivo è
+proporzionale al \emph{quadrato} dell'errore attuale (si veda anche la \cref{fig:erone}). Il
+metodo di Erone è un caso
+particolare del metodo di Newton per la ricerca degli zeri, che studieremo con le derivate
+e che è alla base dei solutori non lineari usati nel calcolo strutturale e nella
+fluidodinamica computazionale.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.62\textwidth]{erone}
+\caption{Il diagramma «a ragnatela» del metodo di Erone. Per rendere visibili più passi
+si parte da $x_{1}=3$: dal punto $(x_{1},x_{1})$ della bisettrice $y=x$ si scende
+verticalmente alla curva $y=\frac12(x+\frac2x)$, trovando $x_{2}$, poi ci si sposta
+orizzontalmente fino alla bisettrice, e così via. Le iterate scendono verso il punto
+fisso $\sqrt2$, dove la curva incontra la bisettrice (\texttt{python/fig\_erone.py}).}
+\label{fig:erone}
+\end{figure}
+
+\begin{notastorica}[Le radici quadrate nell'antichità]
+Il metodo porta il nome di Erone di Alessandria (I secolo d.C.), che lo descrive nei
+\emph{Metrica} per calcolare $\sqrt{720}$; ma era noto molto prima. La tavoletta
+babilonese YBC 7289, conservata a Yale e risalente a circa il 1800 a.C., mostra un
+quadrato con le diagonali e, scritto in base $60$, il numero $1;24,51,10$, cioè
+$1+\frac{24}{60}+\frac{51}{60^{2}}+\frac{10}{60^{3}}\approx1{,}41421296$: un'approssimazione
+di $\sqrt2=1{,}41421356\ldots$ con un errore di circa $6\cdot10^{-7}$ (cinque decimali
+esatti). Curiosamente, essa coincide con il troncamento a tre cifre sessagesimali di
+$x_{4}=577/408=1;24,51,10,35\ldots$, il quarto termine del metodo di Erone a partire da
+$x_{1}=2$. Secondo alcuni storici i Babilonesi conoscevano già un procedimento iterativo
+di questo tipo, che sarebbe allora il più antico algoritmo della storia.
+\end{notastorica}

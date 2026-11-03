@@ -1,0 +1,85 @@
+%% ----------------------------------------------------------------------------
+%%  §6.10  Punti fondamentali del capitolo
+%% ----------------------------------------------------------------------------
+\section{Punti fondamentali del capitolo}
+\label{sec:sintesi-cap06}
+
+La derivata è un'informazione locale; il teorema di Lagrange la trasforma in
+un'informazione globale. Dal segno di $f'$ e di $f''$ in un intervallo si deducono la
+monotonia e la convessità di $f$, e quindi i massimi, i minimi e la forma del grafico.
+Il teorema di L'Hôpital e la formula di Taylor completano il quadro con due strumenti
+per il calcolo dei limiti e l'approssimazione delle funzioni.
+
+\begin{puntichiave}
+\item \textbf{Teorema di Fermat.} Se $x_{0}$ è un punto \emph{interno} di massimo o di
+minimo relativo e $f$ è derivabile in $x_{0}$, allora $f'(x_{0})=0$ (\cref{teo:fermat}).
+La condizione è necessaria ma non sufficiente ($x^{3}$ in $0$); negli estremi
+dell'intervallo vale solo una disuguaglianza sul segno di $f'$
+(\cref{prop:fermat-estremi}).
+\item \textbf{Estremi assoluti in $[a,b]$.} Se $f$ è continua in $[a,b]$, il massimo e il
+minimo assoluti, che esistono per il \cref{teo:weierstrass}, vanno cercati tra gli
+estremi $a$, $b$, i punti interni in cui $f$ non è derivabile e i punti stazionari:
+basta confrontare i valori di $f$ in questi punti.
+\item \textbf{Rolle e Lagrange.} Se $f$ è continua in $[a,b]$ e derivabile in $(a,b)$,
+esiste $x_{0}\in(a,b)$ con $f(b)-f(a)=f'(x_{0})(b-a)$ (\cref{teo:lagrange}); il teorema di
+Rolle è il caso $f(a)=f(b)$, e ciascuna ipotesi è indispensabile
+(\cref{oss:rolle-ipotesi}). Se $\abs{f'}\le M$ in un intervallo, allora
+$\abs{f(x)-f(y)}\le M\abs{x-y}$ (\cref{cor:lipschitz}).
+\item \textbf{Criterio di monotonia.} Se $f$ è continua in un intervallo e derivabile nei
+punti interni, $f$ è crescente se e solo se $f'\ge0$ (\cref{teo:criterio-monotonia}), e
+$f'>0$ implica la stretta monotonia (\cref{cor:derivata-positiva}), ma non viceversa
+($x^{3}$). Errore tipico: dimenticare che il dominio deve essere un intervallo, come
+mostra $1/x$.
+\item \textbf{Funzioni con derivata nulla.} In un intervallo, $f'=0$ implica $f$ costante
+(\cref{cor:funzioni-costanti}), e due funzioni con la stessa derivata differiscono per
+una costante (\cref{cor:stessa-derivata}); ne segue, ad esempio, l'unicità della legge
+esponenziale della pressione nella stratosfera (\cref{es:atmosfera-isoterma}).
+\item \textbf{Test per gli estremi.} Se $f$ è continua in un intorno di $x_{0}$, derivabile
+per $x\neq x_{0}$, con $f'\ge0$ a sinistra e $f'\le0$ a destra di $x_{0}$, il punto è di
+massimo relativo, anche se $f$ non è derivabile in $x_{0}$
+(\cref{cor:test-derivata-prima}). Se $f'(x_{0})=0$ e $f''(x_{0})>0$ (oppure
+$<0$), il punto è di minimo (oppure di massimo) relativo stretto
+(\cref{teo:test-derivata-seconda,oss:test-derivata-seconda}).
+\item \textbf{Convessità e flessi.} Per $f$ derivabile in $[a,b]$ e derivabile due volte in
+$(a,b)$, le condizioni «$f$ convessa», «$f'$ crescente» e «$f''\ge0$ in $(a,b)$» sono
+equivalenti (\cref{teo:criterio-convessita}). In un flesso in cui $f$ è derivabile due
+volte risulta $f''(x_{0})=0$ (\cref{cor:flesso-necessaria}), ma non viceversa ($x^{4}$ in
+$0$).
+\item \textbf{Teorema di L'Hôpital.} Se $f$ e $g$ sono derivabili vicino a $x_{0}$ (escluso
+al più $x_{0}$), con $g'\neq0$, se $f,g\to0$ oppure $\abs g\to+\infty$, e se esiste
+$\lim f'/g'=\ell\in\overline\R$, allora anche $f/g\to\ell$
+(\cref{teo:hopital}); la dimostrazione generale poggia sul teorema di Cauchy
+(\cref{teo:cauchy}).
+\item \textbf{Errori tipici con L'Hôpital.} Il teorema si applica solo alle forme
+indeterminate; se $f'/g'$ non ha limite, non si può concludere nulla su
+$f/g$; non dimostra i limiti notevoli, da cui sono state ricavate le derivate delle
+funzioni elementari.
+\item \textbf{Asintoti e studio di funzione.} La retta $y=mx+q$ è asintoto obliquo per
+$x\to+\infty$ se e solo se $m=\lim f(x)/x$ e $q=\lim\bigl(f(x)-mx\bigr)$ esistono
+finiti (\cref{prop:asintoto-obliquo}); lo studio di funzione segue lo schema dominio,
+simmetrie, limiti, $f'$, $f''$, asintoti obliqui (\cref{sec:studio-funzione}).
+\item \textbf{Formula di Taylor con il resto di Peano.} Se $f$ è derivabile $n$ volte in
+$x_{0}$, allora $f(x)=T_{n}(x)+o\bigl((x-x_{0})^{n}\bigr)$ per $x\to x_{0}$
+(\cref{teo:taylor}), e $T_{n}$ è l'unico polinomio di grado $\le n$ con questa proprietà
+(\cref{prop:unicita-taylor}); gli sviluppi di $e^{x}$, $\log(1+x)$, $\sen x$, $\cos x$,
+$(1+x)^{b}$ vanno ricordati.
+\item \textbf{Criterio delle derivate successive.} Sia $n\ge2$; se le derivate di $f$ di
+ordine $1,\dots,n-1$ sono nulle in $x_{0}$ e $f^{(n)}(x_{0})\neq0$, il punto $x_{0}$ è di
+estremo relativo stretto se $n$ è pari (minimo se $f^{(n)}(x_{0})>0$, massimo se
+$f^{(n)}(x_{0})<0$), mentre non è di estremo se $n$ è dispari
+(\cref{teo:criterio-ordine-n}).
+\item \textbf{Applicazioni aeronautiche.} L'efficienza massima si trova con la tangente
+alla polare condotta dall'origine (\cref{fig:polare-tangente}); alla velocità di minima
+resistenza la resistenza parassita e quella indotta si eguagliano, e
+$V_{\min D}/V_{\min P}=3^{1/4}$ \eqref{eq:V-min-P}; l'errore relativo di
+$\sen\varphi\approx\varphi$ è circa $\varphi^{2}/6$.
+\end{puntichiave}
+
+\paragraph{Il filo del discorso.} Il capitolo lascia aperte due questioni. La formula di
+Taylor con il resto di Peano descrive soltanto il comportamento vicino a $x_{0}$, senza
+una stima quantitativa dell'errore: la daranno i resti integrale e di Lagrange del
+\cref{cap:taylor}. Inoltre tutti i risultati riguardano funzioni di una sola variabile.
+Il prossimo capitolo li estende alle funzioni di più variabili: la derivata diventa la
+derivata parziale, la condizione di Fermat $f'(x_{0})=0$ diventa l'annullarsi del
+gradiente, e il criterio della derivata seconda diventa quello dell'hessiano
+(\cref{sec:estremi-due}).

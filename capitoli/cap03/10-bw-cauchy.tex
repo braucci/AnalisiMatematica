@@ -1,0 +1,746 @@
+%% ----------------------------------------------------------------------------
+%%  §3.10  Appendice: successioni estratte, Bolzano–Weierstrass, Cauchy
+%% ----------------------------------------------------------------------------
+\section[Appendice: successioni estratte, teorema di Bolzano--Weierstrass, successioni di Cauchy]%
+  {Appendice: successioni estratte, teorema di\\ Bolzano--Weierstrass, successioni di Cauchy}
+\label{sec:bw-cauchy}
+
+\subsection{Successioni estratte}
+
+\begin{definizione}[Successione estratta]\index{successione!estratta}
+Sia $a_{n}$ una successione di numeri reali e sia $n_{k}$ una successione strettamente
+crescente di numeri naturali. La successione $a_{n_{k}}$ definita da
+\begin{equation}\label{eq:estratta}
+  k\in\N\ \longmapsto\ a_{n_{k}}
+\end{equation}
+prende il nome di \emph{successione estratta} (o \emph{sottosuccessione}) da $a_{n}$, di
+indici $n_{k}$.
+\end{definizione}
+
+In altre parole, un'estratta si ottiene «saltando» alcuni termini della successione (anche
+infiniti), ma conservando l'ordine. Ad esempio, se $n_{k}=2k$, la successione estratta da
+$a_{n}$ di indici $2k$, cioè di indici pari, è
+\begin{equation}\label{eq:estratta-pari}
+  a_{2},\ a_{4},\ \dots,\ a_{2k},\ \dots
+\end{equation}
+Se invece $n_{k}=2k-1$, si ottiene l'estratta da $a_{n}$ di indici dispari:
+\begin{equation}\label{eq:estratta-dispari}
+  a_{1},\ a_{3},\ \dots,\ a_{2k-1},\ \dots
+\end{equation}
+
+\begin{lemma}\label{lem:nk-maggiore-k}
+Per ogni successione $n_{k}$ strettamente crescente di numeri naturali si ha
+\begin{equation}\label{eq:nk-k}
+  n_{k}\ge k \qquad\perogni k\in\N .
+\end{equation}
+\end{lemma}
+
+\begin{schema}
+\Ipotesi{$n_{k}\in\N$, \ $n_{k}<n_{k+1}$ per ogni $k$.}
+\Tesi{$n_{k}\ge k$ per ogni $k\in\N$.}
+\end{schema}
+
+\begin{strategia}
+Induzione su $k$: il primo indice è almeno $1$, e a ogni passo l'indice cresce almeno di
+un'unità, perché tra due naturali consecutivi non ci sono altri naturali.
+\end{strategia}
+
+\begin{dimostrazione}
+Per $k=1$ si ha ovviamente $n_{1}\ge1$. Inoltre, supponendo valida la \eqref{eq:nk-k},
+proviamo che risulta $n_{k+1}\ge k+1$, da cui, per il principio di induzione, la
+\eqref{eq:nk-k} risulterà vera per ogni $k$. Per ipotesi è $n_{k+1}>n_{k}\ge k$, ovvero
+$n_{k+1}>k$, e perciò $n_{k+1}\ge k+1$ (\cref{lem:struttura-N}(iii)).
+\end{dimostrazione}
+
+Dalla \eqref{eq:nk-k} si ricava facilmente la seguente
+
+\begin{proposizione}\label{prop:estratta-limite}
+Se $a_{n}$ ha limite $a$ (finito o infinito), allora ogni estratta $a_{n_{k}}$ ha lo
+stesso limite $a$.
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$a_{n}\to a$, con $a\in\R$ oppure $a=\pm\infty$; \ $n_{k}$ strettamente
+crescente.}
+\Tesi{$a_{n_{k}}\to a$ per $k\to+\infty$.}
+\end{schema}
+
+\begin{strategia}
+L'estratta prende i suoi termini sempre più avanti nella successione: per il lemma
+precedente il $k$-esimo termine dell'estratta ha indice $n_{k}\ge k$. Quindi la soglia
+$\nu$ che funziona per la successione funziona anche per l'estratta.
+\end{strategia}
+
+\begin{dimostrazione}
+Sia $a$ finito. Fissato $\epsilon>0$ esiste $k_{0}$ tale che $\abs{a_{n}-a}<\epsilon$ per
+ogni $n>k_{0}$. Se $k>k_{0}$, essendo $n_{k}\ge k$ per il lemma precedente, si ha anche
+$n_{k}>k_{0}$, e perciò $\abs{a_{n_{k}}-a}<\epsilon$. Se $a=\pm\infty$ si ragiona allo
+stesso modo, con la disuguaglianza $a_{n}>M$ (o $a_{n}<-M$) al posto di
+$\abs{a_{n}-a}<\epsilon$.
+\end{dimostrazione}
+
+\begin{corollario}\label{cor:estratte-limiti-diversi}
+Se una successione ha due estratte con limiti diversi, allora non ha limite.
+\end{corollario}
+
+\begin{schema}
+\Ipotesi{$a_{n_{k}}\to\ell_{1}$, \ $a_{m_{k}}\to\ell_{2}$ (finiti o infiniti), con
+$\ell_{1}\neq\ell_{2}$.}
+\Tesi{$a_{n}$ non ha limite, né finito né infinito.}
+\end{schema}
+
+\begin{strategia}
+È la \cref{prop:estratta-limite} letta «al contrario»: se la successione avesse un
+limite, tutte le estratte avrebbero quello stesso limite, e per l'unicità del limite non
+potrebbero averne due diversi.
+\end{strategia}
+
+\begin{dimostrazione}
+Se fosse $a_{n}\to a$ (finito o infinito), per la \cref{prop:estratta-limite} si avrebbe
+$a_{n_{k}}\to a$ e $a_{m_{k}}\to a$. Per l'unicità del limite (\cref{teo:unicita-limite}
+e, per i limiti infiniti, l'osservazione che segue la definizione di successione regolare
+nel \cref{sec:def-limite}) sarebbe $\ell_{1}=a=\ell_{2}$, contro l'ipotesi.
+\end{dimostrazione}
+
+Ad esempio, $(-1)^{n}$ non ha limite perché l'estratta di indici pari tende a $1$ e quella
+di indici dispari tende a $-1$: è una dimostrazione della
+\cref{prop:alterna-non-converge} più rapida di quella data a suo tempo. Il
+\cref{teo:lim-geometrica} per $a<-1$ si ottiene allo stesso modo.
+
+\subsection{Il teorema di Bolzano--Weierstrass}
+
+Nel \cref{sec:operazioni-limiti} abbiamo dimostrato che ogni successione convergente è
+limitata, cioè esiste $M>0$ tale che $\abs{a_{n}}\le M$ per ogni $n\in\N$. Il viceversa non
+sussiste, perché, ad esempio, la successione $a_{n}=(-1)^{n}$ è limitata ma non
+convergente. Tuttavia, in essa si possono individuare estratte convergenti (quella dei
+termini di posto pari, ad esempio). Ciò non è un caso: sussiste un notevole teorema,
+che nello schema dei grandi teoremi di esistenza della \cref{fig:schema-teoremi} segue
+immediatamente quello sulle successioni monotòne.
+
+Per enunciarlo e dimostrarlo conviene precisare il linguaggio. Diciamo che un intervallo
+$I$ \emph{contiene termini della successione per infiniti indici} se l'insieme
+$\{n\in\N : a_{n}\in I\}$ non è limitato superiormente, cioè se per ogni $m\in\N$ esiste
+$n>m$ con $a_{n}\in I$. Se $I=I'\cup I''$ e né $I'$ né $I''$ contengono termini per
+infiniti indici, allora gli insiemi $\{n : a_{n}\in I'\}$ e $\{n : a_{n}\in I''\}$ sono
+limitati superiormente, e quindi lo è anche la loro unione $\{n : a_{n}\in I\}$:
+\emph{se $I$ contiene termini per infiniti indici, almeno una delle due parti $I'$, $I''$
+ne contiene per infiniti indici}.
+
+\begin{teorema}[di Bolzano--Weierstrass]\label{teo:bolzano-weierstrass}\index{teorema!di Bolzano--Weierstrass}
+Sia $a_{n}$ una successione limitata. Allora esiste almeno una sua estratta convergente.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$A\le a_{n}\le B$ per ogni $n\in\N$.}
+\Tesi{$\esiste n_{1}<n_{2}<\cdots<n_{k}<\cdots$ e $\ell\in[A,B]$ tali che $a_{n_{k}}\to\ell$.}
+\end{schema}
+
+\begin{strategia}
+È il metodo di bisezione, già incontrato per approssimare $\sqrt2$, usato questa volta per
+\emph{catturare} un valore attorno al quale si addensano infiniti termini della
+successione. La successione ha infiniti termini, e sono
+tutti nell'intervallo $[A,B]$. Dividiamo l'intervallo a metà (\cref{fig:bolzano-weierstrass}): almeno una delle due metà
+contiene termini della successione per infiniti indici (se ciascuna ne contenesse solo un
+numero finito, i termini sarebbero in tutto un numero finito). Scegliamo quella metà e
+ripetiamo: otteniamo una successione di intervalli incapsulati $[A_{k},B_{k}]$, ciascuno
+lungo la metà del precedente e ciascuno contenente termini della successione per infiniti
+indici. Gli estremi sinistri $A_{k}$ formano una successione crescente e limitata, che
+converge (\cref{teo:monotone}) a un numero $\ell$: qui entra in gioco la completezza.
+Infine scegliamo un termine $a_{n_{k}}$ in ciascun intervallo, con indici crescenti
+(possibile proprio perché ogni intervallo ne contiene per infiniti indici): l'estratta
+così ottenuta è stretta tra $A_{k}$ e $B_{k}$, che tendono entrambi a $\ell$, e i
+carabinieri concludono.
+\end{strategia}
+
+\begin{dimostrazione}
+Per ipotesi la successione $a_{n}$ è limitata; pertanto esistono due costanti $A,B\in\R$,
+con $A<B$, tali che
+\begin{equation}\label{eq:bw-limitata}
+  A\le a_{n}\le B \qquad\perogni n\in\N .
+\end{equation}
+L'intervallo $[A,B]$ contiene tutti i termini, e quindi termini per infiniti indici
+(perché $\N$ non è limitato superiormente, \cref{teo:archimede}).
+
+\emph{Costruzione degli intervalli.} Suddividiamo l'intervallo $[A,B]$ mediante il punto
+di mezzo $C=(A+B)/2$ e consideriamo i due intervalli $[A,C]$, $[C,B]$. Per quanto
+osservato sopra, uno almeno dei due contiene termini della successione per infiniti
+indici; indichiamolo con $[A_{1},B_{1}]$ (se entrambi lo fanno, ne scegliamo
+uno qualsiasi). Risulta
+\begin{equation}\label{eq:bw-passo1}
+  A\le A_{1}, \qquad B_{1}\le B, \qquad B_{1}-A_{1}=\frac{B-A}{2}.
+\end{equation}
+Suddividiamo l'intervallo $[A_{1},B_{1}]$ mediante il punto di mezzo
+$C_{1}=(A_{1}+B_{1})/2$. Per lo stesso motivo almeno uno tra i due intervalli
+$[A_{1},C_{1}]$, $[C_{1},B_{1}]$ contiene termini della successione per infiniti indici;
+indichiamolo con $[A_{2},B_{2}]$:
+\begin{equation}\label{eq:bw-passo2}
+  A_{1}\le A_{2}, \qquad B_{2}\le B_{1}, \qquad B_{2}-A_{2}=\frac{B_{1}-A_{1}}{2}=\frac{B-A}{2^{2}}.
+\end{equation}
+Iterando il procedimento (cioè definendo $[A_{k+1},B_{k+1}]$ a partire da $[A_{k},B_{k}]$,
+per induzione) si generano due successioni $A_{k}$, $B_{k}$ $(k\in\N)$ tali che
+\begin{gather}
+  A\le A_{k}\le A_{k+1}<B_{k+1}\le B_{k}\le B \qquad\perogni k\in\N, \label{eq:bw-incapsulati}\\
+  B_{k}-A_{k}=\frac{B-A}{2^{k}} \qquad\perogni k\in\N, \label{eq:bw-lunghezza}
+\end{gather}
+e inoltre ogni intervallo $[A_{k},B_{k}]$ contiene termini della successione $a_{n}$ per
+infiniti indici.
+
+\emph{Scelta degli indici.} L'intervallo $[A_{1},B_{1}]$ contiene termini della
+successione $a_{n}$; quindi esiste il primo intero $n_{1}$ tale che
+$a_{n_{1}}\in[A_{1},B_{1}]$ (\cref{teo:buon-ordinamento}). Per lo stesso motivo esiste un
+primo intero $n_{2}$, fra tutti i numeri naturali più grandi di $n_{1}$, per cui
+$a_{n_{2}}\in[A_{2},B_{2}]$: ne esistono, perché $[A_{2},B_{2}]$ contiene termini per
+infiniti indici. Iterando, per $k=3,4,5,\dots$ determiniamo una successione
+strettamente crescente di interi
+\begin{equation}\label{eq:bw-indici}
+  n_{1}<n_{2}<n_{3}<\dots<n_{k}<n_{k+1}<\dots
+\end{equation}
+per cui $a_{n_{k}}\in[A_{k},B_{k}]$ per ogni $k\in\N$. Dato che
+$B_{k}-A_{k}=(B-A)/2^{k}$, abbiamo quindi
+\begin{equation}\label{eq:bw-carabinieri}
+  A_{k}\le a_{n_{k}}\le B_{k}=A_{k}+\frac{B-A}{2^{k}} \qquad\perogni k\in\N .
+\end{equation}
+
+\emph{Passaggio al limite.} Per la \eqref{eq:bw-incapsulati} la successione $A_{k}$ è
+monotòna (crescente) e limitata; per il teorema sulle successioni monotòne $A_{k}$ ammette
+limite finito per $k\to+\infty$. Indichiamo con $\ell\in\R$ il valore di tale limite. Dato
+che $(B-A)/2^{k}=(B-A)\bigl(\frac12\bigr)^{k}\to0$ per $k\to+\infty$
+(\cref{teo:lim-geometrica}), sia il primo sia l'ultimo membro della
+\eqref{eq:bw-carabinieri} convergono a $\ell$. Inoltre $A\le A_{k}\le B$ per ogni $k$, per
+la \eqref{eq:bw-incapsulati}, e quindi $A\le\ell\le B$ per il \cref{cor:confronto-limiti}
+(applicato confrontando $A_{k}$ con le successioni costanti $A$ e $B$): dunque
+$\ell\in[A,B]$. Dal teorema dei carabinieri si ottiene allora la conclusione
+\begin{equation}\label{eq:bw-tesi}
+  \lim_{k\to+\infty}a_{n_{k}}=\ell. \qedhere
+\end{equation}
+\end{dimostrazione}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[x=10cm, every node/.style={font=\footnotesize}]
+  % termini di una successione limitata (valori di sen n riscalati in [0,1])
+  \foreach \row/\A/\B in {0/0/1, 1/0.5/1, 2/0.5/0.75, 3/0.625/0.75, 4/0.625/0.6875} {
+    \begin{scope}[yshift={-\row*0.85cm}]
+      \draw[grigio!60] (0,0) -- (1,0);
+      \fill[blu!18] (\A,-0.12) rectangle (\B,0.12);
+      \draw[blu, thick] (\A,-0.12) -- (\A,0.12); \draw[blu, thick] (\B,-0.12) -- (\B,0.12);
+      \ifnum\row=0 \node[left] at (0,0) {$[A,B]$}; \else \node[left] at (0,0) {$[A_{\row},B_{\row}]$}; \fi
+    \end{scope}}
+  \foreach \n in {1,...,60} {
+    \pgfmathsetmacro{\v}{0.5+0.5*sin(deg(\n))}
+    \fill[rame] (\v,0) circle (0.9pt);}
+  \draw[verde!60!black, thick, dashed] (0.6553,0.3) -- (0.6553,-3.8) node[below] {$\ell$};
+\end{tikzpicture}
+\caption{Il procedimento di bisezione nella dimostrazione del teorema di
+Bolzano--Weierstrass. I punti color rame sono i termini (riscalati) di una successione
+limitata; a ogni passo si conserva una metà dell'intervallo che contiene termini per
+infiniti indici. Gli intervalli si stringono attorno al limite $\ell$ dell'estratta.}
+\label{fig:bolzano-weierstrass}
+\end{figure}
+
+\begin{osservazione}
+Il teorema afferma l'esistenza di un'estratta convergente, ma non ne fornisce, in
+generale, una costruzione effettiva: la scelta della metà «buona» a ogni passo richiede
+di sapere quale delle due contiene infiniti termini, cosa che nessun calcolatore può
+verificare. Inoltre l'estratta non è unica, e successioni diverse possono avere estratte
+con limiti diversi: per $\sen n$, ad esempio, si può dimostrare che \emph{ogni} numero di
+$[-1,1]$ è limite di qualche estratta. Infine, l'ipotesi di limitatezza è essenziale: la
+successione $a_{n}=n$ non ha alcuna estratta convergente, perché ogni estratta diverge a
+$+\infty$ (\cref{prop:estratta-limite}).
+\end{osservazione}
+
+\subsection{Successioni di Cauchy}
+
+Il teorema sulle successioni monotòne permette di dimostrare che una successione converge
+senza conoscerne il limite; ma richiede la monotonia. Il criterio di Cauchy offre un
+analogo strumento per successioni qualsiasi.
+
+\begin{definizione}[Successione di Cauchy]\index{successione!di Cauchy}
+Sia $a_{n}$ una successione di numeri reali. Si dice che $a_{n}$ è una \emph{successione di
+Cauchy} se, per ogni $\epsilon>0$, esiste un indice $\nu$ tale che per $h,k>\nu$ risulti
+\begin{equation}\label{eq:cauchy}
+  \abs{a_{k}-a_{h}}<\epsilon .
+\end{equation}
+\end{definizione}
+
+La condizione di Cauchy non menziona alcun limite: chiede soltanto che i termini, da un
+certo punto in poi, siano \emph{vicini tra loro}. Dimostriamo in primo luogo la seguente
+
+\begin{proposizione}\label{prop:convergente-cauchy}
+Ogni successione convergente è di Cauchy.
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$a_{n}\to a\in\R$.}
+\Tesi{$\perogni\epsilon>0\ \esiste\nu:\ \abs{a_{k}-a_{h}}<\epsilon$ per ogni $h,k>\nu$.}
+\end{schema}
+
+\begin{strategia}
+Se due termini sono entrambi vicini al limite $a$, sono vicini tra loro: la disuguaglianza
+triangolare, passando per $a$, somma le due distanze. Per ottenere $\epsilon$ alla fine
+si chiede a ciascuna distanza di essere minore di $\epsilon/2$.
+\end{strategia}
+
+\begin{dimostrazione}
+Se $a_{n}$ converge verso $a$, allora, per ogni $\epsilon>0$, esiste $\nu$ tale che
+\begin{equation}\label{eq:conv-cauchy-1}
+  \abs{a_{n}-a}<\frac\epsilon2 \qquad\perogni n>\nu .
+\end{equation}
+Dalla disuguaglianza triangolare segue allora, per $h,k>\nu$:
+\begin{equation}\label{eq:conv-cauchy-2}
+  \abs{a_{k}-a_{h}}\le\abs{a_{k}-a}+\abs{a-a_{h}}<\frac\epsilon2+\frac\epsilon2=\epsilon. \qedhere
+\end{equation}
+\end{dimostrazione}
+
+Per dimostrare che, viceversa, ogni successione di Cauchy è convergente, premettiamo alcuni
+lemmi.
+
+\begin{lemma}\label{lem:cauchy-limitata}
+Una successione di Cauchy è limitata.
+\end{lemma}
+
+\begin{schema}
+\Ipotesi{$a_{n}$ di Cauchy.}
+\Tesi{$\esiste A,B\in\R$: \ $A\le a_{n}\le B$ per ogni $n\in\N$.}
+\end{schema}
+
+\begin{strategia}
+Con $\epsilon=1$, da un certo indice in poi tutti i termini distano meno di $1$ da un
+termine fissato $a_{h_{0}}$: sono quindi definitivamente in un intervallo limitato.
+Restano fuori un numero finito di termini, che si aggiungono al calcolo del minimo e del
+massimo.
+\end{strategia}
+
+\begin{dimostrazione}
+Sia $\epsilon=1$; per ipotesi esiste $\nu\in\N$ tale che
+\begin{equation}\label{eq:cauchy-lim-1}
+  \abs{a_{k}-a_{h}}<1 \qquad\perogni h,k>\nu .
+\end{equation}
+Fissiamo un indice $h_{0}>\nu$. Allora, dalla \eqref{eq:cauchy-lim-1}, per le proprietà
+del valore assoluto, segue
+\begin{equation}\label{eq:cauchy-lim-2}
+  a_{h_{0}}-1<a_{k}<a_{h_{0}}+1 \qquad\perogni k>\nu .
+\end{equation}
+Posto
+\[
+  A=\min\{a_{1},\dots,a_{\nu},a_{h_{0}}-1\}, \qquad B=\max\{a_{1},\dots,a_{\nu},a_{h_{0}}+1\},
+\]
+evidentemente risulta $A\le a_{k}\le B$ per ogni $k\in\N$, e perciò la successione è
+limitata. (È lo stesso schema del \cref{teo:convergente-limitata}: controllo definitivo
+più un numero finito di eccezioni.)
+\end{dimostrazione}
+
+\begin{lemma}\label{lem:cauchy-estratta}
+Se una successione di Cauchy $a_{n}$ contiene un'estratta $a_{n_{k}}$ convergente verso
+$\ell$, allora anche $a_{n}$ converge verso $\ell$.
+\end{lemma}
+
+\begin{schema}
+\Ipotesi{$a_{n}$ di Cauchy; \ $a_{n_{k}}\to\ell\in\R$.}
+\Tesi{$a_{n}\to\ell$.}
+\end{schema}
+
+\begin{strategia}
+Per stimare $\abs{a_{n}-\ell}$ si passa per un termine dell'estratta abbastanza avanzato,
+$a_{n_{k_{0}}}$: questo è vicino a $\ell$ perché l'estratta converge, ed è vicino ad
+$a_{n}$ perché la successione è di Cauchy. La disuguaglianza triangolare, con il solito
+$\epsilon/2+\epsilon/2$, conclude.
+\end{strategia}
+
+\begin{dimostrazione}
+Fissato $\epsilon>0$, sia $\nu\in\N$ tale che
+\begin{equation}\label{eq:cauchy-estr-1}
+  \abs{a_{k}-a_{h}}<\frac\epsilon2 \qquad\perogni h,k>\nu .
+\end{equation}
+Sia inoltre $k_{0}>\nu$ tale che
+\begin{equation}\label{eq:cauchy-estr-2}
+  \abs{a_{n_{k}}-\ell}<\frac\epsilon2 \qquad\perogni k\ge k_{0}.
+\end{equation}
+Poiché si ha $n_{k_{0}}\ge k_{0}>\nu$ (\cref{lem:nk-maggiore-k}), per ogni $n>\nu$ risulta
+\begin{equation}\label{eq:cauchy-estr-3}
+  \abs{a_{n}-\ell}\le\abs{a_{n}-a_{n_{k_{0}}}}+\abs{a_{n_{k_{0}}}-\ell}<\frac\epsilon2+\frac\epsilon2=\epsilon. \qedhere
+\end{equation}
+\end{dimostrazione}
+
+Combinando i risultati precedenti si dimostra il seguente
+
+\begin{teorema}[Criterio di convergenza di Cauchy]\label{teo:criterio-cauchy}\index{criterio di Cauchy!per le successioni}
+Una successione $a_{n}$ di numeri reali è convergente se e solo se è di Cauchy.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$a_{n}$ successione di numeri reali.}
+\Tesi{$a_{n}$ converge in $\R$ \ $\sse$ \ $a_{n}$ è di Cauchy, cioè per ogni $\epsilon>0$
+esiste $\nu$ tale che $\abs{a_{k}-a_{h}}<\epsilon$ per ogni $h,k>\nu$.}
+\end{schema}
+
+\begin{strategia}
+Una delle due implicazioni è la \cref{prop:convergente-cauchy}. Per l'altra, il problema è
+che non conosciamo il candidato limite; lo facciamo produrre al teorema di
+Bolzano--Weierstrass. Una successione di Cauchy è limitata (\cref{lem:cauchy-limitata}),
+quindi ha un'estratta convergente a qualche $\ell$; e poiché i termini di una successione
+di Cauchy sono definitivamente vicini tra loro, se alcuni di essi si avvicinano a $\ell$,
+vi si avvicinano tutti (\cref{lem:cauchy-estratta}).
+\end{strategia}
+
+\begin{dimostrazione}
+Con la \cref{prop:convergente-cauchy} abbiamo già provato che le successioni convergenti
+sono di Cauchy. Viceversa, se $a_{n}$ è di Cauchy, per il \cref{lem:cauchy-limitata} è
+anche limitata. In base al teorema di Bolzano--Weierstrass (\cref{teo:bolzano-weierstrass})
+$a_{n}$ ammette una successione estratta $a_{n_{k}}$ convergente. Per il
+\cref{lem:cauchy-estratta}, $a_{n}$ è convergente.
+\end{dimostrazione}
+
+\begin{osservazione}[Cauchy e la completezza]
+Nel campo dei razionali il criterio di Cauchy è falso: la successione dei troncamenti
+decimali di $\sqrt2$,
+\[
+  1;\quad 1{,}4;\quad 1{,}41;\quad 1{,}414;\quad 1{,}4142;\quad\dots,
+\]
+è formata da numeri razionali ed è di Cauchy (due termini di indice maggiore di $k$
+distano meno di $10^{-k}$), ma non converge ad alcun numero razionale, perché il suo
+limite in $\R$ è $\sqrt2\notin\Q$. La dimostrazione del criterio usa infatti, attraverso
+il teorema di Bolzano--Weierstrass e quello sulle successioni monotòne, l'assioma di
+completezza. Si può anzi dimostrare che, in un campo ordinato archimedeo, il criterio di
+Cauchy è \emph{equivalente} all'assioma di completezza \cite{giusti}. Lo strumento è
+ancora la bisezione. Dati $A$ e $B$ come nell'assioma, si sceglie $a_{0}\in A$ e
+$b_{0}\in B$ e si dimezza ripetutamente l'intervallo $[a_{0},b_{0}]$, conservando a ogni
+passo una metà il cui estremo destro è un maggiorante di $A$ e il cui estremo sinistro non
+supera qualche elemento di $A$. Gli estremi formano due successioni di Cauchy, e il loro
+limite comune separa $A$ da $B$. La proprietà di Archimede serve a garantire che le
+lunghezze $(b_{0}-a_{0})/2^{k}$ tendano a zero.
+\end{osservazione}
+
+\begin{python}[Una successione di Cauchy di razionali che non converge in $\Q$]
+# Troncamenti decimali di sqrt(2): sono razionali, distano sempre
+# meno, ma il loro limite sqrt(2) non è razionale.
+from fractions import Fraction as F
+from decimal import Decimal, getcontext
+getcontext().prec = 40
+cifre = str(Decimal(2).sqrt())            # "1.414213562373095..."
+
+tronc = [F(cifre[:2 + k]) for k in range(1, 12)]   # 1.4, 1.41, ...
+print("k               q_k   max |q_j - q_k|, j > k   q_k^2 = 2 ?")
+for k in range(1, 8):
+    q = tronc[k - 1]
+    dist = max(abs(tronc[j] - q) for j in range(k, len(tronc)))
+    print(f"{k}  {str(q):>16s}   {float(dist):22.1e}   {q * q == 2}")
+\end{python}
+\begin{risultato}
+k               q_k   max |q_j - q_k|, j > k   q_k^2 = 2 ?
+1               7/5                  1.4e-02   False
+2           141/100                  4.2e-03   False
+3           707/500                  2.1e-04   False
+4         7071/5000                  1.4e-05   False
+5     141421/100000                  3.6e-06   False
+6   1414213/1000000                  5.6e-07   False
+7   2828427/2000000                  6.2e-08   False
+\end{risultato}
+
+\begin{idea}[I numeri reali come completamento dei razionali]
+Il programma mostra una successione di Cauchy di razionali che «vorrebbe» convergere ma
+non trova in $\Q$ il suo limite. Charles Méray (1869) e, indipendentemente, Georg Cantor
+(1872) rovesciarono il problema: se il limite manca, lo si \emph{definisce} a partire
+dalla successione stessa. Due successioni di Cauchy di razionali $a_{n}$ e $b_{n}$ si
+dicono equivalenti se $a_{n}-b_{n}\to0$: ad esempio i troncamenti decimali di $\sqrt2$ e
+i termini $2,\frac32,\frac{17}{12},\frac{577}{408},\dots$ del metodo di Erone
+(\cref{es:erone}). Un numero reale è, per definizione, una classe di successioni
+equivalenti, e il razionale $q$ si identifica con la classe della successione costante
+$q$. Somma e prodotto si definiscono termine a termine; un numero è $\ge0$ se ha un
+rappresentante definitivamente $\ge0$. Con un lavoro lungo ma elementare (la parte più
+delicata riguarda l'ordinamento) si verifica che l'insieme così costruito soddisfa tutti
+gli assiomi del \cref{sec:assiomi}, compreso quello di completezza \cite{giusti}. Anche
+$e$ trova posto: è la classe della successione di razionali $(1+\frac1n)^{n}$, alla
+quale è equivalente quella delle somme $\sum_{k=0}^{n}\frac1{k!}$
+(\cref{oss:e-due-vie}). È la costruzione seguita in \cite{tao1}, alternativa alle
+sezioni di Dedekind ricordate nella nota storica del \S\ref{sec:assiomi}.
+\end{idea}
+
+\begin{notastorica}[Bolzano, Cauchy, Weierstrass]
+L'idea della dimostrazione del teorema che chiamiamo «di Bolzano--Weierstrass», la
+bisezione, compare già nel saggio di Bernard Bolzano del 1817 ricordato nel
+\cref{sec:sup}, dove serve a dimostrare l'esistenza dell'estremo superiore e, da questa,
+il teorema dei valori intermedi. Nello stesso lavoro Bolzano enunciò
+anche, quattro anni prima di Cauchy, il criterio che porta il nome di quest'ultimo, e
+cercò di dimostrarlo. Il suo argomento si riduceva però a osservare che l'ipotesi di un
+limite «non contiene nulla di impossibile», perché, se il limite c'è, il suo valore si
+può determinare con tutta la precisione che si vuole: così si descrive il limite, ma non
+se ne prova l'esistenza. In mancanza di una teoria dei numeri reali la dimostrazione non
+poteva che essere illusoria \cite{giusti}. Il saggio, d'altra parte, rimase quasi
+sconosciuto, e fu Karl Weierstrass a riscoprire il risultato e a
+farne, nelle lezioni berlinesi degli anni Sessanta dell'Ottocento, uno dei pilastri
+dell'Analisi. Augustin-Louis Cauchy enunciò il suo criterio nel \emph{Cours d'analyse}
+(1821), ma ne considerò ovvia la parte «difficile» (che una successione di Cauchy
+converge): ovvia lo è, se si ha in mente la retta geometrica; dimostrarla richiede una
+teoria dei numeri reali, che né a Cauchy né a Bolzano era disponibile. Fu proprio per
+colmare questa lacuna che, cinquant'anni dopo, Méray, Dedekind e Cantor costruirono i
+numeri reali (si veda il riquadro precedente).
+\end{notastorica}
+
+\subsection{Approfondimento: massimo e minimo limite}
+\label{subsec:massimo-minimo-limite}
+\index{massimo limite}\index{minimo limite}
+
+Una successione limitata può non avere limite, come $(-1)^{n}$. Il teorema di
+Bolzano--Weierstrass garantisce che abbia estratte convergenti, ma non dice quali, e i
+loro limiti possono essere diversi. Vi sono però due numeri, associati a ogni
+successione limitata, che esistono \emph{sempre} e che si riducono al limite quando
+questo c'è: il \emph{massimo} e il \emph{minimo limite} \cite{giusti}. L'idea è guardare
+la successione «da un certo punto in poi», cioè le sue \emph{code}, e misurarne il
+«tetto» e il «pavimento».
+
+Sia $a_{n}$ una successione limitata, diciamo $A\le a_{n}\le B$ per ogni $n$. Per ogni
+$n\in\N$ la coda $\{a_{k} : k\ge n\}$ è un insieme non vuoto e limitato: per il
+\cref{teo:esistenza-sup} ha estremo superiore ed estremo inferiore reali, che indichiamo
+con
+\begin{equation}\label{eq:code-limsup}
+  s_{n}=\sup_{k\ge n}a_{k}, \qquad i_{n}=\inf_{k\ge n}a_{k} .
+\end{equation}
+Poiché $a_{n}$ appartiene alla propria coda, si ha $A\le i_{n}\le a_{n}\le s_{n}\le B$.
+Passando da $n$ a $n+1$, inoltre, la coda perde il termine $a_{n}$. Il numero $s_{n}$,
+che maggiora la coda di indice $n$, maggiora a maggior ragione quella di indice $n+1$;
+e poiché $s_{n+1}$ è il \emph{minimo} dei maggioranti di quest'ultima, $s_{n+1}\le s_{n}$.
+Allo stesso modo $i_{n+1}\ge i_{n}$. La successione $s_{n}$ è dunque decrescente, la
+$i_{n}$ crescente, ed entrambe sono limitate: per il \cref{teo:monotone} convergono.
+
+\begin{definizione}[Massimo e minimo limite]\label{def:limsup}
+Sia $a_{n}$ una successione limitata, e siano $s_{n}$ e $i_{n}$ definite dalla
+\eqref{eq:code-limsup}. I numeri reali
+\begin{equation}\label{eq:limsup-def}
+\begin{aligned}
+  \limsup_{n\to+\infty}a_{n}&=\lim_{n\to+\infty}s_{n}=\inf_{n\in\N}s_{n},\\
+  \liminf_{n\to+\infty}a_{n}&=\lim_{n\to+\infty}i_{n}=\sup_{n\in\N}i_{n}
+\end{aligned}
+\end{equation}
+si chiamano, rispettivamente, \emph{massimo limite} e \emph{minimo limite} (o
+\emph{limite superiore} e \emph{limite inferiore}) della successione $a_{n}$. Si usano
+anche i simboli $\overline{\lim}\,a_{n}$ e $\underline{\lim}\,a_{n}$.
+\end{definizione}
+
+Il massimo limite è dunque il tetto della successione «visto da lontano»: $s_{n}$ è il
+più basso dei livelli che i termini da $a_{n}$ in poi non superano, e
+$\limsup a_{n}$ è il valore verso cui questi livelli si abbassano al crescere di $n$.
+
+\begin{esempio}[Una successione alternante]\label{es:limsup-alternante}
+Sia $a_{n}=(-1)^{n}\bigl(1+\frac1n\bigr)$. I termini di indice pari, $1+\frac1n$,
+decrescono verso $1$; quelli di indice dispari, $-1-\frac1n$, crescono verso $-1$
+(\cref{fig:limsup-code}). Il più grande termine della coda di indice $n$ è il primo
+termine di indice pari che vi compare: $s_{n}=1+\frac1n$ se $n$ è pari,
+$s_{n}=1+\frac1{n+1}$ se $n$ è dispari. Analogamente $i_{n}=-1-\frac1n$ se $n$ è dispari
+e $i_{n}=-1-\frac1{n+1}$ se $n$ è pari. Quindi
+\[
+  \limsup_{n\to+\infty}a_{n}=1, \qquad \liminf_{n\to+\infty}a_{n}=-1,
+\]
+mentre $\sup_{n}a_{n}=a_{2}=\frac32$ e $\inf_{n}a_{n}=a_{1}=-2$. Gli estremi
+superiore e inferiore dipendono dai primi termini; il massimo e il minimo limite no,
+perché modificando un numero finito di termini le code da un certo indice in poi non
+cambiano.
+\end{esempio}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.92\textwidth, height=5.6cm, xmin=0, xmax=25, ymin=-2.25, ymax=1.85,
+  xtick={5,10,15,20}, ytick={-2,-1,1,1.5}, yticklabels={$-2$,$\lambda=-1$,$L=1$,$\frac32$},
+  xlabel={$n$}, legend columns=3,
+  legend style={font=\scriptsize, draw=none, fill=none, at={(0.5,0.69)}, anchor=center}]
+  \addplot[tratteggio, domain=0:25, forget plot] {1};
+  \addplot[tratteggio, domain=0:25, forget plot] {-1};
+  \addplot[only marks, mark=*, mark size=1.4pt, blu, samples at={1,...,24}] {(-1)^x*(1+1/x)};
+  \addplot[rame, thick, const plot, samples at={1,...,25}] {1+1/(2*ceil(x/2))};
+  \addplot[verde, thick, const plot, samples at={1,...,25}] {-1-1/(2*floor(x/2)+1)};
+  \legend{$a_{n}$, $s_{n}=\sup_{k\ge n}a_{k}$, $i_{n}=\inf_{k\ge n}a_{k}$}
+\end{axis}
+\end{tikzpicture}
+\caption{La successione $a_{n}=(-1)^{n}\bigl(1+\frac1n\bigr)$
+dell'\cref{es:limsup-alternante}, con i «tetti» $s_{n}$ (in rame) e i «pavimenti»
+$i_{n}$ (in verde) delle sue code, disegnati a gradini. I tetti scendono verso
+$L=\limsup a_{n}=1$, i pavimenti salgono verso $\lambda=\liminf a_{n}=-1$; l'estremo
+superiore $\frac32$ e l'estremo inferiore $-2$ sono invece fissati dai primi termini.}
+\label{fig:limsup-code}
+\end{figure}
+
+\begin{idea}[Il picco a regime di una risposta oscillante]
+In una prova di vibrazione, o nella simulazione della risposta di un'ala a una raffica
+periodica, si registra a istanti successivi una grandezza, ad esempio lo spostamento
+della punta alare. La successione dei campioni contiene un \emph{transitorio}, spesso
+con un picco iniziale elevato, seguito da un'oscillazione a regime. L'estremo superiore
+dei campioni risente del picco iniziale; il massimo limite no: misura il picco \emph{a
+regime}, quello che si ripete a ogni ciclo e che conta, ad esempio, per la fatica del
+materiale. Allo stesso modo il minimo limite misura la valle a regime, e la semidifferenza
+$\frac12(L-\lambda)$ l'ampiezza dell'oscillazione stabilizzata. Nell'\cref{es:limsup-alternante}
+il valore $\sup a_{n}=\frac32$ è dovuto al secondo termine, mentre a regime la
+successione oscilla tra valori sempre più vicini a $-1$ e a $1$.
+\end{idea}
+
+\begin{proposizione}[Proprietà del massimo e del minimo limite]\label{prop:limsup-proprieta}
+Sia $a_{n}$ una successione limitata, e siano $L=\limsup a_{n}$ e $\lambda=\liminf a_{n}$.
+Allora:
+\begin{enumerate}
+  \item $\inf_{n}a_{n}\le\lambda\le L\le\sup_{n}a_{n}$;
+  \item per ogni $\epsilon>0$ si ha $a_{n}<L+\epsilon$ definitivamente, e
+  $a_{n}>L-\epsilon$ per infiniti indici;
+  \item per ogni $\epsilon>0$ si ha $a_{n}>\lambda-\epsilon$ definitivamente, e
+  $a_{n}<\lambda+\epsilon$ per infiniti indici.
+\end{enumerate}
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$a_{n}$ limitata; \ $L=\limsup a_{n}$, \ $\lambda=\liminf a_{n}$; \ $\epsilon>0$.}
+\Tesi{(i) $\inf a_{n}\le\lambda\le L\le\sup a_{n}$; \ (ii) $a_{n}<L+\epsilon$
+definitivamente, e $a_{n}>L-\epsilon$ per infiniti indici; \ (iii) le affermazioni
+simmetriche per $\lambda$.}
+\end{schema}
+
+\begin{strategia}
+La (i) si ottiene passando al limite nella catena $i_{1}\le i_{n}\le s_{n}\le s_{1}$. La
+(ii) traduce le caratterizzazioni dell'estremo inferiore e dell'estremo superiore.
+Poiché $L$ è l'estremo inferiore dei tetti $s_{n}$, qualche tetto $s_{\nu}$ è più basso
+di $L+\epsilon$, e da $\nu$ in poi i termini non lo superano. D'altra parte ogni tetto
+$s_{m}$ è almeno $L$: quindi in ogni coda qualche termine supera $L-\epsilon$, e ciò
+accade oltre qualunque indice $m$. La (iii) è simmetrica.
+\end{strategia}
+
+\begin{dimostrazione}
+(i) Per ogni $n$ si ha $i_{1}\le i_{n}\le s_{n}\le s_{1}$, dove $i_{1}=\inf_{k}a_{k}$ e
+$s_{1}=\sup_{k}a_{k}$ sono gli estremi di tutta la successione. Passando al limite per
+$n\to+\infty$ (\cref{cor:confronto-limiti}, con il confronto anche con le successioni
+costanti $i_{1}$ e $s_{1}$) si ottiene la (i).
+
+(ii) Sia $\epsilon>0$. Poiché $L=\inf_{n}s_{n}$, per la \eqref{eq:caratt-inf} esiste
+$\nu\in\N$ con $s_{\nu}<L+\epsilon$. Per ogni $n>\nu$ il termine $a_{n}$ appartiene alla
+coda di indice $\nu$, e quindi $a_{n}\le s_{\nu}<L+\epsilon$: la prima affermazione è
+provata. Per la seconda fissiamo $m\in\N$. Poiché $L$ è un minorante dei tetti,
+$s_{m+1}\ge L>L-\epsilon$; per la caratterizzazione dell'estremo superiore
+(\cref{prop:caratt-sup}) applicata alla coda di indice $m+1$, esiste $k>m$ con
+$a_{k}>L-\epsilon$. Dato che $m$ è arbitrario, l'insieme degli indici $k$ con
+$a_{k}>L-\epsilon$ non è limitato superiormente: la disuguaglianza vale per infiniti
+indici.
+
+(iii) Si ragiona allo stesso modo, scambiando i ruoli dell'estremo superiore e
+dell'estremo inferiore.
+\end{dimostrazione}
+
+\begin{osservazione}[La definizione di \cite{giusti}]\label{oss:limsup-giusti}
+Diciamo \emph{maggiorante definitivo} della successione un numero $M$ tale che
+$a_{n}\le M$ definitivamente. La (ii) dice che ogni $M>L$ è un maggiorante definitivo
+(con $\epsilon=M-L$), mentre nessun $M<L$ lo è (con $\epsilon=L-M$ si ha $a_{n}>M$ per
+infiniti indici). Quindi $L$ è un minorante dell'insieme dei maggioranti definitivi, e
+$L+\epsilon$ vi appartiene per ogni $\epsilon>0$: per la \eqref{eq:caratt-inf}, $L$ ne è
+l'estremo inferiore. È la definizione di massimo limite adottata in \cite{giusti}, che è
+dunque equivalente alla nostra; allo stesso modo il minimo limite è l'estremo superiore
+dei minoranti definitivi. Lo stesso ragionamento mostra che le due condizioni della (ii)
+\emph{caratterizzano} $L$: un numero che le soddisfa entrambe è l'estremo inferiore dei
+maggioranti definitivi, e quindi coincide con $L$.
+\end{osservazione}
+
+\begin{teorema}[Massimo e minimo limite ed estratte]\label{teo:limsup-estratte}
+Sia $a_{n}$ una successione limitata, e siano $L=\limsup a_{n}$ e $\lambda=\liminf a_{n}$.
+\begin{enumerate}
+  \item Esistono un'estratta di $a_{n}$ che converge a $L$ e un'estratta che converge
+  a $\lambda$.
+  \item Se un'estratta $a_{n_{k}}$ converge a un numero $\ell$, allora
+  $\lambda\le\ell\le L$.
+\end{enumerate}
+In altre parole, $L$ e $\lambda$ sono il più grande e il più piccolo dei limiti delle
+estratte convergenti di $a_{n}$.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$a_{n}$ limitata; \ $L=\limsup a_{n}$, \ $\lambda=\liminf a_{n}$.}
+\Tesi{(i) esistono estratte $a_{n_{k}}\to L$ e $a_{m_{k}}\to\lambda$; \ (ii) se
+$a_{n_{k}}\to\ell$, allora $\lambda\le\ell\le L$.}
+\end{schema}
+
+\begin{strategia}
+Per la (i) costruiamo l'estratta un termine alla volta, come nella dimostrazione del
+teorema di Bolzano--Weierstrass, ma senza bisezione. Per la
+\cref{prop:limsup-proprieta}, per ogni $k$ gli indici $n$ con
+$L-\frac1k<a_{n}<L+\frac1k$ sono infiniti, e se ne può sempre scegliere uno maggiore del
+precedente. Per la (ii) basta osservare che $a_{n_{k}}$, avendo indice $n_{k}\ge k$, sta
+nella coda di indice $k$: è quindi compreso tra $i_{k}$ e $s_{k}$, e si passa al limite.
+\end{strategia}
+
+\begin{dimostrazione}
+(i) Sia $k\in\N$. Per la \cref{prop:limsup-proprieta}(ii) con $\epsilon=\frac1k$ esiste
+$\nu_{k}$ tale che $a_{n}<L+\frac1k$ per ogni $n>\nu_{k}$, mentre $a_{n}>L-\frac1k$ per
+infiniti indici, cioè per indici maggiori di qualunque numero fissato. Ne segue che, per
+ogni $m$, esiste $n>\max\{m,\nu_{k}\}$ tale che
+\begin{equation}\label{eq:limsup-scelta}
+  L-\frac1k<a_{n}<L+\frac1k .
+\end{equation}
+Scegliamo allora un indice $n_{1}$ che soddisfi la \eqref{eq:limsup-scelta} con $k=1$,
+poi un indice $n_{2}>n_{1}$ che la soddisfi con $k=2$, e così via. Per induzione si
+ottiene una successione strettamente crescente di indici $n_{k}$ con
+$L-\frac1k<a_{n_{k}}<L+\frac1k$ per ogni $k$. Poiché $L\pm\frac1k\to L$, per il teorema
+dei carabinieri $a_{n_{k}}\to L$. In modo analogo, usando la (iii), si costruisce
+un'estratta convergente a $\lambda$.
+
+(ii) Per il \cref{lem:nk-maggiore-k} si ha $n_{k}\ge k$, quindi $a_{n_{k}}$ appartiene
+alla coda di indice $k$, e
+\[
+  i_{k}\le a_{n_{k}}\le s_{k} \qquad\perogni k\in\N .
+\]
+Per $k\to+\infty$ si ha $i_{k}\to\lambda$, $s_{k}\to L$ e $a_{n_{k}}\to\ell$; per il
+\cref{cor:confronto-limiti} risulta $\lambda\le\ell\le L$.
+\end{dimostrazione}
+
+\begin{osservazione}[Un'altra dimostrazione del teorema di Bolzano--Weierstrass]\label{oss:bw-limsup}
+Il punto (i) del \cref{teo:limsup-estratte} contiene una nuova dimostrazione del
+\cref{teo:bolzano-weierstrass}: una successione limitata ha un'estratta convergente, ad
+esempio quella che converge al massimo limite. È la via seguita da \cite{giusti}, e non è
+circolare: abbiamo usato l'esistenza degli estremi superiore e inferiore, il teorema
+sulle successioni monotòne e la caratterizzazione dell'estremo superiore, non il teorema
+di Bolzano--Weierstrass. Il confronto tra le due vie è istruttivo. La bisezione cattura
+un punto attorno al quale si addensano infiniti termini, senza dire quale; i tetti
+$s_{n}$ indicano invece un punto preciso, il più grande possibile. In entrambe la
+completezza entra nello stesso modo, attraverso il limite di una successione monotòna:
+gli estremi $A_{k}$ degli intervalli dimezzati nella prima, i tetti $s_{n}$ nella
+seconda.
+\end{osservazione}
+
+\begin{teorema}[Limite, massimo e minimo limite]\label{teo:limsup-limite}
+Sia $a_{n}$ una successione limitata e sia $\ell\in\R$. Allora
+\begin{equation}\label{eq:limsup-limite}
+  \lim_{n\to+\infty}a_{n}=\ell \quad\sse\quad
+  \limsup_{n\to+\infty}a_{n}=\liminf_{n\to+\infty}a_{n}=\ell .
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$a_{n}$ limitata; \ $\ell\in\R$.}
+\Tesi{$a_{n}\to\ell$ \ $\sse$ \ $\limsup a_{n}=\liminf a_{n}=\ell$.}
+\end{schema}
+
+\begin{strategia}
+Se la successione converge, ogni sua estratta converge allo stesso limite; ma per il
+teorema precedente ci sono estratte che tendono a $L$ e a $\lambda$, che sono quindi
+uguali a $\ell$. Viceversa, ogni termine sta tra il pavimento e il tetto della propria
+coda, $i_{n}\le a_{n}\le s_{n}$: se pavimento e tetto tendono allo stesso limite, i
+carabinieri concludono.
+\end{strategia}
+
+\begin{dimostrazione}
+($\implica$) Se $a_{n}\to\ell$, per la \cref{prop:estratta-limite} ogni estratta di
+$a_{n}$ tende a $\ell$. Per il \cref{teo:limsup-estratte}(i) esiste un'estratta che
+tende a $L=\limsup a_{n}$, e per l'unicità del limite (\cref{teo:unicita-limite}) è
+$L=\ell$. Allo stesso modo $\lambda=\liminf a_{n}=\ell$.
+
+($\Leftarrow$) Per ogni $n$ si ha $i_{n}\le a_{n}\le s_{n}$, e per ipotesi
+$i_{n}\to\lambda=\ell$ e $s_{n}\to L=\ell$. Per il teorema dei carabinieri
+(\cref{teo:carabinieri}) $a_{n}\to\ell$.
+\end{dimostrazione}
+
+\begin{osservazione}\label{oss:limsup-illimitate}
+Poiché ogni successione convergente è limitata (\cref{teo:convergente-limitata}), il
+teorema si legge anche così: \emph{una successione converge se e solo se è limitata e
+il suo massimo limite coincide con il minimo limite}. La differenza $L-\lambda\ge0$
+misura quanto la successione «oscilla» all'infinito. Per la successione
+dell'\cref{es:limsup-alternante} vale $2$, e la successione non converge; per
+$(-1)^{n}/n$ si ha $0<s_{n}\le\frac1n$ e $-\frac1n\le i_{n}<0$, quindi $L=\lambda=0$, che
+è il limite. Con le convenzioni $\sup=+\infty$ e $\inf=-\infty$ per gli insiemi non
+limitati, le definizioni si estendono a successioni qualsiasi. Ad esempio, per
+$a_{n}=(-1)^{n}n$ ogni coda è illimitata sia superiormente sia inferiormente, e si pone
+$\limsup a_{n}=+\infty$, $\liminf a_{n}=-\infty$. In questo senso il massimo e il minimo
+limite esistono sempre, anche quando il limite non esiste.
+\end{osservazione}

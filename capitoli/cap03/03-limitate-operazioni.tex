@@ -1,0 +1,324 @@
+%% ----------------------------------------------------------------------------
+%%  §3.3  Successioni limitate. Operazioni con i limiti
+%% ----------------------------------------------------------------------------
+\section{Successioni limitate e operazioni con i limiti}
+\label{sec:operazioni-limiti}
+
+\subsection{Successioni limitate}
+
+Abbiamo detto nel paragrafo precedente che una successione si dice \emph{regolare} se
+ammette limite (finito o infinito). Introduciamo ora una nozione di natura diversa, che
+non riguarda il comportamento «per $n$ grande» ma l'insieme di tutti i valori.
+
+\begin{definizione}[Successione limitata]\index{successione!limitata}
+Una successione $a_{n}$ si dice \emph{limitata} se esiste un numero reale $M$ tale che
+\begin{equation}\label{eq:succ-limitata}
+  \abs{a_{n}}\le M \qquad\perogni n\in\N,
+\end{equation}
+o, equivalentemente, in base alla \cref{prop:modulo-r},
+\begin{equation}\label{eq:succ-limitata-2}
+  -M\le a_{n}\le M \qquad\perogni n\in\N.
+\end{equation}
+Si dice \emph{limitata superiormente} (risp.\ \emph{inferiormente}) se esiste $L$ tale che
+$a_{n}\le L$ (risp.\ $a_{n}\ge L$) per ogni $n$.
+\end{definizione}
+
+Si noti il legame con la definizione \eqref{eq:limitato} di insieme limitato e con la
+\cref{prop:limitato-modulo}: una successione è limitata se e solo se è limitato l'insieme
+$\{a_{n} : n\in\N\}$ dei suoi valori. Il lettore provi a verificare per esercizio che le
+successioni \eqref{eq:succ-1n}, \eqref{eq:succ-n1n}, \eqref{eq:succ-alt-n},
+\eqref{eq:succ-alt} sono limitate, mentre la successione \eqref{eq:succ-n2} non lo è; ad
+esempio, la successione \eqref{eq:succ-alt-n} è limitata dalla costante $M=1$, infatti
+\[
+  \abs{a_{n}}=\Bigl|\frac{(-1)^{n}}{n}\Bigr|=\frac1n\le1 \qquad\perogni n\in\N .
+\]
+
+\emph{Esistono successioni limitate non regolari}, cioè successioni limitate che non
+ammettono limite; un esempio è fornito dalla successione $a_{n}=(-1)^{n}$, che è
+limitata (perché $\abs{a_{n}}=1$ per ogni $n\in\N$) ma che, come dimostrato nella
+\cref{prop:alterna-non-converge}, non ammette limite. Viceversa, ogni successione che
+ammette limite finito è limitata, come mostrato dal seguente teorema.
+
+\begin{teorema}\label{teo:convergente-limitata}\index{successione!convergente!è limitata}
+Ogni successione convergente è limitata.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$a_{n}\to a\in\R$.}
+\Tesi{$\esiste M\ge0 : \abs{a_{n}}\le M$ per ogni $n\in\N$.}
+\end{schema}
+
+\begin{strategia}
+La definizione di limite controlla i termini solo \emph{definitivamente}, cioè per
+$n>\nu$: con $\epsilon=1$ essi stanno tutti nell'intorno $(a-1,a+1)$, e quindi hanno
+modulo minore di $1+\abs a$. Restano fuori i primi termini $a_{1},\dots,a_{\nu}$; ma sono
+in numero \emph{finito}, e un insieme finito di numeri ha sempre un massimo. Prendendo
+come $M$ il più grande tra questi valori e $1+\abs a$ si controllano tutti i termini.
+È uno schema che ricorrerà spesso: \emph{un controllo definitivo più un numero finito di
+eccezioni dà un controllo globale}.
+\end{strategia}
+
+\begin{dimostrazione}
+Supponiamo che $a_{n}$ converga ad $a$ e scegliamo $\epsilon=1$. In base alla definizione
+di limite \eqref{eq:def-limite} esiste un indice $\nu$, che possiamo supporre naturale,
+per cui $\abs{a_{n}-a}<1$ per ogni $n>\nu$. Quindi, utilizzando la disuguaglianza
+triangolare \eqref{eq:triangolare},
+\begin{equation}\label{eq:conv-lim-passo}
+  \abs{a_{n}}=\abs{(a_{n}-a)+a}\le\abs{a_{n}-a}+\abs a<1+\abs a \qquad\perogni n>\nu .
+\end{equation}
+Ma allora, per ogni $n\in\N$, si ha
+\begin{equation}\label{eq:conv-lim-M}
+  \abs{a_{n}}\le M=\max\{\abs{a_{1}},\abs{a_{2}},\dots,\abs{a_{\nu}},1+\abs a\},
+\end{equation}
+dove il massimo esiste perché si tratta di un insieme finito di numeri.
+\end{dimostrazione}
+
+\begin{osservazione}
+Il viceversa del \cref{teo:convergente-limitata} è falso, come mostra $(-1)^{n}$; e
+anche una successione divergente non è limitata (se $a_{n}\to+\infty$, nessun $M$ può
+maggiorare tutti i termini). Vedremo però nel \cref{sec:bw-cauchy}, con il teorema di
+Bolzano--Weierstrass, che da ogni successione limitata si può sempre «estrarre» una
+successione convergente.
+\end{osservazione}
+
+\subsection{Le operazioni con i limiti}
+
+Valgono le seguenti regole di calcolo, che permettono di calcolare limiti di successioni
+complicate a partire da limiti noti di successioni semplici, senza ricorrere ogni volta
+alla definizione.
+
+\begin{teorema}[Operazioni con i limiti]\label{teo:operazioni-limiti}\index{limite!operazioni}
+Se $\displaystyle\lim_{n\to+\infty}a_{n}=a$ \ e \ $\displaystyle\lim_{n\to+\infty}b_{n}=b$,
+con $a,b\in\R$, si ha
+\begin{align}
+  &\lim_{n\to+\infty}(a_{n}\pm b_{n})=a\pm b; \label{eq:lim-somma}\\
+  &\lim_{n\to+\infty}a_{n}\cdot b_{n}=a\,b; \label{eq:lim-prodotto}\\
+  &\lim_{n\to+\infty}\frac{a_{n}}{b_{n}}=\frac ab \qquad(\text{se } b_{n}\neq0 \text{ per ogni } n, \text{ e } b\neq0). \label{eq:lim-quoziente}
+\end{align}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$a_{n}\to a\in\R$, \ $b_{n}\to b\in\R$; per il quoziente, inoltre,
+$b_{n}\neq0$ per ogni $n$ e $b\neq0$.}
+\Tesi{$a_{n}\pm b_{n}\to a\pm b$, \ $a_{n}b_{n}\to ab$, \ $a_{n}/b_{n}\to a/b$.}
+\end{schema}
+
+\begin{strategia}
+In tutti e tre i casi dobbiamo stimare la distanza dal limite, $\abs{(\text{risultato})-
+(\text{limite atteso})}$, in termini delle due distanze $\abs{a_{n}-a}$ e $\abs{b_{n}-b}$,
+che sappiamo rendere piccole quanto vogliamo. L'arte sta nello scrivere la differenza
+in modo che compaiano proprio queste due quantità:
+\begin{itemize}
+  \item per la somma basta riordinare: $(a_{n}+b_{n})-(a+b)=(a_{n}-a)+(b_{n}-b)$, e la
+  disuguaglianza triangolare dà la stima con $2\epsilon$;
+  \item per il prodotto si aggiunge e si toglie un termine «misto»:
+  $a_{n}b_{n}-ab=a_{n}(b_{n}-b)+b(a_{n}-a)$, e per controllare il fattore $a_{n}$ serve
+  sapere che la successione è limitata (\cref{teo:convergente-limitata});
+  \item per il quoziente ci si riduce al prodotto $a_{n}\cdot\frac1{b_{n}}$, e la
+  difficoltà è il reciproco: occorre impedire che $b_{n}$ si avvicini a zero, cosa che
+  otterremo mostrando che definitivamente $\abs{b_{n}}>\abs b/2$.
+\end{itemize}
+In ogni caso, per avere entrambe le stime contemporaneamente, si sceglie come indice
+$\nu$ il più grande dei due indici forniti dalle ipotesi, e alla fine si usa la forma
+\eqref{eq:def-limite-c} della definizione, che ammette un fattore costante davanti a
+$\epsilon$.
+\end{strategia}
+
+\begin{dimostrazione}[Dimostrazione della \eqref{eq:lim-somma}]
+Dimostriamo la \eqref{eq:lim-somma} con il segno $+$. Per ipotesi, per ogni $\epsilon>0$,
+\begin{equation}\label{eq:ipotesi-ab}
+  \esiste\nu_{1}:\ \abs{a_{n}-a}<\epsilon\quad\perogni n>\nu_{1}; \qquad
+  \esiste\nu_{2}:\ \abs{b_{n}-b}<\epsilon\quad\perogni n>\nu_{2}.
+\end{equation}
+Ponendo $\nu=\max\{\nu_{1},\nu_{2}\}$, per ogni $n>\nu$ si ha
+\begin{equation}\label{eq:somma-passo}
+  \abs{(a_{n}+b_{n})-(a+b)}=\abs{(a_{n}-a)+(b_{n}-b)}\le\abs{a_{n}-a}+\abs{b_{n}-b}<2\epsilon .
+\end{equation}
+La prova è completa per la \eqref{eq:def-limite-c} con $c=2$. Si noti che abbiamo usato la
+disuguaglianza triangolare e la definizione di limite nella forma \eqref{eq:def-limite-c}.
+Con il segno $-$ si procede allo stesso modo, scrivendo
+$(a_{n}-b_{n})-(a-b)=(a_{n}-a)-(b_{n}-b)$ e usando $\abs{x-y}\le\abs x+\abs y$.
+\end{dimostrazione}
+
+Dimostriamo la \eqref{eq:lim-prodotto} relativa al limite di un prodotto con due metodi,
+il primo dei quali non fa uso del concetto di successione limitata.
+
+\begin{dimostrazione}[Dimostrazione della \eqref{eq:lim-prodotto}, primo metodo]
+Utilizziamo l'identità
+\begin{equation}\label{eq:identita-prodotto}
+\begin{split}
+  a_{n}b_{n}-ab&=(a_{n}-a)(b_{n}-b)+a_{n}b+ab_{n}-2ab\\
+  &=(a_{n}-a)(b_{n}-b)+(a_{n}-a)\,b+a\,(b_{n}-b).
+\end{split}
+\end{equation}
+Nell'ipotesi \eqref{eq:ipotesi-ab}, e supponendo $\epsilon\le1$ (il che è lecito, come
+osservato dopo la \eqref{eq:def-limite-c}), per ogni $n>\nu=\max\{\nu_{1},\nu_{2}\}$
+risulta quindi
+\begin{equation}\label{eq:prodotto-passo-1}
+\begin{split}
+  \abs{a_{n}b_{n}-ab}&\le\abs{a_{n}-a}\,\abs{b_{n}-b}+\abs{a_{n}-a}\,\abs b+\abs a\,\abs{b_{n}-b}\\
+  &<\epsilon^{2}+\epsilon\abs b+\abs a\epsilon\le(1+\abs a+\abs b)\,\epsilon,
+\end{split}
+\end{equation}
+e la tesi segue dalla \eqref{eq:def-limite-c} con $c=1+\abs a+\abs b$.
+\end{dimostrazione}
+
+\begin{dimostrazione}[Dimostrazione della \eqref{eq:lim-prodotto}, secondo metodo]
+Per il \cref{teo:convergente-limitata} la successione $a_{n}$ è limitata, cioè esiste un
+numero reale $M>0$ tale che
+\begin{equation}\label{eq:an-limitata}
+  \abs{a_{n}}\le M \qquad\perogni n\in\N .
+\end{equation}
+Dall'ipotesi \eqref{eq:ipotesi-ab}, per ogni $n>\nu=\max\{\nu_{1},\nu_{2}\}$ si ottiene
+\begin{equation}\label{eq:prodotto-passo-2}
+\begin{split}
+  \abs{a_{n}b_{n}-ab}&=\abs{a_{n}b_{n}-a_{n}b+a_{n}b-ab}=\abs{a_{n}(b_{n}-b)+b(a_{n}-a)}\\
+  &\le\abs{a_{n}}\,\abs{b_{n}-b}+\abs b\,\abs{a_{n}-a}<M\epsilon+\abs b\epsilon=(M+\abs b)\,\epsilon,
+\end{split}
+\end{equation}
+e si conclude con la \eqref{eq:def-limite-c}, con $c=M+\abs b$.
+\end{dimostrazione}
+
+Il testo di riferimento \cite{marcellini-sbordone} si limita ad affermare che la prova per
+il quoziente è «simile» a quella del prodotto. La difficoltà nuova è il denominatore, che
+dobbiamo tenere lontano da zero; la isoliamo in un lemma, preceduto da una semplice
+conseguenza della disuguaglianza triangolare.
+
+\begin{lemma}[Limite del valore assoluto]\label{lem:lim-modulo}
+Se $a_{n}\to a$, allora $\abs{a_{n}}\to\abs a$.
+\end{lemma}
+
+\begin{schema}
+\Ipotesi{$a_{n}\to a\in\R$.}
+\Tesi{$\abs{a_{n}}\to\abs a$.}
+\end{schema}
+
+\begin{strategia}
+La distanza tra i moduli non supera quella tra i numeri (disuguaglianza triangolare
+«inversa»): l'indice $\nu$ che serve per $a_{n}$ serve anche per $\abs{a_{n}}$.
+\end{strategia}
+
+\begin{dimostrazione}
+Per il \cref{cor:triangolare-inversa},
+$\bigl|\abs{a_{n}}-\abs a\bigr|\le\abs{a_{n}-a}$, e il secondo membro è definitivamente
+minore di $\epsilon$, per ogni $\epsilon>0$.
+\end{dimostrazione}
+
+\begin{lemma}[Il denominatore resta lontano da zero]\label{lem:denominatore}
+Se $b_{n}\to b$ con $b\neq0$, allora esiste $\nu$ tale che $\abs{b_{n}}>\dfrac{\abs b}{2}$
+per ogni $n>\nu$. Se inoltre $b_{n}\neq0$ per ogni $n$, allora
+$\dfrac1{b_{n}}\to\dfrac1b$.
+\end{lemma}
+
+\begin{schema}
+\Ipotesi{$b_{n}\to b\in\R$, \ $b\neq0$; per la seconda parte, inoltre, $b_{n}\neq0$ per
+ogni $n$.}
+\Tesi{$\abs{b_{n}}>\abs b/2$ definitivamente; \ $1/b_{n}\to1/b$.}
+\end{schema}
+
+\begin{strategia}
+Per la prima affermazione basta applicare la definizione di limite alla successione
+$\abs{b_{n}}\to\abs b$ (\cref{lem:lim-modulo}) con $\epsilon=\abs b/2$: definitivamente
+$\abs{b_{n}}$ sta nell'intorno $(\abs b/2,\,3\abs b/2)$, quindi supera $\abs b/2$. Per la
+seconda, scriviamo la differenza dei reciproci con un denominatore comune:
+$\frac1{b_{n}}-\frac1b=\frac{b-b_{n}}{b_{n}b}$. Il numeratore è piccolo, e il
+denominatore, grazie alla prima parte, non è troppo piccolo: $\abs{b_{n}b}>\abs b^{2}/2$.
+\end{strategia}
+
+\begin{dimostrazione}
+Per il \cref{lem:lim-modulo}, $\abs{b_{n}}\to\abs b>0$. Scelto $\epsilon=\abs b/2$, esiste
+$\nu_{0}$ tale che $\bigl|\abs{b_{n}}-\abs b\bigr|<\abs b/2$ per $n>\nu_{0}$; in
+particolare $\abs{b_{n}}>\abs b-\abs b/2=\abs b/2$ per $n>\nu_{0}$.
+
+Sia ora $\epsilon>0$ e sia $\nu_{2}$ tale che $\abs{b_{n}-b}<\epsilon$ per $n>\nu_{2}$.
+Per $n>\max\{\nu_{0},\nu_{2}\}$ si ha
+\begin{equation}\label{eq:reciproco-passo}
+  \Bigl|\frac1{b_{n}}-\frac1b\Bigr|=\frac{\abs{b-b_{n}}}{\abs{b_{n}}\,\abs b}
+  <\frac{\epsilon}{\frac{\abs b}{2}\,\abs b}=\frac{2}{\abs b^{2}}\,\epsilon,
+\end{equation}
+e la tesi segue dalla \eqref{eq:def-limite-c}, con $c=2/\abs b^{2}$.
+\end{dimostrazione}
+
+\begin{dimostrazione}[Dimostrazione della \eqref{eq:lim-quoziente}]
+Per il \cref{lem:denominatore} si ha $1/b_{n}\to1/b$, e applicando la
+\eqref{eq:lim-prodotto} alle successioni $a_{n}$ e $1/b_{n}$ si ottiene
+\[
+  \frac{a_{n}}{b_{n}}=a_{n}\cdot\frac1{b_{n}}\to a\cdot\frac1b=\frac ab. \qedhere
+\]
+\end{dimostrazione}
+
+\begin{osservazione}
+Sono casi particolari del teorema: se $c\in\R$ è una costante, la successione costante
+$c_{n}=c$ converge a $c$ (per ogni $\epsilon$ va bene qualsiasi $\nu$), e quindi
+$c\,a_{n}\to c\,a$ e $a_{n}+c\to a+c$. L'ipotesi $b_{n}\neq0$ per ogni $n$ serve solo a
+garantire che il quoziente sia definito per tutti gli indici; per il
+\cref{lem:denominatore} essa è comunque soddisfatta definitivamente, e si potrebbe
+considerare la successione $a_{n}/b_{n}$ definita solo da un certo indice in poi.
+\end{osservazione}
+
+\begin{idea}[La propagazione degli errori]
+La dimostrazione del limite del prodotto è la stessa che si usa in laboratorio per la
+\emph{propagazione degli errori}. Se si misura una forza $F$ con un errore $\delta F$ e
+una velocità $V$ con un errore $\delta V$, la potenza $P=FV$ calcolata con i valori
+misurati differisce da quella vera di
+\[
+  \abs{(F+\delta F)(V+\delta V)-FV}\le\abs F\,\abs{\delta V}+\abs V\,\abs{\delta F}+\abs{\delta F}\,\abs{\delta V},
+\]
+che è la \eqref{eq:prodotto-passo-1} con altri nomi. Dividendo per $\abs{FV}$ si ritrova la
+regola pratica «gli errori relativi si sommano» (a meno del termine di secondo ordine
+$\abs{\delta F\,\delta V}$). Il teorema sui limiti dice che, se gli errori di misura
+possono essere resi piccoli a piacere, anche l'errore sulla potenza può esserlo.
+\end{idea}
+
+\subsection{Esempi}
+
+Esaminiamo alcuni esempi di applicazione delle operazioni con i limiti.
+
+\begin{esempio}\label{es:n-alla-meno-b}
+Avendo già verificato che la successione $1/n$ converge a zero, dal limite del prodotto
+\eqref{eq:lim-prodotto} con $a_{n}=b_{n}=1/n$ si deduce che
+\begin{equation}\label{eq:lim-1n2}
+  \lim_{n\to+\infty}\frac1{n^{2}}=0
+\end{equation}
+e, iterando il procedimento (cioè per induzione su $b$: $n^{-(b+1)}=n^{-b}\cdot n^{-1}$),
+\begin{equation}\label{eq:lim-n-meno-b}
+  \lim_{n\to+\infty}n^{-b}=0 \qquad\perogni b\in\N .
+\end{equation}
+\end{esempio}
+
+\begin{esempio}[Quoziente di polinomi]\label{es:quoziente-polinomi}
+Mediante le operazioni con i limiti si calcola, ad esempio, il seguente limite, dividendo
+numeratore e denominatore per $n^{2}$:
+\begin{equation}\label{eq:lim-razionale}
+  \lim_{n\to+\infty}\frac{n^{2}+5n-4}{3n^{2}+1}
+  =\lim_{n\to+\infty}\frac{1+5/n-4/n^{2}}{3+1/n^{2}}=\frac13 .
+\end{equation}
+Il passaggio decisivo è il primo: così com'è scritta, la frazione è il quoziente di due
+successioni divergenti, a cui il \cref{teo:operazioni-limiti} non si applica; dopo la
+divisione per $n^{2}$ numeratore e denominatore convergono (a $1$ e a $3\neq0$), e il
+teorema dà il risultato. Si noti che non è un caso che il limite sia il rapporto dei
+coefficienti dei termini di grado massimo: è un fatto generale per i quozienti di
+polinomi dello stesso grado.
+\end{esempio}
+
+\begin{python}[Controllare un limite con \texttt{sympy} e numericamente]
+import sympy as sp
+
+n = sp.symbols("n", positive=True, integer=True)
+a = (n**2 + 5*n - 4) / (3*n**2 + 1)
+print(sp.limit(a, n, sp.oo))           # calcolo simbolico del limite
+
+# Controllo numerico: la distanza dal limite 1/3 si riduce come 1/n
+terzo = sp.Rational(1, 3)
+for k in [10, 100, 1000, 10**4]:
+    v = a.subs(n, k)
+    print(f"n = {k:>5d}:  a_n = {float(v):.8f},"
+          f"  |a_n - 1/3| = {float(abs(v - terzo)):.2e}")
+\end{python}
+\begin{risultato}
+1/3
+n =    10:  a_n = 0.48504983,  |a_n - 1/3| = 1.52e-01
+n =   100:  a_n = 0.34985500,  |a_n - 1/3| = 1.65e-02
+n =  1000:  a_n = 0.33499856,  |a_n - 1/3| = 1.67e-03
+n = 10000:  a_n = 0.33349999,  |a_n - 1/3| = 1.67e-04
+\end{risultato}

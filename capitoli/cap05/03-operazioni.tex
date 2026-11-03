@@ -1,0 +1,149 @@
+%% ----------------------------------------------------------------------------
+%%  §5.3  Operazioni con le derivate
+%% ----------------------------------------------------------------------------
+\section{Operazioni con le derivate}
+\label{sec:operazioni-derivate}
+
+Calcolare ogni derivata a partire dalla definizione sarebbe faticoso. Per le derivate
+valgono invece regole di calcolo che permettono di derivare funzioni complicate a partire
+dalle derivate di poche funzioni elementari.
+
+\begin{teorema}[Operazioni con le derivate]\label{teo:operazioni-derivate}\index{derivata!regole di calcolo}
+Se $f$ e $g$ sono due funzioni derivabili in un punto $x$, allora sono derivabili in $x$
+anche la somma, la differenza, il prodotto, il quoziente (purché il denominatore sia
+diverso da zero), e si ha:
+\begin{align}
+  &(f\pm g)'=f'\pm g'; \label{eq:derivata-somma}\\
+  &(fg)'=f'g+fg'; \label{eq:derivata-prodotto}\\
+  &\Bigl(\frac fg\Bigr)'=\frac{f'g-fg'}{g^{2}} \qquad(\text{se } g(x)\neq0). \label{eq:derivata-quoziente}
+\end{align}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$, $g$ derivabili in $x$; \ per il quoziente, $g(x)\neq0$.}
+\Tesi{$f\pm g$, $fg$, $f/g$ derivabili in $x$, con le derivate \eqref{eq:derivata-somma}--\eqref{eq:derivata-quoziente}.}
+\end{schema}
+
+\begin{strategia}
+In ciascun caso si scrive il rapporto incrementale della funzione composta (somma,
+prodotto, quoziente) come combinazione dei rapporti incrementali di $f$ e di $g$, e si
+passa al limite con le regole del \cref{teo:operazioni-funzioni}. Per il prodotto e il
+quoziente serve un artificio: aggiungere e togliere uno stesso termine, in modo da far
+comparire i due rapporti incrementali separatamente. Compariranno anche valori del tipo
+$g(x+h)$, che tendono a $g(x)$ perché una funzione derivabile è continua
+(\cref{teo:derivabile-continua}): è qui che il teorema del paragrafo precedente si rivela
+indispensabile.
+\end{strategia}
+
+\begin{dimostrazione}
+\emph{Somma.} Dimostriamo la \eqref{eq:derivata-somma} con il segno $+$: per ogni
+$h\neq0$ scriviamo il rapporto incrementale relativo alla funzione somma $f+g$,
+\begin{equation}\label{eq:rapporto-somma}
+\begin{split}
+  &\frac{[f(x+h)+g(x+h)]-[f(x)+g(x)]}{h}\\
+  &\qquad=\frac{f(x+h)-f(x)}{h}+\frac{g(x+h)-g(x)}{h}.
+\end{split}
+\end{equation}
+Dato che il limite di una somma è uguale alla somma dei limiti, per $h\to0$ si ottiene la
+\eqref{eq:derivata-somma}. Il caso con il segno $-$ è identico.
+
+\emph{Prodotto.} Scriviamo il rapporto incrementale relativo alla funzione prodotto $fg$,
+aggiungendo e togliendo al numeratore il termine $f(x)g(x+h)$:
+\begin{equation}\label{eq:rapporto-prodotto}
+\begin{split}
+  &\frac{f(x+h)g(x+h)-f(x)g(x)}{h}\\
+  &\quad=\frac{f(x+h)g(x+h)-f(x)g(x+h)+f(x)g(x+h)-f(x)g(x)}{h}\\
+  &\quad=\frac{f(x+h)-f(x)}{h}\,g(x+h)+f(x)\,\frac{g(x+h)-g(x)}{h}.
+\end{split}
+\end{equation}
+La funzione $g$, essendo per ipotesi derivabile in $x$, è anche continua
+(\cref{teo:derivabile-continua}); quindi al limite per $h\to0$ risulta $g(x+h)\to g(x)$.
+Dalla relazione sopra scritta si ottiene la tesi passando al limite per $h\to0$.
+
+\emph{Quoziente.} Supponiamo $g(x)\neq0$. Poiché $g$ è continua in $x$, per il teorema
+della permanenza del segno (\cref{teo:permanenza-segno-continue}, applicato a $g$ oppure
+a $-g$) esiste un numero $\delta>0$ per cui, se $\abs h<\delta$, allora $g(x+h)\neq0$:
+la funzione $f/g$ è dunque definita in un intorno di $x$. Scriviamo il rapporto
+incrementale di $f/g$, aggiungendo e togliendo al numeratore $f(x)g(x)$:
+\begin{equation}\label{eq:rapporto-quoziente}
+\begin{split}
+  &\Bigl(\frac{f(x+h)}{g(x+h)}-\frac{f(x)}{g(x)}\Bigr)\frac1h
+  =\frac{f(x+h)g(x)-f(x)g(x+h)}{g(x+h)\,g(x)\,h}\\
+  &\quad=\frac{f(x+h)g(x)-f(x)g(x)+f(x)g(x)-f(x)g(x+h)}{g(x+h)\,g(x)\,h}\\
+  &\quad=\frac1{g(x+h)\,g(x)}\Bigl(\frac{f(x+h)-f(x)}{h}\,g(x)\\
+  &\qquad\qquad-f(x)\,\frac{g(x+h)-g(x)}{h}\Bigr).
+\end{split}
+\end{equation}
+Al limite per $h\to0$ si ottiene la tesi, ricordando che, come nel caso del prodotto, la
+funzione $g$ è continua in $x$ e quindi $g(x+h)$ tende a $g(x)\neq0$.
+\end{dimostrazione}
+
+Notiamo che un caso particolarmente importante di derivazione di un prodotto si ha
+quando una delle due funzioni è costante. Dato che la derivata di una costante vale zero,
+dalla regola \eqref{eq:derivata-prodotto} si ottiene
+\begin{equation}\label{eq:derivata-costante-per}
+  (cf)'=cf' \qquad(c \text{ costante}).
+\end{equation}
+Insieme alla \eqref{eq:derivata-somma}, ciò significa che la derivazione è
+un'operazione \emph{lineare}: $(\alpha f+\beta g)'=\alpha f'+\beta g'$ per ogni coppia di
+costanti $\alpha$, $\beta$. Un altro caso particolare utile è quello del reciproco, che si
+ottiene dalla \eqref{eq:derivata-quoziente} con $f=1$:
+\begin{equation}\label{eq:derivata-reciproco}
+  \Bigl(\frac1g\Bigr)'=-\frac{g'}{g^{2}} \qquad(\text{se } g(x)\neq0).
+\end{equation}
+
+\begin{osservazione}[Prodotto di più fattori]\label{oss:prodotto-n}
+Applicando ripetutamente la \eqref{eq:derivata-prodotto} si ottiene, per tre fattori,
+$(fgh)'=f'gh+fg'h+fgh'$ e, per induzione, la regola generale: la derivata di un prodotto
+di $n$ funzioni è la somma degli $n$ prodotti che si ottengono derivando, a turno, un
+solo fattore e lasciando invariati gli altri.
+\end{osservazione}
+
+\begin{attenzione}[La derivata di un prodotto non è il prodotto delle derivate]
+L'errore più frequente è scrivere $(fg)'=f'g'$. Basta l'esempio $f(x)=g(x)=x$: si ha
+$fg=x^{2}$, la cui derivata è $2x$, mentre $f'g'=1\cdot1=1$. La regola corretta,
+\eqref{eq:derivata-prodotto}, fu trovata da Leibniz; nei suoi manoscritti del 1675 egli
+si chiese dapprima se il differenziale di un prodotto fosse il prodotto dei
+differenziali, e lo escluse proprio verificandolo su un esempio.
+\end{attenzione}
+
+\begin{idea}[Ritorno all'efficienza massima]
+Nel \cref{cap:funzioni-continue} abbiamo trovato il massimo dell'efficienza
+$E(C_{L})=\frac{C_{L}}{C_{D0}+kC_{L}^{2}}$ di una polare parabolica con una disuguaglianza
+algebrica. Con la regola del quoziente calcoliamo la derivata:
+\[
+  E'(C_{L})=\frac{1\cdot(C_{D0}+kC_{L}^{2})-C_{L}\cdot2kC_{L}}{(C_{D0}+kC_{L}^{2})^{2}}
+  =\frac{C_{D0}-kC_{L}^{2}}{(C_{D0}+kC_{L}^{2})^{2}} .
+\]
+Il denominatore è positivo; il numeratore è positivo per $C_{L}<\sqrt{C_{D0}/k}$, nullo
+per $C_{L}=C_{L}^{*}=\sqrt{C_{D0}/k}$, negativo per $C_{L}>C_{L}^{*}$. La derivata, cioè la
+pendenza del grafico della \cref{fig:efficienza}, si annulla esattamente nel punto di
+massimo trovato allora, ed è positiva prima e negativa dopo. Non è una coincidenza: nel
+prossimo capitolo dimostreremo (teorema di Fermat) che nei punti di massimo o di minimo
+interni la derivata di una funzione derivabile si annulla, e (teorema di Lagrange) che il
+segno della derivata determina la crescenza o la decrescenza. Il calcolo differenziale
+trasformerà la ricerca dei massimi, che il teorema di Weierstrass sa solo garantire,
+in un procedimento sistematico.
+\end{idea}
+
+\begin{notastorica}[Le regole della \emph{Nova methodus}]
+Il titolo della memoria di Leibniz del 1684, nell'epigrafe del capitolo, promette un
+metodo che «non si arresta davanti alle quantità fratte o irrazionali». I procedimenti
+precedenti per le tangenti e per i massimi, come quello di Fermat (si veda la nota storica
+del \S\ref{sec:fermat}), andavano applicati all'intera espressione della funzione, dalla
+quale occorreva spesso eliminare prima frazioni e radicali. La novità fu riconoscere
+nella differenziazione un'\emph{operazione} con regole proprie: il differenziale di una
+somma, di un prodotto, di un quoziente, di una potenza si ottiene da quelli delle parti, e
+un'espressione complicata si tratta un pezzo alla volta. La memoria enunciava le regole
+senza dimostrarle; altrove Leibniz giustificava quella del prodotto scrivendo
+$d(xy)=(x+dx)(y+dy)-xy=x\,dy+y\,dx+dx\,dy$ e trascurando $dx\,dy$, infinitamente
+piccolo rispetto agli altri termini. Nella
+\eqref{eq:rapporto-prodotto} quel termine non si trascura: scrivendo
+$g(x+h)=g(x)+[g(x+h)-g(x)]$, esso compare come
+$\frac{f(x+h)-f(x)}{h}\,[g(x+h)-g(x)]$, che tende a $f'(x)\cdot0=0$ perché $g$ è continua.
+È il limite a giustificare ciò che Leibniz faceva per intuizione. Per le radici bastava
+un accorgimento: se $z=x^{1/k}$, allora $x=z^{k}$, $dx=kz^{k-1}\,dz$ e quindi
+$dz=\frac1k\,x^{1/k-1}\,dx$, che è in sostanza la regola della funzione inversa
+(\cref{teo:derivata-inversa}). Tra gli esempi della memoria c'è la legge della rifrazione
+della luce, ricavata come problema di minimo (\cref{es:snell}).
+\end{notastorica}

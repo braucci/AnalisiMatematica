@@ -1,0 +1,348 @@
+%% ----------------------------------------------------------------------------
+%%  §6.8  Appendice: il teorema di Cauchy e il teorema di L'Hôpital
+%% ----------------------------------------------------------------------------
+\section{Appendice: il teorema di Cauchy e il teorema di L'Hôpital nel caso generale}
+\label{sec:cauchy-hopital}
+
+Allo scopo di dimostrare il teorema di L'Hôpital nel caso generale, è utile una
+generalizzazione del teorema di Lagrange che coinvolge \emph{due} funzioni.
+
+\needspace{9\baselineskip}
+\begin{teorema}[di Cauchy]\label{teo:cauchy}\index{teorema!di Cauchy}
+Siano $f$ e $g$ due funzioni continue in $[a,b]$ e derivabili in $(a,b)$. Se
+$g'(x)\neq0$ per ogni $x\in(a,b)$, allora $g(b)\neq g(a)$ ed esiste un punto
+$x_{0}\in(a,b)$ tale che
+\begin{equation}\label{eq:cauchy-valor-medio}
+  \frac{f'(x_{0})}{g'(x_{0})}=\frac{f(b)-f(a)}{g(b)-g(a)} .
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f,g$ continue in $[a,b]$, derivabili in $(a,b)$; \ $g'(x)\neq0$ in $(a,b)$.}
+\Tesi{$g(b)\neq g(a)$ ed esiste $x_{0}\in(a,b)$ con
+$\dfrac{f'(x_{0})}{g'(x_{0})}=\dfrac{f(b)-f(a)}{g(b)-g(a)}$.}
+\end{schema}
+
+\begin{strategia}
+Si procede come per il teorema di Lagrange, costruendo una funzione ausiliaria alla
+quale applicare il teorema di Rolle: al posto della corda $f(a)+m(x-a)$ si sottrae a $f$
+l'espressione $f(a)+m\bigl(g(x)-g(a)\bigr)$, con la costante $m$ scelta in modo che la
+differenza si annulli in entrambi gli estremi. Prima, però, bisogna assicurarsi che il
+denominatore $g(b)-g(a)$ non sia nullo: anche questo è una conseguenza del teorema di
+Rolle, applicato a $g$.
+\end{strategia}
+
+\begin{dimostrazione}
+Se fosse $g(a)=g(b)$, per il teorema di Rolle (\cref{teo:rolle}) applicato a $g$
+esisterebbe un punto di $(a,b)$ in cui $g'$ si annulla, contro l'ipotesi. Dunque
+$g(b)-g(a)\neq0$, e la funzione
+\begin{equation}\label{eq:cauchy-h}
+  h(x)=f(x)-\Bigl[f(a)+\frac{f(b)-f(a)}{g(b)-g(a)}\bigl(g(x)-g(a)\bigr)\Bigr],
+  \qquad x\in[a,b],
+\end{equation}
+è ben definita, continua in $[a,b]$ e derivabile in $(a,b)$, con
+\begin{equation}\label{eq:cauchy-h-derivata}
+  h'(x)=f'(x)-\frac{f(b)-f(a)}{g(b)-g(a)}\,g'(x) .
+\end{equation}
+Inoltre $h(a)=0$ e $h(b)=f(b)-\bigl[f(a)+f(b)-f(a)\bigr]=0$. Per il teorema di Rolle
+esiste $x_{0}\in(a,b)$ con $h'(x_{0})=0$, che, dividendo la
+\eqref{eq:cauchy-h-derivata} per $g'(x_{0})\neq0$, equivale alla \eqref{eq:cauchy-valor-medio}.
+\end{dimostrazione}
+
+\begin{attenzione}[Perché non basta applicare due volte il teorema di Lagrange]
+Si potrebbe pensare di ottenere la \eqref{eq:cauchy-valor-medio} dividendo membro a membro le
+uguaglianze $f(b)-f(a)=f'(x_{1})(b-a)$ e $g(b)-g(a)=g'(x_{2})(b-a)$ fornite dal teorema di
+Lagrange. Si otterrebbe però $\frac{f(b)-f(a)}{g(b)-g(a)}=\frac{f'(x_{1})}{g'(x_{2})}$, con
+due punti $x_{1}$, $x_{2}$ \emph{in generale diversi}; il teorema di Cauchy afferma
+invece che si può usare lo \emph{stesso} punto a numeratore e a denominatore, ed è
+proprio questo che servirà nella dimostrazione del teorema di L'Hôpital. Un'interpretazione
+geometrica aiuta: se si pensa al punto $\bigl(g(t),f(t)\bigr)$ che descrive una curva nel
+piano al variare di $t\in[a,b]$, il secondo membro della \eqref{eq:cauchy-valor-medio} è la pendenza
+della corda che congiunge gli estremi della curva, e il primo è la pendenza della
+tangente alla curva nel punto di parametro $x_{0}$: il teorema di Cauchy è il teorema di
+Lagrange per le curve in forma parametrica.
+\end{attenzione}
+
+Se nel teorema di Cauchy si sceglie $g(x)=x$, si ritrova il teorema di Lagrange; se nel
+teorema di Lagrange si suppone $f(a)=f(b)$, si ritrova il teorema di Rolle, che a sua
+volta è alla base delle dimostrazioni dei teoremi di Lagrange e di Cauchy. I tre teoremi
+sono quindi da considerarsi fra loro equivalenti: ciascuno è un caso particolare del
+successivo, e ciascuno si deduce dal primo.
+
+\begin{osservazione}[Il teorema di Cauchy senza quozienti]\label{oss:cauchy-simmetrica}
+Se $f$ e $g$ sono continue in $[a,b]$ e derivabili in $(a,b)$, \emph{senza alcuna
+ipotesi su $g'$}, esiste comunque un punto $x_{0}\in(a,b)$ tale che
+\begin{equation}\label{eq:cauchy-simmetrica}
+  \bigl[f(b)-f(a)\bigr]\,g'(x_{0})=\bigl[g(b)-g(a)\bigr]\,f'(x_{0}) .
+\end{equation}
+Basta applicare il teorema di Rolle alla funzione
+$k(x)=f(x)\bigl[g(b)-g(a)\bigr]-g(x)\bigl[f(b)-f(a)\bigr]$, come fa Giusti
+\cite{giusti}: un calcolo diretto dà $k(a)=k(b)=f(a)g(b)-f(b)g(a)$, e la condizione
+$k'(x_{0})=0$ è la \eqref{eq:cauchy-simmetrica}. In questa forma simmetrica non si divide
+per nulla, e con $g(x)=x$ si ottiene subito il teorema di Lagrange. L'ipotesi $g'\neq0$
+serve soltanto per passare alla forma con i quozienti \eqref{eq:cauchy-valor-medio}:
+garantisce che $g(b)\neq g(a)$ e permette di dividere per $g'(x_{0})$.
+\end{osservazione}
+
+\subsection{Un lemma sul segno della derivata}
+
+Nella dimostrazione del teorema di L'Hôpital per le forme $\frac\infty\infty$ ci servirà
+sapere che una derivata che non si annulla mai in un intervallo ha segno costante. Per
+una derivata \emph{continua} è una conseguenza del teorema degli zeri; ma la derivata di
+una funzione derivabile può non essere continua (\cref{oss:f2-non-C1}). Il fatto vale
+ugualmente, per un'argomentazione elegante dovuta a Darboux.
+
+\begin{lemma}[di Darboux]\label{lem:darboux}\index{teorema!di Darboux}
+Sia $g$ derivabile in un intervallo $J$, con $g'(x)\neq0$ per ogni $x\in J$. Allora
+$g'$ ha segno costante in $J$: è positiva in tutto $J$, oppure negativa in tutto $J$.
+\end{lemma}
+
+\begin{schema}
+\Ipotesi{$g$ derivabile nell'intervallo $J$; \ $g'(x)\neq0$ per ogni $x\in J$.}
+\Tesi{$g'>0$ in $J$, oppure $g'<0$ in $J$.}
+\end{schema}
+
+\begin{strategia}
+Ragioniamo per assurdo: se $g'(x_{1})<0<g'(x_{2})$, la funzione scende vicino a $x_{1}$ e
+sale vicino a $x_{2}$. Il suo minimo nell'intervallo di estremi $x_{1}$, $x_{2}$, che
+esiste per il teorema di Weierstrass, non può allora cadere negli estremi, e il teorema
+di Fermat lo costringe a essere un punto in cui la derivata si annulla. Lo strumento per
+escludere gli estremi è la \cref{prop:fermat-estremi}.
+\end{strategia}
+
+\begin{dimostrazione}
+Supponiamo per assurdo che esistano $x_{1},x_{2}\in J$ con $g'(x_{1})<0<g'(x_{2})$, e
+supponiamo $x_{1}<x_{2}$ (l'altro caso è analogo). La funzione $g$ è continua in
+$[x_{1},x_{2}]$ e quindi, per il teorema di Weierstrass, ha un punto di minimo assoluto
+$\xi\in[x_{1},x_{2}]$. Se fosse $\xi=x_{1}$, l'estremo sinistro sarebbe di minimo, e per
+la \cref{prop:fermat-estremi} si avrebbe $g'(x_{1})\ge0$: falso. Se fosse $\xi=x_{2}$,
+l'estremo destro sarebbe di minimo, e si avrebbe $g'(x_{2})\le0$: falso. Dunque
+$\xi\in(x_{1},x_{2})$, e per il teorema di Fermat $g'(\xi)=0$, contro l'ipotesi.
+\end{dimostrazione}
+
+Più in generale, lo stesso ragionamento prova che la derivata di una funzione
+derivabile in un intervallo assume tutti i valori compresi tra due suoi valori, anche
+se non è continua (si veda l'\cref{es:darboux}).
+
+Ci servirà anche una piccola estensione del \cref{teo:limite-monotone-funzioni}, che era
+enunciato per le funzioni monotòne in un intervallo chiuso e limitato e forniva limiti
+finiti.
+
+\begin{osservazione}[Limiti delle funzioni monotòne in un intervallo aperto]
+\label{oss:monotone-aperto}
+Sia $h$ decrescente in un intervallo $(c,d)$ e sia $\lambda=\inf\{h(x): c<x<d\}$, con
+$\lambda=-\infty$ se $h$ non è limitata inferiormente. Allora
+$\lim_{x\to d^{-}}h(x)=\lambda$. Infatti, se $\lambda\in\R$, per ogni $\varepsilon>0$ esiste
+$\bar x\in(c,d)$ con $h(\bar x)<\lambda+\varepsilon$, e per $\bar x<x<d$ si ha
+$\lambda\le h(x)\le h(\bar x)<\lambda+\varepsilon$; se $\lambda=-\infty$, per ogni $M$ esiste
+$\bar x$ con $h(\bar x)<M$, e $h(x)\le h(\bar x)<M$ per $\bar x<x<d$. Analogamente, una
+funzione crescente in $(c,d)$ tende, per $x\to d^{-}$, al suo estremo superiore, finito
+oppure $+\infty$.
+\end{osservazione}
+
+\subsection{La dimostrazione del teorema di L'Hôpital}
+
+Siamo ora in grado di dimostrare il teorema di L'Hôpital (\cref{teo:hopital}) nelle
+ipotesi generali in cui lo abbiamo enunciato.
+
+\begin{strategia}
+Nel caso $\frac00$ estendiamo $f$ e $g$ per continuità ponendo $f(x_{0})=g(x_{0})=0$.
+Allora $\frac{f(x)}{g(x)}=\frac{f(x)-f(x_{0})}{g(x)-g(x_{0})}$, e il teorema di Cauchy
+trasforma questo rapporto in $\frac{f'(\xi)}{g'(\xi)}$, con $\xi$ compreso tra $x_{0}$ e
+$x$: quando $x\to x_{0}$ anche $\xi\to x_{0}$, e il rapporto delle derivate tende a
+$\ell$. Il linguaggio delle successioni rende il ragionamento rigoroso. Nel caso
+$\frac\infty\infty$ questo trucco non funziona, perché $f$ e $g$ non si possono
+estendere a $x_{0}$; useremo il teorema di Lagrange in forma di monotonia: dalla
+disuguaglianza $\frac{f'}{g'}<\ell+\varepsilon$ ricaveremo che una opportuna combinazione
+$f-c\,g$ è decrescente, e quindi tende a $-\infty$ o a un limite finito. Infine il caso
+$x\to\pm\infty$ si riconduce ai precedenti con il cambio di variabile $t=\frac1x$.
+\end{strategia}
+
+\begin{dimostrazione}
+\emph{Passo 1: forma $\frac00$ per $x\to x_{0}\in\R$.} Siano $f$, $g$ derivabili in
+$I\setminus\{x_{0}\}$, con $g'\neq0$, $f(x)\to0$, $g(x)\to0$ e
+$\frac{f'(x)}{g'(x)}\to\ell\in\overline\R$. Ponendo $f(x_{0})=g(x_{0})=0$ (con abuso di
+notazione usiamo lo stesso simbolo per le funzioni estese), $f$ e $g$ diventano
+continue in tutto $I$: in $x_{0}$ perché il limite coincide con il valore, negli altri
+punti perché derivabili. Osserviamo che $g(x)\neq0$ per ogni $x\in I\setminus\{x_{0}\}$:
+se fosse $g(x_{1})=0$ con $x_{1}\neq x_{0}$, per il teorema di Rolle applicato a $g$
+nell'intervallo di estremi $x_{0}$, $x_{1}$ esisterebbe un punto in cui $g'$ si annulla.
+
+Sia ora $x_{n}$ una qualunque successione di punti di $I\setminus\{x_{0}\}$ convergente
+a $x_{0}$. Per il teorema di Cauchy, applicato nell'intervallo di estremi $x_{0}$ e
+$x_{n}$ (nel quale $f$, $g$ sono continue, e derivabili nei punti interni con $g'\neq0$),
+per ogni $n$ esiste un punto $x_{n}'$ strettamente compreso tra $x_{0}$ e $x_{n}$ tale che
+\begin{equation}\label{eq:hopital-cauchy}
+  \frac{f(x_{n})}{g(x_{n})}=\frac{f(x_{n})-f(x_{0})}{g(x_{n})-g(x_{0})}=\frac{f'(x_{n}')}{g'(x_{n}')} .
+\end{equation}
+Poiché $0<\abs{x_{n}'-x_{0}}<\abs{x_{n}-x_{0}}$, la successione $x_{n}'$ converge a $x_{0}$
+(teorema dei carabinieri) ed è formata da punti diversi da $x_{0}$. Per la definizione di
+limite di funzione mediante le successioni (\cref{def:limite-funzione}, con le varianti
+per i limiti infiniti, \cref{oss:ponte-infinito}),
+$\frac{f'(x_{n}')}{g'(x_{n}')}\to\ell$, e quindi, per la \eqref{eq:hopital-cauchy},
+$\frac{f(x_{n})}{g(x_{n})}\to\ell$. Poiché la successione $x_{n}\to x_{0}$ è arbitraria,
+ancora per la \cref{def:limite-funzione} si conclude che
+\[
+  \lim_{x\to x_{0}}\frac{f(x)}{g(x)}=\ell=\lim_{x\to x_{0}}\frac{f'(x)}{g'(x)} .
+\]
+
+\emph{Passo 2: limiti unilaterali.} Per il limite destro si suppone che $f$, $g$ siano
+derivabili in un intervallo $(x_{0},x_{0}+r)$ e si considerano soltanto successioni
+$x_{n}\to x_{0}$ con $x_{n}>x_{0}$; il ragionamento del passo 1 si ripete parola per
+parola. Lo stesso vale per il limite sinistro.
+
+\emph{Passo 3: forma $\frac\infty\infty$.} Consideriamo il limite sinistro per
+$x\to x_{0}^{-}$ (il limite destro è analogo, e combinando i due si ottiene il limite
+completo, \cref{prop:dx-sx}). Siano $f$, $g$ derivabili in $(x_{0}-r,x_{0})$, con
+$g'\neq0$, $\abs{g(x)}\to+\infty$ e $\frac{f'(x)}{g'(x)}\to\ell$. Per il
+\cref{lem:darboux} $g'$ ha segno costante in $(x_{0}-r,x_{0})$, e sostituendo
+eventualmente $f$, $g$ con $-f$, $-g$ (il che non cambia i rapporti $\frac fg$ e
+$\frac{f'}{g'}$, né l'ipotesi $\abs g\to+\infty$) possiamo supporre $g'>0$. Allora $g$ è
+strettamente crescente (\cref{cor:derivata-positiva}); fissato $\bar x\in(x_{0}-r,x_{0})$,
+si ha $g(x)\ge g(\bar x)$ per $\bar x<x<x_{0}$, cioè $g$ è limitata inferiormente vicino a
+$x_{0}$, e quindi l'ipotesi $\abs{g(x)}\to+\infty$ impone $g(x)\to+\infty$. In
+particolare $g(x)>0$ vicino a $x_{0}$.
+
+Proviamo anzitutto la seguente affermazione: \emph{se $c<c'$ sono due numeri reali e
+$\frac{f'(x)}{g'(x)}<c$ in un intervallo $(x_{0}-\delta_{1},x_{0})$, allora
+$\frac{f(x)}{g(x)}<c'$ in un intervallo $(x_{0}-\delta,x_{0})$.} Infatti, poiché $g'>0$,
+le funzioni
+\[
+  h_{1}(x)=f(x)-c\,g(x), \qquad h_{2}(x)=f(x)-c'\,g(x)
+\]
+hanno derivate $h_{1}'=g'\bigl(\frac{f'}{g'}-c\bigr)<0$ e
+$h_{2}'=h_{1}'-(c'-c)g'<0$ in $(x_{0}-\delta_{1},x_{0})$; sono quindi strettamente
+decrescenti, e per l'\cref{oss:monotone-aperto} ammettono limite per
+$x\to x_{0}^{-}$, uguale al loro estremo inferiore: un numero reale oppure $-\infty$. I due
+limiti non possono essere entrambi finiti, perché la differenza
+$h_{1}(x)-h_{2}(x)=(c'-c)g(x)$ tende a $+\infty$. Dunque almeno una delle due funzioni,
+diciamo $h_{i}$, tende a $-\infty$, e per la permanenza del segno esiste $\delta_{2}>0$
+tale che $h_{i}(x)<0$ in $(x_{0}-\delta_{2},x_{0})$. Sia $\delta\le\delta_{2}$ tale che
+$g>0$ in $(x_{0}-\delta,x_{0})$. Dividendo $h_{i}(x)<0$ per $g(x)>0$ si ottiene
+$\frac{f(x)}{g(x)}<c$ se $i=1$, oppure $\frac{f(x)}{g(x)}<c'$ se $i=2$; in entrambi i casi
+$\frac{f(x)}{g(x)}<c'$ in $(x_{0}-\delta,x_{0})$, come volevamo. In modo del tutto
+simmetrico (con funzioni crescenti che tendono a $+\infty$) si prova che \emph{se
+$c''<c$ e $\frac{f'}{g'}>c$ vicino a $x_{0}$, allora $\frac fg>c''$ vicino a $x_{0}$.}
+
+Ora concludiamo. Se $\ell\in\R$, fissato $\varepsilon>0$ si ha
+$\ell-\varepsilon<\frac{f'}{g'}<\ell+\varepsilon$ vicino a $x_{0}$; applicando le due
+affermazioni con $c=\ell+\varepsilon$, $c'=\ell+2\varepsilon$ e con $c=\ell-\varepsilon$,
+$c''=\ell-2\varepsilon$, otteniamo $\ell-2\varepsilon<\frac{f(x)}{g(x)}<\ell+2\varepsilon$ in un
+intorno sinistro di $x_{0}$. Per l'arbitrarietà di $\varepsilon$ (\cref{teo:eps-delta}),
+$\frac fg\to\ell$. Se $\ell=+\infty$, per ogni $M$ si ha $\frac{f'}{g'}>M+1$ vicino a
+$x_{0}$, e la seconda affermazione dà $\frac fg>M$ vicino a $x_{0}$: quindi
+$\frac fg\to+\infty$. Il caso $\ell=-\infty$ è analogo.
+
+\emph{Passo 4: limiti per $x\to\pm\infty$.} Siano $f$, $g$ derivabili in una semiretta
+$[a,+\infty)$, con $a>0$ e $g'(x)\neq0$. Definiamo nell'intervallo $(0,\frac1a]$ le
+funzioni
+\[
+  \tilde f(t)=f\Bigl(\frac1t\Bigr), \qquad \tilde g(t)=g\Bigl(\frac1t\Bigr)
+\]
+(se $t\in(0,\frac1a]$, allora $x=\frac1t\in[a,+\infty)$). Per il teorema sul limite delle
+funzioni composte (\cref{teo:limite-composta}), $\tilde f$ e $\tilde g$ hanno per
+$t\to0^{+}$ gli stessi limiti che $f$ e $g$ hanno per $x\to+\infty$: sono quindi
+infinitesime, oppure $\abs{\tilde g}\to+\infty$. Per la regola di derivazione delle
+funzioni composte (\cref{teo:derivata-composta}),
+\[
+  \frac{\tilde f'(t)}{\tilde g'(t)}=\frac{f'(1/t)\cdot(-1/t^{2})}{g'(1/t)\cdot(-1/t^{2})}
+  =\frac{f'(1/t)}{g'(1/t)}\ \longrightarrow\ \ell \qquad (t\to0^{+}),
+\]
+dove il limite segue dall'ipotesi $\frac{f'(x)}{g'(x)}\to\ell$ per $x\to+\infty$ e, di
+nuovo, dal teorema sul limite delle funzioni composte; inoltre $\tilde g'(t)\neq0$. Per i passi 2 e 3, applicati al limite destro per $t\to0^{+}$,
+\[
+  \lim_{x\to+\infty}\frac{f(x)}{g(x)}=\lim_{t\to0^{+}}\frac{\tilde f(t)}{\tilde g(t)}
+  =\lim_{t\to0^{+}}\frac{\tilde f'(t)}{\tilde g'(t)}=\ell ,
+\]
+dove nella prima uguaglianza si è usato ancora il teorema sul limite delle funzioni
+composte. Il caso $x\to-\infty$ si tratta allo stesso modo, con $t\to0^{-}$.
+\end{dimostrazione}
+
+\begin{strategia}[Un'altra via per il passo 3]
+Il passo 3 si può dimostrare con lo stesso strumento del passo 1, il teorema di Cauchy,
+senza il lemma di Darboux. Poiché $f$ e $g$ non sono definite in $x_{0}$, lo si applica
+in $[y,x]$, con $y$ fisso e tanto vicino a $x_{0}$ che, alla sua destra, $\frac{f'}{g'}$
+disti da $\ell$ meno di $\varepsilon$. Il quoziente $\frac{f(x)-f(y)}{g(x)-g(y)}$ è allora vicino a $\ell$, e
+differisce da $\frac{f(x)}{g(x)}$ per termini come $\frac{f(y)}{g(x)}$ e
+$\frac{g(y)}{g(x)}$, che tendono a zero perché $y$ è fisso e $\abs{g(x)}\to+\infty$. È,
+con qualche ritocco, la via seguita da Giusti \cite{giusti}.
+\end{strategia}
+
+\begin{dimostrazione}[Seconda dimostrazione del passo 3]
+Siano, come nel passo 3, $f$ e $g$ derivabili in $(x_{0}-r,x_{0})$, con $g'\neq0$,
+$\abs{g(x)}\to+\infty$ e $\frac{f'(x)}{g'(x)}\to\ell$ per $x\to x_{0}^{-}$. Se
+$x_{0}-r<y<x<x_{0}$, le funzioni $f$ e $g$ sono continue in $[y,x]$ e derivabili in
+$(y,x)$, con $g'\neq0$; per il teorema di Cauchy (\cref{teo:cauchy}) è $g(x)\neq g(y)$,
+ed esiste $\xi\in(y,x)$ tale che
+\begin{equation}\label{eq:hopital-Q}
+  Q(x)=\frac{f(x)-f(y)}{g(x)-g(y)}=\frac{f'(\xi)}{g'(\xi)} .
+\end{equation}
+Se inoltre $g(x)\neq0$, vale l'identità
+\begin{equation}\label{eq:hopital-identita}
+  \frac{f(x)}{g(x)}=\frac{f(y)}{g(x)}+\Bigl(1-\frac{g(y)}{g(x)}\Bigr)Q(x),
+\end{equation}
+che si verifica osservando che
+\[
+  \Bigl(1-\frac{g(y)}{g(x)}\Bigr)Q(x)=\frac{g(x)-g(y)}{g(x)}\cdot
+  \frac{f(x)-f(y)}{g(x)-g(y)}=\frac{f(x)-f(y)}{g(x)} .
+\]
+
+\emph{Caso $\ell\in\R$.} Fissato $\varepsilon>0$, esiste $\delta_{1}\in(0,r)$ tale che
+$\bigl|\frac{f'(\xi)}{g'(\xi)}-\ell\bigr|<\varepsilon$ per $x_{0}-\delta_{1}<\xi<x_{0}$.
+Scegliamo $y=x_{0}-\delta_{1}$ e teniamolo fisso. Per $y<x<x_{0}$ il punto $\xi$ della
+\eqref{eq:hopital-Q} sta in $(x_{0}-\delta_{1},x_{0})$, e quindi
+$\abs{Q(x)-\ell}<\varepsilon$; in particolare $\abs{Q(x)}<\abs\ell+\varepsilon$. Dalla
+\eqref{eq:hopital-identita}, nei punti $x\in(y,x_{0})$ in cui $g(x)\neq0$,
+\[
+  \frac{f(x)}{g(x)}-\ell=\bigl(Q(x)-\ell\bigr)+\frac{f(y)-g(y)\,Q(x)}{g(x)},
+\]
+e quindi, per la disuguaglianza triangolare,
+\[
+  \Bigl|\frac{f(x)}{g(x)}-\ell\Bigr|<\varepsilon+\frac{C}{\abs{g(x)}}, \qquad
+  C=\abs{f(y)}+\abs{g(y)}\bigl(\abs\ell+\varepsilon\bigr).
+\]
+La costante $C\ge0$ non dipende da $x$, perché $y$ è fisso. Poiché
+$\abs{g(x)}\to+\infty$, esiste $\delta\in(0,\delta_{1})$ tale che
+$\abs{g(x)}>\frac{C}{\varepsilon}$, e in particolare $g(x)\neq0$, per
+$x_{0}-\delta<x<x_{0}$. Per tali $x$ risulta $\frac{C}{\abs{g(x)}}<\varepsilon$, e quindi
+$\bigl|\frac{f(x)}{g(x)}-\ell\bigr|<2\varepsilon$. Per l'arbitrarietà di $\varepsilon$
+(\cref{teo:eps-delta}), $\frac fg\to\ell$.
+
+\emph{Caso $\ell=+\infty$.} Fissato $M>0$, esiste $\delta_{1}\in(0,r)$ tale che
+$\frac{f'(\xi)}{g'(\xi)}>2(M+1)$ per $x_{0}-\delta_{1}<\xi<x_{0}$; con $y=x_{0}-\delta_{1}$
+si ha allora $Q(x)>2(M+1)>0$ per $y<x<x_{0}$. Poiché $\abs{g(x)}\to+\infty$, esiste
+$\delta\in(0,\delta_{1})$ tale che $\abs{g(x)}>\max\bigl\{\abs{f(y)},2\abs{g(y)}\bigr\}$
+per $x_{0}-\delta<x<x_{0}$; per tali $x$ è $g(x)\neq0$,
+$\bigl|\frac{f(y)}{g(x)}\bigr|<1$ e $1-\frac{g(y)}{g(x)}>\frac12$. Dalla
+\eqref{eq:hopital-identita}, essendo $Q(x)>0$,
+\[
+  \frac{f(x)}{g(x)}>-1+\frac12\,Q(x)>-1+(M+1)=M .
+\]
+Dunque $\frac fg\to+\infty$. Il caso $\ell=-\infty$ si riconduce a questo sostituendo $f$
+con $-f$.
+\end{dimostrazione}
+
+\begin{osservazione}[Le due vie a confronto]\label{oss:hopital-due-vie}
+Con la seconda dimostrazione tutto il teorema di L'Hôpital poggia sul solo teorema di
+Cauchy: non occorre sapere che $g'$ ha segno costante né che $g$ tende a $+\infty$
+anziché a $-\infty$. Il suo ingrediente è un ragionamento «in due tempi»: prima si fissa
+un punto ausiliario $y$, scelto in funzione di $\varepsilon$, poi si fa tendere $x$ a
+$x_{0}$ con $y$ fermo, così che i termini che contengono $y$ diventino trascurabili. La
+prima dimostrazione traduce invece le disuguaglianze tra le derivate in monotonia delle
+funzioni $f-c\,g$, ed evita l'identità \eqref{eq:hopital-identita}, che a prima vista
+sembra piovuta dal cielo.
+\end{osservazione}
+
+\begin{notastorica}[Cauchy e Darboux]
+Il teorema che porta il nome di Augustin-Louis Cauchy compare nelle lezioni di calcolo
+differenziale che egli tenne all'École Polytechnique e pubblicò negli anni Venti
+dell'Ottocento, come strumento per studiare proprio le forme indeterminate: è con esso
+che Cauchy diede una dimostrazione rigorosa del teorema di L'Hôpital, oltre un secolo
+dopo la sua pubblicazione. Il lemma sul segno
+della derivata è un caso particolare di un risultato di Gaston Darboux, che nel 1875,
+nella \emph{Mémoire sur les fonctions discontinues}, dimostrò che ogni derivata gode
+della proprietà dei valori intermedi, anche quando è discontinua; nella stessa memoria
+Darboux costruì funzioni continue prive di derivata e funzioni derivabili con derivata
+discontinua, contribuendo a sgombrare il campo dalle intuizioni geometriche ingannevoli
+che avevano accompagnato la nascita del calcolo.
+\end{notastorica}

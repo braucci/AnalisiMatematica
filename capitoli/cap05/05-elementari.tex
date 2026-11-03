@@ -1,0 +1,430 @@
+%% ----------------------------------------------------------------------------
+%%  §5.5  Derivate delle funzioni elementari
+%% ----------------------------------------------------------------------------
+\section{Derivate delle funzioni elementari}
+\label{sec:derivate-elementari}
+
+In questo paragrafo calcoliamo le derivate delle funzioni elementari. Insieme alle regole
+dei due paragrafi precedenti, esse permettono di derivare tutte le funzioni che si
+ottengono da quelle elementari mediante somme, prodotti, quozienti, composizioni e
+inversioni.
+
+\subsection{Potenze con esponente naturale e polinomi}
+
+\begin{proposizione}\label{prop:derivata-xn}
+Per ogni $n\in\N$ e ogni $x\in\R$ si ha
+\begin{equation}\label{eq:derivata-xn}
+  Dx^{n}=nx^{n-1}
+\end{equation}
+(per $n=1$ si intende $Dx=1$).
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$n\in\N$; \ $x\in\R$.}
+\Tesi{$x^{n}$ è derivabile in $x$ e $Dx^{n}=nx^{n-1}$.}
+\end{schema}
+
+\begin{strategia}
+La formula dipende da un indice $n\in\N$: è naturale procedere per induzione. Il caso
+$n=1$ è la derivata della funzione lineare $x$, già calcolata nell'\cref{es:derivata-lineare};
+nel passo induttivo si scrive $x^{n+1}$ come prodotto $x^{n}\cdot x$ e si applica la regola
+del prodotto \eqref{eq:derivata-prodotto}, usando l'ipotesi induttiva per la derivata del
+primo fattore.
+\end{strategia}
+
+\begin{dimostrazione}
+Questa formula (che per $x>0$ si ottiene anche dalla più generale \eqref{eq:derivata-xb}) si può
+dimostrare facendo uso del principio di induzione (\cref{teo:induzione}): abbiamo già
+verificato che $Dx=1$ \eqref{eq:derivata-retta}; quindi la \eqref{eq:derivata-xn} è vera
+per $n=1$. Supponiamo, secondo lo schema del principio di induzione, che la
+\eqref{eq:derivata-xn} sia vera per un certo $n$, e calcoliamo per mezzo della regola di
+derivazione del prodotto:
+\begin{equation}\label{eq:derivata-xn-passo}
+\begin{split}
+  Dx^{n+1}&=D(x^{n}\cdot x)=D(x^{n})\,x+x^{n}\,Dx\\
+  &=nx^{n-1}\,x+x^{n}\cdot1=(n+1)x^{n}.
+\end{split}
+\end{equation}
+Abbiamo quindi verificato che la \eqref{eq:derivata-xn} vale anche per l'indice $n+1$.
+Perciò la \eqref{eq:derivata-xn} è provata per ogni $n\in\N$.
+\end{dimostrazione}
+
+\begin{strategia}[Un'altra via]
+Al posto dell'induzione, una formula chiusa, come in Giusti \cite{giusti}. La
+scomposizione \eqref{eq:scomposizione-potenze} di $u^{n}-v^{n}$ permette di semplificare
+il fattore $\xi-x$ nel rapporto incrementale \eqref{eq:derivata-xi}, che diventa una
+somma di $n$ monomi; ciascuno tende a $x^{n-1}$, e il coefficiente $n$ della formula
+conta proprio questi addendi. La regola del prodotto non serve.
+\end{strategia}
+
+\begin{dimostrazione}[Seconda dimostrazione]
+La \eqref{eq:scomposizione-potenze}, ricavata nel \cref{lem:stima-potenze} per
+$0\le v<u$, vale per ogni coppia di numeri reali $u$, $v$ (con la convenzione $t^{0}=1$
+per ogni $t$). Detta infatti $S=u^{n-1}+u^{n-2}v+\dots+uv^{n-2}+v^{n-1}$ la somma tra
+parentesi, si ha
+\[
+  uS=u^{n}+u^{n-1}v+\dots+uv^{n-1}, \qquad vS=u^{n-1}v+\dots+uv^{n-1}+v^{n},
+\]
+e nella differenza $uS-vS$ tutti i termini si cancellano, tranne $u^{n}-v^{n}$. Con
+$u=\xi$, $v=x$ e $\xi\neq x$ si ottiene
+\[
+  \frac{\xi^{n}-x^{n}}{\xi-x}=\xi^{n-1}+\xi^{n-2}x+\dots+\xi x^{n-2}+x^{n-1}
+  =\sum_{k=0}^{n-1}\xi^{n-1-k}x^{k}.
+\]
+Per $\xi\to x$ ciascuno degli $n$ addendi tende a $x^{n-1-k}x^{k}=x^{n-1}$, per il limite
+di un prodotto (\cref{teo:operazioni-funzioni}); quindi il rapporto incrementale tende a
+$nx^{n-1}$, e per la \eqref{eq:derivata-xi} si ha $Dx^{n}=nx^{n-1}$.
+\end{dimostrazione}
+
+Notiamo che il risultato ottenuto, insieme alla linearità della derivata, ci permette di
+calcolare la derivata di un \emph{polinomio} qualsiasi:
+\begin{equation}\label{eq:derivata-polinomio}
+\begin{gathered}
+  y=a_{n}x^{n}+a_{n-1}x^{n-1}+\dots+a_{1}x+a_{0};\\
+  y'=na_{n}x^{n-1}+(n-1)a_{n-1}x^{n-2}+\dots+a_{1}.
+\end{gathered}
+\end{equation}
+In particolare, la derivata di un polinomio di grado $n\in\N$ è un polinomio di grado
+$n-1$, e un polinomio è derivabile infinite volte (è di classe $C^{\infty}$). Per gli
+esponenti interi negativi la regola del reciproco \eqref{eq:derivata-reciproco} dà, per
+$x\neq0$, $Dx^{-n}=D\frac1{x^{n}}=-\frac{nx^{n-1}}{x^{2n}}=-nx^{-n-1}$: la
+\eqref{eq:derivata-xn} vale per ogni esponente intero.
+
+\subsection{Logaritmi ed esponenziali}
+
+\begin{proposizione}[Derivata del logaritmo]\label{prop:derivata-log}
+Per ogni base $a>0$, $a\neq1$, e per ogni $x>0$ si ha
+\begin{equation}\label{eq:derivata-loga}
+  D\log_{a}x=\frac1x\log_{a}e=\frac1{x\log a};
+\end{equation}
+in particolare, per il logaritmo naturale,
+\begin{equation}\label{eq:derivata-log}
+  D\log x=\frac1x \qquad\perogni x>0 .
+\end{equation}
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$a>0$, \ $a\neq1$; \ $x>0$.}
+\Tesi{$\log_{a}$ è derivabile in $x$ e $D\log_{a}x=\frac1{x\log a}$; \ in particolare
+$D\log x=\frac1x$.}
+\end{schema}
+
+\begin{strategia}
+Le proprietà del logaritmo trasformano la differenza $\log(x+h)-\log x$ nel logaritmo di
+un rapporto, $\log\bigl(1+\frac hx\bigr)$; il rapporto incrementale diventa allora,
+a meno del fattore $\frac1x$, la quantità $\frac{\log(1+t)}{t}$ con $t=\frac hx\to0$, di cui
+conosciamo il limite dal \cref{cap:funzioni-continue}. È qui che si vede perché i
+matematici preferiscono la base $e$: è l'unica per cui quel limite vale $1$.
+\end{strategia}
+
+\begin{dimostrazione}
+Sia $x>0$ e sia $0<\abs h<x$, così che $x+h>0$. Per la \eqref{eq:log2}
+\begin{equation}\label{eq:rapporto-log}
+  \frac{\log(x+h)-\log x}{h}=\frac1h\log\frac{x+h}{x}
+  =\frac1x\cdot\frac{\log\bigl(1+\frac hx\bigr)}{\frac hx}.
+\end{equation}
+La funzione $t=g(h)=\frac hx$ tende a $0$ per $h\to0$ ed è diversa da zero per $h\neq0$;
+per il limite notevole \eqref{eq:ln-log} e per il \cref{teo:limite-composta}, l'ultimo
+fattore tende a $1$. Dunque il rapporto incrementale tende a $\frac1x$, cioè vale la
+\eqref{eq:derivata-log}. Per una base qualsiasi si ha $\log_{a}x=\frac{\log x}{\log a}$
+\eqref{eq:log4}, formula valida anche per esponenti reali (\cref{sec:monotone-inverse}),
+e quindi $D\log_{a}x=\frac1{x\log a}$; infine $\frac1{\log a}=\log_{a}e$, sempre per la
+\eqref{eq:log4}.
+\end{dimostrazione}
+
+Risulta ora chiaro l'interesse nel considerare logaritmi in base $e$: dato che
+$\log_{e}e=1$, la derivata del logaritmo in base $e$ di $x$ è semplicemente $\frac1x$.
+
+\begin{proposizione}[Derivata dell'esponenziale]\label{prop:derivata-exp}
+Per ogni $x\in\R$ e ogni $a>0$ si ha
+\begin{equation}\label{eq:derivata-exp}
+  De^{x}=e^{x}, \qquad Da^{x}=a^{x}\log a .
+\end{equation}
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$x\in\R$; \ $a>0$.}
+\Tesi{$e^{x}$ e $a^{x}$ sono derivabili in $x$, \ $De^{x}=e^{x}$, \ $Da^{x}=a^{x}\log a$.}
+\end{schema}
+
+\begin{strategia}
+L'esponenziale è la funzione inversa del logaritmo, di cui ora conosciamo la derivata
+$\frac1x$, che non si annulla mai: il teorema di derivazione delle funzioni inverse
+(\cref{teo:derivata-inversa}) dà la derivata di $e^{y}$ come reciproco di $\frac1x$,
+calcolato nel punto $x=e^{y}$. Per una base qualsiasi si scrive $a^{x}=e^{x\log a}$ e si
+applica la regola della catena. Dopo la dimostrazione indicheremo anche una via diretta,
+basata sul limite notevole di $\frac{e^{h}-1}{h}$.
+\end{strategia}
+
+\begin{dimostrazione}
+La funzione $y=\log x$ è continua, strettamente crescente e invertibile, e la sua
+inversa è $x=e^{y}$. Fissato $y$, sia $x=e^{y}$: poiché $D\log x=\frac1x\neq0$, il
+teorema di derivazione delle funzioni inverse (applicato al logaritmo su un intervallo
+chiuso contenente $x$ al suo interno) dà
+\begin{equation}\label{eq:derivata-exp-inversa}
+  De^{y}=\frac1{D\log x}=\frac1{1/x}=x=e^{y}.
+\end{equation}
+Usando, come si è soliti fare, il simbolo $x$ per denotare la variabile indipendente,
+possiamo riscrivere la formula precedente: $De^{x}=e^{x}$. Per una base $a>0$ qualsiasi
+ricordiamo che $a^{x}=e^{x\log a}$ \eqref{eq:potenza-esponenziale}; facendo uso del
+teorema di derivazione delle funzioni composte otteniamo
+\begin{equation}\label{eq:derivata-ax}
+  Da^{x}=De^{x\log a}=e^{x\log a}\,D(x\log a)=a^{x}\log a . \qedhere
+\end{equation}
+\end{dimostrazione}
+
+La formula $De^{x}=e^{x}$ si può ottenere anche direttamente dalla definizione:
+$\frac{e^{x+h}-e^{x}}{h}=e^{x}\cdot\frac{e^{h}-1}{h}\to e^{x}\cdot1$, per il limite
+notevole \eqref{eq:ln-exp}. Essa esprime una proprietà caratteristica dell'esponenziale
+naturale: \emph{il tasso di accrescimento di $e^{x}$ è uguale al suo valore}. È per
+questo che la funzione $e^{x}$ descrive tutti i fenomeni in cui la rapidità di
+variazione di una grandezza è proporzionale alla grandezza stessa: la crescita di una
+popolazione, il decadimento radioattivo, la scarica di un condensatore, e, come vedremo
+studiando le equazioni differenziali, la risposta di molti sistemi dinamici.
+
+\subsection{Potenze con esponente reale}
+
+Ricordiamo la proprietà $e^{\log x}=x$ \eqref{eq:log-inversa}, che è sempre utile quando
+si vuole calcolare la derivata di un esponenziale o di una potenza che non rientrano nei
+casi precedenti. Analogamente a quanto fatto per $a^{x}$, si calcola la derivata della
+funzione potenza $x^{b}$, con esponente $b$ \emph{reale}: per $x>0$, essendo
+$x^{b}=e^{b\log x}$ \eqref{eq:potenza-esponenziale},
+\begin{equation}\label{eq:derivata-xb}
+  Dx^{b}=De^{b\log x}=e^{b\log x}\,D(b\log x)=x^{b}\cdot\frac bx=bx^{b-1}.
+\end{equation}
+La formula precedente è molto utile. È utilizzata ad esempio nei casi $b=\frac12$ (in
+questo caso si riottiene la \eqref{eq:derivata-radice}) e $b=-1$:
+\begin{equation}\label{eq:derivata-radice-reciproco}
+\begin{gathered}
+  D\sqrt x=Dx^{1/2}=\frac12x^{-1/2}=\frac1{2\sqrt x},\\
+  D\frac1x=Dx^{-1}=(-1)x^{-2}=-\frac1{x^{2}} .
+\end{gathered}
+\end{equation}
+Lo stesso artificio permette di derivare le funzioni della forma $f(x)^{g(x)}$ con
+$f(x)>0$, scrivendole come $e^{g(x)\log f(x)}$. Ad esempio, per $x>0$,
+\begin{equation}\label{eq:derivata-x-alla-x}
+  Dx^{x}=De^{x\log x}=e^{x\log x}\Bigl(\log x+x\cdot\frac1x\Bigr)=x^{x}(\log x+1).
+\end{equation}
+
+\subsection{Funzioni trigonometriche}
+
+\begin{proposizione}[Derivate di seno, coseno e tangente]\label{prop:derivata-sen-cos}
+Per ogni $x\in\R$ si ha
+\begin{equation}\label{eq:derivata-sen-cos}
+  D\sen x=\cos x, \qquad D\cos x=-\sen x,
+\end{equation}
+e per ogni $x\neq\frac\pi2+k\pi$, $k\in\Z$,
+\begin{equation}\label{eq:derivata-tg}
+  D\tg x=\frac1{\cos^{2}x}=1+\tg^{2}x .
+\end{equation}
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$x\in\R$ (angoli in radianti); \ per la tangente, $\cos x\neq0$.}
+\Tesi{$D\sen x=\cos x$; \ $D\cos x=-\sen x$; \ $D\tg x=1+\tg^{2}x$.}
+\end{schema}
+
+\begin{strategia}
+Per il seno e il coseno si scrive il rapporto incrementale, si sviluppano $\sen(x+h)$ e
+$\cos(x+h)$ con le formule di addizione e si raccolgono i termini in modo che $h$ compaia
+soltanto nei due limiti notevoli $\frac{\sen h}{h}\to1$ e $\frac{1-\cos h}{h}\to0$; i
+fattori $\sen x$ e $\cos x$, che non dipendono da $h$, escono dal limite. La tangente è il
+quoziente $\frac{\sen x}{\cos x}$: basta la regola del quoziente, insieme alla relazione
+fondamentale $\sen^{2}x+\cos^{2}x=1$.
+\end{strategia}
+
+\begin{dimostrazione}
+Dimostriamo la prima delle \eqref{eq:derivata-sen-cos}: facciamo uso della formula di
+addizione \eqref{eq:addizione-sen} e dei limiti notevoli \eqref{eq:lim-senx-x},
+\eqref{eq:lim-1-cos-x}:
+\begin{equation}\label{eq:derivata-sen}
+\begin{split}
+  \lim_{h\to0}\frac{\sen(x+h)-\sen x}{h}
+  &=\lim_{h\to0}\frac{\sen x\cos h+\sen h\cos x-\sen x}{h}\\
+  &=\sen x\cdot\lim_{h\to0}\frac{\cos h-1}{h}+\cos x\cdot\lim_{h\to0}\frac{\sen h}{h}\\
+  &=\sen x\cdot0+\cos x\cdot1=\cos x .
+\end{split}
+\end{equation}
+Allo stesso modo si calcola la derivata di $\cos x$, con la \eqref{eq:addizione-cos}:
+\begin{equation}\label{eq:derivata-cos}
+\begin{split}
+  \lim_{h\to0}\frac{\cos(x+h)-\cos x}{h}
+  &=\lim_{h\to0}\frac{\cos x\cos h-\sen x\sen h-\cos x}{h}\\
+  &=\cos x\cdot\lim_{h\to0}\frac{\cos h-1}{h}-\sen x\cdot\lim_{h\to0}\frac{\sen h}{h}\\
+  &=\cos x\cdot0-\sen x\cdot1=-\sen x .
+\end{split}
+\end{equation}
+La derivata della funzione $\tg x$ si calcola con la regola di derivazione del quoziente,
+nei punti in cui $\cos x\neq0$, usando la relazione fondamentale
+\eqref{eq:relazione-fondamentale}:
+\begin{equation}\label{eq:derivata-tg-calcolo}
+\begin{split}
+  D\tg x=D\Bigl(\frac{\sen x}{\cos x}\Bigr)&=\frac{D(\sen x)\cos x-\sen x\,D(\cos x)}{\cos^{2}x}\\
+  &=\frac{\cos^{2}x+\sen^{2}x}{\cos^{2}x}=\frac1{\cos^{2}x};
+\end{split}
+\end{equation}
+dividendo termine a termine si ottiene anche la forma $1+\tg^{2}x$.
+\end{dimostrazione}
+
+\begin{strategia}[Un'altra via]
+Giusti \cite{giusti} trasforma la differenza $\sen(x+h)-\sen x$ in un prodotto con le
+formule di prostaferesi: l'incremento $h$ compare allora in un solo fattore,
+$\sen\frac h2$, e l'altro fattore è il coseno del punto medio. Basta così un solo limite
+notevole, $\frac{\sen t}t\to1$, insieme alla continuità del coseno; il limite di
+$\frac{1-\cos h}h$ non serve.
+\end{strategia}
+
+\begin{dimostrazione}[Seconda dimostrazione]
+Per ogni $a$, $b$ reali, sottraendo membro a membro le formule di addizione
+\eqref{eq:addizione-sen}, \eqref{eq:addizione-cos} scritte per $a+b$ e per $a-b$, si
+ottengono le formule di prostaferesi (già usate nell'\cref{es:seno-lipschitz})
+\begin{equation}\label{eq:prostaferesi-ab}
+\begin{gathered}
+  \sen(a+b)-\sen(a-b)=2\cos a\,\sen b,\\
+  \cos(a+b)-\cos(a-b)=-2\sen a\,\sen b .
+\end{gathered}
+\end{equation}
+Con $a=x+\frac h2$ e $b=\frac h2$ la prima dà, per $h\neq0$,
+\[
+  \frac{\sen(x+h)-\sen x}{h}=\cos\Bigl(x+\frac h2\Bigr)\cdot\frac{\sen(h/2)}{h/2}.
+\]
+Per $h\to0$ il primo fattore tende a $\cos x$, per la continuità del coseno
+(\cref{prop:sen-cos-continue}); il secondo tende a $1$ per la \eqref{eq:lim-senx-x} e il
+\cref{teo:limite-composta}, con la funzione interna $t=\frac h2$, diversa da zero per
+$h\neq0$. Quindi $D\sen x=\cos x$. Allo stesso modo, per la seconda delle
+\eqref{eq:prostaferesi-ab} e per la continuità del seno,
+\[
+  \frac{\cos(x+h)-\cos x}{h}=-\sen\Bigl(x+\frac h2\Bigr)\cdot\frac{\sen(h/2)}{h/2}
+  \to-\sen x . \qedhere
+\]
+\end{dimostrazione}
+
+\begin{osservazione}[La differenza centrata del seno]\label{oss:seno-centrata}
+Con $a=x$ e $b=h$ la prima delle \eqref{eq:prostaferesi-ab} dà, per la differenza
+centrata del \cref{sec:def-derivata},
+\[
+  \frac{\sen(x+h)-\sen(x-h)}{2h}=\cos x\cdot\frac{\sen h}{h}:
+\]
+la differenza centrata del seno è il valore esatto $\cos x$ moltiplicato per un fattore
+che tende a $1$, e il suo errore vale esattamente $\cos x\,\bigl(1-\frac{\sen h}h\bigr)$
+se $\cos x>0$. Per $x=1$ e $h=0{,}1$ si trova $0{,}5403\cdot0{,}0016658\approx9{,}001\cdot
+10^{-4}$, il primo valore della colonna «errore centrato» della tabella del
+\cref{sec:def-derivata}. Vedremo con la formula di Taylor che $1-\frac{\sen h}h$ è circa
+$\frac{h^{2}}6$: per questo quell'errore si divide per $100$ quando $h$ si divide per $10$.
+\end{osservazione}
+
+\begin{attenzione}[Gli angoli vanno misurati in radianti]
+Le formule \eqref{eq:derivata-sen-cos} valgono perché $\frac{\sen h}{h}\to1$, e questo
+limite vale soltanto se l'angolo $h$ è misurato in radianti. Se l'angolo $\theta$ è
+espresso in gradi, si ha $\sen\theta^{\circ}=\sen\frac{\pi\theta}{180}$ e, per la regola
+della catena, $\frac{d}{d\theta}\sen\theta^{\circ}=\frac{\pi}{180}\cos\theta^{\circ}$: un
+fattore $\frac\pi{180}\approx0{,}01745$ che nei calcoli di stabilità e di prestazioni è
+fonte di errori classici (ad esempio quando si usa una pendenza della retta di portanza
+$C_{L\alpha}$ espressa «per grado» in una formula scritta «per radiante»).
+\end{attenzione}
+
+Riassumiamo nella \cref{tab:derivate-elementari} le principali formule di derivazione
+trovate in questo paragrafo.
+
+\begin{table}[htb]
+\centering
+\renewcommand{\arraystretch}{1.45}
+\begin{tabular}{l l l}
+\toprule
+$f(x)$ & $f'(x)$ & validità\\
+\midrule
+$x^{b}$ & $bx^{b-1}$ & $x>0$ ($x\in\R$ se $b\in\N$)\\
+$\log x$ & $\dfrac1x$ & $x>0$\\
+$\log_{a}x$ & $\dfrac1{x\log a}$ & $x>0$\\
+$e^{x}$ & $e^{x}$ & $x\in\R$\\
+$a^{x}$ & $a^{x}\log a$ & $x\in\R$\\
+$\sen x$ & $\cos x$ & $x\in\R$\\
+$\cos x$ & $-\sen x$ & $x\in\R$\\
+$\tg x$ & $\dfrac1{\cos^{2}x}=1+\tg^{2}x$ & $x\neq\frac\pi2+k\pi$\\
+\bottomrule
+\end{tabular}
+\caption{Le derivate delle funzioni elementari. Con le regole dei
+\cref{sec:operazioni-derivate,sec:composte-inverse} si derivano tutte le funzioni che da
+esse si ottengono con le operazioni algebriche, la composizione e l'inversione.}
+\label{tab:derivate-elementari}
+\end{table}
+
+Con la tabella e le regole di calcolo il lettore può ormai derivare qualsiasi funzione
+elementare. Un sistema di calcolo simbolico come \texttt{sympy} applica esattamente le
+stesse regole, ed è utile per controllare i conti.
+
+\begin{python}[Derivate calcolate con \texttt{sympy}]
+import sympy as sp
+
+x = sp.symbols("x", positive=True)
+funzioni = [x**3 * sp.sin(x), sp.sin(x**2), sp.sin(x)**2, sp.tan(x),
+            sp.exp(x) / x, sp.log(x**2 + 1), x**x, sp.atan(1 / x)]
+for f in funzioni:
+    print(f"D[{f}] = {sp.simplify(sp.diff(f, x))}")
+\end{python}
+\begin{risultato}
+D[x**3*sin(x)] = x**2*(x*cos(x) + 3*sin(x))
+D[sin(x**2)] = 2*x*cos(x**2)
+D[sin(x)**2] = sin(2*x)
+D[tan(x)] = cos(x)**(-2)
+D[exp(x)/x] = (x - 1)*exp(x)/x**2
+D[log(x**2 + 1)] = 2*x/(x**2 + 1)
+D[x**x] = x**x*(log(x) + 1)
+D[atan(1/x)] = -1/(x**2 + 1)
+\end{risultato}
+
+Il lettore verifichi a mano ciascun risultato. Si noti che \texttt{sympy} scrive
+$\sen2x$ al posto di $2\sen x\cos x$ (formula di duplicazione) e che l'ultima riga contiene
+la derivata di $\operatorname{arctg}\frac1x$, che si calcola con quella dell'arcotangente
+(\cref{sec:trig-inverse}): è opposta alla derivata di $\operatorname{arctg}x$, il che non è
+un caso (\cref{es:arctg-1-su-x}).
+
+\begin{idea}[Come varia la densità dell'aria durante una salita]
+Nella troposfera dell'atmosfera standard (ISA) la densità è data, in funzione della quota
+(geopotenziale) $h$ in metri, da
+\begin{gather*}
+  \rho(h)=\rho_{0}\Bigl(1-\frac{L\,h}{T_{0}}\Bigr)^{n},\\
+  \rho_{0}=1{,}225\ \text{kg/m}^{3},\quad T_{0}=288{,}15\ \text{K},\quad L=0{,}0065\ \text{K/m},
+\end{gather*}
+con $n=\frac{g}{RL}-1\approx4{,}2559$, dove $g=9{,}80665$~m/s$^{2}$ è l'accelerazione di
+gravità standard e $R=287{,}05$~J/(kg\,K) la costante dei gas per l'aria. Per la regola
+della catena e la \eqref{eq:derivata-xb},
+\[
+  \frac{d\rho}{dh}=\rho_{0}\,n\Bigl(1-\frac{Lh}{T_{0}}\Bigr)^{n-1}\cdot\Bigl(-\frac L{T_{0}}\Bigr),
+\]
+e, se il velivolo sale con velocità verticale $v_{z}=\frac{dh}{dt}$, ancora per la regola
+della catena la densità varia nel tempo con tasso $\frac{d\rho}{dt}=\frac{d\rho}{dh}\,v_{z}$.
+Il programma che segue calcola questi valori per $v_{z}=5$~m/s, controllando la formula
+con una differenza centrata.
+\end{idea}
+
+\begin{python}[Derivata della densità ISA rispetto alla quota e al tempo]
+# Densità ISA (troposfera): rho0 (1 - L h/T0)^n, n = g/(R L) - 1
+rho0, T0, L, g, R = 1.225, 288.15, 0.0065, 9.80665, 287.05
+n = g / (R * L) - 1
+rho = lambda h: rho0 * (1 - L * h / T0) ** n
+# derivata con la regola della catena: D[u^n] = n u^(n-1) u'
+drho = lambda h: rho0 * n * (1 - L * h / T0) ** (n - 1) * (-L / T0)
+
+vz = 5.0                               # velocità verticale (m/s)
+print(f"n = {n:.4f}")
+print("    h      rho      drho/dh     numerica     drho/dt")
+for h in (0, 2000, 5000, 10000):
+    num = (rho(h + 0.01) - rho(h - 0.01)) / 0.02  # diff. centrata
+    print(f"{h:5d}   {rho(h):.4f}  {drho(h):.4e}  {num:.4e}  "
+          f"{drho(h) * vz:.3e}")
+\end{python}
+\begin{risultato}
+n = 4.2559
+    h      rho      drho/dh     numerica     drho/dt
+    0   1.2250  -1.1760e-04  -1.1760e-04  -5.880e-04
+ 2000   1.0065  -1.0119e-04  -1.0119e-04  -5.060e-04
+ 5000   0.7361  -7.9654e-05  -7.9654e-05  -3.983e-04
+10000   0.4127  -5.1162e-05  -5.1162e-05  -2.558e-04
+\end{risultato}
+
+Al livello del mare la densità diminuisce di circa $1{,}2\cdot10^{-4}$~kg/m$^{3}$ per
+ogni metro di quota, e salendo a $5$~m/s di circa $5{,}9\cdot10^{-4}$~kg/m$^{3}$ al
+secondo; a $10\,000$~m le variazioni sono meno della metà: dalla formula si ricava
+$\frac{d\rho}{dh}=-\frac{nL}{T}\,\rho$, e a quella quota la densità è circa un terzo di quella
+al suolo, mentre la temperatura $T=T_{0}-Lh$ è scesa soltanto del $23\%$ circa.

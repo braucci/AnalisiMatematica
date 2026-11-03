@@ -1,0 +1,217 @@
+%% ----------------------------------------------------------------------------
+%%  §4.1  Premessa: la funzione sen x / x
+%% ----------------------------------------------------------------------------
+\section{Premessa: la funzione \texorpdfstring{$\frac{\sen x}{x}$}{sen x / x}}
+\label{sec:premessa-funzioni}
+
+Consideriamo la funzione
+\begin{equation}\label{eq:senx-x}
+  f(x)=\frac{\sen x}{x},
+\end{equation}
+che è definita per ogni $x\in\R\setminus\{0\}$. Allo scopo di disegnarne il grafico,
+osserviamo preliminarmente che $-1\le\sen x\le1$ per ogni $x\in\R$
+\eqref{eq:sen-cos-limitate}; dividendo tutti i membri per $x>0$ (che conserva il verso
+delle disuguaglianze, \cref{prop:ordine-prodotto}) otteniamo
+\begin{equation}\label{eq:senx-stima}
+  -\frac1x\le f(x)\le\frac1x \qquad\perogni x>0 .
+\end{equation}
+Se $x<0$ si ottiene la situazione analoga $\frac1x\le f(x)\le-\frac1x$; comunque, essendo
+$f$ una \emph{funzione pari}, cioè
+\[
+  f(-x)=\frac{\sen(-x)}{-x}=\frac{-\sen x}{-x}=f(x) \qquad\perogni x\in\R\setminus\{0\},
+\]
+è sufficiente studiarne le proprietà per $x>0$, riportando poi il disegno anche per
+$x<0$ per simmetria rispetto all'asse $y$.
+
+Le funzioni $y=-1/x$ e $y=1/x$, che appaiono nella stima \eqref{eq:senx-stima}, hanno per
+grafico dei rami di iperbole. Tenendo conto del segno di $f(x)$, che per $x>0$ è lo
+stesso segno di $\sen x$, e del fatto che $f$ si annulla esattamente nei punti $x=k\pi$
+con $k\in\Z\setminus\{0\}$, si ottiene per $f$ un grafico come quello della
+\cref{fig:senx-iperboli}: un'oscillazione che si smorza, costretta tra le due iperboli.
+Il disegno è significativo per $x$ sufficientemente grande; è invece del tutto
+indeterminato per $x$ «vicino» a zero, dove le due iperboli si allontanano e non
+forniscono più alcuna informazione utile.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=\textwidth, height=5.2cm, xmin=0, xmax=13.6, ymin=-1.15, ymax=1.6,
+  axis lines=middle, xtick={3.14159,6.28318,9.42478,12.56637},
+  xticklabels={$\pi$,$2\pi$,$3\pi$,$4\pi$}, ytick={-1,1},
+  xlabel={$x$}, ylabel={$y$}, every axis x label/.style={at={(axis description cs:1,0.42)},anchor=west},
+  tick label style={font=\scriptsize}]
+  \addplot[tratteggio, domain=0.62:13.4, samples=120] {1/x};
+  \addplot[tratteggio, domain=0.62:13.4, samples=120] {-1/x};
+  \node[anchor=south west, font=\scriptsize] at (axis cs:1.75,0.6) {$y=\frac1x$};
+  \node[anchor=north west, font=\scriptsize] at (axis cs:1.75,-0.6) {$y=-\frac1x$};
+  \addplot[curva, domain=0.62:13.4, samples=240] {sin(deg(x))/x};
+\end{axis}
+\end{tikzpicture}
+\caption{Il grafico di $f(x)=\frac{\sen x}{x}$ per $x>0$, compreso tra i rami di iperbole
+$y=\pm\frac1x$ (tratteggiati). Il grafico tocca le iperboli dove $\sen x=\pm1$ e
+attraversa l'asse $x$ nei punti $k\pi$. Vicino a $x=0$ le iperboli non dicono nulla.}
+\label{fig:senx-iperboli}
+\end{figure}
+
+\subsection{Che cosa succede vicino a zero?}
+
+Ricordiamo che la funzione \eqref{eq:senx-x} non è definita per $x_{0}=0$, cioè non è
+calcolabile $f(0)$. È invece possibile calcolare valori di $f(x)$ per $x$ «vicino» a
+zero; ad esempio, usando la \cref{tab:valori-notevoli}, si trova
+\begin{gather*}
+  f\Bigl(\frac\pi2\Bigr)=\frac2\pi\approx0{,}637,\qquad
+  f\Bigl(\frac\pi3\Bigr)=\frac{3\sqrt3}{2\pi}\approx0{,}827,\\
+  f\Bigl(\frac\pi4\Bigr)=\frac{2\sqrt2}{\pi}\approx0{,}900,\qquad
+  f\Bigl(\frac\pi6\Bigr)=\frac3\pi\approx0{,}955,
+\end{gather*}
+e con un calcolatore si ottiene l'ulteriore tavola di valori prodotta dal programma
+seguente.
+
+\begin{python}[Valori di $\frac{\sen x}{x}$ vicino a zero]
+import math
+
+f = lambda x: math.sin(x) / x    # definita per x != 0, ed è pari
+
+valori = [math.pi/2, math.pi/3, math.pi/4, math.pi/6,
+          0.1, 0.01, 0.001, 1e-4, 1e-8]
+for x in valori:
+    print(f"x = {x:.8f}    f(x) = {f(x):.12f}")
+print("f pari sui valori provati:",
+      all(f(-x) == f(x) for x in valori))
+\end{python}
+\begin{risultato}
+x = 1.57079633    f(x) = 0.636619772368
+x = 1.04719755    f(x) = 0.826993343133
+x = 0.78539816    f(x) = 0.900316316157
+x = 0.52359878    f(x) = 0.954929658551
+x = 0.10000000    f(x) = 0.998334166468
+x = 0.01000000    f(x) = 0.999983333417
+x = 0.00100000    f(x) = 0.999999833333
+x = 0.00010000    f(x) = 0.999999998333
+x = 0.00000001    f(x) = 1.000000000000
+f pari sui valori provati: True
+\end{risultato}
+
+Nella tabella sono stati scelti valori di $x$ \emph{sufficientemente vicini} a $x_{0}=0$?
+La domanda, così posta, non ha senso: uno, due, nove o mille valori di $x$ non sono, in
+assoluto, né vicini né lontani da zero. Certamente, sulla base della tabella si può
+\emph{intuire} che $f(x)$, per $x$ vicino a zero, assuma valori vicini al numero $1$, del
+tipo $1-\epsilon$ con $\epsilon>0$ «piccolo». Non è però possibile escludere che, per
+$x$ ancora più vicino a zero rispetto ai valori già considerati, $f(x)$ cambi
+comportamento.
+
+\needspace{8\baselineskip}
+\begin{attenzione}[Una tabella non è una dimostrazione]
+La funzione
+\[
+  g(x)=\frac{\sen x}{x}+\sen\frac\pi x \qquad(x\neq0)
+\]
+assume \emph{esattamente} gli stessi valori di $f$ in tutti i punti $x=10^{-k}$,
+$k\in\N$, perché in quei punti $\sen\frac\pi x=\sen(10^{k}\pi)=0$. Una tabella costruita
+con i valori $0{,}1$; $0{,}01$; $0{,}001$; $\dots$ non distinguerebbe $g$ da $f$. Eppure,
+nei punti $x=\frac2{4m+1}$, che si avvicinano a zero al crescere di $m\in\N$, si ha
+$\sen\frac\pi x=\sen\bigl(2m\pi+\frac\pi2\bigr)=1$, e quindi lì $g(x)=f(x)+1$ è vicino
+a $2$, non a $1$. Come vedremo nel \cref{sec:legame-successioni}, $g$ \emph{non} ha
+limite per $x\to0$. La morale è che il comportamento di una funzione vicino a un punto
+non si accerta con un numero finito di prove, ma con un ragionamento valido per
+\emph{tutti} i modi di avvicinarsi al punto.
+\end{attenzione}
+
+\subsection{La tabella ideale}
+
+Una formulazione rigorosa del comportamento di $f(x)$ per $x$ «vicino» a $x_{0}$ si
+ottiene nel modo seguente. Si considera una tabella ideale, illimitata a destra, del tipo
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{c|ccccc}
+  $x$ & $x_{1}$ & $x_{2}$ & $x_{3}$ & $\cdots$ & $x_{n}\ \cdots$\\ \hline
+  $f(x)$ & $y_{1}=f(x_{1})$ & $y_{2}=f(x_{2})$ & $y_{3}=f(x_{3})$ & $\cdots$ & $y_{n}=f(x_{n})\ \cdots$
+\end{tabular}
+\end{center}
+cioè si considera una generica successione $x_{n}$ che converge a $x_{0}$ (il termine
+$x_{n}$ è «vicino» a $x_{0}$ se $n$ è «grande»), con $x_{n}\neq x_{0}$, e la
+corrispondente successione $y_{n}=f(x_{n})$ dei valori assunti dalla funzione. Se $y_{n}$
+converge a un numero $\ell$, \emph{e se il numero $\ell$ non cambia qualunque sia la
+successione $x_{n}$ che converge a $x_{0}$}, allora si dice che la funzione $f$
+\emph{ammette limite}, uguale a $\ell$, per $x\to x_{0}$. La clausola in corsivo è
+essenziale: è proprio quella che la funzione $g$ dell'esempio precedente non soddisfa.
+
+Torniamo alla funzione \eqref{eq:senx-x}. Abbiamo già dimostrato nel
+\cref{teo:sen-x-su-x} che
+\begin{equation}\label{eq:senx-x-succ}
+  \lim_{n\to+\infty}f(x_{n})=\lim_{n\to+\infty}\frac{\sen x_{n}}{x_{n}}=1
+\end{equation}
+\emph{qualunque sia} la successione $x_{n}$ che converge a $x_{0}=0$, con $x_{n}\neq0$ per
+ogni $n\in\N$. In accordo con quanto detto sopra, in termini di limiti di funzioni la
+\eqref{eq:senx-x-succ} equivale a dire che $f(x)$ ha limite $\ell=1$ per $x\to0$; in
+simboli
+\begin{equation}\label{eq:lim-senx-x}
+  \lim_{x\to0}f(x)=\lim_{x\to0}\frac{\sen x}{x}=1 .
+\end{equation}
+
+Nella \cref{fig:senx-x} è riportato il grafico della funzione $\frac{\sen x}{x}$; la
+funzione non è definita per $x_{0}=0$ (nel grafico ciò è evidenziato con un «tondino»
+vuoto), però ha un comportamento regolare anche nelle vicinanze di $x_{0}=0$, e i valori
+assunti da $f(x)$ sono vicini a $\ell=1$ quando $x$ è vicino a $x_{0}=0$.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=\textwidth, height=5.2cm, xmin=-10.2, xmax=10.2, ymin=-0.45, ymax=1.3,
+  axis lines=middle, xtick={-9.42478,-6.28318,-3.14159,3.14159,6.28318,9.42478},
+  xticklabels={$-3\pi$,$-2\pi$,$-\pi$,$\pi$,$2\pi$,$3\pi$}, ytick={1},
+  xlabel={$x$}, ylabel={$y$}, tick label style={font=\scriptsize},
+  every axis x label/.style={at={(axis description cs:1,0.25)},anchor=west}]
+  \addplot[curva, domain=-10:-0.01, samples=200] {sin(deg(x))/x};
+  \addplot[curva, domain=0.01:10, samples=200] {sin(deg(x))/x};
+  \addplot[tratteggio, domain=0:1] {1};
+  \draw[blu, thick, fill=white] (axis cs:0,1) circle (2.2pt);
+  \node[font=\scriptsize, anchor=south west] at (axis cs:1.5,0.75) {$f(x)=\dfrac{\sen x}{x}$};
+\end{axis}
+\end{tikzpicture}
+\caption{Il grafico di $\frac{\sen x}{x}$. La funzione non è definita in $x=0$ (tondino
+vuoto), ma i suoi valori si avvicinano a $1$ quando $x$ si avvicina a zero, da destra e
+da sinistra: è la \eqref{eq:lim-senx-x}.}
+\label{fig:senx-x}
+\end{figure}
+
+Viceversa, anche se la struttura analitica può sembrare a prima vista simile, il limite
+\begin{equation}\label{eq:sen-1-x-anticipo}
+  \lim_{x\to0}\sen\frac1x \qquad\text{non esiste}
+\end{equation}
+(lo dimostreremo nel \cref{sec:legame-successioni}). Nella \cref{fig:sen-1-x} è
+riportato il grafico, eseguito al computer, della funzione $\sen\frac1x$: si noti in
+particolare il comportamento caotico della funzione nelle vicinanze di $x_{0}=0$, dove
+il grafico oscilla infinite volte tra $-1$ e $1$. Accanto è disegnato il grafico di
+$x\sen\frac1x$, che oscilla anch'esso infinite volte, ma è «schiacciato» verso zero tra
+i grafici di $y=\pm\abs x$: questa funzione, come vedremo, ha limite $0$.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=\textwidth]{sen_1_x}
+\caption{A sinistra, il grafico di $\sen\frac1x$: vicino a zero la funzione assume
+infinite volte tutti i valori tra $-1$ e $1$, e non ha limite. A destra, il grafico di
+$x\sen\frac1x$, compreso tra i grafici di $y=\pm\abs x$: le oscillazioni sono smorzate e la
+funzione tende a $0$ (\texttt{python/fig\_sen\_1\_x.py}).}
+\label{fig:sen-1-x}
+\end{figure}
+
+\begin{idea}[Un valore «proibito»: la velocità istantanea]
+La situazione di un limite in un punto in cui la funzione non è definita è tutt'altro che
+artificiosa. Un carico sganciato da un aereo in volo orizzontale cade, trascurando la
+resistenza dell'aria, percorrendo in verticale lo spazio $s(t)=\frac12gt^{2}$. La sua
+velocità media verticale nell'intervallo di tempo tra $t_{0}$ e $t_{0}+h$ è
+\[
+  v_{m}(h)=\frac{s(t_{0}+h)-s(t_{0})}{h}=\frac{\frac12g(t_{0}^{2}+2t_{0}h+h^{2})-\frac12gt_{0}^{2}}{h}
+  =gt_{0}+\frac g2\,h ,
+\]
+una formula che ha senso solo per $h\neq0$: per $h=0$ si otterrebbe $0/0$. La
+\emph{velocità istantanea} all'istante $t_{0}$ è, per definizione, il limite di
+$v_{m}(h)$ per $h\to0$, che qui vale $gt_{0}$: per ogni successione $h_{n}\to0$ con
+$h_{n}\neq0$ si ha $v_{m}(h_{n})=gt_{0}+\frac g2h_{n}\to gt_{0}$. Questo è il germe del
+concetto di \emph{derivata}, che studieremo nel \cref{cap:derivate}: la derivata è il
+limite di un rapporto in un punto in cui il rapporto non è definito.
+\end{idea}
+
+Nel paragrafo che segue formalizziamo la definizione di limite di funzione secondo le
+idee sopra esposte.

@@ -1,0 +1,339 @@
+%% ----------------------------------------------------------------------------
+%%  §4.11  Esercizi di riepilogo
+%% ----------------------------------------------------------------------------
+\section{Esercizi di riepilogo}
+\label{sec:esercizi-cap4}
+
+Come nei capitoli precedenti, ogni soluzione è accompagnata da una nota sulla
+\emph{scelta logica} che la guida: quale definizione o quale teorema conviene usare, e
+perché.
+
+\needspace{8\baselineskip}
+\subsection*{La definizione di limite}
+
+\begin{esercizio}\label{es:eps-delta-radice}
+Verificare con la definizione \eqref{eq:eps-delta} che $\lim_{x\to2}(3x-1)=5$ e che
+$\lim_{x\to4}\sqrt x=2$.
+\begin{soluzione}
+Nel primo caso $\abs{(3x-1)-5}=3\abs{x-2}$, che è minore di $\epsilon$ se
+$\abs{x-2}<\delta=\frac\epsilon3$. Nel secondo caso razionalizziamo: per $x\ge0$,
+\[
+  \abs{\sqrt x-2}=\frac{\abs{x-4}}{\sqrt x+2}\le\frac{\abs{x-4}}2,
+\]
+che è minore di $\epsilon$ se $\abs{x-4}<\delta=2\epsilon$ (e $x\ge0$).
+\emph{Scelta logica:} si cerca di maggiorare $\abs{f(x)-\ell}$ con una costante per $\abs{x-x_{0}}$;
+la razionalizzazione trasforma una differenza di radici, difficile da stimare, in un
+quoziente il cui denominatore è facile da minorare.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}\label{es:ponte-infinito}
+Scrivere per esteso la dimostrazione dell'equivalenza tra le due formulazioni di
+$\lim_{x\to+\infty}f(x)=\ell$, con $\ell\in\R$ e $A$ non limitato superiormente
+(\cref{oss:ponte-infinito}).
+\begin{soluzione}
+Le due formulazioni sono: (S) per ogni $x_{n}\in A$ con $x_{n}\to+\infty$ si ha
+$f(x_{n})\to\ell$; (D) per ogni $\epsilon>0$ esiste $k$ tale che $\abs{f(x)-\ell}<\epsilon$
+per ogni $x\in A$ con $x>k$. Se vale (D) e $x_{n}\to+\infty$, fissato $\epsilon$ si
+prende $k$ come in (D); esiste $\nu$ tale che $x_{n}>k$ per $n>\nu$, e quindi
+$\abs{f(x_{n})-\ell}<\epsilon$ per $n>\nu$: vale (S). Se (D) fosse falsa, esisterebbe
+$\epsilon_{0}>0$ tale che per ogni $k$ c'è un $x\in A$ con $x>k$ e
+$\abs{f(x)-\ell}\ge\epsilon_{0}$; scegliendo $k=n$ si ottiene $x_{n}\in A$ con $x_{n}>n$,
+quindi $x_{n}\to+\infty$, e $\abs{f(x_{n})-\ell}\ge\epsilon_{0}$ per ogni $n$: allora
+$f(x_{n})\not\to\ell$ e (S) è falsa. \emph{Scelta logica:} è la dimostrazione del
+\cref{teo:eps-delta}, in cui gli intorni di raggio $\frac1n$ di $x_{0}$ sono sostituiti
+dalle semirette $(n,+\infty)$, gli intorni «di raggio $\frac1n$» di $+\infty$.
+\end{soluzione}
+\end{esercizio}
+
+\needspace{8\baselineskip}
+\subsection*{Calcolo di limiti}
+
+\begin{esercizio}\label{es:calcolo-limiti-4}
+Calcolare i limiti
+\begin{gather*}
+  \text{(a)}\ \lim_{x\to0}\frac{\sen5x}{\sen3x};\qquad
+  \text{(b)}\ \lim_{x\to0}\frac{\tg x-\sen x}{x^{3}};\\
+  \text{(c)}\ \lim_{x\to0}\frac{e^{2x}-1}{\sen x};\qquad
+  \text{(d)}\ \lim_{x\to+\infty}\Bigl(1+\frac3x\Bigr)^{x}.
+\end{gather*}
+\begin{soluzione}
+(a) $\frac{\sen5x}{\sen3x}=\frac{\sen5x}{x}\cdot\frac{x}{\sen3x}\to5\cdot\frac13=\frac53$,
+per l'\cref{es:composte}(i). (b) Per $0<\abs x<\frac\pi2$,
+$\tg x-\sen x=\sen x\Bigl(\frac1{\cos x}-1\Bigr)=\frac{\sen x\,(1-\cos x)}{\cos x}$, e quindi
+\[
+  \frac{\tg x-\sen x}{x^{3}}=\frac{\sen x}{x}\cdot\frac{1-\cos x}{x^{2}}\cdot\frac1{\cos x}
+  \to1\cdot\frac12\cdot1=\frac12,
+\]
+per le \eqref{eq:lim-senx-x}, \eqref{eq:lim-1-cos} e la continuità del coseno.
+(c) $\frac{e^{2x}-1}{\sen x}=2\cdot\frac{e^{2x}-1}{2x}\cdot\frac{x}{\sen x}\to2\cdot1\cdot1=2$,
+per la \eqref{eq:ln-exp} con il cambio di variabile $y=2x$. (d) Con $y=\frac1x$, che
+tende a $0^{+}$ ed è diverso da zero, $\bigl(1+\frac3x\bigr)^{x}=(1+3y)^{1/y}\to e^{3}$ per
+la \eqref{eq:ln-e-b}. \emph{Scelta logica:} in tutti i casi la forma indeterminata si
+scioglie riconducendo l'espressione, con semplici manipolazioni algebriche, a un prodotto
+di limiti notevoli; il cambio di variabile è giustificato dal \cref{teo:limite-composta}.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Calcolare $\displaystyle\lim_{x\to+\infty}\bigl(\sqrt{x^{2}+x}-x\bigr)$.
+\begin{soluzione}
+È una forma $\infty-\infty$. Razionalizzando, per $x>0$,
+\begin{align*}
+  \sqrt{x^{2}+x}-x&=\frac{x^{2}+x-x^{2}}{\sqrt{x^{2}+x}+x}=\frac{x}{x\Bigl(\sqrt{1+\frac1x}+1\Bigr)}\\
+  &=\frac1{\sqrt{1+\frac1x}+1}\ \to\ \frac1{1+1}=\frac12,
+\end{align*}
+perché $1+\frac1x\to1$ e la radice quadrata è continua nel punto $1$.
+\emph{Scelta logica:} è lo stesso calcolo svolto per la successione $\sqrt{n^{2}+n}-n$ nel
+\cref{cap:successioni}; la definizione «per successioni» garantisce che il risultato vale
+lungo ogni $x_{n}\to+\infty$, non solo lungo i naturali.
+\end{soluzione}
+\end{esercizio}
+
+\needspace{8\baselineskip}
+\subsection*{Continuità e discontinuità}
+
+\begin{esercizio}
+Determinare il numero $k$ per cui la funzione $f(x)=\frac{\sen kx}{x}$ per $x\neq0$,
+$f(0)=3$, è continua in $0$; determinare il numero $a$ per cui la funzione
+$g(x)=ax+1$ per $x\le1$, $g(x)=x^{2}+2$ per $x>1$, è continua su $\R$.
+\begin{soluzione}
+Per l'\cref{es:composte}(i), $f(x)\to k$ per $x\to0$ (anche per $k=0$, quando
+$f(x)=0$); $f$ è continua in $0$ se e solo se $k=3$. Per $g$, ciascun tratto è un
+polinomio, e la sola continuità da verificare è in $x_{0}=1$: il limite sinistro è
+$g(1)=a+1$, il limite destro è $1+2=3$; per la \cref{prop:dx-sx} serve $a+1=3$, cioè
+$a=2$. \emph{Scelta logica:} la continuità in un punto di raccordo si verifica
+confrontando i due limiti unilaterali con il valore.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Classificare le discontinuità delle funzioni $f(x)=\frac{x^{2}-1}{\abs{x-1}}$ e
+$g(x)=\lfloor x\rfloor+\lfloor-x\rfloor$.
+\begin{soluzione}
+Per $x\neq1$ si ha $f(x)=\frac{(x-1)(x+1)}{\abs{x-1}}$, che vale $x+1$ per $x>1$ e
+$-(x+1)$ per $x<1$: i limiti unilaterali in $1$ sono $2$ e $-2$, e $f$ ha in $1$ una
+singolarità di prima specie (salto $4$). Per $g$: se $x\in\Z$, $g(x)=x-x=0$; se
+$x\notin\Z$, posto $k=\lfloor x\rfloor$ si ha $k<x<k+1$, quindi $-k-1<-x<-k$ e
+$\lfloor-x\rfloor=-k-1$, cioè $g(x)=-1$. Dunque $g$ vale $-1$ fuori dagli interi e $0$
+sugli interi: in ogni intero il limite esiste ed è $-1\neq g(k)$, e la discontinuità è
+eliminabile. \emph{Scelta logica:} conviene sempre semplificare l'espressione nei vari
+intervalli prima di calcolare i limiti. Si noti che $g$ è somma di due funzioni con
+salti, ma i salti si compensano: la somma di funzioni discontinue può essere «quasi»
+continua.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Dimostrare che la funzione $f(x)=x$ per $x\in\Q$, $f(x)=0$ per $x\notin\Q$ è continua in
+$x_{0}=0$ e discontinua in ogni $x_{0}\neq0$.
+\begin{soluzione}
+Si ha $\abs{f(x)}\le\abs x$ per ogni $x$, quindi $f(x)\to0=f(0)$ per $x\to0$ (carabinieri).
+Se $x_{0}\neq0$, per la densità (\cref{teo:densita-Q}, \cref{cor:densita-irrazionali})
+esistono successioni di razionali $q_{n}\to x_{0}$ e di irrazionali $r_{n}\to x_{0}$, con
+$q_{n},r_{n}\neq x_{0}$; allora $f(q_{n})=q_{n}\to x_{0}$ e $f(r_{n})=0\to0\neq x_{0}$, e il
+limite non esiste (\cref{cor:non-esistenza}). \emph{Scelta logica:} la continuità in $0$
+viene da una stima; la discontinuità altrove da due successioni con limiti diversi.
+\end{soluzione}
+\end{esercizio}
+
+\needspace{8\baselineskip}
+\subsection*{Teoremi di esistenza}
+
+\begin{esercizio}\label{es:grado-dispari}
+Dimostrare che ogni polinomio di grado dispari ha almeno uno zero reale.
+\begin{soluzione}
+Sia $P(x)=a_{m}x^{m}+\dots+a_{0}$ con $m$ dispari e, ad esempio, $a_{m}>0$ (altrimenti si
+considera $-P$). Per $x\neq0$
+\[
+  P(x)=x^{m}\Bigl(a_{m}+\frac{a_{m-1}}x+\dots+\frac{a_{0}}{x^{m}}\Bigr),
+\]
+e la parentesi tende ad $a_{m}>0$ per $x\to\pm\infty$. Poiché $m$ è dispari,
+$x^{m}\to+\infty$ per $x\to+\infty$ e $x^{m}\to-\infty$ per $x\to-\infty$; quindi
+$P(x)\to+\infty$ per $x\to+\infty$ e $P(x)\to-\infty$ per $x\to-\infty$. Per la
+permanenza del segno (\cref{teo:confronto-funzioni}(i)) esistono $a<b$ con $P(a)<0<P(b)$,
+e il teorema degli zeri, applicato al polinomio continuo $P$ su $[a,b]$, conclude.
+\emph{Scelta logica:} i limiti all'infinito servono soltanto a trovare due punti in cui
+il polinomio ha segno opposto. Per i polinomi di grado pari la conclusione è falsa:
+$x^{2}+1$ non ha zeri reali.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}[Punto fisso]\label{es:punto-fisso}
+Sia $f:[0,1]\to[0,1]$ continua. Dimostrare che esiste $x\in[0,1]$ con $f(x)=x$.
+Applicare il risultato all'equazione $\cos x=x$, e calcolarne la soluzione con il metodo
+di bisezione.
+\begin{soluzione}
+Sia $g(x)=f(x)-x$, continua su $[0,1]$. Poiché $0\le f(x)\le1$, si ha $g(0)=f(0)\ge0$ e
+$g(1)=f(1)-1\le0$. Se $g(0)=0$ o $g(1)=0$ abbiamo finito; altrimenti $g(0)>0>g(1)$ e il
+teorema degli zeri fornisce $x\in(0,1)$ con $g(x)=0$. La funzione $\cos x$ è continua e,
+essendo decrescente su $[0,1]\subseteq[0,\pi]$, manda $[0,1]$ in
+$[\cos1,1]\subseteq[0,1]$; dunque esiste $x$ con $\cos x=x$. Tale soluzione è unica,
+perché $\cos x-x$ è strettamente decrescente su $[0,1]$. \emph{Scelta logica:} un
+problema di punto fisso diventa un problema di zeri considerando la differenza
+$f(x)-x$.
+\end{soluzione}
+\end{esercizio}
+
+\begin{python}[La soluzione di $\cos x=x$]
+import math
+
+g = lambda x: math.cos(x) - x      # g(0) = 1 > 0, g(1) < 0
+a, b = 0.0, 1.0
+n = 0
+while (b - a) / 2 >= 1e-12:        # errore del punto medio < 1e-12
+    c = (a + b) / 2
+    if g(c) > 0:                   # g decrescente: zero a destra
+        a = c
+    else:
+        b = c
+    n += 1
+x = (a + b) / 2
+print(f"x = {x:.12f}   cos x = {math.cos(x):.12f}   ({n} passi)")
+\end{python}
+\begin{risultato}
+x = 0.739085133216   cos x = 0.739085133215   (39 passi)
+\end{risultato}
+
+Il numero $0{,}739085\ldots$ si ottiene anche premendo ripetutamente il tasto «cos» di
+una calcolatrice (in radianti), partendo da un numero qualsiasi: le iterate
+$x_{n+1}=\cos x_{n}$ convergono al punto fisso. Perché ciò accada, e con quale velocità, lo
+capiremo con il calcolo differenziale.
+
+\begin{esercizio}[L'equazione di Keplero]\label{es:kepler}
+In un'orbita ellittica di eccentricità $e\in[0,1)$, la posizione del satellite al tempo
+$t$ si ricava dall'\emph{anomalia eccentrica} $E$, soluzione dell'equazione di Keplero
+\[
+  E-e\sen E=M,
+\]
+dove l'\emph{anomalia media} $M=\frac{2\pi}{T}(t-t_{0})$ è proporzionale al tempo trascorso
+dal passaggio al perigeo. Dimostrare che per ogni $M\in[0,\pi]$ l'equazione ha una e una
+sola soluzione $E\in[0,\pi]$, e calcolarla per $e=0{,}5$, $M=1$ con errore minore di
+$10^{-10}$.
+\begin{soluzione}
+La funzione $f(E)=E-e\sen E-M$ è continua, con $f(0)=-M\le0$ e
+$f(\pi)=\pi-M\ge0$: per il teorema degli zeri (o direttamente, se $M=0$ o $M=\pi$) esiste
+una soluzione in $[0,\pi]$. Per l'unicità basta osservare che $f$ è strettamente
+crescente: se $E_{1}<E_{2}$, allora
+$f(E_{2})-f(E_{1})=(E_{2}-E_{1})-e(\sen E_{2}-\sen E_{1})\ge(E_{2}-E_{1})(1-e)>0$, perché
+$\abs{\sen E_{2}-\sen E_{1}}\le\abs{E_{2}-E_{1}}$ (si veda l'\cref{es:seno-lipschitz}).
+Il numero di dimezzamenti necessari si conosce in anticipo: si deve avere
+$\frac{\pi}{2^{n+1}}<10^{-10}$, cioè $n\ge34$. \emph{Scelta logica:} l'equazione è
+trascendente e non ha soluzioni in forma chiusa; il teorema degli zeri ne garantisce
+l'esistenza, la monotonia l'unicità, la bisezione il calcolo con errore controllato.
+\end{soluzione}
+\end{esercizio}
+
+\begin{python}[L'equazione di Keplero con la bisezione]
+import math
+
+def bisezione(f, a, b, tol):
+    """Approssima uno zero di f in [a, b] con errore < tol."""
+    assert f(a) <= 0 <= f(b)
+    passi = 0
+    while (b - a) / 2 >= tol:      # errore del punto medio
+        c = (a + b) / 2
+        if f(c) > 0:
+            b = c
+        else:
+            a = c
+        passi += 1
+    return (a + b) / 2, passi
+
+e, M = 0.5, 1.0                    # eccentricità, anomalia media
+kepler = lambda E: E - e * math.sin(E) - M
+E, passi = bisezione(kepler, 0, math.pi, 1e-10)
+print(f"E = {E:.10f} rad  dopo {passi} dimezzamenti")
+print(f"verifica: E - e sen E = {E - e * math.sin(E):.10f}")
+\end{python}
+\begin{risultato}
+E = 1.4987011335 rad  dopo 34 dimezzamenti
+verifica: E - e sen E = 1.0000000000
+\end{risultato}
+
+\begin{esercizio}\label{es:seno-lipschitz}
+Dimostrare che $\abs{\sen x-\sen y}\le\abs{x-y}$ per ogni $x,y\in\R$.
+\begin{soluzione}
+Per le formule di prostaferesi, che si ricavano dalle formule di addizione
+\eqref{eq:addizione-sen} scrivendo $x=\frac{x+y}2+\frac{x-y}2$ e
+$y=\frac{x+y}2-\frac{x-y}2$, si ha
+$\sen x-\sen y=2\cos\frac{x+y}2\,\sen\frac{x-y}2$. Poiché $\abs{\cos t}\le1$ e
+$\abs{\sen t}\le\abs t$ (\cref{lem:sen-minore-x}), risulta
+$\abs{\sen x-\sen y}\le2\cdot1\cdot\frac{\abs{x-y}}2=\abs{x-y}$. \emph{Scelta logica:}
+la disuguaglianza dà un'altra dimostrazione, con $\delta=\epsilon$, della continuità del
+seno; funzioni con una stima di questo tipo si dicono \emph{lipschitziane}.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Quanti passi del metodo di bisezione servono per approssimare una radice in $[0,1]$
+con errore minore di $10^{-6}$?
+\begin{soluzione}
+Per la \eqref{eq:bisezione-errore} basta $\frac1{2^{n+1}}<10^{-6}$, cioè
+$2^{n+1}>10^{6}$. Poiché $2^{19}=524\,288<10^{6}<2^{20}=1\,048\,576$, serve $n+1\ge20$:
+il punto medio $c_{19}$ ha la precisione richiesta; per individuarlo occorre conoscere
+il segno di $f$ nei diciannove punti $c_{0},\dots,c_{18}$. \emph{Scelta logica:} la
+stima dell'errore della bisezione non dipende dalla funzione, ma solo dalla lunghezza
+dell'intervallo iniziale.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Dimostrare che una funzione continua su $[a,b]$ che assume soltanto valori razionali è
+costante.
+\begin{soluzione}
+Se esistessero $x_{1},x_{2}$ con $f(x_{1})<f(x_{2})$, tra questi due valori ci sarebbe un
+irrazionale $y$ (\cref{cor:densita-irrazionali}); per il teorema dei valori intermedi,
+applicato su $[x_{1},x_{2}]$ o $[x_{2},x_{1}]$, $f$ assumerebbe il valore $y$, contro
+l'ipotesi. \emph{Scelta logica:} l'immagine di un intervallo mediante una funzione
+continua è un intervallo, e un intervallo con più di un punto contiene irrazionali.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}[Il monaco e la montagna]
+Un monaco parte alle $6$ del mattino dal monastero a valle e sale lungo un sentiero fino
+all'eremo in vetta, dove arriva alle $18$; il giorno dopo parte alle $6$ dall'eremo e
+ridiscende lungo lo stesso sentiero, arrivando al monastero alle $18$. Dimostrare che
+esiste un punto del sentiero in cui il monaco si trova alla stessa ora in entrambi i
+giorni.
+\begin{soluzione}
+Sia $L$ la lunghezza del sentiero e siano $s_{1}(t)$, $s_{2}(t)$ le distanze dal
+monastero, misurate lungo il sentiero, all'ora $t\in[6,18]$ del primo e del secondo
+giorno; sono funzioni continue (il monaco non si teletrasporta). La funzione
+$h(t)=s_{1}(t)-s_{2}(t)$ è continua, con $h(6)=0-L<0$ e $h(18)=L-0>0$: per il teorema degli
+zeri esiste $\bar t$ con $s_{1}(\bar t)=s_{2}(\bar t)$. Si noti che non serve alcuna
+ipotesi sulla velocità, che può anche annullarsi o cambiare segno. \emph{Scelta logica:}
+si immagina che due monaci percorrano il sentiero lo stesso giorno, uno in salita e uno
+in discesa; è evidente che si incontrano, e il teorema degli zeri rende rigoroso questo
+«evidente».
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Dimostrare che la funzione $f(x)=\frac{x}{1+x^{2}}$ ha massimo e minimo sull'intervallo
+illimitato $[0,+\infty)$.
+\begin{soluzione}
+Per $x\ge0$ si ha $f(x)\ge0=f(0)$, quindi $0$ è il minimo. Inoltre $1+x^{2}\ge2x$, perché
+equivale a $(x-1)^{2}\ge0$, e quindi $f(x)\le\frac12=f(1)$: $\frac12$ è il massimo.
+\emph{Scelta logica:} il teorema di Weierstrass non si applica, perché l'intervallo non è
+limitato; ma le sue ipotesi sono sufficienti, non necessarie, e qui massimo e minimo si
+trovano con una disuguaglianza elementare.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Dimostrare che la funzione $f(x)=x^{3}+x$ è una biiezione continua e strettamente
+crescente di $\R$ su $\R$, che la sua inversa è continua, e calcolare $f^{-1}(1)$.
+\begin{soluzione}
+$f$ è continua (polinomio) e strettamente crescente (somma di due funzioni strettamente
+crescenti). Inoltre $f(x)\to\pm\infty$ per $x\to\pm\infty$, quindi per ogni $y\in\R$
+esistono $a<b$ con $f(a)<y<f(b)$, e per il teorema dei valori intermedi $y$ è assunto: $f$
+è suriettiva. Per ogni $[a,b]$ la restrizione di $f$ ha inversa continua su $[f(a),f(b)]$
+(\cref{teo:continuita-inversa}), e ogni $y_{0}\in\R$ è interno a un tale intervallo:
+per la località del limite $f^{-1}$ è continua su $\R$. Infine $f^{-1}(1)$ è la soluzione
+di $x^{3}+x=1$, cioè della \eqref{eq:cubica}: $f^{-1}(1)=0{,}682327\ldots$, calcolata nel
+\cref{sec:bisezione}. \emph{Scelta logica:} calcolare un valore della funzione inversa
+equivale a risolvere un'equazione; la bisezione è dunque anche un algoritmo per
+calcolare funzioni inverse.
+\end{soluzione}
+\end{esercizio}

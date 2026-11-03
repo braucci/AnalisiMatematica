@@ -1,0 +1,205 @@
+%% ----------------------------------------------------------------------------
+%%  §3.1  Premessa: l'area del cerchio e l'idea di limite
+%% ----------------------------------------------------------------------------
+\section{Premessa: l'area del cerchio}
+\label{sec:premessa-limiti}
+
+Uno dei problemi che affronteremo nel capitolo sugli integrali sarà il calcolo delle
+aree di figure piane. Tale calcolo fa uso in modo essenziale del concetto di limite. Per
+mostrarlo, consideriamo un metodo per il calcolo dell'area di un cerchio simile a quello
+che Archimede usò nel III secolo a.C.
+
+Si tratta di «approssimare» un cerchio di raggio $1$ (potremmo scegliere anche un
+diverso valore del raggio) con figure che «differiscono di poco» dal cerchio e di cui sia
+possibile calcolare l'area. Nel capitolo sugli integrali vedremo che è comodo
+considerare, come figure approssimanti, unioni di rettangoli. Qui, per ogni $n\ge3$,
+consideriamo il poligono regolare $P_{n}$ di $n$ lati inscritto nel cerchio di raggio
+$1$: per $n=3$ un triangolo equilatero, per $n=4$ un quadrato, per $n=6$ un esagono, e
+così via (\cref{fig:poligoni-inscritti}).
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[scale=1.0, every node/.style={font=\footnotesize}]
+  \foreach \n/\xx/\col in {3/0/blu, 4/2.45/rame, 6/4.9/verde} {
+    \begin{scope}[shift={(\xx,0)}]
+      \draw[grigio!70] (0,0) circle (1);
+      \draw[\col, thick, fill=\col!12] (90:1) \foreach \k in {1,...,\n} { -- ({90+360*\k/\n}:1)} -- cycle;
+      \fill (0,0) circle (0.8pt);
+      \node at (0,-1.3) {$P_{\n}$};
+    \end{scope}}
+  % dettaglio di un triangolo
+  \begin{scope}[shift={(6.6,0)}, scale=1.75]
+    \pgfmathsetmacro{\al}{30}
+    \draw[grigio!70] ({-\al-10}:1) arc ({-\al-10}:{\al+10}:1);
+    \draw[blu, thick] (0,0) -- (\al:1) -- (-\al:1) -- cycle;
+    \draw[blu, dashed] (0,0) -- ({cos(\al)},0);
+    \draw[blu] ({cos(\al)},0) -- (\al:1);
+    \draw ({cos(\al)-0.06},0) -- ({cos(\al)-0.06},0.06) -- ({cos(\al)},0.06);
+    \draw[rame] (0.3,0) arc (0:\al:0.3); \node[rame] at (15:0.45) {$\alpha$};
+    \node[below] at ({cos(\al)/2},-0.02) {$\cos\alpha$};
+    \node[right] at ({cos(\al)},{sin(\al)/2}) {$\sen\alpha$};
+    \node[above left] at ({cos(\al)/2},{sin(\al)/2}) {$1$};
+    \node at (0.55,-0.85) {$\alpha=\pi/n$};
+  \end{scope}
+\end{tikzpicture}
+\caption{I poligoni regolari $P_{3}$, $P_{4}$, $P_{6}$ inscritti nel cerchio di raggio
+$1$. A destra, uno dei $2n$ triangoli rettangoli in cui si scompone $P_{n}$: l'angolo al
+centro vale $\alpha=\pi/n$, i cateti valgono $\sen\alpha$ e $\cos\alpha$.}
+\label{fig:poligoni-inscritti}
+\end{figure}
+
+Agli $n$ lati del poligono $P_{n}$ corrispondono $n$ angoli al centro uguali fra loro,
+che sono l'$n$-esima parte dell'angolo giro e che quindi misurano $2\pi/n$ radianti.
+Tracciando le altezze dal centro, $P_{n}$ si scompone in $2n$ triangoli rettangoli
+uguali, con l'angolo al centro $\alpha=\pi/n$ e ipotenusa $1$; i cateti misurano quindi
+$\sen\alpha$ e $\cos\alpha$, e l'area di ciascun triangolo vale
+$\frac12\sen\alpha\cos\alpha$. Indicando con $a_{n}$ l'area di $P_{n}$ otteniamo
+\begin{equation}\label{eq:area-poligono-1}
+  a_{n}=\operatorname{area}(P_{n})=2n\cdot\frac12\sen\alpha\cos\alpha,
+\end{equation}
+e, usando la formula di duplicazione $\sen2\alpha=2\sen\alpha\cos\alpha$
+\eqref{eq:duplicazione} e ricordando che $\alpha=\pi/n$,
+\begin{equation}\label{eq:area-poligono}
+  a_{n}=\frac n2\,\sen\frac{2\pi}{n}.
+\end{equation}
+Riportiamo $a_{n}$ per alcuni valori di $n$ nella \cref{tab:aree-poligoni}; il lettore
+controlli i primi valori, fino a $n=12$, usando la \cref{tab:valori-notevoli} (per $n=3$
+si ricordi che $\sen\frac{2\pi}3=\sen\bigl(\pi-\frac\pi3\bigr)=\sen\frac\pi3$).
+
+\begin{table}[htb]
+\centering
+\renewcommand{\arraystretch}{1.5}
+\footnotesize\setlength{\tabcolsep}{4pt}
+\begin{tabular}{l*{10}{c}}
+\toprule
+$n$ & $3$ & $4$ & $6$ & $8$ & $12$ & $20$ & $50$ & $100$ & $200$ & $1000$\\
+\midrule
+$a_{n}$ & $\tfrac{3\sqrt3}{4}$ & $2$ & $\tfrac{3\sqrt3}{2}$ & $2\sqrt2$ & $3$ & $3{,}0902$ &
+$3{,}1333$ & $3{,}1395$ & $3{,}1411$ & $3{,}14157$\\
+\bottomrule
+\end{tabular}
+\caption{Le aree $a_{n}$ dei poligoni regolari di $n$ lati inscritti nel cerchio di
+raggio $1$, calcolate con la \eqref{eq:area-poligono}.}
+\label{tab:aree-poligoni}
+\end{table}
+
+Come ci aspettiamo, per $n$ grande i valori di $a_{n}$ si avvicinano a
+$\pi=3{,}14159265\ldots$ Alla fine del \cref{sec:limiti-notevoli} dimostreremo, tramite
+la \eqref{eq:area-poligono}, che l'area del cerchio di raggio $1$ vale $\pi$. La
+\eqref{eq:area-poligono} non è però utile per il calcolo \emph{numerico} di $\pi$, perché
+$\pi$ entra nella definizione stessa di $a_{n}$ (Archimede, come vedremo nella nota
+storica, aggirò il problema in modo geniale).
+
+Qui desideriamo sottolineare lo schema del procedimento: abbiamo introdotto una
+\emph{successione} di numeri reali
+\begin{equation}\label{eq:succ-aree}
+  a_{3},\ a_{4},\ a_{5},\ a_{6},\ \dots,\ a_{n},\ \dots
+\end{equation}
+Di tale successione ci interessa il comportamento per $n$ grande. Infatti il numero
+$a_{n}$ rappresenta l'area del poligono regolare di $n$ lati inscritto nel cerchio, ed
+è tanto più vicino all'obiettivo --- l'area del cerchio --- quanto più $n$ è grande. Se
+avesse un senso, diremmo che ci interessa «l'ultimo» termine della successione; però ciò
+non ha senso, perché non esiste l'ultimo termine della successione.
+
+Ciò che realmente ci interessa è il \emph{limite} della successione $a_{n}$, cioè un
+numero $a\in\R$ che sia «vicino» ai termini della successione che hanno l'indice $n$
+«grande». Ciò si esprime più precisamente così: $a$, limite della successione $a_{n}$,
+è un numero reale tale che, comunque si scelga un intervallo di numeri intorno ad $a$,
+diciamo $(a-\epsilon,a+\epsilon)$ con $\epsilon>0$, esiste un indice $\nu$ tale che, per
+$n>\nu$, $a_{n}$ sta in questo intervallo, cioè $a-\epsilon<a_{n}<a+\epsilon$.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[x=12cm, every node/.style={font=\footnotesize}]
+  % a_n = 1 - 0.9 (-1)^n / n ;  |a_n - 1| = 0.9/n < eps  sse  n > 0.9/eps
+  \foreach \row/\eps/\nuu/\lab in {0/0.30/3/{0{,}30}, 1/0.12/7/{0{,}12}, 2/0.04/22/{0{,}04}} {
+    \begin{scope}[yshift={-\row*1.25cm}]
+      \fill[verde!18] ({1-\eps},-0.16) rectangle ({1+\eps},0.16);
+      \draw[-Latex, grigio] (0.70,0) -- (1.40,0);
+      \foreach \n in {3,...,60} {
+        \pgfmathsetmacro{\x}{1-0.9/\n*cos(180*\n)}
+        \pgfmathparse{\n>\nuu ? 1 : 0}
+        \ifnum\pgfmathresult=1 \fill[verde!70!black] (\x,0) circle (1.1pt);
+        \else \fill[rame] (\x,0) circle (1.4pt); \fi
+      }
+      \draw[verde!60!black, thick] ({1-\eps},-0.16) -- ({1-\eps},0.16);
+      \draw[verde!60!black, thick] ({1+\eps},-0.16) -- ({1+\eps},0.16);
+      \node[verde!60!black, above] at ({1-\eps},0.16) {$a-\epsilon$};
+      \node[verde!60!black, above] at ({1+\eps},0.16) {$a+\epsilon$};
+      \draw[blu, thick] (1,-0.1) -- (1,0.1); \node[blu, below=2pt] at (1,-0.1) {$a$};
+      \node[anchor=west] at (1.41,0) {$\epsilon=\lab$, \ $\nu=\nuu$};
+    \end{scope}}
+\end{tikzpicture}
+\caption{L'idea di limite, per la successione $a_{n}=1-\frac{9}{10}\frac{(-1)^{n}}{n}$ e $a=1$
+(qui $\abs{a_{n}-a}<\epsilon$ se e solo se $n>\frac{9}{10\epsilon}$). Per tre valori sempre
+più piccoli di $\epsilon$, i termini
+$a_{n}$ con $n>\nu$ (in verde) cadono tutti nell'intervallo $(a-\epsilon,a+\epsilon)$;
+quelli con $n\le\nu$ (in rame) possono cadere fuori. Diminuendo $\epsilon$, l'indice
+$\nu$ in genere aumenta; l'importante è che, \emph{comunque} si fissi $\epsilon>0$, un
+tale $\nu$ esista.}
+\label{fig:idea-limite}
+\end{figure}
+
+Abbiamo rappresentato nella \cref{fig:idea-limite} tre casi per diversi valori di
+$\epsilon$; se si cambia $\epsilon$ con un numero minore, l'indice $\nu$ in genere
+aumenta. L'importante è che, comunque si fissi $\epsilon>0$, in corrispondenza esista un
+indice $\nu$ con le proprietà suddette.
+
+\begin{definizione}[Intorno]\index{intorno}
+Dati $a\in\R$ ed $\epsilon>0$, l'intervallo
+\begin{equation}\label{eq:intorno}
+  (a-\epsilon,a+\epsilon)=\{x\in\R : a-\epsilon<x<a+\epsilon\}=\{x\in\R : \abs{x-a}<\epsilon\}
+\end{equation}
+si chiama \emph{intorno} del numero $a$ di raggio $\epsilon$. L'ultima uguaglianza è la
+\eqref{eq:mod-lt}: l'intorno di raggio $\epsilon$ è l'insieme dei punti che distano da
+$a$ meno di $\epsilon$.
+\end{definizione}
+
+\begin{notastorica}[Archimede e il calcolo di $\pi$]
+Nella \emph{Misura del cerchio} Archimede (287--212 a.C.) dimostrò che l'area del
+cerchio è uguale a quella di un triangolo rettangolo con un cateto uguale al raggio e
+l'altro uguale alla circonferenza --- in linguaggio moderno, $\pi r^{2}=\frac12\,r\cdot2\pi
+r$ --- con un raffinato doppio ragionamento per assurdo (il \emph{metodo di esaustione})
+che è, in sostanza, un passaggio al limite. Nella stessa opera calcolò il perimetro dei
+poligoni regolari inscritti e circoscritti partendo dall'esagono e raddoppiando quattro
+volte il numero dei lati, fino a $96$; ottenne così
+\[
+  3+\tfrac{10}{71}<\pi<3+\tfrac17,\qquad\text{cioè}\qquad 3{,}1408<\pi<3{,}1429 .
+\]
+Il punto geniale è che il procedimento \emph{non} richiede di conoscere $\pi$: le
+grandezze dei poligoni con $2n$ lati si ottengono da quelle dei poligoni con $n$ lati
+mediante sole operazioni aritmetiche ed estrazioni di radice quadrata (si veda il codice
+qui sotto). Archimede eseguì a mano tutte le radici con approssimazioni razionali,
+sempre per difetto o per eccesso nel verso giusto, per non compromettere le
+disuguaglianze.
+\end{notastorica}
+
+\begin{python}[Il metodo di Archimede, senza conoscere $\pi$]
+# s = semiperimetro del poligono inscritto, t = del circoscritto
+# (raggio 1). Da n a 2n lati (media armonica e media geometrica):
+#     t_2n = 2 s t / (s + t),      s_2n = sqrt(s * t_2n)
+# Si parte dall'esagono: s_6 = 3, t_6 = 2*sqrt(3). Niente pi greco!
+import math
+
+n, s, t = 6, 3.0, 2 * math.sqrt(3)
+print(f"{n:4d} lati: {s:.6f} < pi < {t:.6f}")
+for _ in range(4):               # quattro raddoppi, fino a 96 lati
+    t = 2 * s * t / (s + t)
+    s = math.sqrt(s * t)
+    n *= 2
+    print(f"{n:4d} lati: {s:.6f} < pi < {t:.6f}")
+print(f"Archimede: {223/71:.6f} < pi < {22/7:.6f}")
+\end{python}
+\begin{risultato}
+   6 lati: 3.000000 < pi < 3.464102
+  12 lati: 3.105829 < pi < 3.215390
+  24 lati: 3.132629 < pi < 3.159660
+  48 lati: 3.139350 < pi < 3.146086
+  96 lati: 3.141032 < pi < 3.142715
+Archimede: 3.140845 < pi < 3.142857
+\end{risultato}
+
+Le due successioni del programma, quella dei semiperimetri inscritti (crescente) e
+quella dei circoscritti (decrescente), si stringono l'una contro l'altra intorno a $\pi$:
+è una situazione che ritroveremo, in forma generale, nel teorema sulle successioni
+monotòne (\cref{sec:monotone}) e nella definizione del numero $e$ (\cref{sec:numero-e}).

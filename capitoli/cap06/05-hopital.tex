@@ -1,0 +1,310 @@
+%% ----------------------------------------------------------------------------
+%%  §6.5  Il teorema di L'Hôpital
+%% ----------------------------------------------------------------------------
+\section{Il teorema di L'Hôpital}
+\label{sec:hopital}
+
+Siano $f$ e $g$ due funzioni che tendono a zero per $x\to x_{0}$. Abbiamo visto nel
+\cref{cap:funzioni-continue} che il rapporto $\frac{f(x)}{g(x)}$ è allora una forma
+indeterminata: in generale non è possibile dedurre il risultato del limite dai limiti
+di $f$ e di $g$, ma occorre trasformare preliminarmente il rapporto in modo da togliere
+l'indeterminazione. Il teorema di L'Hôpital serve a questo scopo, e sostituisce al
+rapporto delle funzioni il rapporto delle loro derivate.
+
+L'idea si vede bene nella \cref{fig:hopital-tangenti}. Se $f(x_{0})=g(x_{0})=0$, vicino a
+$x_{0}$ le due funzioni sono approssimate dalle loro rette tangenti,
+$f(x)\approx f'(x_{0})(x-x_{0})$ e $g(x)\approx g'(x_{0})(x-x_{0})$; il fattore comune
+$x-x_{0}$, responsabile dell'indeterminazione, si semplifica, e il rapporto
+$\frac{f(x)}{g(x)}$ tende al rapporto delle pendenze $\frac{f'(x_{0})}{g'(x_{0})}$.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.75\textwidth, height=6cm, xmin=-0.75, xmax=0.75, ymin=-1.15,
+  ymax=1.15, xtick={-0.5,0.5}, ytick={-1,1}, xlabel={$x$}, ylabel={$y$}, clip=false]
+  \addplot[curva, domain=-0.6:0.6, samples=100] {exp(x)-1};
+  \addplot[curva2, domain=-0.6:0.6, samples=100] {sin(deg(2*x))};
+  \addplot[tratteggio, domain=-0.6:0.6, samples=2] {x};
+  \addplot[tratteggio, domain=-0.52:0.52, samples=2] {2*x};
+  \node[font=\scriptsize, rame, anchor=west] at (axis cs:0.6,0.96) {$g(x)=\sen2x$};
+  \node[font=\scriptsize, blu, anchor=west] at (axis cs:0.6,0.79) {$f(x)=e^{x}-1$};
+  \node[font=\scriptsize, grigio, anchor=west] at (axis cs:0.6,0.6) {$y=x$};
+  \node[font=\scriptsize, grigio, anchor=south] at (axis cs:0.52,1.04) {$y=2x$};
+\end{axis}
+\end{tikzpicture}
+\caption{Vicino all'origine $f(x)=e^{x}-1$ e $g(x)=\sen2x$ si confondono con le loro
+tangenti $y=x$ e $y=2x$ (tratteggiate): il rapporto $\frac{f(x)}{g(x)}$ si comporta come
+$\frac{x}{2x}=\frac12$, il rapporto delle pendenze.}
+\label{fig:hopital-tangenti}
+\end{figure}
+
+\begin{teorema}[di L'Hôpital]\label{teo:hopital}\index{teorema!di L'Hôpital}
+Sia $I$ un intervallo aperto contenente il punto $x_{0}$ e siano $f$, $g$ funzioni
+derivabili in $I\setminus\{x_{0}\}$, tali che
+\begin{equation}\label{eq:hopital-ipotesi}
+  \lim_{x\to x_{0}}f(x)=0, \qquad \lim_{x\to x_{0}}g(x)=0 .
+\end{equation}
+Se $g'(x)\neq0$ per ogni $x\in I\setminus\{x_{0}\}$ e se esiste, finito o infinito, il
+limite del rapporto delle derivate, allora esiste anche il limite del rapporto delle
+funzioni, e risulta
+\begin{equation}\label{eq:hopital}
+  \lim_{x\to x_{0}}\frac{f(x)}{g(x)}=\lim_{x\to x_{0}}\frac{f'(x)}{g'(x)} .
+\end{equation}
+Il teorema vale anche:
+\begin{enumerate}[label=\textup{(\roman*)}]
+  \item per i limiti destri ($x\to x_{0}^{+}$) e sinistri ($x\to x_{0}^{-}$), con $f$, $g$
+  derivabili soltanto da una parte di $x_{0}$;
+  \item per le forme indeterminate $\frac\infty\infty$, cioè supponendo, al posto della
+  \eqref{eq:hopital-ipotesi}, che $f$ e $g$ tendano all'infinito (anzi, basta che
+  $\abs{g(x)}\to+\infty$, senza alcuna ipotesi sul limite di $f$);
+  \item per $x\to+\infty$ e per $x\to-\infty$, con $f$, $g$ derivabili in una semiretta.
+\end{enumerate}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{\begin{itemize}[nosep, leftmargin=1.2em]
+  \item $f,g$ derivabili in $I\setminus\{x_{0}\}$, con $g'\neq0$;
+  \item $f(x)\to0$ e $g(x)\to0$ (oppure $\abs{g(x)}\to+\infty$) per $x\to x_{0}$;
+  \item esiste $\displaystyle\lim_{x\to x_{0}}\frac{f'(x)}{g'(x)}=\ell\in\overline{\R}$.
+\end{itemize}}
+\Tesi{$\displaystyle\lim_{x\to x_{0}}\frac{f(x)}{g(x)}=\ell$.}
+\end{schema}
+
+Le ipotesi implicano che anche $g(x)\neq0$ per $x\neq x_{0}$ vicino a $x_{0}$, cosicché
+il rapporto $\frac{f}{g}$ è definito. La dimostrazione nel caso generale richiede un
+nuovo strumento, il teorema di Cauchy, ed è svolta nel \cref{sec:cauchy-hopital} in
+appendice. Qui ci limitiamo a provare il teorema in un caso particolare, ma
+significativo, che rende rigorosa l'idea della \cref{fig:hopital-tangenti}.
+
+\begin{proposizione}[Il caso delle funzioni derivabili in $x_{0}$]\label{prop:hopital-semplice}
+Siano $f$, $g$ definite in un intorno di $x_{0}$, derivabili in $x_{0}$, con
+\[
+  f(x_{0})=g(x_{0})=0, \qquad g'(x_{0})\neq0 .
+\]
+Allora $g(x)\neq0$ per $x\neq x_{0}$ in un intorno di $x_{0}$, e
+\begin{equation}\label{eq:hopital-semplice}
+  \lim_{x\to x_{0}}\frac{f(x)}{g(x)}=\frac{f'(x_{0})}{g'(x_{0})} .
+\end{equation}
+Se inoltre $f'$ e $g'$ esistono in un intorno di $x_{0}$ e sono continue in $x_{0}$, il
+secondo membro è uguale a $\lim_{x\to x_{0}}\frac{f'(x)}{g'(x)}$.
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$f,g$ derivabili in $x_{0}$; $f(x_{0})=g(x_{0})=0$; $g'(x_{0})\neq0$.}
+\Tesi{$\displaystyle\frac{f(x)}{g(x)}\to\frac{f'(x_{0})}{g'(x_{0})}$ per $x\to x_{0}$.}
+\end{schema}
+
+\begin{strategia}
+Poiché $f(x_{0})=g(x_{0})=0$, possiamo scrivere $f(x)=f(x)-f(x_{0})$ e
+$g(x)=g(x)-g(x_{0})$; dividendo numeratore e denominatore per $x-x_{0}$, il rapporto
+$\frac{f}{g}$ diventa il quoziente di due rapporti incrementali. Ciascuno ha limite
+finito, e quello del denominatore è diverso da zero: si applica il teorema sul limite
+del quoziente.
+\end{strategia}
+
+\begin{dimostrazione}
+Per $x\neq x_{0}$ poniamo
+\[
+  F(x)=\frac{f(x)-f(x_{0})}{x-x_{0}}=\frac{f(x)}{x-x_{0}}, \qquad
+  G(x)=\frac{g(x)-g(x_{0})}{x-x_{0}}=\frac{g(x)}{x-x_{0}} .
+\]
+Per definizione di derivata, $F(x)\to f'(x_{0})$ e $G(x)\to g'(x_{0})\neq0$. Per la
+permanenza del segno (\cref{teo:confronto-funzioni}\,(i), applicato a $G$ oppure a $-G$),
+esiste $\delta>0$ tale che $G(x)\neq0$, e quindi $g(x)\neq0$, per
+$0<\abs{x-x_{0}}<\delta$. In tali punti
+\[
+  \frac{f(x)}{g(x)}=\frac{f(x)/(x-x_{0})}{g(x)/(x-x_{0})}=\frac{F(x)}{G(x)}
+  \ \longrightarrow\ \frac{f'(x_{0})}{g'(x_{0})}
+\]
+per il teorema sulle operazioni con i limiti (\cref{teo:operazioni-funzioni}). Se infine
+$f'$, $g'$ sono continue in $x_{0}$, risulta $\frac{f'(x)}{g'(x)}\to\frac{f'(x_{0})}{g'(x_{0})}$,
+di nuovo per il limite del quoziente.
+\end{dimostrazione}
+
+\subsection{Esempi: le forme \texorpdfstring{$\frac00$}{0/0} e \texorpdfstring{$\frac\infty\infty$}{inf/inf}}
+
+Calcoliamo il limite
+\begin{equation}\label{eq:hopital-es1}
+  \lim_{x\to0}\frac{e^{x}-1}{\sen2x} .
+\end{equation}
+Si tratta di una forma indeterminata $\frac00$, che verifica le ipotesi della
+\cref{prop:hopital-semplice}: numeratore e denominatore sono nulli e derivabili in $0$, e
+$g'(0)=2\cos0=2\neq0$. Quindi
+\[
+  \lim_{x\to0}\frac{e^{x}-1}{\sen2x}=\frac{e^{0}}{2\cos0}=\frac12 ,
+\]
+come suggeriva la \cref{fig:hopital-tangenti}. Un'altra situazione dello stesso tipo è
+\[
+  \lim_{x\to1}\frac{x^{2}-1}{\log x}=\frac{2x}{1/x}\Big|_{x=1}=2 .
+\]
+
+Consideriamo ora due limiti notevoli, analoghi ai limiti di successioni della
+gerarchia degli infiniti (\cref{teo:gerarchia}), che si calcolano facilmente con il
+teorema di L'Hôpital nella forma $\frac\infty\infty$. Sia $b$ un numero reale
+positivo. Si ha
+\begin{equation}\label{eq:hopital-log-potenza}
+  \lim_{x\to+\infty}\frac{\log x}{x^{b}}=\lim_{x\to+\infty}\frac{1/x}{b\,x^{b-1}}
+  =\lim_{x\to+\infty}\frac1{b\,x^{b}}=0 :
+\end{equation}
+il logaritmo tende all'infinito più lentamente di qualunque potenza positiva. Per il
+confronto tra potenza ed esponenziale, sia $n$ il più piccolo intero $\ge b$ (cioè
+$n=b$ se $b$ è intero, $n=\lfloor b\rfloor+1$ altrimenti). Derivando $n$ volte il
+numeratore si
+ottiene
+\begin{equation}\label{eq:hopital-potenza-exp}
+  \lim_{x\to+\infty}\frac{x^{b}}{e^{x}}=\lim_{x\to+\infty}\frac{b\,x^{b-1}}{e^{x}}=\dots
+  =\lim_{x\to+\infty}\frac{b(b-1)\cdots(b-n+1)\,x^{b-n}}{e^{x}}=0 ,
+\end{equation}
+perché $b-n\le0$ e quindi $x^{b-n}$ è limitata per $x\ge1$. Il ragionamento va letto
+\emph{da destra verso sinistra}: l'ultimo limite esiste ed è nullo; le forme intermedie
+$\frac{x^{b-k}}{e^{x}}$ con $k<n$ sono del tipo $\frac\infty\infty$ (perché $b-k>0$), e il
+teorema di L'Hôpital, applicato $n$ volte risalendo la catena, assicura che anche i
+limiti precedenti esistono e valgono $0$. Le \eqref{eq:hopital-log-potenza} e
+\eqref{eq:hopital-potenza-exp} estendono alle funzioni la gerarchia
+$\log n\ll n^{b}\ll a^{n}$ delle successioni.
+
+\subsection{Le altre forme indeterminate}
+
+Il teorema di L'Hôpital è utile anche per le forme indeterminate $0\cdot\infty$ e
+$\infty-\infty$, che si riconducono a un quoziente con semplici manipolazioni. Per il
+prodotto si scrive $fg=\frac{f}{1/g}$, oppure $fg=\frac{g}{1/f}$, ottenendo una forma
+$\frac00$ oppure $\frac\infty\infty$. Ad esempio, se $b>0$,
+\begin{equation}\label{eq:hopital-xb-log}
+  \lim_{x\to0^{+}}x^{b}\log x=\lim_{x\to0^{+}}\frac{\log x}{x^{-b}}
+  =\lim_{x\to0^{+}}\frac{1/x}{-b\,x^{-b-1}}=\lim_{x\to0^{+}}\frac{x^{b}}{-b}=0 .
+\end{equation}
+Per una differenza si cerca di scriverla come un unico quoziente, ad esempio
+riducendo allo stesso denominatore:
+\begin{align*}
+  \lim_{x\to0}\Bigl(\frac1{\sen x}-\frac1x\Bigr)&=\lim_{x\to0}\frac{x-\sen x}{x\sen x}
+  =\lim_{x\to0}\frac{1-\cos x}{\sen x+x\cos x}\\
+  &=\lim_{x\to0}\frac{\sen x}{2\cos x-x\sen x}=\frac02=0,
+\end{align*}
+dove il teorema è stato applicato due volte (le prime due forme sono $\frac00$, l'ultimo
+rapporto è continuo in $0$).
+
+Le forme indeterminate esponenziali $0^{0}$, $1^{\infty}$, $\infty^{0}$ si trattano
+scrivendo $f(x)^{g(x)}=e^{g(x)\log f(x)}$ (per $f>0$): l'esponente $g(x)\log f(x)$ è una
+forma $0\cdot\infty$, e per la continuità della funzione esponenziale
+(\cref{teo:continuita-esponenziale,cor:limite-composta-continua}) basta calcolarne il
+limite. Ad esempio, usando la \eqref{eq:hopital-xb-log} con $b=1$,
+\begin{equation}\label{eq:hopital-xx}
+  \lim_{x\to0^{+}}x^{x}=\lim_{x\to0^{+}}e^{x\log x}=e^{\,\lim_{x\to0^{+}}x\log x}=e^{0}=1 ;
+\end{equation}
+per la forma $1^{\infty}$,
+\begin{equation}\label{eq:hopital-1-infinito}
+  \lim_{x\to0}(1+\sen x)^{1/x}=e^{\,\lim\limits_{x\to0}\frac{\log(1+\sen x)}{x}}
+  =e^{\,\lim\limits_{x\to0}\frac{\cos x}{1+\sen x}}=e ;
+\end{equation}
+e per la forma $\infty^{0}$, per la \eqref{eq:hopital-log-potenza} con $b=1$,
+\[
+  \lim_{x\to+\infty}x^{1/x}=e^{\,\lim\limits_{x\to+\infty}\frac{\log x}{x}}=e^{0}=1 .
+\]
+
+Il programma seguente verifica tutti questi limiti con la funzione \texttt{limit} di
+\texttt{sympy}. Si osservi che \texttt{sympy} non usa il teorema di L'Hôpital, ma
+algoritmi basati sugli sviluppi asintotici, di cui la formula di Taylor del
+\cref{sec:taylor} è il primo esempio.
+
+\begin{python}[Verifica dei limiti con sympy]
+import sympy as sp
+
+x = sp.symbols("x", real=True)
+b = sp.Rational(1, 2)                    # un esponente positivo
+esempi = [((sp.exp(x) - 1) / sp.sin(2*x), 0, "+-"),
+          ((x**2 - 1) / sp.log(x), 1, "+-"),
+          (sp.log(x) / x**b, sp.oo, "-"),
+          (x**5 / sp.exp(x), sp.oo, "-"),
+          (x**b * sp.log(x), 0, "+"),
+          (1 / sp.sin(x) - 1 / x, 0, "+-"),
+          (x**x, 0, "+"),
+          ((1 + sp.sin(x))**(1/x), 0, "+-"),
+          (x**(1/x), sp.oo, "-")]
+for f, x0, verso in esempi:
+    print(f"lim {str(f):>24} per x -> {x0}:",
+          sp.limit(f, x, x0, verso))
+\end{python}
+\begin{risultato}
+lim    (exp(x) - 1)/sin(2*x) per x -> 0: 1/2
+lim        (x**2 - 1)/log(x) per x -> 1: 2
+lim           log(x)/sqrt(x) per x -> oo: 0
+lim             x**5*exp(-x) per x -> oo: 0
+lim           sqrt(x)*log(x) per x -> 0: 0
+lim           1/sin(x) - 1/x per x -> 0: 0
+lim                     x**x per x -> 0: 1
+lim      (sin(x) + 1)**(1/x) per x -> 0: E
+lim                 x**(1/x) per x -> oo: 1
+\end{risultato}
+
+\subsection{Tre avvertenze}
+
+\begin{attenzione}[Prima di derivare, controllare che la forma sia indeterminata]
+Il teorema si applica soltanto alle forme $\frac00$ e ai rapporti il cui denominatore
+tende all'infinito (in particolare alle forme $\frac\infty\infty$). Applicato a
+sproposito dà risultati sbagliati: $\lim_{x\to0}\frac{1+x}{2+x}=\frac12$ per
+sostituzione, mentre il rapporto delle derivate vale costantemente $1$. Inoltre si
+derivano numeratore e denominatore \emph{separatamente}: la derivata del quoziente
+$\bigl(\frac fg\bigr)'$ non ha nulla a che fare con il teorema.
+\end{attenzione}
+
+\begin{attenzione}[Il teorema fornisce una condizione sufficiente]
+Se il limite di $\frac{f'}{g'}$ non esiste, il teorema non dice nulla: il limite di
+$\frac fg$ può esistere ugualmente. Per $f(x)=x+\sen x$ e $g(x)=x$, per $x\to+\infty$,
+\[
+  \frac{f(x)}{g(x)}=1+\frac{\sen x}{x}\ \to\ 1, \qquad\text{mentre}\qquad
+  \frac{f'(x)}{g'(x)}=1+\cos x
+\]
+non ha limite, perché oscilla tra $0$ e $2$ (\cref{cor:non-esistenza}). Il programma
+seguente lo mostra numericamente nei punti $x=\frac{k\pi}{2}$. Un esempio dello stesso
+tipo, con $x\to0$, è $\frac{x^{2}\sen(1/x)}{\sen x}$, che tende a $0$, mentre il rapporto
+delle derivate contiene il termine $\frac{\cos(1/x)}{\cos x}$, privo di limite (si
+ricordino le funzioni $x^{n}\sen\frac1x$ del \cref{sec:retta-tangente}).
+\end{attenzione}
+
+\begin{python}[Quando il rapporto delle derivate non ha limite]
+import math
+
+# f(x) = x + sen x, g(x) = x per x -> +oo: f/g -> 1, f'/g' oscilla
+print("     x = k pi/2        f/g     f'/g' = 1 + cos x")
+for k in (2000, 2001, 2002, 2003, 200000, 200001, 200002):
+    x = k * math.pi / 2
+    print(f"{x:15.4f}   {(x + math.sin(x)) / x:.6f}   "
+          f"{1 + math.cos(x):.6f}")
+\end{python}
+\begin{risultato}
+     x = k pi/2        f/g     f'/g' = 1 + cos x
+      3141.5927   1.000000   2.000000
+      3143.1634   1.000318   1.000000
+      3144.7342   1.000000   0.000000
+      3146.3050   0.999682   1.000000
+    314159.2654   1.000000   2.000000
+    314160.8362   1.000003   1.000000
+    314162.4070   1.000000   0.000000
+\end{risultato}
+
+\begin{attenzione}[Il teorema di L'Hôpital non dimostra i limiti notevoli]
+Si è tentati di «dimostrare» il limite notevole $\frac{\sen x}{x}\to1$ con il teorema di
+L'Hôpital: $\lim\frac{\sen x}{x}=\lim\frac{\cos x}{1}=1$. Il calcolo è corretto, ma non è
+una dimostrazione: la formula $D\sen x=\cos x$ è stata ricavata nel
+\cref{sec:derivate-elementari} proprio dal limite $\frac{\sen x}x\to1$, e usarla per
+dimostrare quel limite sarebbe un circolo vizioso. Lo stesso vale per
+$\frac{e^{x}-1}{x}\to1$ e $\frac{\log(1+x)}{x}\to1$, da cui sono state ricavate le
+derivate dell'esponenziale e del logaritmo. Il teorema di L'Hôpital è uno strumento per
+calcolare limiti \emph{nuovi} a partire dalle derivate \emph{già note}.
+\end{attenzione}
+
+\begin{notastorica}[Il marchese e il suo maestro]
+Guillaume François Antoine de L'Hôpital (1661--1704), marchese di Sainte-Mesme,
+pubblicò nel 1696 l'\emph{Analyse des infiniment petits pour l'intelligence des lignes
+courbes}, il primo manuale di calcolo differenziale della storia, che ebbe un enorme
+successo e diffuse in Europa i metodi di Leibniz. La regola che porta il suo nome vi
+compare nella sezione IX. Già allora si sapeva che il marchese aveva preso lezioni dal
+giovane Johann Bernoulli, ma solo nel Novecento, con la pubblicazione della loro
+corrispondenza, si scoprì che nel 1694 L'Hôpital aveva offerto a Bernoulli un vitalizio
+in cambio della comunicazione esclusiva delle sue scoperte matematiche, con il diritto di
+usarle a suo piacimento. Il teorema «di L'Hôpital» è dunque, con ogni probabilità, di
+Bernoulli. Va detto, a onore del marchese, che nella prefazione dell'\emph{Analyse} egli
+riconosceva il suo debito verso Leibniz e verso i fratelli Bernoulli. La grafia
+originale del nome era «L'Hospital»; nella grafia francese moderna la \emph{s} muta è
+sostituita dall'accento circonflesso.
+\end{notastorica}

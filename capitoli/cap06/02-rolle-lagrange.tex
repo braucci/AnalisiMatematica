@@ -1,0 +1,349 @@
+%% ----------------------------------------------------------------------------
+%%  §6.2  I teoremi di Rolle e di Lagrange
+%% ----------------------------------------------------------------------------
+\section{I teoremi di Rolle e di Lagrange}
+\label{sec:rolle-lagrange}
+
+Il teorema di Fermat riguarda un singolo punto. I due teoremi di questo paragrafo
+riguardano invece un intero intervallo, e sono la chiave di volta di tutto il capitolo:
+mettono in relazione la variazione \emph{complessiva} $f(b)-f(a)$ di una funzione con
+il valore della derivata in un punto opportuno. Il primo è un caso particolare del
+secondo, ma è anche lo strumento con cui il secondo si dimostra.
+
+\begin{teorema}[di Rolle]\label{teo:rolle}\index{teorema!di Rolle}
+Sia $f$ una funzione continua nell'intervallo chiuso $[a,b]$ e derivabile
+nell'intervallo aperto $(a,b)$. Se $f(a)=f(b)$, esiste un punto $x_{0}\in(a,b)$ tale
+che
+\begin{equation}\label{eq:rolle}
+  f'(x_{0})=0 .
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{\begin{itemize}[nosep, leftmargin=1.2em]
+  \item $f$ continua in $[a,b]$;
+  \item $f$ derivabile in $(a,b)$;
+  \item $f(a)=f(b)$.
+\end{itemize}}
+\Tesi{esiste $x_{0}\in(a,b)$ con $f'(x_{0})=0$.}
+\end{schema}
+
+\begin{strategia}
+Cerchiamo $x_{0}$ tra i punti di massimo e di minimo di $f$. La continuità
+nell'intervallo chiuso e limitato ci permette di usare il teorema di Weierstrass: esistono
+un punto di massimo e un punto di minimo assoluti. Se almeno uno dei due è
+\emph{interno}, il teorema di Fermat (applicabile, perché $f$ è derivabile in $(a,b)$)
+dà subito $f'(x_{0})=0$. Resta il caso in cui massimo e minimo cadono entrambi negli
+estremi: qui interviene l'ipotesi $f(a)=f(b)$, che costringe massimo e minimo a
+coincidere, cioè $f$ a essere costante; e una funzione costante ha derivata nulla
+ovunque.
+\end{strategia}
+
+\begin{dimostrazione}
+Poiché $f$ è continua in $[a,b]$, per il teorema di Weierstrass (\cref{teo:weierstrass})
+esistono $x_{1},x_{2}\in[a,b]$ tali che
+\begin{equation}\label{eq:rolle-weierstrass}
+  m=f(x_{1})\le f(x)\le f(x_{2})=M \qquad\perogni x\in[a,b].
+\end{equation}
+Distinguiamo due casi.
+
+\emph{Primo caso: almeno uno dei due punti $x_{1}$, $x_{2}$ è interno ad $[a,b]$.}
+Supponiamo, per fissare le idee, che sia $x_{2}\in(a,b)$. Allora $x_{2}$ è un punto di
+massimo (assoluto, e quindi relativo) interno, nel quale $f$ è derivabile; per il
+teorema di Fermat (\cref{teo:fermat}) risulta $f'(x_{2})=0$, e la tesi vale con
+$x_{0}=x_{2}$. Se invece è interno $x_{1}$, si ragiona allo stesso modo con il minimo.
+
+\emph{Secondo caso: entrambi i punti $x_{1}$, $x_{2}$ sono estremi dell'intervallo.}
+Allora $m$ e $M$ sono due dei valori $f(a)$, $f(b)$, che per ipotesi sono uguali;
+quindi $m=M$, e dalla \eqref{eq:rolle-weierstrass} segue $f(x)=M$ per ogni $x\in[a,b]$.
+La funzione è costante, e la sua derivata è nulla in ogni punto
+\eqref{eq:derivata-costante}: la tesi vale con un qualunque $x_{0}\in(a,b)$.
+\end{dimostrazione}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.85\textwidth, height=5cm, xmin=0, xmax=6.4, ymin=0, ymax=3.3,
+  axis lines=left, xtick={0.5,1.809,4.427,5.736},
+  xticklabels={$a$,$x_{0}$,$x_{0}'$,$b$}, ytick=\empty, clip=false]
+  \addplot[curva, domain=0.5:5.736, samples=150] {2+0.8*sin(deg(1.2*(x-0.5)))};
+  \addplot[curva2, domain=1.0:2.6] {2.8};
+  \addplot[curva2, domain=3.6:5.2] {1.2};
+  \addplot[tratteggio] coordinates {(0.5,0) (0.5,2) (5.736,2) (5.736,0)};
+  \addplot[tratteggio] coordinates {(1.809,0) (1.809,2.8)};
+  \addplot[tratteggio] coordinates {(4.427,0) (4.427,1.2)};
+  \addplot[only marks, mark=*, mark size=1.6pt, blu] coordinates
+    {(0.5,2) (5.736,2) (1.809,2.8) (4.427,1.2)};
+  \node[font=\scriptsize, grigio, anchor=west] at (axis cs:5.8,2.0) {$f(a)=f(b)$};
+\end{axis}
+\end{tikzpicture}
+\caption{Il teorema di Rolle: se $f(a)=f(b)$, il grafico ha almeno un punto con
+tangente orizzontale. Qui i punti sono due: il massimo $x_{0}$ e il minimo $x_{0}'$; il
+teorema garantisce l'esistenza di almeno uno, non l'unicità.}
+\label{fig:rolle}
+\end{figure}
+
+\begin{osservazione}[Le ipotesi del teorema di Rolle sono tutte necessarie]
+\label{oss:rolle-ipotesi}
+Se si toglie una qualunque delle tre ipotesi la tesi può essere falsa
+(\cref{fig:rolle-ipotesi}).
+\begin{enumerate}[label=\textup{(\alph*)}]
+  \item \emph{Continuità in $[a,b]$.} La funzione $f(x)=x$ per $x\in[0,1)$, con
+  $f(1)=0$, è derivabile in $(0,1)$, con derivata $1$, e verifica $f(0)=f(1)$; ma è
+  discontinua in $x=1$, e la sua derivata non si annulla mai. La continuità serviva per
+  il teorema di Weierstrass: infatti $f$ non ha massimo in $[0,1]$.
+  \item \emph{Derivabilità in $(a,b)$.} La funzione $f(x)=1-\abs x$ in $[-1,1]$ è
+  continua, verifica $f(-1)=f(1)=0$ e ha massimo nel punto interno $0$; ma lì non è
+  derivabile, e altrove la derivata vale $\pm1$. Il teorema di Fermat non era
+  applicabile.
+  \item \emph{Uguaglianza $f(a)=f(b)$.} La funzione $f(x)=x$ in $[0,1]$ è continua e
+  derivabile, ma $f'(x)=1$ per ogni $x$. Massimo e minimo cadono negli estremi senza che
+  la funzione sia costante.
+\end{enumerate}
+Si noti invece che \emph{non} si richiede la derivabilità negli estremi: la funzione
+$f(x)=\sqrt{1-x^{2}}$ in $[-1,1]$ (il cui grafico è una semicirconferenza) ha
+derivata infinita in $\pm1$, ma verifica le ipotesi, e infatti $f'(0)=0$.
+\end{osservazione}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[name=r1, width=0.36\textwidth, height=0.32\textwidth, axis lines=middle,
+  xmin=-0.3, xmax=1.35, ymin=-0.25, ymax=1.3, xtick={1}, ytick=\empty,
+  title={\scriptsize (a) discontinua in $b$}]
+  \addplot[curva, domain=0:1, samples=2] {x};
+  \addplot[only marks, mark=o, mark size=1.6pt, blu, fill=white] coordinates {(1,1)};
+  \addplot[only marks, mark=*, mark size=1.6pt, blu] coordinates {(1,0) (0,0)};
+\end{axis}
+\begin{axis}[at={(r1.east)}, anchor=west, xshift=0.6cm, name=r2, width=0.36\textwidth,
+  height=0.32\textwidth, axis lines=middle, xmin=-1.35, xmax=1.35, ymin=-0.25,
+  ymax=1.3, xtick={-1,1}, ytick=\empty, title={\scriptsize (b) non derivabile in $0$}]
+  \addplot[curva, domain=-1:1, samples=3] {1-abs(x)};
+\end{axis}
+\begin{axis}[at={(r2.east)}, anchor=west, xshift=0.6cm, width=0.36\textwidth,
+  height=0.32\textwidth, axis lines=middle, xmin=-0.3, xmax=1.35, ymin=-0.25,
+  ymax=1.3, xtick={1}, ytick=\empty, title={\scriptsize (c) $f(a)\neq f(b)$}]
+  \addplot[curva, domain=0:1, samples=2] {x};
+  \addplot[only marks, mark=*, mark size=1.6pt, blu] coordinates {(0,0) (1,1)};
+\end{axis}
+\end{tikzpicture}
+\caption{Tre funzioni che violano una sola delle ipotesi del teorema di Rolle e per le
+quali la tesi è falsa: nessuna ha un punto a tangente orizzontale.}
+\label{fig:rolle-ipotesi}
+\end{figure}
+
+Il teorema di Rolle ha un'interpretazione geometrica evidente: se la corda che
+congiunge gli estremi del grafico è orizzontale, in qualche punto anche la tangente lo
+è. Se ora «inclinassimo» la figura, ci aspetteremmo di trovare un punto in cui la
+tangente è \emph{parallela alla corda}. È il contenuto del teorema seguente.
+
+\begin{teorema}[di Lagrange, o del valor medio]\label{teo:lagrange}
+\index{teorema!di Lagrange}\index{teorema!del valor medio}
+Sia $f$ una funzione continua nell'intervallo chiuso $[a,b]$ e derivabile
+nell'intervallo aperto $(a,b)$. Esiste un punto $x_{0}\in(a,b)$ tale che
+\begin{equation}\label{eq:lagrange}
+  \frac{f(b)-f(a)}{b-a}=f'(x_{0}) .
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$ continua in $[a,b]$ e derivabile in $(a,b)$.}
+\Tesi{esiste $x_{0}\in(a,b)$ con $f(b)-f(a)=f'(x_{0})\,(b-a)$.}
+\end{schema}
+
+\begin{strategia}
+Il primo membro della \eqref{eq:lagrange} è la pendenza della corda che congiunge
+$(a,f(a))$ e $(b,f(b))$; il secondo è la pendenza della tangente in $x_{0}$. Ci
+riconduciamo al teorema di Rolle \emph{sottraendo la corda}: la funzione ausiliaria
+$g(x)=f(x)-r(x)$, dove $y=r(x)$ è l'equazione della retta secante, misura la distanza
+verticale tra il grafico e la corda. Questa distanza è nulla negli estremi, quindi $g$
+verifica le ipotesi del teorema di Rolle; nel punto in cui $g'$ si annulla, la
+pendenza di $f$ eguaglia quella della retta. È un procedimento tipico: per dimostrare
+un risultato più generale, si costruisce una funzione alla quale si può applicare il
+caso particolare già noto.
+\end{strategia}
+
+\begin{dimostrazione}
+La retta passante per i punti $(a,f(a))$ e $(b,f(b))$ ha equazione
+$y=r(x)=f(a)+\frac{f(b)-f(a)}{b-a}(x-a)$. Consideriamo la funzione
+\begin{equation}\label{eq:lagrange-g}
+  g(x)=f(x)-\Bigl[f(a)+\frac{f(b)-f(a)}{b-a}(x-a)\Bigr], \qquad x\in[a,b].
+\end{equation}
+La funzione $g$ è continua in $[a,b]$ e derivabile in $(a,b)$, perché differenza di $f$
+e di un polinomio di primo grado (\cref{teo:operazioni-continue,teo:operazioni-derivate});
+inoltre
+\[
+  g(a)=f(a)-f(a)=0, \qquad g(b)=f(b)-\bigl[f(a)+f(b)-f(a)\bigr]=0 .
+\]
+Per il teorema di Rolle (\cref{teo:rolle}) esiste $x_{0}\in(a,b)$ tale che
+$g'(x_{0})=0$. Poiché
+\[
+  g'(x)=f'(x)-\frac{f(b)-f(a)}{b-a} \qquad\perogni x\in(a,b),
+\]
+la condizione $g'(x_{0})=0$ è esattamente la \eqref{eq:lagrange}.
+\end{dimostrazione}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.85\textwidth, height=5.4cm, xmin=0, xmax=4.8, ymin=0, ymax=4.6,
+  axis lines=left, xtick={0.25,1.5625,4}, xticklabels={$a$,$x_{0}$,$b$},
+  ytick=\empty, clip=false]
+  \addplot[curva, domain=0.1:4.3, samples=120] {2*sqrt(x)};
+  \addplot[curva2, domain=0.25:4] {1+0.8*(x-0.25)};
+  \addplot[curva3, domain=0.2:3.6] {2.5+0.8*(x-1.5625)};
+  \addplot[tratteggio] coordinates {(0.25,0) (0.25,1)};
+  \addplot[tratteggio] coordinates {(4,0) (4,4)};
+  \addplot[tratteggio] coordinates {(1.5625,0) (1.5625,2.5)};
+  \addplot[only marks, mark=*, mark size=1.6pt, blu] coordinates
+    {(0.25,1) (4,4) (1.5625,2.5)};
+  \node[font=\scriptsize, rame, anchor=north west] at (axis cs:2.5,2.75) {corda};
+  \node[font=\scriptsize, verde!50!black, anchor=south east] at (axis cs:3.2,3.95)
+    {tangente parallela};
+\end{axis}
+\end{tikzpicture}
+\caption{Il teorema di Lagrange per $f(x)=2\sqrt x$ in $[a,b]=[\frac14,4]$: la corda ha
+pendenza $\frac{4-1}{4-1/4}=\frac45$, e la tangente nel punto $x_{0}=\frac{25}{16}$, dove
+$f'(x_{0})=\frac1{\sqrt{x_{0}}}=\frac45$, le è parallela.}
+\label{fig:lagrange}
+\end{figure}
+
+\begin{idea}[Il «Tutor» e il velivolo: velocità media e velocità istantanea]
+Se $s(t)$ è la legge oraria di un moto rettilineo, il primo membro della
+\eqref{eq:lagrange} è la velocità media nell'intervallo di tempo $[a,b]$, il secondo la
+velocità istantanea all'istante $x_{0}$. Il teorema di Lagrange afferma dunque che
+\emph{esiste un istante in cui la velocità istantanea è uguale alla velocità media}.
+È il principio su cui si fonda il sistema «Tutor» che controlla la velocità sulle
+autostrade italiane: il sistema misura soltanto i tempi di passaggio sotto due portali
+distanti, ad esempio, $20$~km; se l'automobile li ha percorsi in $8$~min, la
+velocità media è di $150$~km/h e, per il teorema di Lagrange, il tachimetro ha
+segnato $150$~km/h in almeno un istante, anche se nessuno l'ha visto. Allo stesso
+modo, un velivolo che percorre i $300$~km tra due punti di riporto in un'ora ha
+avuto, almeno in un istante, una velocità al suolo (lungo la rotta) di esattamente
+$300$~km/h.
+\end{idea}
+
+Il punto $x_{0}$ di cui il teorema garantisce l'esistenza in generale non si può
+calcolare esplicitamente, ma spesso si può trovare numericamente risolvendo
+l'equazione $f'(x)=\frac{f(b)-f(a)}{b-a}$, ad esempio con il metodo di bisezione del
+\cref{sec:bisezione} o con la funzione \texttt{brentq} di \texttt{scipy}, purché $f'$
+sia continua e la differenza $f'(x)-\frac{f(b)-f(a)}{b-a}$ abbia segni opposti negli
+estremi (per $x^{3}$ in $[-1,1]$, ad esempio, ciò non accade, benché i punti
+$\pm\frac1{\sqrt3}$ esistano). Il programma
+seguente lo fa per $f(x)=x^{3}$ in $[0,2]$, dove l'equazione $3x^{2}=4$ dà
+$x_{0}=\frac2{\sqrt3}$, e per $f(x)=\sen x$ in $[0,\frac\pi2]$, dove $\cos x_{0}=\frac2\pi$.
+
+\begin{python}[Il punto di Lagrange calcolato numericamente]
+import math
+from scipy.optimize import brentq
+
+def xi_lagrange(f, df, a, b):
+    """Un punto xi in (a, b) con f'(xi) = [f(b) - f(a)] / (b - a)."""
+    m = (f(b) - f(a)) / (b - a)          # pendenza della corda
+    return brentq(lambda t: df(t) - m, a + 1e-12, b - 1e-12), m
+
+xi, m = xi_lagrange(lambda t: t**3, lambda t: 3 * t**2, 0, 2)
+print(f"x^3:   corda = {m:.4f}   xi = {xi:.6f}"
+      f"   2/sqrt(3)    = {2 / math.sqrt(3):.6f}")
+xi, m = xi_lagrange(math.sin, math.cos, 0, math.pi / 2)
+print(f"sen x: corda = {m:.4f}   xi = {xi:.6f}"
+      f"   arccos(2/pi) = {math.acos(2 / math.pi):.6f}")
+
+# stima di sqrt(101) con il teorema di Lagrange (vedi il testo)
+sup = 10 + 1 / 20
+inf = 10 + 1 / (2 * sup)
+print(f"{inf:.6f} < sqrt(101) = {math.sqrt(101):.6f} < {sup:.6f}")
+\end{python}
+\begin{risultato}
+x^3:   corda = 4.0000   xi = 1.154701   2/sqrt(3)    = 1.154701
+sen x: corda = 0.6366   xi = 0.880689   arccos(2/pi) = 0.880689
+10.049751 < sqrt(101) = 10.049876 < 10.050000
+\end{risultato}
+
+Posto $a=x_{0}$, $b=x_{0}+h$ (con $h>0$) e scritto il punto intermedio nella forma
+$x_{0}+\vartheta h$, con $0<\vartheta<1$, la tesi del teorema di Lagrange diventa la
+\emph{formula degli accrescimenti finiti}: esiste $\vartheta\in(0,1)$ tale che
+\begin{equation}\label{eq:accrescimenti-finiti}
+  f(x_{0}+h)=f(x_{0})+f'(x_{0}+\vartheta h)\,h ,
+\end{equation}
+valida, con lo stesso ragionamento applicato all'intervallo $[x_{0}+h,x_{0}]$, anche
+per $h<0$: in entrambi i casi basta che $f$ sia continua nell'intervallo chiuso di
+estremi $x_{0}$ e $x_{0}+h$ e derivabile nei suoi punti interni. Il confronto con
+l'approssimazione lineare del \cref{sec:retta-tangente},
+$f(x_{0}+h)=f(x_{0})+f'(x_{0})h+o(h)$, è istruttivo: lì la derivata è calcolata nel
+punto noto $x_{0}$ e si commette un errore $o(h)$; qui l'uguaglianza è esatta, ma la
+derivata è calcolata in un punto sconosciuto. Proprio questo la rende adatta a
+ottenere \emph{stime}, come nel corollario seguente.
+
+\needspace{9\baselineskip}
+\begin{corollario}[Stima degli incrementi]\label{cor:lipschitz}
+Sia $f$ derivabile in un intervallo $I$ e supponiamo che esista $M\ge0$ tale che
+$\abs{f'(x)}\le M$ per ogni $x\in I$. Allora
+\begin{equation}\label{eq:lipschitz}
+  \abs{f(x)-f(y)}\le M\abs{x-y} \qquad\perogni x,y\in I .
+\end{equation}
+\end{corollario}
+
+\begin{schema}
+\Ipotesi{$f$ derivabile nell'intervallo $I$; \ $\abs{f'}\le M$ in $I$.}
+\Tesi{$\abs{f(x)-f(y)}\le M\abs{x-y}$ per ogni $x,y\in I$.}
+\end{schema}
+
+\begin{strategia}
+Basta applicare il teorema di Lagrange all'intervallo di estremi $x$ e $y$ (contenuto in
+$I$, perché $I$ è un intervallo) e maggiorare la derivata nel punto intermedio.
+\end{strategia}
+
+\begin{dimostrazione}
+Se $x=y$ non c'è nulla da dimostrare. Se, ad esempio, $x<y$, l'intervallo $[x,y]$ è
+contenuto in $I$, e in esso $f$ è derivabile, quindi anche continua
+(\cref{teo:derivabile-continua}). Per il teorema di Lagrange esiste $x_{0}\in(x,y)$ con
+$f(y)-f(x)=f'(x_{0})(y-x)$, e quindi
+$\abs{f(y)-f(x)}=\abs{f'(x_{0})}\,\abs{y-x}\le M\abs{y-x}$.
+\end{dimostrazione}
+
+Una funzione che verifica la \eqref{eq:lipschitz} per qualche costante $M$ si dice
+\emph{lipschitziana}\index{funzione!lipschitziana} in $I$, dal nome del matematico tedesco
+Rudolf Lipschitz. Poiché $\abs{D\sen x}=\abs{\cos x}\le1$ e
+$\abs{D\operatorname{arctg}x}=\frac1{1+x^{2}}\le1$, si ottengono le disuguaglianze, valide
+per ogni $x,y\in\R$,
+\begin{equation}\label{eq:sen-arctg-lipschitz}
+  \abs{\sen x-\sen y}\le\abs{x-y}, \qquad
+  \abs{\operatorname{arctg}x-\operatorname{arctg}y}\le\abs{x-y} ,
+\end{equation}
+la prima delle quali era stata ricavata per via trigonometrica nell'\cref{es:seno-lipschitz}.
+In termini applicativi il corollario è una regola di \emph{propagazione degli errori}:
+se una grandezza $x$ è misurata con un errore non superiore a $\varepsilon$, il valore
+calcolato $f(x)$ è affetto da un errore non superiore a $M\varepsilon$, dove $M$ è il
+massimo di $\abs{f'}$ nell'intervallo di incertezza.
+
+\begin{esempio}[Una stima di $\sqrt{101}$]\label{es:stima-radice}
+Applichiamo il teorema di Lagrange a $f(x)=\sqrt x$ nell'intervallo $[100,101]$:
+esiste $x_{0}\in(100,101)$ tale che
+\[
+  \sqrt{101}-10=\frac{1}{2\sqrt{x_{0}}}\,(101-100)=\frac{1}{2\sqrt{x_{0}}} .
+\]
+Poiché $\sqrt{x_{0}}>10$, risulta $\sqrt{101}-10<\frac1{20}$, cioè $\sqrt{101}<10{,}05$.
+Ma allora anche $\sqrt{x_{0}}<\sqrt{101}<10{,}05$, e quindi
+$\sqrt{101}-10>\frac{1}{20{,}1}$. In conclusione
+$10{,}04975<\sqrt{101}<10{,}05$, come conferma l'ultima riga dell'output precedente.
+Si noti come la stima superiore sia stata usata per migliorare quella inferiore.
+\end{esempio}
+
+\needspace{8\baselineskip}
+\begin{notastorica}[Rolle, Lagrange, Bonnet]
+Michel Rolle (1652--1719), membro dell'Académie des Sciences, enunciò nel 1691 il
+teorema che porta il suo nome soltanto per i \emph{polinomi}, nel contesto della
+ricerca delle radici delle equazioni algebriche: tra due radici consecutive di un
+polinomio cade una radice di un polinomio da esso derivato secondo regole puramente
+algebriche (la «cascata» di Rolle). Paradossalmente, Rolle fu per anni uno dei più
+accesi critici del nuovo calcolo infinitesimale, che giudicava privo di fondamenti
+solidi. Il nome «teorema di Rolle» fu attribuito soltanto nell'Ottocento. Il teorema
+del valor medio compare nella \emph{Théorie des fonctions analytiques} (1797) di
+Joseph-Louis Lagrange, in una forma legata allo sviluppo in serie delle funzioni;
+Cauchy, nel 1823, ne diede una dimostrazione che presupponeva la continuità della
+derivata. La dimostrazione che abbiamo presentato, che deduce il teorema da quello di
+Rolle mediante la funzione ausiliaria \eqref{eq:lagrange-g}, è dovuta a Ossian Bonnet e
+fu pubblicata nel \emph{Cours de calcul différentiel et intégral} di Joseph Serret
+(1868); da allora è quella di tutti i manuali.
+\end{notastorica}

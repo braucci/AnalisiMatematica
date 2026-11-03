@@ -1,0 +1,791 @@
+%% ----------------------------------------------------------------------------
+%%  §6.4  Funzioni convesse e concave
+%% ----------------------------------------------------------------------------
+\section{Funzioni convesse e concave}
+\label{sec:convessita}
+
+Il segno della derivata prima dice se il grafico sale o scende; non dice però
+\emph{come} sale o scende. Le funzioni $x^{2}$ e $\sqrt x$ sono entrambe crescenti in
+$[0,+\infty)$, ma la prima cresce sempre più rapidamente e il suo grafico volge la
+concavità verso l'alto, la seconda cresce sempre più lentamente e il suo grafico volge
+la concavità verso il basso. Per descrivere questa proprietà introduciamo una nuova
+definizione.
+
+Si dice che una funzione è \emph{convessa} in un intervallo se, per ogni punto
+$x_{0}$ dell'intervallo, il grafico della funzione sta \emph{al di sopra} della retta
+tangente nel punto $(x_{0},f(x_{0}))$; si dice \emph{concava} se il grafico sta \emph{al di
+sotto} di ogni retta tangente. Usando l'equazione della retta tangente
+\eqref{eq:retta-tangente}, possiamo dare la definizione in forma precisa.
+
+\begin{definizione}[Funzioni convesse e concave]\label{def:convessa}
+\index{funzione!convessa}\index{funzione!concava}
+Sia $f$ una funzione derivabile nell'intervallo $[a,b]$ (con derivate unilaterali negli
+estremi). Si dice che $f$ è \emph{convessa} in $[a,b]$ se
+\begin{equation}\label{eq:convessa}
+  f(x)\ge f(x_{0})+f'(x_{0})(x-x_{0}) \qquad\perogni x,x_{0}\in[a,b];
+\end{equation}
+si dice che $f$ è \emph{concava} in $[a,b]$ se
+\begin{equation}\label{eq:concava}
+  f(x)\le f(x_{0})+f'(x_{0})(x-x_{0}) \qquad\perogni x,x_{0}\in[a,b].
+\end{equation}
+Se le disuguaglianze sono strette per $x\neq x_{0}$, la funzione si dice
+\emph{strettamente} convessa o concava. Una funzione è convessa (concava) in un
+intervallo qualunque $I$ se lo è in ogni intervallo chiuso e limitato contenuto in $I$.
+\end{definizione}
+
+Evidentemente $f$ è concava se e solo se $-f$ è convessa: per questo basta
+studiare le funzioni convesse. Nella \cref{fig:convessa-concava} la funzione è convessa
+nell'intervallo $[a,c]$ e concava nell'intervallo $[c,b]$: in $c$ la concavità cambia
+verso.
+
+\begin{definizione}[Punto di flesso]\label{def:flesso}\index{punto!di flesso}\index{flesso}
+Sia $f$ derivabile in un intorno di $x_{0}$. Si dice che $x_{0}$ è un \emph{punto di
+flesso} per $f$ se esiste $\delta>0$ tale che $f$ è convessa in $[x_{0}-\delta,x_{0}]$ e
+concava in $[x_{0},x_{0}+\delta]$, oppure concava in $[x_{0}-\delta,x_{0}]$ e convessa in
+$[x_{0},x_{0}+\delta]$.
+\end{definizione}
+
+In un punto di flesso la retta tangente \emph{attraversa} il grafico: da una parte il
+grafico sta sopra la tangente, dall'altra sotto. Se la tangente è orizzontale si parla
+di \emph{flesso a tangente orizzontale} (come per $x^{3}$ in $0$), altrimenti di flesso a
+tangente obliqua.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.9\textwidth, height=5.6cm, xmin=0.4, xmax=5.6, ymin=1.15, ymax=2.85,
+  axis lines=left, xtick={0.8,3,5.2}, xticklabels={$a$,$c$,$b$}, ytick=\empty,
+  clip=false]
+  \addplot[curva, domain=0.8:5.2, samples=120] {2-0.15*(x-3)^3+0.5*(x-3)};
+  \addplot[curva2, domain=0.55:2.0] {1.9748-0.958*(x-1.2)};
+  \addplot[curva2, domain=2.2:3.8] {2+0.5*(x-3)};
+  \addplot[curva2, domain=4.0:5.45] {2.0252-0.958*(x-4.8)};
+  \addplot[tratteggio] coordinates {(3,1.15) (3,2)};
+  \addplot[only marks, mark=*, mark size=1.6pt, blu] coordinates
+    {(1.2,1.9748) (3,2) (4.8,2.0252)};
+  \node[font=\scriptsize, grigio] at (axis cs:1.9,2.65) {convessa};
+  \node[font=\scriptsize, grigio] at (axis cs:3.6,2.7) {concava};
+  \node[font=\scriptsize, rame, anchor=north west] at (axis cs:3.05,1.95) {flesso};
+\end{axis}
+\end{tikzpicture}
+\caption{Una funzione convessa in $[a,c]$, dove il grafico sta sopra le tangenti, e
+concava in $[c,b]$, dove sta sotto. Nel punto di flesso $c$ la tangente attraversa il
+grafico.}
+\label{fig:convessa-concava}
+\end{figure}
+
+Come per la monotonia, esiste un criterio che riconduce la convessità al segno di una
+derivata, questa volta della derivata seconda.
+
+\needspace{12\baselineskip}
+\begin{teorema}[Criterio di convessità]\label{teo:criterio-convessita}
+\index{criterio!di convessità}
+Sia $f$ una funzione derivabile in $[a,b]$ che ammette derivata seconda in $(a,b)$. Le
+seguenti condizioni sono fra loro equivalenti:
+\begin{enumerate}[label=\textup{(\alph*)}]
+  \item $f$ è convessa in $[a,b]$;
+  \item $f'$ è crescente in $[a,b]$;
+  \item $f''(x)\ge0$ per ogni $x\in(a,b)$.
+\end{enumerate}
+Analogamente, $f$ è concava in $[a,b]$ se e solo se $f'$ è decrescente in $[a,b]$, se e
+solo se $f''\le0$ in $(a,b)$.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$ derivabile in $[a,b]$, derivabile due volte in $(a,b)$.}
+\Tesi{(a) $f$ convessa \ $\sse$ \ (b) $f'$ crescente \ $\sse$ \ (c) $f''\ge0$ in $(a,b)$.}
+\end{schema}
+
+\begin{strategia}
+Dimostriamo le equivalenze (a)$\sse$(b) e (b)$\sse$(c).
+\begin{itemize}[nosep]
+  \item (a)$\Rightarrow$(b): scriviamo la disuguaglianza di convessità con il punto di
+  tangenza in $x_{1}$ e poi in $x_{2}$, e sommiamo: i valori di $f$ si cancellano e resta
+  una disuguaglianza tra le derivate.
+  \item (b)$\Rightarrow$(a): per il teorema di Lagrange la differenza $f(x)-f(x_{0})$ è
+  uguale a $f'(x_{1})(x-x_{0})$, con $x_{1}$ tra $x_{0}$ e $x$; la monotonia di $f'$
+  permette di confrontare $f'(x_{1})$ con $f'(x_{0})$.
+  \item (b)$\sse$(c): è il criterio di monotonia applicato alla funzione $f'$, con una
+  piccola cautela negli estremi $a$ e $b$, dove non sappiamo se $f'$ sia continua.
+\end{itemize}
+\end{strategia}
+
+\begin{dimostrazione}
+\emph{(a)$\Rightarrow$(b).} Siano $x_{1},x_{2}\in[a,b]$ con $x_{1}<x_{2}$. Scrivendo la
+\eqref{eq:convessa} con $x_{0}=x_{1}$, $x=x_{2}$, e poi con $x_{0}=x_{2}$, $x=x_{1}$,
+otteniamo
+\[
+  f(x_{2})\ge f(x_{1})+f'(x_{1})(x_{2}-x_{1}), \qquad
+  f(x_{1})\ge f(x_{2})+f'(x_{2})(x_{1}-x_{2}) .
+\]
+Sommando membro a membro e semplificando,
+\begin{equation}\label{eq:convessa-somma}
+  0\ge f'(x_{1})(x_{2}-x_{1})+f'(x_{2})(x_{1}-x_{2})=-\bigl[f'(x_{2})-f'(x_{1})\bigr](x_{2}-x_{1}),
+\end{equation}
+cioè $\bigl[f'(x_{2})-f'(x_{1})\bigr](x_{2}-x_{1})\ge0$. Essendo $x_{2}-x_{1}>0$, ne segue
+$f'(x_{1})\le f'(x_{2})$: $f'$ è crescente.
+
+\emph{(b)$\Rightarrow$(a).} Siano $x,x_{0}\in[a,b]$ con $x\neq x_{0}$. Per il teorema di
+Lagrange (\cref{teo:lagrange}) esiste $x_{1}$ strettamente compreso tra $x_{0}$ e $x$
+tale che
+\begin{equation}\label{eq:convessa-lagrange}
+  f(x)-f(x_{0})=f'(x_{1})(x-x_{0}) .
+\end{equation}
+Se $x>x_{0}$, allora $x_{1}>x_{0}$ e, per la monotonia di $f'$, $f'(x_{1})\ge f'(x_{0})$;
+moltiplicando per $x-x_{0}>0$ si ottiene $f'(x_{1})(x-x_{0})\ge f'(x_{0})(x-x_{0})$. Se
+$x<x_{0}$, allora $x_{1}<x_{0}$ e $f'(x_{1})\le f'(x_{0})$; moltiplicando per
+$x-x_{0}<0$ il verso si inverte, e si ottiene di nuovo
+$f'(x_{1})(x-x_{0})\ge f'(x_{0})(x-x_{0})$. In entrambi i casi, per la
+\eqref{eq:convessa-lagrange}, $f(x)-f(x_{0})\ge f'(x_{0})(x-x_{0})$, che è la
+\eqref{eq:convessa}. Per $x=x_{0}$ la disuguaglianza è un'uguaglianza.
+
+\emph{(b)$\Rightarrow$(c).} Se $f'$ è crescente, per ogni $x\in(a,b)$ i rapporti
+incrementali $\frac{f'(x+h)-f'(x)}{h}$ sono $\ge0$ (come nella dimostrazione del
+\cref{teo:criterio-monotonia}), e il loro limite $f''(x)$ è $\ge0$.
+
+\emph{(c)$\Rightarrow$(b).} Siano $a<c<d<b$. Nell'intervallo $[c,d]$ la funzione $f'$ è
+derivabile, quindi continua, e ha derivata $f''\ge0$; per il criterio di monotonia
+(\cref{teo:criterio-monotonia}) $f'$ è crescente in $[c,d]$. Poiché due punti qualsiasi
+di $(a,b)$ sono contenuti in un tale intervallo, $f'$ è crescente in $(a,b)$. Resta da
+includere gli estremi, nei quali $f'$ potrebbe non essere continua. Sia $x\in(a,b)$; per
+ogni $h$ con $0<h<x-a$ il teorema di Lagrange in $[a,a+h]$ fornisce un punto
+$\xi_{h}\in(a,a+h)$ tale che
+\[
+  \frac{f(a+h)-f(a)}{h}=f'(\xi_{h})\le f'(x),
+\]
+dove la disuguaglianza vale perché $\xi_{h}<a+h<x$ e $f'$ è crescente in $(a,b)$. Per
+$h\to0^{+}$ il primo membro tende a $f'(a)$, e per il teorema del confronto
+$f'(a)\le f'(x)$. Allo stesso modo si prova che $f'(x)\le f'(b)$; infine
+$f'(a)\le f'(b)$ si ottiene confrontando entrambi con un qualunque $x\in(a,b)$. Dunque
+$f'$ è crescente in $[a,b]$.
+
+Il caso delle funzioni concave si ottiene applicando quanto provato a $-f$.
+\end{dimostrazione}
+
+\begin{osservazione}[Convessità stretta]\label{oss:convessita-stretta}
+Se $f''(x)>0$ per ogni $x\in(a,b)$, allora $f$ è \emph{strettamente} convessa in $[a,b]$.
+Infatti, per il \cref{cor:derivata-positiva} applicato a $f'$, la derivata prima è
+strettamente crescente in ogni $[c,d]\subset(a,b)$, e quindi in $(a,b)$; negli estremi,
+per $a<t<x$ si ha $f'(a)\le f'(t)<f'(x)$. Nella dimostrazione di (b)$\Rightarrow$(a) le
+disuguaglianze tra $f'(x_{1})$ e $f'(x_{0})$ diventano allora strette, e così la
+\eqref{eq:convessa} per $x\neq x_{0}$.
+\end{osservazione}
+
+Negli enunciati che seguono useremo le derivate successive calcolate in un singolo
+punto; precisiamo il significato dell'espressione.
+
+\begin{notazione}[Derivate successive in un punto]\label{not:derivabile-n-volte}
+\index{derivata!successiva in un punto}
+Si dice che $f$ è \emph{derivabile due volte nel punto $x_{0}$} se $f'$ esiste in tutto un
+intorno di $x_{0}$ ed è derivabile in $x_{0}$; la derivata seconda $f''(x_{0})$ è allora la
+derivata di $f'$ nel punto $x_{0}$. Più in generale, $f$ è \emph{derivabile $n$ volte in
+$x_{0}$} se la derivata $f^{(n-1)}$ esiste in tutto un intorno di $x_{0}$ ed è derivabile in
+$x_{0}$. In tal caso $f,f',\dots,f^{(n-2)}$ sono derivabili, e quindi continue, in tale
+intorno; nulla si richiede invece a $f^{(n-1)}$ fuori del punto $x_{0}$.
+\end{notazione}
+
+\begin{corollario}[Condizione necessaria per i flessi]\label{cor:flesso-necessaria}
+Se $x_{0}$ è un punto di flesso per $f$ e $f$ è derivabile due volte in $x_{0}$, allora
+$f''(x_{0})=0$.
+\end{corollario}
+
+\begin{schema}
+\Ipotesi{$x_{0}$ punto di flesso; $f$ derivabile due volte in $x_{0}$.}
+\Tesi{$f''(x_{0})=0$.}
+\end{schema}
+
+\begin{strategia}
+Il cambiamento di concavità si traduce, per il criterio di convessità, in un cambiamento
+di monotonia della derivata prima: $f'$ cresce da una parte di $x_{0}$ e decresce
+dall'altra. Dunque $x_{0}$ è un punto di estremo per la funzione $f'$, e il teorema di
+Fermat, applicato a $f'$, dà $(f')'(x_{0})=0$.
+\end{strategia}
+
+\begin{dimostrazione}
+Supponiamo $f$ convessa in $[x_{0}-\delta,x_{0}]$ e concava in $[x_{0},x_{0}+\delta]$.
+Per il criterio di convessità, nella forma (a)$\Rightarrow$(b) (che non usa la derivata
+seconda), $f'$ è crescente in $[x_{0}-\delta,x_{0}]$ e decrescente in
+$[x_{0},x_{0}+\delta]$. Dunque $x_{0}$ è un punto di massimo relativo \emph{interno} per
+la funzione $f'$, che è derivabile in $x_{0}$: per il teorema di Fermat, applicato a
+$f'$, risulta $f''(x_{0})=0$. Il caso opposto è analogo (con un minimo di $f'$).
+\end{dimostrazione}
+
+La condizione non è sufficiente: la funzione $f(x)=x^{4}$ ha $f''(0)=0$, ma è convessa su
+tutto $\R$, perché $f''(x)=12x^{2}\ge0$; il punto $0$ non è di flesso.
+
+\begin{esempio}[Convessità delle funzioni elementari]\label{es:convessita-elementari}
+La funzione $e^{x}$ è convessa su tutto $\R$, perché la sua derivata seconda $e^{x}$ è
+positiva; la disuguaglianza $e^{x}\ge1+x$ dell'\cref{es:disuguaglianze-exp-log} è la
+\eqref{eq:convessa} con $x_{0}=0$. La funzione $\log x$ è concava in $(0,+\infty)$,
+perché $D^{2}\log x=-\frac1{x^{2}}<0$. Per $\operatorname{arctg}x$ si ha
+\[
+  D\operatorname{arctg}x=\frac1{1+x^{2}}, \qquad
+  D^{2}\operatorname{arctg}x=-\frac{2x}{(1+x^{2})^{2}},
+\]
+quindi l'arcotangente è convessa per $x\le0$ e concava per $x\ge0$, e il punto $0$ è di
+flesso (\cref{fig:arctg}). La funzione $x^{2}$ è convessa su $\R$. Infine
+$f(x)=x^{3}-3x$ ha $f''(x)=6x$: è concava per $x\le0$ e convessa per $x\ge0$, con un
+flesso nell'origine, come si vede nella \cref{fig:cubica-monotonia}.
+\end{esempio}
+
+\begin{esempio}[Il grafico di $\sen x$]\label{es:grafico-seno}
+Le proprietà stabilite negli ultimi due paragrafi permettono di \emph{motivare} il
+grafico, ben noto, della funzione $\sen x$ nell'intervallo $[0,2\pi]$. Le derivate sono
+$f'(x)=\cos x$ e $f''(x)=-\sen x$, e i loro segni sono riassunti nella
+\cref{tab:seno-segni}. Ne segue che $\sen x$ cresce in $[0,\frac\pi2]$, decresce in
+$[\frac\pi2,\frac32\pi]$ e cresce di nuovo in $[\frac32\pi,2\pi]$; è concava in
+$[0,\pi]$ e convessa in $[\pi,2\pi]$. Il punto $\frac\pi2$ è di massimo, $\frac32\pi$ di
+minimo, $\pi$ di flesso (a tangente obliqua, con pendenza $\cos\pi=-1$). Queste
+informazioni, insieme a pochi valori facilmente calcolabili, determinano il grafico
+della \cref{fig:seno-studio}. In modo analogo il lettore può studiare $\cos x$.
+\end{esempio}
+
+\begin{table}[htb]
+\centering
+\small
+\renewcommand{\arraystretch}{1.35}
+\setlength{\tabcolsep}{4.5pt}
+\begin{tabular}{l|cccc}
+  $f(x)=\sen x$ & $0<x<\frac\pi2$ & $\frac\pi2<x<\pi$ & $\pi<x<\frac32\pi$ &
+  $\frac32\pi<x<2\pi$\\\hline
+  segno di $f$   & $+$ & $+$ & $-$ & $-$\\
+  segno di $f'$  & $+$ & $-$ & $-$ & $+$\\
+  segno di $f''$ & $-$ & $-$ & $+$ & $+$\\\hline
+  monotonia   & crescente & \multicolumn{2}{c}{decrescente} & crescente\\
+  concavità   & \multicolumn{2}{c}{concava} & \multicolumn{2}{c}{convessa}
+\end{tabular}
+\caption{Segni di $f(x)=\sen x$ e delle sue derivate $f'(x)=\cos x$ e
+$f''(x)=-\sen x$ in $(0,2\pi)$, e le conseguenti informazioni di monotonia e di
+concavità.}
+\label{tab:seno-segni}
+\end{table}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.9\textwidth, height=5cm, xmin=-0.3, xmax=7, ymin=-1.35, ymax=1.35,
+  xtick={1.5708,3.1416,4.7124,6.2832},
+  xticklabels={$\frac\pi2$,$\pi$,{},$2\pi$}, ytick={-1,1},
+  xlabel={$x$}, ylabel={$y$}, clip=false]
+  \addplot[curva, domain=0:6.2832, samples=150] {sin(deg(x))};
+  \addplot[curva2, domain=2.3:4.0, samples=2] {-(x-3.1416)};
+  \addplot[tratteggio] coordinates {(1.5708,0) (1.5708,1) (0,1)};
+  \addplot[tratteggio] coordinates {(4.7124,0) (4.7124,-1) (0,-1)};
+  \addplot[only marks, mark=*, mark size=1.6pt, rame] coordinates
+    {(1.5708,1) (3.1416,0) (4.7124,-1)};
+  \node[font=\scriptsize, rame, above] at (axis cs:1.5708,1.03) {massimo};
+  \node[font=\scriptsize, rame, below] at (axis cs:4.7124,-1.03) {minimo};
+  \node[font=\scriptsize, rame, anchor=south west] at (axis cs:3.2,0.08) {flesso};
+  \node[font=\scriptsize, anchor=south] at (axis cs:4.7124,0.06) {$\frac32\pi$};
+\end{axis}
+\end{tikzpicture}
+\caption{Il grafico di $\sen x$ in $[0,2\pi]$, ricostruito dalla \cref{tab:seno-segni}.
+Nel flesso $x=\pi$ la tangente $y=-(x-\pi)$ attraversa il grafico.}
+\label{fig:seno-studio}
+\end{figure}
+
+Il programma seguente studia la convessità della funzione $e^{-x^{2}}$, il cui grafico
+è la celebre «curva a campana» di Gauss che descrive la distribuzione degli errori
+casuali di misura.
+
+\begin{python}[Convessità e flessi della curva di Gauss]
+import sympy as sp
+
+x = sp.symbols("x", real=True)
+f = sp.exp(-x**2)                       # curva di Gauss
+d1 = sp.factor(sp.diff(f, x))
+d2 = sp.factor(sp.diff(f, x, 2))
+print("f'  =", d1)
+print("f'' =", d2)
+flessi = sorted(sp.solveset(d2, x, sp.S.Reals))
+approx = [round(float(c), 4) for c in flessi]
+print("f'' = 0 in", flessi, "~", approx)
+for t in (-1, 0, 1):              # segno di f'' negli intervalli
+    print(f"  f''({t}) = {d2.subs(x, t)}  ->",
+          "convessa" if d2.subs(x, t) > 0 else "concava")
+print("f(1/sqrt(2)) =", f.subs(x, flessi[1]),
+      "~", round(float(f.subs(x, flessi[1])), 4))
+print("punto critico x = 0:  f''(0) =",
+      d2.subs(x, 0), "-> massimo relativo")
+\end{python}
+\begin{risultato}
+f'  = -2*x*exp(-x**2)
+f'' = 2*(2*x**2 - 1)*exp(-x**2)
+f'' = 0 in [-sqrt(2)/2, sqrt(2)/2] ~ [-0.7071, 0.7071]
+  f''(-1) = 2*exp(-1)  -> convessa
+  f''(0) = -2  -> concava
+  f''(1) = 2*exp(-1)  -> convessa
+f(1/sqrt(2)) = exp(-1/2) ~ 0.6065
+punto critico x = 0:  f''(0) = -2 -> massimo relativo
+\end{risultato}
+
+Poiché il fattore $e^{-x^{2}}$ è positivo, il segno di $f''$ è quello di $2x^{2}-1$: la
+curva di Gauss è convessa per $\abs x\ge\frac1{\sqrt2}$ e concava per
+$\abs x\le\frac1{\sqrt2}$, e i due punti $x=\pm\frac1{\sqrt2}\approx\pm0{,}7071$ sono di
+flesso, con ordinata $e^{-1/2}\approx0{,}6065$. L'ultima riga dell'output anticipa il
+criterio che dimostriamo alla fine del paragrafo.
+
+\begin{idea}[L'efficienza massima vista con la convessità]
+Ritorniamo ancora una volta alla polare parabolica, pensando ora il coefficiente di
+resistenza come funzione del coefficiente di portanza:
+$C_{D}(C_{L})=C_{D0}+kC_{L}^{2}$. Poiché $C_{D}''=2k>0$, la polare è strettamente
+convessa. L'efficienza $E=\frac{C_{L}}{C_{D}}$ è l'inverso della pendenza della retta che
+congiunge l'origine con il punto $(C_{L},C_{D}(C_{L}))$; massimizzare $E$ significa
+quindi cercare la retta per l'origine di pendenza \emph{minima} che tocca la polare
+(\cref{fig:polare-tangente}). La tangente in $C_{L}^{*}$,
+$y=C_{D}(C_{L}^{*})+2kC_{L}^{*}(C_{L}-C_{L}^{*})$, passa per l'origine se e solo se
+$C_{D0}+kC_{L}^{*2}-2kC_{L}^{*2}=0$, cioè $C_{L}^{*}=\sqrt{C_{D0}/k}$, e in tal caso ha
+equazione $y=2kC_{L}^{*}C_{L}=2\sqrt{kC_{D0}}\,C_{L}$. Per la stretta convessità la polare
+sta sopra questa tangente:
+\[
+  C_{D}(C_{L})>2\sqrt{kC_{D0}}\;C_{L} \quad\text{per } C_{L}\neq C_{L}^{*},
+\]
+e quindi, dividendo per $C_{L}\,C_{D}(C_{L})>0$,
+\[
+  E(C_{L})=\frac{C_{L}}{C_{D}(C_{L})}<\frac1{2\sqrt{kC_{D0}}}=E_{\max}
+  \qquad\text{per } C_{L}>0,\ C_{L}\neq C_{L}^{*}.
+\]
+Ritroviamo il risultato del \cref{cap:funzioni-continue} con una dimostrazione puramente
+geometrica, che è anche la costruzione grafica usata dagli aerodinamici: \emph{l'assetto
+di massima efficienza si trova tracciando dall'origine la tangente alla polare}.
+\end{idea}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.85\textwidth, height=6cm, xmin=0, xmax=1.62, ymin=0, ymax=0.15,
+  axis lines=left, xlabel={$C_{L}$}, ylabel={$C_{D}$}, xtick={0.709,1.2},
+  xticklabels={$C_{L}^{*}$,$C_{L}$}, ytick={0.025,0.05},
+  yticklabels={$C_{D0}$,$0{,}05$}, clip=false,
+  scaled y ticks=false]
+  \addplot[curva, domain=0:1.55, samples=100] {0.025+0.0497359*x^2};
+  \addplot[curva2, domain=0:1.55, samples=2] {x/14.17963};
+  \addplot[curva3, domain=0:1.4, samples=2] {0.0805164*x};
+  \addplot[tratteggio] coordinates {(0.709,0) (0.709,0.05)};
+  \addplot[tratteggio] coordinates {(1.2,0) (1.2,0.09662)};
+  \addplot[only marks, mark=*, mark size=1.6pt, rame] coordinates {(0.709,0.05)};
+  \addplot[only marks, mark=*, mark size=1.6pt, verde] coordinates {(1.2,0.09662)};
+  \node[font=\scriptsize, blu, anchor=east] at (axis cs:1.38,0.13) {polare};
+  \node[font=\scriptsize, rame, anchor=west] at (axis cs:1.56,0.108)
+    {pendenza $\frac1{E_{\max}}$};
+  \node[font=\scriptsize, verde!50!black, anchor=south east] at (axis cs:1.15,0.098)
+    {pendenza $\frac1{E(C_{L})}$};
+\end{axis}
+\end{tikzpicture}
+\caption{La polare parabolica $C_{D}=C_{D0}+kC_{L}^{2}$ per $C_{D0}=0{,}025$, $AR=8$,
+$e=0{,}8$. Ogni retta per l'origine che incontra la polare ha pendenza $\frac1E$; la
+tangente dall'origine (rame) ha la pendenza minima e tocca la polare in
+$C_{L}^{*}\approx0{,}709$, dove $E=E_{\max}\approx14{,}18$. La secante verde, per
+$C_{L}=1{,}2$, ha pendenza maggiore: $E\approx12{,}4$.}
+\label{fig:polare-tangente}
+\end{figure}
+
+\subsection{Il criterio della derivata seconda}
+
+Chiudiamo il paragrafo con un criterio, basato sul segno della derivata seconda, per
+stabilire se un punto stazionario è di massimo o di minimo relativo. Lo generalizzeremo
+nel \cref{sec:taylor}.
+
+\begin{teorema}[Criterio della derivata seconda]\label{teo:test-derivata-seconda}
+\index{criterio!della derivata seconda}
+Sia $f$ derivabile due volte in un intorno di $x_{0}$, con derivata seconda continua in
+$x_{0}$. Allora
+\begin{equation}\label{eq:test-derivata-seconda}
+  \begin{aligned}
+  &f'(x_{0})=0,\ f''(x_{0})>0 \ \implica\ x_{0} \text{ di minimo relativo stretto};\\
+  &f'(x_{0})=0,\ f''(x_{0})<0 \ \implica\ x_{0} \text{ di massimo relativo stretto}.
+  \end{aligned}
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$ derivabile due volte vicino a $x_{0}$, $f''$ continua in $x_{0}$;
+$f'(x_{0})=0$ e $f''(x_{0})>0$ (risp.\ $<0$).}
+\Tesi{$x_{0}$ è di minimo (risp.\ massimo) relativo stretto.}
+\end{schema}
+
+\begin{strategia}
+Se $f''(x_{0})>0$ e $f''$ è continua, per la permanenza del segno $f''$ è positiva in
+tutto un intorno di $x_{0}$; lì la funzione è strettamente convessa e il grafico sta
+sopra la tangente in $x_{0}$. Ma la tangente in un punto stazionario è la retta
+orizzontale $y=f(x_{0})$: dunque il grafico sta sopra il livello $f(x_{0})$, che è la
+definizione di minimo relativo.
+\end{strategia}
+
+\begin{dimostrazione}
+Sia $f''(x_{0})>0$. Per il teorema della permanenza del segno per le funzioni continue
+(\cref{teo:permanenza-segno-continue}) esiste $\delta>0$ tale che $f''(x)>0$ per ogni
+$x\in(x_{0}-\delta,x_{0}+\delta)$, intervallo che possiamo supporre contenuto
+nell'intorno in cui $f$ è derivabile due volte. Fissato $0<\delta'<\delta$, per il
+criterio di convessità e l'\cref{oss:convessita-stretta}, $f$ è strettamente convessa in
+$[x_{0}-\delta',x_{0}+\delta']$, e quindi, ricordando che $f'(x_{0})=0$,
+\begin{equation}\label{eq:test-derivata-seconda-dim}
+  f(x)>f(x_{0})+f'(x_{0})(x-x_{0})=f(x_{0})
+\end{equation}
+per ogni $x\in[x_{0}-\delta',x_{0}+\delta']$ con $x\neq x_{0}$.
+Dunque $x_{0}$ è un punto di minimo relativo stretto. Il caso $f''(x_{0})<0$ si ottiene
+applicando quanto provato a $-f$.
+\end{dimostrazione}
+
+\begin{osservazione}[Basta l'esistenza di $f''(x_{0})$]\label{oss:test-derivata-seconda}
+La continuità di $f''$ in $x_{0}$ non è necessaria. Supponiamo soltanto che $f$ sia
+derivabile in un intorno di $x_{0}$, con $f'(x_{0})=0$, e che esista $f''(x_{0})>0$.
+Allora
+\[
+  f''(x_{0})=\lim_{x\to x_{0}}\frac{f'(x)-f'(x_{0})}{x-x_{0}}=\lim_{x\to x_{0}}\frac{f'(x)}{x-x_{0}}>0,
+\]
+e per la permanenza del segno (\cref{teo:confronto-funzioni}\,(i)) il rapporto
+$\frac{f'(x)}{x-x_{0}}$ è positivo per $0<\abs{x-x_{0}}<\delta$. Quindi $f'(x)<0$ per
+$x_{0}-\delta<x<x_{0}$ e $f'(x)>0$ per $x_{0}<x<x_{0}+\delta$, e il test della derivata
+prima (\cref{cor:test-derivata-prima}) mostra che $x_{0}$ è di minimo relativo stretto.
+Per la curva di Gauss, $f'(0)=0$ e $f''(0)=-2<0$: l'origine è di massimo relativo
+(anzi assoluto, perché $e^{-x^{2}}\le1$). Se invece $f'(x_{0})=f''(x_{0})=0$, il criterio
+non decide: $x^{4}$, $-x^{4}$ e $x^{3}$ hanno in $0$, rispettivamente, un minimo, un
+massimo e un flesso. Il \cref{sec:taylor} risolverà questi casi.
+\end{osservazione}
+
+\subsection{Approfondimento: la convessità senza derivate}
+\label{subsec:convessita-corde}
+
+La \cref{def:convessa} confronta il grafico con le tangenti, e richiede quindi la
+derivabilità; eppure anche $\abs x$, che ha uno spigolo nell'origine, «volge la concavità
+verso l'alto». Seguendo \cite{giusti}, usiamo le \emph{corde} al posto delle tangenti:
+per le funzioni derivabili si ritrova la nostra definizione, e dalla sola convessità
+discendono la continuità e l'esistenza delle derivate unilaterali nei punti interni.
+
+\begin{definizione}[Convessità nel senso delle corde]\label{def:convessa-corde}
+\index{funzione!convessa!nel senso delle corde}
+Sia $I$ un intervallo e sia $f:I\to\R$. Si dice che $f$ è \emph{convessa nel senso delle
+corde} in $I$ se, per ogni $x_{1},x_{2}\in I$ e per ogni $t\in[0,1]$, risulta
+\begin{equation}\label{eq:convessa-corde}
+  f\bigl((1-t)x_{1}+tx_{2}\bigr)\le(1-t)f(x_{1})+tf(x_{2}) ;
+\end{equation}
+si dice che $f$ è \emph{concava nel senso delle corde} se $-f$ è convessa nel senso
+delle corde.
+\end{definizione}
+
+Se $x_{1}<x_{2}$, al variare di $t$ in $[0,1]$ il punto $x=(1-t)x_{1}+tx_{2}$ descrive
+$[x_{1},x_{2}]$, con $t=\frac{x-x_{1}}{x_{2}-x_{1}}$, e la condizione diventa
+\begin{equation}\label{eq:corda-sopra}
+  f(x)\le f(x_{1})+\frac{f(x_{2})-f(x_{1})}{x_{2}-x_{1}}\,(x-x_{1})
+  \qquad (x_{1}\le x\le x_{2}) :
+\end{equation}
+sopra $[x_{1},x_{2}]$ il grafico sta sotto la corda di estremi $(x_{1},f(x_{1}))$ e
+$(x_{2},f(x_{2}))$. Il caso $x_{1}=x_{2}$ è banale, e scambiare $x_{1}$ con $x_{2}$
+equivale a sostituire $t$ con $1-t$. Poiché la condizione coinvolge solo i punti di
+$[x_{1},x_{2}]$, $f$ è convessa nel senso delle corde in $I$ se e solo se lo è in ogni
+intervallo chiuso e limitato contenuto in $I$. Ad esempio $\abs x$ lo è su $\R$, perché
+$\abs{(1-t)x_{1}+tx_{2}}\le(1-t)\abs{x_{1}}+t\abs{x_{2}}$ per la disuguaglianza
+triangolare (\cref{teo:triangolare}).
+
+\begin{lemma}[delle tre corde]\label{lem:tre-corde}\index{lemma delle tre corde}
+Sia $f$ convessa nel senso delle corde nell'intervallo $I$.
+\begin{enumerate}[label=\textup{(\roman*)}]
+  \item Se $x_{1}<x<x_{2}$ sono punti di $I$, allora (\cref{fig:tre-corde})
+  \begin{equation}\label{eq:tre-corde}
+    \frac{f(x)-f(x_{1})}{x-x_{1}}\le\frac{f(x_{2})-f(x_{1})}{x_{2}-x_{1}}
+    \le\frac{f(x_{2})-f(x)}{x_{2}-x} .
+  \end{equation}
+  \item Per ogni $x_{0}\in I$ il rapporto incrementale
+  $R(x)=\frac{f(x)-f(x_{0})}{x-x_{0}}$ è una funzione crescente in $I\setminus\{x_{0}\}$.
+\end{enumerate}
+\end{lemma}
+
+\begin{schema}
+\Ipotesi{$f$ convessa nel senso delle corde nell'intervallo $I$.}
+\Tesi{(i) per $x_{1}<x<x_{2}$ in $I$ vale la \eqref{eq:tre-corde}; \ (ii) per ogni
+$x_{0}\in I$, $R(x)=\frac{f(x)-f(x_{0})}{x-x_{0}}$ è crescente in $I\setminus\{x_{0}\}$.}
+\end{schema}
+
+\begin{strategia}
+Il punto $P=(x,f(x))$ sta sotto la retta $P_{1}P_{2}$: abbassando l'estremo destro di un
+segmento che parte da $P_{1}$ la pendenza diminuisce, abbassando l'estremo sinistro di un
+segmento che arriva in $P_{2}$ la pendenza aumenta. Per la (ii) si applica la (i) alla
+terna formata da $x_{0}$ e dai due punti da confrontare.
+\end{strategia}
+
+\begin{dimostrazione}
+(i) Sia $m=\frac{f(x_{2})-f(x_{1})}{x_{2}-x_{1}}$ e sia $r(s)=f(x_{1})+m(s-x_{1})$, cosicché
+$r(x_{1})=f(x_{1})$, $r(x_{2})=f(x_{2})$ e, per la \eqref{eq:corda-sopra}, $f(x)\le r(x)$.
+Poiché $x-x_{1}>0$ e $x_{2}-x>0$,
+\[
+\begin{gathered}
+  \frac{f(x)-f(x_{1})}{x-x_{1}}\le\frac{r(x)-r(x_{1})}{x-x_{1}}=m ,\\[2pt]
+  \frac{f(x_{2})-f(x)}{x_{2}-x}\ge\frac{r(x_{2})-r(x)}{x_{2}-x}=m ,
+\end{gathered}
+\]
+perché $r$ è un polinomio di primo grado di pendenza $m$: è la \eqref{eq:tre-corde}.
+
+(ii) Il rapporto incrementale non cambia scambiando i due punti:
+$R(x)=\frac{f(x_{0})-f(x)}{x_{0}-x}$. Siano $x<y$ due punti di $I\setminus\{x_{0}\}$. Se
+$x_{0}<x<y$, la prima disuguaglianza della \eqref{eq:tre-corde}, scritta per la terna
+$x_{0}<x<y$, dice che $R(x)\le R(y)$; se $x<x_{0}<y$, lo dice il confronto tra il primo e
+il terzo membro per la terna $x<x_{0}<y$; se $x<y<x_{0}$, lo dice la seconda
+disuguaglianza per la terna $x<y<x_{0}$. Dunque $R$ è crescente.
+\end{dimostrazione}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.8\textwidth, height=5cm, xmin=0, xmax=4.1, ymin=0, ymax=4.9,
+  axis lines=left, xtick={0.5,2,3.5}, xticklabels={$x_{1}$,$x$,$x_{2}$},
+  ytick=\empty, clip=false]
+  \addplot[curva, domain=0.2:3.7, samples=120] {0.35*x^2+0.3};
+  \addplot[tratteggio] coordinates {(0.5,0) (0.5,0.3875)};
+  \addplot[tratteggio] coordinates {(2,0) (2,1.7)};
+  \addplot[tratteggio] coordinates {(3.5,0) (3.5,4.5875)};
+  \draw[curva2] (axis cs:0.5,0.3875) -- (axis cs:2,1.7);
+  \draw[curva3] (axis cs:0.5,0.3875) -- (axis cs:3.5,4.5875);
+  \draw[grigio, line width=1pt] (axis cs:2,1.7) -- (axis cs:3.5,4.5875);
+  \addplot[only marks, mark=*, mark size=1.6pt, blu] coordinates
+    {(0.5,0.3875) (2,1.7) (3.5,4.5875)};
+  \node[font=\footnotesize, rame, anchor=south] at (axis cs:1.75,1.56) {$s_{1}$};
+  \node[font=\footnotesize, verde!50!black, anchor=south east] at (axis cs:1.45,1.85)
+    {$s$};
+  \node[font=\footnotesize, grigio, anchor=south] at (axis cs:2.2,2.2) {$s_{2}$};
+  \node[font=\scriptsize, anchor=south east] at (axis cs:0.47,0.42) {$P_{1}$};
+  \node[font=\scriptsize, anchor=north west] at (axis cs:2.04,1.66) {$P$};
+  \node[font=\scriptsize, anchor=north west] at (axis cs:3.54,4.55) {$P_{2}$};
+\end{axis}
+\end{tikzpicture}
+\caption{Il lemma delle tre corde. Se $f$ è convessa nel senso delle corde e
+$x_{1}<x<x_{2}$, il punto $P$ sta sotto la corda $P_{1}P_{2}$, e le pendenze delle corde
+$P_{1}P$, $P_{1}P_{2}$, $PP_{2}$ crescono: $s_{1}\le s\le s_{2}$. Qui
+$f(x)=0{,}35\,x^{2}+0{,}3$, con $s_{1}=0{,}875$, $s=1{,}4$ e $s_{2}=1{,}925$.}
+\label{fig:tre-corde}
+\end{figure}
+
+\begin{proposizione}[Le due definizioni coincidono per le funzioni derivabili]
+\label{prop:convessita-equivalenti}
+Sia $f$ derivabile in $[a,b]$ (con derivate unilaterali negli estremi). Allora $f$ è
+convessa in $[a,b]$ secondo la \cref{def:convessa} se e solo se è convessa nel senso
+delle corde in $[a,b]$.
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$f$ derivabile in $[a,b]$.}
+\Tesi{grafico sopra le tangenti, \eqref{eq:convessa} \ $\sse$ \ grafico sotto le corde,
+\eqref{eq:convessa-corde}.}
+\end{schema}
+
+\begin{strategia}
+Dalle tangenti alle corde: si scrive la \eqref{eq:convessa} con il punto di tangenza nel
+punto $z$ in cui si stima $f$, e si combinano le disuguaglianze relative agli estremi
+della corda. Dalle corde alle tangenti: il rapporto incrementale $R$, crescente per il
+lemma delle tre corde, a destra di $x_{0}$ non è minore del suo limite $f'(x_{0})$, a
+sinistra non è maggiore; si moltiplica poi per $x-x_{0}$.
+\end{strategia}
+
+\begin{dimostrazione}
+($\Rightarrow$) È l'argomento dell'\cref{es:corde-convesse}. Siano $x_{1},x_{2}\in[a,b]$,
+$t\in[0,1]$ e $z=(1-t)x_{1}+tx_{2}$. Per la \eqref{eq:convessa} con punto di tangenza $z$,
+\[
+  f(x_{1})\ge f(z)+f'(z)(x_{1}-z), \qquad f(x_{2})\ge f(z)+f'(z)(x_{2}-z) .
+\]
+Moltiplicando la prima per $1-t\ge0$, la seconda per $t\ge0$ e sommando, si ottiene
+$(1-t)f(x_{1})+tf(x_{2})\ge f(z)+f'(z)\bigl[(1-t)x_{1}+tx_{2}-z\bigr]=f(z)$.
+
+($\Leftarrow$) Siano $x_{0},x\in[a,b]$, $x\neq x_{0}$, e sia $R$ il rapporto incrementale
+del \cref{lem:tre-corde}\,(ii). Se $x>x_{0}$, per ogni $s\in(x_{0},x)$ si ha
+$R(s)\le R(x)$; per $s\to x_{0}^{+}$ il primo membro tende a $f'(x_{0})$
+(\eqref{eq:derivata-xi} e \cref{prop:dx-sx}; se $x_{0}=a$ si tratta della derivata
+destra), e per il teorema del confronto (\cref{teo:confronto-funzioni}\,(ii)) risulta
+$f'(x_{0})\le R(x)$. Moltiplicando per $x-x_{0}>0$ si ottiene
+$f(x)-f(x_{0})\ge f'(x_{0})(x-x_{0})$. Se $x<x_{0}$, allo stesso modo $R(x)\le f'(x_{0})$,
+e moltiplicando per $x-x_{0}<0$ si ritrova la stessa disuguaglianza, cioè la
+\eqref{eq:convessa}.
+\end{dimostrazione}
+
+Dunque $x^{2}$, $e^{x}$, $-\log x$ e tutte le funzioni convesse incontrate finora lo sono
+anche nel senso delle corde. Una funzione convessa nel senso delle corde può non essere
+derivabile, come $\abs x$; ma nei punti interni non può essere troppo irregolare.
+
+\begin{teorema}[Regolarità delle funzioni convesse]\label{teo:convesse-continue}
+Sia $f$ convessa nel senso delle corde nell'intervallo $I$, e sia $x_{0}$ un punto
+interno di $I$. Allora:
+\begin{enumerate}[label=\textup{(\roman*)}]
+  \item esistono finite la derivata sinistra $f'_{-}(x_{0})$ e la derivata destra
+  $f'_{+}(x_{0})$, e risulta $f'_{-}(x_{0})\le f'_{+}(x_{0})$;
+  \item $f$ è continua in $x_{0}$;
+  \item per ogni $m\in\bigl[f'_{-}(x_{0}),f'_{+}(x_{0})\bigr]$ si ha
+  \begin{equation}\label{eq:retta-appoggio}
+    f(x)\ge f(x_{0})+m(x-x_{0}) \qquad\perogni x\in I .
+  \end{equation}
+\end{enumerate}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$ convessa nel senso delle corde nell'intervallo $I$; \ $x_{0}$ interno a $I$.}
+\Tesi{(i) $f'_{-}(x_{0})\le f'_{+}(x_{0})$, entrambe finite; \ (ii) $f$ continua in
+$x_{0}$; \ (iii) vale la \eqref{eq:retta-appoggio}.}
+\end{schema}
+
+\begin{strategia}
+Tutto discende dalla monotonia di $R$. Una funzione monotòna ha limiti unilaterali, finiti
+se è limitata dalla parte giusta: qui interviene l'ipotesi che $x_{0}$ sia interno, perché
+un punto $a'<x_{0}$ fornisce il minorante $R(a')$ a destra di $x_{0}$, e un punto
+$b'>x_{0}$ un maggiorante a sinistra. La continuità si legge nell'identità
+$f(x)-f(x_{0})=R(x)(x-x_{0})$; la (iii) si ottiene confrontando $R$ con i suoi limiti.
+\end{strategia}
+
+\begin{dimostrazione}
+Siano $a',b'\in I$ con $a'<x_{0}<b'$; per il \cref{lem:tre-corde}, $R$ è crescente in
+$I\setminus\{x_{0}\}$.
+
+(i) La funzione che vale $R(a')$ in $x_{0}$ e coincide con $R$ in $(x_{0},b']$ è crescente
+in $[x_{0},b']$, perché $R(a')\le R(x)$ per $x>x_{0}$. Per il \cref{teo:limite-monotone-funzioni}
+esiste finito il limite di $R(x)$ per $x\to x_{0}^{+}$, che per la \eqref{eq:derivata-xi}
+è $f'_{+}(x_{0})$. Allo stesso modo, la funzione che vale $R(b')$ in $x_{0}$ e coincide
+con $R$ in $[a',x_{0})$ è crescente in $[a',x_{0}]$, e quindi esiste finita
+$f'_{-}(x_{0})=\lim_{x\to x_{0}^{-}}R(x)$. Infine, se $x<x_{0}<y$, da $R(x)\le R(y)$ si
+ottiene, per $x\to x_{0}^{-}$, $f'_{-}(x_{0})\le R(y)$ e poi, per $y\to x_{0}^{+}$,
+$f'_{-}(x_{0})\le f'_{+}(x_{0})$ (\cref{teo:confronto-funzioni}\,(ii)).
+
+(ii) Per $x\to x_{0}^{\pm}$ il fattore $R(x)$ ha limite finito e $x-x_{0}\to0$, quindi
+$f(x)-f(x_{0})=R(x)(x-x_{0})\to0$ da entrambe le parti; per la \cref{prop:dx-sx}, $f$ è
+continua in $x_{0}$.
+
+(iii) Se $x>x_{0}$, per ogni $s\in(x_{0},x)$ è $R(s)\le R(x)$, e al limite per
+$s\to x_{0}^{+}$ si ha $m\le f'_{+}(x_{0})\le R(x)$; moltiplicando per $x-x_{0}>0$ si
+ottiene la \eqref{eq:retta-appoggio}. Se $x<x_{0}$, allo stesso modo
+$R(x)\le f'_{-}(x_{0})\le m$, e si moltiplica per $x-x_{0}<0$. Per $x=x_{0}$ vale
+l'uguaglianza.
+\end{dimostrazione}
+
+\begin{osservazione}[Rette d'appoggio, spigoli ed estremi dell'intervallo]
+\label{oss:convesse-esempi}\index{retta d'appoggio}
+La retta $y=f(x_{0})+m(x-x_{0})$ della \eqref{eq:retta-appoggio} si dice \emph{retta
+d'appoggio}: passa per $(x_{0},f(x_{0}))$ e lascia tutto il grafico da una parte. Se $f$ è
+derivabile in $x_{0}$ l'unica retta d'appoggio è la tangente; in uno spigolo le rette
+d'appoggio sono infinite: per $\abs x$ si ha $f'_{-}(0)=-1$, $f'_{+}(0)=1$, e
+$\abs x\ge mx$ per ogni $m\in[-1,1]$. Se $f$ è convessa e derivabile in un punto interno
+$x_{0}$ con $f'(x_{0})=0$, la \eqref{eq:retta-appoggio} con $m=0$ dà $f(x)\ge f(x_{0})$
+per ogni $x\in I$: \emph{per una funzione convessa ogni punto stazionario interno è di
+minimo assoluto}. Infine, l'ipotesi che $x_{0}$ sia interno non si può togliere: la
+funzione che vale $0$ in $[0,1)$ e $1$ in $1$ è convessa nel senso delle corde in $[0,1]$
+(le corde hanno ordinate $\ge0$), ma è discontinua nell'estremo $1$.
+\end{osservazione}
+
+La \eqref{eq:convessa-corde} riguarda medie pesate di \emph{due} punti; per induzione la
+si estende a un numero qualunque di punti.
+
+\begin{teorema}[Disuguaglianza di Jensen]\label{teo:jensen}\index{disuguaglianza di Jensen}
+Sia $f$ convessa nel senso delle corde nell'intervallo $I$, siano $x_{1},\dots,x_{n}\in I$
+e siano $t_{1},\dots,t_{n}\ge0$ numeri con $t_{1}+\dots+t_{n}=1$. Allora il punto
+$\sum_{k=1}^{n}t_{k}x_{k}$ appartiene a $I$ e
+\begin{equation}\label{eq:jensen}
+  f\Bigl(\sum_{k=1}^{n}t_{k}x_{k}\Bigr)\le\sum_{k=1}^{n}t_{k}f(x_{k}) .
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$ convessa nel senso delle corde in $I$; \ $x_{k}\in I$, $t_{k}\ge0$,
+$\sum_{k}t_{k}=1$.}
+\Tesi{$\sum_{k}t_{k}x_{k}\in I$ \ e \
+$f\bigl(\sum_{k}t_{k}x_{k}\bigr)\le\sum_{k}t_{k}f(x_{k})$.}
+\end{schema}
+
+\begin{strategia}
+Per induzione su $n$: per $n=2$ la tesi è la definizione. Per passare da $n$ a $n+1$ punti
+si raggruppano i primi $n$ nella loro media pesata $y$, con i pesi divisi per la loro
+somma: la combinazione diventa una combinazione dei \emph{due} punti $y$ e $x_{n+1}$, a cui
+si applica la definizione, mentre $f(y)$ si stima con l'ipotesi induttiva. In termini
+meccanici: il baricentro di masse poste sul grafico sta sopra il grafico.
+\end{strategia}
+
+\begin{dimostrazione}
+Se $p$ e $q$ sono il minimo e il massimo dei punti $x_{k}$, risulta
+$p=\sum_{k}t_{k}p\le\sum_{k}t_{k}x_{k}\le\sum_{k}t_{k}q=q$; poiché $I$ è un intervallo che
+contiene $p$ e $q$, contiene anche $\sum_{k}t_{k}x_{k}$.
+
+Proviamo la \eqref{eq:jensen} per induzione (\cref{teo:induzione}). Per $n=1$ è $t_{1}=1$
+e i due membri coincidono. Supponiamola vera per $n$ punti e siano dati $n+1$ punti con
+pesi $t_{1},\dots,t_{n+1}$; sia $s=t_{1}+\dots+t_{n}=1-t_{n+1}$. Se $s=0$ i due membri
+valgono $f(x_{n+1})$. Se $s>0$, il punto $y=\sum_{k=1}^{n}\frac{t_{k}}{s}x_{k}$ è una media
+pesata con pesi $\ge0$ di somma $1$: quindi $y\in I$ e, per l'ipotesi induttiva,
+$f(y)\le\sum_{k=1}^{n}\frac{t_{k}}{s}f(x_{k})$. Poiché
+$\sum_{k=1}^{n+1}t_{k}x_{k}=s\,y+t_{n+1}x_{n+1}$, la \eqref{eq:convessa-corde} (con
+$t=t_{n+1}$) dà
+\[
+\begin{aligned}
+  f\Bigl(\sum_{k=1}^{n+1}t_{k}x_{k}\Bigr)&\le s\,f(y)+t_{n+1}f(x_{n+1})\\
+  &\le\sum_{k=1}^{n}t_{k}f(x_{k})+t_{n+1}f(x_{n+1})=\sum_{k=1}^{n+1}t_{k}f(x_{k}) .
+\end{aligned}
+\]
+La tesi vale dunque per $n+1$ punti, e quindi per ogni $n$.
+\end{dimostrazione}
+
+\begin{corollario}[Media aritmetica e media geometrica]
+\label{cor:media-aritmetica-geometrica}
+\index{disuguaglianza tra media aritmetica e geometrica}
+Per ogni $n\in\N$ e per ogni scelta di numeri positivi $a_{1},\dots,a_{n}$,
+\begin{equation}\label{eq:am-gm}
+  \sqrt[n]{a_{1}a_{2}\cdots a_{n}}\le\frac{a_{1}+a_{2}+\dots+a_{n}}{n} .
+\end{equation}
+\end{corollario}
+
+\begin{schema}
+\Ipotesi{$n\in\N$; \ $a_{1},\dots,a_{n}>0$.}
+\Tesi{la media geometrica non supera la media aritmetica: vale la \eqref{eq:am-gm}.}
+\end{schema}
+
+\begin{strategia}
+Il logaritmo della media geometrica è la media aritmetica dei logaritmi. La tesi diventa
+così «il logaritmo della media non è minore della media dei logaritmi»: è la
+disuguaglianza di Jensen per la funzione convessa $-\log x$, con i pesi $t_{k}=\frac1n$.
+\end{strategia}
+
+\begin{dimostrazione}
+La funzione $\varphi(x)=-\log x$ ha $\varphi''(x)=\frac1{x^{2}}>0$ in $(0,+\infty)$
+(\cref{es:convessita-elementari}); per il \cref{teo:criterio-convessita} e la
+\cref{prop:convessita-equivalenti} è convessa nel senso delle corde in ogni intervallo
+$[a,b]\subset(0,+\infty)$, e quindi in $(0,+\infty)$. La \eqref{eq:jensen} con
+$x_{k}=a_{k}$ e $t_{k}=\frac1n$ e le proprietà dei logaritmi (\cref{prop:log-proprieta})
+danno
+\[
+  -\log\Bigl(\frac1n\sum_{k=1}^{n}a_{k}\Bigr)\le-\frac1n\sum_{k=1}^{n}\log a_{k}
+  =-\log\sqrt[n]{a_{1}a_{2}\cdots a_{n}} .
+\]
+Cambiando segno, il logaritmo della media geometrica non supera quello della media
+aritmetica; poiché il logaritmo è strettamente crescente (\cref{prop:log-monotono}), lo
+stesso vale per le due medie.
+\end{dimostrazione}
+
+Per $n=2$ si ritrova la disuguaglianza $\sqrt{ab}\le\frac{a+b}2$, dimostrata per via
+algebrica negli esercizi del \cref{cap:numeri}. Se gli $a_{k}$ sono tutti uguali, i due
+membri della \eqref{eq:am-gm} coincidono; con la convessità stretta di $-\log x$ si
+dimostra che è l'unico caso di uguaglianza.
+
+\begin{esempio}[La potenza minima senza derivate]\label{es:potenza-am-gm}
+Con termini scelti ad arte, la \eqref{eq:am-gm} trova minimi senza derivate: si maggiora
+(o si minora) la funzione con una costante, e si cerca dove la disuguaglianza diventa
+un'uguaglianza. Nel \cref{sec:studio-funzione} vedremo che la potenza necessaria al volo
+livellato è $P(V)=aV^{3}+\frac bV$, con $a,b>0$. Spezzando $\frac bV$ in tre parti uguali,
+in modo che nel prodotto dei quattro termini $V$ si semplifichi,
+\[
+  P(V)=aV^{3}+3\cdot\frac{b}{3V}\ge4\sqrt[4]{aV^{3}\Bigl(\frac{b}{3V}\Bigr)^{3}}
+  =4\sqrt[4]{\frac{ab^{3}}{27}} ,
+\]
+con l'uguaglianza quando i quattro termini sono uguali: $aV^{3}=\frac{b}{3V}$, cioè
+$V^{4}=\frac{b}{3a}$, la velocità di minima potenza \eqref{eq:V-min-P}. Per il velivolo
+del \cref{sec:studio-funzione} si trova $P_{\min}\approx23{,}47$~kW, come là con le
+derivate. Con due soli termini lo stesso procedimento dà la resistenza minima e, nel
+\cref{cap:funzioni-continue}, l'efficienza massima.
+\end{esempio}
+
+\begin{notastorica}[Le funzioni convesse]
+Le funzioni convesse comparvero in modo implicito in molti lavori dell'Ottocento sulle
+disuguaglianze tra medie, ma la loro teoria sistematica fu iniziata dal matematico
+danese Johan Jensen, che nel 1906 pubblicò negli \emph{Acta Mathematica} la memoria
+\emph{Sur les fonctions convexes et les inégalités entre les valeurs moyennes}. Jensen
+adottò una definizione che non richiede la derivabilità, basata sui punti medi delle
+corde anziché sulle tangenti: $f\bigl(\frac{x+y}2\bigr)\le\frac{f(x)+f(y)}2$ per ogni $x,y$.
+Per le funzioni continue essa equivale alla \eqref{eq:convessa-corde}, cioè al fatto che
+ogni corda stia sopra il grafico, che è la definizione oggi più comune: per le funzioni
+derivabili coincide con la nostra (\cref{prop:convessita-equivalenti}), ma si applica
+anche a funzioni non derivabili, come $\abs x$. Nella stessa memoria Jensen dimostrò in
+generale la disuguaglianza \eqref{eq:jensen}, già ottenuta da Otto Hölder nel 1889 per
+le funzioni con $f''\ge0$. Oggi la convessità è al centro dell'\emph{ottimizzazione
+convessa}, la teoria che garantisce che un minimo locale sia anche globale e che sta
+alla base di molti algoritmi di progetto ottimo in ingegneria.
+\end{notastorica}

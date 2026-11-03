@@ -1,0 +1,322 @@
+%% ----------------------------------------------------------------------------
+%%  §4.8  Appendice: il metodo di bisezione
+%% ----------------------------------------------------------------------------
+\section{Appendice: il metodo di bisezione per il calcolo delle radici}
+\label{sec:bisezione}
+
+In questo paragrafo dimostriamo il teorema dell'esistenza degli zeri (\cref{teo:zeri}).
+Utilizziamo nella dimostrazione il \emph{metodo di bisezione}, già incontrato nel
+\cref{cap:numeri} per approssimare $\sqrt2$ e nel \cref{cap:successioni} per dimostrare
+il teorema di Bolzano--Weierstrass: si tratta di un procedimento costruttivo che, oltre a
+dimostrare l'esistenza di una soluzione di un'equazione data, fornisce anche un metodo
+per calcolarla.
+
+Prendiamo in considerazione \emph{equazioni} del tipo
+\begin{equation}\label{eq:equazione}
+  f(x)=0,
+\end{equation}
+con $f$ funzione definita in un intervallo $[a,b]$. Risolvere l'equazione significa
+determinare tutti i numeri reali $x_{0}\in[a,b]$ per cui $f(x_{0})=0$; tali numeri si
+dicono \emph{soluzioni} dell'equazione \eqref{eq:equazione}, o anche \emph{zeri} della
+funzione $f$. Se $f$ è un polinomio, si dice che \eqref{eq:equazione} è un'\emph{equazione
+algebrica}; se $f$ è una funzione trascendente (ad esempio composta tramite le funzioni
+$e^{x}$, $\log x$, $\sen x$, $\cos x$), la \eqref{eq:equazione} prende il nome di
+\emph{equazione trascendente}. Una soluzione di un'equazione algebrica si dice anche
+\emph{radice} dell'equazione; per estensione, si usa il termine di radici anche per le
+soluzioni di equazioni trascendenti.
+
+\begin{strategia}[Piano d'attacco per il \cref{teo:zeri}]
+Ricordiamo le ipotesi: $f$ è continua in $[a,b]$ e $f(a)<0<f(b)$. L'idea è di
+\emph{intrappolare} uno zero in intervalli sempre più piccoli, mantenendo l'invariante
+«$f$ è negativa nell'estremo sinistro e positiva nell'estremo destro». Si dimezza
+l'intervallo e si tiene la metà agli estremi della quale $f$ continua a cambiare segno.
+Gli estremi sinistri formano una successione crescente e limitata, che converge per il
+teorema sulle successioni monotòne (qui entra l'assioma di completezza); gli estremi
+destri convergono allo stesso limite $x_{0}$, perché le lunghezze si dimezzano. Infine
+la continuità di $f$ permette di passare al limite nelle disuguaglianze $f(a_{n})<0$ e
+$f(b_{n})>0$, che diventano $f(x_{0})\le0$ e $f(x_{0})\ge0$.
+\end{strategia}
+
+\begin{dimostrazione}[Dimostrazione del \cref{teo:zeri}]
+\emph{Costruzione.} Consideriamo il numero $c$, punto di mezzo dell'intervallo $[a,b]$,
+cioè $c=\frac{a+b}2$. Se $f(c)=0$ abbiamo trovato una radice. Altrimenti consideriamo i
+due casi $f(c)>0$, $f(c)<0$. Se $f(c)>0$, la funzione $f$ assume valori di segno discorde
+agli estremi dell'intervallo $[a,c]$, mentre se $f(c)<0$ è $[c,b]$ l'intervallo dove $f$
+cambia segno. Indichiamo con $[a_{1},b_{1}]$ l'intervallo da considerare, cioè definiamo
+\begin{equation}\label{eq:bisezione-primo}
+  \begin{cases}
+    \text{se } f(c)>0 \ \implica\ a_{1}=a,\ b_{1}=c;\\
+    \text{se } f(c)<0 \ \implica\ a_{1}=c,\ b_{1}=b.
+  \end{cases}
+\end{equation}
+Abbiamo così trovato un intervallo $[a_{1},b_{1}]$, di ampiezza metà del precedente
+$[a,b]$, per cui risulta $f(a_{1})<0$, $f(b_{1})>0$. Definiamo $c_{1}=\frac{a_{1}+b_{1}}2$ e
+ripetiamo il ragionamento. Posto $a_{0}=a$, $b_{0}=b$, otteniamo tre successioni $a_{n}$,
+$b_{n}$, $c_{n}$ definite per ricorrenza da $c_{n}=\frac{a_{n}+b_{n}}2$ e
+\begin{equation}\label{eq:bisezione-ricorrenza}
+  \begin{cases}
+    \text{se } f(c_{n})>0 \ \implica\ a_{n+1}=a_{n},\ b_{n+1}=c_{n};\\
+    \text{se } f(c_{n})<0 \ \implica\ a_{n+1}=c_{n},\ b_{n+1}=b_{n}.
+  \end{cases}
+\end{equation}
+Se per qualche $n$ risulta $f(c_{n})=0$, ci si ferma perché si è trovata una radice, e
+il teorema è dimostrato. Altrimenti le successioni sono definite per ogni $n$ e, per
+costruzione, risulta
+\begin{equation}\label{eq:bisezione-segni}
+  f(a_{n})<0, \qquad f(b_{n})>0 \qquad\perogni n\ge0 .
+\end{equation}
+
+\emph{Lunghezze.} È semplice scrivere la relazione che lega $a_{n}$ con $b_{n}$: infatti,
+a ogni iterazione, la lunghezza dell'intervallo $[a_{n},b_{n}]$ si dimezza. Quindi
+$b_{1}-a_{1}=\frac{b-a}2$, $b_{2}-a_{2}=\frac{b-a}{2^{2}}$ e, dopo $n$ passi (per
+induzione),
+\begin{equation}\label{eq:bisezione-lunghezza}
+  b_{n}-a_{n}=\frac{b-a}{2^{n}} \qquad\perogni n\ge0 .
+\end{equation}
+
+\emph{Convergenza.} Per costruzione, la successione $a_{n}$ è crescente
+($a_{0}\le a_{1}\le a_{2}\le\cdots$), la successione $b_{n}$ è decrescente, e
+$a\le a_{n}<b_{n}\le b$ per ogni $n$: in particolare $a_{n}$ è limitata. Per il teorema
+sulle successioni monotòne (\cref{teo:monotone}) $a_{n}$ ammette limite finito; sia
+$x_{0}$ tale limite. Anche la successione $b_{n}$, espressa mediante la
+\eqref{eq:bisezione-lunghezza} da
+\begin{equation}\label{eq:bisezione-bn}
+  b_{n}=a_{n}+\frac{b-a}{2^{n}},
+\end{equation}
+converge a $x_{0}$ per $n\to+\infty$, perché $\frac1{2^{n}}\to0$ (\cref{teo:lim-geometrica}).
+Inoltre $x_{0}\in[a,b]$, per il \cref{cor:confronto-limiti} applicato alle
+disuguaglianze $a\le a_{n}\le b$.
+
+\emph{Passaggio al limite.} Quindi, ricordando la \eqref{eq:bisezione-segni}, dalla
+continuità di $f$ nel punto $x_{0}$ (\cref{prop:caratt-continuita}(b)) e dal
+\cref{cor:limite-non-negativo} si ottiene
+\begin{equation}\label{eq:bisezione-limite}
+  f(x_{0})=\lim_{n\to+\infty}f(a_{n})\le0, \qquad f(x_{0})=\lim_{n\to+\infty}f(b_{n})\ge0 .
+\end{equation}
+Perciò $f(x_{0})=0$. Infine $x_{0}\neq a$ e $x_{0}\neq b$, perché $f(a)<0$ e $f(b)>0$;
+dunque $x_{0}\in(a,b)$, e il teorema dell'esistenza degli zeri è provato.
+\end{dimostrazione}
+
+\begin{strategia}[Un'altra via]
+Invece di costruire lo zero, lo si individua con l'estremo superiore: si considera
+l'insieme $E$ dei punti di $[a,b]$ in cui $f$ è negativa, e il suo estremo superiore $y$.
+Se fosse $f(y)<0$, oppure $f(y)>0$, la permanenza del segno darebbe un intorno di $y$ in
+cui $f$ conserva il segno, e in entrambi i casi $y$ non potrebbe essere il minimo dei
+maggioranti di $E$. L'assioma di completezza interviene direttamente, nella forma
+dell'esistenza dell'estremo superiore; la continuità, soltanto attraverso la permanenza
+del segno.
+\end{strategia}
+
+\begin{dimostrazione}[Seconda dimostrazione]
+Sia
+\begin{equation}\label{eq:zeri-insieme-E}
+  E=\{x\in[a,b] : f(x)<0\} .
+\end{equation}
+L'insieme $E$ non è vuoto, perché $a\in E$, ed è limitato superiormente da $b$; per il
+\cref{teo:esistenza-sup} esiste $y=\sup E$, e $a\le y\le b$. Dimostriamo che $f(y)=0$,
+escludendo gli altri due casi.
+
+\emph{Non può essere $f(y)<0$.} In tal caso $y\neq b$, perché $f(b)>0$; dunque $y<b$. La
+funzione $-f$ è continua in $y$ (\cref{teo:operazioni-continue}) e $-f(y)>0$: per la
+permanenza del segno (\cref{teo:permanenza-segno-continue}) esiste $\delta>0$ tale che
+$f(x)<0$ per ogni $x\in[a,b]$ con $\abs{x-y}<\delta$. Il punto
+$x_{1}=\min\bigl\{y+\frac\delta2,b\bigr\}$ appartiene a $[a,b]$ e verifica
+$y<x_{1}<y+\delta$; quindi $f(x_{1})<0$, cioè $x_{1}\in E$. Ma $x_{1}>y$, contro il fatto
+che $y$ è un maggiorante di $E$.
+
+\emph{Non può essere $f(y)>0$.} Per la permanenza del segno esiste $\delta>0$ tale che
+$f(x)>0$ per ogni $x\in[a,b]$ con $\abs{x-y}<\delta$. Per la caratterizzazione
+dell'estremo superiore (\cref{prop:caratt-sup}), con $\epsilon=\delta$, esiste $x_{2}\in E$
+tale che $y-\delta<x_{2}\le y$. Allora $\abs{x_{2}-y}<\delta$, e quindi $f(x_{2})>0$;
+d'altra parte $f(x_{2})<0$, perché $x_{2}\in E$: è una contraddizione.
+
+Resta $f(y)=0$. Infine $y\neq a$ e $y\neq b$, perché $f(a)<0<f(b)$; quindi $y\in(a,b)$.
+\end{dimostrazione}
+
+\begin{osservazione}[Due dimostrazioni a confronto]\label{oss:zeri-due-vie}
+Le due dimostrazioni poggiano entrambe sull'assioma di completezza, ma lo usano in modo
+diverso. La bisezione passa attraverso il teorema sulle successioni monotòne ed è
+\emph{costruttiva}: produce le approssimazioni $c_{n}$ e ne controlla l'errore. La
+seconda usa l'esistenza dell'estremo superiore e non indica alcun modo per calcolare
+$\sup E$: garantisce lo zero senza dire come avvicinarlo. In compenso ne individua uno
+ben preciso: $y=\sup E$ è uno zero a destra del quale $f$ non assume più valori
+negativi, perché i punti di $(y,b]$ non stanno in $E$. Infine, la seconda dimostrazione
+usa la continuità solo «localmente», attraverso la permanenza del segno nel punto $y$:
+la stessa struttura ritorna in molte dimostrazioni di esistenza dell'Analisi.
+\end{osservazione}
+
+\begin{notastorica}[Bolzano, Cauchy e il teorema degli zeri]
+Il saggio di Bolzano del 1817, ricordato nel \cref{sec:sup} per il principio
+dell'estremo superiore, ha per titolo l'enunciato stesso del nostro teorema:
+\emph{Dimostrazione puramente analitica del teorema che fra due valori che danno
+risultati di segno opposto giace almeno una radice reale dell'equazione}. Bolzano vi
+definì la continuità in modo sostanzialmente identico al nostro, e ricavò il teorema
+dall'esistenza dell'estremo superiore: è l'idea della seconda dimostrazione. Quattro
+anni dopo Cauchy, nel \emph{Cours d'analyse}, si accontentò nel testo di un argomento geometrico
+(il grafico deve incontrare la retta), ma in una nota dedicata alla risoluzione numerica
+delle equazioni diede una dimostrazione diretta: divideva l'intervallo in $m$ parti
+uguali, ne sceglieva una ai cui estremi la funzione ha segni opposti e ripeteva
+l'operazione, ottenendo due successioni monotòne di estremi con lo stesso limite. È la
+nostra prima dimostrazione, che corrisponde a $m=2$; con $m=10$ si guadagna una cifra
+decimale a ogni passo. Né l'uno né l'altro, però, poteva giustificare fino in fondo il
+passo decisivo, l'esistenza dell'estremo superiore o del limite di una successione
+monotòna e limitata: mancava una teoria dei numeri reali, che arrivò mezzo secolo più
+tardi (si veda la nota storica del \cref{sec:bw-cauchy}).
+\end{notastorica}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.92\textwidth]{bisezione}
+\caption{Il metodo di bisezione per $f(x)=x^{3}+x-1$ su $[0,1]$: i primi intervalli
+incapsulati $[a_{n},b_{n}]$ si stringono attorno alla radice $x_{0}=0{,}6823\ldots$, e a
+ogni passo la loro lunghezza si dimezza (\texttt{python/fig\_bisezione.py}).}
+\label{fig:bisezione}
+\end{figure}
+
+\subsection{Il calcolo numerico della radice}
+
+Dalla dimostrazione proposta risulta chiaro come calcolare numericamente la soluzione
+$x_{0}$. Infatti le tre successioni $a_{n}$, $b_{n}$, $c_{n}$ convergono a $x_{0}$ (la terza
+perché è compresa tra le prime due). I termini delle tre successioni sono valori
+approssimati di $x_{0}$; in particolare, i valori di $a_{n}$ sono approssimazioni per
+difetto, quelli di $b_{n}$ sono approssimazioni per eccesso, cioè
+\begin{equation}\label{eq:bisezione-stima}
+  a_{n}\le x_{0}\le b_{n} \qquad\perogni n\ge0
+\end{equation}
+(la successione crescente $a_{n}$ non supera il suo limite, la decrescente $b_{n}$ non
+scende sotto il suo, per il \cref{teo:monotone}). Dalle \eqref{eq:bisezione-lunghezza},
+\eqref{eq:bisezione-stima} si deduce che l'errore di approssimazione che si commette
+sostituendo $x_{0}$ con $a_{n}$ (oppure con $b_{n}$) non supera $\frac{b-a}{2^{n}}$. Dato
+che $c_{n}$ è il punto di mezzo dell'intervallo $[a_{n},b_{n}]$, che contiene $x_{0}$,
+l'errore che si commette nell'approssimare $x_{0}$ con $c_{n}$ non supera
+$\frac{b-a}{2^{n+1}}$:
+\begin{equation}\label{eq:bisezione-errore}
+  \abs{c_{n}-x_{0}}\le\frac{b_{n}-a_{n}}2=\frac{b-a}{2^{n+1}} .
+\end{equation}
+
+Riprendiamo in considerazione le equazioni \eqref{eq:cubica}, \eqref{eq:trascendente}.
+Ci proponiamo il calcolo delle rispettive radici con un errore inferiore a $10^{-3}$. In
+entrambi i casi abbiamo un intervallo di ampiezza $b-a=1$; infatti nel primo caso
+$[a,b]=[0,1]$, nel secondo $[a,b]=[-1,0]$. L'errore di approssimazione che si commette
+sostituendo la soluzione $x_{0}$ con $c_{n}$ non supera $\frac1{2^{n+1}}$; in particolare,
+per $n=9$, risulta
+\begin{equation}\label{eq:bisezione-c9}
+  \abs{c_{9}-x_{0}}\le\frac1{2^{10}}=\frac1{1024}<10^{-3} .
+\end{equation}
+Il programma seguente esegue il calcolo, e alla fine prosegue fino a $50$ dimezzamenti
+per confrontare il risultato con la formula di Cardano \eqref{eq:cardano}.
+
+\begin{python}[Il metodo di bisezione]
+import math
+
+def bisezione(f, a, b, passi):
+    """Se f(a) < 0 < f(b), restituisce i punti medi c_0, ..., c_n."""
+    assert f(a) < 0 < f(b)
+    medi = []
+    for n in range(passi + 1):
+        c = (a + b) / 2
+        medi.append(c)
+        if f(c) == 0:          # radice esatta: ci si ferma
+            break
+        if f(c) > 0:
+            b = c              # il cambio di segno è in [a, c]
+        else:
+            a = c              # il cambio di segno è in [c, b]
+    return medi
+
+f1 = lambda x: x**3 + x - 1           # f1(0) = -1 < 0 < 1 = f1(1)
+f2 = lambda x: math.exp(x) + x        # f2(-1) = 1/e - 1 < 0 < f2(0)
+
+c1 = bisezione(f1, 0, 1, 9)
+c2 = bisezione(f2, -1, 0, 9)
+for n in range(10):
+    print(f"c_{n} = {c1[n]:.6f}     c_{n} = {c2[n]:+.6f}")
+
+# 50 passi: errore < 2^-51; confronto con la formula di Cardano
+r1 = bisezione(f1, 0, 1, 50)[-1]
+s = math.sqrt(31 / 108)
+cardano = (0.5 + s) ** (1/3) - (s - 0.5) ** (1/3)
+print(f"x^3 + x - 1 = 0:  {r1:.15f}   (Cardano: {cardano:.15f})")
+print(f"e^x + x = 0:     {bisezione(f2, -1, 0, 50)[-1]:.15f}")
+\end{python}
+\begin{risultato}
+c_0 = 0.500000     c_0 = -0.500000
+c_1 = 0.750000     c_1 = -0.750000
+c_2 = 0.625000     c_2 = -0.625000
+c_3 = 0.687500     c_3 = -0.562500
+c_4 = 0.656250     c_4 = -0.593750
+c_5 = 0.671875     c_5 = -0.578125
+c_6 = 0.679688     c_6 = -0.570312
+c_7 = 0.683594     c_7 = -0.566406
+c_8 = 0.681641     c_8 = -0.568359
+c_9 = 0.682617     c_9 = -0.567383
+x^3 + x - 1 = 0:  0.682327803828020   (Cardano: 0.682327803828019)
+e^x + x = 0:     -0.567143290409784
+\end{risultato}
+
+Quindi la radice dell'equazione $x^{3}+x-1=0$ soddisfa $\abs{x_{0}-0{,}682617}<0{,}001$,
+cioè $0{,}6816<x_{0}<0{,}6837$; la radice dell'equazione $e^{x}+x=0$ soddisfa
+$\abs{x_{0}+0{,}567383}<0{,}001$, cioè $-0{,}5684<x_{0}<-0{,}5663$. Il numero $\pm0{,}001$ è
+una \emph{stima} dell'errore, non l'errore effettivo: quest'ultimo, come mostrano le
+ultime righe dell'output, è di circa $2{,}9\cdot10^{-4}$ nel primo caso e di circa
+$2{,}4\cdot10^{-4}$ nel secondo. Si osservi anche
+che la successione $c_{n}$ non è monotòna: si avvicina a $x_{0}$ oscillando, ma la
+\eqref{eq:bisezione-errore} ne controlla l'errore a ogni passo.
+
+\begin{osservazione}[Quanti passi servono?]\label{oss:passi-bisezione}
+Per ottenere $\abs{c_{n}-x_{0}}<\tau$ basta, per la \eqref{eq:bisezione-errore}, che
+$\frac{b-a}{2^{n+1}}<\tau$, cioè $2^{n+1}>\frac{b-a}\tau$. Poiché $2^{10}=1024\approx10^{3}$,
+ogni dieci dimezzamenti si guadagnano circa tre cifre decimali esatte: il metodo è
+lento ma \emph{garantito}, e il numero di passi necessari si conosce in anticipo, prima
+di cominciare il calcolo. È questa robustezza a renderlo ancora oggi il metodo di
+riferimento, spesso combinato con metodi più veloci che da soli potrebbero non
+convergere.
+\end{osservazione}
+
+\begin{python}[Gli zeri con la libreria \texttt{scipy}]
+import math
+from scipy.optimize import bisect, brentq
+
+f = lambda x: math.exp(x) + x
+
+# entrambe vogliono [a, b] con f(a), f(b) di segno discorde
+x_b, info_b = bisect(f, -1, 0, xtol=1e-14, full_output=True)
+x_r, info_r = brentq(f, -1, 0, xtol=1e-14, full_output=True)
+print(f"bisect: {x_b:.14f}  ({info_b.iterations} iterazioni)")
+print(f"brentq: {x_r:.14f}  ({info_r.iterations} iterazioni)")
+try:
+    bisect(f, 0, 1)            # f(0) = 1, f(1) = e + 1: stesso segno
+except ValueError as err:
+    print("errore:", err)
+\end{python}
+\begin{risultato}
+bisect: -0.56714329040978  (47 iterazioni)
+brentq: -0.56714329040978  (6 iterazioni)
+errore: f(a) and f(b) must have different signs
+\end{risultato}
+
+La funzione \texttt{bisect} è esattamente il metodo della dimostrazione: con
+$b-a=1$ e tolleranza $10^{-14}$ servono $47$ dimezzamenti, perché $2^{47}\approx1{,}4\cdot10^{14}$.
+La funzione \texttt{brentq} (metodo di Brent) combina la bisezione con interpolazioni
+più veloci e arriva allo stesso risultato in pochissime iterazioni, conservando la
+garanzia di convergenza. Entrambe, come il teorema, \emph{pretendono} che $f$ cambi
+segno agli estremi: senza questa ipotesi non garantiscono nulla e si rifiutano di
+partire.
+
+\subsection{Il ruolo dell'assioma di completezza}
+
+Chiudiamo il paragrafo con un'osservazione sull'assioma di completezza
+(\cref{ass:completezza}). Abbiamo utilizzato tale assioma nella dimostrazione del teorema
+dell'esistenza degli zeri, in particolare nell'affermazione che la successione $a_{n}$,
+essendo monotòna e limitata, risulta convergente. Ciò è essenziale; infatti,
+nell'ambito dei numeri razionali $\Q$, dove non è verificato l'assioma di completezza,
+non vale nemmeno il teorema dell'esistenza degli zeri. Ad esempio, la funzione
+$f(x)=x^{2}-2$, considerata sull'insieme dei razionali $\{x\in\Q : 0\le x\le2\}$, è
+continua e verifica $f(0)<0$, $f(2)>0$, ma non si annulla mai, perché $\sqrt2$ non è
+razionale (\cref{teo:radice2}). Le successioni $a_{n}$, $b_{n}$ della bisezione sarebbero
+ancora ben definite e razionali, si stringerebbero attorno al «buco» lasciato da
+$\sqrt2$, ma non avrebbero un limite in $\Q$. Allo stesso modo, nella seconda
+dimostrazione, l'insieme $E=\{x\in\Q : 0\le x\le2,\ x^{2}<2\}$ è limitato, ma non ha
+estremo superiore in $\Q$ (\cref{teo:Q-non-completo}). L'assioma di completezza è essenziale anche
+negli altri teoremi di esistenza: nel teorema di Weierstrass, o, come già detto, nel
+teorema sull'esistenza del limite per le successioni monotòne.

@@ -1,0 +1,118 @@
+%% ----------------------------------------------------------------------------
+%%  §4.9  Appendice: dimostrazione del teorema di Weierstrass
+%% ----------------------------------------------------------------------------
+\section{Appendice: dimostrazione del teorema di Weierstrass}
+\label{sec:dim-weierstrass}
+
+Dimostriamo ora il teorema enunciato nel \cref{sec:teoremi-continue}: \emph{se $f$ è una
+funzione continua in un intervallo chiuso e limitato $[a,b]$, allora $f$ assume minimo e
+massimo in $[a,b]$}, cioè esistono $x_{1},x_{2}\in[a,b]$ per cui vale la
+\eqref{eq:weierstrass}.
+
+\begin{strategia}[Piano d'attacco per il \cref{teo:weierstrass}]
+Consideriamo l'estremo superiore $M$ dei valori di $f$, che a priori potrebbe anche
+essere $+\infty$. Per le proprietà dell'estremo superiore esiste una successione di punti
+$x_{n}$ in cui i valori $f(x_{n})$ si avvicinano a $M$ (una successione
+\emph{massimizzante}). I punti $x_{n}$ potrebbero non convergere, ma stanno tutti in
+$[a,b]$, che è limitato: per il teorema di Bolzano--Weierstrass se ne può estrarre una
+successione convergente a un punto $x_{0}$, che sta ancora in $[a,b]$ perché
+l'intervallo è chiuso. Per la continuità, i valori di $f$ lungo l'estratta tendono a
+$f(x_{0})$; ma tendono anche a $M$. Dunque $M=f(x_{0})$: l'estremo superiore è finito ed
+è un valore assunto, cioè un massimo. Ogni ipotesi interviene in un punto preciso: la
+limitatezza dell'intervallo per applicare Bolzano--Weierstrass, la chiusura per non
+perdere il punto limite, la continuità per passare al limite dentro $f$.
+\end{strategia}
+
+\begin{dimostrazione}[Dimostrazione del \cref{teo:weierstrass}]
+Posto $M=\sup\{f(x) : x\in[a,b]\}$ (con la convenzione $M=+\infty$ se l'insieme dei
+valori non è limitato superiormente, \eqref{eq:sup-infinito}), verifichiamo che esiste
+una successione $x_{n}$ di punti di $[a,b]$ tale che
+\begin{equation}\label{eq:weier-massimizzante}
+  \lim_{n\to+\infty}f(x_{n})=M .
+\end{equation}
+Infatti, se $M=+\infty$, nessun numero $n\in\N$ è un maggiorante dei valori di $f$, e
+quindi per ogni $n\in\N$ esiste $x_{n}\in[a,b]$ tale che $f(x_{n})>n$; perciò
+$f(x_{n})\to M=+\infty$ (\cref{teo:confronto-infinito}). Se invece risulta $M<+\infty$,
+per la caratterizzazione dell'estremo superiore (\cref{prop:caratt-sup}) con
+$\epsilon=\frac1n$, per ogni $n\in\N$ esiste $x_{n}$ in $[a,b]$ tale che
+\begin{equation}\label{eq:weier-stima}
+  M-\frac1n<f(x_{n})\le M,
+\end{equation}
+e perciò $f(x_{n})\to M$ per il teorema dei carabinieri.
+
+La successione $x_{n}$ è limitata, perché $a\le x_{n}\le b$ per ogni $n$. Per il teorema
+di Bolzano--Weierstrass (\cref{teo:bolzano-weierstrass}) esistono un'estratta $x_{n_{k}}$
+da $x_{n}$ e un punto $x_{0}$ tali che
+\begin{equation}\label{eq:weier-estratta}
+  x_{n_{k}}\to x_{0} \qquad\text{per } k\to+\infty ;
+\end{equation}
+inoltre $x_{0}\in[a,b]$, per il \cref{cor:confronto-limiti} applicato alle disuguaglianze
+$a\le x_{n_{k}}\le b$. Poiché $f$ è continua in $x_{0}$, ne segue
+(\cref{prop:caratt-continuita}(b), che ammette anche eventuali termini $x_{n_{k}}=x_{0}$)
+\begin{equation}\label{eq:weier-continuita}
+  f(x_{n_{k}})\to f(x_{0}) .
+\end{equation}
+D'altra parte $f(x_{n_{k}})$ è un'estratta di $f(x_{n})$, e quindi, per la
+\eqref{eq:weier-massimizzante} e la \cref{prop:estratta-limite}, tende a $M$. Per
+l'unicità del limite
+\begin{equation}\label{eq:weier-uguaglianza}
+  M=\lim_{n\to+\infty}f(x_{n})=\lim_{k\to+\infty}f(x_{n_{k}})=f(x_{0}) .
+\end{equation}
+Abbiamo così dimostrato che
+\begin{equation}\label{eq:weier-tesi}
+  f(x_{0})=M=\sup\{f(x) : x\in[a,b]\};
+\end{equation}
+ciò implica allo stesso tempo che $M<+\infty$ (perché $f(x_{0})$ è un numero reale) e
+che l'estremo superiore è, in effetti, un massimo: posto $x_{2}=x_{0}$, si ha
+$f(x)\le f(x_{2})$ per ogni $x\in[a,b]$.
+
+Analogamente si ragiona per determinare un punto di minimo, partendo dall'estremo
+inferiore di $f$ in $[a,b]$; oppure si applica quanto appena dimostrato alla funzione
+continua $-f$: un punto di massimo $x_{1}$ di $-f$ verifica $-f(x)\le-f(x_{1})$, cioè
+$f(x_{1})\le f(x)$, per ogni $x\in[a,b]$.
+\end{dimostrazione}
+
+\begin{corollario}\label{cor:continua-limitata}
+Una funzione continua in un intervallo chiuso e limitato è limitata.
+\end{corollario}
+
+\begin{schema}
+\Ipotesi{$f$ continua in $[a,b]$.}
+\Tesi{$\esiste L>0$: \ $\abs{f(x)}\le L$ \ $\perogni x\in[a,b]$.}
+\end{schema}
+
+\begin{strategia}
+Il teorema di Weierstrass dà molto di più della limitatezza: un minimo e un massimo
+\emph{reali}. Basta allora racchiudere l'intervallo $[m,M]$ in un intervallo simmetrico
+$[-L,L]$.
+\end{strategia}
+
+\begin{dimostrazione}
+Per il teorema di Weierstrass $m\le f(x)\le M$ per ogni $x\in[a,b]$, con $m$, $M$ numeri
+reali; quindi $\abs{f(x)}\le L=\max\{\abs m,\abs M,1\}$ per ogni $x\in[a,b]$
+(\cref{prop:limitato-modulo}).
+\end{dimostrazione}
+
+Rileggiamo alla luce della dimostrazione gli esempi del \cref{sec:teoremi-continue}
+(\cref{fig:controesempi-weierstrass}). Per $\frac1x$ su $(0,1]$ e per $g$ su $[-1,1]$
+l'estremo da raggiungere (rispettivamente $+\infty$ e $0$) è avvicinato lungo una
+successione che tende a $0$: nel primo caso il punto limite $0$ esce dall'intervallo, che
+non è chiuso; nel secondo il punto limite c'è, ma la discontinuità di $g$ impedisce di
+passare al limite dentro la funzione, e $g(0)=1$ non ha nulla a che fare con $0$. Per
+$\frac1x$ su $[1,+\infty)$ la successione minimizzante $x_{n}=n$ diverge, e nessuna sua
+estratta converge: è la limitatezza dell'intervallo che viene a mancare.
+
+\begin{notastorica}[Bolzano, Weierstrass e la compattezza]
+Karl Weierstrass dimostrò il teorema che porta il suo nome nelle lezioni berlinesi dei
+primi anni Sessanta dell'Ottocento, con un argomento basato proprio su quello che oggi chiamiamo teorema di
+Bolzano--Weierstrass. Ancora una volta, però, Bolzano lo aveva preceduto: nella sua
+\emph{Functionenlehre}, scritta intorno al 1830, si trova una dimostrazione del fatto che
+una funzione continua su un intervallo chiuso e limitato è limitata e assume il massimo;
+il manoscritto rimase inedito fino al 1930. La proprietà dell'intervallo $[a,b]$ usata
+nella dimostrazione, che \emph{ogni successione di suoi punti ammette un'estratta
+convergente a un punto dell'intervallo}, fu isolata all'inizio del Novecento da Maurice
+Fréchet, che tra il 1904 e il 1906 introdusse per gli insiemi con questa proprietà il
+nome di \emph{compatti} (nella sua terminologia originaria il punto limite non doveva
+necessariamente appartenere all'insieme). Con questo linguaggio il teorema di Weierstrass si enuncia in grande
+generalità: una funzione continua su un insieme compatto ha massimo e minimo.
+\end{notastorica}

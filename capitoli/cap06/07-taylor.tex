@@ -1,0 +1,463 @@
+%% ----------------------------------------------------------------------------
+%%  §6.7  La formula di Taylor
+%% ----------------------------------------------------------------------------
+\section{La formula di Taylor}
+\label{sec:taylor}
+
+Nel \cref{sec:retta-tangente} abbiamo visto che una funzione derivabile in $x_{0}$ si
+può approssimare, vicino a $x_{0}$, con un polinomio di primo grado:
+\begin{equation}\label{eq:taylor-ordine-1}
+  f(x)=f(x_{0})+f'(x_{0})(x-x_{0})+R_{1}(x), \qquad
+  \lim_{x\to x_{0}}\frac{R_{1}(x)}{x-x_{0}}=0 ,
+\end{equation}
+cioè $R_{1}(x)=o(x-x_{0})$ (\cref{prop:approssimazione-lineare}): il \emph{resto} $R_{1}$
+tende a zero più rapidamente di $x-x_{0}$. Sapendo che una funzione è derivabile fino
+a un ordine $n>1$, ci si può domandare se sia possibile ottenere un'approssimazione
+migliore, cioè decomporre $f(x)$ nella somma di un polinomio di grado $n$ e di un resto
+$R_{n}(x)$ che tende a zero più rapidamente di $(x-x_{0})^{n}$. La formula di Taylor
+risponde affermativamente.
+
+Useremo il simbolo di sommatoria introdotto nel \cref{sec:binomio}, e il fattoriale
+$k!=1\cdot2\cdots k$ \eqref{eq:fattoriale}, con la convenzione $0!=1$, e la nozione di
+funzione \emph{derivabile $n$ volte in un punto} precisata nella
+\cref{not:derivabile-n-volte}.
+
+\begin{definizione}[Polinomio di Taylor]\label{def:polinomio-taylor}
+\index{polinomio di Taylor}
+Sia $f$ derivabile $n$ volte in $x_{0}$. Si chiama \emph{polinomio di Taylor di ordine
+$n$} di $f$ di punto iniziale $x_{0}$ il polinomio
+\begin{equation}\label{eq:polinomio-taylor}
+\begin{split}
+  T_{n}(x)&=\sum_{k=0}^{n}\frac{f^{(k)}(x_{0})}{k!}(x-x_{0})^{k}\\
+  &=f(x_{0})+f'(x_{0})(x-x_{0})+\frac{f''(x_{0})}{2}(x-x_{0})^{2}\\
+  &\quad+\dots+\frac{f^{(n)}(x_{0})}{n!}(x-x_{0})^{n}
+\end{split}
+\end{equation}
+(per $k=0$ si intende $f^{(0)}(x_{0})=f(x_{0})$). Se $x_{0}=0$ si parla anche di
+\emph{polinomio di Mac Laurin}.
+\end{definizione}
+
+Perché proprio questi coefficienti? Il lemma seguente mostra che $T_{n}$ è il polinomio
+di grado $\le n$ che ha \emph{le stesse derivate di $f$ in $x_{0}$, fino all'ordine
+$n$}: generalizza la retta tangente, che ha in comune con $f$ il valore e la derivata
+prima.
+
+\begin{lemma}\label{lem:derivate-taylor}
+Per $k=0,1,\dots,n$ risulta $T_{n}^{(k)}(x_{0})=f^{(k)}(x_{0})$. Inoltre
+$T_{n}^{(n-1)}(x)=f^{(n-1)}(x_{0})+f^{(n)}(x_{0})(x-x_{0})$ per ogni $x$.
+\end{lemma}
+
+\begin{schema}
+\Ipotesi{$f$ derivabile $n$ volte in $x_{0}$; $T_{n}$ definito dalla
+\eqref{eq:polinomio-taylor}.}
+\Tesi{$T_{n}^{(k)}(x_{0})=f^{(k)}(x_{0})$ per $0\le k\le n$; \
+$T_{n}^{(n-1)}(x)=f^{(n-1)}(x_{0})+f^{(n)}(x_{0})(x-x_{0})$.}
+\end{schema}
+
+\needspace{6\baselineskip}
+\begin{strategia}
+$T_{n}$ è una combinazione delle potenze $(x-x_{0})^{j}$: basta sapere quanto vale la
+derivata $k$-esima di ciascuna potenza nel punto $x_{0}$, e osservare che soltanto la
+potenza di esponente $j=k$ dà un contributo non nullo.
+\end{strategia}
+
+\begin{dimostrazione}
+Derivando $k$ volte la potenza $(x-x_{0})^{j}$ si ottiene
+$j(j-1)\cdots(j-k+1)(x-x_{0})^{j-k}$ se $k\le j$, e $0$ se $k>j$. Nel punto $x=x_{0}$
+questa espressione è nulla, tranne nel caso $j=k$, in cui vale $k!$. Quindi, nella
+derivata $k$-esima di $T_{n}$ calcolata in $x_{0}$, sopravvive soltanto il termine con
+$j=k$, che vale $\frac{f^{(k)}(x_{0})}{k!}\cdot k!=f^{(k)}(x_{0})$. Per la seconda
+affermazione, derivando $n-1$ volte $T_{n}$ si annullano i termini con $j<n-1$, e
+restano $\frac{f^{(n-1)}(x_{0})}{(n-1)!}(n-1)!$ e
+$\frac{f^{(n)}(x_{0})}{n!}\,n!\,(x-x_{0})$.
+\end{dimostrazione}
+
+\begin{teorema}[Formula di Taylor con il resto di Peano]\label{teo:taylor}
+\index{formula di Taylor}\index{teorema!di Taylor}
+Sia $f$ una funzione derivabile $n$ volte nel punto $x_{0}$ ($n\ge1$). Posto
+$R_{n}(x)=f(x)-T_{n}(x)$, risulta
+\begin{equation}\label{eq:taylor}
+  f(x)=\sum_{k=0}^{n}\frac{f^{(k)}(x_{0})}{k!}(x-x_{0})^{k}+R_{n}(x), \qquad
+  \lim_{x\to x_{0}}\frac{R_{n}(x)}{(x-x_{0})^{n}}=0 ,
+\end{equation}
+cioè $R_{n}(x)=o\bigl((x-x_{0})^{n}\bigr)$ per $x\to x_{0}$.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$ derivabile $n$ volte in $x_{0}$.}
+\Tesi{$f(x)-T_{n}(x)=o\bigl((x-x_{0})^{n}\bigr)$ per $x\to x_{0}$.}
+\end{schema}
+
+\begin{strategia}
+Dobbiamo calcolare il limite di $\frac{R_{n}(x)}{(x-x_{0})^{n}}$, che è una forma
+indeterminata $\frac00$. L'idea è di applicare ripetutamente il teorema di L'Hôpital:
+per il \cref{lem:derivate-taylor} le derivate di $R_{n}=f-T_{n}$ fino all'ordine $n$ si
+annullano in $x_{0}$, e quindi a ogni passo si ritrova una forma $\frac00$. Dopo $n-1$
+applicazioni il numeratore è $f^{(n-1)}(x)-f^{(n-1)}(x_{0})-f^{(n)}(x_{0})(x-x_{0})$ e il
+denominatore è un multiplo di $x-x_{0}$: il limite si calcola direttamente con la
+definizione di $f^{(n)}(x_{0})$. Come per la \eqref{eq:hopital-potenza-exp}, la catena
+di uguaglianze va poi letta \emph{all'indietro}: è l'esistenza dell'ultimo limite a
+garantire, passo dopo passo, quella dei precedenti.
+\end{strategia}
+
+\begin{dimostrazione}
+Per $n=1$ la tesi è la \eqref{eq:taylor-ordine-1}, cioè la
+\cref{prop:approssimazione-lineare}. Sia $n\ge2$, e sia $I$ un intorno di $x_{0}$ in cui
+esiste $f^{(n-1)}$. Poniamo, per $k=0,1,\dots,n-1$,
+\begin{align*}
+  N_{k}(x)&=R_{n}^{(k)}(x)=f^{(k)}(x)-T_{n}^{(k)}(x),\\
+  D_{k}(x)&=\frac{d^{k}}{dx^{k}}(x-x_{0})^{n}=\frac{n!}{(n-k)!}(x-x_{0})^{n-k} .
+\end{align*}
+Osserviamo che:
+\begin{itemize}
+  \item per $k\le n-2$, $N_{k}$ e $D_{k}$ sono derivabili in $I$, con $N_{k}'=N_{k+1}$ e
+  $D_{k}'=D_{k+1}$; inoltre $D_{k+1}(x)\neq0$ per $x\neq x_{0}$;
+  \item per $k\le n-2$, $N_{k}(x)\to N_{k}(x_{0})=0$ (per la continuità e il
+  \cref{lem:derivate-taylor}) e $D_{k}(x)\to0$ per $x\to x_{0}$: il rapporto
+  $\frac{N_{k}}{D_{k}}$ è una forma indeterminata $\frac00$.
+\end{itemize}
+Calcoliamo l'ultimo rapporto. Per il \cref{lem:derivate-taylor},
+$N_{n-1}(x)=f^{(n-1)}(x)-f^{(n-1)}(x_{0})-f^{(n)}(x_{0})(x-x_{0})$, e $D_{n-1}(x)=n!\,(x-x_{0})$;
+quindi
+\begin{equation}\label{eq:taylor-ultimo}
+\begin{split}
+  \frac{N_{n-1}(x)}{D_{n-1}(x)}&=\frac1{n!}\Bigl[\frac{f^{(n-1)}(x)-f^{(n-1)}(x_{0})}{x-x_{0}}
+  -f^{(n)}(x_{0})\Bigr]\\
+  &\longrightarrow\ \frac1{n!}\bigl[f^{(n)}(x_{0})-f^{(n)}(x_{0})\bigr]=0,
+\end{split}
+\end{equation}
+per la definizione di derivata di $f^{(n-1)}$ nel punto $x_{0}$. Ora risaliamo: poiché
+$\frac{N_{n-1}}{D_{n-1}}=\frac{N_{n-2}'}{D_{n-2}'}\to0$ e $\frac{N_{n-2}}{D_{n-2}}$ è una
+forma $\frac00$ che verifica le ipotesi del teorema di L'Hôpital (\cref{teo:hopital}),
+anche $\frac{N_{n-2}}{D_{n-2}}\to0$. Ripetendo il ragionamento per
+$k=n-3,\dots,1,0$ si ottiene infine
+\[
+  \lim_{x\to x_{0}}\frac{N_{0}(x)}{D_{0}(x)}=\lim_{x\to x_{0}}\frac{R_{n}(x)}{(x-x_{0})^{n}}=0 .
+  \qedhere
+\]
+\end{dimostrazione}
+
+\begin{osservazione}[Sulle ipotesi e sull'uso del teorema di L'Hôpital]
+\label{oss:taylor-ipotesi}
+Una dimostrazione più breve, che si trova in molti testi, suppone che $f^{(n)}$ esista in
+un intorno di $x_{0}$ e sia continua in $x_{0}$, e applica il teorema di L'Hôpital $n$
+volte; la dimostrazione precedente, fermandosi a $n-1$ applicazioni e concludendo con la
+definizione di derivata, richiede soltanto l'esistenza di $f^{(n)}(x_{0})$. Si noti che
+per $n\ge2$ le derivate dei denominatori $D_{k}$ si annullano in $x_{0}$, e quindi non
+basta la forma semplice del teorema di L'Hôpital (\cref{prop:hopital-semplice}): serve
+il caso generale, dimostrato nel \cref{sec:cauchy-hopital} con il teorema di Cauchy, che
+a sua volta poggia soltanto sul teorema di Rolle. Non c'è dunque alcun circolo vizioso.
+\end{osservazione}
+
+Per $n=2$ la formula di Taylor si scrive esplicitamente
+\begin{equation}\label{eq:taylor-ordine-2}
+  f(x)=f(x_{0})+f'(x_{0})(x-x_{0})+\frac{f''(x_{0})}{2}(x-x_{0})^{2}+o\bigl((x-x_{0})^{2}\bigr):
+\end{equation}
+la parabola $y=T_{2}(x)$, detta \emph{parabola osculatrice}, approssima il grafico
+meglio della retta tangente, perché ne riproduce anche la curvatura. Il polinomio di
+Taylor è inoltre l'\emph{unico} polinomio di grado $\le n$ che approssima $f$ con un
+errore $o\bigl((x-x_{0})^{n}\bigr)$.
+
+\begin{proposizione}[Unicità del polinomio di Taylor]\label{prop:unicita-taylor}
+Se $P$ è un polinomio di grado $\le n$ tale che $f(x)-P(x)=o\bigl((x-x_{0})^{n}\bigr)$
+per $x\to x_{0}$, e $f$ è derivabile $n$ volte in $x_{0}$, allora $P=T_{n}$.
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$f$ derivabile $n$ volte in $x_{0}$; $P$ polinomio di grado $\le n$ con
+$f-P=o\bigl((x-x_{0})^{n}\bigr)$.}
+\Tesi{$P=T_{n}$.}
+\end{schema}
+
+\begin{strategia}
+Per la formula di Taylor anche $f-T_{n}$ è $o\bigl((x-x_{0})^{n}\bigr)$; quindi il polinomio
+$Q=T_{n}-P$ è un infinitesimo di ordine superiore a $n$. Ma un polinomio non nullo di
+grado $\le n$ è, vicino a $x_{0}$, un infinitesimo di ordine pari all'esponente $j$ del suo
+primo coefficiente non nullo, che è $\le n$: si arriva a una contraddizione dividendo
+per $(x-x_{0})^{j}$.
+\end{strategia}
+
+\begin{dimostrazione}
+Per differenza, il polinomio $Q=T_{n}-P$ verifica $Q(x)=o\bigl((x-x_{0})^{n}\bigr)$.
+Scriviamolo nella forma $Q(x)=\sum_{k=0}^{n}c_{k}(x-x_{0})^{k}$ e supponiamo per assurdo
+che i coefficienti non siano tutti nulli; sia $j$ il più piccolo indice con
+$c_{j}\neq0$. Allora
+\[
+  \frac{Q(x)}{(x-x_{0})^{j}}=c_{j}+c_{j+1}(x-x_{0})+\dots+c_{n}(x-x_{0})^{n-j}\ \to\ c_{j}\neq0,
+\]
+mentre d'altra parte
+$\frac{Q(x)}{(x-x_{0})^{j}}=\frac{Q(x)}{(x-x_{0})^{n}}\,(x-x_{0})^{n-j}$ è il prodotto della
+funzione infinitesima $\frac{Q(x)}{(x-x_{0})^{n}}$ per la funzione $(x-x_{0})^{n-j}$, limitata
+vicino a $x_{0}$, e quindi tende a $0$. Contraddizione: quindi $Q=0$.
+\end{dimostrazione}
+
+L'unicità è molto utile in pratica: \emph{qualunque} procedimento produca un polinomio
+che approssima $f$ con l'errore giusto fornisce il polinomio di Taylor, senza bisogno di
+calcolare le derivate. Ad esempio, dallo sviluppo $e^{t}=1+t+\frac{t^{2}}2+\frac{t^{3}}6+o(t^{3})$
+che vedremo tra poco, sostituendo $t=-x^{2}$ si ottiene
+$e^{-x^{2}}=1-x^{2}+\frac{x^{4}}2-\frac{x^{6}}6+o(x^{6})=1-x^{2}+\frac{x^{4}}2+o(x^{5})$
+(per il teorema sul limite delle funzioni composte, $o(t^{3})$ con $t=-x^{2}$ è $o(x^{6})$):
+$1-x^{2}+\frac{x^{4}}2$ è dunque il polinomio di Taylor di ordine $4$, e anche di ordine
+$5$, della curva di Gauss.
+
+\subsection{Gli sviluppi delle funzioni elementari}
+
+Sviluppiamo con la formula di Taylor, con $x_{0}=0$, alcune funzioni elementari.
+
+\emph{Esponenziale.} Se $f(x)=e^{x}$, risulta $f^{(k)}(x)=e^{x}$ per ogni $k$, e quindi
+$f^{(k)}(0)=1$:
+\begin{equation}\label{eq:taylor-exp}
+  e^{x}=1+x+\frac{x^{2}}{2}+\frac{x^{3}}{3!}+\dots+\frac{x^{n}}{n!}+o(x^{n})
+  =\sum_{k=0}^{n}\frac{x^{k}}{k!}+o(x^{n}) .
+\end{equation}
+
+\emph{Logaritmo.} Se $f(x)=\log(1+x)$, per induzione si verifica che
+$f^{(k)}(x)=\frac{(-1)^{k+1}(k-1)!}{(1+x)^{k}}$ per $k\ge1$: infatti per $k=1$ si ha
+$f'(x)=\frac1{1+x}$, e derivando la formula per $k$ si ottiene quella per $k+1$. Quindi
+$\frac{f^{(k)}(0)}{k!}=\frac{(-1)^{k+1}}{k}$ e
+\begin{equation}\label{eq:taylor-log}
+  \log(1+x)=x-\frac{x^{2}}2+\frac{x^{3}}3-\dots+(-1)^{n+1}\frac{x^{n}}{n}+o(x^{n}) .
+\end{equation}
+
+\emph{Seno e coseno.} Per le formule di addizione \eqref{eq:addizione-sen},
+$\cos x=\sen\bigl(x+\frac\pi2\bigr)$ e $-\sen x=\cos\bigl(x+\frac\pi2\bigr)$; quindi, per
+induzione, $D^{k}\sen x=\sen\bigl(x+k\frac\pi2\bigr)$ e
+$D^{k}\cos x=\cos\bigl(x+k\frac\pi2\bigr)$. In $x=0$ le derivate del seno valgono
+ciclicamente $0,1,0,-1$, quelle del coseno $1,0,-1,0$; nei polinomi compaiono soltanto
+le potenze dispari per il seno, soltanto quelle pari per il coseno:
+\begin{align}
+  \sen x&=x-\frac{x^{3}}{3!}+\frac{x^{5}}{5!}-\dots+(-1)^{n}\frac{x^{2n+1}}{(2n+1)!}
+  +o(x^{2n+2}), \label{eq:taylor-sen}\\
+  \cos x&=1-\frac{x^{2}}{2}+\frac{x^{4}}{4!}-\dots+(-1)^{n}\frac{x^{2n}}{(2n)!}
+  +o(x^{2n+1}). \label{eq:taylor-cos}
+\end{align}
+Si noti che il resto del seno è $o(x^{2n+2})$, e non soltanto $o(x^{2n+1})$: il
+polinomio di ordine $2n+1$ coincide con quello di ordine $2n+2$, perché il coefficiente
+di $x^{2n+2}$ è nullo. Lo stesso vale per il coseno.
+
+\emph{Potenza.} Se $f(x)=(1+x)^{b}$, con $b\in\R$, si ha
+$f^{(k)}(x)=b(b-1)\cdots(b-k+1)(1+x)^{b-k}$, e quindi
+\begin{equation}\label{eq:taylor-potenza}
+  (1+x)^{b}=1+bx+\frac{b(b-1)}{2}x^{2}+\dots+\frac{b(b-1)\cdots(b-n+1)}{n!}x^{n}+o(x^{n}).
+\end{equation}
+Se $b$ è un intero positivo e $n\ge b$, il resto è nullo e si ritrova la formula del
+binomio di Newton (\cref{sec:binomio}). Ad esempio,
+$\sqrt{1+x}=1+\frac x2-\frac{x^{2}}8+o(x^{2})$ e
+$\frac1{1+x}=1-x+x^{2}-\dots+(-1)^{n}x^{n}+o(x^{n})$.
+
+\begin{python}[Gli sviluppi di Mac Laurin con sympy]
+import sympy as sp
+
+x, b = sp.symbols("x b", real=True)
+for f in (sp.exp(x), sp.log(1 + x), sp.sin(x), sp.cos(x)):
+    print(f"{str(f):>10} =", sp.series(f, x, 0, 6))
+print("  (1+x)**b =", sp.series((1 + x)**b, x, 0, 3))
+print("  e^(-x^2) =", sp.series(sp.exp(-x**2), x, 0, 6))
+\end{python}
+\begin{risultato}
+    exp(x) = 1 + x + x**2/2 + x**3/6 + x**4/24 + x**5/120 + O(x**6)
+log(x + 1) = x - x**2/2 + x**3/3 - x**4/4 + x**5/5 + O(x**6)
+    sin(x) = x - x**3/6 + x**5/120 + O(x**6)
+    cos(x) = 1 - x**2/2 + x**4/24 + O(x**6)
+  (1+x)**b = 1 + b*x + b*x**2*(b - 1)/2 + O(x**3)
+  e^(-x^2) = 1 - x**2 + x**4/2 + O(x**6)
+\end{risultato}
+
+Il simbolo $O(x^{6})$ usato da \texttt{sympy} indica un resto che, diviso per $x^{6}$,
+si mantiene limitato: è un'informazione più precisa di $o(x^{5})$. Per verificare
+graficamente quanto ottenuto, la \cref{fig:taylor-seno} riporta i grafici dei polinomi
+di Mac Laurin del seno di grado $1,3,5,\dots,23$, cioè
+\[
+  T_{1}(x)=x, \qquad T_{3}(x)=x-\frac{x^{3}}6, \qquad T_{5}(x)=x-\frac{x^{3}}6+\frac{x^{5}}{120},
+  \qquad\dots
+\]
+Si vede chiaramente che i polinomi di Taylor hanno un grafico tanto più simile a quello
+del seno, e su un intervallo tanto più ampio, quanto più il grado è alto. La formula di
+Taylor, però, garantisce soltanto il comportamento \emph{vicino a $x_{0}$}: che per il
+seno l'approssimazione migliori su ogni intervallo limitato al crescere del grado è un
+fatto più profondo, che dimostreremo nel capitolo sulle serie (\cref{teo:sviluppabilita}).
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=\textwidth]{taylor_seno}
+\caption{Il seno (blu) e i suoi polinomi di Mac Laurin (rame) di grado $1,3,5,\dots,23$;
+ciascuno è etichettato con il suo grado nel punto in cui esce dalla finestra
+(\texttt{python/fig\_taylor\_seno.py}).}
+\label{fig:taylor-seno}
+\end{figure}
+
+\subsection{Due applicazioni: limiti e piccoli angoli}
+
+\emph{Calcolo di limiti.} La formula di Taylor è spesso più rapida del teorema di
+L'Hôpital, perché mostra in un colpo solo l'ordine di infinitesimo del numeratore e del
+denominatore. Ad esempio, per la \eqref{eq:taylor-sen} con $n=1$,
+\[
+  \lim_{x\to0}\frac{x-\sen x}{x^{3}}=\lim_{x\to0}\frac{x-\bigl(x-\frac{x^{3}}6+o(x^{4})\bigr)}{x^{3}}
+  =\lim_{x\to0}\Bigl(\frac16+\frac{o(x^{4})}{x^{3}}\Bigr)=\frac16 ,
+\]
+mentre con il teorema di L'Hôpital occorrerebbe derivare tre volte. Allo stesso modo
+$\frac{1-\cos x}{x^{2}}\to\frac12$, in accordo con la \eqref{eq:lim-1-cos}, e
+$\frac{e^{x}-1-x}{x^{2}}\to\frac12$.
+
+\emph{Piccoli angoli.} In meccanica del volo si usano di continuo le approssimazioni
+$\sen\varphi\approx\varphi$ e $\cos\varphi\approx1-\frac{\varphi^{2}}2$ per angoli
+«piccoli» (l'incidenza, l'angolo di rampa, l'angolo di sbandata). La formula di Taylor
+dice quanto piccoli: poiché $\varphi-\sen\varphi=\frac{\varphi^{3}}6+o(\varphi^{4})$,
+l'errore relativo che si commette sostituendo $\sen\varphi$ con $\varphi$ è
+\[
+  \frac{\varphi-\sen\varphi}{\sen\varphi}\approx\frac{\varphi^{2}}{6},
+\]
+che resta sotto l'$1\%$ finché $\varphi^{2}<0{,}06$, cioè $\varphi\lesssim0{,}245$~rad
+$\approx14^{\circ}$. Analogamente, in una virata corretta con angolo di sbandata
+$\varphi$ il fattore di carico (che qui indichiamo con $n_{z}$, per non confonderlo con
+l'ordine dello sviluppo) è $n_{z}=\frac1{\cos\varphi}$; poiché questa funzione è pari,
+ha $f(0)=1$, $f'(0)=0$, $f''(0)=1$ e $f'''(0)=0$, e quindi
+$n_{z}=1+\frac{\varphi^{2}}2+o(\varphi^{3})$. Il programma confronta i valori esatti con le
+approssimazioni.
+
+\begin{python}[Approssimazioni per piccoli angoli]
+import math
+
+print(" phi(gradi)  sen phi    phi    errore   1/cos phi  1+phi^2/2")
+for g in (5, 10, 15, 20, 30, 45, 60):
+    phi = math.radians(g)
+    s = math.sin(phi)
+    print(f"{g:8d}    {s:.5f}  {phi:.5f}  {(phi - s) / s:7.2%}"
+          f"    {1 / math.cos(phi):.4f}    {1 + phi**2 / 2:.4f}")
+\end{python}
+\begin{risultato}
+ phi(gradi)  sen phi    phi    errore   1/cos phi  1+phi^2/2
+       5    0.08716  0.08727    0.13%    1.0038    1.0038
+      10    0.17365  0.17453    0.51%    1.0154    1.0152
+      15    0.25882  0.26180    1.15%    1.0353    1.0343
+      20    0.34202  0.34907    2.06%    1.0642    1.0609
+      30    0.50000  0.52360    4.72%    1.1547    1.1371
+      45    0.70711  0.78540   11.07%    1.4142    1.3084
+      60    0.86603  1.04720   20.92%    2.0000    1.5483
+\end{risultato}
+
+A $15^{\circ}$ l'errore relativo è dell'$1{,}15\%$, molto vicino alla stima
+$\frac{\varphi^{2}}6\approx1{,}14\%$; a $60^{\circ}$ è ormai del $21\%$. Per il fattore di
+carico l'approssimazione quadratica è eccellente fino a $20^{\circ}$ circa, ma a
+$60^{\circ}$ dà $1{,}55$ invece di $2$: le virate strette vanno calcolate con la formula
+esatta.
+
+\subsection{Il criterio delle derivate successive}
+
+Per mezzo della formula di Taylor si può generalizzare il criterio della derivata
+seconda (\cref{teo:test-derivata-seconda}) al caso in cui anche $f''(x_{0})$ sia nulla.
+
+\begin{teorema}[Criterio per i punti di massimo e di minimo]\label{teo:criterio-ordine-n}
+\index{criterio!delle derivate successive}
+Sia $f$ derivabile $n$ volte nel punto $x_{0}$, con $n\ge2$, e supponiamo che
+\begin{equation}\label{eq:criterio-ordine-n}
+  f'(x_{0})=f''(x_{0})=\dots=f^{(n-1)}(x_{0})=0, \qquad f^{(n)}(x_{0})\neq0 .
+\end{equation}
+\begin{enumerate}[label=\textup{(\roman*)}]
+  \item Se $n$ è pari e $f^{(n)}(x_{0})>0$, $x_{0}$ è un punto di minimo relativo stretto.
+  \item Se $n$ è pari e $f^{(n)}(x_{0})<0$, $x_{0}$ è un punto di massimo relativo stretto.
+  \item Se $n$ è dispari, $x_{0}$ non è né di massimo né di minimo relativo.
+\end{enumerate}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$ derivabile $n$ volte in $x_{0}$; le derivate di ordine $1,\dots,n-1$ sono
+nulle in $x_{0}$; $f^{(n)}(x_{0})\neq0$.}
+\Tesi{$n$ pari: minimo se $f^{(n)}(x_{0})>0$, massimo se $f^{(n)}(x_{0})<0$; \ $n$ dispari:
+né massimo né minimo.}
+\end{schema}
+
+\begin{strategia}
+Per l'annullarsi delle derivate, la formula di Taylor si riduce a
+$f(x)-f(x_{0})=\frac{f^{(n)}(x_{0})}{n!}(x-x_{0})^{n}+o\bigl((x-x_{0})^{n}\bigr)$: vicino a
+$x_{0}$ l'incremento $f(x)-f(x_{0})$ ha lo stesso segno del termine principale
+$\frac{f^{(n)}(x_{0})}{n!}(x-x_{0})^{n}$. Si tratta allora di discutere il segno di
+$(x-x_{0})^{n}$, che è sempre positivo se $n$ è pari, e cambia segno attraversando
+$x_{0}$ se $n$ è dispari. Lo strumento per rendere rigoroso «ha lo stesso segno» è la
+permanenza del segno.
+\end{strategia}
+
+\begin{dimostrazione}
+Consideriamo il caso $f^{(n)}(x_{0})>0$ (il caso opposto si ottiene considerando $-f$).
+Per le \eqref{eq:criterio-ordine-n} il polinomio di Taylor si riduce a
+$T_{n}(x)=f(x_{0})+\frac{f^{(n)}(x_{0})}{n!}(x-x_{0})^{n}$, e per il \cref{teo:taylor}
+\begin{equation}\label{eq:criterio-ordine-n-limite}
+  \lim_{x\to x_{0}}\frac{f(x)-f(x_{0})}{(x-x_{0})^{n}}
+  =\lim_{x\to x_{0}}\Bigl[\frac{f^{(n)}(x_{0})}{n!}+\frac{R_{n}(x)}{(x-x_{0})^{n}}\Bigr]
+  =\frac{f^{(n)}(x_{0})}{n!}>0 .
+\end{equation}
+Per la permanenza del segno (\cref{teo:confronto-funzioni}\,(i)) esiste $\delta>0$ tale
+che
+\begin{equation}\label{eq:criterio-ordine-n-segno}
+  \frac{f(x)-f(x_{0})}{(x-x_{0})^{n}}>0 \qquad\perogni x:\ 0<\abs{x-x_{0}}<\delta .
+\end{equation}
+Se $n$ è pari, il denominatore $(x-x_{0})^{n}$ è positivo per ogni $x\neq x_{0}$; quindi
+$f(x)>f(x_{0})$ per $0<\abs{x-x_{0}}<\delta$, e $x_{0}$ è di minimo relativo stretto. Se
+$n$ è dispari, il denominatore è positivo per $x>x_{0}$ e negativo per $x<x_{0}$; quindi
+$f(x)>f(x_{0})$ per $x_{0}<x<x_{0}+\delta$ e $f(x)<f(x_{0})$ per $x_{0}-\delta<x<x_{0}$:
+in ogni intorno di $x_{0}$ la funzione assume valori sia maggiori sia minori di
+$f(x_{0})$, e quindi $x_{0}$ non è né di massimo né di minimo relativo.
+\end{dimostrazione}
+
+Il criterio si può riassumere così: \emph{si cerca la prima derivata non nulla in
+$x_{0}$; se il suo ordine è pari, $x_{0}$ è di estremo (minimo se è positiva, massimo se
+è negativa); se è dispari, non lo è}. Per $f(x)=x^{4}$ risulta
+$f'(0)=f''(0)=f'''(0)=0$ e $f^{(4)}(0)=4!=24>0$: l'origine è di minimo, come si verifica
+anche direttamente ($x^{4}\ge0=f(0)$). Per $g(x)=x^{3}$ si ha $g'(0)=g''(0)=0$ e
+$g'''(0)=3!=6\neq0$, con ordine dispari: l'origine non è di estremo; in effetti è un
+punto di flesso (\cref{fig:x3-iperbole}). Quest'ultima proprietà vale in generale.
+
+\begin{proposizione}[Flessi e derivate successive]\label{prop:flesso-ordine-n}
+Sia $f$ derivabile $n$ volte in $x_{0}$, con $n\ge3$ dispari, e supponiamo che
+$f''(x_{0})=\dots=f^{(n-1)}(x_{0})=0$ e $f^{(n)}(x_{0})\neq0$. Allora $x_{0}$ è un punto di
+flesso.
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$f$ derivabile $n$ volte in $x_{0}$, $n\ge3$ dispari; derivate di ordine
+$2,\dots,n-1$ nulle in $x_{0}$; $f^{(n)}(x_{0})\neq0$.}
+\Tesi{$x_{0}$ è un punto di flesso.}
+\end{schema}
+
+\begin{strategia}
+Si ripete il ragionamento del teorema precedente per la funzione $f''$ invece che per
+$f$: la formula di Taylor mostra che $f''$ ha, vicino a $x_{0}$, il segno di
+$f^{(n)}(x_{0})(x-x_{0})^{n-2}$, che cambia attraversando $x_{0}$ perché $n-2$ è dispari.
+Il criterio di convessità traduce il cambiamento di segno di $f''$ in un cambiamento di
+concavità.
+\end{strategia}
+
+\begin{dimostrazione}
+La funzione $f''$ è derivabile $n-2\ge1$ volte in $x_{0}$, con derivate nulle fino
+all'ordine $n-3$ e derivata di ordine $n-2$ uguale a $f^{(n)}(x_{0})\neq0$. Ragionando
+come nella dimostrazione precedente, con la formula di Taylor applicata a $f''$, si
+ottiene $\frac{f''(x)}{(x-x_{0})^{n-2}}\to\frac{f^{(n)}(x_{0})}{(n-2)!}\neq0$, e quindi, per
+la permanenza del segno, $f''(x)$ ha in un intorno bucato $0<\abs{x-x_{0}}<\delta$ il
+segno di $f^{(n)}(x_{0})(x-x_{0})^{n-2}$. Poiché $n-2$ è dispari, $f''$ ha segni opposti
+in $(x_{0}-\delta,x_{0})$ e in $(x_{0},x_{0}+\delta)$. Per il criterio di convessità
+(\cref{teo:criterio-convessita}), applicato agli intervalli $[x_{0}-\delta',x_{0}]$ e
+$[x_{0},x_{0}+\delta']$ con $0<\delta'<\delta$, la funzione è convessa da una parte e
+concava dall'altra: $x_{0}$ è di flesso.
+\end{dimostrazione}
+
+Si osservi che la proposizione non richiede $f'(x_{0})=0$. Per $\sen x$ nel punto
+$x_{0}=\pi$ si ha $f''(\pi)=-\sen\pi=0$ e $f'''(\pi)=-\cos\pi=1\neq0$: con $n=3$ si
+ritrova il flesso a tangente obliqua dell'\cref{es:grafico-seno}.
+
+\begin{notastorica}[Taylor, Mac Laurin, Peano]
+Brook Taylor (1685--1731), seguace di Newton e segretario della Royal Society, pubblicò
+lo sviluppo che porta il suo nome nel trattato \emph{Methodus incrementorum directa et
+inversa} (1715), ricavandolo come limite di una formula alle differenze finite; il
+risultato era però già noto a James Gregory, che lo aveva comunicato per lettera nel
+1671, e in parte a Newton e a Leibniz. Colin Mac Laurin ne fece largo uso, nel caso
+$x_{0}=0$, nel \emph{Treatise of Fluxions} (1742). Il significato dello sviluppo come
+approssimazione, con una valutazione esplicita del resto, si deve a Lagrange (1797), che
+scrisse il resto in una forma simile alla \eqref{eq:accrescimenti-finiti}. La forma del
+resto che abbiamo dimostrato, $R_{n}(x)=o\bigl((x-x_{0})^{n}\bigr)$, che richiede la sola
+esistenza delle derivate nel punto, è legata al nome di Giuseppe Peano, che la presentò
+nel 1889 nella nota \emph{Une nouvelle forme du reste dans la formule de Taylor},
+pubblicata sulla rivista \emph{Mathesis}. Peano si era già occupato a fondo dei
+fondamenti del calcolo differenziale nel trattato \emph{Calcolo differenziale e principii
+di calcolo integrale} (1884), pubblicato come rielaborazione delle lezioni di Angelo
+Genocchi.
+\end{notastorica}

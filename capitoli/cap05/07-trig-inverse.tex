@@ -1,0 +1,294 @@
+%% ----------------------------------------------------------------------------
+%%  §5.7  Appendice: le funzioni trigonometriche inverse
+%% ----------------------------------------------------------------------------
+\section{Appendice: le funzioni trigonometriche inverse}
+\label{sec:trig-inverse}
+
+Le funzioni trigonometriche $\sen x$, $\cos x$, $\tg x$ non sono monotòne su tutto $\R$ (sono
+periodiche) e non esistono le loro funzioni inverse su $\R$: a ogni valore del seno
+corrispondono infiniti angoli. Però possiamo restringere a un intervallo limitato
+l'insieme in cui prendere in considerazione tali funzioni, in modo che risultino monotòne
+nell'insieme considerato. La scelta degli intervalli è convenzionale, ma universalmente
+adottata (ed è quella delle funzioni di libreria di tutti i linguaggi di programmazione).
+
+\begin{lemma}\label{lem:monotonia-trig}
+La funzione $\sen x$ è strettamente crescente nell'intervallo
+$\bigl[-\frac\pi2,\frac\pi2\bigr]$; la funzione $\cos x$ è strettamente decrescente
+nell'intervallo $[0,\pi]$; la funzione $\tg x$ è strettamente crescente nell'intervallo
+$\bigl(-\frac\pi2,\frac\pi2\bigr)$.
+\end{lemma}
+
+\begin{schema}
+\Ipotesi{$x_{1}<x_{2}$, entrambi in $\bigl[-\frac\pi2,\frac\pi2\bigr]$ (seno), in $[0,\pi]$
+(coseno), in $\bigl(-\frac\pi2,\frac\pi2\bigr)$ (tangente).}
+\Tesi{$\sen x_{1}<\sen x_{2}$; \ $\cos x_{1}>\cos x_{2}$; \ $\tg x_{1}<\tg x_{2}$.}
+\end{schema}
+
+\begin{strategia}
+Non disponiamo ancora del legame tra il segno della derivata e la monotonia (lo
+stabiliremo nel prossimo capitolo): studiamo quindi direttamente il segno delle
+differenze $\sen x_{2}-\sen x_{1}$, $\cos x_{2}-\cos x_{1}$, $\tg x_{2}-\tg x_{1}$. Le
+formule di prostaferesi trasformano le prime due in prodotti di seni e coseni della
+semisomma e della semidifferenza, che cadono in intervalli dove il segno di seno e coseno
+è noto. Per la tangente si riduce allo stesso denominatore e si riconosce al numeratore il
+seno di una differenza.
+\end{strategia}
+
+\begin{dimostrazione}
+Dalle formule di addizione \eqref{eq:addizione-sen}, \eqref{eq:addizione-cos}, scrivendo
+$x_{2}=\frac{x_{1}+x_{2}}2+\frac{x_{2}-x_{1}}2$ e $x_{1}=\frac{x_{1}+x_{2}}2-\frac{x_{2}-x_{1}}2$,
+si ottengono le \emph{formule di prostaferesi}
+\begin{equation}\label{eq:prostaferesi}
+\begin{aligned}
+  \sen x_{2}-\sen x_{1}&=2\cos\frac{x_{1}+x_{2}}2\,\sen\frac{x_{2}-x_{1}}2,\\
+  \cos x_{2}-\cos x_{1}&=-2\sen\frac{x_{1}+x_{2}}2\,\sen\frac{x_{2}-x_{1}}2 .
+\end{aligned}
+\end{equation}
+Siano $-\frac\pi2\le x_{1}<x_{2}\le\frac\pi2$. Allora $\frac{x_{1}+x_{2}}2\in
+\bigl(-\frac\pi2,\frac\pi2\bigr)$, dove il coseno è positivo, e $\frac{x_{2}-x_{1}}2\in
+\bigl(0,\frac\pi2\bigr]$, dove il seno è positivo; quindi $\sen x_{2}-\sen x_{1}>0$. Se invece
+$0\le x_{1}<x_{2}\le\pi$, allora $\frac{x_{1}+x_{2}}2\in(0,\pi)$ e
+$\frac{x_{2}-x_{1}}2\in\bigl(0,\frac\pi2\bigr]$, dove il seno è positivo; quindi
+$\cos x_{2}-\cos x_{1}<0$. Infine, se $-\frac\pi2<x_{1}<x_{2}<\frac\pi2$, per la
+\eqref{eq:addizione-sen}
+\[
+  \tg x_{2}-\tg x_{1}=\frac{\sen x_{2}\cos x_{1}-\sen x_{1}\cos x_{2}}{\cos x_{1}\cos x_{2}}
+  =\frac{\sen(x_{2}-x_{1})}{\cos x_{1}\cos x_{2}}>0,
+\]
+perché $x_{2}-x_{1}\in(0,\pi)$ e i due coseni sono positivi.
+\end{dimostrazione}
+
+Le formule di prostaferesi sono state usate anche nell'\cref{es:seno-lipschitz} e, nella
+forma \eqref{eq:prostaferesi-ab}, nella seconda dimostrazione della
+\cref{prop:derivata-sen-cos}.
+
+\subsection{L'arcoseno}
+
+Cominciamo con la funzione $\sen x$. Per il \cref{lem:monotonia-trig} è una funzione
+strettamente crescente nell'intervallo $\bigl[-\frac\pi2,\frac\pi2\bigr]$. Consideriamo quindi
+$f(x)=\sen x$, con $f:\bigl[-\frac\pi2,\frac\pi2\bigr]\to[-1,1]$. La funzione $f$ è continua e
+quindi assume tutti i valori compresi tra il suo minimo ($=-1$) e il suo massimo ($=1$).
+Essendo strettamente monotòna, è anche invertibile (\cref{teo:invertibilita}). Pertanto
+esiste la funzione inversa
+\[
+  f^{-1}:[-1,1]\to\Bigl[-\frac\pi2,\frac\pi2\Bigr],
+\]
+che viene indicata con $f^{-1}(x)=\arcsen x$ (\emph{arcoseno di $x$}). Il nome deriva dal
+fatto che, se $y=\arcsen x$, vuol dire che $y$ è uguale alla misura dell'arco, o angolo,
+il cui seno è $x$ ($\sen y=x$). Per il \cref{teo:continuita-inversa} l'arcoseno è
+continuo, ed è strettamente crescente. Il grafico dell'arcoseno si ottiene
+immediatamente dal grafico della funzione seno, per simmetria rispetto alla bisettrice
+$y=x$, come nella \cref{fig:arcsen-arccos}.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[name=as, width=0.5\textwidth, height=0.5\textwidth, axis lines=middle,
+  xmin=-1.9, xmax=1.9, ymin=-1.9, ymax=1.9, axis equal image,
+  xtick={-1.5708,-1,1,1.5708}, xticklabels={$-\frac\pi2$,$-1$,$1$,$\frac\pi2$},
+  ytick={-1.5708,-1,1,1.5708}, yticklabels={$-\frac\pi2$,$-1$,$1$,$\frac\pi2$},
+  tick label style={font=\tiny}, title={\scriptsize $\sen x$ e $\arcsen x$}]
+  \addplot[tratteggio, domain=-1.8:1.8] {x};
+  \addplot[curva2, domain=-1.5708:1.5708, samples=80] {sin(deg(x))};
+  \addplot[curva, domain=-1:1, samples=200] {rad(asin(x))};
+\end{axis}
+\begin{axis}[at={(as.east)}, anchor=west, xshift=0.8cm, width=0.5\textwidth,
+  height=0.5\textwidth, axis lines=middle, xmin=-1.4, xmax=3.5, ymin=-1.4, ymax=3.5,
+  axis equal image, xtick={-1,1,1.5708,3.14159}, xticklabels={$-1$,$1$,$\frac\pi2$,$\pi$},
+  ytick={-1,1,1.5708,3.14159}, yticklabels={$-1$,$1$,$\frac\pi2$,$\pi$},
+  tick label style={font=\tiny}, title={\scriptsize $\cos x$ e $\arccos x$}]
+  \addplot[tratteggio, domain=-1.3:3.4] {x};
+  \addplot[curva2, domain=0:3.14159, samples=80] {cos(deg(x))};
+  \addplot[curva, domain=-1:1, samples=200] {rad(acos(x))};
+\end{axis}
+\end{tikzpicture}
+\caption{A sinistra il seno ristretto a $\bigl[-\frac\pi2,\frac\pi2\bigr]$ (rame) e la sua
+inversa $\arcsen x$ (blu), definita su $[-1,1]$; a destra il coseno ristretto a $[0,\pi]$
+e la sua inversa $\arccos x$. I grafici delle inverse si ottengono per simmetria rispetto
+alla bisettrice $y=x$ (tratteggiata); nei punti $x=\pm1$ hanno tangente verticale.}
+\label{fig:arcsen-arccos}
+\end{figure}
+
+La funzione arcoseno è quindi definita nell'intervallo \emph{chiuso} $[-1,1]$. Dal teorema
+di derivazione delle funzioni inverse si ottiene che la funzione $\arcsen x$ è derivabile
+nell'intervallo \emph{aperto} $(-1,1)$, e la derivata vale, posto $y=\arcsen x$,
+\begin{equation}\label{eq:derivata-arcsen}
+\begin{split}
+  D\arcsen x&=\frac1{D\sen y}=\frac1{\cos y}=\frac1{\sqrt{1-\sen^{2}y}}\\
+  &=\frac1{\sqrt{1-\sen^{2}(\arcsen x)}}=\frac1{\sqrt{1-x^{2}}};
+\end{split}
+\end{equation}
+sono state utilizzate le relazioni
+\begin{equation}\label{eq:relazioni-arcsen}
+  \cos y=\sqrt{1-\sen^{2}y}, \qquad \sen(\arcsen x)=x,
+\end{equation}
+la prima delle quali vale perché $\cos y>0$ per ogni $y\in\bigl(-\frac\pi2,\frac\pi2\bigr)$
+(dalla relazione fondamentale, $\cos y=\pm\sqrt{1-\sen^{2}y}$, e il segno è determinato
+dalla posizione dell'angolo). La condizione $D\sen y=\cos y\neq0$, richiesta dal
+\cref{teo:derivata-inversa}, è appunto verificata per $y$ interno. Nei punti $x=\pm1$, estremi del dominio, si può parlare solo di derivate
+unilaterali, e in essi $\cos y=D\sen y$ si annulla ($y=\arcsen(\pm1)=\pm\frac\pi2$). Il
+calcolo diretto mostra che il rapporto incrementale tende all'infinito: per $x\to1^{-}$,
+posto $y=\arcsen x\to\frac\pi2^{-}$, si ha
+\[
+  \frac{\arcsen x-\arcsen1}{x-1}=\frac{y-\frac\pi2}{\sen y-1}
+  =\frac1{\dfrac{\sen y-\sen\frac\pi2}{y-\frac\pi2}}\to+\infty,
+\]
+perché il denominatore tende a $D\sen\frac\pi2=\cos\frac\pi2=0$ con valori positivi
+(numeratore e denominatore del rapporto $\frac{\sen y-1}{y-\pi/2}$ sono entrambi negativi);
+analogamente in $x=-1$. Graficamente, ciò corrisponde al fatto che la funzione
+$\arcsen x$ ha retta tangente verticale (unilaterale) se $x=\pm1$.
+
+\subsection{L'arcocoseno}
+
+Passiamo alla funzione $f(x)=\cos x$. Per il \cref{lem:monotonia-trig}, $f:[0,\pi]\to[-1,1]$
+è continua e strettamente decrescente; quindi è invertibile in tale intervallo. La
+funzione inversa $f^{-1}:[-1,1]\to[0,\pi]$ viene indicata con $f^{-1}(x)=\arccos x$
+(\emph{arcocoseno di $x$}). Il grafico si ottiene dal grafico della funzione coseno, come
+nella \cref{fig:arcsen-arccos}. La funzione $y=\arccos x$ è definita e continua
+nell'intervallo chiuso $[-1,1]$, è derivabile nell'intervallo aperto $(-1,1)$ e la derivata
+vale, posto $y=\arccos x\in(0,\pi)$, dove $\sen y>0$,
+\begin{equation}\label{eq:derivata-arccos}
+\begin{split}
+  D\arccos x&=\frac1{D\cos y}=\frac1{-\sen y}=\frac{-1}{\sqrt{1-\cos^{2}y}}\\
+  &=\frac{-1}{\sqrt{1-\cos^{2}(\arccos x)}}=\frac{-1}{\sqrt{1-x^{2}}} .
+\end{split}
+\end{equation}
+
+\begin{osservazione}\label{oss:arcsen-arccos}
+Le derivate di $\arcsen x$ e di $\arccos x$ sono opposte; ciò suggerisce che la loro somma
+sia costante. In effetti
+\begin{equation}\label{eq:arcsen-piu-arccos}
+  \arcsen x+\arccos x=\frac\pi2 \qquad\perogni x\in[-1,1].
+\end{equation}
+Per dimostrarlo, posto $y=\arcsen x\in\bigl[-\frac\pi2,\frac\pi2\bigr]$, l'angolo
+$\frac\pi2-y$ appartiene a $[0,\pi]$ e $\cos\bigl(\frac\pi2-y\bigr)=\sen y=x$ (per la
+\eqref{eq:addizione-cos}); quindi, per definizione di arcocoseno,
+$\arccos x=\frac\pi2-y$. (Nel prossimo capitolo vedremo che una funzione con derivata nulla
+su un intervallo è costante, e questa sarà una dimostrazione alternativa.)
+\end{osservazione}
+
+\subsection{L'arcotangente}
+
+La più usata funzione trigonometrica inversa è quella relativa alla tangente. La funzione
+$f(x)=\tg x$ è continua e strettamente crescente nell'intervallo aperto
+$\bigl(-\frac\pi2,\frac\pi2\bigr)$ (\cref{prop:sen-cos-continue,lem:monotonia-trig});
+inoltre
+\[
+  \lim_{x\to\frac\pi2^{-}}\tg x=+\infty, \qquad \lim_{x\to-\frac\pi2^{+}}\tg x=-\infty,
+\]
+perché $\sen x\to\pm1$ mentre $\cos x\to0$ restando positivo (si veda il riquadro
+«$1/0$ non è $+\infty$» del \cref{sec:forme-indeterminate}, con la funzione $\cos x$ al
+posto della successione). Dunque, dato un qualsiasi $y\in\R$, esistono $a<b$ in
+$\bigl(-\frac\pi2,\frac\pi2\bigr)$ con $\tg a<y<\tg b$, e per il teorema dei valori intermedi
+$y$ è un valore della tangente: $\tg$ è una biiezione di $\bigl(-\frac\pi2,\frac\pi2\bigr)$ su
+$\R$. La funzione inversa $f^{-1}:\R\to\bigl(-\frac\pi2,\frac\pi2\bigr)$ viene indicata con
+$f^{-1}(x)=\operatorname{arctg}x$ (\emph{arcotangente di $x$}), e ha il grafico della
+\cref{fig:arctg}. È continua: per ogni $y_{0}\in\R$ la restrizione della tangente a un
+intervallo $[a,b]$ come sopra ha inversa continua su $[\tg a,\tg b]$
+(\cref{teo:continuita-inversa}), che contiene un intorno di $y_{0}$, e basta applicare
+la località del limite.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.9\textwidth, height=5.4cm, axis lines=middle, xmin=-8, xmax=8,
+  ymin=-2, ymax=2, xtick={-6,-4,-2,1,2,4,6}, ytick={-1.5708,0.7854,1.5708},
+  yticklabels={$-\frac\pi2$,$\frac\pi4$,$\frac\pi2$}, tick label style={font=\scriptsize},
+  yticklabel style={fill=white, inner sep=1pt},
+  xlabel={$x$}, ylabel={$y$}]
+  \addplot[tratteggio, domain=-8:8] {1.5708};
+  \addplot[tratteggio, domain=-8:8] {-1.5708};
+  \addplot[tratteggio] coordinates {(1,0) (1,0.7854) (0,0.7854)};
+  \addplot[curva, domain=-7.8:7.8, samples=200] {rad(atan(x))};
+  \node[font=\scriptsize, anchor=south east] at (axis cs:-1.5,0.4) {$y=\operatorname{arctg}x$};
+\end{axis}
+\end{tikzpicture}
+\caption{La funzione $\operatorname{arctg}x$: è definita, continua e strettamente crescente su
+tutto $\R$, con asintoti orizzontali $y=\pm\frac\pi2$; si ha $\operatorname{arctg}1=\frac\pi4$.}
+\label{fig:arctg}
+\end{figure}
+
+La funzione $y=\operatorname{arctg}x$ è definita per ogni $x$ reale. Per i limiti all'infinito
+si ha
+\begin{equation}\label{eq:arctg-infinito}
+  \lim_{x\to+\infty}\operatorname{arctg}x=\frac\pi2, \qquad \lim_{x\to-\infty}\operatorname{arctg}x=-\frac\pi2 .
+\end{equation}
+Infatti, fissato $\epsilon\in\bigl(0,\frac\pi2\bigr)$, per ogni $x>k=\tg\bigl(\frac\pi2-\epsilon\bigr)$
+la monotonia dà $\frac\pi2-\epsilon<\operatorname{arctg}x<\frac\pi2$; il secondo limite segue
+per simmetria, essendo $\operatorname{arctg}(-x)=-\operatorname{arctg}x$. È una funzione derivabile per ogni
+$x\in\R$, perché $D\tg y=\frac1{\cos^{2}y}\neq0$, e la derivata vale, posto
+$y=\operatorname{arctg}x$,
+\begin{equation}\label{eq:derivata-arctg}
+\begin{split}
+  D\operatorname{arctg}x&=\frac1{D\tg y}=\frac1{1/\cos^{2}y}
+  =\frac1{(\cos^{2}y+\sen^{2}y)/\cos^{2}y}\\
+  &=\frac1{1+\tg^{2}y}=\frac1{1+\tg^{2}(\operatorname{arctg}x)}=\frac1{1+x^{2}} .
+\end{split}
+\end{equation}
+
+Riassumiamo nella tabella seguente i valori trovati per le derivate.
+\begin{center}
+\renewcommand{\arraystretch}{1.7}
+\begin{tabular}{l l l l}
+\toprule
+$f(x)$ & dominio & immagine & $f'(x)$\\
+\midrule
+$\arcsen x$ & $[-1,1]$ & $\bigl[-\frac\pi2,\frac\pi2\bigr]$ & $\dfrac1{\sqrt{1-x^{2}}}$ \ \ $(\abs x<1)$\\
+$\arccos x$ & $[-1,1]$ & $[0,\pi]$ & $\dfrac{-1}{\sqrt{1-x^{2}}}$ \ \ $(\abs x<1)$\\
+$\operatorname{arctg}x$ & $\R$ & $\bigl(-\frac\pi2,\frac\pi2\bigr)$ & $\dfrac1{1+x^{2}}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{idea}[Gli angoli aerodinamici e la funzione \texttt{atan2}]
+In meccanica del volo l'orientamento della velocità rispetto al velivolo si descrive con
+due angoli, ricavati dalle componenti $u$ (in avanti), $v$ (laterale), $w$ (verso il basso)
+della velocità in assi corpo: l'\emph{angolo d'attacco} $\alpha=\operatorname{arctg}\frac wu$ e
+l'\emph{angolo di derapata} $\beta=\arcsen\frac vV$, con $V=\sqrt{u^{2}+v^{2}+w^{2}}$.
+L'arcotangente restituisce valori in $\bigl(-\frac\pi2,\frac\pi2\bigr)$ e non distingue,
+ad esempio, $(u,w)=(1,1)$ da $(-1,-1)$: in volo normale $u>0$ e non c'è ambiguità, ma in
+manovre estreme, in una vite o nei transitori di un modello di simulazione, $u$ può
+annullarsi o diventare negativo. Per questo i programmi usano la funzione a due argomenti
+$\operatorname{atan2}(w,u)$, che restituisce l'angolo in $(-\pi,\pi]$ del punto $(u,w)$,
+tenendo conto del quadrante (e che è definita anche per $u=0$).
+\end{idea}
+
+\begin{python}[Angolo d'attacco e angolo di derapata]
+import math
+
+# velocità in assi corpo (m/s): u avanti, v laterale, w in basso
+casi = [(60.0, 0.0, 5.0), (60.0, 3.0, -4.0), (-2.0, 0.0, 10.0)]
+for u, v, w in casi:
+    V = math.sqrt(u*u + v*v + w*w)
+    alfa_atan = math.degrees(math.atan(w / u))  # in (-90°, 90°)
+    alfa = math.degrees(math.atan2(w, u))       # vede il quadrante
+    beta = math.degrees(math.asin(v / V))       # derapata
+    print(f"u={u:5.1f} v={v:3.1f} w={w:5.1f}: "
+          f"atan {alfa_atan:7.2f}°  atan2 {alfa:7.2f}°"
+          f"  beta {beta:5.2f}°")
+\end{python}
+\begin{risultato}
+u= 60.0 v=0.0 w=  5.0: atan    4.76°  atan2    4.76°  beta  0.00°
+u= 60.0 v=3.0 w= -4.0: atan   -3.81°  atan2   -3.81°  beta  2.86°
+u= -2.0 v=0.0 w= 10.0: atan  -78.69°  atan2  101.31°  beta  0.00°
+\end{risultato}
+
+Nel terzo caso la velocità, in assi corpo, è diretta quasi del tutto verso il ventre del
+velivolo e leggermente all'indietro, come può accadere in una scivolata di coda o in
+una manovra post-stallo estrema: l'arcotangente fornisce un
+angolo d'attacco di circa $-79^{\circ}$, palesemente sbagliato, mentre $\operatorname{atan2}$
+restituisce il valore corretto di circa $101^{\circ}$.
+
+\begin{notastorica}[L'arcotangente e $\pi$]
+Le funzioni trigonometriche inverse sono, storicamente, più antiche della loro notazione:
+tra il Tre e il Quattrocento il matematico indiano Madhava di Sangamagrama conosceva lo sviluppo in
+serie
+$\operatorname{arctg}x=x-\frac{x^{3}}3+\frac{x^{5}}5-\dots$, riscoperto in Europa da James Gregory
+(1671) e da Leibniz (1674), che ne dedusse, con $x=1$, la celebre formula
+$\frac\pi4=1-\frac13+\frac15-\frac17+\cdots$. Formule di questo tipo, combinate con identità
+come quella di John Machin (1706), $\frac\pi4=4\operatorname{arctg}\frac15-\operatorname{arctg}\frac1{239}$,
+permisero per due secoli di calcolare $\pi$ con centinaia di cifre. La notazione
+$\sen^{-1}x$ per l'arcoseno, ancora oggi sui tasti delle calcolatrici, fu introdotta da
+John Herschel nel 1813; non va confusa con $1/\sen x$, ed è per evitare l'equivoco che nei
+testi italiani si preferisce $\arcsen x$.
+\end{notastorica}

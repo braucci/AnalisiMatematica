@@ -1,0 +1,89 @@
+%% ----------------------------------------------------------------------------
+%%  §4.12  Punti fondamentali del capitolo
+%% ----------------------------------------------------------------------------
+\section{Punti fondamentali del capitolo}
+\label{sec:sintesi-cap04}
+
+L'idea centrale del capitolo è che il limite di una funzione si riduce ai limiti delle
+successioni: $f(x)\to\ell$ se $f(x_{n})\to\ell$ lungo \emph{ogni} successione che si
+avvicina a $x_{0}$. Così tutto il \cref{cap:successioni} si trasferisce alle funzioni.
+La continuità chiede che il limite coincida con il valore; su un intervallo chiuso e
+limitato, insieme alla completezza di $\R$, essa produce i grandi teoremi di esistenza.
+
+\begin{puntichiave}
+\item \textbf{Il limite per successioni.} Se $x_{0}$ è di accumulazione per $A$ (cioè
+esiste una successione di punti di $A\setminus\{x_{0}\}$ che tende a $x_{0}$,
+\cref{prop:caratt-accumulazione}), si ha $\lim_{x\to x_{0}}f(x)=\ell$ quando
+$f(x_{n})\to\ell$ per ogni $x_{n}\in A\setminus\{x_{0}\}$ con $x_{n}\to x_{0}$
+(\cref{def:limite-funzione}). Il valore $f(x_{0})$ non conta, e il limite, se esiste, è
+unico (\cref{prop:unicita-limite-funzioni}).
+\item \textbf{La formulazione con $\epsilon$ e $\delta$.} La definizione equivale a:
+per ogni $\epsilon>0$ esiste $\delta>0$ tale che $\abs{f(x)-\ell}<\epsilon$ per ogni
+$x\in A$ con $0<\abs{x-x_{0}}<\delta$ (\cref{teo:eps-delta}); $\delta$ dipende da
+$\epsilon$. Per i punti e i limiti infiniti si usano gli intorni della
+\cref{tab:intorni}.
+\item \textbf{Località e limiti unilaterali.} Il limite dipende solo dai valori di $f$
+vicino a $x_{0}$ (\cref{lem:localita}); se $x_{0}$ è di accumulazione da entrambi i
+lati, il limite esiste se e solo se esistono e coincidono il limite destro e il limite
+sinistro (\cref{prop:dx-sx}).
+\item \textbf{Come si prova che un limite non esiste.} Bastano due successioni
+ammissibili lungo le quali $f$ ha limiti diversi (\cref{cor:non-esistenza}): così
+$\sen\frac1x$ non ha limite per $x\to0$ (\cref{es:sen-1-x}) e $\sen x$ non ha limite
+per $x\to+\infty$ (\cref{es:sen-cos-infinito}).
+\item \textbf{Regole di calcolo.} Somme, prodotti e quozienti (con limite del
+denominatore non nullo), permanenza del segno, confronto, carabinieri e «limitata per
+infinitesima» valgono come per le successioni, esclusi i casi di forma indeterminata
+(\cref{teo:operazioni-funzioni,teo:confronto-funzioni}).
+\item \textbf{Limite di una funzione composta.} Se $g(x)\to y_{0}$ e $f(y)\to\ell$,
+allora $f(g(x))\to\ell$ purché $g(x)\neq y_{0}$ per $x\neq x_{0}$ vicino a $x_{0}$
+(\cref{teo:limite-composta}); senza questa ipotesi la tesi può essere falsa
+(\cref{oss:composta-controesempio}), ma è vera se $f$ è continua in $y_{0}$
+(\cref{cor:limite-composta-continua}).
+\item \textbf{Limiti notevoli.} Per $x\to0$: $\frac{\sen x}{x}\to1$,
+$\frac{1-\cos x}{x^{2}}\to\frac12$, $(1+x)^{1/x}\to e$ (\cref{es:composte}),
+$\frac{\log(1+x)}{x}\to1$, $\frac{e^{x}-1}{x}\to1$, $\frac{a^{x}-1}{x}\to\log a$,
+$\frac{(1+x)^{b}-1}{x}\to b$ (\cref{prop:limiti-notevoli-exp}).
+\item \textbf{Funzioni continue.} $f$ è continua in $x_{0}\in A$ se
+$\lim_{x\to x_{0}}f(x)=f(x_{0})$, cioè se $f(x_{n})\to f(x_{0})$ per ogni successione di
+punti di $A$ convergente a $x_{0}$, anche con $x_{n}=x_{0}$
+(\cref{prop:caratt-continuita}). Somme, prodotti, quozienti e composte di funzioni
+continue sono continue, e le funzioni elementari sono continue nel loro dominio
+(\cref{tab:elementari-continue}).
+\item \textbf{Discontinuità e prolungamento.} Le discontinuità sono eliminabili, di
+prima specie (salto) o di seconda specie (\cref{def:discontinuita}); una funzione si
+prolunga per continuità in $x_{0}$ se e solo se esiste finito il limite in $x_{0}$
+(\cref{def:prolungamento}), come $\frac{\sen x}{x}$ in $0$.
+\item \textbf{Teorema degli zeri e bisezione.} Se $f$ è continua in $[a,b]$ e $f(a)$,
+$f(b)$ hanno segno discorde, esiste $x_{0}\in(a,b)$ con $f(x_{0})=0$ (\cref{teo:zeri}).
+La dimostrazione per bisezione è un algoritmo, con errore
+$\abs{c_{n}-x_{0}}\le\frac{b-a}{2^{n+1}}$, e poggia sulla completezza: in $\Q$ il
+teorema è falso.
+\item \textbf{Valori intermedi e Weierstrass.} Una funzione continua nell'intervallo
+\emph{chiuso e limitato} $[a,b]$ ha minimo $m$ e massimo $M$ (\cref{teo:weierstrass}) e
+assume tutti i valori compresi tra essi: $f([a,b])=[m,M]$
+(\cref{teo:valori-intermedi-2,cor:immagine-intervallo}). Le ipotesi sono sufficienti, non
+necessarie, e nessuna può essere omessa (\cref{fig:controesempi-weierstrass}).
+\item \textbf{Monotone e inverse.} Nei punti interni di $[a,b]$ una funzione monotòna
+può avere solo discontinuità di salto (\cref{cor:monotone-salti}); su $[a,b]$ è continua se e solo se la sua immagine è
+l'intervallo di estremi $f(a)$, $f(b)$ (\cref{teo:criterio-monotone}). L'inversa di una
+funzione continua e strettamente monotòna su $[a,b]$ è continua (\cref{teo:continuita-inversa}):
+da qui la continuità di $a^{x}$, $\log_{a}x$, $x^{b}$ (\cref{teo:continuita-esponenziale}).
+\item \textbf{Errori tipici.} Confondere il limite con il valore; dedurre un limite da
+una tabella o da un calcolo numerico, che può soffrire di cancellazione; far passare al
+limite una disuguaglianza stretta ($x^{2}>0$, ma $x^{2}\to0$); applicare il teorema
+degli zeri fuori da un intervallo ($\frac1x$ cambia segno su $\R\setminus\{0\}$ senza
+annullarsi).
+\item \textbf{Applicazioni aeronautiche.} I valori intermedi garantiscono un'incidenza
+di equilibrio portanza--peso; Weierstrass garantisce l'efficienza massima della polare
+parabolica, $E_{\max}=\frac1{2\sqrt{kC_{D0}}}$ per $C_{L}^{*}=\sqrt{C_{D0}/k}$
+(\cref{fig:efficienza}); la bisezione risolve l'equazione di Keplero
+(\cref{es:kepler}); l'onda d'urto normale è un esempio fisico di salto.
+\end{puntichiave}
+
+\paragraph{Il filo del discorso.} La continuità dice che a piccole variazioni della
+variabile corrispondono piccole variazioni della funzione, ma non \emph{quanto}
+piccole: non distingue il raccordo liscio dallo spigolo della tropopausa, né spiega la
+diversa precisione dell'anemometro alle varie velocità. I teoremi di esistenza, poi,
+non dicono dove si trovi un massimo. Nel \cref{cap:derivate} il limite del rapporto
+incrementale, già intravisto con la velocità istantanea, misurerà la rapidità di
+variazione e darà gli strumenti per localizzare massimi e minimi.

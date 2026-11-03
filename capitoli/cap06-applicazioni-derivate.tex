@@ -1,0 +1,68 @@
+%% ============================================================================
+%%  CAPITOLO 6 — Applicazioni delle derivate. Studio di funzioni
+%%  Fonte principale per argomenti e dimostrazioni: Marcellini–Sbordone, cap. 6
+%%  (§46 massimi e minimi relativi, teorema di Fermat; §47 teoremi di Rolle e di
+%%  Lagrange; §48 funzioni crescenti e decrescenti; §49 funzioni convesse e
+%%  concave; §50 teorema di L'Hôpital; §51 studio del grafico di una funzione;
+%%  §52 formula di Taylor; appendice §53 teorema di Cauchy e teorema di
+%%  L'Hôpital nel caso generale).
+%% ============================================================================
+\aperturacapitolo{Applicazioni delle derivate. Studio di funzioni}{cap:applicazioni-derivate}
+
+\epigraph{Nihil omnino in mundo contingit, in quo non maximi minimive ratio quaepiam
+eluceat.\\[2pt]
+\upshape(Nulla accade nel mondo in cui non risplenda una qualche regola di massimo o di
+minimo.)}{Leonhard Euler, \emph{Methodus inveniendi lineas curvas maximi minimive
+proprietate gaudentes} (1744)}
+
+\lettrine[lines=3, findent=2pt, nindent=0pt]{N}{el capitolo precedente} abbiamo
+imparato a \emph{calcolare} le derivate; in questo impariamo a \emph{usarle}. La
+derivata è un'informazione locale: dice come si comporta una funzione in un intorno
+piccolissimo di un punto. Il risultato centrale del capitolo, il teorema di Lagrange,
+trasforma questa informazione locale in un'informazione \emph{globale}: dal segno della
+derivata in tutto un intervallo si deduce se la funzione cresce o decresce, dal segno
+della derivata seconda se il grafico volge la concavità verso l'alto o verso il basso.
+Su queste basi costruiremo un procedimento sistematico per disegnare il grafico di una
+funzione e, soprattutto, per trovarne i massimi e i minimi.
+
+I problemi di massimo e di minimo sono il pane quotidiano dell'ingegnere. L'assetto di
+efficienza massima di un velivolo, la velocità di minima resistenza e quella di minima
+potenza necessaria, la sezione di una trave che a parità di materiale resiste di più,
+il percorso di minimo tempo di un raggio di luce: sono tutti problemi in cui si cerca il
+punto in cui la derivata di una opportuna funzione si annulla, e poi si dimostra che
+quel punto è davvero un massimo o un minimo. Completeremo il capitolo con due strumenti
+di calcolo di grande efficacia: il teorema di L'Hôpital, per le forme indeterminate, e
+la formula di Taylor, che approssima una funzione con un polinomio e generalizza
+l'approssimazione lineare del \cref{sec:retta-tangente}. Seguiremo, come sempre, il
+testo di riferimento \cite{marcellini-sbordone}; in appendice dimostreremo il teorema
+di Cauchy e, con esso, il teorema di L'Hôpital in tutta la sua generalità.
+
+\medskip
+\noindent\textbf{In questo capitolo.}
+\begin{itemize}
+  \item Massimi e minimi relativi; il teorema di Fermat (\S\ref{sec:fermat}).
+  \item I teoremi di Rolle e di Lagrange (\S\ref{sec:rolle-lagrange}).
+  \item Il criterio di monotonia e le sue conseguenze (\S\ref{sec:monotonia}).
+  \item Funzioni convesse e concave; i punti di flesso (\S\ref{sec:convessita}).
+  \item Approfondimento: la convessità senza derivate e la disuguaglianza di Jensen
+  (\S\ref{subsec:convessita-corde}).
+  \item Il teorema di L'Hôpital e le forme indeterminate (\S\ref{sec:hopital}).
+  \item Lo studio del grafico di una funzione; gli asintoti (\S\ref{sec:studio-funzione}).
+  \item La formula di Taylor e il criterio delle derivate successive (\S\ref{sec:taylor}).
+  \item Appendice: il teorema di Cauchy e il teorema di L'Hôpital nel caso generale
+  (\S\ref{sec:cauchy-hopital}).
+  \item Esercizi di riepilogo, tra cui alcuni problemi di ottimo strutturale e ottico
+  (\S\ref{sec:esercizi-cap6}).
+  \item Punti fondamentali del capitolo (\S\ref{sec:sintesi-cap06}).
+\end{itemize}
+
+\input{capitoli/cap06/01-fermat}
+\input{capitoli/cap06/02-rolle-lagrange}
+\input{capitoli/cap06/03-monotonia}
+\input{capitoli/cap06/04-convessita}
+\input{capitoli/cap06/05-hopital}
+\input{capitoli/cap06/06-studio}
+\input{capitoli/cap06/07-taylor}
+\input{capitoli/cap06/08-cauchy-hopital}
+\input{capitoli/cap06/09-esercizi}
+\input{capitoli/cap06/10-sintesi}

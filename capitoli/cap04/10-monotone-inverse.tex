@@ -1,0 +1,738 @@
+%% ----------------------------------------------------------------------------
+%%  §4.10  Appendice: funzioni monotòne, funzioni inverse, funzioni elementari
+%% ----------------------------------------------------------------------------
+\section{Appendice: continuità delle funzioni monotòne e delle funzioni inverse}
+\label{sec:monotone-inverse}
+
+Con lo stesso metodo utilizzato per la dimostrazione del teorema sulle successioni
+monotòne (\cref{teo:monotone}) si prova il seguente risultato, che riguarda i limiti
+unilaterali di una funzione monotòna.
+
+\begin{teorema}[Limiti delle funzioni monotòne]\label{teo:limite-monotone-funzioni}\index{funzione!monotòna!limiti}
+Sia $f$ monotòna in $[a,b]$. Allora esistono finiti i limiti
+\begin{align}
+  &\lim_{x\to a^{+}}f(x), \qquad \lim_{x\to b^{-}}f(x); \label{eq:monotone-estremi}\\
+  &\lim_{x\to x_{0}^{-}}f(x), \qquad \lim_{x\to x_{0}^{+}}f(x) \qquad\perogni x_{0}\in(a,b).
+  \label{eq:monotone-interni}
+\end{align}
+Se $f$ è crescente, si ha inoltre (per $x_{0}\in(a,b]$ nella prima uguaglianza, per
+$x_{0}\in[a,b)$ nella seconda)
+\begin{equation}\label{eq:monotone-sup-inf}
+\begin{gathered}
+  \lim_{x\to x_{0}^{-}}f(x)=\sup\{f(x) : a\le x<x_{0}\}, \\
+  \lim_{x\to x_{0}^{+}}f(x)=\inf\{f(x) : x_{0}<x\le b\} .
+\end{gathered}
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$ monotòna (ad esempio crescente) in $[a,b]$.}
+\Tesi{esistono finiti i limiti unilaterali in ogni punto, dati dalle \eqref{eq:monotone-sup-inf}.}
+\end{schema}
+
+\begin{strategia}
+È la versione «continua» del teorema sulle successioni monotòne: là il limite di una
+successione crescente era l'estremo superiore dei suoi termini, qui il limite sinistro
+in $x_{0}$ di una funzione crescente è l'estremo superiore dei valori assunti a sinistra
+di $x_{0}$. La dimostrazione è la stessa: se un valore $f(x_{1})$ supera $\ell-\epsilon$,
+la monotonia costringe tutti i valori $f(x)$ con $x_{1}<x<x_{0}$ a fare altrettanto, e
+l'intervallo $(x_{1},x_{0})$ fornisce il $\delta$ cercato.
+\end{strategia}
+
+\begin{dimostrazione}
+Consideriamo il caso di una funzione $f$ crescente in $[a,b]$ (se $f$ è decrescente, si
+applica il ragionamento a $-f$). Osserviamo subito che $f$ è limitata in $[a,b]$:
+\begin{equation}\label{eq:monotone-limitata}
+  f(a)\le f(x)\le f(b) \qquad\perogni x\in[a,b];
+\end{equation}
+cioè $f(a)$ è il minimo di $f$ nell'intervallo $[a,b]$, mentre $f(b)$ è il massimo.
+Fissato $x_{0}\in(a,b]$, poniamo
+\begin{equation}\label{eq:monotone-ell}
+  \ell=\sup\{f(x) : x\in[a,x_{0})\}.
+\end{equation}
+Per la \eqref{eq:monotone-limitata} l'estremo superiore $\ell$ è finito. Per le proprietà
+dell'estremo superiore (\cref{prop:caratt-sup}), per ogni $\epsilon>0$ esiste
+$x_{1}\in[a,x_{0})$ tale che
+\begin{equation}\label{eq:monotone-x1}
+  \ell-\epsilon<f(x_{1}).
+\end{equation}
+Per $x_{1}<x<x_{0}$ risulta $f(x)\ge f(x_{1})$, perché $f$ è crescente, e $f(x)\le\ell$,
+perché $\ell$ è un maggiorante; dunque
+\begin{equation}\label{eq:monotone-catena}
+  \ell-\epsilon<f(x_{1})\le f(x)\le\ell<\ell+\epsilon \qquad\perogni x\in(x_{1},x_{0}),
+\end{equation}
+cioè, posto $\delta=x_{0}-x_{1}>0$, si ha $\abs{f(x)-\ell}<\epsilon$ per ogni $x$ con
+$x_{0}-\delta<x<x_{0}$. Per la \eqref{eq:def-limite-sx} ne segue
+\begin{equation}\label{eq:monotone-limite}
+  \lim_{x\to x_{0}^{-}}f(x)=\ell .
+\end{equation}
+Si procede in modo analogo per il limite per $x\to x_{0}^{+}$, con $x_{0}\in[a,b)$,
+usando l'estremo inferiore $\inf\{f(x) : x_{0}<x\le b\}$.
+\end{dimostrazione}
+
+Osserviamo che, se $f$ è crescente in $[a,b]$, i limiti \eqref{eq:monotone-estremi},
+\eqref{eq:monotone-interni} si possono ordinare nel modo seguente:
+\begin{equation}\label{eq:monotone-ordine}
+\begin{split}
+  f(a)&\le\lim_{x\to a^{+}}f(x)\le\lim_{x\to x_{0}^{-}}f(x)\le f(x_{0})\\
+  &\le\lim_{x\to x_{0}^{+}}f(x)\le\lim_{x\to b^{-}}f(x)\le f(b)
+\end{split}
+\end{equation}
+per ogni $x_{0}\in(a,b)$. Ad esempio, la disuguaglianza centrale
+$\lim_{x\to x_{0}^{-}}f(x)\le f(x_{0})$ vale perché $f(x_{0})$ è un maggiorante di
+$\{f(x) : a\le x<x_{0}\}$, e il limite sinistro ne è l'estremo superiore; le altre si
+provano allo stesso modo, o con il confronto dei limiti (\cref{teo:confronto-funzioni}(ii)).
+
+\begin{corollario}\label{cor:monotone-salti}
+Le eventuali discontinuità di una funzione monotòna in $[a,b]$ nei punti interni
+$x_{0}\in(a,b)$ sono tutte di prima specie (salti). Negli estremi, se $f$ è crescente,
+una discontinuità significa $f(a)<\lim_{x\to a^{+}}f(x)$ oppure
+$\lim_{x\to b^{-}}f(x)<f(b)$.
+\end{corollario}
+
+\begin{schema}
+\Ipotesi{$f$ monotòna (ad esempio crescente) in $[a,b]$; \ $f$ discontinua in $x_{0}$.}
+\Tesi{se $x_{0}\in(a,b)$, la discontinuità è di prima specie; \ se $x_{0}=a$ (o $b$),
+vale la disuguaglianza stretta indicata.}
+\end{schema}
+
+\begin{strategia}
+Si scorre la classificazione della \cref{def:discontinuita}: il caso (c) è escluso perché
+i limiti unilaterali esistono finiti, il caso (a) perché la catena di disuguaglianze
+\eqref{eq:monotone-ordine} costringe il valore $f(x_{0})$ a stare tra il limite sinistro
+e il limite destro. Resta solo il salto.
+\end{strategia}
+
+\begin{dimostrazione}
+Per il \cref{teo:limite-monotone-funzioni} i limiti destro e sinistro esistono sempre
+finiti, quindi il caso (c) della \cref{def:discontinuita} è escluso; per la
+\eqref{eq:monotone-ordine}, se i due limiti coincidono coincidono anche con $f(x_{0})$,
+e quindi è escluso anche il caso (a). Negli estremi esiste un solo limite unilaterale,
+finito, che per la \eqref{eq:monotone-ordine} è maggiore o uguale a $f(a)$ (rispettivamente
+minore o uguale a $f(b)$): la discontinuità equivale alla disuguaglianza stretta.
+\end{dimostrazione}
+
+\subsection{Un criterio di continuità per le funzioni monotòne}
+
+Una funzione monotòna può dunque essere discontinua soltanto «saltando», e un salto
+lascia necessariamente fuori dall'immagine un intervallo di valori (\cref{fig:monotona-salto}).
+Questa osservazione porta a un criterio molto semplice.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.85\textwidth, height=5.4cm, xmin=0, xmax=6.2, ymin=0, ymax=3.6,
+  axis lines=left, xtick={0.6,3.2,5.6}, xticklabels={$a$,$x_{0}$,$b$},
+  ytick={0.5,1.45,2.35,3.2}, yticklabels={$f(a)$,$\ell_{1}$,$\ell_{2}$,$f(b)$},
+  xlabel={$x$}, ylabel={$y$}]
+  \fill[rosso!12] (axis cs:0,1.45) rectangle (axis cs:6.2,2.35);
+  \addplot[curva, domain=0.6:3.2, samples=60] {0.5+0.95*((x-0.6)/2.6)^0.8};
+  \addplot[curva, domain=3.2:5.6, samples=60] {2.35+0.85*((x-3.2)/2.4)^1.3};
+  \draw[blu, thick, fill=white] (axis cs:3.2,1.45) circle (2pt);
+  \fill[blu] (axis cs:3.2,2.35) circle (2pt);
+  \addplot[tratteggio] coordinates {(0,1.45) (3.2,1.45)};
+  \addplot[tratteggio] coordinates {(0,2.35) (3.2,2.35) (3.2,0)};
+  \addplot[tratteggio] coordinates {(0,3.2) (5.6,3.2) (5.6,0)};
+  \addplot[tratteggio] coordinates {(0.6,0) (0.6,0.5)};
+  \node[font=\scriptsize, rosso, anchor=west] at (axis cs:3.6,1.9) {valori non assunti};
+\end{axis}
+\end{tikzpicture}
+\caption{Una funzione crescente con un salto in $x_{0}$: limite sinistro $\ell_{1}$,
+limite destro $\ell_{2}=f(x_{0})$. I valori dell'intervallo $(\ell_{1},\ell_{2})$, che
+pure stanno tra $f(a)$ e $f(b)$, non sono assunti: l'immagine di $f$ non è un intervallo.}
+\label{fig:monotona-salto}
+\end{figure}
+
+\begin{teorema}[Criterio di continuità per le funzioni monotòne]\label{teo:criterio-monotone}\index{funzione!monotòna!continuità}
+Sia $f$ una funzione monotòna nell'intervallo chiuso e limitato $[a,b]$. Allora $f$ è
+continua in $[a,b]$ se e solo se l'immagine di $f$ è tutto l'intervallo di estremi
+$f(a)$, $f(b)$.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$ monotòna (ad esempio crescente) in $[a,b]$.}
+\Tesi{$f$ continua in $[a,b]$ \ $\sse$ \ $f([a,b])=[f(a),f(b)]$.}
+\end{schema}
+
+\begin{strategia}
+Una implicazione è il teorema dei valori intermedi e non richiede la monotonia. Per
+l'altra procediamo per assurdo: se $f$ non fosse continua in un punto, per il
+\cref{cor:monotone-salti} avrebbe lì un salto, e i valori del salto, pur compresi tra
+$f(a)$ e $f(b)$, non sarebbero assunti; ciò contraddice l'ipotesi sull'immagine.
+\end{strategia}
+
+\begin{dimostrazione}
+Supponiamo $f$ crescente (altrimenti si considera $-f$). Se $f$ è continua in $[a,b]$,
+allora, indipendentemente dalla monotonia, assume tutti i valori compresi tra $f(a)$ e
+$f(b)$ (\cref{teo:valori-intermedi-1}); e per la \eqref{eq:monotone-limitata} non ne
+assume altri. Quindi $f([a,b])=[f(a),f(b)]$.
+
+Viceversa, sia $f([a,b])=[f(a),f(b)]$ e supponiamo per assurdo che $f$ non sia continua
+in un punto $x_{0}\in(a,b)$. Posto
+\begin{equation}\label{eq:criterio-salto}
+  \ell_{1}=\lim_{x\to x_{0}^{-}}f(x), \qquad \ell_{2}=\lim_{x\to x_{0}^{+}}f(x),
+\end{equation}
+per la \eqref{eq:monotone-ordine} si ha $\ell_{1}\le f(x_{0})\le\ell_{2}$, e almeno una
+delle due disuguaglianze è stretta (se fossero entrambe uguaglianze, $f$ sarebbe
+continua in $x_{0}$ per la \cref{prop:dx-sx}). Supponiamo ad esempio $\ell_{1}<f(x_{0})$
+(l'altro caso è analogo). Allora $f$ non assume alcun valore nell'intervallo
+$(\ell_{1},f(x_{0}))$: per $x<x_{0}$ si ha $f(x)\le\ell_{1}$, per la
+\eqref{eq:monotone-sup-inf}, e per $x\ge x_{0}$ si ha $f(x)\ge f(x_{0})$. D'altra parte
+$f(a)\le\ell_{1}<f(x_{0})\le f(b)$, quindi $(\ell_{1},f(x_{0}))\subseteq[f(a),f(b)]$:
+questi valori dovrebbero essere assunti, e si ha una contraddizione. Si procede in modo
+analogo se $x_{0}=a$ oppure $x_{0}=b$: ad esempio, se $f$ non è continua per $x=a$,
+allora $f$ non assume alcun valore nell'intervallo $(f(a),\ell)$, essendo
+\begin{equation}\label{eq:criterio-estremo}
+  f(a)<\ell=\lim_{x\to a^{+}}f(x)=\inf\{f(x) : a<x\le b\}. \qedhere
+\end{equation}
+\end{dimostrazione}
+
+\subsection{Continuità della funzione inversa}
+
+\begin{teorema}[Continuità delle funzioni inverse]\label{teo:continuita-inversa}\index{funzione!inversa!continuità}
+Sia $f$ una funzione strettamente monotòna in $[a,b]$. Se $f$ è continua, anche la
+funzione inversa $f^{-1}$ è continua.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$ continua e strettamente crescente (o decrescente) in $[a,b]$.}
+\Tesi{$f^{-1}:[f(a),f(b)]\to[a,b]$ (rispettivamente $[f(b),f(a)]\to[a,b]$) è continua.}
+\end{schema}
+
+\begin{strategia}
+Non serve alcuna stima: si applica il criterio appena dimostrato alla funzione $f^{-1}$.
+Basta osservare che anche $f^{-1}$ è monotòna, e che la sua immagine è tutto
+l'intervallo $[a,b]$.
+\end{strategia}
+
+\begin{dimostrazione}
+Osserviamo che la stretta monotonia di $f$ su $[a,b]$ implica la sua invertibilità (si
+veda il criterio di invertibilità, \cref{teo:invertibilita}). Supponiamo, per fissare le
+notazioni, che $f$ sia strettamente crescente in $[a,b]$; allora
+\begin{equation}\label{eq:inversa-domini}
+  f:[a,b]\to[f(a),f(b)], \qquad f^{-1}:[f(a),f(b)]\to[a,b]
+\end{equation}
+sono biiettive. La funzione $f^{-1}$ è strettamente crescente: se $y_{1}<y_{2}$ e fosse
+$f^{-1}(y_{1})\ge f^{-1}(y_{2})$, applicando la funzione crescente $f$ si otterrebbe
+$y_{1}\ge y_{2}$. Inoltre $f^{-1}$ assume tutti i valori dell'intervallo $[a,b]$, che è
+l'intervallo di estremi $f^{-1}(f(a))=a$ e $f^{-1}(f(b))=b$. Per il criterio precedente
+(di continuità delle funzioni monotòne), $f^{-1}$ è continua.
+\end{dimostrazione}
+
+\begin{strategia}[Un'altra via]
+Si può fare a meno del criterio per le funzioni monotòne e ragionare per successioni,
+come nella dimostrazione del teorema di Weierstrass. Se $f^{-1}$ non fosse continua in
+un punto $y_{0}$, si troverebbero valori $y_{n}\to y_{0}$ le cui controimmagini $x_{n}$
+restano lontane da $x_{0}=f^{-1}(y_{0})$; per il teorema di Bolzano--Weierstrass le
+$x_{n}$ hanno un'estratta convergente a un punto $x'\neq x_{0}$, e la continuità di $f$
+dà $f(x')=y_{0}=f(x_{0})$, contro l'iniettività. Della stretta monotonia si usa soltanto
+l'iniettività; sono essenziali, invece, la continuità di $f$ e il fatto che $[a,b]$ sia
+chiuso e limitato.
+\end{strategia}
+
+\begin{dimostrazione}[Seconda dimostrazione]
+Sia $J=f([a,b])$ il dominio di $f^{-1}$, che è un intervallo chiuso e limitato
+(\cref{cor:immagine-intervallo}); siano $y_{0}\in J$ e $x_{0}=f^{-1}(y_{0})$. Supponiamo per
+assurdo che $f^{-1}$ non sia continua in $y_{0}$. Negando la caratterizzazione (c) della
+\cref{prop:caratt-continuita} e scegliendo $\delta=\frac1n$, come nella dimostrazione del
+\cref{teo:eps-delta}, si trova $\epsilon_{0}>0$ tale che per ogni $n\in\N$ esiste
+$y_{n}\in J$ con
+\begin{equation}\label{eq:inversa-succ-cattiva}
+  \abs{y_{n}-y_{0}}<\frac1n, \qquad \abs{f^{-1}(y_{n})-x_{0}}\ge\epsilon_{0} .
+\end{equation}
+Posto $x_{n}=f^{-1}(y_{n})$, si ha dunque $y_{n}\to y_{0}$, $x_{n}\in[a,b]$,
+$f(x_{n})=y_{n}$ e $\abs{x_{n}-x_{0}}\ge\epsilon_{0}$ per ogni $n$. La successione
+$x_{n}$ è limitata: per il teorema di Bolzano--Weierstrass (\cref{teo:bolzano-weierstrass})
+ha un'estratta $x_{n_{k}}$ convergente a un punto $x'$, che appartiene ad $[a,b]$ per il
+\cref{cor:confronto-limiti}. Non può essere $x'=x_{0}$: altrimenti si avrebbe
+definitivamente $\abs{x_{n_{k}}-x_{0}}<\epsilon_{0}$, contro la
+\eqref{eq:inversa-succ-cattiva}. Per la continuità di $f$ in $x'$
+(\cref{prop:caratt-continuita}(b)) si ha $f(x_{n_{k}})\to f(x')$; d'altra parte
+$f(x_{n_{k}})=y_{n_{k}}$ è un'estratta di $y_{n}$, e quindi tende a $y_{0}$
+(\cref{prop:estratta-limite}). Per l'unicità del limite $f(x')=y_{0}=f(x_{0})$, con
+$x'\neq x_{0}$: ciò contraddice l'iniettività di $f$.
+\end{dimostrazione}
+
+\begin{osservazione}[Che cosa insegna la seconda via]\label{oss:inversa-compattezza}
+La seconda dimostrazione non usa la monotonia di $f$, ma solo la sua iniettività: prova
+dunque che \emph{l'inversa di una funzione continua e iniettiva su $[a,b]$ è continua}.
+Usa invece in modo essenziale la proprietà delle estratte convergenti, che nella nota
+storica del \cref{sec:dim-weierstrass} abbiamo chiamato compattezza: vale quindi, con
+la stessa dimostrazione, per le funzioni continue e iniettive su un qualunque insieme $K$
+in cui ogni successione ha un'estratta convergente a un punto di $K$, anche se $K$ non è
+un intervallo. La prima dimostrazione sfrutta invece l'ordine dei numeri reali.
+Nell'approfondimento del \S\ref{subsec:continue-iniettive} vedremo che le due ipotesi
+non sono poi così diverse: su un intervallo, una funzione continua e iniettiva è
+necessariamente strettamente monotòna.
+\end{osservazione}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.7\textwidth, height=0.7\textwidth, xmin=-3, xmax=3.2, ymin=-3, ymax=3.2,
+  axis lines=middle, xtick={-2,-1,1,2,3}, ytick={-2,-1,1,2,3}, xlabel={$x$}, ylabel={$y$},
+  tick label style={font=\scriptsize}, axis equal image]
+  \addplot[tratteggio, domain=-3:3.2] {x};
+  \addplot[curva, domain=-3:1.16, samples=80] {exp(x)} node[pos=0.93, left, font=\scriptsize] {$e^{x}$};
+  \addplot[curva2, domain=0.05:3.2, samples=120] {ln(x)} node[pos=0.9, below right, font=\scriptsize] {$\log x$};
+\end{axis}
+\end{tikzpicture}
+\caption{La funzione esponenziale e la sua inversa, il logaritmo: i grafici sono
+simmetrici rispetto alla bisettrice $y=x$. La continuità dell'una si trasmette all'altra
+(\cref{teo:continuita-inversa}).}
+\label{fig:inversa-continua}
+\end{figure}
+
+\begin{idea}[Invertire una curva di taratura]
+Molti strumenti di bordo misurano una grandezza per ricavarne un'altra attraverso una
+relazione monotòna. L'anemometro misura la differenza di pressione
+$\Delta p=\frac12\rho V^{2}$ tra presa totale e presa statica, e ne ricava la velocità
+$V=\sqrt{2\Delta p/\rho}$: la funzione $V\mapsto\Delta p$ è continua e strettamente
+crescente per $V\ge0$, e la sua inversa è continua per il \cref{teo:continuita-inversa}.
+Il significato pratico è rassicurante: un piccolo errore nella misura di $\Delta p$
+produce un piccolo errore su $V$. La continuità, però, non dice \emph{quanto} piccolo:
+a basse velocità la curva $\Delta p(V)$ è quasi piatta, e un errore fissato su $\Delta p$
+si traduce in un errore su $V$ molto più grande che ad alta velocità. È il motivo per cui
+gli anemometri sono poco precisi alle basse velocità; per quantificare questa
+sensibilità servirà la derivata.
+\end{idea}
+
+\subsection{Continuità delle funzioni elementari}
+
+Siamo finalmente in grado di dimostrare la continuità di esponenziali, logaritmi e
+potenze, annunciata nel \cref{sec:continue}, e di chiudere un conto rimasto aperto nei
+\cref{cap:complementi,cap:successioni}: le regole di calcolo delle potenze con
+esponente reale.
+
+\begin{teorema}[Continuità di esponenziali, logaritmi e potenze]\label{teo:continuita-esponenziale}\index{funzione!esponenziale!continuità}\index{funzione!logaritmo!continuità}
+\begin{enumerate}[label=\textup{(\roman*)}]
+  \item Per ogni $a>0$ la funzione $x\mapsto a^{x}$ è continua su $\R$.
+  \item Per ogni $a>0$, $a\neq1$, la funzione $y\mapsto\log_{a}y$ è continua su $(0,+\infty)$.
+  \item Per ogni $b\in\R$ la funzione $x\mapsto x^{b}$ è continua su $(0,+\infty)$.
+\end{enumerate}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{la \cref{def:potenza-reale} di $a^{x}$ e il \cref{teo:esponenziale}
+(monotonia stretta e suriettività su $(0,+\infty)$).}
+\Tesi{continuità di $a^{x}$ su $\R$, di $\log_{a}y$ su $(0,+\infty)$, di $x^{b}$ su
+$(0,+\infty)$.}
+\end{schema}
+
+\begin{strategia}
+Non c'è bisogno di stime con $\epsilon$ e $\delta$: tutto il lavoro è già stato fatto
+nel \cref{teo:esponenziale}, che fornisce una funzione strettamente crescente la cui
+immagine è un intervallo. Il criterio di continuità per le funzioni monotòne trasforma
+questa informazione in continuità, su ogni intervallo chiuso e limitato; la località del
+limite la estende a tutto $\R$. Il logaritmo è l'inversa dell'esponenziale, e per esso
+si usa il \cref{teo:continuita-inversa}. Per le potenze, infine, si scrive
+$x^{b}=e^{b\log x}$: ma per giustificare questa uguaglianza servono le regole delle
+potenze con esponente reale, che dimostreremo subito dopo usando la (i).
+\end{strategia}
+
+\begin{dimostrazione}[Dimostrazione di (i) e (ii)]
+(i) Sia dapprima $a>1$, e fissiamo $x_{0}\in\R$. Consideriamo l'intervallo
+$[\alpha,\beta]=[x_{0}-1,x_{0}+1]$. La funzione $f(x)=a^{x}$ è strettamente crescente
+(\cref{teo:esponenziale}(ii)), e l'immagine di $[\alpha,\beta]$ è l'intervallo
+$[a^{\alpha},a^{\beta}]$: infatti ogni valore $a^{x}$ con $\alpha\le x\le\beta$ sta in
+$[a^{\alpha},a^{\beta}]$ per la monotonia, e viceversa, se $c\in[a^{\alpha},a^{\beta}]$,
+per il \cref{teo:esponenziale}(iii) esiste $x\in\R$ con $a^{x}=c$, e deve essere
+$\alpha\le x\le\beta$, perché $x<\alpha$ darebbe $a^{x}<a^{\alpha}\le c$ e $x>\beta$
+darebbe $a^{x}>a^{\beta}\ge c$. Per il \cref{teo:criterio-monotone} la restrizione di
+$f$ a $[\alpha,\beta]$ è continua, in particolare nel punto interno $x_{0}$; poiché
+$[\alpha,\beta]$ contiene l'intorno $(x_{0}-1,x_{0}+1)$ di $x_{0}$, per la località del
+limite (\cref{lem:localita}(ii)) $f$ è continua in $x_{0}$. Se $a=1$ la funzione è
+costante. Se $0<a<1$, si ha $a^{x}=(1/a)^{-x}$ per definizione, e la funzione è
+composta delle funzioni continue $x\mapsto-x$ e $t\mapsto(1/a)^{t}$, con $1/a>1$; è
+dunque continua per il \cref{teo:composta-continua}.
+
+(ii) Sia $a>1$ e sia $y_{0}>0$; posto $x_{0}=\log_{a}y_{0}$ e
+$[\alpha,\beta]=[x_{0}-1,x_{0}+1]$, la funzione $a^{x}$ è continua e strettamente
+crescente su $[\alpha,\beta]$, con immagine $[a^{\alpha},a^{\beta}]$. Per il
+\cref{teo:continuita-inversa} la sua inversa, che è la restrizione di $\log_{a}$ a
+$[a^{\alpha},a^{\beta}]$, è continua; poiché $a^{\alpha}<y_{0}<a^{\beta}$, l'intervallo
+$[a^{\alpha},a^{\beta}]$ contiene un intorno di $y_{0}$, e per la località del limite
+$\log_{a}$ è continua in $y_{0}$. Se $0<a<1$, dalla definizione $a^{x}=(1/a)^{-x}$ segue che
+$a^{x}=y$ se e solo se $(1/a)^{-x}=y$, cioè $-x=\log_{1/a}y$: dunque
+$\log_{a}y=-\log_{1/a}y$, che è continua per il caso già dimostrato, essendo $1/a>1$.
+(Si noti che non abbiamo usato la formula del cambiamento di base \eqref{eq:log4}, che
+con esponenti reali richiede le regole delle potenze, dimostrate soltanto più avanti.)
+\end{dimostrazione}
+
+\begin{teorema}[Potenze con esponente reale]\label{teo:potenze-reali}\index{potenza a esponente reale!proprietà}
+Per ogni $a,b>0$ e per ogni $x,z,c\in\R$ si ha
+\begin{align}
+  &a^{x}\,a^{z}=a^{x+z}, \qquad (a^{x})^{z}=a^{xz}, \qquad (ab)^{x}=a^{x}\,b^{x};
+  \label{eq:potenze-reali-algebra}\\
+  &a<b,\ c>0 \ \implica\ a^{c}<b^{c}; \qquad a<b,\ c<0 \ \implica\ a^{c}>b^{c} .
+  \label{eq:potenze-reali-ordine}
+\end{align}
+Cioè le proprietà \eqref{eq:pot1}, \eqref{eq:pot3}, \eqref{eq:pot4}, note per esponenti
+razionali, valgono per esponenti reali qualsiasi.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$a,b>0$; \ $x,z,c\in\R$; \ le proprietà per esponenti razionali (\cref{sec:potenze});
+la continuità delle funzioni esponenziali (\cref{teo:continuita-esponenziale}(i)).}
+\Tesi{le uguaglianze \eqref{eq:potenze-reali-algebra} e le disuguaglianze
+\eqref{eq:potenze-reali-ordine}.}
+\end{schema}
+
+\begin{strategia}
+Un numero reale è limite di una successione di razionali; per i razionali le regole sono
+note; la continuità delle funzioni esponenziali permette di passare al limite nei due
+membri di ciascuna uguaglianza, e l'unicità del limite conclude. È un procedimento tipico,
+che si chiama \emph{estensione per continuità}: una relazione tra funzioni continue che
+vale su un insieme denso vale ovunque. Per $(a^{x})^{z}$ occorre un passo intermedio,
+perché la base $a^{x}$ non è più un numero «noto»: si tratta prima il caso di $z$
+razionale, usando l'unicità della radice $q$-esima.
+\end{strategia}
+
+\begin{dimostrazione}
+Ricordiamo che per ogni $x\in\R$ esiste una successione di razionali $q_{n}\to x$: per
+la densità di $\Q$ (\cref{teo:densita-Q}) esiste $q_{n}\in\Q$ con $x-\frac1n<q_{n}<x$, e
+$q_{n}\to x$ per il teorema dei carabinieri.
+
+\emph{Prima uguaglianza.} Siano $q_{n}\to x$ ed $r_{n}\to z$ successioni di razionali.
+Per la \eqref{eq:pot1} con esponenti razionali, $a^{q_{n}}a^{r_{n}}=a^{q_{n}+r_{n}}$ per
+ogni $n$. Per la continuità di $t\mapsto a^{t}$ nei punti $x$, $z$ e $x+z$
+(\cref{prop:caratt-continuita}(b)), il primo membro tende a $a^{x}a^{z}$ e il secondo,
+poiché $q_{n}+r_{n}\to x+z$, tende a $a^{x+z}$. Per l'unicità del limite
+$a^{x}a^{z}=a^{x+z}$. In particolare $a^{x}a^{-x}=a^{0}=1$, cioè $a^{-x}=1/a^{x}$.
+
+\emph{Terza uguaglianza.} Allo stesso modo $(ab)^{q_{n}}=a^{q_{n}}b^{q_{n}}$ e, passando al
+limite con la continuità delle tre funzioni esponenziali di base $ab$, $a$, $b$, si
+ottiene $(ab)^{x}=a^{x}b^{x}$.
+
+\emph{Seconda uguaglianza.} Sia dapprima $z=\frac pq$ razionale, con $q\in\N$ e
+$p\in\Z$. Per la prima uguaglianza, applicata $q-1$ volte,
+\[
+  \bigl(a^{x/q}\bigr)^{q}=\underbrace{a^{x/q}\cdots a^{x/q}}_{q\ \text{volte}}=a^{x};
+\]
+dunque $a^{x/q}$ è un numero positivo la cui potenza $q$-esima è $a^{x}$, e per l'unicità
+della radice $q$-esima (\cref{teo:radice-n}) è $a^{x/q}=(a^{x})^{1/q}$. Se $p>0$ si ha
+allora, per le proprietà delle potenze con esponente razionale (che danno
+$y^{p/q}=\bigl(y^{1/q}\bigr)^{p}$ per $y>0$) e ancora per la prima uguaglianza,
+$(a^{x})^{p/q}=\bigl((a^{x})^{1/q}\bigr)^{p}=\bigl(a^{x/q}\bigr)^{p}=a^{xp/q}$; se $p<0$ si
+passa al reciproco, usando $a^{-y}=1/a^{y}$; se $p=0$ entrambi i membri valgono $1$.
+Sia ora $z$ reale, e sia $r_{n}\to z$ una successione di razionali. Per quanto appena
+visto $(a^{x})^{r_{n}}=a^{xr_{n}}$. Il primo membro tende a $(a^{x})^{z}$, per la
+continuità della funzione esponenziale di base $a^{x}>0$; il secondo tende a $a^{xz}$,
+perché $xr_{n}\to xz$ e $t\mapsto a^{t}$ è continua. Quindi $(a^{x})^{z}=a^{xz}$.
+
+\emph{Disuguaglianze.} Siano $0<a<b$ e $c>0$. Poiché $\frac ba>1$, la stretta monotonia
+dell'esponenziale di base $\frac ba$ (\cref{teo:esponenziale}(ii)) dà
+$\bigl(\frac ba\bigr)^{c}>\bigl(\frac ba\bigr)^{0}=1$; per la terza uguaglianza
+\[
+  b^{c}=\Bigl(\frac ba\cdot a\Bigr)^{c}=\Bigl(\frac ba\Bigr)^{c}a^{c}>a^{c} .
+\]
+Se $c<0$, si ha $a^{-c}<b^{-c}$ per quanto appena visto, e passando ai reciproci
+$a^{c}=\frac1{a^{-c}}>\frac1{b^{-c}}=b^{c}$.
+\end{dimostrazione}
+
+\begin{dimostrazione}[Dimostrazione del \cref{teo:continuita-esponenziale}(iii)]
+Per $x>0$ si ha $x=e^{\log x}$ \eqref{eq:log-inversa}, e quindi, per la seconda delle
+\eqref{eq:potenze-reali-algebra},
+\begin{equation}\label{eq:potenza-esponenziale}
+  x^{b}=\bigl(e^{\log x}\bigr)^{b}=e^{b\log x} \qquad\perogni x>0 .
+\end{equation}
+La funzione $x\mapsto b\log x$ è continua su $(0,+\infty)$ per la (ii), e $t\mapsto e^{t}$
+è continua su $\R$ per la (i): per il \cref{teo:composta-continua} la funzione
+$x\mapsto x^{b}$ è continua su $(0,+\infty)$.
+\end{dimostrazione}
+
+\begin{osservazione}
+Se $b>0$, ponendo $0^{b}=0$ la funzione $x^{b}$ risulta continua anche in $0$ (da destra):
+per $x\to0^{+}$ si ha $b\log x\to-\infty$ (\cref{prop:lim-logaritmo}) ed $e^{t}\to0$ per
+$t\to-\infty$ (\cref{prop:lim-esponenziale}), quindi $x^{b}=e^{b\log x}\to0$ per il
+\cref{teo:limite-composta} (con $y_{0}=-\infty$). Dalla \eqref{eq:potenza-esponenziale}
+segue anche la regola $\log x^{b}=b\log x$ per ogni $b\in\R$, cioè la \eqref{eq:log3}
+con esponente reale. Ne segue anche la formula del cambiamento di base \eqref{eq:log4} per
+esponenti reali: se $y=a^{x}$, allora $\log y=\log\bigl(e^{\log a}\bigr)^{x}=x\log a$. Le
+osservazioni sulle potenze a esponente reale fatte nel \cref{sec:esponenziale-reale} e nel
+\cref{sec:numero-e} sono così completamente giustificate; e la dimostrazione non ha usato
+alcun risultato che dipendesse da esse.
+\end{osservazione}
+
+\subsection{Limiti notevoli}
+
+La continuità di esponenziali e logaritmi, insieme al limite \eqref{eq:lim-1-piu-x},
+permette di ricavare alcuni limiti notevoli di uso continuo.
+
+\begin{proposizione}[Limiti notevoli di esponenziali e logaritmi]\label{prop:limiti-notevoli-exp}\index{limite!notevole}
+Per ogni $b\in\R$ e ogni $a>0$ si ha
+\begin{align}
+  &\lim_{x\to0}(1+bx)^{1/x}=e^{b}; \label{eq:ln-e-b}\\
+  &\lim_{x\to0}\frac{\log(1+x)}{x}=1; \label{eq:ln-log}\\
+  &\lim_{x\to0}\frac{e^{x}-1}{x}=1, \qquad \lim_{x\to0}\frac{a^{x}-1}{x}=\log a; \label{eq:ln-exp}\\
+  &\lim_{x\to0}\frac{(1+x)^{b}-1}{x}=b . \label{eq:ln-pot}
+\end{align}
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$b\in\R$, \ $a>0$; \ $(1+x)^{1/x}\to e$ per $x\to0$ \eqref{eq:lim-1-piu-x}; \
+continuità di $e^{t}$, $\log t$, $t^{b}$ (\cref{teo:continuita-esponenziale}).}
+\Tesi{i limiti \eqref{eq:ln-e-b}--\eqref{eq:ln-pot}.}
+\end{schema}
+
+\begin{strategia}
+Tutti i limiti sono forme indeterminate ($1^{\infty}$ o $\frac00$) e si riconducono, con
+le regole delle potenze e qualche cambio di variabile, al limite
+$(1+x)^{1/x}\to e$. Per «portare il limite dentro» le funzioni $\log$, $e^{t}$, $t^{b}$ si
+usa la loro continuità (\cref{cor:limite-composta-continua}); per i cambi di variabile
+si usa il \cref{teo:limite-composta}, verificando ogni volta l'ipotesi $g(x)\neq y_{0}$.
+\end{strategia}
+
+\begin{dimostrazione}
+\eqref{eq:ln-e-b}: Se $b=0$ la funzione vale costantemente $1=e^{0}$. Se $b\neq0$, per
+$0<\abs x<\frac1{\abs b}$ si ha $1+bx>0$ e, per il \cref{teo:potenze-reali},
+\[
+  (1+bx)^{1/x}=\Bigl[(1+bx)^{\frac1{bx}}\Bigr]^{b}.
+\]
+Con $g(x)=bx$, che tende a $0$ ed è diversa da $0$ per $x\neq0$, il
+\cref{teo:limite-composta} e la \eqref{eq:lim-1-piu-x} danno $(1+bx)^{1/(bx)}\to e$;
+per la continuità della funzione $t\mapsto t^{b}$ nel punto $t=e$
+(\cref{teo:continuita-esponenziale}(iii) e \cref{cor:limite-composta-continua}) il
+secondo membro tende a $e^{b}$.
+
+\eqref{eq:ln-log}: Per $x>-1$, $x\neq0$, si ha
+$\frac{\log(1+x)}x=\frac1x\log(1+x)=\log\bigl[(1+x)^{1/x}\bigr]$ (regola $\log y^{c}=c\log y$).
+Poiché $(1+x)^{1/x}\to e$ e il logaritmo è continuo nel punto $e$, il limite è
+$\log e=1$.
+
+\eqref{eq:ln-exp}: Poniamo $y=g(x)=e^{x}-1$. Per la continuità dell'esponenziale,
+$g(x)\to e^{0}-1=0$ per $x\to0$, e $g(x)\neq0$ per $x\neq0$ perché l'esponenziale è
+iniettiva; inoltre $x=\log(1+y)$. Dunque
+\[
+  \frac{e^{x}-1}{x}=\frac{y}{\log(1+y)}=f(g(x)), \qquad\text{dove}\quad
+  f(y)=\frac{y}{\log(1+y)},
+\]
+e $f(y)\to\frac11=1$ per $y\to0$
+per la \eqref{eq:ln-log}; il \cref{teo:limite-composta} conclude. Per la seconda, se
+$a=1$ entrambi i membri sono nulli; se $a\neq1$, per la \eqref{eq:potenza-esponenziale}
+$a^{x}=e^{x\log a}$ e
+\[
+  \frac{a^{x}-1}{x}=\log a\cdot\frac{e^{x\log a}-1}{x\log a}\ \to\ \log a\cdot1,
+\]
+per il \cref{teo:limite-composta} con $g(x)=x\log a$, che si annulla solo per $x=0$.
+
+\eqref{eq:ln-pot}: Se $b=0$ il limite è $0=b$. Se $b\neq0$, per $x>-1$, $x\neq0$, si
+ha $(1+x)^{b}=e^{b\log(1+x)}$, e la quantità $y=b\log(1+x)$ è diversa da zero e tende a
+zero; quindi
+\[
+  \frac{(1+x)^{b}-1}{x}=\frac{e^{y}-1}{y}\cdot\frac{b\log(1+x)}{x}\ \to\ 1\cdot b=b,
+\]
+per la \eqref{eq:ln-exp}, il \cref{teo:limite-composta} e la \eqref{eq:ln-log}.
+\end{dimostrazione}
+
+\begin{osservazione}
+Con la continuità del logaritmo si ritrova anche il limite $\frac{\log n}{n}\to0$,
+dimostrato nel \cref{teo:gerarchia}: infatti
+$\frac{\log n}{n}=\log n^{1/n}=\log\sqrt[n]n\to\log1=0$, per la \cref{prop:radice-n-n} e la
+continuità del logaritmo nel punto $1$.
+\end{osservazione}
+
+I limiti \eqref{eq:ln-log} e \eqref{eq:ln-exp} dicono che, per $x$ piccolo,
+$\log(1+x)\approx x$ ed $e^{x}-1\approx x$, con un errore relativo che tende a zero. Ma,
+come per $1-\cos x$, il calcolo numerico diretto di queste espressioni soffre di
+cancellazione: per questo le librerie di calcolo forniscono le funzioni
+\texttt{log1p}$(x)=\log(1+x)$ ed \texttt{expm1}$(x)=e^{x}-1$, calcolate senza formare la
+differenza.
+
+\begin{python}[I limiti notevoli e le funzioni \texttt{log1p}, \texttt{expm1}]
+import math
+
+# log(1+x)/x -> 1 e (e^x - 1)/x -> 1 per x -> 0. Le funzioni
+# log1p(x) = log(1+x), expm1(x) = e^x - 1 evitano la cancellazione.
+print("    x     log(1+x)/x   log1p(x)/x   (e^x-1)/x    expm1(x)/x")
+for k in (1, 3, 5, 8, 11, 14, 16):
+    x = 10.0**(-k)
+    a, b = math.log(1 + x) / x, math.log1p(x) / x
+    c, d = (math.exp(x) - 1) / x, math.expm1(x) / x
+    print(f"1e-{k:<3d} {a:12.10f} {b:12.10f} {c:12.10f} {d:12.10f}")
+\end{python}
+\begin{risultato}
+    x     log(1+x)/x   log1p(x)/x   (e^x-1)/x    expm1(x)/x
+1e-1   0.9531017980 0.9531017980 1.0517091808 1.0517091808
+1e-3   0.9995003331 0.9995003331 1.0005001667 1.0005001667
+1e-5   0.9999950000 0.9999950000 1.0000050000 1.0000050000
+1e-8   0.9999999889 0.9999999950 0.9999999939 1.0000000050
+1e-11  1.0000000827 1.0000000000 1.0000000827 1.0000000000
+1e-14  0.9992007222 1.0000000000 0.9992007222 1.0000000000
+1e-16  0.0000000000 1.0000000000 0.0000000000 1.0000000000
+\end{risultato}
+
+\begin{idea}[L'equazione del razzo per piccole frazioni di propellente]
+L'equazione di Tsiolkovsky dà l'incremento di velocità di un razzo che brucia
+propellente: $\Delta v=v_{e}\log\frac{m_{0}}{m_{1}}$, dove $v_{e}$ è la velocità efficace di
+scarico, $m_{0}$ la massa iniziale e $m_{1}$ quella finale. Posto
+$\mu=\frac{m_{0}-m_{1}}{m_{1}}$, si ha $\Delta v=v_{e}\log(1+\mu)$, e per la
+\eqref{eq:ln-log}, quando la massa di propellente consumata è piccola rispetto a quella
+del veicolo, $\Delta v\approx v_{e}\,\mu$: è la conservazione della quantità di moto «a
+un passo», come se il propellente fosse espulso tutto insieme. Con $v_{e}=3000$~m/s e
+$\mu=0{,}05$ la formula esatta dà $\Delta v=146{,}4$~m/s, quella approssimata $150$~m/s:
+un errore del $2{,}5\%$, che diventa trascurabile per le piccole correzioni d'orbita e
+cresce rapidamente per le manovre importanti. La differenza tra le due formule, il
+logaritmo al posto del termine lineare $\mu$, è il prezzo da pagare per dover accelerare
+anche il propellente non ancora bruciato.
+\end{idea}
+
+\subsection{Approfondimento: funzioni continue e iniettive}
+\label{subsec:continue-iniettive}
+
+Il criterio di invertibilità (\cref{teo:invertibilita}) dice che una funzione continua e
+strettamente monotòna su un intervallo è iniettiva. Vale anche il viceversa: su un
+intervallo, una funzione continua può essere iniettiva soltanto se è strettamente
+monotòna. L'idea intuitiva è chiara: un grafico che si traccia senza staccare la matita,
+e che prima sale e poi scende, ripassa per forza a una stessa altezza.
+
+\begin{proposizione}[Le funzioni continue e iniettive sono monotòne]\label{prop:continua-iniettiva-monotona}
+Sia $I$ un intervallo e sia $f:I\to\R$ continua e iniettiva. Allora $f$ è strettamente
+monotòna in $I$.
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$I$ intervallo; \ $f$ continua in $I$; \ $f(x_{1})\neq f(x_{2})$ se $x_{1}\neq x_{2}$.}
+\Tesi{$f$ è strettamente crescente oppure strettamente decrescente in $I$.}
+\end{schema}
+
+\begin{strategia}
+Ragioniamo per assurdo. Se $f$ non fosse strettamente monotòna, ci sarebbero una coppia
+di punti $a_{1}<a_{2}$ su cui $f$ «sale» e una coppia $x_{1}<x_{2}$ su cui $f$
+«scende». Facciamo scorrere con continuità la prima coppia fino alla seconda, con due
+punti mobili $u(t)<v(t)$: la differenza $f(v(t))-f(u(t))$ passa da un valore positivo a
+uno negativo, e per il teorema degli zeri si annulla. Ma allora $f$ assume lo stesso
+valore in due punti distinti.
+\end{strategia}
+
+\begin{dimostrazione}
+Poiché $f$ è iniettiva, in due punti distinti i valori sono sempre diversi. Dire che $f$
+non è strettamente crescente significa allora che esistono $x_{1}<x_{2}$ in $I$ con
+$f(x_{1})>f(x_{2})$; dire che non è strettamente decrescente, che esistono $a_{1}<a_{2}$
+in $I$ con $f(a_{1})<f(a_{2})$. Supponiamo per assurdo che accadano entrambe le cose, e
+poniamo per $t\in[0,1]$
+\begin{equation}\label{eq:iniettiva-uv}
+  u(t)=(1-t)\,a_{1}+t\,x_{1}, \qquad v(t)=(1-t)\,a_{2}+t\,x_{2} .
+\end{equation}
+Il punto $u(t)$ è compreso tra $a_{1}$ e $x_{1}$, e quindi sta in $I$, perché un
+intervallo contiene tutti i punti compresi tra due suoi punti (\cref{def:intervalli});
+lo stesso vale per $v(t)$. Inoltre
+\[
+  v(t)-u(t)=(1-t)\,(a_{2}-a_{1})+t\,(x_{2}-x_{1})>0 \qquad\perogni t\in[0,1],
+\]
+perché è la somma di due termini non negativi che non si annullano insieme (il primo si
+annulla solo per $t=1$, il secondo solo per $t=0$). La funzione
+\[
+  \phi(t)=f\bigl(v(t)\bigr)-f\bigl(u(t)\bigr), \qquad t\in[0,1],
+\]
+è continua, perché $u$ e $v$ sono polinomi di primo grado e $f$ è continua
+(\cref{teo:composta-continua,teo:operazioni-continue}); inoltre
+\[
+  \phi(0)=f(a_{2})-f(a_{1})>0, \qquad \phi(1)=f(x_{2})-f(x_{1})<0 .
+\]
+Per il teorema degli zeri, applicato a $-\phi$ (\cref{teo:zeri}), esiste $t_{0}\in(0,1)$
+con $\phi(t_{0})=0$, cioè $f\bigl(u(t_{0})\bigr)=f\bigl(v(t_{0})\bigr)$, mentre
+$u(t_{0})<v(t_{0})$: ciò contraddice l'iniettività di $f$. Dunque $f$ è strettamente
+crescente oppure strettamente decrescente.
+\end{dimostrazione}
+
+\begin{corollario}\label{cor:continua-invertibile}
+Sia $f$ continua nell'intervallo $[a,b]$. Allora $f$ è iniettiva se e solo se è
+strettamente monotòna; in tal caso $f([a,b])$ è l'intervallo di estremi $f(a)$, $f(b)$,
+e la funzione inversa è continua.
+\end{corollario}
+
+\begin{schema}
+\Ipotesi{$f$ continua in $[a,b]$.}
+\Tesi{$f$ iniettiva $\sse$ $f$ strettamente monotòna; \ in tal caso $f^{-1}$ è continua
+sull'intervallo di estremi $f(a)$, $f(b)$.}
+\end{schema}
+
+\begin{strategia}
+Basta mettere insieme i risultati: la \cref{prop:continua-iniettiva-monotona} dà la
+monotonia, il criterio di invertibilità l'immagine, il \cref{teo:continuita-inversa} la
+continuità dell'inversa.
+\end{strategia}
+
+\begin{dimostrazione}
+Una funzione strettamente monotòna è iniettiva, perché punti distinti hanno valori
+ordinati in senso stretto; viceversa, se $f$ è iniettiva, è strettamente monotòna per la
+\cref{prop:continua-iniettiva-monotona}. In tal caso il \cref{teo:invertibilita} dà
+$f([a,b])$, e il \cref{teo:continuita-inversa} la continuità di $f^{-1}$.
+\end{dimostrazione}
+
+Per le funzioni continue su un intervallo, dunque, «invertibile» e «strettamente
+monotòna» sono la stessa cosa. In pratica: se la curva di taratura di uno strumento, come
+quella dell'anemometro vista sopra, è continua e non assume mai due volte lo stesso
+valore, è automaticamente monotòna, e la sua inversa è continua. Gli esempi che seguono
+mostrano che l'ipotesi che il dominio sia un intervallo non si può omettere.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.49\textwidth, height=4.6cm, xmin=-0.2, xmax=3.5, ymin=-0.2,
+  ymax=3.4, xtick={1,2,3}, ytick={1,2,3}, xlabel={$x$}, ylabel={$y$},
+  title={\footnotesize $y=f(x)$}]
+  \addplot[curva, domain=0:1] {x};
+  \addplot[curva, domain=2:3] {x-1};
+  \addplot[tratteggio] coordinates {(0,1) (2,1)};
+  \draw[blu, thick, fill=white] (axis cs:0,0) circle (1.8pt);
+  \fill[blu] (axis cs:1,1) circle (1.8pt);
+  \draw[blu, thick, fill=white] (axis cs:2,1) circle (1.8pt);
+  \fill[blu] (axis cs:3,2) circle (1.8pt);
+\end{axis}
+\end{tikzpicture}\hfill
+\begin{tikzpicture}
+\begin{axis}[width=0.49\textwidth, height=4.6cm, xmin=-0.2, xmax=3.5, ymin=-0.2,
+  ymax=3.4, xtick={1,2,3}, ytick={1,2,3}, xlabel={$y$}, ylabel={$x$},
+  title={\footnotesize $x=f^{-1}(y)$}]
+  \addplot[curva2, domain=0:1] {x};
+  \addplot[curva2, domain=1:2] {x+1};
+  \addplot[tratteggio] coordinates {(1,0) (1,2)};
+  \draw[rame, thick, fill=white] (axis cs:0,0) circle (1.8pt);
+  \fill[rame] (axis cs:1,1) circle (1.8pt);
+  \draw[rame, thick, fill=white] (axis cs:1,2) circle (1.8pt);
+  \fill[rame] (axis cs:2,3) circle (1.8pt);
+\end{axis}
+\end{tikzpicture}
+\caption{La funzione dell'\cref{es:inversa-discontinua}(ii) e la sua inversa. La $f$ è
+continua e strettamente crescente sull'insieme $(0,1]\cup(2,3]$, che non è un
+intervallo; la sua inversa, definita sull'intervallo $(0,2]$, ha un salto nel punto
+$1$.}
+\label{fig:inversa-discontinua}
+\end{figure}
+
+\begin{esempio}[Se il dominio non è un intervallo]\label{es:inversa-discontinua}
+\begin{enumerate}[label=\textup{(\roman*)}]
+  \item La funzione $\frac1x$ è continua e iniettiva in $\R\setminus\{0\}$, ma non è
+  monotòna: decresce su ciascuna delle due semirette, eppure $f(-1)=-1<1=f(1)$. La
+  \cref{prop:continua-iniettiva-monotona} non si applica, perché il dominio non è un
+  intervallo.
+  \item Siano $A=(0,1]\cup(2,3]$ e
+  \[
+    f(x)=
+    \begin{cases}
+      x & \text{se } 0<x\le1,\\
+      x-1 & \text{se } 2<x\le3 .
+    \end{cases}
+  \]
+  La funzione è continua in $A$, perché in un intorno di ogni punto di $A$ coincide con
+  un polinomio (\cref{lem:localita}), ed è strettamente crescente, perché i valori del
+  primo tratto stanno in $(0,1]$ e quelli del secondo in $(1,2]$. La sua immagine è
+  $(0,2]$, e la funzione inversa
+  \[
+    f^{-1}(y)=
+    \begin{cases}
+      y & \text{se } 0<y\le1,\\
+      y+1 & \text{se } 1<y\le2
+    \end{cases}
+  \]
+  ha nel punto $y=1$ un salto: $f^{-1}(1)=1$, mentre $f^{-1}(y)\to2$ per $y\to1^{+}$
+  (\cref{fig:inversa-discontinua}). Il «buco» $(1,2]$ nel dominio di $f$ diventa un
+  salto dell'inversa. Il dominio $A$ non è un intervallo, e questo impedisce la prima
+  dimostrazione del \cref{teo:continuita-inversa}; non è chiuso, e questo impedisce la
+  seconda: la successione $y_{n}=1+\frac1n$ tende a $1$, ma le controimmagini
+  $x_{n}=2+\frac1n$ tendono a $2$, che non sta in $A$.
+\end{enumerate}
+\end{esempio}
+

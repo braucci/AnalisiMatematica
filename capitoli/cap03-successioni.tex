@@ -1,0 +1,65 @@
+%% ============================================================================
+%%  CAPITOLO 3 — Limiti di successioni
+%%  Fonte principale per argomenti e dimostrazioni: Marcellini–Sbordone, cap. 3
+%%  (§16 premessa, §17–22 definizioni, operazioni, confronto, §23 limiti
+%%  notevoli, §24 successioni monotòne, §25 il numero e; appendice §26–28:
+%%  infiniti, Bolzano–Weierstrass, successioni di Cauchy).
+%%  Arricchimenti da Giusti, Analisi Matematica 1, cap. 2 (§7, §10–13 e
+%%  notizie storiche): seconda dimostrazione per (1+1/n)^n, massimo e minimo
+%%  limite, completamento dei razionali, Mengoli e Bolzano.
+%% ============================================================================
+\aperturacapitolo{Limiti di successioni}{cap:successioni}
+
+\epigraph{Quando i valori successivamente attribuiti a una variabile si avvicinano
+indefinitamente a un valore fisso, così da finire per differirne di tanto poco quanto si
+vuole, quest'ultimo è chiamato il limite di tutti gli altri.}{Augustin-Louis Cauchy,
+\emph{Cours d'analyse} (1821)}
+
+\lettrine[lines=3, findent=2pt, nindent=0pt]{C}{on questo capitolo} entriamo nel cuore
+dell'Analisi Matematica. I due capitoli precedenti hanno preparato il terreno: abbiamo
+fissato gli assiomi dei numeri reali e abbiamo imparato a usare l'assioma di completezza
+attraverso l'estremo superiore. Ora introduciamo il concetto che distingue l'Analisi
+dall'Algebra: il \emph{limite}.
+
+Un limite risponde a una domanda che l'aritmetica, da sola, non sa porre: che cosa
+succede a una quantità quando un indice cresce «senza fine»? L'area dei poligoni
+regolari inscritti in un cerchio, al crescere del numero dei lati; il capitale prodotto
+da un interesse capitalizzato sempre più spesso; l'errore di un metodo iterativo dopo
+sempre più iterazioni. In nessuno di questi casi esiste un «ultimo» termine da calcolare,
+eppure la successione dei valori si comporta in un modo preciso, e quel comportamento è
+proprio ciò che ci interessa. La definizione di limite che daremo, dovuta a Cauchy e
+resa definitivamente rigorosa da Weierstrass, è il frutto di due millenni di riflessione,
+da Archimede a Newton: è breve, ma ogni sua parola è necessaria, e conviene leggerla con
+calma.
+
+\medskip
+\noindent\textbf{In questo capitolo.}
+\begin{itemize}
+  \item Il problema dell'area del cerchio e l'idea di limite (\S\ref{sec:premessa-limiti}).
+  \item La definizione di limite, finito e infinito; unicità (\S\ref{sec:def-limite}).
+  \item Successioni limitate; le operazioni con i limiti (\S\ref{sec:operazioni-limiti}).
+  \item Limiti infiniti e forme indeterminate (\S\ref{sec:forme-indeterminate}).
+  \item Permanenza del segno, teorema dei carabinieri e altri confronti
+  (\S\ref{sec:confronto}).
+  \item I limiti notevoli: $a^{n}$, $\sqrt[n]a$, $\sqrt[n]n$, $\frac{\sen a_{n}}{a_{n}}$; l'area del
+  cerchio (\S\ref{sec:limiti-notevoli}).
+  \item Il teorema sulle successioni monotòne e il numero $e$ (\S\ref{sec:monotone},
+  \S\ref{sec:numero-e}).
+  \item Appendice: infiniti di ordine crescente, successioni estratte, teorema di
+  Bolzano--Weierstrass, criterio di Cauchy (\S\ref{sec:infiniti}, \S\ref{sec:bw-cauchy}).
+  \item Approfondimento: massimo e minimo limite (\S\ref{subsec:massimo-minimo-limite}).
+  \item Punti fondamentali del capitolo (\S\ref{sec:sintesi-cap03}).
+\end{itemize}
+
+\input{capitoli/cap03/01-premessa}
+\input{capitoli/cap03/02-definizioni}
+\input{capitoli/cap03/03-limitate-operazioni}
+\input{capitoli/cap03/04-forme-indeterminate}
+\input{capitoli/cap03/05-confronto}
+\input{capitoli/cap03/06-limiti-notevoli}
+\input{capitoli/cap03/07-monotone}
+\input{capitoli/cap03/08-numero-e}
+\input{capitoli/cap03/09-infiniti}
+\input{capitoli/cap03/10-bw-cauchy}
+\input{capitoli/cap03/11-esercizi}
+\input{capitoli/cap03/12-sintesi}

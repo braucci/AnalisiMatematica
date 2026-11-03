@@ -1,0 +1,230 @@
+%% ----------------------------------------------------------------------------
+%%  §3.9  Appendice: infiniti di ordine crescente
+%% ----------------------------------------------------------------------------
+\section{Appendice: infiniti di ordine crescente}
+\label{sec:infiniti}
+
+Molte successioni importanti divergono a $+\infty$, ma con «velocità» molto diverse. In
+questo paragrafo impariamo a confrontarle; lo strumento principale è un criterio che
+sfrutta il teorema sulle successioni monotòne, con lo stesso metodo utilizzato per il
+metodo di Erone.
+
+\begin{teorema}[Criterio del rapporto per le successioni]\label{teo:criterio-rapporto}\index{criterio del rapporto!per le successioni}
+Sia $a_{n}$ una successione a termini positivi. Definiamo $b_{n}=a_{n+1}/a_{n}$. Se la
+successione $b_{n}$ converge a un limite $b<1$, allora la successione $a_{n}$ tende a
+zero.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$a_{n}>0$ per ogni $n$; \ $\dfrac{a_{n+1}}{a_{n}}\to b$, con $b<1$.}
+\Tesi{$a_{n}\to0$.}
+\end{schema}
+
+\begin{strategia}
+Se il rapporto tra un termine e il precedente tende a un numero minore di $1$, da un
+certo punto in poi ogni termine è più piccolo del precedente: la successione è
+definitivamente decrescente e, essendo positiva, limitata inferiormente da $0$; quindi
+converge (\cref{teo:monotone}) a un limite $a\ge0$. Per identificare $a$ si passa al
+limite nella relazione $a_{n+1}=b_{n}a_{n}$, come nel metodo di Erone: se fosse $a>0$, si
+otterrebbe $b=a/a=1$, contro l'ipotesi.
+\end{strategia}
+
+\begin{dimostrazione}
+Per il teorema della permanenza del segno (\cref{teo:permanenza-segno}), applicato alla
+successione $1-b_{n}$, che converge a $1-b>0$, esiste un indice $\nu$ per cui $b_{n}<1$
+per ogni $n>\nu$. Quindi $a_{n+1}/a_{n}<1$, cioè $a_{n+1}<a_{n}$, per ogni $n>\nu$. Il
+teorema sulle successioni monotòne (nella forma della \cref{oss:traslata}) assicura
+l'esistenza del limite $a$, che è un numero reale non negativo, dato che la successione
+è definitivamente decrescente e a termini positivi (\cref{cor:limite-non-negativo}).
+Supponendo per assurdo $a\neq0$ e passando al limite per $n\to+\infty$ nella relazione
+$b_{n}=a_{n+1}/a_{n}$ (si ricordi che $a_{n+1}\to a$, \cref{oss:traslata}), si ottiene
+$b=a/a=1$, in contrasto con l'ipotesi $b<1$. Pertanto risulta $a=0$.
+\end{dimostrazione}
+
+\begin{osservazione}
+Se invece $b>1$, lo stesso ragionamento mostra che $a_{n}$ è definitivamente crescente,
+diciamo per $n\ge n_{0}$, e quindi ha limite. Tale limite non può essere $0$, perché è
+maggiore o uguale di $a_{n_{0}}>0$, e non può essere un numero positivo $a$, perché si
+otterrebbe di nuovo $b=a/a=1$: dunque $a_{n}\to+\infty$. Allo stesso risultato si arriva
+applicando il criterio alla successione $1/a_{n}$, il cui rapporto
+$\frac{1/a_{n+1}}{1/a_{n}}=\frac1{b_{n}}$ tende a $\frac1b<1$: quindi $1/a_{n}\to0$ e,
+poiché $a_{n}>0$, $a_{n}\to+\infty$ (si veda il riquadro «$1/0$ non è $+\infty$» nel
+\cref{sec:forme-indeterminate}). È la versione «per divergenza» del criterio. Se infine $b=1$, il criterio non dà alcuna
+informazione: $a_{n}=n$, $a_{n}=1$ e $a_{n}=1/n$ hanno tutte $b_{n}\to1$, ma
+comportamenti diversi.
+\end{osservazione}
+
+\subsection{La gerarchia degli infiniti}
+
+Applichiamo il criterio del rapporto al confronto delle successioni
+\begin{equation}\label{eq:gerarchia}
+  \log n; \qquad n^{b}; \qquad a^{n}; \qquad n!; \qquad n^{n},
+\end{equation}
+dove abbiamo scelto $b>0$ e $a>1$. Il simbolo $n!$ ($n$ \emph{fattoriale}) indica il
+prodotto dei primi $n$ numeri naturali (\cref{sec:combinatoria}). Per $n\to+\infty$ le
+cinque successioni \eqref{eq:gerarchia} tendono tutte a $+\infty$ (per $\log n$ e
+$n^{b}$ lo verificheremo nel \cref{lem:potenze-log}, per $a^{n}$ è il
+\cref{teo:lim-geometrica}, per $n!\ge n$ e $n^{n}\ge n$ è ovvio). Possiamo però dire che
+sono \emph{infiniti di ordine crescente}\index{infiniti di ordine crescente}, nel senso
+che i limiti dei rapporti valgono
+\begin{equation}\label{eq:gerarchia-limiti}
+  \lim_{n\to+\infty}\frac{\log n}{n^{b}}=\lim_{n\to+\infty}\frac{n^{b}}{a^{n}}
+  =\lim_{n\to+\infty}\frac{a^{n}}{n!}=\lim_{n\to+\infty}\frac{n!}{n^{n}}=0 .
+\end{equation}
+
+\begin{lemma}\label{lem:potenze-log}
+\leavevmode
+\begin{enumerate}
+  \item Per ogni $c>0$ si ha $n^{c}\to+\infty$, e quindi $n^{-c}\to0$.
+  \item Per ogni $x\in\R$ si ha $e^{x}>x$; di conseguenza $\log y<y$ per ogni $y>0$.
+  \item $\log n\to+\infty$.
+  \item Per ogni $b>0$ si ha $(1+\frac1n)^{b}\to1$.
+\end{enumerate}
+\end{lemma}
+
+\begin{schema}
+\Ipotesi{$c>0$, \ $b>0$, \ $x\in\R$, \ $y>0$.}
+\Tesi{(i) $n^{c}\to+\infty$, $n^{-c}\to0$; \ (ii) $e^{x}>x$, $\log y<y$;\\
+(iii) $\log n\to+\infty$; \ (iv) $(1+\frac1n)^{b}\to1$.}
+\end{schema}
+
+\begin{strategia}
+Sono quattro fatti elementari, che servono come mattoni nel teorema successivo. Per (i)
+e (iii) basta «invertire» la disuguaglianza $n^{c}>M$ o $\log n>M$ con la funzione
+inversa, che è crescente. Per (ii) si confronta $e^{x}$ con la potenza di esponente
+intero $e^{\lfloor x\rfloor}$, stimata dal basso con Bernoulli. Per (iv) si intrappola
+l'esponente reale $b$ tra $0$ e un intero $k\ge b$, e si usano i carabinieri.
+\end{strategia}
+
+\begin{dimostrazione}
+(i) Fissato $M>0$, per la monotonia delle potenze \eqref{eq:pot3} si ha $n^{c}>M$ se e
+solo se $n>M^{1/c}$. La seconda affermazione segue dalla \eqref{eq:inf5}.
+
+(ii) Se $x\le0$ la tesi è ovvia, perché $e^{x}>0$. Sia $x>0$ e $m=\lfloor x\rfloor\ge0$.
+Per la disuguaglianza di Bernoulli, ricordando che $e-1>1$ (\cref{cor:e-tra-2-e-3}),
+$e^{m}=\bigl(1+(e-1)\bigr)^{m}\ge1+m(e-1)\ge1+m$ (per $m=0$ entrambi i membri valgono
+$1$). Quindi, per la monotonia dell'esponenziale, $e^{x}\ge e^{m}\ge1+m>x$. Per la
+seconda affermazione, posto $x=\log y$, si ha $y=e^{\log y}>\log y$.
+
+(iii) Fissato $M>0$, poiché il logaritmo è crescente (\cref{prop:log-monotono}), si ha
+$\log n>M$ se e solo se $n>e^{M}$.
+
+(iv) Sia $k\in\N$ con $k\ge b$. Poiché $1+\frac1n>1$, per le \eqref{eq:pot5} si ha
+$1\le(1+\frac1n)^{b}\le(1+\frac1n)^{k}$; il terzo membro è il prodotto di $k$ successioni
+che tendono a $1$, e tende a $1$. Si conclude con il teorema dei carabinieri.
+\end{dimostrazione}
+
+\begin{teorema}[Gerarchia degli infiniti]\label{teo:gerarchia}
+Per ogni $b>0$ e ogni $a>1$ valgono i limiti \eqref{eq:gerarchia-limiti}.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$b>0$, \ $a>1$.}
+\Tesi{$\dfrac{\log n}{n^{b}}\to0$, \ $\dfrac{n^{b}}{a^{n}}\to0$, \
+$\dfrac{a^{n}}{n!}\to0$, \ $\dfrac{n!}{n^{n}}\to0$.}
+\end{schema}
+
+\begin{strategia}
+Gli ultimi tre limiti sono tutti della forma $a_{n}\to0$ con $a_{n}>0$, e il criterio del
+rapporto è lo strumento ideale: il rapporto $a_{n+1}/a_{n}$ di quozienti di potenze e
+fattoriali si semplifica in modo spettacolare (ad esempio $\frac{(n+1)!}{n!}=n+1$). Per il
+primo limite, invece, il criterio del rapporto non serve (il rapporto tende a $1$), e il
+testo di riferimento \cite{marcellini-sbordone} rimanda la dimostrazione a un capitolo
+successivo. Possiamo però darla subito, usando la disuguaglianza elementare $\log y<y$
+del \cref{lem:potenze-log}: applicata a $y=n^{b/2}$, essa dice che $\log n$ è più piccolo
+di un multiplo di $n^{b/2}$, e quindi $\frac{\log n}{n^{b}}$ è più piccolo di un multiplo di
+$n^{-b/2}$, che è infinitesimo. Il trucco di usare «metà dell'esponente» è tipico: si
+sacrifica un po' della potenza per ottenere una stima semplice.
+\end{strategia}
+
+\begin{dimostrazione}
+\emph{Primo limite.} Per il \cref{lem:potenze-log}(ii) applicato a $y=n^{b/2}$, e per la
+\eqref{eq:log3},
+\[
+  \frac b2\log n=\log n^{b/2}<n^{b/2},
+\]
+quindi
+\[
+  0\le\frac{\log n}{n^{b}}<\frac2b\cdot\frac{n^{b/2}}{n^{b}}=\frac2b\,n^{-b/2}
+  \qquad\perogni n\in\N .
+\]
+Per il \cref{lem:potenze-log}(i) il terzo membro tende a zero, e la tesi segue dal
+teorema dei carabinieri.
+
+\emph{Secondo limite.} Poniamo
+\begin{equation}\label{eq:gerarchia-2}
+  a_{n}=\frac{n^{b}}{a^{n}}; \qquad
+  r_{n}=\frac{a_{n+1}}{a_{n}}=\Bigl(\frac{n+1}{n}\Bigr)^{b}\frac1a\to\frac1a<1,
+\end{equation}
+dove si è usato il \cref{lem:potenze-log}(iv). Dal criterio del rapporto otteniamo che
+$n^{b}/a^{n}\to0$.
+
+\emph{Terzo limite.} Poniamo
+\begin{equation}\label{eq:gerarchia-3}
+  a_{n}=\frac{a^{n}}{n!}; \qquad r_{n}=\frac{a_{n+1}}{a_{n}}=\frac{a^{n+1}}{(n+1)!}\cdot\frac{n!}{a^{n}}=\frac{a}{n+1}\to0 .
+\end{equation}
+Ancora dal criterio del rapporto segue che $a^{n}/n!\to0$.
+
+\emph{Quarto limite.} Poniamo
+\begin{equation}\label{eq:gerarchia-4}
+\begin{split}
+  a_{n}=\frac{n!}{n^{n}}; \qquad
+  r_{n}&=\frac{a_{n+1}}{a_{n}}=\frac{(n+1)!}{(n+1)^{n+1}}\cdot\frac{n^{n}}{n!}\\
+  &=\frac{n^{n}}{(n+1)^{n}}=\frac{1}{\bigl(\frac{n+1}{n}\bigr)^{n}}\to\frac1e<1,
+\end{split}
+\end{equation}
+e di nuovo, per il criterio del rapporto, la successione $a_{n}=n!/n^{n}$ converge a zero
+per $n\to+\infty$.
+\end{dimostrazione}
+
+\begin{osservazione}
+Il primo limite vale per i logaritmi in qualsiasi base $c>1$, perché
+$\log_{c}n=\log n/\log c$ \eqref{eq:log4}. Il risultato si ricorda con la gerarchia
+\[
+  \log n\ \ll\ n^{b}\ \ll\ a^{n}\ \ll\ n!\ \ll\ n^{n},
+\]
+dove $x_{n}\ll y_{n}$ significa $x_{n}/y_{n}\to0$. Si noti che la gerarchia non dipende
+dalle costanti: anche $\log n$ è trascurabile rispetto a $n^{0{,}001}$, e $n^{1000}$
+rispetto a $1{,}001^{n}$. Ma il «sorpasso» può avvenire molto tardi, come mostra
+l'\cref{es:n10-su-1-1n}.
+\end{osservazione}
+
+\begin{idea}[Il costo degli algoritmi]
+La gerarchia degli infiniti è il linguaggio con cui gli informatici classificano il costo
+degli algoritmi. Un problema di dimensione $n$ (ad esempio il numero di celle di una
+griglia di calcolo, o di elementi di un modello strutturale) si risolve con un numero di
+operazioni che può crescere come $\log n$ (ricerca binaria), come $n$ o $n\log n$
+(ordinamento), come $n^{2}$ o $n^{3}$ (eliminazione di Gauss su una matrice piena), come
+$2^{n}$ (esplorare tutti i sottoinsiemi) o come $n!$ (provare tutti i percorsi del
+problema del commesso viaggiatore). Raddoppiare la potenza del calcolatore permette di
+affrontare problemi molto più grandi se il costo è polinomiale, ma aggiunge appena una
+unità alla dimensione trattabile se il costo è $2^{n}$. La \cref{fig:infiniti} rende
+visibile la differenza.
+\end{idea}
+
+\begin{python}[La gerarchia degli infiniti in cifre]
+import math
+
+print(f"{'n':>4} {'log n':>8} {'n^2':>8} {'2^n':>12}"
+      f" {'n!':>12} {'n^n':>12}")
+for n in (5, 10, 20, 50, 100):
+    print(f"{n:>4} {math.log(n):8.3f} {n**2:8d} {2.0**n:12.3e} "
+          f"{float(math.factorial(n)):12.3e} {float(n)**n:12.3e}")
+\end{python}
+\begin{risultato}
+   n    log n      n^2          2^n           n!          n^n
+   5    1.609       25    3.200e+01    1.200e+02    3.125e+03
+  10    2.303      100    1.024e+03    3.629e+06    1.000e+10
+  20    2.996      400    1.049e+06    2.433e+18    1.049e+26
+  50    3.912     2500    1.126e+15    3.041e+64    8.882e+84
+ 100    4.605    10000    1.268e+30   9.333e+157   1.000e+200
+\end{risultato}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.85\textwidth]{infiniti}
+\caption{Le successioni $\log n$, $n^{2}$, $2^{n}$, $n!$, $n^{n}$ in scala logaritmica
+(\texttt{python/fig\_infiniti.py}): le curve si separano sempre di più, ciascuna
+diventando trascurabile rispetto alla successiva.}
+\label{fig:infiniti}
+\end{figure}

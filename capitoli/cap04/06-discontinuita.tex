@@ -1,0 +1,235 @@
+%% ----------------------------------------------------------------------------
+%%  §4.6  Discontinuità e prolungamento per continuità
+%% ----------------------------------------------------------------------------
+\section{Discontinuità}
+\label{sec:discontinuita}
+
+La funzione
+\begin{equation}\label{eq:segno}
+  f(x)=\frac{\abs x}{x}=
+  \begin{cases}
+    1 & \text{se } x>0,\\
+    -1 & \text{se } x<0
+  \end{cases}
+\end{equation}
+è continua per $x\neq0$ (in un intorno di ogni $x_{0}\neq0$ è costante, e il limite è
+una proprietà locale, \cref{lem:localita}), ma non è continua se $x=0$. Il grafico di
+questa funzione presenta per $x=0$ un salto, appunto una \emph{discontinuità}
+(\cref{fig:modulo-su-x}). In particolare $f$ non è continua nel punto $x_{0}=0$ perché
+non è definita in tal punto, cioè perché non esiste il valore $f(x_{0})=f(0)$.
+
+Estendiamo allora $f$ anche a $x_{0}=0$ con un valore $\ell\in\R$, considerando cioè la
+nuova funzione
+\begin{equation}\label{eq:segno-esteso}
+  \tilde f(x)=
+  \begin{cases}
+    \dfrac{\abs x}{x} & \text{se } x\neq0,\\[1ex]
+    \ell & \text{se } x=0 .
+  \end{cases}
+\end{equation}
+La funzione $\tilde f$ è definita anche nel punto $x_{0}=0$, ma non è continua in tale
+punto, perché non esiste il limite per $x\to0$ di $\tilde f(x)$: precisamente, il limite
+destro è diverso dal limite sinistro \eqref{eq:modulo-su-x}. Tutto ciò accade
+\emph{qualunque sia} il valore $\ell$ scelto in \eqref{eq:segno-esteso}: $\tilde f$ è
+un'estensione non continua (o \emph{prolungamento non continuo}) della funzione $f$, e
+la discontinuità di $f$ nel punto $x_{0}=0$ si dice \emph{non eliminabile}.
+
+Viceversa, la funzione studiata nel \cref{sec:premessa-funzioni},
+$f(x)=\frac{\sen x}{x}$, non è continua in $x_{0}=0$ (perché non è definita), ma è
+possibile \emph{prolungarla per continuità} mediante la funzione
+\begin{equation}\label{eq:sinc}
+  \tilde f(x)=
+  \begin{cases}
+    \dfrac{\sen x}{x} & \text{se } x\neq0,\\[1ex]
+    1 & \text{se } x=0 .
+  \end{cases}
+\end{equation}
+A causa del limite notevole \eqref{eq:lim-senx-x}, $\tilde f$ è continua anche nel punto
+$x_{0}=0$. Il grafico di $\tilde f$ si ottiene «completando» il disegno della
+\cref{fig:senx-x} con l'ulteriore punto di coordinate $(0,1)$, che riempie il tondino
+vuoto.
+
+\subsection{Classificazione delle discontinuità}
+
+Sia $f$ una funzione definita in $A$ e $x_{0}$ un punto di $A$, di accumulazione per $A$.
+Se $f$ non è continua in $x_{0}$ si dice che $x_{0}$ è un punto di \emph{discontinuità}
+per $f$. Le discontinuità si classificano nel modo seguente
+(\cref{fig:discontinuita}).
+
+\begin{definizione}[Tipi di discontinuità]\label{def:discontinuita}\index{discontinuità}
+\begin{enumerate}[label=\textup{(\alph*)}]
+  \item La funzione $f$ presenta in $x_{0}$ una \emph{discontinuità eliminabile} se
+  esiste finito il limite di $f(x)$ per $x\to x_{0}$ e risulta
+  \begin{equation}\label{eq:disc-eliminabile}
+    \lim_{x\to x_{0}}f(x)\neq f(x_{0}) .
+  \end{equation}
+  \item La funzione $f$ presenta in $x_{0}$ una \emph{discontinuità di prima specie} (o
+  \emph{di salto}) se esistono finiti i limiti destro e sinistro di $f(x)$ in $x_{0}$ e
+  si ha
+  \begin{equation}\label{eq:disc-prima-specie}
+    \lim_{x\to x_{0}^{-}}f(x)\neq\lim_{x\to x_{0}^{+}}f(x);
+  \end{equation}
+  la differenza tra il limite destro e il limite sinistro si chiama \emph{salto} di $f$
+  in $x_{0}$.
+  \item La funzione $f$ presenta in $x_{0}$ una \emph{discontinuità di seconda specie}
+  se almeno uno dei due limiti
+  \begin{equation}\label{eq:disc-seconda-specie}
+    \lim_{x\to x_{0}^{-}}f(x), \qquad \lim_{x\to x_{0}^{+}}f(x)
+  \end{equation}
+  non esiste oppure è infinito.
+\end{enumerate}
+\end{definizione}
+
+La classificazione è completa: se $f$ è discontinua in $x_{0}$ (interno al dominio) e
+non siamo nel caso (c), i due limiti unilaterali esistono finiti; se sono diversi siamo
+nel caso (b), se sono uguali il limite esiste (\cref{prop:dx-sx}) ed è diverso da
+$f(x_{0})$, e siamo nel caso (a). Per abuso di linguaggio, le stesse parole si usano
+anche per un punto $x_{0}$ di accumulazione che \emph{non} appartiene al dominio, come
+$x_{0}=0$ per $\frac{\sen x}{x}$ (singolarità eliminabile) o per $\frac{\abs x}{x}$
+(salto).
+
+Nel caso (a), posto $\ell=\lim_{x\to x_{0}}f(x)$, la funzione
+\begin{equation}\label{eq:elimina}
+  \tilde f(x)=
+  \begin{cases}
+    f(x) & \text{se } x\in A\setminus\{x_{0}\},\\
+    \ell & \text{se } x=x_{0}
+  \end{cases}
+\end{equation}
+risulta continua nel punto $x_{0}$: la discontinuità si «elimina» correggendo un solo
+valore. Nei casi (b) e (c) nessuna modifica del valore in $x_{0}$ rende $f$ continua.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=\textwidth]{discontinuita}
+\caption{I tre tipi di discontinuità. (a) La funzione vale $\frac{\sen x}{x}$ per
+$x\neq0$ e $\frac12$ in $0$: il limite esiste, ma è diverso dal valore. (b) I limiti
+destro e sinistro esistono finiti ma sono diversi. (c) La funzione $e^{1/x}$ ha limite
+sinistro $0$ e limite destro $+\infty$ (asse $y$ in scala logaritmica per $y>1$)
+(\texttt{python/fig\_discontinuita.py}).}
+\label{fig:discontinuita}
+\end{figure}
+
+\begin{esempio}\label{es:parte-intera-continuita}
+La funzione $f(x)=\lfloor x\rfloor$, \emph{parte intera} di $x$
+(\cref{prop:parte-intera}, rappresentata nella \cref{fig:parte-intera}), presenta
+discontinuità di prima specie in corrispondenza a ogni $k\in\Z$, mentre è continua per
+ogni $x\in\R\setminus\Z$. Infatti, se $x_{0}\notin\Z$, esiste $k\in\Z$ con
+$k<x_{0}<k+1$, e nell'intorno $(k,k+1)$ di $x_{0}$ la funzione è costante, uguale a $k$.
+Se invece $x_{0}=k\in\Z$, si ha $\lfloor x\rfloor=k-1$ per $k-1\le x<k$ e
+$\lfloor x\rfloor=k$ per $k\le x<k+1$; quindi
+\[
+  \lim_{x\to k^{-}}\lfloor x\rfloor=k-1, \qquad \lim_{x\to k^{+}}\lfloor x\rfloor=k=\lfloor k\rfloor:
+\]
+il salto vale $1$, e la funzione è continua da destra ma non da sinistra.
+\end{esempio}
+
+\begin{esempio}\label{es:seconda-specie}
+\begin{enumerate}[label=\textup{(\roman*)}]
+  \item La funzione $f(x)=\sen\frac1x$ per $x\neq0$, prolungata con un qualsiasi valore
+  in $0$, ha in $0$ una discontinuità di seconda specie: il limite destro non esiste
+  (lo si vede con le successioni dell'\cref{es:sen-1-x}, che sono positive).
+  \item La funzione $f(x)=\frac1x$ per $x\neq0$, $f(0)=0$, ha in $0$ una discontinuità di
+  seconda specie: i limiti unilaterali sono infiniti (\cref{es:modulo-su-x}).
+  \item La funzione $e^{1/x}$ ha in $0$ una singolarità di seconda specie: per $x\to0^{+}$
+  si ha $\frac1x\to+\infty$ ed $e^{y}\to+\infty$ per $y\to+\infty$, quindi, per il
+  \cref{teo:limite-composta} (con $y_{0}=+\infty$, caso in cui l'ipotesi $g(x)\neq y_{0}$
+  è automatica), $e^{1/x}\to+\infty$; per $x\to0^{-}$, invece, $\frac1x\to-\infty$ ed
+  $e^{1/x}\to0$ (\cref{fig:discontinuita}(c)).
+\end{enumerate}
+\end{esempio}
+
+\begin{osservazione}[Una funzione discontinua ovunque]\label{oss:dirichlet}\index{funzione!di Dirichlet}
+La \emph{funzione di Dirichlet}
+\[
+  D(x)=
+  \begin{cases}
+    1 & \text{se } x\in\Q,\\
+    0 & \text{se } x\in\R\setminus\Q
+  \end{cases}
+\]
+è discontinua in ogni punto, con discontinuità di seconda specie. Fissato $x_{0}\in\R$,
+per la densità dei razionali e degli irrazionali (\cref{teo:densita-Q},
+\cref{cor:densita-irrazionali}) in ogni intervallo $(x_{0},x_{0}+\frac1n)$ esistono un
+razionale $q_{n}$ e un irrazionale $r_{n}$; le successioni $q_{n}$ ed $r_{n}$ tendono a
+$x_{0}$ da destra, ma $D(q_{n})=1\to1$ e $D(r_{n})=0\to0$, quindi il limite destro non
+esiste (\cref{cor:non-esistenza}). Peter Gustav Lejeune Dirichlet la propose nel 1829,
+nel suo lavoro sulle serie di Fourier, come esempio di funzione per cui l'integrale, e
+con esso la sua analisi, perde significato; nel 1837 formulò esplicitamente la nozione di
+funzione come corrispondenza arbitraria, priva di qualunque regolarità. Questi esempi
+contribuirono a imporre la definizione moderna di funzione.
+\end{osservazione}
+
+\subsection{Il prolungamento per continuità}
+
+\begin{definizione}[Prolungamento per continuità]\label{def:prolungamento}\index{prolungamento per continuità}
+Sia $A$ un intervallo (o un'unione finita di intervalli), $x_{0}\in A$, e sia $f$ una
+funzione definita in $A\setminus\{x_{0}\}$. Se esiste finito il limite
+\begin{equation}\label{eq:prolungamento-limite}
+  \lim_{x\to x_{0}}f(x)=\ell,
+\end{equation}
+la funzione $\tilde f$ definita in $A$ da
+\begin{equation}\label{eq:prolungamento}
+  \tilde f(x)=
+  \begin{cases}
+    f(x) & \text{se } x\in A\setminus\{x_{0}\},\\
+    \ell & \text{se } x=x_{0}
+  \end{cases}
+\end{equation}
+è detta \emph{prolungamento per continuità di $f$ in $x_{0}$}; per costruzione $\tilde f$
+risulta continua in $x_{0}$. Se poi $f$ è continua in $A\setminus\{x_{0}\}$, allora
+$\tilde f$, continua su tutto l'insieme $A$, è detta \emph{prolungamento per continuità
+di $f$ su $A$}.
+\end{definizione}
+
+Il prolungamento per continuità, quando esiste, è unico, perché il limite è unico.
+La \eqref{eq:sinc} è il prolungamento per continuità di $\frac{\sen x}{x}$ su $\R$; la
+funzione che si ottiene, detta \emph{seno cardinale} e indicata con $\operatorname{sinc}x$,
+è di uso quotidiano nell'elaborazione dei segnali: è, a meno di costanti, la trasformata
+di Fourier di un impulso rettangolare, e descrive ad esempio il diagramma di
+diffrazione di un'apertura o di un'antenna. Nei programmi il prolungamento va scritto
+esplicitamente.
+
+\begin{python}[Il prolungamento per continuità nei programmi]
+import math
+import numpy as np
+
+try:
+    print(math.sin(0.0) / 0.0)
+except ZeroDivisionError as err:
+    print("sen(0)/0 ->", type(err).__name__, ":", err)
+
+def sinc(x):
+    """Prolungamento per continuità di sen(x)/x: vale 1 in x = 0."""
+    return 1.0 if x == 0 else math.sin(x) / x
+
+print(sinc(0.0), sinc(1e-9), sinc(math.pi / 2))
+# NumPy usa la versione normalizzata sen(pi x)/(pi x), estesa in 0
+print(np.sinc(0.0), np.sinc(0.5), np.sinc(1.0))
+\end{python}
+\begin{risultato}
+sen(0)/0 -> ZeroDivisionError : float division by zero
+1.0 1.0 0.6366197723675814
+1.0 0.6366197723675814 3.8981718325193755e-17
+\end{risultato}
+
+L'ultimo valore dovrebbe essere $\sen\pi/\pi=0$: è il solito residuo di arrotondamento
+dovuto alla rappresentazione approssimata di $\pi$.
+
+\begin{idea}[L'onda d'urto: una discontinuità di prima specie]
+In un flusso supersonico può formarsi un'onda d'urto normale: attraversandola, la
+pressione, la densità e la temperatura aumentano bruscamente e la velocità diminuisce.
+Nel modello di fluido non viscoso (equazioni di Eulero) l'urto è una vera discontinuità
+di prima specie: lungo l'asse della corrente la pressione vale $p_{1}$ a monte e $p_{2}$
+a valle, con
+\[
+  \frac{p_{2}}{p_{1}}=1+\frac{2\gamma}{\gamma+1}\bigl(M_{1}^{2}-1\bigr),
+\]
+dove $M_{1}$ è il numero di Mach a monte e $\gamma=1{,}4$ per l'aria; con $M_{1}=2$ il
+salto porta la pressione a $4{,}5$ volte il valore di monte. Nella realtà la viscosità
+«smussa» l'urto in uno strato continuo spesso pochi cammini liberi medi delle molecole,
+frazioni di micrometro al livello del mare: alla scala di un'ala, una discontinuità a
+tutti gli effetti. Nei codici CFD con tecniche di \emph{shock capturing} lo stesso salto
+viene invece distribuito su poche celle di calcolo: la soluzione numerica è continua e
+approssima, raffinando la griglia, una soluzione discontinua.
+\end{idea}

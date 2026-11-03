@@ -1,0 +1,354 @@
+%% ----------------------------------------------------------------------------
+%%  §6.1  Massimi e minimi relativi. Il teorema di Fermat
+%% ----------------------------------------------------------------------------
+\section{Massimi e minimi relativi. Il teorema di Fermat}
+\label{sec:fermat}
+
+Il teorema di Weierstrass (\cref{teo:weierstrass}) garantisce che una funzione continua
+in un intervallo chiuso e limitato assume massimo e minimo, ma non dice \emph{dove}. In
+questo paragrafo cominciamo a rispondere alla domanda. L'idea è semplice: in un punto
+di massimo «interno» il grafico di una funzione derivabile non può né salire né
+scendere, e quindi la retta tangente deve essere orizzontale. Per formulare l'idea in
+modo preciso conviene introdurre una nozione di massimo più debole di quella usata fino
+a ora, che guarda soltanto a ciò che accade \emph{vicino} al punto.
+
+\begin{definizione}[Massimi e minimi relativi]\label{def:max-min-relativo}
+\index{massimo!relativo}\index{minimo!relativo}\index{punto!di massimo relativo}
+Sia $f:A\to\R$, con $A\subseteq\R$, e sia $x_{0}\in A$. Si dice che $x_{0}$ è un
+\emph{punto di massimo relativo} (o \emph{locale}) per $f$ se esiste $\delta>0$ tale che
+\begin{equation}\label{eq:max-relativo}
+  f(x)\le f(x_{0}) \qquad\perogni x\in A\cap(x_{0}-\delta,x_{0}+\delta);
+\end{equation}
+si dice che $x_{0}$ è un \emph{punto di minimo relativo} (o \emph{locale}) per $f$ se
+esiste $\delta>0$ tale che
+\begin{equation}\label{eq:min-relativo}
+  f(x)\ge f(x_{0}) \qquad\perogni x\in A\cap(x_{0}-\delta,x_{0}+\delta).
+\end{equation}
+Il valore $f(x_{0})$ si chiama, rispettivamente, \emph{massimo relativo} o \emph{minimo
+relativo} di $f$. Se le disuguaglianze valgono in senso stretto per $x\neq x_{0}$, si
+parla di massimo o minimo relativo \emph{stretto}. Se le disuguaglianze valgono per
+\emph{ogni} $x\in A$ (non solo vicino a $x_{0}$), si parla di punto di massimo o di
+minimo \emph{assoluto}. I punti di massimo e di minimo, relativo o assoluto, si dicono
+anche \emph{punti di estremo}.
+\end{definizione}
+
+Ogni punto di massimo assoluto è anche di massimo relativo (basta prendere un $\delta$
+qualunque), ma non viceversa. Nella \cref{fig:estremi-relativi} la funzione,
+definita in $[a,b]$, ha un minimo relativo in $x_{1}$, che è anche il minimo assoluto,
+un massimo relativo in $x_{2}$ e un minimo relativo in $x_{3}$, che non sono assoluti;
+anche gli estremi dell'intervallo sono punti di estremo relativo: $a$ è di massimo
+relativo (vicino ad $a$ i valori di $f$ sono minori di $f(a)$) e $b$ è il punto di
+massimo assoluto. Si osservi che la definizione confronta $f(x_{0})$ soltanto con i
+valori assunti \emph{nel dominio}: per questo ha senso anche negli estremi
+dell'intervallo, dove l'intorno $(x_{0}-\delta,x_{0}+\delta)$ esce da $[a,b]$.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.95\textwidth, height=5.6cm, xmin=0, xmax=6.8, ymin=0, ymax=3.8,
+  axis lines=left, xtick={0.3,1.2,3.4,5.3,6.2},
+  xticklabels={$a$,$x_{1}$,$x_{2}$,$x_{3}$,$b$}, ytick=\empty, clip=false]
+  \fill[blu!8] (axis cs:2.6,0) rectangle (axis cs:4.2,3.55);
+  \addplot[curva, domain=0.3:6.2, samples=200]
+    {0.0875*x^4-1.155*x^3+4.9805*x^2-7.5684*x+4.72456};
+  \addplot[tratteggio] coordinates {(2.6,2.8634) (4.2,2.8634)};
+  \addplot[tratteggio] coordinates {(0.3,0) (0.3,2.8718)};
+  \addplot[tratteggio] coordinates {(1.2,0) (1.2,1.0)};
+  \addplot[tratteggio] coordinates {(3.4,0) (3.4,2.8634)};
+  \addplot[tratteggio] coordinates {(5.3,0) (5.3,1.6031)};
+  \addplot[tratteggio] coordinates {(6.2,0) (6.2,3.275)};
+  \addplot[only marks, mark=*, mark size=1.6pt, rame] coordinates
+    {(0.3,2.8718) (1.2,1.0) (3.4,2.8634) (5.3,1.6031) (6.2,3.275)};
+  \node[font=\scriptsize, grigio, anchor=south] at (axis cs:3.4,3.56)
+    {$(x_{2}-\delta,x_{2}+\delta)$};
+  \node[font=\scriptsize, rame, above] at (axis cs:3.4,2.95) {max.\ rel.};
+  \node[font=\scriptsize, rame, below right] at (axis cs:1.2,0.95) {min.\ ass.};
+  \node[font=\scriptsize, rame, anchor=north west] at (axis cs:5.35,1.55) {min.\ rel.};
+  \node[font=\scriptsize, rame, right] at (axis cs:6.25,3.275) {max.\ ass.};
+  \node[font=\scriptsize, rame, anchor=south west] at (axis cs:0.3,2.95) {max.\ rel.};
+\end{axis}
+\end{tikzpicture}
+\caption{Punti di estremo relativo e assoluto di una funzione definita in $[a,b]$. Nella
+striscia evidenziata, intorno di $x_{2}$, il grafico sta sotto la retta orizzontale
+$y=f(x_{2})$: $x_{2}$ è di massimo relativo, anche se la funzione assume altrove valori
+maggiori di $f(x_{2})$. In $x_{1}$, $x_{2}$, $x_{3}$, interni all'intervallo, la tangente
+è orizzontale; negli estremi $a$ e $b$ non lo è.}
+\label{fig:estremi-relativi}
+\end{figure}
+
+La figura suggerisce la proprietà che stiamo cercando: nei punti di estremo
+relativo \emph{interni} all'intervallo la tangente al grafico è orizzontale.
+
+\begin{teorema}[di Fermat]\label{teo:fermat}\index{teorema!di Fermat}
+Sia $f$ una funzione definita in un intervallo $[a,b]$ e sia $x_{0}\in(a,b)$ un punto
+\emph{interno} di massimo o di minimo relativo per $f$. Se $f$ è derivabile in $x_{0}$,
+allora
+\begin{equation}\label{eq:fermat}
+  f'(x_{0})=0 .
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{\begin{itemize}[nosep, leftmargin=1.2em]
+  \item $f:[a,b]\to\R$;
+  \item $x_{0}\in(a,b)$ punto di massimo (o di minimo) relativo;
+  \item $f$ derivabile in $x_{0}$.
+\end{itemize}}
+\Tesi{$f'(x_{0})=0$.}
+\end{schema}
+
+\begin{strategia}
+Studiamo il \emph{segno} del rapporto incrementale $\frac{f(x_{0}+h)-f(x_{0})}{h}$ in un
+punto di massimo. Il numeratore è $\le0$ per $h$ piccolo, qualunque sia il segno di $h$;
+quindi il rapporto è $\le0$ se $h>0$ ed è $\ge0$ se $h<0$. Passando al limite, la
+derivata destra è $\le0$ e la derivata sinistra è $\ge0$; ma la funzione è derivabile,
+quindi le due derivate unilaterali coincidono con $f'(x_{0})$, che deve essere
+contemporaneamente $\le0$ e $\ge0$. L'ipotesi che $x_{0}$ sia \emph{interno} serve a
+poter prendere incrementi $h$ di entrambi i segni.
+\end{strategia}
+
+\begin{dimostrazione}
+Supponiamo che $x_{0}$ sia un punto di massimo relativo (il caso del minimo si
+riconduce a questo considerando la funzione $-f$, che ha un massimo relativo in $x_{0}$ e
+derivata $-f'(x_{0})$). Per la \eqref{eq:max-relativo} esiste $\delta>0$ tale che
+$f(x)\le f(x_{0})$ per ogni $x\in[a,b]\cap(x_{0}-\delta,x_{0}+\delta)$. Poiché $x_{0}$ è
+interno, possiamo ridurre $\delta$ in modo che $\delta\le\min\{x_{0}-a,\,b-x_{0}\}$:
+allora l'intero intervallo $(x_{0}-\delta,x_{0}+\delta)$ è contenuto in $[a,b]$, e
+\begin{equation}\label{eq:fermat-numeratore}
+  f(x_{0}+h)-f(x_{0})\le0 \qquad\perogni h\in(-\delta,\delta).
+\end{equation}
+Dividendo per $h$ si ottiene, per $0<h<\delta$ e per $-\delta<h<0$ rispettivamente,
+\begin{equation}\label{eq:fermat-rapporti}
+\begin{aligned}
+  &\frac{f(x_{0}+h)-f(x_{0})}{h}\le0 \qquad\text{per } 0<h<\delta,\\[2pt]
+  &\frac{f(x_{0}+h)-f(x_{0})}{h}\ge0 \qquad\text{per } -\delta<h<0.
+\end{aligned}
+\end{equation}
+Poiché $f$ è derivabile in $x_{0}$, il rapporto incrementale tende a $f'(x_{0})$ sia per
+$h\to0^{+}$ sia per $h\to0^{-}$ (\cref{prop:dx-sx}). Per il teorema del confronto dei
+limiti (\cref{teo:confronto-funzioni}\,(ii)), il limite di una funzione $\le0$ è $\le0$,
+e quello di una funzione $\ge0$ è $\ge0$; dalle \eqref{eq:fermat-rapporti} segue quindi
+\begin{align*}
+  f'(x_{0})&=\lim_{h\to0^{+}}\frac{f(x_{0}+h)-f(x_{0})}{h}\le0,\\
+  f'(x_{0})&=\lim_{h\to0^{-}}\frac{f(x_{0}+h)-f(x_{0})}{h}\ge0 ,
+\end{align*}
+cioè $f'(x_{0})=0$.
+\end{dimostrazione}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.8\textwidth, height=5cm, xmin=-0.2, xmax=4.4, ymin=0.6, ymax=3.6,
+  axis lines=left, xtick={1,2,3.2}, xticklabels={$x_{0}+h$,$x_{0}$,$x_{0}+h$},
+  ytick=\empty, clip=false]
+  \addplot[curva, domain=0:4, samples=100] {3-0.5*(x-2)^2};
+  \addplot[curva3, domain=0.2:2.8] {3+0.5*(x-2)};
+  \addplot[curva2, domain=1.2:4.2] {3-0.6*(x-2)};
+  \addplot[tratteggio] coordinates {(0.4,3) (3.6,3)};
+  \addplot[tratteggio] coordinates {(1,0.6) (1,2.5)};
+  \addplot[tratteggio] coordinates {(3.2,0.6) (3.2,2.28)};
+  \addplot[only marks, mark=*, mark size=1.6pt, blu] coordinates {(1,2.5) (2,3) (3.2,2.28)};
+  \node[font=\scriptsize, verde!50!black, anchor=south east] at (axis cs:0.55,2.3) {$h<0$};
+  \node[font=\scriptsize, rame, anchor=west] at (axis cs:4.25,1.68) {$h>0$};
+\end{axis}
+\end{tikzpicture}
+\caption{La dimostrazione del teorema di Fermat. Vicino a un punto di massimo relativo
+interno $x_{0}$, le secanti con $h<0$ (verde) hanno pendenza $\ge0$, quelle con $h>0$
+(rame) pendenza $\le0$; al limite, la pendenza della tangente è insieme $\ge0$ e $\le0$.}
+\label{fig:fermat}
+\end{figure}
+
+\begin{attenzione}[Il teorema di Fermat dà una condizione necessaria, non sufficiente]
+Il viceversa del teorema di Fermat è falso: la derivata può annullarsi in un punto
+che non è né di massimo né di minimo. L'esempio tipico è $f(x)=x^{3}$: risulta
+$f'(0)=0$, ma $f(x)<0=f(0)$ per $x<0$ e $f(x)>0=f(0)$ per $x>0$, quindi in ogni intorno
+di $0$ la funzione assume valori sia maggiori sia minori di $f(0)$. Inoltre il teorema
+non dice nulla nei punti in cui $f$ non è derivabile: $f(x)=\abs x$ ha in $0$ il minimo
+assoluto, ma non ha derivata in $0$ (\cref{es:modulo-non-derivabile}). Infine, l'ipotesi
+che $x_{0}$ sia interno è essenziale: $f(x)=x$ in $[0,1]$ ha il massimo in $x_{0}=1$,
+dove la derivata vale $1$.
+\end{attenzione}
+
+I punti $x_{0}$ in cui $f'(x_{0})=0$ si chiamano \emph{punti stazionari} (o
+\emph{critici}) di $f$\index{punto!stazionario}. Che cosa accade negli estremi
+dell'intervallo? Il ragionamento della dimostrazione si può ancora fare, ma con
+incrementi di un solo segno, e fornisce una disuguaglianza invece di un'uguaglianza.
+
+\begin{proposizione}[Estremi relativi e segno della derivata]\label{prop:fermat-estremi}
+Sia $f:[a,b]\to\R$ e sia $x_{0}\in[a,b]$ un punto di massimo relativo per $f$, nel quale
+$f$ è derivabile (con derivata unilaterale se $x_{0}=a$ oppure $x_{0}=b$). Allora
+\begin{equation}\label{eq:fermat-max-generale}
+  f'(x_{0})\,(x-x_{0})\le0 \qquad\perogni x\in[a,b].
+\end{equation}
+Se invece $x_{0}$ è un punto di minimo relativo, risulta
+\begin{equation}\label{eq:fermat-min-generale}
+  f'(x_{0})\,(x-x_{0})\ge0 \qquad\perogni x\in[a,b].
+\end{equation}
+In particolare: se $a$ è di massimo relativo allora $f'(a)\le0$, se $b$ è di massimo
+relativo allora $f'(b)\ge0$; se $a$ è di minimo relativo allora $f'(a)\ge0$, se $b$ è di
+minimo relativo allora $f'(b)\le0$; se $x_{0}\in(a,b)$ allora $f'(x_{0})=0$.
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$f:[a,b]\to\R$; \ $x_{0}\in[a,b]$ di massimo (minimo) relativo; \ $f$
+derivabile in $x_{0}$ (unilateralmente se $x_{0}$ è un estremo).}
+\Tesi{$f'(x_{0})(x-x_{0})\le0$ \ (rispettivamente $\ge0$) \ per ogni $x\in[a,b]$.}
+\end{schema}
+
+\begin{strategia}
+Ripetiamo la dimostrazione del teorema di Fermat tenendo conto che, se $x_{0}=a$, sono
+ammessi soltanto incrementi $h>0$, e se $x_{0}=b$ soltanto incrementi $h<0$. La forma
+\eqref{eq:fermat-max-generale} riassume in una sola disuguaglianza tutti i casi: il
+prodotto $f'(x_{0})(x-x_{0})$ è la variazione «prevista dalla tangente» quando ci si
+sposta da $x_{0}$ a $x$, e in un punto di massimo non può essere positiva.
+\end{strategia}
+
+\begin{dimostrazione}
+Sia $x_{0}$ di massimo relativo e sia $\delta>0$ come nella \eqref{eq:max-relativo}.
+Se $x_{0}<b$, per $0<h<\min\{\delta,b-x_{0}\}$ il rapporto incrementale è $\le0$, e
+passando al limite per $h\to0^{+}$ si ottiene $f'(x_{0})\le0$. Se $x_{0}>a$, per
+$-\min\{\delta,x_{0}-a\}<h<0$ il rapporto incrementale è $\ge0$, e al limite per
+$h\to0^{-}$ si ottiene $f'(x_{0})\ge0$. Quindi:
+\begin{itemize}
+  \item se $x_{0}=a$, vale solo il primo caso: $f'(a)\le0$, e poiché $x-a\ge0$ per ogni
+  $x\in[a,b]$ risulta $f'(a)(x-a)\le0$;
+  \item se $x_{0}=b$, vale solo il secondo caso: $f'(b)\ge0$, e poiché $x-b\le0$ si ha
+  $f'(b)(x-b)\le0$;
+  \item se $a<x_{0}<b$, valgono entrambi: $f'(x_{0})=0$, e la
+  \eqref{eq:fermat-max-generale} è banalmente vera.
+\end{itemize}
+Il caso del minimo si ottiene applicando quanto provato alla funzione $-f$.
+\end{dimostrazione}
+
+\subsection{Un metodo per trovare massimi e minimi assoluti}
+
+Combinando il teorema di Weierstrass con quello di Fermat otteniamo un procedimento
+concreto. Sia $f$ continua in $[a,b]$ e derivabile in $(a,b)$, eccetto al più un numero
+finito di punti. Per il teorema di Weierstrass $f$ ammette massimo e minimo assoluti;
+un punto $x_{0}$ di massimo o di minimo assoluto è anche di estremo relativo, e
+quindi, per il teorema di Fermat, deve appartenere a una delle tre categorie seguenti:
+\begin{enumerate}[label=\textup{(\roman*)}]
+  \item $x_{0}$ è uno degli estremi $a$, $b$ dell'intervallo;
+  \item $x_{0}$ è un punto interno in cui $f$ non è derivabile;
+  \item $x_{0}$ è un punto interno stazionario, cioè $f'(x_{0})=0$.
+\end{enumerate}
+Nei casi più comuni i punti delle tre categorie sono in numero finito: basta allora
+calcolare i valori di $f$ in tali punti e confrontarli. Il più grande è il massimo
+assoluto, il più piccolo è il minimo assoluto. Si noti che il ragionamento è
+\emph{per esclusione}: non serve sapere a priori quali punti stazionari siano di
+massimo o di minimo, perché l'esistenza degli estremi assoluti è garantita dal teorema
+di Weierstrass. Il programma seguente esegue il procedimento con \texttt{sympy} per la
+funzione $f(x)=x^{3}-3x$ nell'intervallo $[-2,3]$.
+
+\begin{python}[Massimo e minimo assoluti in un intervallo chiuso]
+import sympy as sp
+
+x = sp.symbols("x", real=True)
+
+def estremi_assoluti(f, a, b):
+    """Massimo e minimo assoluti di f (derivabile) in [a, b]."""
+    critici = sp.solveset(sp.diff(f, x), x, sp.Interval.open(a, b))
+    candidati = sorted(set(critici) | {a, b})
+    valori = {c: f.subs(x, c) for c in candidati}
+    for c in candidati:
+        print(f"  f({c}) = {valori[c]}")
+    M, m = max(valori.values()), min(valori.values())
+    dove = lambda y: [c for c in candidati if valori[c] == y]
+    print("  max =", M, "in", dove(M))
+    print("  min =", m, "in", dove(m))
+
+print("f(x) = x^3 - 3x in [-2, 3]:")
+estremi_assoluti(x**3 - 3*x, -2, 3)
+\end{python}
+\begin{risultato}
+f(x) = x^3 - 3x in [-2, 3]:
+  f(-2) = -2
+  f(-1) = 2
+  f(1) = -2
+  f(3) = 18
+  max = 18 in [3]
+  min = -2 in [-2, 1]
+\end{risultato}
+
+Il massimo assoluto $18$ è assunto nell'estremo $b=3$, dove la derivata
+$f'(3)=24$ non è nulla (ed è positiva, in accordo con la \cref{prop:fermat-estremi}); il
+minimo assoluto $-2$ è assunto in due punti: nell'estremo $a=-2$, dove $f'(-2)=9\ge0$,
+e nel punto stazionario interno $x=1$. Il punto stazionario $x=-1$ è di massimo
+relativo, ma non assoluto. Ritroveremo il grafico di questa funzione nella
+\cref{fig:cubica-monotonia}.
+
+\begin{esempio}[La gittata massima]\label{es:gittata}
+Un carico viene lanciato con velocità iniziale di modulo $v$, inclinata dell'angolo
+$\theta$ sull'orizzontale. Trascurando la resistenza dell'aria, la distanza orizzontale
+percorsa prima di tornare alla quota di partenza (la \emph{gittata}) è
+\begin{equation}\label{eq:gittata}
+  R(\theta)=\frac{v^{2}\sen2\theta}{g}, \qquad \theta\in\Bigl[0,\frac\pi2\Bigr],
+\end{equation}
+dove $g$ è l'accelerazione di gravità. La funzione $R$ è continua nell'intervallo
+chiuso $[0,\frac\pi2]$, quindi ha massimo assoluto; è derivabile, con
+$R'(\theta)=\frac{2v^{2}}{g}\cos2\theta$, che nell'intervallo aperto si annulla soltanto
+per $2\theta=\frac\pi2$, cioè $\theta=\frac\pi4$. I candidati sono dunque $0$,
+$\frac\pi4$, $\frac\pi2$, con $R(0)=R(\frac\pi2)=0$ e $R(\frac\pi4)=\frac{v^{2}}g$: la
+gittata massima si ottiene con l'inclinazione di $45^{\circ}$, mentre i due estremi
+sono punti di minimo assoluto. Coerentemente con la \cref{prop:fermat-estremi}, risulta
+$R'(0)=\frac{2v^{2}}g\ge0$ (minimo nell'estremo sinistro) e
+$R'(\frac\pi2)=-\frac{2v^{2}}g\le0$ (minimo nell'estremo destro).
+\end{esempio}
+
+\begin{python}[La gittata: punti critici e derivate negli estremi]
+import sympy as sp
+
+th, v, g = sp.symbols("theta v g", positive=True)
+R = v**2 * sp.sin(2 * th) / g             # gittata nel vuoto
+dR = sp.diff(R, th)
+print("R'(theta) =", dR)
+print("punti critici in (0, pi/2):",
+      sp.solveset(dR, th, sp.Interval.open(0, sp.pi / 2)))
+print("R'(0) =", dR.subs(th, 0),
+      "   R'(pi/2) =", dR.subs(th, sp.pi / 2))
+print("R(pi/4) =", R.subs(th, sp.pi / 4))
+\end{python}
+\begin{risultato}
+R'(theta) = 2*v**2*cos(2*theta)/g
+punti critici in (0, pi/2): {pi/4}
+R'(0) = 2*v**2/g    R'(pi/2) = -2*v**2/g
+R(pi/4) = v**2/g
+\end{risultato}
+
+\begin{idea}[L'efficienza massima, finalmente con tutti i crismi]
+Nell'idea «Ritorno all'efficienza massima» del \cref{sec:operazioni-derivate} abbiamo
+visto che la derivata dell'efficienza $E(C_{L})=\frac{C_{L}}{C_{D0}+kC_{L}^{2}}$ si annulla
+in $C_{L}^{*}=\sqrt{C_{D0}/k}$. Ora possiamo concludere con il metodo appena descritto:
+$E$ è continua in $[0,C_{L,\max}]$ (con $C_{L,\max}>C_{L}^{*}$), quindi ha massimo
+assoluto; l'unico punto stazionario interno è $C_{L}^{*}$; negli estremi
+$E(0)=0<E(C_{L}^{*})$ e $E(C_{L,\max})<E(C_{L}^{*})$, perché, come vedremo nel
+\cref{sec:monotonia}, $E$ è strettamente decrescente per $C_{L}\ge C_{L}^{*}$. Il massimo assoluto è
+quindi $E_{\max}=E(C_{L}^{*})=\frac1{2\sqrt{kC_{D0}}}$, in accordo con il
+\cref{cap:funzioni-continue}.
+\end{idea}
+
+\begin{notastorica}[Fermat e il metodo dell'«adequalitas»]
+Pierre de Fermat (1601?--1665), magistrato al parlamento di Tolosa e matematico per
+passione, descrisse intorno al 1636--1638, in un breve scritto intitolato
+\emph{Methodus ad disquirendam maximam et minimam} fatto circolare per lettera, un
+procedimento per trovare i massimi e i minimi. In linguaggio moderno: si confronta
+$f(x)$ con $f(x+E)$, si «adeguagliano» le due espressioni (\emph{adaequalitas}), si
+divide per $E$ e infine si pone $E=0$. Nel primo esempio si divide un segmento di
+lunghezza $b$ in due parti in modo che il rettangolo $x(b-x)$ sia massimo: da
+$x(b-x)\sim(x+E)(b-x-E)$ segue $E(b-2x)-E^{2}\sim0$, poi $b-2x-E\sim0$, e per $E=0$ si
+trova $x=\frac b2$: il rettangolo massimo è il quadrato. È, in sostanza, la condizione
+$f'(x)=0$, ottenuta decenni prima del calcolo differenziale; ma dividere per $E$ e poi
+porre $E=0$ non è passare al limite. Per i polinomi le due operazioni si equivalgono; se
+invece $f$ contiene radicali, come $x+\sqrt{1-x}$, prima di dividere per $E$ bisogna
+eliminarli elevando al quadrato, e nei casi meno semplici i calcoli diventano
+proibitivi. Il nuovo calcolo superò l'ostacolo separando due momenti, il calcolo di $f'$
+con regole generali e la soluzione di $f'(x)=0$: non a caso Leibniz vantava un metodo
+«che non si arresta davanti alle quantità fratte o irrazionali» (epigrafe del
+\cref{cap:derivate}). Già Keplero, nella \emph{Nova stereometria doliorum vinariorum}
+(1615), aveva notato che vicino a un massimo le variazioni di una grandezza diventano
+impercettibili. Fermat applicò lo stesso tipo di ragionamento all'ottica, enunciando nel
+1662 il \emph{principio del tempo minimo}: la
+luce, per andare da un punto a un altro, segue il percorso che richiede il tempo
+minore (si veda l'\cref{es:snell}). Le sue opere furono pubblicate postume dal figlio
+Samuel, nei \emph{Varia opera mathematica} (1679).
+\end{notastorica}

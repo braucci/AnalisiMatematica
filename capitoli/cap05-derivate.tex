@@ -1,0 +1,63 @@
+%% ============================================================================
+%%  CAPITOLO 5 — Derivate
+%%  Fonte principale per argomenti e dimostrazioni: Marcellini–Sbordone, cap. 5
+%%  (§39 tasso di accrescimento, §40 definizione di derivata, §41 operazioni,
+%%  §42 funzioni composte e inverse, §43 derivate delle funzioni elementari,
+%%  §44 significato geometrico, retta tangente; appendice §45 funzioni
+%%  trigonometriche inverse).
+%% ============================================================================
+\aperturacapitolo{Derivate}{cap:derivate}
+
+\epigraph{Nova methodus pro maximis et minimis, itemque tangentibus, quae nec fractas
+nec irrationales quantitates moratur, et singulare pro illis calculi genus.\\[2pt]
+\upshape(Un nuovo metodo per i massimi e i minimi, e anche per le tangenti, che non si
+arresta davanti alle quantità fratte o irrazionali, e un singolare genere di calcolo per
+esse.)}{Gottfried Wilhelm Leibniz, titolo della memoria negli \emph{Acta Eruditorum}
+(1684)}
+
+\lettrine[lines=3, findent=2pt, nindent=0pt]{C}{on la derivata} l'Analisi diventa uno
+strumento di calcolo. I capitoli precedenti ci hanno dato il linguaggio dei limiti e le
+proprietà delle funzioni continue; ora usiamo quel linguaggio per rispondere a una
+domanda che attraversa tutta la fisica e l'ingegneria: \emph{con che rapidità varia una
+grandezza?} La velocità di un velivolo è la rapidità con cui varia la sua posizione,
+il rateo di salita è la rapidità con cui varia la quota, il consumo è la rapidità con
+cui diminuisce la massa di combustibile, il gradiente termico è la rapidità con cui la
+temperatura cambia con la quota. In tutti questi casi si confronta la variazione della
+grandezza con la variazione della variabile da cui dipende, in un intervallo sempre più
+piccolo: si calcola cioè il limite di un \emph{rapporto incrementale}.
+
+La stessa operazione ha un significato geometrico altrettanto importante: la derivata è
+la pendenza della retta tangente al grafico. Vedremo che una funzione derivabile, vicino
+a un punto, «assomiglia» alla sua retta tangente: è l'idea di \emph{linearizzazione},
+che sta alla base di gran parte dei modelli ingegneristici, dalle piccole perturbazioni
+in meccanica del volo all'analisi della propagazione degli errori di misura. Seguiremo
+il testo di riferimento \cite{marcellini-sbordone}: definizione, regole di calcolo,
+derivate delle funzioni elementari, interpretazione geometrica; in appendice
+introdurremo le funzioni trigonometriche inverse, indispensabili per esprimere gli
+angoli a partire dai loro seni, coseni e tangenti.
+
+\medskip
+\noindent\textbf{In questo capitolo.}
+\begin{itemize}
+  \item Il tasso di accrescimento e la velocità istantanea (\S\ref{sec:tasso}).
+  \item La definizione di derivata; derivabilità e continuità; derivate successive
+  (\S\ref{sec:def-derivata}).
+  \item Le regole di derivazione: somma, prodotto, quoziente (\S\ref{sec:operazioni-derivate}),
+  funzioni composte e funzioni inverse (\S\ref{sec:composte-inverse}).
+  \item Le derivate delle funzioni elementari (\S\ref{sec:derivate-elementari}).
+  \item La retta tangente e l'approssimazione lineare; le funzioni $x^{n}\sen\frac1x$
+  (\S\ref{sec:retta-tangente}).
+  \item Appendice: le funzioni trigonometriche inverse (\S\ref{sec:trig-inverse}).
+  \item Esercizi di riepilogo (\S\ref{sec:esercizi-cap5}).
+  \item Punti fondamentali del capitolo (\S\ref{sec:sintesi-cap05}).
+\end{itemize}
+
+\input{capitoli/cap05/01-tasso}
+\input{capitoli/cap05/02-definizione}
+\input{capitoli/cap05/03-operazioni}
+\input{capitoli/cap05/04-composte-inverse}
+\input{capitoli/cap05/05-elementari}
+\input{capitoli/cap05/06-tangente}
+\input{capitoli/cap05/07-trig-inverse}
+\input{capitoli/cap05/08-esercizi}
+\input{capitoli/cap05/09-sintesi}

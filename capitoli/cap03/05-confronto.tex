@@ -1,0 +1,338 @@
+%% ----------------------------------------------------------------------------
+%%  §3.5  Teoremi di confronto e altre proprietà dei limiti
+%% ----------------------------------------------------------------------------
+\section{Teoremi di confronto}
+\label{sec:confronto}
+
+Studiamo in questo paragrafo alcune relazioni tra limiti e ordinamento: che cosa si può
+dedurre sul limite conoscendo il segno dei termini, e viceversa; e come si può
+determinare il limite di una successione «intrappolandola» tra due successioni di cui
+conosciamo il comportamento.
+
+\subsection{Permanenza del segno}
+
+\begin{teorema}[Permanenza del segno]\label{teo:permanenza-segno}\index{teorema!della permanenza del segno}
+Se $\displaystyle\lim_{n\to+\infty}a_{n}=a>0$, esiste un numero $\nu$ tale che $a_{n}>0$
+per ogni $n>\nu$.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$a_{n}\to a$, \ $a>0$.}
+\Tesi{$a_{n}>0$ definitivamente.}
+\end{schema}
+
+\begin{strategia}
+Se il limite è positivo, i termini della successione finiscono per stare in un intorno
+di $a$; basta scegliere l'intorno abbastanza piccolo da non contenere lo zero. Il raggio
+$\epsilon=a/2$ va bene: l'intorno $(a/2,\,3a/2)$ sta tutto a destra dello zero. Anzi,
+otteniamo un'informazione più precisa: definitivamente $a_{n}>a/2$, cioè i termini non
+solo sono positivi, ma si mantengono lontani da zero.
+\end{strategia}
+
+\begin{dimostrazione}
+Dato che $a>0$, possiamo scegliere $\epsilon=a/2$. Esiste quindi un numero $\nu$ per cui
+$\abs{a_{n}-a}<a/2$ per ogni $n>\nu$. Ciò equivale a $-a/2<a_{n}-a<a/2$. In particolare
+abbiamo
+\begin{equation}\label{eq:permanenza-passo}
+  a_{n}>a-\frac a2=\frac a2>0 \qquad\perogni n>\nu. \qedhere
+\end{equation}
+\end{dimostrazione}
+
+Sottolineiamo che, se una successione $a_{n}$ converge a un numero reale positivo $a$,
+\emph{non} si può affermare in generale che \emph{tutti} i termini della successione
+siano positivi. Ad esempio, in analogia con la \eqref{eq:succ-n1n}, la successione
+$a_{n}=(n-7)/n$ converge al numero $1$, però i primi termini della successione (da $a_{1}$
+fino ad $a_{6}$) sono negativi e $a_{7}=0$; il numero $\nu$ nella tesi del teorema della
+permanenza del segno, in questo caso, può essere scelto uguale a $7$, e $7$ è il più
+piccolo valore possibile.
+
+\begin{osservazione}
+Con la stessa dimostrazione (scegliendo $\epsilon=a-L$) si prova la versione più
+generale: \emph{se $a_{n}\to a$ e $a>L$, allora definitivamente $a_{n}>L$}; e
+analogamente, se $a<L$, definitivamente $a_{n}<L$. Il caso $L=0$ è il teorema.
+\end{osservazione}
+
+\begin{corollario}\label{cor:limite-non-negativo}
+Se $\displaystyle\lim_{n\to+\infty}a_{n}=a$, e se $a_{n}\ge0$ per ogni $n$, allora anche
+$a\ge0$.
+\end{corollario}
+
+\begin{schema}
+\Ipotesi{$a_{n}\to a\in\R$; \ $a_{n}\ge0$ per ogni $n$.}
+\Tesi{$a\ge0$.}
+\end{schema}
+
+\begin{strategia}
+Ragioniamo per assurdo: se il limite fosse negativo, la permanenza del segno (applicata
+a $-a_{n}$) renderebbe i termini definitivamente negativi, contro l'ipotesi.
+\end{strategia}
+
+\begin{dimostrazione}
+Se per assurdo fosse $a<0$, il teorema della permanenza del segno, applicato alla
+successione $-a_{n}$ (che converge a $-a>0$ per il \cref{teo:operazioni-limiti}),
+comporterebbe che $-a_{n}>0$, cioè $a_{n}<0$, per $n$ grande, contro l'ipotesi.
+\end{dimostrazione}
+
+\begin{corollario}[Confronto dei limiti]\label{cor:confronto-limiti}
+Se $\displaystyle\lim_{n\to+\infty}a_{n}=a$, $\displaystyle\lim_{n\to+\infty}b_{n}=b$, e
+se $a_{n}\ge b_{n}$ per ogni $n$, allora $a\ge b$.
+\end{corollario}
+
+\begin{schema}
+\Ipotesi{$a_{n}\to a\in\R$, \ $b_{n}\to b\in\R$; \ $a_{n}\ge b_{n}$ per ogni $n$.}
+\Tesi{$a\ge b$.}
+\end{schema}
+
+\begin{strategia}
+Confrontare due successioni equivale a confrontare la loro differenza con zero: basta
+applicare il corollario precedente ad $a_{n}-b_{n}$, il cui limite è noto per il
+\cref{teo:operazioni-limiti}.
+\end{strategia}
+
+\begin{dimostrazione}
+Per ottenere la dimostrazione di quest'ultimo corollario basta applicare il corollario
+precedente alla successione $a_{n}-b_{n}\ge0$, che converge ad $a-b$.
+\end{dimostrazione}
+
+Possiamo schematizzare i risultati ottenuti nel modo seguente (si noti la differenza tra
+i segni $>$ e $\ge$):
+\begin{align}
+  a_{n}\to a,\ \ a>0\ \ &\implica\ \ a_{n}>0\ \text{ definitivamente}; \label{eq:schema-perm1}\\
+  a_{n}\to a,\ \ a_{n}\ge0\ \ \perogni n\in\N\ \ &\implica\ \ a\ge0; \label{eq:schema-perm2}\\
+  a_{n}\to a,\ \ b_{n}\to b,\ \ a_{n}\ge b_{n}\ \ \perogni n\in\N\ \ &\implica\ \ a\ge b. \label{eq:schema-perm3}
+\end{align}
+
+\begin{attenzione}[Le disuguaglianze strette non passano al limite]
+Nelle \eqref{eq:schema-perm2} e \eqref{eq:schema-perm3} non si può sostituire $\ge$ con
+$>$ nella tesi, nemmeno se l'ipotesi è stretta: $a_{n}=1/n>0$ per ogni $n$, ma il limite
+è $0$, che non è positivo. Passando al limite, «$>$» si indebolisce in «$\ge$». Al
+contrario, nella \eqref{eq:schema-perm1} l'ipotesi deve essere stretta: se fosse $a=0$, i
+termini potrebbero avere qualsiasi segno, come accade per $(-1)^{n}/n$.
+\end{attenzione}
+
+\subsection{Il teorema dei carabinieri}
+
+\begin{teorema}[dei carabinieri]\label{teo:carabinieri}\index{teorema!dei carabinieri}
+Siano $a_{n}$, $b_{n}$, $c_{n}$ tre successioni tali che
+\begin{equation}\label{eq:carabinieri-ipotesi}
+  a_{n}\le c_{n}\le b_{n} \qquad\perogni n\in\N .
+\end{equation}
+Se $\displaystyle\lim_{n\to+\infty}a_{n}=\lim_{n\to+\infty}b_{n}=a$, allora anche la
+successione $c_{n}$ è convergente e $\displaystyle\lim_{n\to+\infty}c_{n}=a$.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$a_{n}\le c_{n}\le b_{n}$ per ogni $n$ (basta definitivamente); \
+$a_{n}\to a$, \ $b_{n}\to a$ (lo \emph{stesso} limite).}
+\Tesi{$c_{n}\to a$ \ (in particolare, $c_{n}$ ammette limite).}
+\end{schema}
+
+\begin{strategia}
+Si noti che la tesi contiene un'affermazione di \emph{esistenza}: non si suppone che
+$c_{n}$ abbia limite, lo si dimostra. Non possiamo quindi usare il
+\cref{cor:confronto-limiti}, che presuppone l'esistenza dei limiti; dobbiamo tornare alla
+definizione. L'idea è visiva (\cref{fig:carabinieri}): fissato un intorno
+$(a-\epsilon,a+\epsilon)$, definitivamente vi cadono sia $a_{n}$ sia $b_{n}$; e poiché
+$c_{n}$ è «stretto» tra i due, ci cade anche lui. In formule, basta leggere le due
+disuguaglianze $\abs{a_{n}-a}<\epsilon$ e $\abs{b_{n}-a}<\epsilon$ nella forma «doppia
+disuguaglianza» e concatenarle con la \eqref{eq:carabinieri-ipotesi}.
+\end{strategia}
+
+\begin{dimostrazione}
+Per ipotesi, per ogni $\epsilon>0$,
+\begin{equation}\label{eq:carabinieri-passo1}
+  \esiste\nu_{1}:\ \abs{a_{n}-a}<\epsilon\quad\perogni n>\nu_{1}; \qquad
+  \esiste\nu_{2}:\ \abs{b_{n}-a}<\epsilon\quad\perogni n>\nu_{2}.
+\end{equation}
+Ricordiamo che le disuguaglianze con il valore assoluto si possono anche scrivere
+\begin{equation}\label{eq:carabinieri-passo2}
+  a-\epsilon<a_{n}<a+\epsilon; \qquad a-\epsilon<b_{n}<a+\epsilon .
+\end{equation}
+Quindi, se $n>\nu=\max\{\nu_{1},\nu_{2}\}$, risulta
+\begin{equation}\label{eq:carabinieri-passo3}
+  a-\epsilon<a_{n}\le c_{n}\le b_{n}<a+\epsilon .
+\end{equation}
+Perciò $\abs{c_{n}-a}<\epsilon$ per ogni $n>\nu$, come volevasi dimostrare.
+\end{dimostrazione}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.92\textwidth, height=5.2cm, xmin=0, xmax=31, ymin=-0.1, ymax=2.1,
+  xtick={5,10,15,20,25,30}, ytick={1}, yticklabels={$a$}, xlabel={$n$}]
+  \fill[verde!15] (axis cs:0,0.85) rectangle (axis cs:31,1.15);
+  \addplot[tratteggio, domain=0:31] {1};
+  \addplot[only marks, mark=triangle*, mark size=1.8pt, rame, samples at={1,...,30}] {1-1/x};
+  \addplot[only marks, mark=triangle*, mark size=1.8pt, rame, mark options={rotate=180}, samples at={1,...,30}] {1+1/x};
+  \addplot[only marks, mark=*, mark size=1.3pt, blu, samples at={1,...,30}] {1+0.8*sin(deg(1.3*x))/x};
+  \node[font=\scriptsize, rame, anchor=west] at (axis cs:1.6,0.22) {$a_{n}$};
+  \node[font=\scriptsize, rame, anchor=west] at (axis cs:1.6,1.93) {$b_{n}$};
+  \node[font=\scriptsize, blu, anchor=west] at (axis cs:1.6,1.72) {$c_{n}$};
+  \node[font=\scriptsize, verde!50!black, anchor=east] at (axis cs:30.5,1.25) {$(a-\epsilon,a+\epsilon)$};
+\end{axis}
+\end{tikzpicture}
+\caption{Il teorema dei carabinieri: la successione $c_{n}$ (in blu) è compresa tra
+$a_{n}$ e $b_{n}$ (i «carabinieri», in rame), che convergono allo stesso limite $a$.
+Quando i due carabinieri sono entrati nella striscia verde $(a-\epsilon,a+\epsilon)$,
+anche $c_{n}$, che sta in mezzo, è costretta a entrarvi.}
+\label{fig:carabinieri}
+\end{figure}
+
+\begin{osservazione}
+Nell'enunciato basta che la \eqref{eq:carabinieri-ipotesi} valga definitivamente, cioè
+per $n$ maggiore di un certo $\nu_{3}$: nella dimostrazione si prende allora
+$\nu=\max\{\nu_{1},\nu_{2},\nu_{3}\}$. In generale, il comportamento di una successione
+per $n$ grande non dipende dai primi termini: modificando un numero finito di termini il
+limite (se esiste) non cambia. Il nome del teorema, d'uso comune in Italia, evoca un
+arrestato condotto tra due carabinieri: dove vanno loro, deve andare anche lui. In altri
+paesi si chiama «teorema del sandwich» o «del confronto».
+\end{osservazione}
+
+\begin{idea}[Le inviluppanti di un'oscillazione smorzata]
+Un esempio fisico: lo spostamento di una struttura che vibra con ampiezza decrescente,
+campionato a istanti successivi, è una successione $c_{n}$ che oscilla attorno alla
+posizione di equilibrio; ma se l'ampiezza $A_{n}$ tende a zero, le due curve
+\emph{inviluppanti} $-A_{n}$ e $A_{n}$ fanno da carabinieri, e lo spostamento tende a
+zero qualunque sia la forma dettagliata delle oscillazioni. È esattamente la situazione
+della \cref{fig:carabinieri}, e del \cref{teo:limitata-infinitesima} qui sotto.
+\end{idea}
+
+Valgono analoghi teoremi di confronto anche per i limiti infiniti; qui basta un solo
+«carabiniere».
+
+\begin{teorema}[Confronto per limiti infiniti]\label{teo:confronto-infinito}
+Se $a_{n}\le b_{n}$ per ogni $n\in\N$, allora
+\begin{align}
+  a_{n}\to+\infty &\ \implica\ b_{n}\to+\infty; \label{eq:confronto-piu-inf}\\
+  b_{n}\to-\infty &\ \implica\ a_{n}\to-\infty. \label{eq:confronto-meno-inf}
+\end{align}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$a_{n}\le b_{n}$ per ogni $n$ (basta definitivamente); \ $a_{n}\to+\infty$
+(risp.\ $b_{n}\to-\infty$).}
+\Tesi{$b_{n}\to+\infty$ (risp.\ $a_{n}\to-\infty$).}
+\end{schema}
+
+\begin{strategia}
+Basta la definizione: se la successione più piccola supera definitivamente un livello
+$M$, la più grande lo supera a maggior ragione, con lo stesso indice $\nu$. Non occorre
+un secondo carabiniere, perché verso $+\infty$ non c'è nulla da «stringere».
+\end{strategia}
+
+\begin{dimostrazione}
+Dimostriamo la \eqref{eq:confronto-piu-inf} (la prova della \eqref{eq:confronto-meno-inf}
+è analoga). Per ipotesi $a_{n}\to+\infty$, che per la definizione
+\eqref{eq:def-piu-inf} significa
+\begin{equation}\label{eq:confronto-inf-passo}
+  \perogni M>0\ \ \esiste\nu :\ a_{n}>M \quad\perogni n>\nu .
+\end{equation}
+Dato che $b_{n}\ge a_{n}$ per ogni $n\in\N$, si ottiene la tesi:
+$b_{n}\ge a_{n}>M$ per ogni $n>\nu$.
+\end{dimostrazione}
+
+\subsection{Successioni infinitesime}
+
+Riportiamo infine due ulteriori proprietà dei limiti di successioni; in particolare la
+seconda, enunciata sotto forma di teorema, è importante per le applicazioni.
+
+\begin{proposizione}\label{prop:infinitesima-modulo}
+La successione $a_{n}$ converge a zero se e soltanto se $\abs{a_{n}}$ converge a zero.
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$a_{n}$ successione di numeri reali.}
+\Tesi{$a_{n}\to0$ \ $\sse$ \ $\abs{a_{n}}\to0$.}
+\end{schema}
+
+\begin{strategia}
+Quando il limite è zero, la definizione coinvolge soltanto la distanza da zero, cioè il
+valore assoluto: scritte per esteso, le due condizioni sono la stessa frase, perché
+$\bigl|\abs{a_{n}}\bigr|=\abs{a_{n}}$.
+\end{strategia}
+
+\begin{dimostrazione}
+Posto $b_{n}=\abs{a_{n}}$, in base alla definizione \eqref{eq:def-limite} $b_{n}$
+converge a zero se e solo se
+\begin{equation}\label{eq:modulo-zero-passo}
+  \perogni\epsilon>0\ \ \esiste\nu :\ \abs{b_{n}}<\epsilon \quad\perogni n>\nu .
+\end{equation}
+Dato che $\abs{b_{n}}=\bigl|\abs{a_{n}}\bigr|=\abs{a_{n}}$ per ogni $n\in\N$, la
+\eqref{eq:modulo-zero-passo} è equivalente alla convergenza a zero della successione
+$a_{n}$.
+\end{dimostrazione}
+
+Si noti che, nella proposizione precedente, è importante considerare non solo
+successioni convergenti, ma più in particolare successioni \emph{convergenti a zero}. Ad
+esempio, se $a_{n}=(-1)^{n}$, allora $a_{n}$ non è convergente, mentre
+$b_{n}=\abs{a_{n}}$ è la successione costante $b_{n}=1$, che ovviamente converge a $1$. In
+generale vale solo l'implicazione del \cref{lem:lim-modulo}: se $a_{n}\to a$ allora
+$\abs{a_{n}}\to\abs a$.
+
+\begin{teorema}[Prodotto di una limitata per un'infinitesima]\label{teo:limitata-infinitesima}\index{successione!infinitesima}
+Se $a_{n}$ è una successione limitata e $b_{n}$ è una successione che converge a zero,
+allora la successione prodotto $a_{n}\cdot b_{n}$ converge a zero.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$\abs{a_{n}}\le M$ per ogni $n$; \ $b_{n}\to0$.}
+\Tesi{$a_{n}b_{n}\to0$.}
+\end{schema}
+
+\begin{strategia}
+Si noti che $a_{n}$ \emph{non} è supposta convergente (potrebbe essere $(-1)^{n}$): il
+\cref{teo:operazioni-limiti} non si applica. Ma $\abs{a_{n}b_{n}}\le M\abs{b_{n}}$, e la
+successione a destra tende a zero: possiamo quindi usare i carabinieri $\pm M\abs{b_{n}}$
+(primo metodo), oppure verificare direttamente la definizione nella forma
+\eqref{eq:def-limite-c} (secondo metodo).
+\end{strategia}
+
+\begin{dimostrazione}[Primo metodo]
+Per l'ipotesi di limitatezza si ha
+\begin{equation}\label{eq:lim-inf-passo1}
+  \abs{a_{n}b_{n}}=\abs{a_{n}}\cdot\abs{b_{n}}\le M\abs{b_{n}} \qquad\perogni n\in\N,
+\end{equation}
+che, per la proprietà \eqref{eq:mod-le} del valore assoluto, equivale a
+\begin{equation}\label{eq:lim-inf-passo2}
+  -M\abs{b_{n}}\le a_{n}b_{n}\le M\abs{b_{n}} \qquad\perogni n\in\N .
+\end{equation}
+Dato che per ipotesi $b_{n}\to0$, per la proposizione precedente anche la successione
+$\abs{b_{n}}$ converge a zero, e quindi $\pm M\abs{b_{n}}\to0$. Per il teorema dei
+carabinieri, dalla \eqref{eq:lim-inf-passo2} si deduce infine che $a_{n}b_{n}\to0$.
+\end{dimostrazione}
+
+\begin{dimostrazione}[Secondo metodo]
+Per la definizione di limite si ha
+$\perogni\epsilon>0\ \esiste\nu:\ \abs{b_{n}}<\epsilon$ per ogni $n>\nu$. Dall'ipotesi di
+limitatezza si ottiene poi
+\begin{equation}\label{eq:lim-inf-passo3}
+  \abs{a_{n}b_{n}}=\abs{a_{n}}\cdot\abs{b_{n}}\le M\abs{b_{n}}<M\epsilon \qquad\perogni n>\nu,
+\end{equation}
+che equivale (si veda la \eqref{eq:def-limite-c}) al fatto che la successione prodotto
+$a_{n}b_{n}$ converge a zero.
+\end{dimostrazione}
+
+\begin{esempio}
+A titolo di esempio verifichiamo che
+\begin{equation}\label{eq:es-limitata-inf}
+  \lim_{n\to+\infty}\frac{(-1)^{n}(n+5)}{3n^{2}+1}=0;
+\end{equation}
+infatti si tratta del limite del prodotto della successione limitata $a_{n}=(-1)^{n}$
+per la successione infinitesima
+\begin{equation}\label{eq:es-limitata-inf-b}
+  b_{n}=\frac{n+5}{3n^{2}+1}=\frac{1/n+5/n^{2}}{3+1/n^{2}}\to\frac03=0 .
+\end{equation}
+\end{esempio}
+
+\begin{esempio}\label{es:senn-n}
+Come ulteriore esempio verifichiamo che
+\begin{equation}\label{eq:lim-senn-n}
+  \lim_{n\to+\infty}\frac{\sen n}{n}=0 .
+\end{equation}
+Il limite è zero perché è il limite del prodotto della successione limitata
+$a_{n}=\sen n$ ($\abs{a_{n}}=\abs{\sen n}\le1$ per ogni $n\in\N$, per la
+\eqref{eq:sen-cos-limitate}) per la successione infinitesima $b_{n}=1/n$. Il lettore non
+confonda questo limite con quello che dimostreremo nel \cref{teo:sen-x-su-x}, uguale a
+$1$: là la successione $a_{n}$ converge a zero, mentre la successione in esame nella
+\eqref{eq:lim-senn-n} è $\sen a_{n}/a_{n}$ con $a_{n}=n\to+\infty$.
+\end{esempio}

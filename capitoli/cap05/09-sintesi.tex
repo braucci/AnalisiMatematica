@@ -1,0 +1,78 @@
+%% ----------------------------------------------------------------------------
+%%  §5.9  Punti fondamentali del capitolo
+%% ----------------------------------------------------------------------------
+\section{Punti fondamentali del capitolo}
+\label{sec:sintesi-cap05}
+
+La derivata, limite del rapporto incrementale, misura la rapidità con cui varia una
+grandezza e, geometricamente, la pendenza della retta tangente al grafico. Una funzione
+derivabile, vicino a un punto, è approssimata al primo ordine dalla sua tangente; poche
+regole di calcolo, insieme alle derivate delle funzioni elementari, permettono di
+derivare qualsiasi funzione elementare.
+
+\begin{puntichiave}
+\item \textbf{Derivata.} Se $f$ è definita in un intorno di $x$, è derivabile in $x$ quando
+esiste \emph{finito} $f'(x)=\lim_{h\to0}\frac{f(x+h)-f(x)}{h}$ (\cref{def:derivata}); ciò
+accade se e solo se le derivate destra e sinistra esistono finite e uguali. Una
+«derivata infinita» non è una derivata.
+\item \textbf{Derivabilità e continuità.} Se $f$ è derivabile in $x$, è continua in $x$
+(\cref{teo:derivabile-continua}); il viceversa è falso: $\abs x$ (spigolo), $\sqrt[3]x$
+(tangente verticale), $\sqrt{\abs x}$ (cuspide) e $x\sen\frac1x$ sono continue in $0$ ma
+non derivabili (\cref{es:modulo-non-derivabile,es:derivate-infinite}).
+\item \textbf{Regole algebriche.} Se $f$ e $g$ sono derivabili in $x$, lo sono $f\pm g$,
+$fg$ e, se $g(x)\neq0$, $f/g$, con $(fg)'=f'g+fg'$ e
+$(f/g)'=(f'g-fg')/g^{2}$ (\cref{teo:operazioni-derivate}); la derivazione è lineare.
+Errore tipico da evitare: $(fg)'\neq f'g'$.
+\item \textbf{Regola della catena.} Se $g$ è derivabile in $x$ e $f$ è derivabile in
+$g(x)$, allora $(f\circ g)'(x)=f'(g(x))\,g'(x)$ (\cref{teo:derivata-composta}); nel caso
+generale la dimostrazione evita la divisione per un incremento $g(x+h)-g(x)$ che può
+annullarsi, grazie a una funzione ausiliaria $F$ continua in $0$.
+\item \textbf{Funzione inversa.} Se $f$ è continua e strettamente monotòna in $[a,b]$,
+derivabile in $x\in(a,b)$ con $f'(x)\neq0$, allora $(f^{-1})'(f(x))=1/f'(x)$
+(\cref{teo:derivata-inversa}); se $f'(x)=0$, l'inversa non è derivabile in $f(x)$ e il
+suo grafico ha tangente verticale (\cref{oss:inversa-derivata-nulla}).
+\item \textbf{Derivate elementari.} $Dx^{b}=bx^{b-1}$, $D\log x=\frac1x$, $De^{x}=e^{x}$,
+$Da^{x}=a^{x}\log a$, $D\sen x=\cos x$, $D\cos x=-\sen x$, $D\tg x=1+\tg^{2}x$
+(\cref{tab:derivate-elementari}); una potenza $f(x)^{g(x)}$ con $f(x)>0$ si deriva
+scrivendola come $e^{g(x)\log f(x)}$.
+\item \textbf{Angoli in radianti.} Le derivate di seno e coseno valgono perché
+$\frac{\sen h}{h}\to1$, cioè solo in radianti; con gli angoli in gradi compare il fattore
+$\frac{\pi}{180}$, causa di errori classici con una $C_{L\alpha}$ data «per grado».
+\item \textbf{Funzioni trigonometriche inverse.} $\arcsen$ e $\arccos$, definite e
+continue in $[-1,1]$, sono derivabili in $(-1,1)$, con derivate rispettivamente
+$\frac1{\sqrt{1-x^{2}}}$ e $-\frac1{\sqrt{1-x^{2}}}$;
+$\operatorname{arctg}:\R\to\bigl(-\frac\pi2,\frac\pi2\bigr)$ ha derivata $\frac1{1+x^{2}}$
+(\cref{sec:trig-inverse}).
+\item \textbf{Retta tangente e approssimazione lineare.} La tangente in $x_{0}$ è
+$y=f(x_{0})+f'(x_{0})(x-x_{0})$ (\cref{def:retta-tangente}); $f$ è derivabile in $x_{0}$
+se e solo se $f(x)=f(x_{0})+m(x-x_{0})+o(x-x_{0})$ per qualche $m$, e allora $m=f'(x_{0})$
+(\cref{prop:approssimazione-lineare}): la tangente è l'unica retta che approssima il
+grafico al primo ordine, e l'errore è tipicamente dell'ordine di $(x-x_{0})^{2}$.
+\item \textbf{Derivate successive e classi $C^{n}$.} $f$ è di classe $C^{n}$ se $f^{(n)}$
+esiste ed è continua; $x\abs x$ è di classe $C^{1}$ ma non è derivabile due volte in $0$
+(\cref{es:x-modulo-x}), e $x^{2}\sen\frac1x$ è derivabile ovunque con derivata discontinua
+in $0$ (\cref{oss:f2-non-C1}).
+\item \textbf{Derivata numerica.} L'errore di troncamento è proporzionale a $h$ per la
+differenza in avanti e a $h^{2}$ per quella centrata, mentre l'arrotondamento cresce
+come $10^{-16}/h$: esiste un passo ottimale, sotto il quale ridurre $h$ peggiora il
+risultato (\cref{fig:derivata-numerica}).
+\item \textbf{Metodo di Newton.} Sostituendo $f$ con la tangente si ottiene l'iterazione
+$x_{n+1}=x_{n}-f(x_{n})/f'(x_{n})$ (\cref{es:newton}); non sempre converge, ma quando
+converge le cifre esatte all'incirca raddoppiano a ogni passo.
+\item \textbf{Applicazioni aeronautiche.} Il variometro misura la derivata della quota
+(\cref{sec:tasso}); la regola della catena dà $dq/dt=\rho V\,dV/dt$ per la
+pressione dinamica e il tasso di variazione della densità ISA in salita
+(\cref{sec:composte-inverse,sec:derivate-elementari}); la sensibilità
+dell'anemometro, $dV/d(\Delta p)=1/(\rho V)$, e la linearizzazione
+$C_{L}\simeq C_{L}(\alpha_{0})+C_{L\alpha}(\alpha-\alpha_{0})$ sono approssimazioni lineari
+(\cref{sec:retta-tangente}).
+\end{puntichiave}
+
+\paragraph{Il filo del discorso.} Il capitolo ha costruito lo strumento, ma non ne ha
+ancora sfruttato la conseguenza più importante: che cosa dice il segno della derivata
+sull'andamento di una funzione? Nel \cref{cap:applicazioni-derivate} i teoremi di Fermat,
+Rolle e Lagrange risponderanno a questa domanda, collegando la derivata alla monotonia, ai
+massimi e minimi e alla convessità. Lo stesso capitolo presenterà il teorema di
+L'Hôpital e la formula di Taylor: è questo lo strumento che giustifica perché l'errore
+dell'approssimazione lineare e quello della differenza centrata sono dell'ordine del
+quadrato dell'incremento, e perché il metodo di Newton converge quadraticamente.

@@ -1,0 +1,379 @@
+%% ----------------------------------------------------------------------------
+%%  §3.2  Definizioni e prime proprietà
+%% ----------------------------------------------------------------------------
+\section{Definizione di limite e prime proprietà}
+\label{sec:def-limite}
+
+\begin{definizione}[Successione]\index{successione}
+Una \emph{successione} è una legge che a ogni numero naturale $n$ fa corrispondere uno e
+un solo numero reale $a_{n}$. Ricordando la definizione di funzione (\cref{sec:funzioni})
+si può dire che \emph{una successione è una funzione da $\N$ in $\R$}. Indichiamo una
+successione con il simbolo $(a_{n})$, o più semplicemente con $a_{n}$, o per esteso con
+\begin{equation}\label{eq:succ-esteso}
+  a_{1},\ a_{2},\ a_{3},\ a_{4},\ \dots,\ a_{n},\ \dots
+\end{equation}
+Il numero $a_{n}$ si chiama \emph{termine $n$-esimo} (o \emph{termine generale}) della
+successione, e $n$ il suo \emph{indice}.
+\end{definizione}
+
+Parleremo allo stesso modo di successione anche se non sono definiti i termini $a_{n}$
+per i primi indici $n$, cioè per un numero finito di indici, come nel caso considerato
+nel paragrafo precedente, dove era $n\ge3$. Esempi di successioni sono:
+\begin{align}
+  a_{n}&=\frac1n: & &1,\ \tfrac12,\ \tfrac13,\ \tfrac14,\ \dots,\ \tfrac1n,\ \dots \label{eq:succ-1n}\\
+  a_{n}&=\frac{n-1}{n}: & &0,\ \tfrac12,\ \tfrac23,\ \tfrac34,\ \dots,\ \tfrac{n-1}{n},\ \dots \label{eq:succ-n1n}\\
+  a_{n}&=\frac{(-1)^{n}}{n}: & &-1,\ \tfrac12,\ -\tfrac13,\ \tfrac14,\ \dots,\ \tfrac{(-1)^{n}}{n},\ \dots \label{eq:succ-alt-n}\\
+  a_{n}&=(-1)^{n}: & &-1,\ 1,\ -1,\ 1,\ \dots,\ (-1)^{n},\ \dots \label{eq:succ-alt}\\
+  a_{n}&=n^{2}: & &1,\ 4,\ 9,\ 16,\ \dots,\ n^{2},\ \dots \label{eq:succ-n2}
+\end{align}
+I grafici delle successioni \eqref{eq:succ-alt-n} e \eqref{eq:succ-alt} sono riportati
+nella \cref{fig:grafici-successioni}.
+
+\subsection{Limite finito}
+
+\begin{definizione}[Limite finito di una successione]\label{def:limite}\index{limite!di una successione}\index{successione!convergente}
+Un numero reale $a$ è il \emph{limite} della successione $a_{n}$ (si dice anche che
+$a_{n}$ \emph{tende} o \emph{converge} ad $a$), e si scrive
+\begin{equation}\label{eq:lim-notazione}
+  \lim_{n\to+\infty}a_{n}=a \qquad(\text{oppure}\quad a_{n}\to a),
+\end{equation}
+se, qualunque sia $\epsilon>0$, esiste un numero $\nu$ tale che
+$a-\epsilon<a_{n}<a+\epsilon$ per ogni $n>\nu$.
+\end{definizione}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=5.8cm, height=4.4cm, xmin=0, xmax=16.5, ymin=-1.3, ymax=1.3,
+  xtick={5,10,15}, ytick={-1,1}, title={\footnotesize $a_{n}=\frac{(-1)^{n}}{n}$}, title style={at={(0.62,0.92)}}]
+  \addplot[only marks, mark=*, mark size=1.4pt, blu, samples at={1,...,16}] {(-1)^x/x};
+\end{axis}
+\end{tikzpicture}\hfill
+\begin{tikzpicture}
+\begin{axis}[width=5.8cm, height=4.4cm, xmin=0, xmax=16.5, ymin=-1.3, ymax=1.3,
+  xtick={5,10,15}, ytick={-1,1}, title={\footnotesize $a_{n}=(-1)^{n}$}, title style={at={(0.62,0.92)}}]
+  \addplot[only marks, mark=*, mark size=1.4pt, rame, samples at={1,...,16}] {(-1)^x};
+\end{axis}
+\end{tikzpicture}
+\caption{Il grafico di una successione è un insieme di punti isolati $(n,a_{n})$. A
+sinistra la successione \eqref{eq:succ-alt-n}, i cui termini oscillano attorno a $0$
+avvicinandosi sempre più; a destra la successione \eqref{eq:succ-alt}, che oscilla
+indefinitamente tra $-1$ e $1$.}
+\label{fig:grafici-successioni}
+\end{figure}
+
+La relazione $a-\epsilon<a_{n}<a+\epsilon$ si può anche scrivere
+$-\epsilon<a_{n}-a<\epsilon$, e ciò equivale, per la \eqref{eq:mod-lt}, a
+$\abs{a_{n}-a}<\epsilon$. Quindi possiamo ripetere la definizione in simboli:
+\begin{equation}\label{eq:def-limite}
+  \lim_{n\to+\infty}a_{n}=a \quad\sse\quad
+  \perogni\epsilon>0\ \ \esiste\nu : \ \abs{a_{n}-a}<\epsilon\quad\perogni n>\nu .
+\end{equation}
+Si dice anche che una proprietà vale \emph{definitivamente}\index{definitivamente} se vale
+per ogni $n$ maggiore di un opportuno indice $\nu$. Con questo linguaggio:
+\emph{$a_{n}\to a$ se e solo se, per ogni $\epsilon>0$, definitivamente
+$\abs{a_{n}-a}<\epsilon$}. Geometricamente: comunque si fissi un intorno di $a$, i termini
+della successione vi cadono definitivamente, cioè tutti tranne al più un numero finito.
+
+\begin{attenzione}[L'ordine dei quantificatori]
+Nella \eqref{eq:def-limite} l'ordine «$\perogni\epsilon\ \esiste\nu$» è essenziale:
+l'indice $\nu$ si sceglie \emph{dopo} $\epsilon$, e dipende da esso (per sottolinearlo si
+scrive talvolta $\nu=\nu(\epsilon)$). Se si scambiassero i quantificatori,
+«$\esiste\nu\ \perogni\epsilon$: $\abs{a_{n}-a}<\epsilon$ per $n>\nu$», si otterrebbe
+un'affermazione molto più forte: per $n>\nu$ il numero $\abs{a_{n}-a}$, non negativo,
+sarebbe minore di \emph{ogni} $\epsilon>0$, e quindi nullo; la successione sarebbe
+definitivamente \emph{uguale} ad $a$. Scambiare due quantificatori di tipo diverso
+cambia quasi sempre il significato di una frase: «per ogni serratura esiste una chiave
+che la apre» non è la stessa cosa che «esiste una chiave che apre ogni serratura».
+\end{attenzione}
+
+\begin{idea}[Il limite come tolleranza: il residuo di un solutore iterativo]
+Chi ha usato un codice di fluidodinamica computazionale conosce bene questo schema. Un
+solutore iterativo produce una successione di soluzioni approssimate $u_{1},u_{2},\dots$,
+e l'utente fissa una \emph{tolleranza} sul residuo, ad esempio $10^{-6}$: il calcolo si
+considera «converso» quando, da un certo numero di iterazioni in poi, l'errore resta sotto
+la tolleranza. La definizione di limite dice la stessa cosa, ma per \emph{tutte} le
+tolleranze contemporaneamente: la tolleranza è $\epsilon$, il numero di iterazioni
+necessario è $\nu(\epsilon)$, e un metodo converge se, comunque si scelga la tolleranza,
+esiste un numero di iterazioni oltre il quale l'errore non la supera più. Si noti il
+«non la supera \emph{più}»: un residuo che scende sotto la soglia e poi risale non
+soddisfa la definizione.
+\end{idea}
+
+Osserviamo, perché ci sarà utile nel seguito, che la \eqref{eq:def-limite} è equivalente
+a
+\begin{equation}\label{eq:def-limite-c}
+  \lim_{n\to+\infty}a_{n}=a \quad\sse\quad \esiste c>0 :\ \perogni\epsilon>0\ \ \esiste\nu :\
+  \abs{a_{n}-a}<c\,\epsilon\quad\perogni n>\nu ;
+\end{equation}
+infatti la \eqref{eq:def-limite} è il caso $c=1$ della \eqref{eq:def-limite-c}, e
+viceversa dalla \eqref{eq:def-limite-c} si riottiene la \eqref{eq:def-limite} applicandola
+con $\epsilon/c$ al posto di $\epsilon$. Analogamente, nella \eqref{eq:def-limite} ci si può
+limitare a considerare i valori $\epsilon<\epsilon_{0}$, con $\epsilon_{0}>0$ fissato: se
+la condizione vale per gli $\epsilon$ piccoli, vale a maggior ragione per quelli grandi
+(l'indice $\nu$ trovato per $\epsilon_{0}/2$ va bene per ogni $\epsilon\ge\epsilon_{0}$).
+Infine il numero $\nu$ si può sempre supporre naturale: se $\nu$ va bene, va bene anche
+ogni numero più grande, in particolare un naturale maggiore di $\nu$, che esiste per la
+proprietà di Archimede (\cref{teo:archimede}).
+
+\subsection{Primi esempi}
+
+\begin{esempio}\label{es:lim-1n}
+Usando la definizione, verifichiamo che
+\begin{equation}\label{eq:lim-1n}
+  \lim_{n\to+\infty}\frac1n=0 .
+\end{equation}
+Risulta $\abs{a_{n}-a}=\abs{1/n}=1/n$. Dato che $1/n<\epsilon$ equivale a $n>1/\epsilon$,
+basta scegliere $\nu=1/\epsilon$. Cioè abbiamo verificato che per ogni $\epsilon>0$
+esiste $\nu=1/\epsilon$ per cui $\abs{a_{n}-a}=1/n<\epsilon$ per ogni $n>\nu$.
+\end{esempio}
+
+\begin{esempio}\label{es:lim-n1n}
+Verifichiamo ora che
+\begin{equation}\label{eq:lim-n1n}
+  \lim_{n\to+\infty}\frac{n-1}{n}=1 .
+\end{equation}
+Risulta
+\[
+  \abs{a_{n}-a}=\Bigl|\frac{n-1}{n}-1\Bigr|=\Bigl|-\frac1n\Bigr|=\frac1n ;
+\]
+in questo esempio si vede l'importanza di considerare il valore assoluto di $a_{n}-a$: si
+trova $\abs{a_{n}-a}=1/n$ e poi si procede come nel caso precedente.
+\end{esempio}
+
+\begin{esempio}[Un limite sbagliato]\label{es:lim-sbagliato}
+Naturalmente non abbiamo scelto a caso i valori $a=0$ e $a=1$ nei due esempi precedenti.
+Proviamo a vedere che cosa succede se tentassimo invece di dimostrare che
+$\lim_{n\to+\infty}\frac1n=1$. Avremmo
+\[
+  \abs{a_{n}-a}=\Bigl|\frac1n-1\Bigr|=1-\frac1n<\epsilon
+  \quad\sse\quad \frac1n>1-\epsilon .
+\]
+Questa relazione non crea problemi se $\epsilon$ è grande: ad esempio, se $\epsilon=1$ è
+verificata da ogni $n\in\N$. Ma se $\epsilon$ è più piccolo, ad esempio $\epsilon=1/2$,
+allora $1/n>1/2$ è verificata solo se $n<2$. Cioè solo $a_{1}$ verifica la relazione
+data, e non gli $a_{n}$ con $n>\nu$, comunque si scelga $\nu$. Ciò prova che $a=1$
+\emph{non} è il limite della successione $1/n$: la definizione deve valere per
+\emph{ogni} $\epsilon>0$, e basta un solo $\epsilon$ per cui fallisce a farla cadere.
+\end{esempio}
+
+\begin{python}[Quanto deve essere grande $\nu$?]
+# a_n = (2n+1)/(n+3) -> 2. Si ha |a_n - 2| = 5/(n+3), e la condizione
+# |a_n - 2| < eps equivale a n > 5/eps - 3. Confrontiamo la formula
+# con la ricerca "brutale" del primo indice da cui essa vale sempre.
+from fractions import Fraction as F
+import math
+
+def a(n):
+    return F(2 * n + 1, n + 3)
+
+for eps in [F(1, 10), F(1, 100), F(1, 1000), F(1, 10**6)]:
+    nu = max(0, math.floor(5 / eps - 3))   # disuguaglianza risolta
+    primo = 1
+    while abs(a(primo) - 2) >= eps:        # |a_n - 2| decresce
+        primo += 1
+    print(f"eps = {float(eps):.0e}:  nu = {nu:>7d},"
+          f"  primo indice buono = {primo}")
+\end{python}
+\begin{risultato}
+eps = 1e-01:  nu =      47,  primo indice buono = 48
+eps = 1e-02:  nu =     497,  primo indice buono = 498
+eps = 1e-03:  nu =    4997,  primo indice buono = 4998
+eps = 1e-06:  nu = 4999997,  primo indice buono = 4999998
+\end{risultato}
+
+Il programma mostra concretamente la dipendenza di $\nu$ da $\epsilon$: per guadagnare
+una cifra decimale di precisione occorre moltiplicare per $10$ l'indice. Si noti che la
+ricerca «brutale» del primo indice buono funziona solo perché $\abs{a_{n}-2}$ decresce al
+crescere di $n$; in generale un calcolatore non può verificare la definizione di limite,
+che riguarda infiniti termini: per questo servono le dimostrazioni.
+
+\subsection{Unicità del limite}
+
+Con un argomento simile a quello dell'\cref{es:lim-sbagliato} verifichiamo che il limite,
+se esiste, è uno solo: è ciò che giustifica l'articolo determinativo e la notazione
+$\lim a_{n}=a$.
+
+\begin{teorema}[Unicità del limite]\label{teo:unicita-limite}\index{limite!unicità}
+Una successione convergente non può avere due limiti distinti.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$a_{n}\to a$ \ e \ $a_{n}\to b$, con $a,b\in\R$.}
+\Tesi{$a=b$.}
+\end{schema}
+
+\begin{strategia}
+Ragioniamo per assurdo: se fosse $a\neq b$, i due numeri avrebbero una distanza
+$\abs{a-b}>0$, e potremmo scegliere due intorni di $a$ e di $b$ \emph{disgiunti}: basta
+prendere entrambi di raggio $\epsilon=\abs{a-b}/2$, metà della distanza
+(\cref{fig:unicita-limite}). Ma la successione dovrebbe cadere definitivamente in
+entrambi, e un numero non può stare in due intervalli disgiunti. Per rendere rigoroso
+il «non può stare in entrambi» usiamo la disuguaglianza triangolare: se $a_{n}$ distasse
+meno di $\epsilon$ sia da $a$ sia da $b$, la distanza tra $a$ e $b$ sarebbe minore di
+$2\epsilon=\abs{a-b}$. Un altro ingrediente, che useremo continuamente: se due proprietà
+valgono definitivamente, valgono definitivamente \emph{insieme} (basta prendere il più
+grande dei due indici).
+\end{strategia}
+
+\begin{dimostrazione}
+Supponiamo per assurdo che esistano due limiti distinti, cioè supponiamo che
+$a_{n}\to a$, $a_{n}\to b$, con $a\neq b$. Poniamo $\epsilon=\abs{a-b}/2$ $(>0)$. Si ha
+\begin{equation}\label{eq:unicita-passo}
+  \esiste\nu_{1}:\ \abs{a_{n}-a}<\epsilon\quad\perogni n>\nu_{1}; \qquad
+  \esiste\nu_{2}:\ \abs{a_{n}-b}<\epsilon\quad\perogni n>\nu_{2}.
+\end{equation}
+Ponendo $\nu=\max\{\nu_{1},\nu_{2}\}$, le relazioni sopra scritte valgono
+contemporaneamente per $n>\nu$, e si ha (utilizzando la disuguaglianza triangolare,
+\cref{teo:triangolare})
+\begin{equation}\label{eq:unicita-triangolare}
+\begin{split}
+  \abs{a-b}&=\abs{(a-a_{n})+(a_{n}-b)}\le\abs{a-a_{n}}+\abs{a_{n}-b}\\
+  &=\abs{a_{n}-a}+\abs{a_{n}-b}<\epsilon+\epsilon=\abs{a-b}.
+\end{split}
+\end{equation}
+Abbiamo così trovato che $\abs{a-b}<\abs{a-b}$, che è assurdo.
+\end{dimostrazione}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}[x=1cm, every node/.style={font=\footnotesize}]
+  \draw[-Latex, grigio] (-0.5,0) -- (9.5,0);
+  \fill[blu!15] (1,-0.15) rectangle (4,0.15);
+  \fill[rame!20] (4,-0.15) rectangle (7,0.15);
+  \draw[blu, thick] (2.5,-0.12) -- (2.5,0.12) node[above=4pt] {$a$};
+  \draw[rame, thick] (5.5,-0.12) -- (5.5,0.12) node[above=4pt] {$b$};
+  \draw[blu, decorate, decoration={brace, amplitude=3pt, mirror}] (1,-0.3) -- (4,-0.3) node[midway, below=4pt] {$(a-\epsilon,a+\epsilon)$};
+  \draw[rame, decorate, decoration={brace, amplitude=3pt, mirror}] (4.02,-0.3) -- (7,-0.3) node[midway, below=4pt] {$(b-\epsilon,b+\epsilon)$};
+  \draw[grigio, decorate, decoration={brace, amplitude=3pt}] (2.5,0.85) -- (5.5,0.85) node[midway, above=3pt] {$\abs{a-b}=2\epsilon$};
+\end{tikzpicture}
+\caption{L'idea della dimostrazione del \cref{teo:unicita-limite}: con
+$\epsilon=\abs{a-b}/2$ i due intorni sono disgiunti, e i termini della successione non
+possono cadere definitivamente in entrambi.}
+\label{fig:unicita-limite}
+\end{figure}
+
+\subsection{Successioni oscillanti}
+
+Esaminiamo ora le successioni \eqref{eq:succ-alt-n} e \eqref{eq:succ-alt}. Si ha che
+\begin{equation}\label{eq:lim-alt-n}
+  \lim_{n\to+\infty}\frac{(-1)^{n}}{n}=0 ;
+\end{equation}
+infatti $\abs{a_{n}-a}=\abs{(-1)^{n}/n}=1/n$, e poi si procede come fatto per il limite
+\eqref{eq:lim-1n}. Invece il limite della successione $(-1)^{n}$ non esiste.
+
+\begin{proposizione}\label{prop:alterna-non-converge}
+La successione $a_{n}=(-1)^{n}$ non ha limite finito.
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$a_{n}=(-1)^{n}$; \ $a\in\R$ arbitrario.}
+\Tesi{$\esiste\epsilon>0$ tale che $\perogni\nu$ $\esiste n>\nu$ con
+$\abs{a_{n}-a}\ge\epsilon$, cioè $a$ non è il limite di $a_{n}$.}
+\end{schema}
+
+\begin{strategia}
+Dobbiamo negare la definizione: per ogni candidato $a$ va trovato un $\epsilon>0$ tale
+che, oltre qualunque indice $\nu$, qualche termine disti da $a$ almeno $\epsilon$. Con
+$\epsilon=1$ funziona: i valori $1$ e $-1$ distano $2$, e per la disuguaglianza
+triangolare $a$ non può distare meno di $1$ da entrambi; poiché sia i termini di posto
+pari sia quelli di posto dispari compaiono oltre ogni $\nu$, quello «lontano» da $a$
+compare sempre.
+\end{strategia}
+
+\begin{dimostrazione}
+Sia $a\in\R$ qualsiasi. Per la disuguaglianza triangolare
+\[
+  2=\abs{1-(-1)}=\abs{(1-a)+(a+1)}\le\abs{1-a}+\abs{-1-a},
+\]
+quindi almeno uno dei due numeri $\abs{1-a}$, $\abs{-1-a}$ è maggiore o uguale a $1$.
+Supponiamo, ad esempio, $\abs{-1-a}\ge1$ (l'altro caso è analogo, con «pari» al posto di
+«dispari»). Allora, scelto $\epsilon=1$, per ogni $\nu$ esiste un indice dispari $n>\nu$
+(ad esempio $n=2m+1$, dove $m$ è un naturale maggiore di $\nu$, che esiste per la
+proprietà di Archimede), e per tale $n$ si ha $\abs{a_{n}-a}=\abs{-1-a}\ge1=\epsilon$.
+Dunque per $\epsilon=1$ nessun indice $\nu$ soddisfa la definizione: $a$ non è il limite.
+Poiché $a$ era arbitrario, la successione non ha limite finito.
+\end{dimostrazione}
+
+\subsection{Limiti infiniti}
+
+Infine la successione \eqref{eq:succ-n2} tende a $+\infty$ secondo la definizione
+seguente.
+
+\begin{definizione}[Limite infinito]\label{def:limite-infinito}\index{limite!infinito}\index{successione!divergente}
+Una successione $a_{n}$ ha limite uguale a $+\infty$ (si dice anche che $a_{n}$
+\emph{tende} o \emph{diverge} a $+\infty$), e si scrive
+\begin{equation}\label{eq:lim-piu-infinito}
+  \lim_{n\to+\infty}a_{n}=+\infty \qquad(\text{oppure}\quad a_{n}\to+\infty),
+\end{equation}
+se, qualunque sia $M>0$, esiste un numero $\nu$ tale che $a_{n}>M$ per ogni $n>\nu$. Si
+dà una definizione analoga nel caso di limite uguale a $-\infty$. In simboli:
+\begin{align}
+  \lim_{n\to+\infty}a_{n}=+\infty \quad&\sse\quad \perogni M>0\ \ \esiste\nu :\ a_{n}>M \quad\perogni n>\nu; \label{eq:def-piu-inf}\\
+  \lim_{n\to+\infty}a_{n}=-\infty \quad&\sse\quad \perogni M>0\ \ \esiste\nu :\ a_{n}<-M \quad\perogni n>\nu. \label{eq:def-meno-inf}
+\end{align}
+\end{definizione}
+
+\begin{esempio}
+$n^{2}\to+\infty$: fissato $M>0$, si ha $n^{2}\ge n>M$ per ogni $n>\nu=M$. Analogamente
+$-n^{2}\to-\infty$. Anche la successione $a_{n}=n$ diverge a $+\infty$: è la proprietà di
+Archimede, riletta nel linguaggio dei limiti.
+\end{esempio}
+
+\begin{marginfigure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=5.4cm, height=4.6cm, xmin=0, xmax=8.5, ymin=0, ymax=40,
+  xtick={2,6,8}, extra x ticks={4.47}, extra x tick labels={$\nu$},
+  ytick={20}, yticklabels={$M$}]
+  \fill[verde!15] (axis cs:4.47,20) rectangle (axis cs:8.5,40);
+  \addplot[tratteggio, domain=0:8.5] {20};
+  \addplot[only marks, mark=*, mark size=1.4pt, blu, samples at={1,...,6}] {x^2};
+  \addplot[tratteggio] coordinates {(4.47,0) (4.47,20)};
+\end{axis}
+\end{tikzpicture}
+\caption{$a_{n}=n^{2}\to+\infty$: fissato un livello $M$, i termini con $n>\nu=\sqrt M$
+stanno tutti al di sopra di $M$.}
+\end{marginfigure}
+
+\begin{definizione}[Terminologia]\index{successione!regolare}\index{successione!infinitesima}
+Una successione si dice \emph{convergente} se ammette limite finito, mentre si dice
+\emph{divergente} se ammette limite uguale a $+\infty$ oppure a $-\infty$. Le successioni
+convergenti o divergenti si dicono \emph{regolari}, mentre le successioni che non
+ammettono limite (né finito né infinito) si dicono \emph{non regolari} o
+\emph{oscillanti}. Infine, una successione che converge a zero si dice
+\emph{infinitesima}, mentre una successione divergente si dice anche \emph{infinita}.
+\end{definizione}
+
+La successione $(-1)^{n}$ è non regolare: non ha limite finito
+(\cref{prop:alterna-non-converge}) e non diverge, perché è compresa tra $-1$ e $1$ (con
+$M=1$ nessun termine supera $M$). Anche per i limiti infiniti vale l'unicità: una
+successione non può tendere sia a $+\infty$ sia a $-\infty$ (con $M=1$, definitivamente
+dovrebbe essere $a_{n}>1$ e $a_{n}<-1$), né contemporaneamente a un limite finito $a$ e a
+$\pm\infty$ (con $\epsilon=1$ e $M=\abs a+1$, definitivamente sarebbe
+$\abs{a_{n}}<\abs a+1$ e $\abs{a_{n}}>\abs a+1$).
+
+\begin{notastorica}[Dalle «ultime ragioni» all'$\epsilon$]
+Newton, nei \emph{Principia} (1687), parlava di «ultime ragioni di quantità
+evanescenti», cioè del rapporto tra due quantità «nell'istante in cui svaniscono»: un
+concetto efficace ma oscuro, che il vescovo George Berkeley ridicolizzò nel 1734
+chiamando gli incrementi evanescenti «fantasmi di quantità defunte». Eppure, quasi
+trent'anni prima dei \emph{Principia}, una definizione sorprendentemente vicina alla
+nostra era già stata scritta. Nei \emph{Geometriae speciosae elementa} (1659) il
+bolognese Pietro Mengoli chiamava «quasi infinita» una quantità variabile che può
+superare ogni numero assegnato, «quasi nulla» una che può diventare minore di ogni
+numero positivo, e «quasi $a$» una che può essere resa minore di ogni numero maggiore di
+$a$ e maggiore di ogni numero minore di $a$: è, in sostanza, la condizione
+$a-\epsilon<a_{n}<a+\epsilon$. Ne ricavò anche le regole per i limiti di somme, prodotti e
+quozienti (\cref{sec:operazioni-limiti}); ma le sue idee restarono ignorate, anche perché
+l'interesse per le successioni sarebbe nato molto più tardi (sulle sue ricerche sulle
+serie si veda la nota storica del \S\ref{sec:serie-numeriche}). D'Alembert,
+nell'\emph{Encyclopédie} (1765), definì il limite a parole come una grandezza a cui un'altra «si avvicina più di
+qualsiasi quantità data», e Cauchy, nel \emph{Cours d'analyse} (1821) da cui è tratta
+l'epigrafe del capitolo, ne fece il fondamento di tutta l'Analisi. Ma la definizione nella
+forma che abbiamo dato, con i quantificatori «per ogni $\epsilon$ esiste $\nu$» e le
+disuguaglianze esplicite, si deve a Karl Weierstrass (1815--1897), che la insegnò nelle
+sue lezioni berlinesi a partire dagli anni Sessanta dell'Ottocento; i suoi allievi la
+diffusero. La lettera $\epsilon$ era già usata da Cauchy (\emph{Résumé des leçons}, 1823); per
+tradizione la si legge come iniziale di \emph{erreur}, «errore».
+\end{notastorica}

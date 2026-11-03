@@ -1,0 +1,486 @@
+%% ----------------------------------------------------------------------------
+%%  §6.3  Funzioni crescenti e decrescenti
+%% ----------------------------------------------------------------------------
+\section{Funzioni crescenti e decrescenti}
+\label{sec:monotonia}
+
+Ricordiamo (\cref{sec:invertibili}) che una funzione $f$ si dice
+\emph{crescente} in un insieme se $x_{1}<x_{2}$ implica $f(x_{1})\le f(x_{2})$, e
+\emph{strettamente crescente} se $x_{1}<x_{2}$ implica $f(x_{1})<f(x_{2})$; analogamente
+per le funzioni decrescenti. L'intuizione dice che una funzione con derivata positiva
+«sale». Il teorema di Lagrange permette di trasformare questa intuizione in un
+teorema, e anzi in una caratterizzazione completa.
+
+\begin{teorema}[Criterio di monotonia]\label{teo:criterio-monotonia}
+\index{criterio!di monotonia}\index{funzione!crescente!criterio}
+Sia $f$ una funzione continua nell'intervallo $[a,b]$ e derivabile in $(a,b)$. Allora
+\begin{equation}\label{eq:criterio-monotonia}
+  f \text{ è crescente in } [a,b] \quad\sse\quad f'(x)\ge0 \quad\perogni x\in(a,b);
+\end{equation}
+analogamente, $f$ è decrescente in $[a,b]$ se e solo se $f'(x)\le0$ per ogni
+$x\in(a,b)$.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$ continua in $[a,b]$, derivabile in $(a,b)$.}
+\Tesi{$f$ crescente in $[a,b]$ \ $\sse$ \ $f'\ge0$ in $(a,b)$.}
+\end{schema}
+
+\begin{strategia}
+Le due implicazioni si dimostrano con strumenti diversi. L'implicazione «$\Leftarrow$»
+va dal locale al globale: dobbiamo confrontare $f(x_{1})$ e $f(x_{2})$ conoscendo solo il
+segno della derivata. Il teorema di Lagrange scrive esattamente la differenza
+$f(x_{2})-f(x_{1})$ come prodotto della derivata in un punto intermedio per
+$x_{2}-x_{1}>0$. L'implicazione «$\Rightarrow$» va dal globale al locale ed è più
+semplice: per una funzione crescente il rapporto incrementale è sempre $\ge0$, qualunque
+sia il segno dell'incremento, e la disuguaglianza passa al limite.
+\end{strategia}
+
+\begin{dimostrazione}
+\emph{($\Leftarrow$)} Supponiamo $f'(x)\ge0$ per ogni $x\in(a,b)$ e siano
+$x_{1},x_{2}\in[a,b]$ con $x_{1}<x_{2}$. La funzione $f$ è continua in $[x_{1},x_{2}]$ e
+derivabile in $(x_{1},x_{2})\subseteq(a,b)$; per il teorema di Lagrange
+(\cref{teo:lagrange}) esiste $x_{0}\in(x_{1},x_{2})$ tale che
+\begin{equation}\label{eq:monotonia-lagrange}
+  f(x_{2})-f(x_{1})=f'(x_{0})\,(x_{2}-x_{1}) .
+\end{equation}
+Il secondo membro è il prodotto di $f'(x_{0})\ge0$ per $x_{2}-x_{1}>0$, quindi è $\ge0$:
+risulta $f(x_{1})\le f(x_{2})$, e $f$ è crescente.
+
+\emph{($\Rightarrow$)} Supponiamo $f$ crescente in $[a,b]$ e sia $x\in(a,b)$. Per ogni
+$h\neq0$ tale che $x+h\in[a,b]$, il numeratore e il denominatore del rapporto
+incrementale $\frac{f(x+h)-f(x)}{h}$ hanno lo stesso segno (se $h>0$ è $f(x+h)\ge f(x)$,
+se $h<0$ è $f(x+h)\le f(x)$); quindi il rapporto è $\ge0$. Per il teorema del confronto
+(\cref{teo:confronto-funzioni}\,(ii)) anche il suo limite per $h\to0$, cioè $f'(x)$, è
+$\ge0$.
+
+Il caso delle funzioni decrescenti si ottiene applicando quanto provato a $-f$.
+\end{dimostrazione}
+
+\begin{osservazione}[Intervalli qualunque]\label{oss:monotonia-intervalli}
+Il criterio vale in un intervallo $I$ qualunque (aperto, chiuso, semiaperto, limitato o
+no), purché $f$ sia continua in $I$ e derivabile nei punti interni di $I$. Infatti la
+monotonia in $I$ è una proprietà che riguarda le coppie di punti $x_{1}<x_{2}$ di $I$,
+e per ciascuna coppia basta applicare il teorema all'intervallo $[x_{1},x_{2}]\subseteq I$.
+\end{osservazione}
+
+\begin{attenzione}[L'ipotesi che il dominio sia un intervallo è essenziale]
+La funzione $f(x)=\frac1x$ ha derivata $f'(x)=-\frac1{x^{2}}<0$ in ogni punto del suo
+dominio $\R\setminus\{0\}$, ma \emph{non} è decrescente in tale insieme: ad esempio
+$-1<1$ e $f(-1)=-1<1=f(1)$. È invece decrescente in ciascuno dei due intervalli
+$(-\infty,0)$ e $(0,+\infty)$ (\cref{fig:x3-iperbole}, a destra). Nella dimostrazione,
+il teorema di Lagrange non si può applicare a $[-1,1]$, che contiene il punto $0$ in cui
+$f$ non è definita. Dire «$f$ è decrescente perché ha derivata negativa» senza
+specificare l'intervallo è un errore frequente.
+\end{attenzione}
+
+\begin{esempio}[Monotonia delle funzioni elementari]\label{es:monotonia-elementari}
+Le funzioni $e^{x}$, $\log x$, $\operatorname{arctg}x$ hanno derivate $e^{x}$,
+$\frac1x$, $\frac1{1+x^{2}}$, positive nei rispettivi domini, che sono intervalli; per il
+criterio sono crescenti (anzi strettamente crescenti, come vedremo tra poco). La
+funzione $x^{2}$ ha derivata $2x$, negativa per $x<0$ e positiva per $x>0$: è
+decrescente in $(-\infty,0]$ e crescente in $[0,+\infty)$. Si noti che questi fatti erano
+già noti dai capitoli precedenti, ma ora discendono tutti da un unico calcolo.
+
+La funzione $f(x)=x^{3}-3x$ ha derivata $f'(x)=3x^{2}-3=3(x-1)(x+1)$, positiva per
+$\abs x>1$ e negativa per $\abs x<1$. Quindi $f$ è crescente in $(-\infty,-1]$,
+decrescente in $[-1,1]$ e di nuovo crescente in $[1,+\infty)$. Ne segue che $x=-1$ è un
+punto di massimo relativo, con $f(-1)=2$, e $x=1$ è un punto di minimo relativo, con
+$f(1)=-2$ (\cref{fig:cubica-monotonia}). Nessuno dei due è assoluto, perché
+$f(x)\to\pm\infty$ per $x\to\pm\infty$.
+\end{esempio}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.8\textwidth, height=6.2cm, xmin=-2.5, xmax=2.5, ymin=-3.3, ymax=3.3,
+  xtick={-1.732,-1,1,1.732}, xticklabels={}, ytick={-2,2},
+  yticklabels={$-2$,{}}, xlabel={$x$}, ylabel={$y$}, clip=false]
+  \addplot[curva, domain=-2.1:2.1, samples=120] {x^3-3*x};
+  \addplot[tratteggio] coordinates {(-1,0) (-1,2) (0,2)};
+  \addplot[tratteggio] coordinates {(1,0) (1,-2) (0,-2)};
+  \node[font=\scriptsize, anchor=west] at (axis cs:0.05,2) {$2$};
+  \addplot[only marks, mark=*, mark size=1.6pt, rame] coordinates {(-1,2) (1,-2)};
+  \node[font=\scriptsize, rame, above] at (axis cs:-1,2.05) {max.\ rel.};
+  \node[font=\scriptsize, rame, below] at (axis cs:1,-2.05) {min.\ rel.};
+  \node[font=\scriptsize, blu, anchor=east] at (axis cs:1.9,2.75) {$y=x^{3}-3x$};
+  \node[font=\scriptsize, anchor=north] at (axis cs:-1,-0.05) {$-1$};
+  \node[font=\scriptsize, anchor=south] at (axis cs:1,0.05) {$1$};
+  \node[font=\scriptsize, anchor=south east] at (axis cs:-1.78,0.05) {$-\sqrt3$};
+  \node[font=\scriptsize, anchor=north west] at (axis cs:1.78,-0.05) {$\sqrt3$};
+  % schema dei segni di f'
+  \draw[grigio, thin] (axis cs:-2.4,-3.9) -- (axis cs:2.4,-3.9);
+  \node[font=\scriptsize, grigio, anchor=east] at (axis cs:-2.45,-3.9) {$f'$};
+  \draw[grigio] (axis cs:-1,-3.75) -- (axis cs:-1,-4.05);
+  \draw[grigio] (axis cs:1,-3.75) -- (axis cs:1,-4.05);
+  \node[font=\scriptsize] at (axis cs:-1,-4.35) {$0$};
+  \node[font=\scriptsize] at (axis cs:1,-4.35) {$0$};
+  \node[font=\scriptsize, verde!50!black] at (axis cs:-1.75,-3.68) {$+\ \ \nearrow$};
+  \node[font=\scriptsize, rosso] at (axis cs:0,-3.68) {$-\ \ \searrow$};
+  \node[font=\scriptsize, verde!50!black] at (axis cs:1.75,-3.68) {$+\ \ \nearrow$};
+\end{axis}
+\end{tikzpicture}
+\caption{La funzione $f(x)=x^{3}-3x$ e lo schema del segno della derivata
+$f'(x)=3(x-1)(x+1)$: dove $f'>0$ la funzione cresce, dove $f'<0$ decresce. Il passaggio
+da crescente a decrescente in $x=-1$ individua un massimo relativo, quello da
+decrescente a crescente in $x=1$ un minimo relativo.}
+\label{fig:cubica-monotonia}
+\end{figure}
+
+Lo studio del segno della derivata si presta bene a essere automatizzato. Il programma
+seguente trova i punti in cui $f'$ si annulla e determina il segno di $f'$ in ciascuno
+degli intervalli che essi individuano, valutando la derivata in un punto di prova
+interno. Il procedimento è corretto perché $f'$ è continua e, per il teorema degli zeri
+(\cref{teo:zeri}), non può cambiare segno all'interno di un intervallo in cui non si
+annulla.
+
+\begin{python}[Gli intervalli di monotonia dal segno della derivata]
+import sympy as sp
+
+x = sp.symbols("x", real=True)
+
+def punto_interno(p, q):
+    """Un punto di prova nell'intervallo aperto (p, q)."""
+    if p.is_finite and q.is_finite:
+        return (p + q) / 2
+    if p.is_finite:
+        return p + 1
+    return q - 1 if q.is_finite else sp.Integer(0)
+
+def tabella_monotonia(f):
+    """Intervalli di monotonia di f su R, dal segno di f'."""
+    df = sp.factor(sp.diff(f, x))
+    critici = sorted(sp.solveset(df, x, sp.S.Reals))
+    print(f"f = {f},   f' = {df},   f' = 0 in {critici}")
+    nodi = [-sp.oo] + critici + [sp.oo]
+    for p, q in zip(nodi[:-1], nodi[1:]):
+        s = sp.sign(df.subs(x, punto_interno(p, q)))
+        verso = "crescente" if s > 0 else "decrescente"
+        print(f"  ({p}, {q}):  f' {'+' if s > 0 else '-'}  {verso}")
+
+tabella_monotonia(x**3 - 3*x)
+tabella_monotonia(x**4 - 2*x**2)
+\end{python}
+\begin{risultato}
+f = x**3 - 3*x,   f' = 3*(x - 1)*(x + 1),   f' = 0 in [-1, 1]
+  (-oo, -1):  f' +  crescente
+  (-1, 1):  f' -  decrescente
+  (1, oo):  f' +  crescente
+f = x**4 - 2*x**2,   f' = 4*x*(x - 1)*(x + 1),   f' = 0 in [-1, 0, 1]
+  (-oo, -1):  f' -  decrescente
+  (-1, 0):  f' +  crescente
+  (0, 1):  f' -  decrescente
+  (1, oo):  f' +  crescente
+\end{risultato}
+
+\subsection{Funzioni con derivata nulla}
+
+Un caso particolare del criterio di monotonia è di importanza fondamentale.
+
+\begin{corollario}[Caratterizzazione delle funzioni costanti]\label{cor:funzioni-costanti}
+\index{funzione!costante!caratterizzazione}
+Sia $f$ continua in $[a,b]$ e derivabile in $(a,b)$. Allora $f$ è costante in $[a,b]$
+se e solo se $f'(x)=0$ per ogni $x\in(a,b)$.
+\end{corollario}
+
+\begin{schema}
+\Ipotesi{$f$ continua in $[a,b]$, derivabile in $(a,b)$.}
+\Tesi{$f$ costante in $[a,b]$ \ $\sse$ \ $f'=0$ in $(a,b)$.}
+\end{schema}
+
+\begin{strategia}
+Una funzione è costante se e solo se è contemporaneamente crescente e decrescente; e la
+derivata è nulla se e solo se è contemporaneamente $\ge0$ e $\le0$. Basta applicare due
+volte il criterio di monotonia.
+\end{strategia}
+
+\begin{dimostrazione}
+Se $f$ è costante, la sua derivata è nulla \eqref{eq:derivata-costante}. Viceversa, se
+$f'(x)=0$ in $(a,b)$, risulta sia $f'\ge0$ sia $f'\le0$; per il
+\cref{teo:criterio-monotonia} $f$ è sia crescente sia decrescente in $[a,b]$. Allora,
+per ogni $x\in[a,b]$, da $a\le x$ segue $f(a)\le f(x)$ e $f(a)\ge f(x)$, cioè
+$f(x)=f(a)$.
+\end{dimostrazione}
+
+Anche qui il dominio deve essere un intervallo: la funzione che vale $1$ per $x>0$ e
+$-1$ per $x<0$ ha derivata nulla in tutto il suo dominio $\R\setminus\{0\}$, ma non è
+costante. Un esempio meno artificioso è offerto dalla funzione
+$\operatorname{arctg}x+\operatorname{arctg}\frac1x$, la cui derivata è nulla per ogni
+$x\neq0$ (\cref{es:arctg-1-su-x}): la funzione vale $\frac\pi2$ in $(0,+\infty)$ e
+$-\frac\pi2$ in $(-\infty,0)$. Analogamente, l'identità
+$\arcsen x+\arccos x=\frac\pi2$, dimostrata per via trigonometrica
+nell'\cref{oss:arcsen-arccos}, si ritrova ora senza calcoli: la funzione
+$\arcsen x+\arccos x$ è continua in $[-1,1]$ e ha derivata
+$\frac1{\sqrt{1-x^{2}}}-\frac1{\sqrt{1-x^{2}}}=0$ in $(-1,1)$; quindi è costante, e il
+suo valore è quello assunto in $x=0$, cioè $0+\frac\pi2$.
+
+\begin{corollario}[Funzioni con la stessa derivata]\label{cor:stessa-derivata}
+Se $f$ e $g$ sono continue in un intervallo $I$, derivabili nei punti interni e
+$f'(x)=g'(x)$ in tali punti, allora esiste una costante $c$ tale che $f(x)=g(x)+c$ per
+ogni $x\in I$.
+\end{corollario}
+
+\begin{schema}
+\Ipotesi{$f,g$ continue nell'intervallo $I$, derivabili nei punti interni, con $f'=g'$.}
+\Tesi{$f-g$ è costante in $I$.}
+\end{schema}
+
+\begin{strategia}
+Si applica la caratterizzazione delle funzioni costanti alla differenza $f-g$, la cui
+derivata è $f'-g'=0$.
+\end{strategia}
+
+\begin{dimostrazione}
+La funzione $f-g$ ha derivata nulla nei punti interni di $I$, ed è quindi costante per
+il \cref{cor:funzioni-costanti} (applicato a ogni intervallo chiuso contenuto in $I$).
+\end{dimostrazione}
+
+Questo corollario, apparentemente modesto, è alla base del calcolo integrale: le
+funzioni che hanno una derivata assegnata (le \emph{primitive}) differiscono tra loro
+per una costante. Ne vediamo subito un'applicazione a un problema fisico.
+
+\begin{esempio}[La pressione nella stratosfera]\label{es:atmosfera-isoterma}
+Nell'atmosfera standard internazionale (ISA), tra le quote $z_{1}=11\,000$~m e
+$20\,000$~m la temperatura è costante, $T=216{,}65$~K. L'equilibrio idrostatico di
+uno strato d'aria impone $p'(z)=-\rho(z)g$, e l'equazione di stato dei gas perfetti dà
+$\rho=\frac{p}{RT}$; quindi la pressione verifica
+\begin{equation}\label{eq:isoterma}
+  p'(z)=-\frac{p(z)}{H}, \qquad H=\frac{RT}{g},
+\end{equation}
+con la condizione $p(z_{1})=p_{1}=22\,632$~Pa. Una soluzione è
+$p(z)=p_{1}e^{-(z-z_{1})/H}$, come si verifica derivando. \emph{È l'unica?} Sia $p$ una
+qualunque funzione derivabile che verifica la \eqref{eq:isoterma}, e consideriamo
+$\varphi(z)=p(z)\,e^{(z-z_{1})/H}$. Per la regola del prodotto e per la
+\eqref{eq:isoterma},
+\begin{align*}
+  \varphi'(z)&=p'(z)\,e^{(z-z_{1})/H}+p(z)\,\frac{e^{(z-z_{1})/H}}{H}\\
+  &=\Bigl(p'(z)+\frac{p(z)}H\Bigr)e^{(z-z_{1})/H}=0 .
+\end{align*}
+Per il \cref{cor:funzioni-costanti} $\varphi$ è costante, e quindi
+$\varphi(z)=\varphi(z_{1})=p_{1}$, cioè $p(z)=p_{1}e^{-(z-z_{1})/H}$: la soluzione è
+unica. Lo stesso ragionamento mostra che \emph{l'unica funzione derivabile su $\R$ tale
+che $f'=f$ e $f(0)=1$ è $e^{x}$}. La costante $H$, detta \emph{altezza di scala}, è la
+quota di cui bisogna salire perché la pressione si riduca di un fattore $e$.
+\end{esempio}
+
+\begin{python}[La pressione nello strato isotermo dell'atmosfera ISA]
+import math
+
+# ISA, strato isotermo tra 11 e 20 km
+R, g, T = 287.05, 9.80665, 216.65        # J/(kg K), m/s^2, K
+z1, p1 = 11000.0, 22632.0                # m, Pa (tropopausa)
+H = R * T / g                            # altezza di scala
+p = lambda z: p1 * math.exp(-(z - z1) / H)
+print(f"H = {H:.1f} m")
+for z in (11000, 14000, 17000, 20000):
+    rho = p(z) / (R * T)
+    print(f"z = {z:5d} m   p = {p(z):8.1f} Pa"
+          f"   rho = {rho:.4f} kg/m^3")
+\end{python}
+\begin{risultato}
+H = 6341.6 m
+z = 11000 m   p =  22632.0 Pa   rho = 0.3639 kg/m^3
+z = 14000 m   p =  14101.7 Pa   rho = 0.2268 kg/m^3
+z = 17000 m   p =   8786.6 Pa   rho = 0.1413 kg/m^3
+z = 20000 m   p =   5474.8 Pa   rho = 0.0880 kg/m^3
+\end{risultato}
+
+I valori coincidono con quelli tabulati dall'ISA (a $20$~km, $p\approx5475$~Pa e
+$\rho\approx0{,}0880$~kg/m$^{3}$): le tabelle dell'atmosfera standard, in questo strato,
+non sono altro che la soluzione unica della \eqref{eq:isoterma}.
+
+\subsection{Monotonia stretta}
+
+Una funzione con derivata positiva è strettamente crescente; ma vale anche il
+viceversa? La funzione $x^{3}$ è strettamente crescente su $\R$, perché
+$x_{1}<x_{2}\sse x_{1}^{3}<x_{2}^{3}$, eppure la sua derivata $3x^{2}$ si annulla in
+$x=0$ (\cref{fig:x3-iperbole}, a sinistra). La derivata di una funzione strettamente
+crescente può dunque annullarsi in qualche punto; ciò che non può fare è annullarsi in
+tutto un intervallo.
+
+\begin{teorema}[Criterio di stretta monotonia]\label{teo:stretta-monotonia}
+\index{criterio!di stretta monotonia}
+Sia $f$ continua in $[a,b]$ e derivabile in $(a,b)$. Allora $f$ è strettamente
+crescente in $[a,b]$ se e solo se
+\begin{enumerate}[label=\textup{(\roman*)}]
+  \item $f'(x)\ge0$ per ogni $x\in(a,b)$, e
+  \item $f'$ non è identicamente nulla in alcun intervallo $[x_{1},x_{2}]\subseteq(a,b)$
+  con $x_{1}<x_{2}$.
+\end{enumerate}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$ continua in $[a,b]$, derivabile in $(a,b)$.}
+\Tesi{$f$ strettamente crescente \ $\sse$ \ $f'\ge0$ in $(a,b)$ e $f'$ non si annulla
+identicamente in alcun sottointervallo.}
+\end{schema}
+
+\begin{strategia}
+Si confronta la monotonia stretta con quella debole: una funzione crescente che non è
+strettamente crescente assume lo stesso valore in due punti $x_{1}<x_{2}$, e quindi,
+essendo crescente, è costante in tutto $[x_{1},x_{2}]$. Le funzioni costanti su un
+intervallo sono esattamente quelle con derivata identicamente nulla
+(\cref{cor:funzioni-costanti}). Tutto si riduce quindi al criterio di monotonia e alla
+caratterizzazione delle funzioni costanti.
+\end{strategia}
+
+\begin{dimostrazione}
+\emph{($\Leftarrow$)} Per la (i) e il \cref{teo:criterio-monotonia}, $f$ è crescente in
+$[a,b]$. Se non fosse strettamente crescente, esisterebbero $x_{1}<x_{2}$ in $[a,b]$
+con $f(x_{1})=f(x_{2})$; per ogni $x\in[x_{1},x_{2}]$ sarebbe allora
+$f(x_{1})\le f(x)\le f(x_{2})=f(x_{1})$, cioè $f$ sarebbe costante in $[x_{1},x_{2}]$ e
+$f'$ sarebbe nulla in $(x_{1},x_{2})$, quindi in ogni intervallo chiuso contenuto in
+$(x_{1},x_{2})$, contro la (ii).
+
+\emph{($\Rightarrow$)} Se $f$ è strettamente crescente, è in particolare crescente, e
+quindi vale la (i) per il criterio di monotonia. Se $f'$ fosse identicamente nulla in
+un intervallo $[x_{1},x_{2}]\subseteq(a,b)$ con $x_{1}<x_{2}$, per il
+\cref{cor:funzioni-costanti} $f$ sarebbe costante in $[x_{1},x_{2}]$, contro l'ipotesi
+di stretta monotonia.
+\end{dimostrazione}
+
+\begin{corollario}\label{cor:derivata-positiva}
+Se $f$ è continua in un intervallo $I$, derivabile nei punti interni e $f'(x)>0$ in tali
+punti, allora $f$ è strettamente crescente in $I$. Lo stesso vale se $f'\ge0$ e, in ogni
+intervallo limitato contenuto in $I$, $f'$ si annulla soltanto in un numero finito di
+punti.
+\end{corollario}
+
+\begin{schema}
+\Ipotesi{$f$ continua nell'intervallo $I$, derivabile nei punti interni; $f'>0$, oppure
+$f'\ge0$ con un numero finito di zeri in ogni intervallo limitato.}
+\Tesi{$f$ strettamente crescente in $I$.}
+\end{schema}
+
+\begin{strategia}
+Basta verificare, in ogni intervallo $[x_{1},x_{2}]\subseteq I$, le due condizioni del
+criterio di stretta monotonia; la seconda vale perché un intervallo non degenere
+contiene infiniti punti, e quindi non può essere formato da zeri di $f'$.
+\end{strategia}
+
+\begin{dimostrazione}
+Siano $x_{1}<x_{2}$ in $I$. In $[x_{1},x_{2}]$ la funzione $f$ è continua e derivabile
+nei punti interni, con $f'\ge0$; inoltre $f'$ non è identicamente nulla in alcun
+intervallo $[s,t]\subseteq(x_{1},x_{2})$ con $s<t$, perché $[s,t]$ contiene infiniti punti
+mentre gli zeri di $f'$ in $[x_{1},x_{2}]$ sono in numero finito (o non esistono). Per il
+\cref{teo:stretta-monotonia}, $f$ è strettamente crescente in $[x_{1},x_{2}]$, e in
+particolare $f(x_{1})<f(x_{2})$.
+\end{dimostrazione}
+
+Ad esempio, la funzione $x-\sen x$ ha derivata $1-\cos x\ge0$, che si annulla soltanto
+nei punti $2k\pi$, in numero finito in ogni intervallo limitato: quindi $x-\sen x$ è
+strettamente crescente su $\R$.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[name=m1, width=0.48\textwidth, height=0.42\textwidth, xmin=-1.5, xmax=1.5,
+  ymin=-1.6, ymax=1.6, xtick={-1,1}, ytick={-1,1}, xlabel={$x$}, ylabel={$y$},
+  title style={align=center, font=\scriptsize, yshift=8pt},
+  title={$x^{3}$: strettamente crescente,\\ con $f'(0)=0$}]
+  \addplot[curva, domain=-1.17:1.17, samples=100] {x^3};
+  \addplot[curva2, domain=-0.8:0.8, samples=2] {0};
+  \addplot[only marks, mark=*, mark size=1.4pt, rame] coordinates {(0,0)};
+\end{axis}
+\begin{axis}[at={(m1.east)}, anchor=west, xshift=1cm, width=0.48\textwidth,
+  height=0.42\textwidth, xmin=-2.6, xmax=2.6, ymin=-2.6, ymax=2.6, xtick={-1,1},
+  xticklabels={{},$1$}, ytick={-1,1}, yticklabels={{},$1$}, xlabel={$x$}, ylabel={$y$},
+  title style={align=center, font=\scriptsize, yshift=8pt},
+  title={$\frac1x$: $f'<0$, ma non decrescente\\ in $\R\setminus\{0\}$}]
+  \addplot[curva, domain=0.39:2.5, samples=100] {1/x};
+  \addplot[curva, domain=-2.5:-0.39, samples=100] {1/x};
+  \addplot[tratteggio] coordinates {(-1,0) (-1,-1) (0,-1)};
+  \addplot[tratteggio] coordinates {(1,0) (1,1) (0,1)};
+  \addplot[only marks, mark=*, mark size=1.4pt, rame] coordinates {(-1,-1) (1,1)};
+  \node[font=\scriptsize, anchor=south] at (axis cs:-1,0.08) {$-1$};
+  \node[font=\scriptsize, anchor=west] at (axis cs:0.08,-1) {$-1$};
+\end{axis}
+\end{tikzpicture}
+\caption{A sinistra: la derivata di una funzione strettamente crescente può annullarsi
+in un punto isolato (la tangente in $0$ è orizzontale). A destra: una derivata negativa
+in tutto il dominio non garantisce la monotonia se il dominio non è un intervallo, come
+mostrano i punti $(-1,-1)$ e $(1,1)$.}
+\label{fig:x3-iperbole}
+\end{figure}
+
+\subsection{Disuguaglianze dimostrate con le derivate}
+
+Il criterio di monotonia è uno strumento molto efficace per dimostrare disuguaglianze.
+Lo schema è sempre lo stesso: per provare che $u(x)\ge v(x)$ in un intervallo, si studia
+il segno della derivata della differenza $g=u-v$ e se ne deduce che il minimo di $g$ è
+$\ge0$.
+
+\begin{esempio}[Due disuguaglianze fondamentali]\label{es:disuguaglianze-exp-log}
+Dimostriamo che
+\begin{equation}\label{eq:exp-log-disuguaglianze}
+  e^{x}\ge1+x \quad\perogni x\in\R, \qquad\qquad \log(1+x)\le x \quad\perogni x>-1,
+\end{equation}
+con l'uguaglianza soltanto per $x=0$. Sia $g(x)=e^{x}-1-x$; allora $g'(x)=e^{x}-1$, che
+è negativa per $x<0$ e positiva per $x>0$ (perché l'esponenziale è strettamente
+crescente ed $e^{0}=1$). Per il \cref{cor:derivata-positiva}, $g$ è strettamente
+decrescente in $(-\infty,0]$ e strettamente crescente in $[0,+\infty)$; quindi $g(x)>g(0)=0$
+per ogni $x\neq0$. Per la seconda, sia $h(x)=x-\log(1+x)$ per $x>-1$: si ha
+$h'(x)=1-\frac1{1+x}=\frac{x}{1+x}$, negativa in $(-1,0)$ e positiva in $(0,+\infty)$, e
+come prima $h(x)>h(0)=0$ per $x\neq0$. Geometricamente: il grafico di $e^{x}$ sta sopra
+la sua tangente $y=1+x$ nel punto $0$, e quello di $\log(1+x)$ sta sotto la sua tangente
+$y=x$. Nel prossimo paragrafo vedremo che questo è un fatto generale per le funzioni
+convesse e concave.
+\end{esempio}
+
+\begin{attenzione}[Attenzione ai circoli viziosi]
+Con lo stesso metodo si può «dimostrare» che $\sen x<x$ per $x>0$: la funzione
+$x-\sen x$ è strettamente crescente e vale $0$ in $0$. Questo ragionamento è corretto
+come \emph{verifica}, ma non può sostituire la dimostrazione geometrica delle
+disuguaglianze $\sen x<x<\tg x$ data nel \cref{sec:trigonometriche} \eqref{eq:sen-x-tg}:
+la derivata del seno, infatti, è stata calcolata nel \cref{sec:derivate-elementari}
+proprio a partire dal limite notevole $\sen x/x\to1$, che a sua volta poggia su quelle
+disuguaglianze. Usare la derivata del seno per dimostrarle sarebbe un circolo vizioso:
+prima di usare un risultato, bisogna sempre chiedersi su che cosa poggia.
+\end{attenzione}
+
+\subsection{Il test della derivata prima}
+
+Lo schema dei segni della \cref{fig:cubica-monotonia} suggerisce un criterio per
+riconoscere i punti di estremo, che useremo sistematicamente nello studio di funzioni.
+
+\begin{corollario}[Test della derivata prima]\label{cor:test-derivata-prima}
+\index{test della derivata prima}
+Sia $f$ continua in un intervallo $(x_{0}-\delta,x_{0}+\delta)$ e derivabile in tale
+intervallo, eccetto al più nel punto $x_{0}$. Se
+\begin{equation}\label{eq:test-derivata-prima}
+  f'(x)\ge0 \ \text{ per } x_{0}-\delta<x<x_{0}, \qquad
+  f'(x)\le0 \ \text{ per } x_{0}<x<x_{0}+\delta,
+\end{equation}
+allora $x_{0}$ è un punto di massimo relativo per $f$; se le disuguaglianze sono strette,
+il massimo relativo è stretto. Con le disuguaglianze invertite, $x_{0}$ è un punto di
+minimo relativo.
+\end{corollario}
+
+\begin{schema}
+\Ipotesi{$f$ continua in $(x_{0}-\delta,x_{0}+\delta)$, derivabile per $x\neq x_{0}$;
+$f'\ge0$ a sinistra di $x_{0}$, $f'\le0$ a destra.}
+\Tesi{$x_{0}$ è di massimo relativo (stretto, se le disuguaglianze sono strette).}
+\end{schema}
+
+\begin{strategia}
+Il segno della derivata dà la monotonia separatamente a sinistra e a destra di $x_{0}$:
+la funzione sale fino a $x_{0}$ e poi scende, quindi $f(x_{0})$ è il valore più alto
+nell'intorno. La derivabilità in $x_{0}$ non serve, perché il criterio di monotonia
+richiede la derivabilità solo nei punti interni degli intervalli.
+\end{strategia}
+
+\begin{dimostrazione}
+Per il criterio di monotonia, applicato agli intervalli $[x_{0}-\delta',x_{0}]$ e
+$[x_{0},x_{0}+\delta']$ per ogni $0<\delta'<\delta$, $f$ è crescente in
+$(x_{0}-\delta,x_{0}]$ e decrescente in $[x_{0},x_{0}+\delta)$; quindi $f(x)\le f(x_{0})$
+sia per $x<x_{0}$ sia per $x>x_{0}$. Se le disuguaglianze sono strette, la monotonia è
+stretta (\cref{cor:derivata-positiva}) e $f(x)<f(x_{0})$ per $x\neq x_{0}$.
+\end{dimostrazione}
+
+Il test non richiede la derivabilità in $x_{0}$: per $f(x)=\abs x$ si ha $f'(x)=-1$ per
+$x<0$ e $f'(x)=1$ per $x>0$, e il test riconosce correttamente il minimo in $0$, che il
+teorema di Fermat non poteva vedere. Applicato all'efficienza
+$E(C_{L})=\frac{C_{L}}{C_{D0}+kC_{L}^{2}}$, la cui derivata è positiva per
+$C_{L}<C_{L}^{*}$ e negativa per $C_{L}>C_{L}^{*}$ (\cref{sec:operazioni-derivate}), il
+\cref{cor:derivata-positiva} mostra che $E$ è strettamente crescente in $[0,C_{L}^{*}]$ e
+strettamente decrescente in $[C_{L}^{*},+\infty)$: il massimo in $C_{L}^{*}$ è assoluto.

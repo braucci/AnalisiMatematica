@@ -1,0 +1,423 @@
+%% ----------------------------------------------------------------------------
+%%  §4.4  Esempi e proprietà dei limiti di funzioni
+%% ----------------------------------------------------------------------------
+\section{Esempi e proprietà dei limiti di funzioni}
+\label{sec:proprieta-limiti-funzioni}
+
+Dato che i limiti di funzioni sono definiti a partire dai limiti di successioni, per
+essi valgono le proprietà già dimostrate nel \cref{cap:successioni}. In questo paragrafo
+ricaviamo alcuni esempi fondamentali e le regole di calcolo: operazioni, confronti,
+limiti di funzioni composte.
+
+\subsection{Esponenziali e logaritmi}
+
+Esempi di limiti molto importanti, e che quindi occorre sapere bene, sono i limiti della
+funzione esponenziale, che derivano dal limite della successione geometrica
+(\cref{teo:lim-geometrica}).
+
+\begin{proposizione}[Limiti dell'esponenziale]\label{prop:lim-esponenziale}\index{funzione!esponenziale!limiti}
+Risulta
+\begin{equation}\label{eq:lim-esponenziale}
+  \lim_{x\to+\infty}a^{x}=
+  \begin{cases}
+    +\infty & \text{se } a>1,\\
+    0 & \text{se } 0<a<1,
+  \end{cases}
+  \quad
+  \lim_{x\to-\infty}a^{x}=
+  \begin{cases}
+    0 & \text{se } a>1,\\
+    +\infty & \text{se } 0<a<1.
+  \end{cases}
+\end{equation}
+In particolare, per la base $e$,
+\begin{equation}\label{eq:lim-e-x}
+  \lim_{x\to+\infty}e^{x}=+\infty, \qquad \lim_{x\to-\infty}e^{x}=0 .
+\end{equation}
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$a>0$, \ $a\neq1$; potenze a esponente reale (\cref{def:potenza-reale}).}
+\Tesi{i limiti \eqref{eq:lim-esponenziale}.}
+\end{schema}
+
+\begin{strategia}
+Conosciamo già il comportamento di $a^{n}$ per $n$ intero; per passare a un esponente
+reale qualsiasi basta la monotonia della funzione esponenziale: se $x$ supera l'intero
+$\bar n$, allora $a^{x}$ supera $a^{\bar n}$. Useremo la formulazione con le
+disuguaglianze della \cref{tab:intorni}. Il caso $0<a<1$ si riconduce al caso $a>1$
+attraverso la definizione $a^{x}=(1/a)^{-x}$.
+\end{strategia}
+
+\begin{dimostrazione}
+Sia $a>1$. Fissato $M>0$, poiché $a^{n}\to+\infty$ (\cref{teo:lim-geometrica}) esiste
+$\bar n\in\N$ con $a^{\bar n}>M$. Per ogni $x>\bar n$, la stretta monotonia
+dell'esponenziale (\cref{teo:esponenziale}(ii)) dà $a^{x}>a^{\bar n}>M$: è la
+definizione di $\lim_{x\to+\infty}a^{x}=+\infty$ con $k=\bar n$. Fissato poi $\epsilon>0$,
+poiché $a^{-n}=\frac1{a^{n}}\to0$ (\eqref{eq:inf5}), esiste $\bar n$ con
+$a^{-\bar n}<\epsilon$; per ogni $x<-\bar n$ si ha allora $0<a^{x}<a^{-\bar n}<\epsilon$,
+cioè $a^{x}\to0$ per $x\to-\infty$.
+
+Sia ora $0<a<1$, e sia $x_{n}\to+\infty$. Allora $-x_{n}\to-\infty$ e, per quanto appena
+provato con la base $1/a>1$, $a^{x_{n}}=(1/a)^{-x_{n}}\to0$; per la definizione «per
+successioni», $a^{x}\to0$ per $x\to+\infty$. Allo stesso modo, se $x_{n}\to-\infty$,
+allora $-x_{n}\to+\infty$ e $a^{x_{n}}=(1/a)^{-x_{n}}\to+\infty$.
+\end{dimostrazione}
+
+Il lettore controlli i limiti \eqref{eq:lim-esponenziale} sui grafici della
+\cref{fig:esponenziali}; controlli anche i seguenti importanti limiti della funzione
+$\log x$ (in base $e$), visibili nella \cref{fig:logaritmi}.
+
+\begin{proposizione}[Limiti del logaritmo]\label{prop:lim-logaritmo}\index{funzione!logaritmo!limiti}
+\begin{equation}\label{eq:lim-log}
+  \lim_{x\to+\infty}\log x=+\infty, \qquad \lim_{x\to0^{+}}\log x=-\infty .
+\end{equation}
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$\log$ definito su $(0,+\infty)$, strettamente crescente, con $\log e^{y}=y$.}
+\Tesi{i limiti \eqref{eq:lim-log}.}
+\end{schema}
+
+\begin{strategia}
+Si usa la formulazione con le disuguaglianze. Per superare una soglia $M$ basta che
+$x$ superi il numero di cui $M$ è il logaritmo, cioè $e^{M}$: la monotonia fa il resto.
+Allo stesso modo, $\log x<-M$ appena $0<x<e^{-M}$.
+\end{strategia}
+
+\begin{dimostrazione}
+Il logaritmo è definito su tutto $(0,+\infty)$ (\cref{teo:esponenziale}(iii)), è
+strettamente crescente (\cref{prop:log-monotono}) e $\log e^{y}=y$ per ogni $y\in\R$
+\eqref{eq:log-inversa}. Fissato $M>0$: se $x>e^{M}$ si ha $\log x>\log e^{M}=M$; se
+$0<x<e^{-M}$ si ha $\log x<\log e^{-M}=-M$. Sono le due definizioni richieste, con
+$k=e^{M}$ e con $\delta=e^{-M}$ (si osservi che il dominio del logaritmo sta tutto a
+destra di $0$, per cui il limite per $x\to0$ e il limite destro coincidono).
+\end{dimostrazione}
+
+Altri limiti notevoli, conseguenza della definizione di limite di funzione e dei limiti
+di successioni del \cref{teo:e-generalizzato}, sono i seguenti.
+
+\begin{proposizione}\label{prop:e-funzioni}
+\begin{equation}\label{eq:e-funzioni}
+  \lim_{x\to+\infty}\Bigl(1+\frac1x\Bigr)^{x}=e, \qquad
+  \lim_{x\to-\infty}\Bigl(1+\frac1x\Bigr)^{x}=e .
+\end{equation}
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$\bigl(1+\frac1{a_{n}}\bigr)^{a_{n}}\to e$ per ogni successione $a_{n}\to\pm\infty$
+(\cref{teo:e-generalizzato}).}
+\Tesi{i limiti \eqref{eq:e-funzioni}.}
+\end{schema}
+
+\begin{strategia}
+Il lavoro è già stato fatto nel \cref{cap:successioni}: la definizione «per
+successioni» chiede esattamente il comportamento lungo ogni successione divergente di
+punti del dominio, ed è ciò che afferma il \cref{teo:e-generalizzato}. Occorre solo
+controllare che il dominio non sia limitato, perché $\pm\infty$ sia di accumulazione.
+\end{strategia}
+
+\begin{dimostrazione}
+La funzione è definita dove $1+\frac1x>0$, cioè per $x<-1$ oppure $x>0$: il suo dominio
+non è limitato né superiormente né inferiormente. Se $x_{n}$ è una qualsiasi successione
+di punti del dominio che diverge a $+\infty$, la \eqref{eq:e-piu-inf} del
+\cref{teo:e-generalizzato}, applicata con $a_{n}=x_{n}$, dà
+$\bigl(1+\frac1{x_{n}}\bigr)^{x_{n}}\to e$: è proprio la definizione
+\eqref{eq:def-lim-all-inf}. Per $x\to-\infty$ si usa allo stesso modo la
+\eqref{eq:e-meno-inf}.
+\end{dimostrazione}
+
+Si noti come il \cref{teo:e-generalizzato}, che nel \cref{cap:successioni} sembrava un
+complemento tecnico, sia esattamente ciò che serve: la definizione di limite di funzione
+richiede il comportamento lungo \emph{tutte} le successioni divergenti, non soltanto
+lungo $x_{n}=n$.
+
+\subsection{Operazioni con i limiti}
+
+Il limite della somma, differenza, prodotto, quoziente di due funzioni è
+rispettivamente uguale alla somma, differenza, prodotto, quoziente (se il denominatore è
+diverso da zero) dei due limiti, purché non si presenti una delle forme indeterminate.
+Precisamente:
+
+\begin{teorema}[Operazioni con i limiti di funzioni]\label{teo:operazioni-funzioni}\index{limite!operazioni}
+Siano $f,g:A\to\R$, $x_{0}\in\overline{\R}$ di accumulazione per $A$, e supponiamo che
+$f(x)\to\ell_{1}$, $g(x)\to\ell_{2}$ per $x\to x_{0}$, con $\ell_{1},\ell_{2}\in\R$. Allora
+\begin{equation}\label{eq:operazioni-funzioni}
+\begin{gathered}
+  f(x)\pm g(x)\to\ell_{1}\pm\ell_{2}, \qquad f(x)\,g(x)\to\ell_{1}\ell_{2},\\
+  \frac{f(x)}{g(x)}\to\frac{\ell_{1}}{\ell_{2}} \quad(\text{se } \ell_{2}\neq0).
+\end{gathered}
+\end{equation}
+Se $\ell_{1}$ o $\ell_{2}$ sono infiniti valgono le regole \eqref{eq:inf1}--\eqref{eq:inf7}
+del \cref{teo:operazioni-infinite}, con le funzioni al posto delle successioni; restano
+escluse le forme indeterminate $\infty-\infty$, $0\cdot\infty$, $\frac\infty\infty$,
+$\frac00$.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f,g:A\to\R$; \ $x_{0}$ di accumulazione per $A$; \ $f(x)\to\ell_{1}$,
+$g(x)\to\ell_{2}$ per $x\to x_{0}$.}
+\Tesi{le \eqref{eq:operazioni-funzioni} (per il quoziente, $\ell_{2}\neq0$); le regole
+\eqref{eq:inf1}--\eqref{eq:inf7} se un limite è infinito.}
+\end{schema}
+
+\begin{strategia}
+Si segue una generica successione $x_{n}\to x_{0}$: lungo di essa $f(x_{n})$ e
+$g(x_{n})$ sono successioni, e per esse le regole di calcolo sono già note dal
+\cref{cap:successioni}. L'unico punto che richiede attenzione è il quoziente, che è
+definito solo dove $g\neq0$: con un argomento di permanenza del segno si verifica che vicino a
+$x_{0}$ il denominatore non si annulla, così che $x_{0}$ resta di accumulazione per il
+dominio di $f/g$.
+\end{strategia}
+
+\begin{dimostrazione}
+Dimostriamo ad esempio che il limite di un prodotto è uguale al prodotto dei limiti.
+Sia $x_{n}$ una qualunque successione di punti di $A\setminus\{x_{0}\}$ che tende a
+$x_{0}$. Per ipotesi, e per la definizione di limite, $f(x_{n})\to\ell_{1}$ e
+$g(x_{n})\to\ell_{2}$. Per la \eqref{eq:lim-prodotto}, che esprime il modo di calcolare il
+limite del prodotto di due successioni, risulta $f(x_{n})\cdot g(x_{n})\to\ell_{1}\cdot\ell_{2}$;
+data l'arbitrarietà della successione, ciò completa la prova. Somma, differenza e casi
+infiniti si trattano allo stesso modo.
+
+Il quoziente richiede una precisazione: $f/g$ è definita sull'insieme
+$A'=\{x\in A : g(x)\neq0\}$, e bisogna verificare che $x_{0}$ sia di accumulazione per
+$A'$. Supponiamo $x_{0}\in\R$. Applicando la \eqref{eq:eps-delta} a $g$ con
+$\epsilon=\abs{\ell_{2}}/2>0$, troviamo $\delta>0$ tale che, per $x\in A$ con
+$0<\abs{x-x_{0}}<\delta$, si ha $\abs{g(x)-\ell_{2}}<\abs{\ell_{2}}/2$ e quindi, per la
+disuguaglianza triangolare inversa (\cref{cor:triangolare-inversa}),
+$\abs{g(x)}>\abs{\ell_{2}}-\abs{\ell_{2}}/2=\abs{\ell_{2}}/2>0$. Dunque tutti i punti di
+$A\setminus\{x_{0}\}$ con $\abs{x-x_{0}}<\delta$ stanno in $A'$, e $x_{0}$, che è di
+accumulazione per $A$, lo è anche per $A'$. Lungo ogni successione $x_{n}\in A'\setminus\{x_{0}\}$
+convergente a $x_{0}$ si ha poi $f(x_{n})/g(x_{n})\to\ell_{1}/\ell_{2}$ per la
+\eqref{eq:lim-quoziente}. Il caso $x_{0}=\pm\infty$ è identico, con una semiretta al posto
+dell'intorno di raggio $\delta$.
+\end{dimostrazione}
+
+\begin{esempio}\label{es:limite-polinomi}
+Dall'\cref{es:limiti-elementari}(iii) e dal teorema precedente, applicato un numero
+finito di volte, segue che per ogni polinomio $P(x)=a_{m}x^{m}+\dots+a_{1}x+a_{0}$ si ha
+$\lim_{x\to x_{0}}P(x)=P(x_{0})$ per ogni $x_{0}\in\R$, e che per ogni funzione razionale
+$P(x)/Q(x)$ con $Q(x_{0})\neq0$ si ha $\lim_{x\to x_{0}}P(x)/Q(x)=P(x_{0})/Q(x_{0})$. Ad
+esempio $\lim_{x\to2}\frac{x^{3}-1}{x+1}=\frac73$.
+\end{esempio}
+
+Come applicazione calcoliamo il limite, per $x\to0$, del rapporto $\frac{1-\cos x}{x^{2}}$.
+È una forma indeterminata $\frac00$. Moltiplicando numeratore e denominatore per
+$1+\cos x$, che è positivo per $\abs x<\frac\pi2$, e usando la relazione fondamentale
+$\sen^{2}x+\cos^{2}x=1$, otteniamo per $0<\abs x<\frac\pi2$
+\begin{equation}\label{eq:lim-1-cos}
+\begin{split}
+  \frac{1-\cos x}{x^{2}}&=\frac{1-\cos^{2}x}{x^{2}(1+\cos x)}
+  =\frac{\sen^{2}x}{x^{2}(1+\cos x)}\\
+  &=\Bigl(\frac{\sen x}{x}\Bigr)^{2}\cdot\frac1{1+\cos x}
+  \ \xrightarrow[x\to0]{}\ 1^{2}\cdot\frac1{1+1}=\frac12 ,
+\end{split}
+\end{equation}
+dove abbiamo usato la \eqref{eq:lim-senx-x}, la \eqref{eq:lim-sen-cos-0} e il
+\cref{teo:operazioni-funzioni}. Con lo stesso metodo, oppure scrivendo
+$\frac{1-\cos x}{x}=x\cdot\frac{1-\cos x}{x^{2}}$, si ottiene
+\begin{equation}\label{eq:lim-1-cos-x}
+  \lim_{x\to0}\frac{1-\cos x}{x}=0\cdot\frac12=0 .
+\end{equation}
+
+\begin{idea}[Il secondo ordine dei piccoli angoli]
+Nel \cref{cap:successioni} abbiamo giustificato l'approssimazione $\sen\alpha\approx\alpha$.
+La \eqref{eq:lim-1-cos} giustifica la successiva, $\cos\alpha\approx1-\frac{\alpha^{2}}2$:
+l'errore $\cos\alpha-\bigl(1-\frac{\alpha^{2}}2\bigr)$, diviso per $\alpha^{2}$, tende a
+zero. Per questo in meccanica del volo il coseno di un angolo piccolo si confonde con
+$1$ «al primo ordine»: in una virata corretta con angolo di sbandamento $\phi$ il fattore
+di carico è $n=\frac1{\cos\phi}$, e per piccoli $\phi$ si ha
+$n\approx1+\frac{\phi^{2}}2$; con $\phi=10^{\circ}=0{,}1745$~rad si ottiene $n\approx1{,}0152$,
+contro il valore esatto $1{,}0154$. L'aumento di carico è dunque del secondo ordine
+nell'angolo: piccolo, ma non nullo.
+\end{idea}
+
+Il calcolo numerico di limiti come \eqref{eq:lim-1-cos} nasconde però un'insidia, che il
+programma seguente mette in evidenza.
+
+\begin{python}[Una formula giusta, un risultato sbagliato]
+import math
+
+# (1 - cos x)/x^2 -> 1/2. Due formule uguali in aritmetica esatta:
+ingenua = lambda x: (1 - math.cos(x)) / x**2
+# 1 - cos x = 2 sen^2(x/2): nessuna sottrazione tra numeri vicini
+stabile = lambda x: 2 * math.sin(x / 2)**2 / x**2
+
+for k in range(1, 10):
+    x = 10.0**(-k)
+    print(f"x = 1e-{k}:   ingenua = {ingenua(x):.10f}   "
+          f"stabile = {stabile(x):.10f}")
+\end{python}
+\begin{risultato}
+x = 1e-1:   ingenua = 0.4995834722   stabile = 0.4995834722
+x = 1e-2:   ingenua = 0.4999958333   stabile = 0.4999958333
+x = 1e-3:   ingenua = 0.4999999583   stabile = 0.4999999583
+x = 1e-4:   ingenua = 0.4999999970   stabile = 0.4999999996
+x = 1e-5:   ingenua = 0.5000000414   stabile = 0.5000000000
+x = 1e-6:   ingenua = 0.5000444503   stabile = 0.5000000000
+x = 1e-7:   ingenua = 0.4996003611   stabile = 0.5000000000
+x = 1e-8:   ingenua = 0.0000000000   stabile = 0.5000000000
+x = 1e-9:   ingenua = 0.0000000000   stabile = 0.5000000000
+\end{risultato}
+
+\begin{attenzione}[La cancellazione numerica]
+Le due formule sono identiche in aritmetica esatta, ma la prima peggiora a partire da
+$x=10^{-4}$ e da $x=10^{-8}$ in poi restituisce $0$. Il motivo è che per $x$ piccolo
+$\cos x$ è vicinissimo a $1$: in doppia precisione, con circa $16$ cifre significative,
+per $x=10^{-8}$ il valore $\cos x=1-5\cdot10^{-17}+\dots$ viene arrotondato a $1$, e la
+differenza $1-\cos x$ si annulla. Sottraendo due numeri quasi uguali si perdono le cifre
+significative che hanno in comune (\emph{cancellazione}). La formula
+$1-\cos x=2\sen^{2}\frac x2$ evita la sottrazione e dà il risultato corretto. È lo
+stesso fenomeno osservato nel \cref{cap:successioni} per $\bigl(1+\frac1n\bigr)^{n}$: un
+limite si dimostra con il ragionamento, e anche il calcolo numerico «di controllo» va
+impostato tenendo conto della teoria.
+\end{attenzione}
+
+\subsection{Teoremi di confronto}
+
+I teoremi di confronto del \cref{sec:confronto} si trasferiscono alle funzioni. Nel loro
+enunciato è comodo supporre che le disuguaglianze tra le funzioni valgano soltanto
+\emph{vicino} a $x_{0}$: diremo che una proprietà vale \emph{in un intorno di $x_{0}$}
+se esiste un intorno $U$ di $x_{0}$ tale che la proprietà sia vera per ogni
+$x\in(U\cap A)\setminus\{x_{0}\}$.
+
+\begin{teorema}[Confronto]\label{teo:confronto-funzioni}\index{teorema!della permanenza del segno}\index{teorema!dei carabinieri}
+Siano $f,g,h:A\to\R$ e $x_{0}\in\overline{\R}$ di accumulazione per $A$.
+\begin{enumerate}[label=\textup{(\roman*)}]
+  \item \emph{(Permanenza del segno)} Se $\lim_{x\to x_{0}}f(x)=\ell$ con $\ell>0$
+  oppure $\ell=+\infty$, allora $f(x)>0$ in un intorno di $x_{0}$.
+  \item \emph{(Confronto dei limiti)} Se $f(x)\le g(x)$ in un intorno di $x_{0}$, e
+  $f(x)\to\ell_{1}$, $g(x)\to\ell_{2}$, allora $\ell_{1}\le\ell_{2}$.
+  \item \emph{(Carabinieri)} Se $f(x)\le h(x)\le g(x)$ in un intorno di $x_{0}$, e
+  $f(x)\to\ell$, $g(x)\to\ell$ con $\ell\in\R$, allora anche $h(x)\to\ell$.
+  \item \emph{(Confronto con limiti infiniti)} Se $f(x)\le g(x)$ in un intorno di
+  $x_{0}$ e $f(x)\to+\infty$, allora $g(x)\to+\infty$.
+  \item \emph{(Limitata per infinitesima)} Se $f$ è limitata in un intorno di $x_{0}$ e
+  $g(x)\to0$, allora $f(x)g(x)\to0$.
+\end{enumerate}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{(i) $f\to\ell>0$; \ (ii) $f\le g$, $f\to\ell_{1}$, $g\to\ell_{2}$; \
+(iii) $f\le h\le g$, $f,g\to\ell$; \ (iv) $f\le g$, $f\to+\infty$; \ (v) $\abs f\le L$,
+$g\to0$ (le disuguaglianze in un intorno di $x_{0}$).}
+\Tesi{(i) $f>0$ vicino a $x_{0}$; \ (ii) $\ell_{1}\le\ell_{2}$; \ (iii) $h\to\ell$; \
+(iv) $g\to+\infty$; \ (v) $fg\to0$.}
+\end{schema}
+
+\begin{strategia}
+Per la (i) usiamo la definizione con le disuguaglianze, scegliendo la tolleranza
+$\epsilon=\ell/2$ come per le successioni. Per le altre basta osservare che, lungo
+qualsiasi successione $x_{n}\to x_{0}$, i termini finiscono per stare nell'intorno in
+cui valgono le ipotesi; a quel punto i teoremi del \cref{sec:confronto} si applicano
+alle successioni $f(x_{n})$, $g(x_{n})$, $h(x_{n})$, eventualmente traslate.
+\end{strategia}
+
+\begin{dimostrazione}
+(i) Sia $x_{0}\in\R$ e $\ell\in\R$. Con $\epsilon=\ell/2$ la \eqref{eq:eps-delta} fornisce
+$\delta>0$ tale che $\abs{f(x)-\ell}<\ell/2$, e quindi $f(x)>\ell-\ell/2=\ell/2>0$, per
+ogni $x\in A$ con $0<\abs{x-x_{0}}<\delta$. Se $\ell=+\infty$ si usa la definizione con
+$M=1$; se $x_{0}=\pm\infty$ si sostituisce l'intorno di raggio $\delta$ con una semiretta.
+
+(ii)--(v) Sia $U$ l'intorno in cui valgono le disuguaglianze (o la limitatezza), e sia
+$x_{n}\in A\setminus\{x_{0}\}$ una successione tendente a $x_{0}$. Esiste $\nu$ tale che
+$x_{n}\in U$ per $n>\nu$ (\cref{oss:ponte-infinito}). Le successioni traslate
+$a_{k}=f(x_{\nu+k})$, $b_{k}=g(x_{\nu+k})$, $c_{k}=h(x_{\nu+k})$ verificano le
+disuguaglianze per \emph{ogni} $k\in\N$, e hanno gli stessi limiti di $f(x_{n})$,
+$g(x_{n})$, $h(x_{n})$. Basta allora applicare, rispettivamente, il
+\cref{cor:confronto-limiti}, il \cref{teo:carabinieri}, il \cref{teo:confronto-infinito}
+e il \cref{teo:limitata-infinitesima}.
+\end{dimostrazione}
+
+\begin{osservazione}
+Come per le successioni, nella (ii) le disuguaglianze strette non passano al limite:
+$x^{2}>0$ per ogni $x\neq0$, ma $\lim_{x\to0}x^{2}=0$. Dalla (i) applicata a $f-L$ segue
+inoltre che, se $f(x)\to\ell>L$, allora $f(x)>L$ in un intorno di $x_{0}$.
+\end{osservazione}
+
+\begin{esempio}\label{es:x-sen-1-x}
+\begin{enumerate}[label=\textup{(\roman*)}]
+  \item $\displaystyle\lim_{x\to0}x\sen\frac1x=0$. La funzione $\sen\frac1x$ non ha
+  limite, ma è limitata ($\abs{\sen\frac1x}\le1$), e $x\to0$: si applica la (v). Si può
+  anche usare la (iii), perché $-\abs x\le x\sen\frac1x\le\abs x$ e $\pm\abs x\to0$:
+  è ciò che si vede nella parte destra della \cref{fig:sen-1-x}.
+  \item $\displaystyle\lim_{x\to+\infty}\frac{\sen x}{x}=0$: il seno è limitato e
+  $\frac1x\to0$ per $x\to+\infty$. È l'informazione contenuta nella stima
+  \eqref{eq:senx-stima} e visibile nella \cref{fig:senx-iperboli}.
+\end{enumerate}
+\end{esempio}
+
+\subsection{Limiti di funzioni composte}
+
+Una ulteriore proprietà, molto utile nelle applicazioni, riguarda la composizione di
+funzioni: è la giustificazione rigorosa del «cambiamento di variabile» nei limiti.
+
+\begin{teorema}[Limite di una funzione composta]\label{teo:limite-composta}\index{limite!di una funzione composta}
+Siano $g:X\to Y$ e $f:Y\to\R$ due funzioni, $x_{0}\in\overline{\R}$ di accumulazione per
+$X$ e $y_{0}\in\overline{\R}$ di accumulazione per $Y$, tali che
+\begin{equation}\label{eq:composta-ipotesi}
+  \lim_{x\to x_{0}}g(x)=y_{0}, \qquad \lim_{y\to y_{0}}f(y)=\ell,
+\end{equation}
+ed esista un intorno $U$ di $x_{0}$ tale che risulti $g(x)\neq y_{0}$ per ogni
+$x\in(U\cap X)\setminus\{x_{0}\}$. Allora è anche
+\begin{equation}\label{eq:composta-tesi}
+  \lim_{x\to x_{0}}f(g(x))=\ell .
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$g(x)\to y_{0}$ per $x\to x_{0}$; \ $f(y)\to\ell$ per $y\to y_{0}$; \
+$g(x)\neq y_{0}$ per $x\neq x_{0}$ vicino a $x_{0}$.}
+\Tesi{$f(g(x))\to\ell$ per $x\to x_{0}$.}
+\end{schema}
+
+\begin{strategia}
+Si segue una successione $x_{n}\to x_{0}$ attraverso le due funzioni: i valori
+$y_{n}=g(x_{n})$ formano una successione che tende a $y_{0}$, e quindi $f(y_{n})\to\ell$
+per la definizione di limite di $f$. C'è però un punto delicato: la definizione di
+limite di $f$ riguarda solo le successioni con $y_{n}\neq y_{0}$, e nulla garantisce,
+in generale, che $g(x_{n})$ sia diverso da $y_{0}$. A questo serve la terza ipotesi.
+\end{strategia}
+
+\begin{dimostrazione}
+Consideriamo una generica successione $x_{n}$ convergente a $x_{0}$, con $x_{n}\in X$ e
+$x_{n}\neq x_{0}$ per ogni $n$. Esiste $\nu$ tale che $x_{n}\in U$ per ogni $n>\nu$, e
+perciò per ogni $n>\nu$ risulta anche $g(x_{n})\neq y_{0}$. La successione
+$y_{n}=g(x_{n})$ è contenuta in $Y$, converge a $y_{0}$ (per la prima delle
+\eqref{eq:composta-ipotesi}) ed è tale che $y_{n}\neq y_{0}$ per $n>\nu$; allora, per la
+seconda delle \eqref{eq:composta-ipotesi} applicata alla successione traslata
+$y_{\nu+k}$, si ha $f(y_{\nu+k})\to\ell$, e quindi $f(y_{n})\to\ell$. Cioè
+$f(g(x_{n}))\to\ell$, come si voleva dimostrare.
+\end{dimostrazione}
+
+\begin{osservazione}[L'ipotesi $g(x)\neq y_{0}$ non si può omettere]\label{oss:composta-controesempio}
+Siano $g(x)=0$ per ogni $x$ e $f(y)=1$ per $y\neq0$, $f(0)=0$. Allora $g(x)\to0$ per
+$x\to0$ e $f(y)\to1$ per $y\to0$ (il valore $f(0)$ non conta), ma $f(g(x))=f(0)=0$ per
+ogni $x$, e quindi $f(g(x))\to0\neq1$. L'ipotesi è invece automaticamente soddisfatta
+se $y_{0}=\pm\infty$ (i valori di $g$ sono numeri reali), oppure se $y_{0}$ non
+appartiene al dominio $Y$ di $f$. Vedremo nel \cref{sec:continue} che essa può essere
+sostituita dalla continuità di $f$ in $y_{0}$.
+\end{osservazione}
+
+\begin{esempio}\label{es:composte}
+\begin{enumerate}[label=\textup{(\roman*)}]
+  \item Per ogni $k\neq0$, $\displaystyle\lim_{x\to0}\frac{\sen kx}{x}=k$. Infatti
+  $\frac{\sen kx}{x}=k\cdot\frac{\sen kx}{kx}$, e con $g(x)=kx$ (che tende a $0$ ed è
+  diversa da $0$ per $x\neq0$) e $f(y)=\frac{\sen y}{y}$ il \cref{teo:limite-composta}
+  dà $\frac{\sen kx}{kx}\to1$.
+  \item Di nuovo la \eqref{eq:lim-1-cos}, per un'altra via: poiché
+  $1-\cos x=2\sen^{2}\frac x2$ (dalla \eqref{eq:duplicazione} con $\frac x2$ al posto di
+  $x$, e dalla relazione fondamentale \eqref{eq:relazione-fondamentale}), si ha
+  $\frac{1-\cos x}{x^{2}}=\frac12\Bigl(\frac{\sen(x/2)}{x/2}\Bigr)^{2}\to\frac12$.
+  \item \emph{Cambio di variabile $y=\frac1x$.} Con $g(x)=\frac1x$, che tende a $+\infty$
+  per $x\to0^{+}$ e a $-\infty$ per $x\to0^{-}$, e con $f(y)=\bigl(1+\frac1y\bigr)^{y}$,
+  si ha $f(g(x))=(1+x)^{1/x}$; dalla \eqref{eq:e-funzioni} e dalla \cref{prop:dx-sx}
+  segue
+  \begin{equation}\label{eq:lim-1-piu-x}
+    \lim_{x\to0}(1+x)^{1/x}=e .
+  \end{equation}
+  \item Ancora con $y=\frac1x$: $\displaystyle\lim_{x\to+\infty}x\sen\frac1x
+  =\lim_{y\to0^{+}}\frac{\sen y}{y}=1$. Si confronti con l'\cref{es:x-sen-1-x}(i): la
+  stessa espressione ha limite $0$ per $x\to0$ e limite $1$ per $x\to+\infty$.
+\end{enumerate}
+\end{esempio}

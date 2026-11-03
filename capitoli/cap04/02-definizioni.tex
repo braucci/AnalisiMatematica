@@ -1,0 +1,485 @@
+%% ----------------------------------------------------------------------------
+%%  §4.2  Definizioni: intervalli, intorni, punti di accumulazione, limiti
+%% ----------------------------------------------------------------------------
+\section{Definizioni}
+\label{sec:def-limite-funzioni}
+
+\subsection{Intervalli e intorni}
+
+Gli insiemi su cui definiremo le nostre funzioni sono quasi sempre intervalli o unioni
+di intervalli. Fissiamo quindi la terminologia, che finora abbiamo usato in modo
+informale.
+
+\begin{definizione}[Intervalli]\label{def:intervalli}\index{intervallo}
+Se $a,b$ sono due numeri reali con $a<b$, per indicare un \emph{intervallo} di estremi
+$a$, $b$ si usano le notazioni
+\begin{align}
+  [a,b]&=\{x\in\R : a\le x\le b\}, & (a,b)&=\{x\in\R : a<x<b\}, \label{eq:intervalli-1}\\
+  [a,b)&=\{x\in\R : a\le x<b\}, & (a,b]&=\{x\in\R : a<x\le b\}. \label{eq:intervalli-2}
+\end{align}
+L'intervallo $[a,b]$ si dice \emph{chiuso}, mentre $(a,b)$ è detto \emph{aperto};
+$[a,b)$ è detto \emph{chiuso a sinistra} e \emph{aperto a destra} (analogamente per
+$(a,b]$). Gli intervalli sopra scritti si dicono \emph{limitati}. Si considerano anche
+gli \emph{intervalli illimitati}
+\begin{equation}\label{eq:intervalli-illimitati}
+\begin{aligned}
+  [a,+\infty)&=\{x\in\R : x\ge a\}, & (a,+\infty)&=\{x\in\R : x>a\},\\
+  (-\infty,b]&=\{x\in\R : x\le b\}, & (-\infty,b)&=\{x\in\R : x<b\},\\
+  (-\infty,+\infty)&=\R .
+\end{aligned}
+\end{equation}
+I numeri $a$, $b$ sono detti \emph{estremi} dell'intervallo, anche nel caso in cui non
+ne facciano parte.
+\end{definizione}
+
+Si noti che i simboli $+\infty$ e $-\infty$ \emph{non} sono numeri reali: la scrittura
+$(a,+\infty)$ è soltanto un modo compatto per indicare la semiretta dei numeri maggiori
+di $a$. Talvolta conviene però aggiungere formalmente a $\R$ i due simboli e considerare
+la \emph{retta reale ampliata} $\overline{\R}=\R\cup\{-\infty,+\infty\}$, con la
+convenzione $-\infty<x<+\infty$ per ogni $x\in\R$; ciò permette di enunciare in un colpo
+solo definizioni che altrimenti andrebbero ripetute caso per caso.
+
+\begin{definizione}[Intorni]\label{def:intorni}\index{intorno}
+Sia $x_{0}\in\R$. Per ogni $\delta>0$ l'intervallo aperto $(x_{0}-\delta,x_{0}+\delta)$
+si chiama \emph{intorno} di $x_{0}$ di raggio $\delta$ \eqref{eq:intorno}; più in
+generale, si chiama intorno di $x_{0}$ ogni insieme che contiene un intervallo aperto
+contenente $x_{0}$. Gli intervalli $[x_{0},x_{0}+\delta)$ e $(x_{0}-\delta,x_{0}]$ si
+chiamano rispettivamente \emph{intorno destro} e \emph{intorno sinistro} di $x_{0}$.
+Si chiama \emph{intorno di $+\infty$} ogni semiretta $(k,+\infty)$, e \emph{intorno di
+$-\infty$} ogni semiretta $(-\infty,k)$, con $k\in\R$.
+\end{definizione}
+
+Due proprietà degli intorni, evidenti ma usate di continuo, sono le seguenti:
+l'intersezione di due intorni di $x_{0}$ è ancora un intorno di $x_{0}$ (basta prendere
+il più piccolo dei due raggi); due punti distinti $x_{0}\neq x_{1}$ hanno intorni
+disgiunti (basta prendere come raggio comune $\abs{x_{1}-x_{0}}/2$).
+
+\subsection{Punti di accumulazione}
+
+Per parlare del limite di $f(x)$ per $x\to x_{0}$ dobbiamo poterci avvicinare a $x_{0}$
+restando nel dominio di $f$, e senza mai toccare $x_{0}$. La nozione che formalizza
+questa esigenza è la seguente.
+
+\begin{definizione}[Punto di accumulazione]\label{def:punto-accumulazione}\index{punto!di accumulazione}
+Sia $A\subseteq\R$. Un numero reale $x_{0}$ si dice \emph{punto di accumulazione} per
+$A$ se in ogni intorno di $x_{0}$, cioè in ogni insieme $(x_{0}-\delta,x_{0}+\delta)$ con
+$\delta>0$, cade almeno un punto di $A$ \emph{distinto da $x_{0}$}. Si dice che $+\infty$
+(rispettivamente $-\infty$) è punto di accumulazione per $A$ se $A$ non è limitato
+superiormente (rispettivamente inferiormente), cioè se ogni intorno di $+\infty$
+(rispettivamente di $-\infty$) contiene punti di $A$.
+\end{definizione}
+
+\begin{marginfigure}
+\centering
+\begin{tikzpicture}[x=4cm]
+  \draw[grigio, ->] (-0.08,0) -- (1.12,0);
+  \foreach \n in {1,...,40} { \fill[blu] ({1/\n},0) circle (0.9pt); }
+  \draw[rame, thick] (0,-0.12) -- (0,0.12);
+  \node[below, font=\scriptsize] at (0,-0.1) {$0$};
+  \node[below, font=\scriptsize] at (1,-0.06) {$1$};
+  \node[below, font=\scriptsize] at (0.5,-0.06) {$\frac12$};
+  \node[below, font=\scriptsize] at (0.3333,-0.06) {$\frac13$};
+\end{tikzpicture}
+\caption{L'insieme $\{1/n : n\in\N\}$: i suoi punti si addensano verso $0$, che è
+l'unico punto di accumulazione e non appartiene all'insieme; ogni punto $1/n$ è invece
+isolato.}
+\label{fig:accumulazione}
+\end{marginfigure}
+
+\begin{esempio}\label{es:accumulazione}
+\begin{enumerate}[label=\textup{(\roman*)}]
+  \item Sia $A=(0,1]$. Ogni $x_{0}\in[0,1]$ è punto di accumulazione per $A$: se
+  $x_{0}=0$, l'intorno $(-\delta,\delta)$ contiene il punto $\min\{\delta/2,1\}\in A$,
+  che è diverso da $0$; se $0<x_{0}\le1$, l'intorno $(x_{0}-\delta,x_{0}+\delta)$
+  contiene il punto $x_{0}-\frac12\min\{\delta,x_{0}\}$, che sta in $A$ ed è diverso da
+  $x_{0}$. Nessun altro numero è punto di accumulazione: se $x_{0}>1$ l'intorno di
+  raggio $x_{0}-1$ non incontra $A$, e se $x_{0}<0$ non lo incontra l'intorno di raggio
+  $\abs{x_{0}}$. Si noti che $0$ è di accumulazione pur non appartenendo ad $A$.
+  \item L'insieme $\N$ non ha punti di accumulazione reali: l'intorno di raggio $\frac12$
+  di un qualsiasi numero reale $x_{0}$ contiene al più un numero naturale $m$; se
+  $m\neq x_{0}$, l'intorno di raggio $\min\{\frac12,\abs{m-x_{0}}\}$ non contiene alcun
+  punto di $\N$ diverso da $x_{0}$. Invece $+\infty$ è
+  punto di accumulazione per $\N$, che non è limitato superiormente (\cref{teo:archimede}).
+  \item L'insieme $A=\{1/n : n\in\N\}$ ha come unico punto di accumulazione $0$
+  (\cref{fig:accumulazione}). Ogni punto $1/n$ di $A$ è invece \emph{isolato}: l'intorno
+  di $1/n$ di raggio $\frac1n-\frac1{n+1}$ non contiene altri punti di $A$.
+  \item Se $A=\R\setminus\{0\}$, ogni numero reale, compreso $0$, è punto di accumulazione
+  per $A$; inoltre lo sono anche $+\infty$ e $-\infty$.
+\end{enumerate}
+\end{esempio}
+
+Il legame con le successioni è dato dalla proposizione seguente, che sarà la chiave di
+tutto il capitolo.
+
+\begin{proposizione}\label{prop:caratt-accumulazione}
+Siano $A\subseteq\R$ e $x_{0}\in\overline{\R}$. Allora $x_{0}$ è punto di accumulazione per
+$A$ se e solo se esiste una successione $x_{n}$ di punti di $A$, con $x_{n}\neq x_{0}$
+per ogni $n\in\N$, che tende a $x_{0}$.
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$A\subseteq\R$, \ $x_{0}\in\R$ (oppure $x_{0}=\pm\infty$).}
+\Tesi{$x_{0}$ di accumulazione per $A$ \ $\sse$ \ $\esiste x_{n}\in A\setminus\{x_{0}\}$ con
+$x_{n}\to x_{0}$.}
+\end{schema}
+
+\begin{strategia}
+Per costruire la successione basta usare la definizione con una famiglia di intorni che
+si restringono: gli intorni di raggio $\frac1n$. In ciascuno di essi c'è un punto di $A$
+diverso da $x_{0}$, e lo prendiamo come $x_{n}$; i carabinieri faranno il resto.
+Viceversa, se una successione di punti di $A$ diversi da $x_{0}$ converge a $x_{0}$,
+ogni intorno di $x_{0}$ ne contiene definitivamente i termini.
+\end{strategia}
+
+\begin{dimostrazione}
+Sia $x_{0}\in\R$ di accumulazione per $A$. Per ogni $n\in\N$ l'intorno di raggio
+$\frac1n$ contiene un punto di $A$ diverso da $x_{0}$; scegliamone uno e chiamiamolo
+$x_{n}$. Allora $x_{n}\in A$, $x_{n}\neq x_{0}$ e
+\[
+  x_{0}-\frac1n<x_{n}<x_{0}+\frac1n \qquad\perogni n\in\N ;
+\]
+poiché $\frac1n\to0$, per il teorema dei carabinieri (\cref{teo:carabinieri}) si ha
+$x_{n}\to x_{0}$. Se $x_{0}=+\infty$, l'insieme $A$ non è limitato superiormente, e per
+ogni $n$ esiste $x_{n}\in A$ con $x_{n}>n$; per il confronto (\cref{teo:confronto-infinito})
+$x_{n}\to+\infty$. Il caso $x_{0}=-\infty$ è analogo.
+
+Viceversa, sia $x_{n}\in A\setminus\{x_{0}\}$ con $x_{n}\to x_{0}\in\R$, e fissiamo
+$\delta>0$. Per la definizione di limite esiste $\nu$ tale che $\abs{x_{n}-x_{0}}<\delta$
+per $n>\nu$: il punto $x_{\nu+1}$, ad esempio, sta in $A$, è diverso da $x_{0}$ e
+appartiene all'intorno $(x_{0}-\delta,x_{0}+\delta)$. Se $x_{0}=+\infty$, per ogni $k$ si
+ha definitivamente $x_{n}>k$, e quindi la semiretta $(k,+\infty)$ contiene punti di $A$.
+\end{dimostrazione}
+
+Nel seguito del capitolo considereremo, come il testo di riferimento, soprattutto
+funzioni il cui dominio $A$ è un intervallo (o un'unione finita di intervalli), e punti
+$x_{0}$ che appartengono ad $A$ oppure sono estremi di uno degli intervalli che lo
+compongono. Ad esempio, se $f$ è definita nell'insieme $A=\R\setminus\{0\}=(-\infty,0)\cup
+(0,+\infty)$, il punto $x_{0}$ prescelto per il calcolo del limite può appartenere a uno
+dei due intervalli oppure essere l'estremo $0$: in questo esempio $x_{0}$ può essere un
+qualunque numero reale. In tutti questi casi $x_{0}$ è punto di accumulazione per $A$,
+per l'argomento dell'\cref{es:accumulazione}(i).
+
+\subsection{Limite finito per \texorpdfstring{$x\to x_{0}$}{x che tende a x0}}
+
+\begin{definizione}[Limite di una funzione]\label{def:limite-funzione}\index{limite!di una funzione}
+Siano $f:A\to\R$ una funzione, $x_{0}\in\R$ un punto di accumulazione per $A$ e
+$\ell\in\R$. Si dice che $f(x)$ \emph{ha limite uguale a $\ell$} (o \emph{tende}, o
+\emph{converge}, ad $\ell$) per $x$ che tende a $x_{0}$ se, qualunque sia la successione
+$x_{n}\to x_{0}$, con $x_{n}\in A$ e $x_{n}\neq x_{0}$ per ogni $n$, risulta
+$f(x_{n})\to\ell$. In simboli:
+\begin{equation}\label{eq:def-limite-funzione}
+  \lim_{x\to x_{0}}f(x)=\ell \quad\sse\quad
+  \perogni x_{n}\in A\setminus\{x_{0}\}\ \text{con}\ x_{n}\to x_{0}:\quad f(x_{n})\to\ell .
+\end{equation}
+Si scrive anche $f(x)\to\ell$ per $x\to x_{0}$.
+\end{definizione}
+
+Due osservazioni chiariscono il significato delle ipotesi.
+
+\begin{osservazione}\label{oss:valore-irrilevante}
+Il valore $f(x_{0})$, se anche $x_{0}$ appartiene al dominio, \emph{non ha alcun ruolo}
+nella definizione: le successioni considerate hanno $x_{n}\neq x_{0}$. Ad esempio, la
+funzione che vale $1$ per $x\neq0$ e $5$ per $x=0$ ha limite $1$ per $x\to0$. Il limite
+descrive il comportamento di $f$ \emph{vicino} a $x_{0}$, non \emph{in} $x_{0}$; il
+confronto tra le due cose sarà il tema del \cref{sec:continue}.
+\end{osservazione}
+
+\begin{osservazione}\label{oss:perche-accumulazione}
+L'ipotesi che $x_{0}$ sia di accumulazione per $A$ non è un dettaglio tecnico. Se non lo
+fosse, per la \cref{prop:caratt-accumulazione} non esisterebbe \emph{nessuna}
+successione $x_{n}\in A\setminus\{x_{0}\}$ convergente a $x_{0}$, e la condizione
+\eqref{eq:def-limite-funzione} sarebbe soddisfatta, per mancanza di controesempi, da
+\emph{ogni} numero $\ell$: il «limite» perderebbe qualunque significato. Grazie a questa
+ipotesi, invece, il limite, se esiste, è unico.
+\end{osservazione}
+
+\begin{proposizione}[Unicità del limite]\label{prop:unicita-limite-funzioni}\index{limite!unicità}
+Se $\displaystyle\lim_{x\to x_{0}}f(x)=\ell$ e $\displaystyle\lim_{x\to x_{0}}f(x)=\ell'$,
+allora $\ell=\ell'$.
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$f:A\to\R$; \ $x_{0}$ di accumulazione per $A$; \ $f(x)\to\ell$ e $f(x)\to\ell'$
+per $x\to x_{0}$.}
+\Tesi{$\ell=\ell'$.}
+\end{schema}
+
+\begin{strategia}
+Si riduce tutto all'unicità del limite di una successione. Basta disporre di
+\emph{una} successione $x_{n}\in A\setminus\{x_{0}\}$ convergente a $x_{0}$: lungo di
+essa $f(x_{n})$ deve tendere sia a $\ell$ sia a $\ell'$. Che una tale successione esista
+è garantito proprio dall'ipotesi che $x_{0}$ sia di accumulazione.
+\end{strategia}
+
+\begin{dimostrazione}
+Poiché $x_{0}$ è di accumulazione per $A$, per la \cref{prop:caratt-accumulazione}
+esiste almeno una successione $x_{n}\in A\setminus\{x_{0}\}$ con $x_{n}\to x_{0}$. Per
+la definizione di limite la successione $f(x_{n})$ converge sia a $\ell$ sia a $\ell'$;
+per l'unicità del limite di una successione (\cref{teo:unicita-limite}) è $\ell=\ell'$.
+\end{dimostrazione}
+
+\begin{esempio}\label{es:limiti-elementari}
+\begin{enumerate}[label=\textup{(\roman*)}]
+  \item Per la \eqref{eq:lim-senx-x}, $\displaystyle\lim_{x\to0}\frac{\sen x}{x}=1$.
+  \item Per il \cref{teo:lim-sen-cos}, se $x_{n}\to0$ allora $\sen x_{n}\to0$ e
+  $\cos x_{n}\to1$; dunque
+  \begin{equation}\label{eq:lim-sen-cos-0}
+    \lim_{x\to0}\sen x=0, \qquad \lim_{x\to0}\cos x=1 .
+  \end{equation}
+  \item Se $f(x)=c$ è costante, $\lim_{x\to x_{0}}f(x)=c$; se $f(x)=x$,
+  $\lim_{x\to x_{0}}f(x)=x_{0}$: infatti $f(x_{n})=c\to c$, e rispettivamente
+  $f(x_{n})=x_{n}\to x_{0}$.
+  \item La funzione $f(x)=\frac{x^{2}-4}{x-2}$ non è definita in $x_{0}=2$, che però è di
+  accumulazione per il dominio $\R\setminus\{2\}$. Per $x\neq2$ si ha
+  $f(x)=\frac{(x-2)(x+2)}{x-2}=x+2$; quindi, se $x_{n}\to2$ con $x_{n}\neq2$,
+  $f(x_{n})=x_{n}+2\to4$, cioè $\lim_{x\to2}f(x)=4$. La semplificazione è lecita
+  proprio perché nella definizione di limite si considerano solo punti $x\neq2$.
+\end{enumerate}
+\end{esempio}
+
+\subsection{La definizione con \texorpdfstring{$\epsilon$ e $\delta$}{epsilon e delta}}
+
+La \cref{def:limite-funzione} è comoda per ereditare i risultati sulle successioni, ma
+in essa compare un quantificatore «per ogni successione» che non è facile da verificare
+direttamente. Possiamo formulare la definizione di limite per mezzo di disuguaglianze,
+come già fatto per le successioni con i simboli $\epsilon$, $\nu$. I simboli usati
+classicamente per i limiti di funzioni sono $\epsilon$ e $\delta$ (delta).
+
+\begin{teorema}[Caratterizzazione con $\epsilon$ e $\delta$]\label{teo:eps-delta}
+Siano $f:A\to\R$, $x_{0}\in\R$ di accumulazione per $A$ e $\ell\in\R$. Si ha
+$\lim_{x\to x_{0}}f(x)=\ell$ se e soltanto se, qualunque sia $\epsilon>0$, esiste un
+numero $\delta>0$ tale che $\ell-\epsilon<f(x)<\ell+\epsilon$ per ogni $x\in A$, con
+$x\neq x_{0}$ e $x_{0}-\delta<x<x_{0}+\delta$. In simboli:
+\begin{equation}\label{eq:eps-delta}
+\begin{split}
+  \lim_{x\to x_{0}}f(x)=\ell \quad\sse\quad
+  &\perogni\epsilon>0\ \esiste\delta>0 :\\
+  &\abs{f(x)-\ell}<\epsilon \quad\perogni x\in A,\ 0<\abs{x-x_{0}}<\delta .
+\end{split}
+\end{equation}
+\end{teorema}
+
+Il teorema è dimostrato nel \cref{sec:legame-successioni}. La \cref{fig:eps-delta} ne
+illustra il significato: comunque si fissi una striscia orizzontale di semiampiezza
+$\epsilon$ attorno alla retta $y=\ell$, si può trovare una striscia verticale di
+semiampiezza $\delta$ attorno alla retta $x=x_{0}$ tale che la parte di grafico contenuta
+nella striscia verticale (escluso al più il punto di ascissa $x_{0}$) sta tutta dentro
+la striscia orizzontale.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.9\textwidth, height=6cm, xmin=0, xmax=4.2, ymin=0, ymax=3.2,
+  axis lines=left, xtick={2}, xticklabels={$x_{0}$}, ytick={1.8}, yticklabels={$\ell$},
+  xlabel={$x$}, ylabel={$y$}, clip=false]
+  \fill[verde!15] (axis cs:0,1.45) rectangle (axis cs:4.2,2.15);
+  \fill[blu!12] (axis cs:1.62,0) rectangle (axis cs:2.38,3.2);
+  \addplot[tratteggio, domain=0:4.2] {1.8};
+  \addplot[curva, domain=0.2:1.97, samples=80] {1.8+0.9*(x-2)+0.12*(x-2)^3*sin(deg(5*x))};
+  \addplot[curva, domain=2.03:4, samples=80] {1.8+0.9*(x-2)+0.12*(x-2)^3*sin(deg(5*x))};
+  \draw[blu, thick, fill=white] (axis cs:2,1.8) circle (2pt);
+  \draw[<->, verde!50!black] (axis cs:3.95,1.8) -- node[right, font=\scriptsize] {$\epsilon$} (axis cs:3.95,2.15);
+  \draw[<->, verde!50!black] (axis cs:3.95,1.45) -- node[right, font=\scriptsize] {$\epsilon$} (axis cs:3.95,1.8);
+  \draw[<->, blu] (axis cs:1.62,0.25) -- node[below, font=\scriptsize] {$\delta$} (axis cs:2,0.25);
+  \draw[<->, blu] (axis cs:2,0.25) -- node[below, font=\scriptsize] {$\delta$} (axis cs:2.38,0.25);
+\end{axis}
+\end{tikzpicture}
+\caption{Il significato della \eqref{eq:eps-delta}: fissata la striscia orizzontale
+$\ell-\epsilon<y<\ell+\epsilon$ (verde), esiste una striscia verticale
+$x_{0}-\delta<x<x_{0}+\delta$ (azzurra) in cui il grafico, escluso al più il punto di
+ascissa $x_{0}$, resta dentro la striscia orizzontale. Se si restringe $\epsilon$, in
+generale bisogna restringere anche $\delta$.}
+\label{fig:eps-delta}
+\end{figure}
+
+\begin{attenzione}[$\delta$ dipende da $\epsilon$]
+Come per le successioni, l'ordine dei quantificatori è essenziale: prima si fissa
+$\epsilon$, poi si trova $\delta$, che in generale dipende da $\epsilon$ (e da $x_{0}$).
+Scambiando l'ordine, «esiste $\delta$ tale che per ogni $\epsilon$\dots», si otterrebbe
+che $\abs{f(x)-\ell}$ è minore di ogni numero positivo, cioè $f(x)=\ell$ per tutti gli
+$x\neq x_{0}$ di un intorno: una richiesta molto più forte, che non ha nulla a che fare
+con il concetto di limite.
+\end{attenzione}
+
+\begin{esempio}\label{es:x-quadro-eps-delta}
+Verifichiamo con la \eqref{eq:eps-delta} che $\lim_{x\to3}x^{2}=9$. Dobbiamo rendere
+piccola la quantità $\abs{x^{2}-9}=\abs{x-3}\cdot\abs{x+3}$. Il primo fattore è
+piccolo quando $x$ è vicino a $3$; il secondo non è piccolo, ma è \emph{limitato} se
+$x$ resta vicino a $3$: se $\abs{x-3}<1$, cioè $2<x<4$, si ha $\abs{x+3}<7$. Fissato
+$\epsilon>0$ poniamo quindi
+\[
+  \delta=\min\Bigl\{1,\frac\epsilon7\Bigr\}.
+\]
+Se $0<\abs{x-3}<\delta$, allora $\abs{x-3}<1$, quindi $\abs{x+3}<7$, e
+$\abs{x^{2}-9}<7\abs{x-3}<7\cdot\frac\epsilon7=\epsilon$. La scelta del minimo tra due
+valori è un artificio tipico: il primo vincolo serve a tenere sotto controllo i fattori
+«innocui», il secondo a rendere piccolo il fattore che tende a zero.
+\end{esempio}
+
+\begin{idea}[Tolleranze in ingresso e in uscita]
+La definizione con $\epsilon$ e $\delta$ ha un'interpretazione naturale per chi progetta.
+Si pensi a un sistema che a una grandezza di ingresso $x$ (la posizione della manetta,
+l'angolo di un'aletta di compensazione) associa una grandezza di uscita $f(x)$ (la
+spinta, il momento di cerniera). Il committente fissa la \emph{tolleranza in uscita}
+$\epsilon$: l'uscita deve differire dal valore nominale $\ell$ meno di $\epsilon$.
+Il progettista deve allora garantire una \emph{tolleranza in ingresso} $\delta$
+abbastanza stretta: se l'ingresso differisce dal valore nominale $x_{0}$ meno di
+$\delta$, l'uscita rispetta la specifica. Che $f(x)\to\ell$ per $x\to x_{0}$ significa
+esattamente che \emph{qualunque} specifica $\epsilon$ può essere soddisfatta con un'opportuna
+precisione $\delta$ sull'ingresso; e, come nell'\cref{es:x-quadro-eps-delta},
+specifiche più severe richiedono in generale lavorazioni più precise.
+\end{idea}
+
+\subsection{Limiti infiniti e limiti all'infinito}
+
+Valgono analoghe definizioni quando il limite $\ell$, oppure il punto $x_{0}$, o entrambi,
+sono infiniti: basta sostituire nella \cref{def:limite-funzione} le parole «converge a»
+con «tende a $\pm\infty$», secondo le definizioni del \cref{cap:successioni}. Così, ad
+esempio, se $x_{0}\in\R$ è di accumulazione per $A$, e se $A$ non è limitato
+superiormente,
+\begin{align}
+  \lim_{x\to x_{0}}f(x)=+\infty \quad&\sse\quad \perogni x_{n}\in A\setminus\{x_{0}\},\ x_{n}\to x_{0}:\ f(x_{n})\to+\infty;
+  \label{eq:def-lim-piu-inf}\\
+  \lim_{x\to+\infty}f(x)=\ell \quad&\sse\quad \perogni x_{n}\in A,\ x_{n}\to+\infty:\ f(x_{n})\to\ell;
+  \label{eq:def-lim-all-inf}\\
+  \lim_{x\to+\infty}f(x)=+\infty \quad&\sse\quad \perogni x_{n}\in A,\ x_{n}\to+\infty:\ f(x_{n})\to+\infty .
+  \label{eq:def-lim-inf-inf}
+\end{align}
+Il lettore formuli i casi corrispondenti con $-\infty$ al posto di $+\infty$. Anche
+queste definizioni ammettono una formulazione con le disuguaglianze, analoga alla
+\eqref{eq:eps-delta}: la riassumiamo nella \cref{tab:intorni}. In ogni caso la struttura
+è la stessa:
+\begin{equation}\label{eq:def-intorni}
+\begin{gathered}
+  \text{per ogni intorno } V \text{ di } \ell \ \ \text{esiste un intorno } U \text{ di } x_{0} :\\
+  f(x)\in V \quad\perogni x\in(U\cap A)\setminus\{x_{0}\},
+\end{gathered}
+\end{equation}
+dove gli intorni sono quelli della \cref{def:intorni}, e per i punti infiniti la
+condizione $x\neq x_{0}$ è automatica.
+
+\begin{table}[htb]
+\centering
+\small
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{l l}
+\toprule
+punto $x_{0}$ & «$x$ vicino a $x_{0}$»\\
+\midrule
+$x_{0}\in\R$ & $\esiste\delta>0$: \ $0<\abs{x-x_{0}}<\delta$\\
+$x_{0}=+\infty$ & $\esiste k$: \ $x>k$\\
+$x_{0}=-\infty$ & $\esiste k$: \ $x<k$\\
+\bottomrule
+\end{tabular}
+\qquad
+\begin{tabular}{l l}
+\toprule
+limite $\ell$ & «$f(x)$ vicino a $\ell$»\\
+\midrule
+$\ell\in\R$ & $\perogni\epsilon>0$: \ $\abs{f(x)-\ell}<\epsilon$\\
+$\ell=+\infty$ & $\perogni M>0$: \ $f(x)>M$\\
+$\ell=-\infty$ & $\perogni M>0$: \ $f(x)<-M$\\
+\bottomrule
+\end{tabular}
+\caption{Le nove definizioni di limite con le disuguaglianze si ottengono combinando una
+riga della tabella di sinistra con una riga della tabella di destra secondo lo schema
+\eqref{eq:def-intorni}: «per ogni [condizione su $f(x)$] esiste [condizione su $x$], con
+$x\in A$». Ad esempio, $\lim_{x\to+\infty}f(x)=\ell$ significa: per ogni $\epsilon>0$
+esiste $k$ tale che $\abs{f(x)-\ell}<\epsilon$ per ogni $x\in A$ con $x>k$.}
+\label{tab:intorni}
+\end{table}
+
+\begin{esempio}\label{es:limiti-infiniti}
+\begin{enumerate}[label=\textup{(\roman*)}]
+  \item $\displaystyle\lim_{x\to0}\frac1{x^{2}}=+\infty$. Con le successioni: se
+  $x_{n}\to0$ e $x_{n}\neq0$, allora $x_{n}^{2}\to0$ con $x_{n}^{2}>0$, e quindi
+  $1/x_{n}^{2}\to+\infty$ (per la \eqref{eq:inf7} e l'avviso «$1/0$ non è $+\infty$»
+  del \cref{sec:forme-indeterminate}). Con le
+  disuguaglianze: fissato $M>0$, si ha $\frac1{x^{2}}>M$ se $0<\abs x<\delta=\frac1{\sqrt M}$.
+  \item $\displaystyle\lim_{x\to+\infty}\frac1x=0$: fissato $\epsilon>0$, per $x>k=\frac1\epsilon$
+  si ha $0<\frac1x<\epsilon$.
+  \item $\displaystyle\lim_{x\to+\infty}x^{2}=+\infty$: fissato $M>0$, per $x>k=\sqrt M$
+  si ha $x^{2}>M$.
+  \item Il limite di $\frac1x$ per $x\to0$ \emph{non esiste}: lungo $x_{n}=\frac1n$ si ha
+  $\frac1{x_{n}}=n\to+\infty$, lungo $x_{n}'=-\frac1n$ si ha $\frac1{x_{n}'}=-n\to-\infty$,
+  mentre la definizione richiede lo stesso limite lungo tutte le successioni.
+\end{enumerate}
+\end{esempio}
+
+\subsection{Limite destro e limite sinistro}
+
+L'ultimo esempio suggerisce di distinguere da quale parte ci si avvicina a $x_{0}$. È utile
+considerare i cosiddetti \emph{limite destro} ($x\to x_{0}^{+}$) e \emph{limite
+sinistro} ($x\to x_{0}^{-}$), quando ci si avvicina al punto $x_{0}$ per valori di
+$x\in A$ rispettivamente solo maggiori di $x_{0}$, o solo minori.
+
+\begin{definizione}[Limite destro e sinistro]\label{def:limite-dx-sx}\index{limite!destro e sinistro}
+Sia $x_{0}\in\R$ di accumulazione per $A\cap(x_{0},+\infty)$, e sia $\ell\in\R$. Si dice
+che $\ell$ è il \emph{limite destro} di $f$ in $x_{0}$ se
+\begin{equation}\label{eq:def-limite-dx}
+\begin{aligned}
+  \lim_{x\to x_{0}^{+}}f(x)=\ell \quad&\sse\quad \perogni x_{n}\to x_{0},\ x_{n}\in A,\ x_{n}>x_{0}:\ f(x_{n})\to\ell\\
+  &\sse\quad \perogni\epsilon>0\ \esiste\delta>0 :\ \abs{f(x)-\ell}<\epsilon\\
+  &\phantom{\sse}\quad \perogni x\in A,\ x_{0}<x<x_{0}+\delta .
+\end{aligned}
+\end{equation}
+Analogamente, se $x_{0}$ è di accumulazione per $A\cap(-\infty,x_{0})$,
+\begin{equation}\label{eq:def-limite-sx}
+\begin{aligned}
+  \lim_{x\to x_{0}^{-}}f(x)=\ell \quad&\sse\quad \perogni x_{n}\to x_{0},\ x_{n}\in A,\ x_{n}<x_{0}:\ f(x_{n})\to\ell\\
+  &\sse\quad \perogni\epsilon>0\ \esiste\delta>0 :\ \abs{f(x)-\ell}<\epsilon\\
+  &\phantom{\sse}\quad \perogni x\in A,\ x_{0}-\delta<x<x_{0} .
+\end{aligned}
+\end{equation}
+Il lettore formuli i casi con limite infinito.
+\end{definizione}
+
+In altre parole, il limite destro di $f$ in $x_{0}$ non è altro che il limite in $x_{0}$
+della restrizione di $f$ all'insieme $A\cap(x_{0},+\infty)$: l'equivalenza tra le due
+righe della \eqref{eq:def-limite-dx} è quindi un caso particolare del \cref{teo:eps-delta}.
+
+\begin{marginfigure}
+\centering
+\begin{tikzpicture}[scale=0.9]
+  \draw[->, grigio] (-2,0) -- (2.2,0) node[below, font=\scriptsize, black] {$x$};
+  \draw[->, grigio] (0,-1.5) -- (0,1.6) node[left, font=\scriptsize, black] {$y$};
+  \draw[blu, very thick] (0,1) -- (1.9,1);
+  \draw[blu, very thick] (-1.9,-1) -- (0,-1);
+  \draw[blu, thick, fill=white] (0,1) circle (2pt);
+  \draw[blu, thick, fill=white] (0,-1) circle (2pt);
+  \node[left, font=\scriptsize] at (0,1) {$1$};
+  \node[right, font=\scriptsize] at (0,-1) {$-1$};
+\end{tikzpicture}
+\caption{La funzione $\frac{\abs x}{x}$: limite destro $1$ e limite sinistro $-1$ in
+$x_{0}=0$; il limite (bilatero) non esiste.}
+\label{fig:modulo-su-x}
+\end{marginfigure}
+
+\begin{esempio}\label{es:modulo-su-x}
+Per la funzione $f(x)=\frac{\abs x}{x}$, definita per $x\neq0$, si ha $f(x)=1$ per
+$x>0$ e $f(x)=-1$ per $x<0$ (\cref{fig:modulo-su-x}). Quindi
+\begin{equation}\label{eq:modulo-su-x}
+  \lim_{x\to0^{+}}\frac{\abs x}{x}=1, \qquad \lim_{x\to0^{-}}\frac{\abs x}{x}=-1,
+  \qquad \lim_{x\to0}\frac{\abs x}{x}\ \text{non esiste}:
+\end{equation}
+la successione $x_{n}=\frac{(-1)^{n}}n$ tende a zero, ma $f(x_{n})=(-1)^{n}$ non è
+regolare. Analogamente $\lim_{x\to0^{+}}\frac1x=+\infty$ e $\lim_{x\to0^{-}}\frac1x=-\infty$.
+\end{esempio}
+
+\begin{notastorica}[Due definizioni, una sola idea]
+La definizione di limite con le disuguaglianze si è affermata attraverso le lezioni
+berlinesi di Karl Weierstrass, negli anni Sessanta dell'Ottocento, ma la sostanza era già
+nel \emph{Résumé des leçons} di Cauchy (1823), dove le lettere $\epsilon$ e $\delta$
+compaiono per misurare l'incremento della variabile e lo scarto del rapporto
+incrementale dalla derivata. La definizione
+«per successioni» porta invece il nome di Eduard Heine, autore degli \emph{Elemente der
+Functionenlehre} (1872), un'esposizione dei fondamenti dell'analisi scritta sotto
+l'influenza delle lezioni di Weierstrass e in dialogo con Georg Cantor, nella quale
+anche i numeri reali sono costruiti a partire dalle successioni. Si parla così di
+\emph{definizione di Heine} (sequenziale) e di \emph{definizione di Cauchy}
+($\epsilon$-$\delta$).
+Il fatto che le due definizioni siano equivalenti, che dimostreremo tra poco, non è
+banale: la parte delicata richiede di \emph{scegliere} infiniti punti, uno per ogni
+$n$, e sottintende un principio logico (una forma debole dell'assioma della scelta) che
+fu messo in luce solo all'inizio del Novecento.
+\end{notastorica}

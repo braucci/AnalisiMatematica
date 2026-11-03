@@ -1,0 +1,87 @@
+%% ----------------------------------------------------------------------------
+%%  §3.12  Punti fondamentali del capitolo
+%% ----------------------------------------------------------------------------
+\section{Punti fondamentali del capitolo}
+\label{sec:sintesi-cap03}
+
+L'idea centrale del capitolo è che il comportamento «all'infinito» di una successione si
+può descrivere con un numero finito di parole: per ogni tolleranza $\epsilon$ esiste un
+indice oltre il quale i termini la rispettano. Da questa definizione discendono le regole
+di calcolo, i teoremi di confronto e, grazie all'assioma di completezza, i teoremi di
+esistenza che permettono di affermare che un limite c'è senza conoscerlo in anticipo.
+
+\begin{puntichiave}
+\item \textbf{Definizione di limite.} $a_{n}\to a\in\R$ se per ogni $\epsilon>0$ esiste
+$\nu$ tale che $\abs{a_{n}-a}<\epsilon$ per ogni $n>\nu$ (\cref{def:limite}); $a_{n}\to+\infty$
+se per ogni $M>0$ esiste $\nu$ tale che $a_{n}>M$ per ogni $n>\nu$
+(\cref{def:limite-infinito}). L'indice $\nu$ dipende da $\epsilon$: scambiare i
+quantificatori cambia il significato. Il limite, se esiste, è unico
+(\cref{teo:unicita-limite}).
+\item \textbf{Convergenza e limitatezza.} Ogni successione convergente è limitata
+(\cref{teo:convergente-limitata}), ma non viceversa: $(-1)^{n}$ è limitata e non ha
+limite (\cref{prop:alterna-non-converge}).
+\item \textbf{Operazioni con i limiti.} Se $a_{n}\to a$ e $b_{n}\to b$, con $a,b\in\R$,
+allora $a_{n}\pm b_{n}\to a\pm b$, $a_{n}b_{n}\to ab$ e, se $b_{n}\neq0$ e $b\neq0$,
+$a_{n}/b_{n}\to a/b$ (\cref{teo:operazioni-limiti}). Con limiti infiniti valgono regole
+analoghe (\cref{teo:operazioni-infinite}).
+\item \textbf{Forme indeterminate.} Nelle forme $\infty-\infty$, $0\cdot\infty$,
+$\frac\infty\infty$, $\frac00$ e $1^{\infty}$, $\infty^{0}$, $0^{0}$ i limiti dei
+singoli termini non bastano: occorre prima trasformare l'espressione (raccogliere il
+termine dominante, razionalizzare), come negli \cref{es:quoziente-polinomi} e
+\cref{es:razionalizzare}. Attenzione: se $b_{n}\to0$, soltanto $\abs{1/b_{n}}$ diverge;
+$1/b_{n}\to+\infty$ solo se $b_{n}>0$ definitivamente.
+\item \textbf{Permanenza del segno e confronto.} Se $a_{n}\to a>0$, allora $a_{n}>0$
+definitivamente (\cref{teo:permanenza-segno}). Le disuguaglianze larghe passano al
+limite (\cref{cor:confronto-limiti}); quelle strette si indeboliscono: $\frac1n>0$, ma il
+limite è $0$.
+\item \textbf{Teorema dei carabinieri.} Se $a_{n}\le c_{n}\le b_{n}$ definitivamente e
+$a_{n}$, $b_{n}$ tendono allo stesso limite $a$, allora anche $c_{n}$ ha limite, uguale
+ad $a$ (\cref{teo:carabinieri}). Ne segue che il prodotto di una successione limitata per
+una infinitesima è infinitesimo (\cref{teo:limitata-infinitesima}), ad esempio
+$\frac{\sen n}{n}\to0$.
+\item \textbf{Limiti notevoli.} $a^{n}$ tende a $+\infty$, $1$ o $0$ secondo che $a>1$,
+$a=1$ o $\abs a<1$, e non ha limite per $a\le-1$ (\cref{teo:lim-geometrica});
+$\sqrt[n]a\to1$ per $a>0$ e $\sqrt[n]n\to1$ (\cref{prop:radice-n-a},
+\cref{prop:radice-n-n}). Lo strumento comune sono le stime dal basso di $(1+x)^{n}$ date
+da Bernoulli e dal binomio.
+\item \textbf{Il limite $\frac{\sen a_{n}}{a_{n}}$.} Se $a_{n}\to0$ con $a_{n}\neq0$,
+allora $\frac{\sen a_{n}}{a_{n}}\to1$ (\cref{teo:sen-x-su-x}); ne segue che l'area del
+cerchio di raggio $1$ è $\pi$ (\cref{teo:area-cerchio}). Non va confuso con
+$\frac{\sen n}{n}\to0$, dove l'argomento diverge.
+\item \textbf{Successioni monotòne.} Ogni successione monotòna ha limite: il $\sup$ se è
+crescente, l'$\inf$ se è decrescente; se è anche limitata, converge (\cref{teo:monotone}).
+Per le successioni definite per ricorrenza si dimostra prima che il limite esiste, poi lo
+si calcola passando al limite nella ricorrenza (\cref{es:erone}).
+\item \textbf{Il numero $e$.} $(1+\frac1n)^{n}$ è strettamente crescente,
+$(1+\frac1n)^{n+1}$ strettamente decrescente, ed entrambe tendono ad $e$, con
+$(1+\frac1n)^{n}<e<(1+\frac1n)^{n+1}$ per ogni $n$ (\cref{teo:numero-e}) e $2<e<3$
+(\cref{cor:e-tra-2-e-3}). Più in generale $(1+\frac1{a_{n}})^{a_{n}}\to e$ se
+$a_{n}\to\pm\infty$ (\cref{teo:e-generalizzato}).
+\item \textbf{Criterio del rapporto e gerarchia degli infiniti.} Se $a_{n}>0$ e
+$\frac{a_{n+1}}{a_{n}}\to b<1$, allora $a_{n}\to0$ (\cref{teo:criterio-rapporto}); per
+$b>1$ la successione diverge, per $b=1$ il criterio tace. Per $b>0$ e $a>1$ vale
+$\log n\ll n^{b}\ll a^{n}\ll n!\ll n^{n}$ (\cref{teo:gerarchia}), anche se il sorpasso
+può avvenire molto tardi (\cref{es:n10-su-1-1n}).
+\item \textbf{Estratte e teorema di Bolzano--Weierstrass.} Se $a_{n}$ ha limite, ogni
+estratta ha lo stesso limite (\cref{prop:estratta-limite}); due estratte con limiti
+diversi escludono l'esistenza del limite. Ogni successione limitata ha un'estratta
+convergente (\cref{teo:bolzano-weierstrass}).
+\item \textbf{Criterio di Cauchy.} Una successione reale converge se e solo se è di
+Cauchy (\cref{teo:criterio-cauchy}): la convergenza si verifica senza conoscere il
+limite. In $\Q$ il criterio è falso, perché poggia sulla completezza di $\R$.
+\item \textbf{Limiti e calcolo numerico.} La definizione di limite è la tolleranza sul
+residuo di un solutore iterativo; il metodo di Erone, caso particolare del metodo di
+Newton, converge quadraticamente; il limite $\frac{\sen\alpha}{\alpha}\to1$ giustifica le
+approssimazioni $W\sen\gamma\approx W\gamma$ e $C_{L}=2\pi\alpha$ per piccoli angoli in
+radianti. Ma il calcolatore va usato con cautela: in doppia precisione
+$(1+10^{-16})^{10^{16}}$ risulta $1$.
+\end{puntichiave}
+
+\paragraph{Il filo del discorso.} Il capitolo ha studiato il comportamento di una
+quantità che dipende da un indice naturale. Restano aperte due questioni: che cosa
+accade a $f(x)$ quando la variabile \emph{reale} $x$ si avvicina a un punto, e la
+«continuità» di esponenziali e potenze, che qui abbiamo dovuto aggirare. Il
+\cref{cap:funzioni-continue} risponde a entrambe definendo il limite di una funzione
+proprio mediante le successioni, così da ereditare tutti i risultati di questo capitolo;
+il metodo di bisezione e il teorema di Bolzano--Weierstrass diventeranno il teorema degli
+zeri e il teorema di Weierstrass.

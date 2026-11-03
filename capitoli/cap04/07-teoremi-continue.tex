@@ -1,0 +1,522 @@
+%% ----------------------------------------------------------------------------
+%%  §4.7  Alcuni teoremi sulle funzioni continue
+%% ----------------------------------------------------------------------------
+\section{Alcuni teoremi sulle funzioni continue}
+\label{sec:teoremi-continue}
+
+Il teorema seguente è analogo al teorema della permanenza del segno per le successioni
+(\cref{teo:permanenza-segno}) e alla sua versione per i limiti di funzioni
+(\cref{teo:confronto-funzioni}(i)); la differenza è che ora la conclusione vale anche
+\emph{nel} punto $x_{0}$.
+
+\begin{teorema}[Permanenza del segno]\label{teo:permanenza-segno-continue}\index{teorema!della permanenza del segno}
+Sia $f$ una funzione definita in un intervallo $A$ e continua in $x_{0}\in A$. Se
+$f(x_{0})>0$, esiste un numero $\delta>0$ con la proprietà che $f(x)>0$ per ogni
+$x\in A\cap(x_{0}-\delta,x_{0}+\delta)$.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$ continua in $x_{0}$; \ $f(x_{0})>0$.}
+\Tesi{$\esiste\delta>0$: \ $f(x)>0$ \ $\perogni x\in A$, $\abs{x-x_{0}}<\delta$.}
+\end{schema}
+
+\begin{strategia}
+Si sceglie una tolleranza che non permetta a $f(x)$ di raggiungere lo zero: con
+$\epsilon=f(x_{0})/2$, la caratterizzazione (c) della continuità tiene $f(x)$ sopra
+$f(x_{0})/2>0$ in tutto un intorno di $x_{0}$, punto $x_{0}$ compreso.
+\end{strategia}
+
+\begin{dimostrazione}
+La dimostrazione si fa come per le successioni: dato che $f(x_{0})>0$, possiamo scegliere
+$\epsilon=f(x_{0})/2$. Per la \cref{prop:caratt-continuita}(c) esiste quindi un numero
+$\delta>0$ per cui $\abs{f(x)-f(x_{0})}<f(x_{0})/2$ per ogni $x\in A$ con
+$\abs{x-x_{0}}<\delta$. Ciò equivale a $-f(x_{0})/2<f(x)-f(x_{0})<f(x_{0})/2$; in
+particolare
+\begin{equation}\label{eq:permanenza-continue}
+  f(x)>f(x_{0})-\frac{f(x_{0})}2=\frac{f(x_{0})}2>0 . \qedhere
+\end{equation}
+\end{dimostrazione}
+
+Molto importanti sono i tre teoremi che seguono: il teorema dell'esistenza degli zeri,
+il teorema dell'esistenza dei valori intermedi e il teorema di Weierstrass sull'esistenza
+del massimo e del minimo. Sono, nello schema della \cref{fig:schema-teoremi}, i primi
+teoremi di esistenza che riguardano le funzioni.
+
+\subsection{Il teorema dell'esistenza degli zeri}
+
+\begin{teorema}[Esistenza degli zeri]\label{teo:zeri}\index{teorema!dell'esistenza degli zeri}
+Sia $f$ una funzione continua in un intervallo $[a,b]$. Se $f(a)<0$ e $f(b)>0$, allora
+esiste $x_{0}\in(a,b)$ tale che $f(x_{0})=0$.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$ continua in $[a,b]$; \ $f(a)<0<f(b)$.}
+\Tesi{$\esiste x_{0}\in(a,b)$: \ $f(x_{0})=0$.}
+\end{schema}
+
+Naturalmente la tesi vale anche se $f(a)>0$ e $f(b)<0$ (basta applicare il teorema a
+$-f$): il teorema dell'esistenza degli zeri vale supponendo che i valori $f(a)$, $f(b)$
+siano di segno discorde. L'enunciato garantisce l'esistenza di \emph{almeno} uno zero,
+non la sua unicità: gli zeri possono essere molti (\cref{fig:zeri}). La dimostrazione
+del teorema, con il metodo di bisezione, è riportata nel \cref{sec:bisezione}.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.92\textwidth, height=5cm, xmin=0, xmax=6.4, ymin=-1.9, ymax=2.6,
+  axis lines=middle, xtick={0.5,6}, xticklabels={$a$,$b$}, ytick=\empty,
+  xlabel={$x$}, ylabel={$y$},
+  every axis x label/.style={at={(axis description cs:1,0.46)},anchor=west}]
+  \addplot[curva, domain=0.5:6, samples=150] {0.15*(x-1.4)*(x-3.1)*(x-4.9)};
+  \addplot[only marks, mark=*, mark size=1.6pt, blu] coordinates {(0.5,-1.5444) (6,2.2011)};
+  \addplot[only marks, mark=*, mark size=1.6pt, rame] coordinates {(1.4,0) (3.1,0) (4.9,0)};
+  \addplot[tratteggio] coordinates {(0.5,0) (0.5,-1.5444)};
+  \addplot[tratteggio] coordinates {(6,0) (6,2.2011)};
+  \node[font=\scriptsize, right] at (axis cs:0.55,-1.5444) {$f(a)<0$};
+  \node[font=\scriptsize, left] at (axis cs:5.95,2.2011) {$f(b)>0$};
+\end{axis}
+\end{tikzpicture}
+\caption{Una funzione continua in $[a,b]$ che assume agli estremi valori di segno
+discorde attraversa l'asse $x$ almeno una volta: qui gli zeri sono tre. Il teorema
+garantisce che ce n'è almeno uno, non dice quanti sono né dove si trovano.}
+\label{fig:zeri}
+\end{figure}
+
+Tutte le ipotesi sono essenziali. Senza la continuità la tesi è falsa: la funzione che
+vale $-1$ in $[-1,0)$ e $1$ in $[0,1]$ cambia segno senza annullarsi. È essenziale anche
+che il dominio sia un intervallo: $\frac1x$ assume valori di segno discorde in $-1$ e in
+$1$, è continua nel suo dominio $\R\setminus\{0\}$, ma non si annulla mai. Infine, come
+vedremo nel \cref{sec:bisezione}, è essenziale l'assioma di completezza.
+
+Per mostrare la portata del teorema, consideriamo come esempio le due equazioni nella
+incognita $x$
+\begin{align}
+  &x^{3}+x-1=0, \label{eq:cubica}\\
+  &e^{x}+x=0, \label{eq:trascendente}
+\end{align}
+che non rientrano tra le equazioni algebriche di primo e secondo grado di cui è facile
+ricordare la formula risolutiva. La prima delle due equazioni è un'\emph{equazione
+algebrica di terzo grado}, mentre la seconda è un'\emph{equazione trascendente}.
+Procediamo per tentativi, assegnando a $x$ alcuni valori:
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{c|ccccc}
+  $x$ & $-2$ & $-1$ & $0$ & $1$ & $2$\\ \hline
+  $x^{3}+x-1$ & $-11$ & $-3$ & $-1$ & $1$ & $9$\\
+  $e^{x}+x$ & $e^{-2}-2$ & $e^{-1}-1$ & $1$ & $e+1$ & $e^{2}+2$
+\end{tabular}
+\end{center}
+Nel caso $f(x)=x^{3}+x-1$, abbiamo $f(0)<0$, $f(1)>0$. Poiché $f$ è un polinomio, e
+quindi è continua, in base al teorema dell'esistenza degli zeri esiste un numero $x_{0}$
+nell'intervallo $(0,1)$ tale che $f(x_{0})=0$; cioè $x_{0}$ è una soluzione
+dell'equazione \eqref{eq:cubica}. Nel \cref{sec:bisezione} vedremo come calcolare
+numericamente tale radice, e troveremo che $x_{0}=0{,}682327\ldots$ Nel secondo caso,
+$f(x)=e^{x}+x$ è continua (\cref{teo:continuita-esponenziale}) e risulta
+$f(-1)=\frac1e-1<0$, $f(0)=1>0$. Quindi esiste nell'intervallo $(-1,0)$ una radice
+$x_{0}$ dell'equazione \eqref{eq:trascendente}; troveremo che $x_{0}=-0{,}567143\ldots$
+In entrambi i casi la radice è unica, perché le due funzioni sono strettamente crescenti
+(somme di funzioni strettamente crescenti): due zeri distinti $x_{1}<x_{2}$ darebbero
+$0=f(x_{1})<f(x_{2})=0$.
+
+Esiste una formula risolutiva per le equazioni di terzo grado (si ricordi la nota storica
+su Cardano e Bombelli del \cref{sec:complessi}), che dà come soluzione reale
+dell'equazione \eqref{eq:cubica} il numero
+\begin{equation}\label{eq:cardano}
+  x_{0}=\sqrt[3]{\frac12+\sqrt{\frac{31}{108}}}-\sqrt[3]{\sqrt{\frac{31}{108}}-\frac12}
+  =0{,}682327\ldots
+\end{equation}
+Viceversa, non è nota alcuna formula risolutiva, in termini di funzioni elementari, per
+l'equazione \eqref{eq:trascendente}.
+
+\begin{notastorica}[Le equazioni che non si risolvono con una formula]
+Dopo le formule per le equazioni di terzo e quarto grado, trovate nel Cinquecento da
+Scipione del Ferro, Niccolò Tartaglia, Gerolamo Cardano e Ludovico Ferrari, i matematici
+cercarono per quasi tre secoli una formula «per radicali» per l'equazione generale di
+quinto grado. Paolo Ruffini (1799) e, in forma completa, Niels Henrik Abel (1824)
+dimostrarono che una tale formula \emph{non esiste}; Évariste Galois chiarì poco dopo
+quali equazioni particolari siano risolubili per radicali. Per le equazioni
+trascendenti come la \eqref{eq:trascendente} la situazione è ancora più netta: la sua
+soluzione si esprime con la \emph{funzione $W$ di Lambert}, $x_{0}=-W(1)$, ma $W$ è
+definita proprio come inversa di una funzione, $w\mapsto we^{w}$, e non è una funzione
+elementare. Il numero $W(1)=0{,}567143\ldots$ è detto \emph{costante omega}. Il teorema
+degli zeri, insieme al metodo di bisezione, cambia la prospettiva: anche quando una
+formula non esiste, l'esistenza della soluzione è garantita, e la soluzione si può
+calcolare con la precisione che si desidera.
+\end{notastorica}
+
+Applichiamo ancora una volta il teorema dell'esistenza degli zeri per ritrovare, per
+un'altra via, un risultato del \cref{cap:complementi}: l'esistenza della radice $n$-esima
+(\cref{teo:radice-n}). \emph{Per ogni
+$y_{0}\ge0$ esiste un numero reale $x_{0}\ge0$ soluzione dell'equazione}
+\begin{equation}\label{eq:radice-zeri}
+  x^{n}=y_{0} .
+\end{equation}
+Ricordiamo che, essendo la funzione $x^{n}$ strettamente crescente per $x\ge0$
+(\cref{prop:potenza-crescente}), un tale numero $x_{0}$ è unico. Dimostriamo che
+l'equazione ha soluzione: se $n=1$ basta $x_{0}=y_{0}$, e quindi possiamo supporre
+$n\ge2$; se $y_{0}=0$ naturalmente è $x_{0}=0$, e se $y_{0}=1$ basta prendere
+$x_{0}=1$. Negli altri casi ($y_{0}>0$, $y_{0}\neq1$) poniamo $f(x)=x^{n}-y_{0}$, che è
+continua; risulta
+$f(0)=-y_{0}<0$, e rimane da trovare un punto dove $f$ è positiva. Se $y_{0}<1$, allora
+$f(1)=1-y_{0}>0$, e quindi esiste una radice $x_{0}$ nell'intervallo $(0,1)$. Se invece
+$y_{0}>1$, allora $f(y_{0})=y_{0}^{n}-y_{0}=y_{0}\bigl(y_{0}^{n-1}-1\bigr)>0$, e quindi in
+questo caso esiste una radice nell'intervallo $(0,y_{0})$. Nel \cref{cap:complementi}
+avevamo ottenuto lo stesso risultato direttamente con l'estremo superiore; il teorema
+degli zeri, che a sua volta poggia sull'assioma di completezza, incorpora una volta per
+tutte quel ragionamento.
+
+\subsection{Il teorema dei valori intermedi}
+
+\begin{teorema}[Primo teorema dei valori intermedi]\label{teo:valori-intermedi-1}\index{teorema!dei valori intermedi}
+Una funzione continua in un intervallo $[a,b]$ assume tutti i valori compresi tra $f(a)$
+e $f(b)$.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$ continua in $[a,b]$; \ $y_{0}$ compreso tra $f(a)$ e $f(b)$.}
+\Tesi{$\esiste x_{0}\in[a,b]$: \ $f(x_{0})=y_{0}$.}
+\end{schema}
+
+\begin{strategia}
+Si «abbassa» il grafico di $y_{0}$: la funzione $g(x)=f(x)-y_{0}$ è continua e cambia
+segno tra $a$ e $b$, e uno zero di $g$ è esattamente un punto in cui $f$ vale $y_{0}$
+(\cref{fig:valori-intermedi}). Il teorema dei valori intermedi è dunque il teorema degli
+zeri applicato a una funzione traslata.
+\end{strategia}
+
+\begin{dimostrazione}
+Per semplificare le notazioni consideriamo il caso in cui $f(a)\le f(b)$ (l'altro caso
+si ottiene applicando questo a $-f$). La tesi consiste nel provare che, qualunque sia
+$y_{0}\in[f(a),f(b)]$, esiste $x_{0}\in[a,b]$ tale che $f(x_{0})=y_{0}$. Se $y_{0}=f(a)$ si
+può porre $x_{0}=a$; analogamente, se $y_{0}=f(b)$, basta prendere $x_{0}=b$. Per trattare
+il caso $y_{0}\in(f(a),f(b))$ consideriamo la funzione
+\begin{equation}\label{eq:vi-g}
+  g(x)=f(x)-y_{0} \qquad\perogni x\in[a,b],
+\end{equation}
+che è continua per il \cref{teo:operazioni-continue}; essendo $f(a)<y_{0}<f(b)$, risulta
+\begin{equation}\label{eq:vi-segni}
+  g(a)=f(a)-y_{0}<0, \qquad g(b)=f(b)-y_{0}>0 .
+\end{equation}
+Per il teorema dell'esistenza degli zeri esiste un numero $x_{0}\in(a,b)$ tale che
+$g(x_{0})=0$, cioè $f(x_{0})=y_{0}$.
+\end{dimostrazione}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.85\textwidth, height=5cm, xmin=0, xmax=5.4, ymin=0, ymax=3.3,
+  axis lines=left, xtick={0.6,5}, xticklabels={$a$,$b$}, ytick={0.7,1.552,2.404},
+  yticklabels={$f(a)$,$y_{0}$,$f(b)$}, xlabel={$x$}, ylabel={$y$}]
+  \addplot[curva, domain=0.6:5, samples=120] {0.7+0.32*(x-0.6)+0.95*sin(deg(1.5*(x-0.6)))};
+  \addplot[curva2, domain=0:5.4] {1.552};
+  \addplot[tratteggio] coordinates {(0,0.7) (0.6,0.7) (0.6,0)};
+  \addplot[tratteggio] coordinates {(0,2.404) (5,2.404) (5,0)};
+  \addplot[only marks, mark=*, mark size=1.6pt, rame] coordinates {(1.1332,1.552) (2.5277,1.552) (4.5017,1.552)};
+\end{axis}
+\end{tikzpicture}
+\caption{Il teorema dei valori intermedi: ogni retta orizzontale $y=y_{0}$ con $y_{0}$
+compreso tra $f(a)$ e $f(b)$ incontra il grafico di una funzione continua su $[a,b]$
+almeno una volta (qui tre volte).}
+\label{fig:valori-intermedi}
+\end{figure}
+
+\begin{idea}[L'equilibrio portanza--peso]
+In volo rettilineo orizzontale uniforme la portanza deve uguagliare il peso:
+$\frac12\rho V^{2}S\,C_{L}(\alpha)=W$. Per una data velocità $V$ e quota (cioè densità
+$\rho$), esiste un angolo d'attacco che realizza l'equilibrio? Il coefficiente di
+portanza $C_{L}(\alpha)$ è una funzione continua dell'incidenza (tra l'incidenza di
+portanza nulla e lo stallo), e così la portanza $L(\alpha)=\frac12\rho V^{2}S\,C_{L}(\alpha)$.
+Se a un'incidenza $\alpha_{1}$ la portanza è minore del peso e a un'incidenza $\alpha_{2}$
+è maggiore, il teorema dei valori intermedi garantisce un'incidenza $\bar\alpha$ compresa
+tra le due per cui $L(\bar\alpha)=W$. Se invece anche al $C_{L,\max}$ la portanza resta
+inferiore al peso, l'equilibrio è impossibile: la velocità è minore della velocità di
+stallo $V_{S}=\sqrt{2W/(\rho S\,C_{L,\max})}$.
+\end{idea}
+
+\subsection{Il teorema di Weierstrass}
+
+\begin{teorema}[di Weierstrass]\label{teo:weierstrass}\index{teorema!di Weierstrass}
+Sia $f$ una funzione continua in un intervallo chiuso e limitato $[a,b]$. Allora $f$
+assume massimo e minimo in $[a,b]$, cioè esistono in $[a,b]$ due punti $x_{1}$, $x_{2}$
+tali che
+\begin{equation}\label{eq:weierstrass}
+  f(x_{1})\le f(x)\le f(x_{2}) \qquad\perogni x\in[a,b].
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$ continua in $[a,b]$, intervallo chiuso e limitato.}
+\Tesi{$\esiste x_{1},x_{2}\in[a,b]$: \ $f(x_{1})\le f(x)\le f(x_{2})$ \ $\perogni x\in[a,b]$.}
+\end{schema}
+
+I numeri $x_{1}$, $x_{2}$ sono detti rispettivamente \emph{punti di minimo} e \emph{di
+massimo} per $f$ nell'intervallo $[a,b]$; i corrispondenti valori $m=f(x_{1})$ e
+$M=f(x_{2})$ sono detti \emph{minimo} e \emph{massimo} di $f$ in $[a,b]$
+(\cref{fig:weierstrass}). Il massimo e il minimo sono unici (\cref{prop:unicita-max}),
+i punti di massimo e di minimo in generale no.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.85\textwidth, height=5.2cm, xmin=0, xmax=6.2, ymin=0, ymax=3.4,
+  axis lines=left, xtick={0.6,1.62,4.6,5.6}, xticklabels={$a$,$x_{1}$,$x_{2}$,$b$},
+  ytick={0.9,3}, yticklabels={$m$,$M$}, xlabel={$x$}, ylabel={$f(x)$}]
+  \addplot[curva, domain=0.6:5.6, samples=150, smooth]
+    coordinates {(0.6,1.5) (1.0,1.05) (1.62,0.9) (2.4,1.15) (3.2,1.9) (4.0,2.75) (4.6,3.0) (5.2,2.75) (5.6,2.1)};
+  \addplot[tratteggio] coordinates {(0,0.9) (1.62,0.9) (1.62,0)};
+  \addplot[tratteggio] coordinates {(0,3) (4.6,3) (4.6,0)};
+  \addplot[tratteggio] coordinates {(0.6,0) (0.6,1.5)};
+  \addplot[tratteggio] coordinates {(5.6,0) (5.6,2.1)};
+  \addplot[only marks, mark=*, mark size=1.6pt, rame] coordinates {(1.62,0.9) (4.6,3)};
+\end{axis}
+\end{tikzpicture}
+\caption{Il teorema di Weierstrass: una funzione continua su un intervallo chiuso e
+limitato assume un valore minimo $m=f(x_{1})$ e un valore massimo $M=f(x_{2})$.}
+\label{fig:weierstrass}
+\end{figure}
+
+Il teorema di Weierstrass è dimostrato nel \cref{sec:dim-weierstrass}; in questa sede ci
+limitiamo a mettere in luce con degli esempi l'importanza delle ipotesi (funzione
+\emph{continua} definita in un intervallo \emph{chiuso} e \emph{limitato}) che
+garantiscono l'esistenza del massimo e del minimo (\cref{fig:controesempi-weierstrass}).
+
+\begin{enumerate}[label=\textup{(\alph*)}]
+  \item Consideriamo per $x>0$ la funzione $f(x)=\frac1x$. Essa \emph{non assume
+  massimo} nell'intervallo aperto a sinistra $(0,1]$; infatti non è limitata
+  superiormente in tale intervallo: per ogni $M>0$ risulta $f(x)>M$ se
+  $x\in\bigl(0,\frac1M\bigr)$. Qui manca la chiusura dell'intervallo.
+  \item La stessa funzione \emph{non assume minimo} nell'intervallo illimitato
+  $[1,+\infty)$. La funzione è limitata in tale intervallo, perché $0<\frac1x\le1$ per
+  ogni $x\ge1$; però $0$ non è il minimo di $f$ in $[1,+\infty)$, perché non esiste alcun
+  $x_{1}\ge1$ per cui $f(x_{1})=\frac1{x_{1}}=0$ (una frazione è nulla se e soltanto se
+  il numeratore è nullo), e nessun numero reale positivo $m$ è minimo per $f$, perché
+  risulta $f(x)<m$ per ogni $x>\frac1m$. L'estremo inferiore è $0$, ma non è raggiunto:
+  qui manca la limitatezza dell'intervallo.
+  \item La funzione $f(x)=x^{2}$ assume massimo e minimo in ogni intervallo chiuso e
+  limitato $[a,b]$, in particolare nell'intervallo $[-1,1]$. Invece la funzione
+  \begin{equation}\label{eq:g-senza-minimo}
+    g(x)=
+    \begin{cases}
+      x^{2} & \text{se } x\in[-1,1]\setminus\{0\},\\
+      1 & \text{se } x=0
+    \end{cases}
+  \end{equation}
+  non assume minimo nell'intervallo chiuso e limitato $[-1,1]$, perché assume valori
+  positivi arbitrariamente vicini allo zero ($g(x)\to0$ per $x\to0$) ma non è uguale a
+  zero per alcun valore di $x\in[-1,1]$. In questo caso la mancanza del minimo è causata
+  dalla discontinuità (eliminabile) di $g$ nel punto $x_{0}=0$.
+  \item Per la sua discontinuità in corrispondenza dei numeri interi, la funzione
+  \emph{parte frazionaria} $f(x)=x-\lfloor x\rfloor$, $x\in\R$, non ha massimo in un
+  qualunque intervallo $[a,b]$ che contenga un numero intero $k$ con $a<k\le b$: nei
+  punti immediatamente a sinistra di $k$ essa assume valori arbitrariamente vicini a $1$
+  (si ha $f(x)=x-k+1$ per $k-1\le x<k$), ma il valore $1$ non è mai assunto, essendo
+  $0\le f(x)<1$ per ogni $x$. Si osservi invece che in $[0,\frac12]$, che contiene l'intero
+  $0$ ma solo come estremo sinistro, $f(x)=x$ ha massimo $\frac12$.
+\end{enumerate}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.95\textwidth]{controesempi_weierstrass}
+\caption{Quattro funzioni per cui la tesi del teorema di Weierstrass non vale, perché
+manca una delle ipotesi: (a) l'intervallo non è chiuso; (b) l'intervallo non è limitato;
+(c) e (d) la funzione non è continua (\texttt{python/fig\_controesempi\_weierstrass.py}).}
+\label{fig:controesempi-weierstrass}
+\end{figure}
+
+Le ipotesi del teorema sono sufficienti, non necessarie: la funzione $\sen x$ ha massimo
+$1$ e minimo $-1$ su tutto $\R$, che non è limitato; la funzione di Dirichlet ha massimo
+e minimo su ogni intervallo pur essendo discontinua ovunque. Il teorema di Weierstrass
+garantisce l'esistenza del massimo, ma non dice dove si trovi: per trovarlo occorrono
+altri strumenti (il calcolo differenziale, oppure, come nell'esempio che segue,
+un'osservazione algebrica, oppure una ricerca numerica).
+
+\begin{idea}[L'efficienza massima di un velivolo]
+Con la \emph{polare parabolica} $C_{D}=C_{D0}+kC_{L}^{2}$, dove $k=\frac1{\pi e\,AR}$
+dipende dall'allungamento alare $AR$ e dal fattore di Oswald $e$, l'efficienza
+aerodinamica
+\[
+  E(C_{L})=\frac{C_{L}}{C_{D}}=\frac{C_{L}}{C_{D0}+kC_{L}^{2}}, \qquad 0\le C_{L}\le C_{L,\max},
+\]
+è una funzione continua su un intervallo chiuso e limitato (il denominatore è positivo):
+per il teorema di Weierstrass \emph{esiste} un coefficiente di portanza $C_{L}^{*}$ di
+efficienza massima. Per trovarlo, osserviamo che per $C_{L}>0$
+\[
+  \frac1{E}=\frac{C_{D0}}{C_{L}}+kC_{L}\ \ge\ 2\sqrt{\frac{C_{D0}}{C_{L}}\cdot kC_{L}}=2\sqrt{kC_{D0}},
+\]
+per la disuguaglianza $u+v\ge2\sqrt{uv}$, valida per $u,v>0$ perché equivale a
+$\bigl(\sqrt u-\sqrt v\bigr)^{2}\ge0$, con l'uguaglianza se e solo se $u=v$. Dunque
+$E\le E_{\max}=\frac1{2\sqrt{kC_{D0}}}$, con l'uguaglianza se e solo se
+$\frac{C_{D0}}{C_{L}}=kC_{L}$, cioè per $C_{L}^{*}=\sqrt{C_{D0}/k}$, la condizione in cui
+la resistenza parassita uguaglia quella indotta (purché $C_{L}^{*}\le C_{L,\max}$).
+Il programma che segue confronta la formula con una ricerca del massimo su una griglia
+fitta, per un velivolo con $C_{D0}=0{,}025$, $AR=8$, $e=0{,}8$ (\cref{fig:efficienza}).
+\end{idea}
+
+\begin{python}[Efficienza massima: Weierstrass, poi la formula]
+import math
+
+# Polare parabolica: C_D = C_D0 + k C_L^2, con k = 1/(pi e AR)
+CD0, AR, e_osw, CLmax = 0.025, 8.0, 0.80, 1.4
+k = 1 / (math.pi * e_osw * AR)
+E = lambda CL: CL / (CD0 + k * CL**2)       # efficienza L/D
+
+# Weierstrass: E è continua su [0, CLmax], quindi ha massimo.
+# Lo cerchiamo su una griglia fitta e lo confrontiamo con la formula.
+N = 140000
+CL_griglia = max((CLmax * i / N for i in range(N + 1)), key=E)
+CL_star = math.sqrt(CD0 / k)
+print(f"k = {k:.5f}")
+print(f"griglia:  C_L = {CL_griglia:.4f}   E = {E(CL_griglia):.4f}")
+E_max = 1 / (2 * math.sqrt(CD0 * k))
+print(f"formula:  C_L = {CL_star:.4f}   E = {E_max:.4f}")
+\end{python}
+\begin{risultato}
+k = 0.04974
+griglia:  C_L = 0.7090   E = 14.1796
+formula:  C_L = 0.7090   E = 14.1796
+\end{risultato}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.92\textwidth]{efficienza}
+\caption{L'efficienza $E=C_{L}/C_{D}$ in funzione di $C_{L}$ per la polare parabolica
+dell'esempio: il massimo, che esiste per il teorema di Weierstrass, è
+$E_{\max}\approx14{,}18$ per $C_{L}^{*}\approx0{,}709$ (\texttt{python/fig\_efficienza.py}).}
+\label{fig:efficienza}
+\end{figure}
+
+\subsection{Il secondo teorema dei valori intermedi}
+
+Siamo ora in grado di provare una nuova formulazione del teorema di esistenza dei valori
+intermedi.
+
+\begin{teorema}[Secondo teorema dei valori intermedi]\label{teo:valori-intermedi-2}
+Una funzione continua in un intervallo $[a,b]$ assume tutti i valori compresi tra il
+minimo e il massimo.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$ continua in $[a,b]$; \ $m=\min f$, $M=\max f$ (che esistono per Weierstrass).}
+\Tesi{per ogni $y_{0}\in[m,M]$ \ $\esiste x_{0}\in[a,b]$: \ $f(x_{0})=y_{0}$.}
+\end{schema}
+
+\begin{strategia}
+Si ripete la dimostrazione del primo teorema dei valori intermedi, ma al posto degli
+estremi $a$, $b$ si usano un punto di minimo $x_{1}$ e un punto di massimo $x_{2}$, che
+esistono per il teorema di Weierstrass: la funzione $f(x)-y_{0}$ cambia segno tra
+$x_{1}$ e $x_{2}$, e il teorema degli zeri, applicato sull'intervallo di estremi $x_{1}$
+e $x_{2}$, fornisce il punto cercato.
+\end{strategia}
+
+\begin{dimostrazione}
+I valori di massimo $M$ e di minimo $m$ sono assunti in base al teorema di Weierstrass;
+rimane da provare che, qualunque sia $y_{0}\in(m,M)$, esiste $x_{0}\in[a,b]$ tale che
+$f(x_{0})=y_{0}$. Indichiamo con $x_{1}$, $x_{2}$ i punti di minimo e di massimo di $f$,
+cioè tali che $f(x_{1})=m$, $f(x_{2})=M$, e consideriamo la funzione
+\begin{equation}\label{eq:vi2-g}
+  g(x)=f(x)-y_{0} \qquad\perogni x\in[a,b].
+\end{equation}
+Essendo $f(x_{1})=m<y_{0}<M=f(x_{2})$, risulta
+\begin{equation}\label{eq:vi2-segni}
+  g(x_{1})=f(x_{1})-y_{0}<0, \qquad g(x_{2})=f(x_{2})-y_{0}>0;
+\end{equation}
+per il teorema dell'esistenza degli zeri, applicato a $g$ nell'intervallo di estremi
+$x_{1}$, $x_{2}$ (che è $[x_{1},x_{2}]$ oppure $[x_{2},x_{1}]$, e su cui $g$ è continua),
+esiste un numero $x_{0}$, appartenente all'intervallo aperto di estremi $x_{1}$, $x_{2}$,
+tale che $g(x_{0})=0$, cioè tale che $f(x_{0})=y_{0}$.
+\end{dimostrazione}
+
+\begin{corollario}\label{cor:immagine-intervallo}
+L'immagine di un intervallo chiuso e limitato mediante una funzione continua è un
+intervallo chiuso e limitato: se $f$ è continua in $[a,b]$, allora
+$f([a,b])=[m,M]$, dove $m$ ed $M$ sono il minimo e il massimo di $f$.
+\end{corollario}
+
+\begin{schema}
+\Ipotesi{$f$ continua in $[a,b]$; \ $m=\min f$, $M=\max f$.}
+\Tesi{$f([a,b])=[m,M]$.}
+\end{schema}
+
+\begin{strategia}
+Si dimostrano le due inclusioni: $f([a,b])\subseteq[m,M]$ è la definizione stessa di
+minimo e massimo, $[m,M]\subseteq f([a,b])$ è il secondo teorema dei valori intermedi.
+\end{strategia}
+
+\begin{dimostrazione}
+Ogni valore $f(x)$ sta in $[m,M]$ per definizione di minimo e massimo; viceversa ogni
+$y_{0}\in[m,M]$ è un valore di $f$ per il \cref{teo:valori-intermedi-2}.
+\end{dimostrazione}
+
+\begin{notastorica}[Una curva che riempie un quadrato]
+Una funzione continua trasforma dunque un segmento in un segmento, eventualmente ridotto
+a un punto. Che cosa accade se i valori stanno nel piano, cioè se si considerano due
+funzioni continue $x(t)$, $y(t)$, con $t\in[0,1]$? L'intuizione suggerisce che il punto
+$\bigl(x(t),y(t)\bigr)$ descriva una linea, priva di area. Nel 1878 Georg Cantor aveva
+sorpreso i contemporanei dimostrando che tra il segmento e il quadrato esiste una
+corrispondenza biunivoca (lo abbiamo raccontato nella nota storica del
+\S\ref{sec:invertibili}); l'anno seguente Eugen Netto provò che una tale corrispondenza
+non può essere continua. Nel 1890 Giuseppe Peano pubblicò sui \emph{Mathematische
+Annalen} una nota di quattro pagine, \emph{Sur une courbe, qui remplit toute une aire
+plane}: vi costruiva due funzioni continue $x(t)$, $y(t)$ tali che la coppia
+$\bigl(x(t),y(t)\bigr)$, al variare di $t$ in $[0,1]$, assume \emph{tutti} i punti del
+quadrato $[0,1]\times[0,1]$. Peano le definì per via aritmetica, con lo sviluppo di $t$
+in base tre, senza alcuna figura; l'anno dopo David Hilbert ne pubblicò una variante
+geometrica, e fu il primo a illustrarla con un disegno (\cref{fig:curva-hilbert}). Per
+il teorema di Netto una curva siffatta non può essere iniettiva: passa più volte per
+alcuni punti. La lezione è che la continuità, da sola, non conserva la dimensione; la
+conservano le corrispondenze biunivoche e continue insieme alla loro inversa, come
+dimostrò Brouwer nel 1911.
+\end{notastorica}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=\textwidth]{curva_hilbert}
+\caption{Le prime quattro iterate della curva di Hilbert. La $n$-esima è una poligonale
+che percorre, uno dopo l'altro, i centri dei $4^{n}$ quadratini di lato $2^{-n}$; ogni
+quadratino viene poi diviso in quattro, che l'iterata successiva percorre
+consecutivamente. Al crescere di $n$ le poligonali, opportunamente parametrizzate su
+$[0,1]$, convergono a una funzione continua che assume tutti i punti del quadrato
+(\texttt{python/fig\_curva\_hilbert.py}).}
+\label{fig:curva-hilbert}
+\end{figure}
+
+\subsection{Un criterio di invertibilità}
+
+Chiudiamo il paragrafo precisando un criterio, introdotto nel \cref{sec:invertibili},
+per riconoscere se una data funzione è invertibile. Là avevamo osservato che una
+funzione strettamente monotòna è iniettiva (\cref{teo:monotona-invertibile}); la
+continuità permette ora di individuarne esattamente l'immagine. La continuità della
+funzione inversa è invece studiata nel \cref{sec:monotone-inverse}.
+
+\begin{teorema}[Criterio di invertibilità]\label{teo:invertibilita}\index{funzione!invertibile}
+Una funzione continua e strettamente monotòna in un intervallo $[a,b]$ è invertibile in
+tale intervallo: se è strettamente crescente, $f:[a,b]\to[f(a),f(b)]$ è biiettiva.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$ continua e strettamente crescente (o decrescente) in $[a,b]$.}
+\Tesi{$f:[a,b]\to[f(a),f(b)]$ (rispettivamente $[f(b),f(a)]$) è biiettiva.}
+\end{schema}
+
+\begin{strategia}
+La biiettività si spezza in due: la suriettività sull'intervallo di estremi $f(a)$,
+$f(b)$ viene dalla continuità, attraverso il primo teorema dei valori intermedi;
+l'iniettività viene dalla stretta monotonia, perché punti distinti hanno immagini
+ordinate allo stesso modo, e quindi distinte.
+\end{strategia}
+
+\begin{dimostrazione}
+Proponiamo la dimostrazione nel caso in cui la funzione $f$ sia strettamente crescente
+in $[a,b]$ (il caso decrescente è analogo, con $[f(b),f(a)]$). Risulta
+\begin{equation}\label{eq:invertibilita-estremi}
+  f(a)<f(x)<f(b) \qquad\perogni x\in(a,b);
+\end{equation}
+quindi $f(a)$ è il minimo di $f$ in $[a,b]$, mentre $f(b)$ è il massimo, e
+$f([a,b])\subseteq[f(a),f(b)]$. Inoltre, per il \cref{teo:valori-intermedi-1}, $f$
+assume tutti i valori compresi tra $f(a)$ e $f(b)$: per ogni $y\in[f(a),f(b)]$ esiste
+almeno un $x\in[a,b]$ per cui $f(x)=y$. Tale $x$ è unico; infatti, se esistessero due
+valori $x_{1}$, $x_{2}$ distinti tra loro, diciamo $x_{1}<x_{2}$, per cui
+$y=f(x_{1})=f(x_{2})$, allora dovrebbe risultare anche $f(x_{1})<f(x_{2})$, dato che $f$ è
+strettamente crescente. Quindi $f:[a,b]\to[f(a),f(b)]$ è suriettiva e iniettiva, cioè
+invertibile.
+\end{dimostrazione}

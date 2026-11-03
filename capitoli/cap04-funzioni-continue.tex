@@ -1,0 +1,73 @@
+%% ============================================================================
+%%  CAPITOLO 4 — Limiti di funzioni. Funzioni continue
+%%  Fonte principale per argomenti e dimostrazioni: Marcellini–Sbordone, cap. 4
+%%  (§29 premessa, §30 definizioni, §31 legame con le successioni, §32 esempi e
+%%  proprietà, §33 funzioni continue, §34 discontinuità, §35 teoremi sulle
+%%  funzioni continue; appendice §36 bisezione, §37 teorema di Weierstrass,
+%%  §38 funzioni monotòne e inverse).
+%% ============================================================================
+\aperturacapitolo{Limiti di funzioni. Funzioni \texorpdfstring{\mbox{continue}}{continue}}{cap:funzioni-continue}
+
+\epigraph{La funzione $f(x)$ resterà continua rispetto a $x$ tra i limiti dati se, tra
+questi limiti, un incremento infinitamente piccolo della variabile produce sempre un
+incremento infinitamente piccolo della funzione stessa.}{Augustin-Louis Cauchy,
+\emph{Cours d'analyse} (1821)}
+
+\lettrine[lines=3, findent=2pt, nindent=0pt]{N}{el capitolo precedente} abbiamo studiato
+il comportamento di una successione quando l'indice $n$ cresce senza fine. Ora facciamo
+lo stesso passo per le funzioni di una variabile reale: vogliamo capire come si comporta
+$f(x)$ quando $x$ si avvicina a un punto $x_{0}$, eventualmente un punto in cui $f$ non è
+nemmeno definita, oppure quando $x$ cresce o decresce illimitatamente. È la domanda che
+si pone chiunque voglia sapere quale valore «dovrebbe» avere una grandezza fisica in una
+condizione che non si può realizzare esattamente: la velocità di un corpo in un istante,
+il coefficiente di portanza a incidenza nulla calcolato da misure a incidenze diverse da
+zero, il valore di una formula nel punto in cui il denominatore si annulla.
+
+La strada che percorreremo è quella del testo di riferimento \cite{marcellini-sbordone}:
+\emph{definiremo il limite di una funzione per mezzo dei limiti di successioni}, in modo
+da ereditare senza fatica tutti i risultati del \cref{cap:successioni}; poi
+dimostreremo che questa definizione equivale a quella con $\epsilon$ e $\delta$, dovuta a
+Cauchy e Weierstrass. Sui limiti costruiremo il concetto di \emph{funzione continua},
+che formalizza l'idea intuitiva di un grafico «tracciato senza staccare la matita dal
+foglio», e arriveremo ai grandi teoremi di esistenza dello schema della
+\cref{fig:schema-teoremi}: il teorema degli zeri, quello dei valori intermedi e il
+teorema di Weierstrass. Sono teoremi che garantiscono l'esistenza di qualcosa (una
+radice, un valore, un massimo) senza dire dove si trovi: ma la dimostrazione del primo,
+con il metodo di bisezione, è anche un algoritmo per calcolarla.
+
+\medskip
+\noindent\textbf{In questo capitolo.}
+\begin{itemize}
+  \item La funzione $\frac{\sen x}{x}$ e l'idea di limite di una funzione
+  (\S\ref{sec:premessa-funzioni}).
+  \item Intervalli, intorni, punti di accumulazione; la definizione di limite, finito e
+  infinito, destro e sinistro (\S\ref{sec:def-limite-funzioni}).
+  \item L'equivalenza tra la definizione «con le successioni» e quella con $\epsilon$ e
+  $\delta$ (\S\ref{sec:legame-successioni}).
+  \item Esempi notevoli; operazioni, confronti e limiti di funzioni composte
+  (\S\ref{sec:proprieta-limiti-funzioni}).
+  \item Funzioni continue e loro proprietà; le discontinuità e il prolungamento per
+  continuità (\S\ref{sec:continue}, \S\ref{sec:discontinuita}).
+  \item Permanenza del segno, teorema degli zeri, teoremi dei valori intermedi e di
+  Weierstrass, criterio di invertibilità (\S\ref{sec:teoremi-continue}).
+  \item Appendice: il metodo di bisezione, la dimostrazione del teorema di Weierstrass,
+  le funzioni monotòne e le funzioni inverse; la continuità di esponenziali, logaritmi e
+  potenze, e i limiti notevoli che ne seguono (\S\ref{sec:bisezione},
+  \S\ref{sec:dim-weierstrass}, \S\ref{sec:monotone-inverse}).
+  \item Approfondimento: su un intervallo le funzioni continue e iniettive sono
+  strettamente monotòne (\S\ref{subsec:continue-iniettive}).
+  \item Punti fondamentali del capitolo (\S\ref{sec:sintesi-cap04}).
+\end{itemize}
+
+\input{capitoli/cap04/01-premessa}
+\input{capitoli/cap04/02-definizioni}
+\input{capitoli/cap04/03-legame-successioni}
+\input{capitoli/cap04/04-proprieta}
+\input{capitoli/cap04/05-continue}
+\input{capitoli/cap04/06-discontinuita}
+\input{capitoli/cap04/07-teoremi-continue}
+\input{capitoli/cap04/08-bisezione}
+\input{capitoli/cap04/09-weierstrass}
+\input{capitoli/cap04/10-monotone-inverse}
+\input{capitoli/cap04/11-esercizi}
+\input{capitoli/cap04/12-sintesi}

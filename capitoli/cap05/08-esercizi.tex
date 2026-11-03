@@ -1,0 +1,231 @@
+%% ----------------------------------------------------------------------------
+%%  §5.8  Esercizi di riepilogo
+%% ----------------------------------------------------------------------------
+\section{Esercizi di riepilogo}
+\label{sec:esercizi-cap5}
+
+Come nei capitoli precedenti, ogni soluzione è accompagnata da una nota sulla
+\emph{scelta logica} che la guida.
+
+\needspace{8\baselineskip}
+\subsection*{La definizione di derivata}
+
+\begin{esercizio}\label{es:derivata-definizione}
+Calcolare con la definizione le derivate di $\frac1x$ (per $x\neq0$) e di $\sqrt x$ (per
+$x>0$).
+\begin{soluzione}
+Per $h\neq0$ e $x+h\neq0$,
+$\frac1h\Bigl(\frac1{x+h}-\frac1x\Bigr)=\frac{x-(x+h)}{h\,x(x+h)}=-\frac1{x(x+h)}\to-\frac1{x^{2}}$.
+Per la radice razionalizziamo, con $x+h>0$:
+\[
+  \frac{\sqrt{x+h}-\sqrt x}{h}=\frac{(x+h)-x}{h\bigl(\sqrt{x+h}+\sqrt x\bigr)}
+  =\frac1{\sqrt{x+h}+\sqrt x}\to\frac1{2\sqrt x},
+\]
+per la continuità della radice. Si ritrovano le \eqref{eq:derivata-radice-reciproco}.
+\emph{Scelta logica:} in entrambi i casi si elimina il fattore $h$ dal denominatore con
+una manipolazione algebrica (denominatore comune, razionalizzazione), dopo la quale il
+limite si calcola per sostituzione.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}\label{es:differenza-centrata}
+Dimostrare che, se $f$ è derivabile in $x$, allora
+$\displaystyle\lim_{h\to0}\frac{f(x+h)-f(x-h)}{2h}=f'(x)$. Mostrare con $f(x)=\abs x$ che il
+limite può esistere anche se $f$ non è derivabile.
+\begin{soluzione}
+Si ha
+$\frac{f(x+h)-f(x-h)}{2h}=\frac12\Bigl[\frac{f(x+h)-f(x)}{h}+\frac{f(x-h)-f(x)}{-h}\Bigr]$.
+Il primo rapporto tende a $f'(x)$; il secondo è il rapporto incrementale con incremento
+$-h$, che tende a $0$ ed è diverso da $0$, e quindi tende anch'esso a $f'(x)$
+(\cref{teo:limite-composta}). Per $f(x)=\abs x$ e $x=0$ il rapporto centrato vale
+$\frac{\abs h-\abs{-h}}{2h}=0$ per ogni $h$, e tende a $0$, ma $\abs x$ non è derivabile in $0$.
+\emph{Scelta logica:} si spezza il rapporto simmetrico in due rapporti incrementali
+ordinari; il controesempio mostra che la differenza centrata «non vede» uno spigolo
+simmetrico, il che va tenuto presente nei codici numerici.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Determinare $a$ e $b$ in modo che la funzione $f(x)=x^{2}$ per $x\le1$, $f(x)=ax+b$ per
+$x>1$, sia derivabile in $x=1$.
+\begin{soluzione}
+Serve anzitutto la continuità (\cref{teo:derivabile-continua}): $\lim_{x\to1^{+}}f(x)=a+b$
+deve uguagliare $f(1)=1$. La derivata sinistra in $1$ è quella di $x^{2}$, cioè $2$; la
+derivata destra, con $b=1-a$, è
+$\lim_{h\to0^{+}}\frac{a(1+h)+1-a-1}{h}=a$. Deve essere $a=2$, e quindi $b=-1$: la retta
+$y=2x-1$ è la tangente alla parabola nel punto $(1,1)$. \emph{Scelta logica:} prima la
+continuità, poi l'uguaglianza delle derivate unilaterali. Se fosse $a+b\neq1$, il
+rapporto incrementale destro $\frac{a+b-1+ah}{h}$ tenderebbe all'infinito: senza
+continuità la derivata destra non esiste nemmeno.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Dimostrare che $f(x)=\abs x^{3}$ è di classe $C^{2}$ su $\R$ ma non è derivabile tre volte in
+$0$; dimostrare che $f_{3}(x)=x^{3}\sen\frac1x$ (con $f_{3}(0)=0$) è di classe $C^{1}$ ma non
+è derivabile due volte in $0$.
+\begin{soluzione}
+Si ha $f(x)=x^{2}\cdot\abs x$, e con i ragionamenti dell'\cref{es:x-modulo-x} si trova
+$f'(x)=3x\abs x$ e $f''(x)=6\abs x$ per ogni $x$: $f''$ è continua ma non derivabile in $0$.
+Per $f_{3}$: per $x\neq0$, $f_{3}'(x)=3x^{2}\sen\frac1x-x\cos\frac1x$, che tende a $0$; inoltre
+$f_{3}'(0)=\lim_{h\to0}h^{2}\sen\frac1h=0$. Quindi $f_{3}'$ è continua. Ma
+$\frac{f_{3}'(h)-f_{3}'(0)}{h}=3h\sen\frac1h-\cos\frac1h$ non ha limite per $h\to0$.
+\emph{Scelta logica:} ogni fattore $x$ in più «regolarizza» di un ordine; nei punti in cui
+la funzione cambia espressione si calcolano le derivate con la definizione.
+\end{soluzione}
+\end{esercizio}
+
+\needspace{8\baselineskip}
+\subsection*{Regole di derivazione}
+
+\begin{esercizio}\label{es:derivate-calcolo}
+Calcolare le derivate di
+\begin{gather*}
+  \text{(a) } x^{2}e^{-x};\qquad \text{(b) } \log(\sen x),\ x\in(0,\pi);\qquad
+  \text{(c) } \sqrt{1+x^{2}};\\
+  \text{(d) } e^{-x^{2}};\qquad \text{(e) } \arcsen2x;\qquad \text{(f) } x^{\sen x},\ x>0.
+\end{gather*}
+\begin{soluzione}
+(a) $2xe^{-x}-x^{2}e^{-x}=x(2-x)e^{-x}$. (b) $\frac{\cos x}{\sen x}$. (c)
+$\frac{2x}{2\sqrt{1+x^{2}}}=\frac{x}{\sqrt{1+x^{2}}}$. (d) $-2xe^{-x^{2}}$. (e)
+$\frac{2}{\sqrt{1-4x^{2}}}$ per $\abs x<\frac12$. (f) $x^{\sen x}=e^{\sen x\log x}$, quindi la
+derivata è $x^{\sen x}\bigl(\cos x\log x+\frac{\sen x}x\bigr)$. \emph{Scelta logica:} si
+riconosce la struttura della funzione (prodotto, composta, potenza a esponente variabile)
+e si applica la regola corrispondente dall'esterno verso l'interno; per gli esponenti
+variabili si passa sempre alla forma $e^{g\log f}$.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Dimostrare per induzione che $D^{n}e^{ax}=a^{n}e^{ax}$ e che
+$D^{n}\sen x=\sen\bigl(x+n\frac\pi2\bigr)$ per ogni $n\in\N$.
+\begin{soluzione}
+Per $n=1$, $De^{ax}=ae^{ax}$ (regola della catena) e
+$D\sen x=\cos x=\sen\bigl(x+\frac\pi2\bigr)$. Se le formule valgono per $n$, derivando si ha
+$D^{n+1}e^{ax}=a^{n}\cdot ae^{ax}$ e
+$D^{n+1}\sen x=\cos\bigl(x+n\frac\pi2\bigr)=\sen\bigl(x+(n+1)\frac\pi2\bigr)$, usando
+$\cos t=\sen\bigl(t+\frac\pi2\bigr)$. \emph{Scelta logica:} una formula che dipende da $n$
+si dimostra per induzione, e il passo induttivo consiste nel derivare una volta in più.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Sia $f(x)=x+e^{x}$. Dimostrare che $f$ è invertibile su $\R$ e calcolare $(f^{-1})'(1)$.
+\begin{soluzione}
+$f$ è continua e strettamente crescente, e tende a $\pm\infty$ per $x\to\pm\infty$; quindi
+è una biiezione di $\R$ su $\R$. Si ha $f(0)=1$, cioè $f^{-1}(1)=0$, e $f'(x)=1+e^{x}$, che
+non si annulla mai; per il \cref{teo:derivata-inversa},
+$(f^{-1})'(1)=\frac1{f'(0)}=\frac12$. \emph{Scelta logica:} non serve conoscere
+esplicitamente $f^{-1}$ (che non è esprimibile con funzioni elementari): basta conoscere il
+punto $x$ in cui $f(x)=1$.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}\label{es:arctg-1-su-x}
+Dimostrare che $\operatorname{arctg}x+\operatorname{arctg}\frac1x=\frac\pi2$ per ogni $x>0$, e
+verificare che la derivata del primo membro è nulla.
+\begin{soluzione}
+Sia $x>0$ e $\theta=\operatorname{arctg}x\in\bigl(0,\frac\pi2\bigr)$. Allora
+$\frac\pi2-\theta\in\bigl(0,\frac\pi2\bigr)$ e
+$\tg\bigl(\frac\pi2-\theta\bigr)=\frac{\cos\theta}{\sen\theta}=\frac1{\tg\theta}=\frac1x$; quindi
+$\operatorname{arctg}\frac1x=\frac\pi2-\theta$. La derivata è
+$\frac1{1+x^{2}}+\frac1{1+1/x^{2}}\cdot\bigl(-\frac1{x^{2}}\bigr)=\frac1{1+x^{2}}-\frac1{x^{2}+1}=0$, in
+accordo con l'output di \texttt{sympy} del \cref{sec:derivate-elementari}. Per $x<0$ la somma
+vale $-\frac\pi2$. \emph{Scelta logica:} come per l'\cref{oss:arcsen-arccos}, l'identità si
+dimostra direttamente con la definizione della funzione inversa; la derivata nulla è una
+verifica, che diventerà una dimostrazione con il teorema di Lagrange.
+\end{soluzione}
+\end{esercizio}
+
+\needspace{8\baselineskip}
+\subsection*{Retta tangente e applicazioni}
+
+\begin{esercizio}
+Scrivere l'equazione della retta tangente al grafico di $e^{x}$ nel punto di ascissa $0$, e
+a quello di $\log x$ nel punto di ascissa $1$. Usarle per stimare $e^{0{,}1}$ e $\log1{,}1$.
+\begin{soluzione}
+Per $e^{x}$: $f(0)=f'(0)=1$, tangente $y=1+x$. Per $\log x$: $f(1)=0$, $f'(1)=1$, tangente
+$y=x-1$. Le stime sono $e^{0{,}1}\simeq1{,}1$ (valore vero $1{,}10517\ldots$) e
+$\log1{,}1\simeq0{,}1$ (valore vero $0{,}09531\ldots$). Le due rette sono simmetriche
+rispetto alla bisettrice, come i grafici delle due funzioni inverse. \emph{Scelta logica:}
+si sceglie il punto di tangenza in cui funzione e derivata sono note esattamente; le
+approssimazioni coincidono con i limiti notevoli $\frac{e^{x}-1}x\to1$ e
+$\frac{\log(1+x)}x\to1$.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}[Il radar e il tasso di variazione della distanza]
+Un velivolo vola in orizzontale alla quota $H=3000$~m con velocità costante
+$V=150$~m/s, e all'istante $t=0$ passa sulla verticale di un radar. Calcolare la rapidità
+con cui varia la distanza radar--velivolo all'istante $t=20$~s, e il suo limite per
+$t\to+\infty$.
+\begin{soluzione}
+La distanza è $r(t)=\sqrt{H^{2}+V^{2}t^{2}}$. Per la regola della catena,
+$r'(t)=\frac{2V^{2}t}{2\sqrt{H^{2}+V^{2}t^{2}}}=\frac{V^{2}t}{r(t)}$. A $t=20$~s si ha
+$Vt=3000$~m, $r=3000\sqrt2\approx4243$~m e $r'=\frac{150^{2}\cdot20}{4243}\approx106$~m/s, cioè
+$V\cos45^{\circ}$: la componente della velocità lungo la congiungente. Per $t\to+\infty$,
+$r'(t)=\frac{V}{\sqrt{H^{2}/(V^{2}t^{2})+1}}\to V$. \emph{Scelta logica:} è un problema di
+\emph{tassi correlati}: si scrive la relazione tra le grandezze e la si deriva rispetto al
+tempo con la regola della catena. Il radar Doppler misura esattamente $r'(t)$, non $V$.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}[Il metodo di Newton]\label{es:newton}
+Per risolvere $f(x)=0$, si parte da un'approssimazione $x_{0}$ della soluzione, si sostituisce
+il grafico di $f$ con la sua retta tangente nel punto $(x_{0},f(x_{0}))$ e si prende come
+nuova approssimazione lo zero della tangente; poi si ripete. Ricavare la formula
+dell'iterazione e applicarla all'equazione $x^{3}+x-1=0$ e all'equazione di Keplero
+dell'\cref{es:kepler}.
+\begin{soluzione}
+La tangente in $(x_{n},f(x_{n}))$ è $y=f(x_{n})+f'(x_{n})(x-x_{n})$; se $f'(x_{n})\neq0$ il suo
+zero è
+\[
+  x_{n+1}=x_{n}-\frac{f(x_{n})}{f'(x_{n})}.
+\]
+Per $f(x)=x^{3}+x-1$ si ha $f'(x)=3x^{2}+1$; per l'equazione di Keplero,
+$f(E)=E-e\sen E-M$ e $f'(E)=1-e\cos E$. Il programma che segue mostra i risultati.
+\emph{Scelta logica:} è l'approssimazione lineare usata «al contrario»: invece di calcolare
+$f$ vicino a $x_{0}$, si cerca dove la sua approssimazione lineare si annulla. A differenza
+della bisezione, il metodo non è sempre convergente; quando converge, lo fa molto
+rapidamente, come si vede nell'output; la ragione si trova con la formula di Taylor
+(\cref{es:newton-quadratico}).
+\end{soluzione}
+\end{esercizio}
+
+\begin{python}[Il metodo di Newton]
+import math
+
+def newton(f, df, x, passi):
+    """Sostituisce x con lo zero della tangente in (x, f(x))."""
+    for n in range(1, passi + 1):
+        x = x - f(x) / df(x)
+        print(f"  x_{n} = {x:.15f}   f(x_{n}) = {f(x):+.2e}")
+    return x
+
+print("x^3 + x - 1 = 0, partendo da x_0 = 1:")
+newton(lambda x: x**3 + x - 1, lambda x: 3 * x**2 + 1, 1.0, 5)
+e, M = 0.5, 1.0
+print("Keplero E - e sen E = M (e = 0.5, M = 1), da E_0 = M:")
+newton(lambda E: E - e * math.sin(E) - M,
+       lambda E: 1 - e * math.cos(E), M, 4)
+\end{python}
+\begin{risultato}
+x^3 + x - 1 = 0, partendo da x_0 = 1:
+  x_1 = 0.750000000000000   f(x_1) = +1.72e-01
+  x_2 = 0.686046511627907   f(x_2) = +8.94e-03
+  x_3 = 0.682339582597314   f(x_3) = +2.82e-05
+  x_4 = 0.682327803946513   f(x_4) = +2.84e-10
+  x_5 = 0.682327803828019   f(x_5) = +2.22e-16
+Keplero E - e sen E = M (e = 0.5, M = 1), da E_0 = M:
+  x_1 = 1.576469352654799   f(x_1) = +7.65e-02
+  x_2 = 1.500208268606644   f(x_2) = +1.45e-03
+  x_3 = 1.498701720652660   f(x_3) = +5.66e-07
+  x_4 = 1.498701133517938   f(x_4) = +8.62e-14
+\end{risultato}
+
+Con cinque iterazioni il metodo di Newton raggiunge la precisione della macchina sulla
+radice della cubica, e con quattro iterazioni risolve l'equazione di Keplero con un residuo
+di $10^{-13}$, contro i $34$ dimezzamenti della bisezione dell'\cref{es:kepler}. Si osservi
+come, a ogni passo, il numero di cifre esatte all'incirca raddoppia (il valore di $f$ passa
+da $10^{-2}$ a $10^{-5}$, poi a $10^{-10}$): è la \emph{convergenza quadratica}, che si
+spiega con la formula di Taylor (\cref{es:newton-quadratico}).

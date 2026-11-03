@@ -1,0 +1,314 @@
+%% ----------------------------------------------------------------------------
+%%  §4.5  Funzioni continue
+%% ----------------------------------------------------------------------------
+\section{Funzioni continue}
+\label{sec:continue}
+
+Come nel paragrafo precedente, consideriamo funzioni $f$ definite in un dominio $A$
+costituito da un intervallo, o dall'unione finita di intervalli, e punti $x_{0}$ di $A$.
+Abbiamo introdotto i limiti di funzioni soprattutto per descrivere il comportamento di
+una funzione nelle vicinanze di punti «singolari», come $x_{0}=0$ per $\frac{\sen x}{x}$.
+Naturalmente possiamo calcolare il limite per $x\to x_{0}$ anche se la funzione non
+presenta alcuna singolarità in $x_{0}$. Ad esempio abbiamo già calcolato in
+\eqref{eq:lim-sen-cos-0} i limiti
+\begin{equation}\label{eq:sen-cos-in-0}
+  \lim_{x\to0}\sen x=0=\sen0, \qquad \lim_{x\to0}\cos x=1=\cos0:
+\end{equation}
+il valore limite, per $x\to0$, è uguale al valore che si ottiene calcolando la funzione
+per $x=0$. Si dice che le funzioni $\sen x$ e $\cos x$ sono \emph{continue} per $x=0$ (e
+in realtà, come vedremo, sono continue in ogni $x_{0}\in\R$), in accordo con la seguente
+definizione.
+
+\begin{definizione}[Funzione continua]\label{def:continua}\index{funzione!continua}\index{continuità}
+Siano $f:A\to\R$ e $x_{0}\in A$ un punto di accumulazione per $A$. La funzione $f$ si
+dice \emph{continua nel punto $x_{0}$} se
+\begin{equation}\label{eq:def-continua}
+  \lim_{x\to x_{0}}f(x)=f(x_{0}) .
+\end{equation}
+La funzione si dice \emph{continua in un insieme} $B\subseteq A$ se è continua in ogni
+punto $x_{0}\in B$; si dice semplicemente \emph{continua} se è continua in tutto il suo
+dominio.
+\end{definizione}
+
+Nella definizione sono contenute tre richieste: che $f$ sia definita in $x_{0}$, che
+esista il limite di $f$ per $x\to x_{0}$, e che il limite coincida con il valore. Se
+$A=[a,b]$ e $x_{0}=a$, nella \eqref{eq:def-continua} intervengono soltanto punti $x>a$
+(non ci sono punti del dominio a sinistra di $a$), e dunque il limite è di fatto il solo
+limite destro $x\to a^{+}$; analogamente, se $x_{0}=b$, si considera il limite sinistro
+$x\to b^{-}$. Una funzione è quindi continua nell'intervallo $[a,b]$ se è continua in ogni
+punto interno, e se agli estremi il limite destro (in $a$) e il limite sinistro (in $b$)
+coincidono con i valori $f(a)$ e $f(b)$.
+
+\begin{osservazione}
+Se $x_{0}$ fosse un punto isolato di $A$ (cioè un punto di $A$ che non è di
+accumulazione), la \eqref{eq:def-continua} non avrebbe senso. Per convenzione si dice
+che ogni funzione è continua nei punti isolati del suo dominio; con i domini che
+consideriamo, intervalli non degeneri o loro unioni finite, il caso non si presenta.
+\end{osservazione}
+
+La continuità ammette due riformulazioni, che useremo continuamente: una con le
+successioni, senza la restrizione $x_{n}\neq x_{0}$, e una con $\epsilon$ e $\delta$,
+senza la restrizione $x\neq x_{0}$.
+
+\begin{proposizione}[Caratterizzazioni della continuità]\label{prop:caratt-continuita}
+Siano $f:A\to\R$ e $x_{0}\in A$ di accumulazione per $A$. Sono equivalenti:
+\begin{enumerate}[label=\textup{(\alph*)}]
+  \item $f$ è continua in $x_{0}$;
+  \item per ogni successione $x_{n}$ di punti di $A$ convergente a $x_{0}$ (anche con
+  $x_{n}=x_{0}$ per qualche $n$) risulta $f(x_{n})\to f(x_{0})$;
+  \item per ogni $\epsilon>0$ esiste $\delta>0$ tale che $\abs{f(x)-f(x_{0})}<\epsilon$ per
+  ogni $x\in A$ con $\abs{x-x_{0}}<\delta$.
+\end{enumerate}
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$f:A\to\R$; \ $x_{0}\in A$ di accumulazione per $A$.}
+\Tesi{(a) $\sse$ (b) $\sse$ (c).}
+\end{schema}
+
+\begin{strategia}
+Si dimostra il ciclo di implicazioni (a)$\implica$(c)$\implica$(b)$\implica$(a), sfruttando
+il \cref{teo:eps-delta}. L'osservazione chiave è che, quando il limite coincide con il
+valore $f(x_{0})$, la condizione $x\neq x_{0}$ (o $x_{n}\neq x_{0}$) diventa superflua:
+nel punto $x_{0}$ la distanza $\abs{f(x)-f(x_{0})}$ è nulla, e quindi minore di ogni
+$\epsilon$.
+\end{strategia}
+
+\begin{dimostrazione}
+(a)$\implica$(c): per il \cref{teo:eps-delta} la disuguaglianza
+$\abs{f(x)-f(x_{0})}<\epsilon$ vale per $x\in A$ con $0<\abs{x-x_{0}}<\delta$; per
+$x=x_{0}$ vale banalmente, perché il primo membro è zero.
+
+(c)$\implica$(b): è la prima parte della dimostrazione del \cref{teo:eps-delta}, in cui
+non serve più l'ipotesi $x_{n}\neq x_{0}$: se $x_{n}\to x_{0}$, definitivamente
+$\abs{x_{n}-x_{0}}<\delta$, e quindi $\abs{f(x_{n})-f(x_{0})}<\epsilon$.
+
+(b)$\implica$(a): le successioni con $x_{n}\neq x_{0}$ sono un caso particolare di quelle
+considerate in (b); dunque $f(x)\to f(x_{0})$ per la \cref{def:limite-funzione}.
+\end{dimostrazione}
+
+La (b) si legge così: \emph{per una funzione continua il limite «passa dentro» la
+funzione}, $\lim_{n}f(x_{n})=f\bigl(\lim_{n}x_{n}\bigr)$. La (c), scritta con
+$x=x_{0}+h$, dice che $f(x_{0}+h)-f(x_{0})\to0$ per $h\to0$: a un incremento piccolo
+della variabile corrisponde un incremento piccolo della funzione, che è esattamente la
+definizione di Cauchy riportata nell'epigrafe del capitolo. In particolare
+\begin{equation}\label{eq:continua-h}
+  f \text{ è continua in } x_{0} \quad\sse\quad \lim_{h\to0}f(x_{0}+h)=f(x_{0}).
+\end{equation}
+
+\subsection{Operazioni con le funzioni continue}
+
+\begin{teorema}[Operazioni con funzioni continue]\label{teo:operazioni-continue}
+Siano $f,g:A\to\R$ e $x_{0}\in A$ di accumulazione per $A$. Se $f$ e $g$ sono continue
+in $x_{0}$, sono continue in $x_{0}$ anche $f+g$, $f-g$, $f\cdot g$ e, se
+$g(x_{0})\neq0$, $f/g$.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$, $g$ continue in $x_{0}$ \ (per il quoziente, $g(x_{0})\neq0$).}
+\Tesi{$f\pm g$, $fg$, $f/g$ continue in $x_{0}$.}
+\end{schema}
+
+\begin{strategia}
+Basta tradurre la continuità in termini di limiti e applicare il
+\cref{teo:operazioni-funzioni} con $\ell_{1}=f(x_{0})$ e $\ell_{2}=g(x_{0})$: il limite
+dell'operazione è l'operazione sui valori, cioè il valore della nuova funzione in
+$x_{0}$.
+\end{strategia}
+
+\begin{dimostrazione}
+Dato che il limite di somma, differenza, prodotto, quoziente è uguale rispettivamente
+alla somma, differenza, prodotto, quoziente dei limiti (\cref{teo:operazioni-funzioni}),
+si ha ad esempio $\lim_{x\to x_{0}}f(x)g(x)=f(x_{0})g(x_{0})$. Per il quoziente
+occorre al solito fare attenzione ai punti dove il denominatore si annulla: se
+$g(x_{0})\neq0$, la dimostrazione del \cref{teo:operazioni-funzioni} mostra che $g$ non
+si annulla vicino a $x_{0}$, e $f(x)/g(x)\to f(x_{0})/g(x_{0})$.
+\end{dimostrazione}
+
+\begin{teorema}[Continuità della funzione composta]\label{teo:composta-continua}\index{funzione!composta!continuità}
+Siano $g:X\to Y$ continua in $x_{0}\in X$ e $f:Y\to\R$ continua in $y_{0}=g(x_{0})$.
+Allora la funzione composta $f\circ g$ è continua in $x_{0}$.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$g$ continua in $x_{0}$; \ $f$ continua in $g(x_{0})$.}
+\Tesi{$f(g(x))\to f(g(x_{0}))$ per $x\to x_{0}$.}
+\end{schema}
+
+\begin{strategia}
+Con la caratterizzazione per successioni, senza la restrizione $x_{n}\neq x_{0}$, la
+dimostrazione è una catena: $x_{n}\to x_{0}$ implica $g(x_{n})\to g(x_{0})$, che a sua
+volta implica $f(g(x_{n}))\to f(g(x_{0}))$. Non occorre preoccuparsi dei termini con
+$g(x_{n})=g(x_{0})$, che invece creavano difficoltà nel \cref{teo:limite-composta}.
+\end{strategia}
+
+\begin{dimostrazione}
+Usiamo la caratterizzazione (b) della \cref{prop:caratt-continuita}. Se $x_{n}\in X$ e
+$x_{n}\to x_{0}$, per la continuità di $g$ si ha $y_{n}=g(x_{n})\to g(x_{0})=y_{0}$, con
+$y_{n}\in Y$; per la continuità di $f$ in $y_{0}$ si ha allora $f(y_{n})\to f(y_{0})$,
+cioè $f(g(x_{n}))\to f(g(x_{0}))$.
+\end{dimostrazione}
+
+Si noti che qui non serve l'ipotesi $g(x)\neq y_{0}$ del \cref{teo:limite-composta}:
+proprio perché la (b) ammette successioni con $y_{n}=y_{0}$. Lo stesso argomento prova
+la seguente versione, che useremo spesso nel calcolo dei limiti.
+
+\begin{corollario}\label{cor:limite-composta-continua}
+Siano $g:X\to Y$, $f:Y\to\R$ e $x_{0}\in\overline{\R}$ di accumulazione per $X$. Se
+$\lim_{x\to x_{0}}g(x)=y_{0}$, con $y_{0}\in Y$, e $f$ è continua in $y_{0}$, allora
+\begin{equation}\label{eq:limite-composta-continua}
+  \lim_{x\to x_{0}}f(g(x))=f\Bigl(\lim_{x\to x_{0}}g(x)\Bigr)=f(y_{0}) .
+\end{equation}
+\end{corollario}
+
+\begin{schema}
+\Ipotesi{$g(x)\to y_{0}$ per $x\to x_{0}$, con $y_{0}\in Y$; \ $f$ continua in $y_{0}$.}
+\Tesi{$f(g(x))\to f(y_{0})$ per $x\to x_{0}$.}
+\end{schema}
+
+\begin{strategia}
+È la stessa catena del teorema precedente, con una sola differenza: ora $x_{0}$ può
+non appartenere al dominio di $g$, e si considerano soltanto successioni con
+$x_{n}\neq x_{0}$. Dove arrivano i valori $g(x_{n})$ non importa, perché la
+caratterizzazione (b) della continuità di $f$ ammette anche $g(x_{n})=y_{0}$.
+\end{strategia}
+
+\begin{dimostrazione}
+Se $x_{n}\in X\setminus\{x_{0}\}$ e $x_{n}\to x_{0}$, allora $g(x_{n})\to y_{0}$, e per
+la \cref{prop:caratt-continuita}(b) applicata a $f$ (che non richiede $g(x_{n})\neq
+y_{0}$) si ha $f(g(x_{n}))\to f(y_{0})$.
+\end{dimostrazione}
+
+\subsection{Continuità delle funzioni elementari}
+
+L'importanza delle funzioni continue sta anche nel fatto che \emph{le funzioni
+elementari sono continue nel loro insieme di definizione}. Esaminiamole una per volta.
+
+\paragraph{Polinomi e funzioni razionali.} Per l'\cref{es:limite-polinomi}, ogni polinomio
+è continuo su tutto $\R$, e ogni funzione razionale $P(x)/Q(x)$ è continua in ogni punto
+in cui $Q(x)\neq0$.
+
+\paragraph{Valore assoluto.} La continuità della funzione $f(x)=\abs x$ su $\R$ segue
+dalla disuguaglianza triangolare inversa (\cref{cor:triangolare-inversa})
+\begin{equation}\label{eq:modulo-lipschitz}
+  \bigl\lvert\abs x-\abs{x_{0}}\bigr\rvert\le\abs{x-x_{0}} \qquad\perogni x,x_{0}\in\R:
+\end{equation}
+basta infatti porre $\delta=\epsilon$ nella \cref{prop:caratt-continuita}(c): se
+$\abs{x-x_{0}}<\epsilon$, allora anche $\abs{f(x)-f(x_{0})}=\bigl\lvert\abs x-\abs{x_{0}}\bigr\rvert<\epsilon$.
+
+\begin{proposizione}[Continuità di seno, coseno, tangente]\label{prop:sen-cos-continue}\index{funzione!seno!continuità}
+Le funzioni $\sen x$ e $\cos x$ sono continue su $\R$; la funzione $\tg x$ è continua
+in ogni punto $x\neq\frac\pi2+k\pi$, $k\in\Z$.
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$\sen h\to0$, $\cos h\to1$ per $h\to0$ \eqref{eq:sen-cos-in-0}; \ formule di
+addizione.}
+\Tesi{$\sen$, $\cos$ continue in ogni $x_{0}\in\R$; \ $\tg$ continua dove $\cos x\neq0$.}
+\end{schema}
+
+\begin{strategia}
+Conosciamo la continuità di seno e coseno nel solo punto $0$ \eqref{eq:sen-cos-in-0}. Le
+formule di addizione permettono di «trasportare» questa informazione in un punto
+qualsiasi: $\sen(x_{0}+h)$ si esprime per mezzo di $\sen h$ e $\cos h$, che per $h\to0$
+tendono a $0$ e a $1$.
+\end{strategia}
+
+\begin{dimostrazione}
+Sia $x_{0}\in\R$ e sia $x_{n}\to x_{0}$. Posto $h_{n}=x_{n}-x_{0}$, si ha $h_{n}\to0$, e
+quindi $\sen h_{n}\to0$, $\cos h_{n}\to1$ per il \cref{teo:lim-sen-cos}. Per la formula
+di addizione del seno \eqref{eq:addizione-sen}
+\begin{equation}\label{eq:sen-continuo}
+\begin{split}
+  \sen x_{n}=\sen(x_{0}+h_{n})&=\sen x_{0}\cos h_{n}+\cos x_{0}\sen h_{n}\\
+  &\to\ \sen x_{0}\cdot1+\cos x_{0}\cdot0=\sen x_{0},
+\end{split}
+\end{equation}
+per le operazioni con i limiti di successioni. Analogamente, per la
+\eqref{eq:addizione-cos}, $\cos x_{n}=\cos x_{0}\cos h_{n}-\sen x_{0}\sen h_{n}\to\cos x_{0}$.
+Per la \cref{prop:caratt-continuita}(b) seno e coseno sono continui in $x_{0}$. Infine la
+continuità della funzione $\tg x=\frac{\sen x}{\cos x}$ nei punti in cui $\cos x\neq0$,
+cioè per $x\neq\frac\pi2+k\pi$, discende dal \cref{teo:operazioni-continue}.
+\end{dimostrazione}
+
+\paragraph{Esponenziali, logaritmi, potenze.} Anche le funzioni esponenziali $a^{x}$
+($a>0$), i logaritmi $\log_{a}x$ ($a>0$, $a\neq1$) e le potenze $x^{b}$ (per $x>0$, con
+$b\in\R$) sono continue nel loro insieme di definizione. La dimostrazione richiede il
+teorema sul limite delle funzioni monotòne, ed è svolta nel \cref{sec:monotone-inverse}
+(\cref{teo:continuita-esponenziale}); essa non usa alcun risultato di questo paragrafo
+che dipenda dalla continuità di tali funzioni, per cui possiamo servircene fin d'ora
+negli esempi. Nello stesso paragrafo ricaveremo, come applicazione, alcuni limiti
+notevoli che coinvolgono $e^{x}$ e $\log x$.
+
+\begin{table}[htb]
+\centering
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{l l l}
+\toprule
+funzione & continua in & dimostrazione\\
+\midrule
+polinomi & $\R$ & \cref{es:limite-polinomi}\\
+$P(x)/Q(x)$ & $Q(x)\neq0$ & \\
+$\abs x$ & $\R$ & \eqref{eq:modulo-lipschitz}\\
+$\sen x$, $\cos x$ & $\R$ & \cref{prop:sen-cos-continue}\\
+$\tg x$ & $x\neq\frac\pi2+k\pi$ & \\
+$a^{x}$ & $\R$ & \cref{teo:continuita-esponenziale}\\
+$\log_{a}x$ & $(0,+\infty)$ & \\
+$x^{b}$ & $(0,+\infty)$ & \\
+\bottomrule
+\end{tabular}
+\caption{La continuità delle funzioni elementari. Somme, prodotti, quozienti (dove il
+denominatore non si annulla) e composizioni di funzioni continue sono continue
+(\cref{teo:operazioni-continue,teo:composta-continua}).}
+\label{tab:elementari-continue}
+\end{table}
+
+Grazie alla \cref{tab:elementari-continue} e ai \cref{teo:operazioni-continue,%
+teo:composta-continua}, la continuità di funzioni come
+$x\mapsto\sen(x^{2}+1)$, $x\mapsto e^{\cos x}$ o $x\mapsto\abs{\log x}$ è immediata, e i
+corrispondenti limiti nei punti del dominio si calcolano per sostituzione: ad esempio
+$\lim_{x\to\pi}e^{\cos x}=e^{\cos\pi}=e^{-1}$.
+
+\begin{idea}[L'atmosfera standard: continua, ma con uno spigolo]
+Nel modello dell'atmosfera standard internazionale (ISA) la temperatura, in funzione
+della quota $h$ espressa in metri, è
+\[
+  T(h)=
+  \begin{cases}
+    288{,}15-0{,}0065\,h & \text{per } 0\le h\le11\,000 \ \ \text{(troposfera)},\\
+    216{,}65 & \text{per } 11\,000<h\le20\,000 \ \ \text{(stratosfera)},
+  \end{cases}
+\]
+in kelvin. Ciascun tratto è un polinomio, quindi continuo; nel punto di raccordo, la
+tropopausa, il limite sinistro vale $288{,}15-0{,}0065\cdot11\,000=216{,}65$, uguale al
+limite destro e al valore: $T$ è continua anche lì. Il modello non poteva essere
+altrimenti: una temperatura discontinua in quota non avrebbe senso fisico, e la
+pressione e la densità, che si ricavano da $T(h)$, risultano anch'esse continue. Il
+grafico di $T$ ha però uno \emph{spigolo} a $11\,000$~m: la pendenza passa bruscamente da
+$-6{,}5$~K/km a zero. La continuità non esclude cambi di pendenza improvvisi; li
+misureremo con le derivate.
+\end{idea}
+
+\begin{notastorica}[Che cosa vuol dire «continua»?]
+Per Eulero, nell'\emph{Introductio in analysin infinitorum} (1748), una funzione era
+«continua» se era data da un'unica espressione analitica, e «discontinua» (o mista) se
+era definita da espressioni diverse in parti diverse del dominio: secondo questo uso la
+funzione $T(h)$ dell'atmosfera standard sarebbe stata discontinua, e $\frac1x$
+continua! Discontinua sarebbe stata anche $\abs x$, che vale $x$ per $x\ge0$ e $-x$ per
+$x<0$, ed è per noi continua ovunque. A mettere in crisi questo linguaggio fu il problema
+della corda vibrante. Nel 1747 d'Alembert ne scrisse la soluzione generale come somma di
+due onde che viaggiano in versi opposti; Eulero obiettò che la forma iniziale della
+corda può essere qualsiasi, ad esempio triangolare, con uno spigolo, come quella di una
+corda pizzicata, e che bisognava ammettere anche curve «discontinue», perfino tracciate a
+mano libera. Daniel Bernoulli (1753) sostenne invece che ogni vibrazione è una
+sovrapposizione di oscillazioni sinusoidali, cioè la somma di una serie trigonometrica.
+Eulero e d'Alembert respinsero questa tesi: una serie di seni era, ai loro occhi, un'unica
+espressione, e non poteva rappresentare una curva «discontinua». La risposta venne da
+Joseph Fourier, che nella \emph{Théorie analytique de la chaleur} (1822) rappresentò con
+serie trigonometriche funzioni definite a tratti, anche con salti: la stessa «formula»
+poteva descrivere oggetti molto diversi, e il concetto di funzione andava separato da
+quello di formula. La definizione moderna di continuità, che guarda al comportamento della
+funzione vicino a ogni punto e non alla forma della formula, fu data indipendentemente da
+Bernard Bolzano (1817) e da Augustin-Louis Cauchy, nel \emph{Cours d'analyse} (1821).
+\end{notastorica}

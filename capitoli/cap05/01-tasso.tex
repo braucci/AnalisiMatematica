@@ -1,0 +1,186 @@
+%% ----------------------------------------------------------------------------
+%%  §5.1  Tasso di accrescimento. Significato meccanico della derivata
+%% ----------------------------------------------------------------------------
+\section{Tasso di accrescimento. Significato meccanico della derivata}
+\label{sec:tasso}
+
+Consideriamo un semplice processo di crescita di un corpo, supponendo che il peso $p$
+del corpo vari al crescere del tempo; cioè supponiamo che il peso sia una funzione del
+tempo, $p=p(t)$. Prendiamo in considerazione le variazioni di peso a partire da un certo
+istante $t$. Al tempo $t$ il peso è $p(t)$, mentre all'istante $t+h$, dopo che è
+trascorso un tempo uguale ad $h$, il peso è $p(t+h)$. Quindi, nell'intervallo di tempo
+$h$, il cambio di peso è $p(t+h)-p(t)$. Il rapporto
+\begin{equation}\label{eq:tasso-medio}
+  \frac{p(t+h)-p(t)}{h}
+\end{equation}
+dà un'indicazione di quanto sia cambiato il peso per unità di tempo. Più precisamente
+il rapporto \eqref{eq:tasso-medio} esprime la variazione \emph{media} per unità di tempo
+del peso nell'intervallo $[t,t+h]$ (o $[t+h,t]$ se $h<0$). Si chiama anche \emph{tasso
+medio di accrescimento}, o tasso medio di variazione, o \emph{velocità media di
+accrescimento}.
+
+Invece della variazione media nell'intervallo $[t,t+h]$, spesso è più utile la
+variazione \emph{istantanea} al tempo $t$. Intuitivamente si considera l'espressione
+\eqref{eq:tasso-medio} per alcuni valori di $h$ sempre più vicini a zero. Con il
+linguaggio più preciso introdotto nei capitoli precedenti, si calcola il limite, per
+$h\to0$, del rapporto \eqref{eq:tasso-medio}:
+\begin{equation}\label{eq:tasso}
+  \text{tasso di accrescimento}=\lim_{h\to0}\frac{p(t+h)-p(t)}{h}.
+\end{equation}
+Si noti come sia indispensabile usare il limite per $h\to0$, dato che, se nella
+\eqref{eq:tasso-medio} si pone direttamente $h=0$, si ottiene un'espressione senza
+significato. Invece, con il linguaggio dei limiti, il limite in \eqref{eq:tasso} è una
+forma indeterminata $\frac00$ (se $p$ è una funzione continua), del tipo già incontrato
+nell'esempio della velocità istantanea del \cref{sec:premessa-funzioni}.
+
+Per mostrare come il tasso di accrescimento possa essere effettivamente calcolato,
+consideriamo a titolo di esercizio il caso in cui il peso dipenda dal tempo in modo
+quadratico,
+\begin{equation}\label{eq:peso-quadratico}
+  p(t)=t^{2};
+\end{equation}
+per ogni $h\neq0$ risulta
+\begin{equation}\label{eq:tasso-t2}
+  \frac{p(t+h)-p(t)}{h}=\frac{(t+h)^{2}-t^{2}}{h}=\frac{t^{2}+2ht+h^{2}-t^{2}}{h}=2t+h .
+\end{equation}
+L'ultimo membro della \eqref{eq:tasso-t2} tende a $2t$ per $h\to0$. Quindi il tasso di
+accrescimento vale $2t$. Ciò significa che, al crescere del tempo $t>0$, non soltanto il
+peso cresce come $t^{2}$, ma anche il \emph{cambiamento} di peso per unità di tempo
+aumenta (nel caso in considerazione, in modo proporzionale al tempo).
+
+Proponiamo un esempio numerico: secondo la legge $p(t)=t^{2}$, al tempo $t=10$ il peso
+risulta essere uguale a $p(10)=100$. Il tasso di accrescimento, uguale a $2t$, al tempo
+$t=10$ vale $20$. Ciò significa che, dopo una unità di tempo, il peso del corpo aumenta
+di circa $20$ unità; quindi $p(11)$ vale all'incirca $120$. Si noti che effettivamente il
+valore trovato, $120$, non differisce di molto da $p(11)=11^{2}=121$; approfondiremo
+questo aspetto nel \cref{sec:retta-tangente} e, in modo più completo, con la formula di
+Taylor. Il programma seguente calcola i tassi medi per $h$ sempre più piccoli, in
+aritmetica razionale esatta.
+
+\begin{python}[Tassi medi di accrescimento per $p(t)=t^{2}$ e $t=10$]
+from fractions import Fraction as F
+
+p = lambda t: t**2                    # peso in funzione del tempo
+t = F(10)
+for k in range(0, 7):
+    h = F(1, 10**k)                   # aritmetica razionale esatta
+    tasso_medio = (p(t + h) - p(t)) / h
+    print(f"h = {str(h):>9}   tasso medio = {float(tasso_medio)}")
+print("previsione lineare p(11) ~", p(t) + 2 * t * 1,
+      "  valore vero:", p(t + 1))
+\end{python}
+\begin{risultato}
+h =         1   tasso medio = 21.0
+h =      1/10   tasso medio = 20.1
+h =     1/100   tasso medio = 20.01
+h =    1/1000   tasso medio = 20.001
+h =   1/10000   tasso medio = 20.0001
+h =  1/100000   tasso medio = 20.00001
+h = 1/1000000   tasso medio = 20.000001
+previsione lineare p(11) ~ 120   valore vero: 121
+\end{risultato}
+
+I tassi medi valgono esattamente $20+h$, come previsto dalla \eqref{eq:tasso-t2}, e si
+avvicinano a $20$; ma, ancora una volta, il calcolo con alcuni valori di $h$ suggerisce
+il limite, mentre è la \eqref{eq:tasso-t2} a dimostrarlo.
+
+\subsection{La velocità istantanea}
+
+Abbiamo già detto che «velocità di accrescimento» è sinonimo di «tasso di
+accrescimento»; ciò deriva dal fatto che una velocità si definisce in modo analogo a
+quanto fatto sopra. Consideriamo ad esempio un velivolo che percorre una rotta
+rettilinea, e indichiamo con $s(t)$ lo spazio percorso in funzione del tempo. La
+\emph{velocità media} nell'intervallo di tempo $[t,t+h]$ è uguale al rapporto tra lo
+spazio percorso $s(t+h)-s(t)$ e il tempo $h$ impiegato a percorrerlo. La \emph{velocità
+istantanea} (quella che, a meno del vento, si ricava dagli strumenti di bordo) è il
+limite, per $h\to0$, della velocità media; quindi
+\begin{equation}\label{eq:velocita-istantanea}
+  \text{velocità istantanea}=\lim_{h\to0}\frac{s(t+h)-s(t)}{h}.
+\end{equation}
+Il significato geometrico è illustrato nella \cref{fig:velocita-media}: la velocità media
+è la pendenza della retta che congiunge due punti del grafico della legge oraria; la
+velocità istantanea è la pendenza limite di tali rette quando il secondo punto si
+avvicina al primo.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.9\textwidth, height=5.6cm, xmin=0, xmax=6, ymin=0, ymax=5.6,
+  axis lines=left, xtick={2,4.6}, xticklabels={$t$,$t+h$}, ytick={1.404,4.6221},
+  yticklabels={$s(t)$,$s(t+h)$}, xlabel={tempo}, ylabel={spazio}, clip=false]
+  \addplot[curva, domain=0.2:5.2, samples=100] {0.5+0.25*x^2-0.012*x^3};
+  \addplot[tratteggio] coordinates {(0,1.404) (2,1.404) (2,0)};
+  \addplot[tratteggio] coordinates {(0,4.6221) (4.6,4.6221) (4.6,0)};
+  \addplot[curva2, domain=1.2:5.1] {1.404+(4.6221-1.404)/2.6*(x-2)};
+  \addplot[curva3, domain=0.4:4.2] {1.404+0.856*(x-2)};
+  \addplot[only marks, mark=*, mark size=1.6pt, blu] coordinates {(2,1.404) (4.6,4.6221)};
+  \node[font=\scriptsize, rame, anchor=west] at (axis cs:5.1,5.0) {secante};
+  \node[font=\scriptsize, verde!50!black, anchor=north west] at (axis cs:3.6,2.35) {tangente};
+\end{axis}
+\end{tikzpicture}
+\caption{La velocità media nell'intervallo $[t,t+h]$ è la pendenza della retta secante
+(rame) per i punti $(t,s(t))$ e $(t+h,s(t+h))$ del grafico della legge oraria; quando
+$h\to0$ la secante tende alla retta tangente (verde), la cui pendenza è la velocità
+istantanea.}
+\label{fig:velocita-media}
+\end{figure}
+
+È chiaro che nei due esempi precedenti lo schema matematico è identico. In entrambi gli
+esempi occorre calcolare \emph{il limite di un rapporto incrementale}, così chiamato
+perché a denominatore c'è l'incremento $h$ della variabile indipendente, mentre a
+numeratore c'è il corrispondente incremento della variabile dipendente. Occorre
+calcolare il limite del rapporto incrementale anche in molte altre situazioni, analoghe
+a quelle dei due esempi esposti:
+\begin{itemize}
+  \item l'\emph{accelerazione} di un corpo in moto rettilineo è il limite del rapporto
+  incrementale della velocità rispetto al tempo;
+  \item la \emph{portata in massa} di combustibile consumato da un motore è il limite del
+  rapporto incrementale della massa di combustibile bruciata rispetto al tempo;
+  \item la \emph{densità lineare} di una trave non omogenea è il limite del rapporto tra
+  la massa di un tratto di trave e la sua lunghezza, quando la lunghezza tende a zero;
+  \item il \emph{gradiente termico} verticale dell'atmosfera è il limite del rapporto
+  incrementale della temperatura rispetto alla quota.
+\end{itemize}
+Un altro esempio, di tipo geometrico, è studiato nel \cref{sec:retta-tangente}.
+Introdurremo nel prossimo paragrafo la \emph{derivata} come limite del rapporto
+incrementale, quando l'incremento tende a zero.
+
+\begin{idea}[Il variometro: uno strumento che misura una derivata]
+Il variometro, presente sul cruscotto di ogni aliante e di quasi ogni velivolo, indica
+la \emph{velocità verticale}, cioè il tasso di variazione della quota rispetto al tempo,
+$\lim_{h\to0}\frac{z(t+h)-z(t)}{h}$. Il variometro meccanico realizza fisicamente
+un rapporto incrementale: una capsula, collegata direttamente alla presa statica, è
+racchiusa in un serbatoio che comunica con la stessa presa soltanto attraverso un
+sottile tubo capillare, che rallenta l'equalizzazione delle pressioni. Quando la quota
+cambia, la pressione nella capsula segue subito quella esterna, mentre quella nel
+serbatoio resta indietro, e la differenza di pressione che si stabilisce è, con buona
+approssimazione, proporzionale alla rapidità di variazione della pressione statica, e
+quindi della quota. Lo strumento ha un ritardo, perché in effetti confronta valori in
+istanti diversi: misura cioè un rapporto incrementale con un incremento di tempo
+piccolo ma non nullo. I variometri elettronici calcolano il rapporto incrementale per
+via numerica, con gli accorgimenti che vedremo nel \cref{sec:def-derivata}.
+\end{idea}
+
+\begin{notastorica}[Newton, Leibniz e le notazioni]
+Il calcolo differenziale nacque due volte, in modo indipendente. Isaac Newton lo
+sviluppò negli anni 1665--1666 come «metodo delle flussioni». Per lui le grandezze sono
+quantità che «fluiscono» nel tempo, le \emph{fluenti}; la loro velocità di variazione è
+la \emph{flussione}, e il prodotto della flussione per un intervallo di tempo
+infinitamente piccolo $o$ è il \emph{momento}, cioè l'incremento infinitesimo della
+fluente. Il problema centrale, nel trattato \emph{De methodis serierum et fluxionum}
+scritto nel 1671, è proprio il nostro: data una relazione tra quantità fluenti, trovare
+la relazione tra le loro flussioni. Poiché la variabile indipendente è sempre il tempo,
+la derivata di $y$ rispetto a $x$ compare come rapporto tra le flussioni di $y$ e di $x$.
+Il trattato fu pubblicato soltanto nel 1736, in traduzione inglese (\emph{The Method of
+Fluxions and Infinite Series}); la notazione col punto, $\dot x$, ancora oggi d'uso in
+meccanica per le derivate rispetto al tempo, Newton la adottò soltanto alla fine del 1691.
+Gottfried Wilhelm Leibniz pubblicò per primo, nell'ottobre 1684, la memoria citata
+nell'epigrafe, uscita a Lipsia negli \emph{Acta Eruditorum}: poche pagine che rendevano
+pubblici i differenziali $dx$, $dy$, ideati nei manoscritti parigini del 1675, e le regole
+per calcolarli. Leibniz pensava le grandezze come formate da parti infinitesime, e la
+sua notazione, che conserva nel simbolo $\frac{dy}{dx}$ l'origine della derivata come
+rapporto di incrementi, si è dimostrata straordinariamente efficace, come vedremo con la
+regola della catena. Sulla disputa per la priorità che seguì si veda la nota storica
+del \S\ref{sec:teorema-fondamentale}; il nome «derivata» e il simbolo $f'(x)$ sono più
+tardi (si veda la nota storica alla fine del \S\ref{sec:def-derivata}).
+\end{notastorica}

@@ -1,0 +1,464 @@
+%% ----------------------------------------------------------------------------
+%%  §3.8  Il numero e
+%% ----------------------------------------------------------------------------
+\section{Il numero $e$}
+\label{sec:numero-e}
+
+Il teorema sulle successioni monotòne è utile per definire il \emph{numero di Nepero}
+$e$ come limite di una particolare successione monotòna e limitata. Infatti,
+introduciamo tale numero mediante il limite
+\begin{equation}\label{eq:def-e}
+  e=\lim_{n\to+\infty}a_{n}, \qquad\text{con}\qquad a_{n}=\Bigl(1+\frac1n\Bigr)^{n}.
+\end{equation}
+La \eqref{eq:def-e} è la definizione del \emph{numero di Nepero}\index{numero di Nepero} $e$.
+Tale definizione è giustificata dal fatto che, come proveremo tra poco, \emph{la
+successione $a_{n}=(1+1/n)^{n}$ è strettamente crescente e limitata}; quindi esiste, ed è
+un numero reale, il limite per $n\to+\infty$ di $a_{n}$.
+
+\begin{idea}[Due tendenze opposte]
+La successione $(1+1/n)^{n}$ combina fra loro due tendenze opposte: la tendenza della
+base a un limite uguale a $1$, e la tendenza dell'esponente a un limite infinito. Se
+prevalesse la prima, il limite sarebbe $1$ (come per $1^{n}$); se prevalesse la seconda,
+sarebbe $+\infty$ (come per $1{,}01^{n}$, \cref{teo:lim-geometrica}). Il risultato è
+invece un numero intermedio tra $1$ e $+\infty$, che non è né l'uno né l'altro: è
+proprio questo equilibrio delicato a rendere $e$ così importante. La forma $1^{\infty}$ è
+una nuova forma indeterminata, come vedremo alla fine del paragrafo.
+\end{idea}
+
+\subsection{Monotonia e limitatezza}
+
+Ci serve una versione «stretta» della disuguaglianza di Bernoulli.
+
+\begin{lemma}[Bernoulli in forma stretta]\label{lem:bernoulli-stretta}
+Se $x\ge-1$, $x\neq0$ e $n\ge2$ è un numero naturale, allora $(1+x)^{n}>1+nx$.
+\end{lemma}
+
+\begin{schema}
+\Ipotesi{$x\ge-1$, \ $x\neq0$; \ $n\in\N$, \ $n\ge2$.}
+\Tesi{$(1+x)^{n}>1+nx$.}
+\end{schema}
+
+\begin{strategia}
+Si ripete la dimostrazione per induzione della disuguaglianza di Bernoulli, partendo da
+$n=2$, dove la disuguaglianza è stretta perché $x^{2}>0$. Nel passo induttivo si
+moltiplica per $1+x$, che deve essere \emph{positivo} perché la disuguaglianza stretta
+si conservi: il caso $x=-1$, in cui $1+x=0$, va quindi controllato a parte.
+\end{strategia}
+
+\begin{dimostrazione}
+Per $n=2$: $(1+x)^{2}=1+2x+x^{2}>1+2x$, perché $x\neq0$. Supponiamo la tesi vera per un
+certo $n\ge2$. Se $x=-1$, si ha $(1+x)^{n+1}=0>1-(n+1)=1+(n+1)x$. Se $x>-1$, moltiplicando
+l'ipotesi induttiva per $1+x>0$,
+\[
+  (1+x)^{n+1}>(1+nx)(1+x)=1+(n+1)x+nx^{2}\ge1+(n+1)x .
+\]
+Per il principio di induzione (a partire da $n=2$) la tesi vale per ogni $n\ge2$.
+\end{dimostrazione}
+
+\begin{teorema}[Esistenza del numero $e$]\label{teo:numero-e}\index{numero di Nepero!esistenza}
+Le successioni
+\begin{equation}\label{eq:an-bn}
+  a_{n}=\Bigl(1+\frac1n\Bigr)^{n}, \qquad b_{n}=\Bigl(1+\frac1n\Bigr)^{n+1}
+\end{equation}
+sono, rispettivamente, strettamente crescente e strettamente decrescente, e risulta
+$a_{n}<b_{n}$ per ogni $n$. Di conseguenza entrambe convergono, allo stesso limite $e$, e
+\begin{equation}\label{eq:e-stima}
+  a_{n}<e<b_{n} \qquad\perogni n\in\N .
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$a_{n}$ e $b_{n}$ definite dalla \eqref{eq:an-bn}, \ $n\in\N$.}
+\Tesi{(i) $a_{n}<a_{n+1}$; \ (ii) $b_{n}>b_{n+1}$; \ (iii) $a_{n}<b_{n}$; \
+(iv) $a_{n}$ e $b_{n}$ convergono allo stesso limite $e$, e $a_{n}<e<b_{n}$.}
+\end{schema}
+
+\begin{strategia}
+Il cuore della dimostrazione sono le due monotonie, ed entrambe si ottengono con lo
+stesso trucco. Si scrive il rapporto tra due termini consecutivi, si mettono insieme le
+potenze con lo stesso esponente, e si ottiene una disuguaglianza della forma
+$\bigl(1+x\bigr)^{n}\gtrless1+(\text{qualcosa})$, con $x=-\frac1{n^{2}}$ per $a_{n}$ e
+$x=\frac1{n^{2}-1}$ per $b_{n}$: esattamente la forma della disuguaglianza di Bernoulli.
+Poi la conclusione è quasi automatica: $a_{n}$ cresce, $b_{n}$ decresce, e $a_{n}<b_{n}$;
+quindi ogni $a_{n}$ è minore di ogni $b_{m}$ (una «tenaglia» come quella di Archimede nel
+\cref{sec:premessa-limiti}). In particolare $a_{n}$ è limitata superiormente da $b_{1}=4$,
+e il teorema sulle successioni monotòne dà la convergenza. Che i due limiti coincidano
+segue dal fatto che $b_{n}=a_{n}(1+\frac1n)$ e $1+\frac1n\to1$.
+\end{strategia}
+
+\begin{dimostrazione}
+(i) \emph{$a_{n}$ è strettamente crescente.} La tesi è
+\begin{equation}\label{eq:an-cresce-1}
+  a_{n}=\Bigl(1+\frac1n\Bigr)^{n}>a_{n-1}=\Bigl(1+\frac1{n-1}\Bigr)^{n-1} \qquad\perogni n\ge2 .
+\end{equation}
+Eseguendo la somma delle frazioni, si può scrivere in modo equivalente
+\begin{equation}\label{eq:an-cresce-2}
+  \Bigl(\frac{n+1}{n}\Bigr)^{n}>\Bigl(\frac{n}{n-1}\Bigr)^{n}\cdot\frac{n-1}{n},
+\end{equation}
+cioè, dividendo per $\bigl(\frac{n}{n-1}\bigr)^{n}>0$ e raccogliendo le potenze,
+\begin{equation}\label{eq:an-cresce-3}
+  \Bigl(\frac{n^{2}-1}{n^{2}}\Bigr)^{n}>\frac{n-1}{n}.
+\end{equation}
+È conveniente isolare come addendo $1$, nel modo seguente:
+\begin{equation}\label{eq:an-cresce-4}
+  \Bigl(1-\frac1{n^{2}}\Bigr)^{n}>1-\frac1n .
+\end{equation}
+La \eqref{eq:an-cresce-4} è equivalente alla tesi da provare; e si ottiene dal
+\cref{lem:bernoulli-stretta} con $x=-1/n^{2}$, che è maggiore di $-1$ e diverso da zero:
+$\bigl(1-\frac1{n^{2}}\bigr)^{n}>1-n\cdot\frac1{n^{2}}=1-\frac1n$.
+
+(ii) \emph{$b_{n}$ è strettamente decrescente.} Procediamo come nella dimostrazione
+precedente. La tesi è
+\begin{equation}\label{eq:bn-decresce-1}
+  b_{n-1}=\Bigl(1+\frac1{n-1}\Bigr)^{n}>b_{n}=\Bigl(1+\frac1n\Bigr)^{n+1} \qquad\perogni n\ge2,
+\end{equation}
+cioè, equivalentemente,
+\begin{equation}\label{eq:bn-decresce-2}
+\begin{gathered}
+  \Bigl(\frac{n}{n-1}\Bigr)^{n}>\Bigl(\frac{n+1}{n}\Bigr)^{n}\cdot\frac{n+1}{n},\\
+  \text{cioè}\qquad\Bigl(\frac{n^{2}}{n^{2}-1}\Bigr)^{n}>\frac{n+1}{n}.
+\end{gathered}
+\end{equation}
+Come nella dimostrazione precedente isoliamo $1$ come addendo:
+\begin{equation}\label{eq:bn-decresce-3}
+  \Bigl(1+\frac1{n^{2}-1}\Bigr)^{n}>1+\frac1n .
+\end{equation}
+La disuguaglianza di Bernoulli, con $x=1/(n^{2}-1)$, dà la conclusione:
+\begin{equation}\label{eq:bn-decresce-4}
+  \Bigl(1+\frac1{n^{2}-1}\Bigr)^{n}\ge1+\frac{n}{n^{2}-1}>1+\frac1n \qquad\perogni n\ge2
+\end{equation}
+(nell'ultimo passaggio si è utilizzata la disuguaglianza $\frac{n}{n^{2}-1}>\frac1n$, che
+è vera perché equivale a $n^{2}>n^{2}-1$).
+
+(iii) Per ogni $n\in\N$ si ha
+\begin{equation}\label{eq:bn-maggiore-an}
+  b_{n}=\Bigl(1+\frac1n\Bigr)^{n}\cdot\Bigl(1+\frac1n\Bigr)=a_{n}\cdot\Bigl(1+\frac1n\Bigr)>a_{n}.
+\end{equation}
+
+(iv) Dalle (i), (ii), (iii) segue che, per ogni $n,m\in\N$, posto $k=\max\{n,m\}$,
+\begin{equation}\label{eq:an-minore-bm}
+  a_{n}\le a_{k}<b_{k}\le b_{m};
+\end{equation}
+in particolare $2=a_{1}\le a_{n}<b_{1}=4$ per ogni $n$. La successione $a_{n}$ è dunque
+crescente e limitata, e per il \cref{teo:monotone} converge a un numero reale, che
+chiamiamo $e$; analogamente $b_{n}$, decrescente e limitata inferiormente da $a_{1}=2$,
+converge. Dalla \eqref{eq:bn-maggiore-an} e dal \cref{teo:operazioni-limiti},
+$\lim b_{n}=\lim a_{n}\cdot\lim(1+\frac1n)=e\cdot1=e$. Infine, poiché $a_{n}$ è strettamente
+crescente, $a_{n}<a_{n+1}\le\sup_{k}a_{k}=e$; e poiché $b_{n}$ è strettamente
+decrescente, $e=\inf_{k}b_{k}\le b_{n+1}<b_{n}$ (si veda la \eqref{eq:lim-monotone}).
+\end{dimostrazione}
+
+\begin{strategia}[Un'altra via]
+Seguendo \cite{giusti}, si può sviluppare la potenza con la formula del binomio, invece di
+confrontare due termini consecutivi. Si ottiene una somma di addendi positivi che
+crescono con $n$, e il cui numero cresce con $n$: la crescenza diventa evidente. Ogni
+addendo è poi minore di un reciproco di fattoriale, e la limitatezza segue dal confronto
+con una progressione geometrica. Si perde la tenaglia \eqref{eq:e-stima}, ma si scopre da
+dove viene il numero $e$.
+\end{strategia}
+
+\begin{dimostrazione}[Seconda dimostrazione della crescenza e della limitatezza di $a_{n}$]
+Per la formula del binomio (\cref{teo:binomio}) con $a=1$ e $b=\frac1n$, e per la
+\eqref{eq:combinazioni},
+\[
+  a_{n}=\sum_{k=0}^{n}\binom nk\frac1{n^{k}}
+  =\sum_{k=0}^{n}\frac1{k!}\cdot\frac{n(n-1)\cdots(n-k+1)}{n^{k}} .
+\]
+La seconda frazione è il prodotto dei $k$ fattori $\frac nn,\frac{n-1}n,\dots,\frac{n-k+1}n$.
+Isolando gli addendi con $k=0$ e $k=1$, che valgono $1$, si ottiene
+\begin{equation}\label{eq:e-binomio}
+  a_{n}=1+1+\sum_{k=2}^{n}\frac1{k!}\Bigl(1-\frac1n\Bigr)\Bigl(1-\frac2n\Bigr)\cdots
+  \Bigl(1-\frac{k-1}n\Bigr)
+\end{equation}
+(per $n=1$ la somma è vuota).
+
+\emph{Crescenza.} Passando da $n$ a $n+1$, ogni fattore $1-\frac jn$, con
+$1\le j\le k-1\le n-1$, è positivo e aumenta, perché diventa $1-\frac j{n+1}$; quindi
+aumenta ogni addendo della somma \eqref{eq:e-binomio}. Inoltre $a_{n+1}$ contiene un
+addendo positivo in più, quello con $k=n+1$. Dunque $a_{n}<a_{n+1}$.
+
+\emph{Limitatezza.} Ogni prodotto nella \eqref{eq:e-binomio} è compreso tra $0$ e $1$.
+Inoltre per $k\ge1$ si ha $k!\ge2^{k-1}$, perché ciascuno dei $k-1$ fattori $2,3,\dots,k$
+è almeno $2$. Per la \cref{prop:geometrica} con $x=\frac12$ si ha allora
+\begin{equation}\label{eq:e-binomio-stima}
+  a_{n}\le1+\sum_{k=1}^{n}\frac1{k!}\le1+\sum_{k=1}^{n}\frac1{2^{k-1}}
+  =1+\frac{1-(1/2)^{n}}{1-1/2}<3 .
+\end{equation}
+La successione $a_{n}$ è dunque crescente e limitata superiormente da $3$. Per il
+\cref{teo:monotone} converge, e il suo limite $e$ verifica $e\le3$.
+\end{dimostrazione}
+
+\begin{osservazione}[Che cosa insegna ciascuna via]\label{oss:e-due-vie}
+La prima dimostrazione dà di più sul piano quantitativo: la successione decrescente
+$b_{n}$ e la tenaglia $a_{n}<e<b_{n}$, cioè un controllo dell'errore. La seconda dice
+invece da dove viene $e$. Posto $s_{n}=\sum_{k=0}^{n}\frac1{k!}$, la
+\eqref{eq:e-binomio-stima} dice che $a_{n}\le s_{n}<3$; e con gli stessi strumenti si
+prova che $s_{n}\to e$. La successione $s_{n}$ è crescente e limitata, quindi converge a
+un limite $s$, e da $a_{n}\le s_{n}$ segue $e\le s$ (\cref{cor:confronto-limiti}).
+Viceversa, fissato $m$, per $n\ge m$ si possono trascurare nella \eqref{eq:e-binomio}
+gli addendi con $k>m$, che sono positivi:
+\[
+  a_{n}\ge1+1+\sum_{k=2}^{m}\frac1{k!}\Bigl(1-\frac1n\Bigr)\cdots\Bigl(1-\frac{k-1}n\Bigr).
+\]
+Per $n\to+\infty$, con $m$ fisso, il secondo membro è una somma di un numero \emph{fisso}
+di termini, ciascuno dei quali tende a $\frac1{k!}$ (\cref{teo:operazioni-limiti}):
+tende quindi a $s_{m}$, e si ottiene $e\ge s_{m}$. Passando al limite per $m\to+\infty$
+si ha $e\ge s$. Dunque $e=\lim_{n}s_{n}$ è la somma della serie dei reciproci dei
+fattoriali (\cref{es:serie-fattoriali}), ottenuta qui senza la formula di Taylor. Il punto
+delicato è l'ordine dei passaggi al limite: prima $n\to+\infty$ con $m$ fisso, poi
+$m\to+\infty$. Nella \eqref{eq:e-binomio} non si può passare al limite addendo per
+addendo, perché il numero degli addendi cresce con $n$.
+\end{osservazione}
+
+\begin{corollario}\label{cor:e-tra-2-e-3}
+Risulta $2<e<3$.
+\end{corollario}
+
+\begin{schema}
+\Ipotesi{la stima \eqref{eq:e-stima}: $a_{n}<e<b_{n}$ per ogni $n\in\N$.}
+\Tesi{$2<e<3$.}
+\end{schema}
+
+\begin{strategia}
+Basta scegliere nella tenaglia \eqref{eq:e-stima} due indici opportuni: $a_{1}=2$ dà la
+stima dal basso; per quella dall'alto occorre un $b_{n}$ minore di $3$, e un calcolo
+diretto mostra che $n=5$ è sufficiente.
+\end{strategia}
+
+\begin{dimostrazione}
+Dalla \eqref{eq:e-stima} con $n=1$ si ha $e>a_{1}=2$, e con $n=5$
+\begin{equation}\label{eq:b5}
+  e<b_{5}=\Bigl(\frac65\Bigr)^{6}=\frac{46656}{15625}=2{,}985984<3. \qedhere
+\end{equation}
+\end{dimostrazione}
+
+La \eqref{eq:e-stima} è un'ottima «tenaglia» numerica: aumentando $n$ si ottengono stime
+sempre più precise. Riportiamo nella \cref{tab:numero-e} alcuni valori approssimati di
+$a_{n}$ e $b_{n}$, rappresentati anche nella \cref{fig:numero-e}. Un metodo molto più efficiente per calcolare espressioni decimali
+approssimate di $e$ verrà dalla formula di Taylor (\cref{es:calcolo-e}) e dalla serie dei
+reciproci dei fattoriali, $e=\sum_{k=0}^{\infty}\frac1{k!}$ (\cref{oss:e-due-vie},
+\cref{es:serie-fattoriali} e \eqref{eq:e-serie}); con esso si ottengono facilmente
+valori come
+\begin{equation}\label{eq:e-decimali}
+  e=2{,}71828182845904523536\ldots
+\end{equation}
+
+\begin{table}[htb]
+\centering
+\renewcommand{\arraystretch}{1.3}
+\footnotesize\setlength{\tabcolsep}{3pt}
+\begin{tabular}{l*{8}{c}}
+\toprule
+$n$ & $1$ & $10$ & $50$ & $100$ & $500$ & $1000$ & $10^{5}$ & $10^{6}$\\
+\midrule
+$(1+1/n)^{n}$ & $2$ & $2{,}5937$ & $2{,}6916$ & $2{,}7048$ & $2{,}7156$ & $2{,}7169$ & $2{,}71827$ & $2{,}718280$\\
+$(1+1/n)^{n+1}$ & $4$ & $2{,}8531$ & $2{,}7454$ & $2{,}7319$ & $2{,}7210$ & $2{,}7196$ & $2{,}71830$ & $2{,}718283$\\
+\bottomrule
+\end{tabular}
+\caption{Approssimazioni per difetto ($a_{n}$) e per eccesso ($b_{n}$) del numero $e$.
+La convergenza è lenta: con $n=10^{6}$ si ottengono appena cinque cifre decimali
+esatte.}
+\label{tab:numero-e}
+\end{table}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.85\textwidth]{numero_e}
+\caption{Le successioni $a_{n}=(1+1/n)^{n}$ (crescente, in blu) e
+$b_{n}=(1+1/n)^{n+1}$ (decrescente, in rame) stringono il numero $e$ (tratteggiato)
+come in una tenaglia (\texttt{python/fig\_numero\_e.py}).}
+\label{fig:numero-e}
+\end{figure}
+
+\subsection{Generalizzazioni}
+
+Nelle applicazioni sono utili anche i limiti seguenti, generalizzazioni della
+definizione \eqref{eq:def-e} a successioni di esponenti reali qualsiasi. Ci serve
+preliminarmente un lemma, che permette di «comporre» una successione con una successione
+di indici.
+
+\begin{lemma}\label{lem:composizione-indici}
+Sia $c_{m}$ una successione con $\lim_{m\to+\infty}c_{m}=L\in\R$, e sia $m_{n}$ una
+successione di numeri naturali tale che $m_{n}\to+\infty$. Allora $c_{m_{n}}\to L$.
+\end{lemma}
+
+\begin{schema}
+\Ipotesi{$c_{m}\to L\in\R$ per $m\to+\infty$; \ $m_{n}\in\N$ e $m_{n}\to+\infty$.}
+\Tesi{$c_{m_{n}}\to L$ per $n\to+\infty$.}
+\end{schema}
+
+\begin{strategia}
+Due definizioni di limite vanno incatenate. Fissato $\epsilon$, la convergenza di $c_{m}$
+fornisce una soglia $\mu$ per l'indice $m$; la divergenza di $m_{n}$ garantisce che
+definitivamente $m_{n}$ supera quella soglia. Si noti che, a differenza delle estratte,
+qui gli indici $m_{n}$ possono ripetersi o non essere crescenti.
+\end{strategia}
+
+\begin{dimostrazione}
+Fissato $\epsilon>0$, esiste $\mu$ tale che $\abs{c_{m}-L}<\epsilon$ per ogni $m>\mu$.
+Poiché $m_{n}\to+\infty$, esiste $\nu$ tale che $m_{n}>\mu$ per ogni $n>\nu$ (si applichi
+la \eqref{eq:def-piu-inf} con $M=\max\{\mu,1\}$). Per tali $n$ si ha quindi
+$\abs{c_{m_{n}}-L}<\epsilon$.
+\end{dimostrazione}
+
+\begin{teorema}\label{teo:e-generalizzato}
+Per ogni successione di numeri reali $a_{n}$ (con $a_{n}\neq0$ e $1+1/a_{n}>0$) si ha
+\begin{align}
+  a_{n}\to+\infty \quad&\implica\quad \Bigl(1+\frac1{a_{n}}\Bigr)^{a_{n}}\to e; \label{eq:e-piu-inf}\\
+  a_{n}\to-\infty \quad&\implica\quad \Bigl(1+\frac1{a_{n}}\Bigr)^{a_{n}}\to e. \label{eq:e-meno-inf}
+\end{align}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$a_{n}\neq0$, \ $1+\frac1{a_{n}}>0$; \ $a_{n}\to+\infty$ oppure
+$a_{n}\to-\infty$.}
+\Tesi{$\Bigl(1+\dfrac1{a_{n}}\Bigr)^{a_{n}}\to e$.}
+\end{schema}
+
+\begin{strategia}
+Per la \eqref{eq:e-piu-inf} confrontiamo con il caso intero mediante la parte intera
+$m_{n}=\lfloor a_{n}\rfloor$: poiché $m_{n}\le a_{n}<m_{n}+1$, la base $1+\frac1{a_{n}}$ è
+compresa tra $1+\frac1{m_{n}+1}$ e $1+\frac1{m_{n}}$, e l'esponente tra $m_{n}$ e
+$m_{n}+1$. Prendendo la base più piccola con l'esponente più piccolo, e la base più
+grande con l'esponente più grande, otteniamo due carabinieri che sono, a meno di
+fattori che tendono a $1$, proprio le successioni $a_{m}$ e $b_{m}$ del teorema
+precedente, valutate in $m=m_{n}\to+\infty$. Per la \eqref{eq:e-meno-inf} un cambiamento
+di variabile, $b_{n}=-a_{n}-1$, la riconduce alla precedente.
+\end{strategia}
+
+\begin{dimostrazione}[Dimostrazione della \eqref{eq:e-piu-inf}]
+Poiché $a_{n}\to+\infty$, definitivamente $a_{n}\ge1$; consideriamo solo tali indici.
+Indichiamo con $m_{n}=\lfloor a_{n}\rfloor$ la parte intera di $a_{n}$
+(\cref{prop:parte-intera}), il più grande intero minore o uguale ad $a_{n}$: risulta
+$m_{n}\in\N$, $m_{n}\le a_{n}<m_{n}+1$, e quindi $m_{n}>a_{n}-1\to+\infty$. Si ha
+\begin{equation}\label{eq:e-carabinieri}
+  \Bigl(1+\frac1{m_{n}+1}\Bigr)^{m_{n}}\le\Bigl(1+\frac1{a_{n}}\Bigr)^{a_{n}}\le\Bigl(1+\frac1{m_{n}}\Bigr)^{m_{n}+1},
+\end{equation}
+perché la base e l'esponente del primo membro sono minori o uguali rispettivamente della
+base e dell'esponente del secondo membro, e lo stesso accade tra secondo e terzo membro:
+si usano la monotonia della potenza rispetto all'esponente per basi maggiori di $1$
+\eqref{eq:pot5} e la monotonia rispetto alla base per esponenti positivi \eqref{eq:pot3}.
+Il risultato segue dal teorema dei carabinieri, perché il primo e il terzo membro tendono
+ad $e$. Infatti, per il terzo membro, $\bigl(1+\frac1{m}\bigr)^{m+1}=b_{m}\to e$; per il
+primo,
+\begin{equation}\label{eq:e-primo-membro}
+  \Bigl(1+\frac1{m+1}\Bigr)^{m}=\frac{\bigl(1+\frac1{m+1}\bigr)^{m+1}}{1+\frac1{m+1}}
+  =\frac{a_{m+1}}{1+\frac1{m+1}}\to\frac e1=e ;
+\end{equation}
+in entrambi i casi per $m\to+\infty$, e quindi anche per $m=m_{n}$, per il
+\cref{lem:composizione-indici}.
+\end{dimostrazione}
+
+\begin{dimostrazione}[Dimostrazione della \eqref{eq:e-meno-inf}]
+Poniamo
+\begin{equation}\label{eq:e-cambio}
+  b_{n}=-a_{n}-1 .
+\end{equation}
+Dato che $a_{n}\to-\infty$, la successione $b_{n}$ diverge a $+\infty$; in particolare
+definitivamente $b_{n}>0$. Inoltre $a_{n}=-(b_{n}+1)$, e quindi
+\begin{equation}\label{eq:e-meno-inf-passo}
+\begin{split}
+  \Bigl(1+\frac1{a_{n}}\Bigr)^{a_{n}}&=\Bigl(1-\frac1{b_{n}+1}\Bigr)^{-(b_{n}+1)}
+  =\Bigl(\frac{b_{n}}{b_{n}+1}\Bigr)^{-(b_{n}+1)}\\
+  &=\Bigl(\frac{b_{n}+1}{b_{n}}\Bigr)^{b_{n}+1}
+  =\Bigl(1+\frac1{b_{n}}\Bigr)^{b_{n}}\cdot\Bigl(1+\frac1{b_{n}}\Bigr).
+\end{split}
+\end{equation}
+Ricordando che $b_{n}\to+\infty$, l'ultimo membro converge a $e\cdot1=e$, a causa della
+\eqref{eq:e-piu-inf} e della \eqref{eq:inf5}; ciò prova la \eqref{eq:e-meno-inf}.
+\end{dimostrazione}
+
+\begin{osservazione}
+Nelle due dimostrazioni, e in alcune delle successive, abbiamo usato le proprietà delle
+potenze a esponente reale. La monotonia rispetto all'esponente \eqref{eq:pot5} è stata
+dimostrata nel \cref{teo:esponenziale}(ii). Le regole algebriche \eqref{eq:pot1} e la
+monotonia rispetto alla base \eqref{eq:pot3}, invece, per esponenti irrazionali sono
+state soltanto discusse nel \cref{sec:esponenziale-reale}: la loro dimostrazione
+completa verrà data quando avremo a disposizione la continuità della funzione
+esponenziale.
+\end{osservazione}
+
+\begin{esempio}\label{es:limiti-e}
+Dal \cref{teo:e-generalizzato} e dalle operazioni con i limiti seguono molti limiti
+utili. Ad esempio:
+\begin{itemize}
+  \item $\bigl(1+\frac1n\bigr)^{2n}=\bigl[\bigl(1+\frac1n\bigr)^{n}\bigr]^{2}\to e^{2}$;
+  \item $\bigl(1-\frac1n\bigr)^{n}\to\frac1e$: infatti, per la \eqref{eq:e-meno-inf} con
+  $a_{n}=-n$ (per $n\ge2$, così che $1+1/a_{n}>0$), $\bigl(1-\frac1n\bigr)^{-n}\to e$, e il
+  reciproco tende a $1/e$;
+  \item $\bigl(\frac{n+1}{n-1}\bigr)^{n}=\frac{(1+1/n)^{n}}{(1-1/n)^{n}}\to\frac{e}{1/e}=e^{2}$
+  (anche qui $n\ge2$).
+\end{itemize}
+\end{esempio}
+
+\subsection{Nuove forme indeterminate}
+
+La forma $1^{\infty}$ è una nuova forma indeterminata, come pure sono indeterminate le
+forme $\infty^{0}$ e $0^{0}$. Quindi all'elenco \eqref{eq:forme-indeterminate} vanno
+aggiunte le \emph{forme indeterminate}\index{forma indeterminata!esponenziale}
+\begin{equation}\label{eq:forme-esponenziali}
+  1^{(+\infty)}, \qquad 1^{(-\infty)}, \qquad (+\infty)^{0}, \qquad 0^{0} .
+\end{equation}
+Che la forma $1^{\infty}$ sia davvero indeterminata lo mostrano tre successioni in cui la
+base tende a $1$ e l'esponente a $+\infty$, con limiti diversi:
+\begin{gather*}
+  \Bigl(1+\frac1n\Bigr)^{n}\to e, \qquad
+  \Bigl(1+\frac1n\Bigr)^{n^{2}}\ge1+n^{2}\cdot\frac1n=1+n\to+\infty,\\
+  1\le\Bigl(1+\frac1{n^{2}}\Bigr)^{n}=\Bigl[\Bigl(1+\frac1{n^{2}}\Bigr)^{n^{2}}\Bigr]^{1/n}<3^{1/n}\to1 .
+\end{gather*}
+Nella seconda si è usata la disuguaglianza di Bernoulli, nella terza la stima
+$a_{n^{2}}<3$ del \cref{cor:e-tra-2-e-3} e la \cref{prop:radice-n-a}.
+
+\begin{notastorica}[Il numero $e$ da Eulero a oggi]
+Nell'\emph{Introductio in analysin infinitorum} (1748) Eulero mostrò che il limite
+\eqref{eq:def-e} coincide con la somma della serie
+$1+1+\frac1{2!}+\frac1{3!}+\frac1{4!}+\cdots$, che converge molto più rapidamente (la
+ritroveremo nel \cref{cap:serie}, formula \eqref{eq:e-serie}), e ne calcolò le prime $23$ cifre decimali; nella
+stessa opera introdusse la funzione esponenziale $e^{x}$ e il logaritmo naturale come sua
+inversa, nella forma che usiamo ancora oggi. Il fatto che la successione $(1+1/n)^{n}$
+converga così lentamente (si veda la \cref{tab:numero-e}) è una curiosità ben nota agli
+studenti di calcolo numerico: con i numeri in virgola mobile a doppia precisione, per
+$n$ molto grande il calcolo di $1+1/n$ perde tutte le cifre significative di $1/n$, e il
+risultato «converge» a $1$ invece che ad $e$ (si veda il programma qui sotto).
+\end{notastorica}
+
+\begin{python}[Il numero $e$ con la tenaglia, e un'insidia numerica]
+import math
+
+for n in [10, 1000, 10**5, 10**7]:
+    a = (1 + 1/n) ** n
+    b = (1 + 1/n) ** (n + 1)
+    print(f"n = {n:>8d}:  {a:.10f} < e < {b:.10f}"
+          f"   (ampiezza {b - a:.1e})")
+print(f"math.e        = {math.e:.10f}")
+
+# Insidia della virgola mobile: per n enorme 1 + 1/n si arrotonda.
+# Confrontiamo il calcolo "ingenuo" con quello basato su log1p.
+for k in [9, 12, 15, 16]:
+    n = 10**k
+    ingenuo = (1 + 1/n) ** n
+    accurato = math.exp(n * math.log1p(1/n))
+    print(f"n = 1e{k}:  ingenuo = {ingenuo:.10f}"
+          f"   con log1p = {accurato:.10f}")
+\end{python}
+\begin{risultato}
+n =       10:  2.5937424601 < e < 2.8531167061   (ampiezza 2.6e-01)
+n =     1000:  2.7169239322 < e < 2.7196408562   (ampiezza 2.7e-03)
+n =   100000:  2.7182682372 < e < 2.7182954199   (ampiezza 2.7e-05)
+n = 10000000:  2.7182816941 < e < 2.7182819660   (ampiezza 2.7e-07)
+math.e        = 2.7182818285
+n = 1e9:  ingenuo = 2.7182820520   con log1p = 2.7182818271
+n = 1e12:  ingenuo = 2.7185234960   con log1p = 2.7182818285
+n = 1e15:  ingenuo = 3.0350352065   con log1p = 2.7182818285
+n = 1e16:  ingenuo = 1.0000000000   con log1p = 2.7182818285
+\end{risultato}
+
+Si noti che già per $n=10^{9}$ il valore calcolato «ingenuamente» supera $e$, in
+contraddizione con la \eqref{eq:e-stima}: l'errore di arrotondamento nel calcolo di
+$1+1/n$, amplificato dall'elevamento alla potenza $n$, ha superato l'errore di
+troncamento. Per $n=10^{15}$ il risultato è addirittura maggiore di $3$, e per $n=10^{16}$
+vale $1$, perché $1+10^{-16}$ viene arrotondato a $1$. La matematica dice che la
+successione converge ad $e$; il calcolatore, se usato senza cautela, dice altro. Il
+rimedio, in questo caso, è riscrivere la potenza come $e^{\,n\log(1+1/n)}$ e calcolare
+$\log(1+x)$ con una funzione apposita (\texttt{math.log1p}), che non perde cifre per $x$
+piccolo: la terza colonna mostra che così i valori restano corretti.

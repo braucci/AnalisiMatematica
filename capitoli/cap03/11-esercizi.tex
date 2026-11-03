@@ -1,0 +1,216 @@
+%% ----------------------------------------------------------------------------
+%%  §3.11  Esercizi di riepilogo
+%% ----------------------------------------------------------------------------
+\section{Esercizi di riepilogo}
+\label{sec:esercizi-cap3}
+
+Come nei capitoli precedenti, ogni soluzione è accompagnata da un commento sulle
+\emph{scelte logiche} che la guidano.
+
+\subsection*{La definizione di limite}
+
+\begin{esercizio}
+Verificare con la definizione che $\displaystyle\lim_{n\to+\infty}\frac{3n-1}{n+2}=3$,
+determinando esplicitamente un indice $\nu(\epsilon)$.
+\begin{soluzione}
+Si ha $\bigl|\frac{3n-1}{n+2}-3\bigr|=\bigl|\frac{3n-1-3n-6}{n+2}\bigr|=\frac7{n+2}$, e
+$\frac7{n+2}<\epsilon$ equivale a $n>\frac7\epsilon-2$: basta $\nu=\frac7\epsilon-2$.
+\emph{Scelta logica:} per verificare un limite con la definizione si parte sempre da
+$\abs{a_{n}-a}$, lo si semplifica, e si risolve la disuguaglianza $\abs{a_{n}-a}<\epsilon$
+rispetto a $n$. Non serve trovare il $\nu$ \emph{più piccolo}: basta un $\nu$ che funzioni,
+e spesso conviene maggiorare $\abs{a_{n}-a}$ con qualcosa di più semplice prima di
+risolvere.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Dimostrare che se $a_{n}\to0$ allora anche la media aritmetica
+$m_{n}=\frac{a_{1}+\dots+a_{n}}{n}$ tende a zero.
+\begin{soluzione}
+Fissato $\epsilon>0$, sia $\nu\in\N$ tale che $\abs{a_{n}}<\epsilon/2$ per $n>\nu$, e sia
+$S=\abs{a_{1}}+\dots+\abs{a_{\nu}}$ (un numero fisso). Per $n>\nu$,
+\[
+  \abs{m_{n}}\le\frac{S}{n}+\frac{\abs{a_{\nu+1}}+\dots+\abs{a_{n}}}{n}
+  <\frac Sn+\frac{n-\nu}{n}\cdot\frac\epsilon2<\frac Sn+\frac\epsilon2,
+\]
+e $\frac Sn<\frac\epsilon2$ per $n>2S/\epsilon$. Quindi $\abs{m_{n}}<\epsilon$ per
+$n>\max\{\nu,2S/\epsilon\}$. Il viceversa è falso: per $a_{n}=(-1)^{n}$ la media tende a
+zero ma $a_{n}$ non converge. \emph{Scelta logica:} si spezza la somma in una «testa»
+finita, che pesa sempre meno perché divisa per $n$, e una «coda» in cui i termini sono
+piccoli; a ciascuna parte si assegna metà della tolleranza, come nel trucco
+dell'$\epsilon/2$ (\cref{es:sup-somma}).
+\end{soluzione}
+\end{esercizio}
+
+\subsection*{Calcolo di limiti}
+
+\begin{esercizio}
+Calcolare $\displaystyle\lim_{n\to+\infty}\frac{2^{n}+3^{n}}{3^{n+1}-2^{n}}$.
+\begin{soluzione}
+Dividendo numeratore e denominatore per $3^{n}$, il termine che cresce più rapidamente:
+$\frac{(2/3)^{n}+1}{3-(2/3)^{n}}\to\frac{0+1}{3-0}=\frac13$, per il
+\cref{teo:lim-geometrica} con $a=2/3$. \emph{Scelta logica:} in una forma $\infty/\infty$ si
+divide per l'infinito di ordine più alto, qui $3^{n}$ perché $2^{n}/3^{n}=(2/3)^{n}\to0$;
+nei casi meno evidenti la gerarchia del \cref{sec:infiniti} dice quale sia.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Calcolare $\displaystyle\lim_{n\to+\infty}\bigl(\sqrt{n^{2}+n}-n\bigr)$.
+\begin{soluzione}
+È una forma $\infty-\infty$. Razionalizzando,
+$\sqrt{n^{2}+n}-n=\frac{n}{\sqrt{n^{2}+n}+n}=\frac{1}{\sqrt{1+1/n}+1}$. Poiché
+$1\le\sqrt{1+1/n}\le1+\frac1n$ (la seconda disuguaglianza perché
+$(1+\frac1n)^{2}\ge1+\frac1n$), per i carabinieri $\sqrt{1+1/n}\to1$, e il limite vale
+$\frac12$. \emph{Scelta logica:} come nell'\cref{es:razionalizzare}, si moltiplica per il
+«coniugato» per trasformare la differenza di due infiniti in un quoziente; il risultato,
+$\frac12$, mostra che una forma $\infty-\infty$ può avere un limite finito non nullo.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}\label{es:radice-continua}
+Dimostrare che se $c_{n}\ge0$ e $c_{n}\to c$, allora $\sqrt{c_{n}}\to\sqrt c$. Dedurne
+che $\bigl(1+\frac1{2n}\bigr)^{n}\to\sqrt e$.
+\begin{soluzione}
+Per il \cref{cor:limite-non-negativo} $c\ge0$. Se $c>0$:
+$\abs{\sqrt{c_{n}}-\sqrt c}=\frac{\abs{c_{n}-c}}{\sqrt{c_{n}}+\sqrt c}\le\frac{\abs{c_{n}-c}}{\sqrt c}$,
+che tende a zero. Se $c=0$: $\sqrt{c_{n}}<\epsilon$ se e solo se $c_{n}<\epsilon^{2}$, che è
+vero definitivamente. Infine
+$\bigl(1+\frac1{2n}\bigr)^{n}=\sqrt{\bigl(1+\frac1{2n}\bigr)^{2n}}$, e
+$\bigl(1+\frac1{2n}\bigr)^{2n}$ è l'estratta di indici pari della successione che definisce
+$e$, quindi tende ad $e$ (\cref{prop:estratta-limite}). \emph{Scelta logica:} la stima
+della differenza di due radici si ottiene ancora razionalizzando; il caso $c=0$ va trattato
+a parte perché la stima divide per $\sqrt c$.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}\label{es:quesiti-b}
+Riprendiamo l'osservazione che segue il \cref{cor:radice-n-nb}. Posto
+$b_{n}=n^{\beta/n}-1$ con $\beta>0$, la disuguaglianza di Bernoulli dà
+$n^{\beta}=(1+b_{n})^{n}\ge1+nb_{n}$. Per quali valori di $\beta$ se ne deduce che
+$b_{n}\to0$? Perché la scelta $\beta=1$ non funziona?
+\begin{soluzione}
+Si ottiene $0\le b_{n}\le\frac{n^{\beta}-1}{n}<n^{\beta-1}$, e l'ultimo membro tende a
+zero se e solo se $\beta<1$ (\cref{lem:potenze-log}(i)). Per $\beta=1$ la stima diventa
+$b_{n}\le\frac{n-1}{n}$, che tende a $1$ e non dice nulla. Quindi ogni $\beta\in(0,1)$ va
+bene, e $\beta=\frac12$ è semplicemente la scelta più comoda. Con $\beta=\frac1m$
+($m\ge2$ naturale) il caso di un esponente intero $k$ segue poi da
+$n^{k/n}=\bigl(n^{1/(mn)}\bigr)^{mk}$, e il caso di $b$ reale con la parte intera, come
+nella dimostrazione del \cref{cor:radice-n-nb}.
+\emph{Scelta logica:} quando una stima «quasi funziona», conviene chiedersi quale parametro
+la rende troppo debole, e indebolire l'obiettivo (qui: dimostrare il risultato per un
+esponente più piccolo) per poi ricostruire il caso generale.
+\end{soluzione}
+\end{esercizio}
+
+\subsection*{Successioni monotòne, numero $e$, criterio del rapporto}
+
+\begin{esercizio}\label{es:n10-su-1-1n}
+Dimostrare che $\dfrac{n^{10}}{1{,}1^{n}}\to0$, e calcolare con Python il massimo valore
+assunto dalla successione.
+\begin{soluzione}
+Per il \cref{teo:gerarchia} con $b=10$ e $a=1{,}1$. Il rapporto tra termini consecutivi
+vale $\bigl(1+\frac1n\bigr)^{10}/1{,}1$, che è maggiore di $1$ finché
+$\bigl(1+\frac1n\bigr)^{10}>1{,}1$, cioè per $n$ fino a circa $104$:
+\begin{python}
+a = lambda n: n**10 / 1.1**n
+n_max = max(range(1, 1000), key=a)
+print("massimo per n =", n_max, f"  a(n) = {a(n_max):.3e}")
+print(f"a(500) = {a(500):.3e},  a(1000) = {a(1000):.3e}")
+\end{python}
+\begin{risultato}
+massimo per n = 105   a(n) = 7.339e+15
+a(500) = 1.965e+06,  a(1000) = 4.049e-12
+\end{risultato}
+La successione cresce fino a $n=105$, dove supera $7\cdot10^{15}$, e solo dopo comincia a
+decrescere verso zero: a $n=500$ vale ancora circa $2\cdot10^{6}$, a $n=1000$ circa
+$4\cdot10^{-12}$. \emph{Scelta logica:} un
+limite descrive il comportamento \emph{definitivo}, e non dice nulla su quanto presto esso
+si manifesti; chi usa i limiti per stimare grandezze concrete deve tenerlo presente.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}
+Dimostrare che $\dfrac{2^{n}\,n!}{n^{n}}\to0$, mentre $\dfrac{3^{n}\,n!}{n^{n}}\to+\infty$.
+\begin{soluzione}
+Il rapporto tra termini consecutivi della prima vale
+$2\cdot\frac{n^{n}}{(n+1)^{n}}=\frac{2}{(1+1/n)^{n}}\to\frac2e<1$, e il criterio del
+rapporto dà la tesi. Per la seconda il rapporto tende a $\frac3e>1$, e per l'osservazione
+che segue il \cref{teo:criterio-rapporto} la successione diverge. \emph{Scelta logica:} il
+valore $e$ compare in modo naturale in tutti i confronti con $n^{n}$; il confine tra
+convergenza e divergenza è proprio $a=e$ (per $a=e$ il criterio non decide).
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}[Il problema di Basilea]
+Sia $s_{n}=\displaystyle\sum_{k=1}^{n}\frac1{k^{2}}$. Dimostrare che $s_{n}$ converge.
+\begin{soluzione}
+La successione è strettamente crescente. Per $k\ge2$ si ha
+$\frac1{k^{2}}<\frac1{k(k-1)}$, e quindi, per la somma telescopica
+(\cref{prop:telescopica}),
+\[
+  s_{n}\le1+\sum_{k=2}^{n}\frac1{(k-1)k}=1+\frac{n-1}{n}<2
+\]
+(con l'uguaglianza solo per $n=1$, quando la somma a destra è vuota).
+Per il teorema sulle successioni monotòne $s_{n}$ converge a un limite $s\le2$. Il valore
+del limite, $s=\pi^{2}/6\approx1{,}6449$, fu trovato da Eulero nel 1734, risolvendo un
+problema posto da Pietro Mengoli nel 1650 e rimasto aperto per oltre ottant'anni.
+\emph{Scelta logica:} non sappiamo calcolare $s_{n}$ in forma chiusa, ma per la
+convergenza basta una maggiorazione con una somma che sappiamo calcolare.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}[La serie armonica]
+Sia $H_{n}=1+\frac12+\dots+\frac1n$. Dimostrare che $H_{2n}-H_{n}\ge\frac12$ per ogni $n$,
+e dedurne che $H_{n}$ non è di Cauchy e che $H_{n}\to+\infty$.
+\begin{soluzione}
+$H_{2n}-H_{n}=\frac1{n+1}+\dots+\frac1{2n}$ è una somma di $n$ termini, ciascuno
+$\ge\frac1{2n}$; quindi $H_{2n}-H_{n}\ge n\cdot\frac1{2n}=\frac12$. Con $\epsilon=\frac12$,
+per ogni $\nu$ gli indici $h=n$, $k=2n$ con $n>\nu$ violano la condizione di Cauchy: la
+successione non è di Cauchy, e quindi non converge (\cref{teo:criterio-cauchy}). Essendo
+crescente, per il \cref{teo:monotone} diverge a $+\infty$. La divergenza è però
+lentissima: $H_{n}$ supera $10$ solo per $n>12\,000$ circa. Ne riparleremo nel
+\cref{sec:serie-armonica}. \emph{Scelta logica:} i termini $\frac1n$ tendono a zero,
+eppure la somma diverge; il confronto con l'esercizio precedente mostra che conta la
+\emph{velocità} con cui i termini tendono a zero.
+\end{soluzione}
+\end{esercizio}
+
+\begin{esercizio}[Con Python]
+Generalizzare il metodo di Erone: per $a>0$ e $x_{1}>0$ qualsiasi, la successione
+$x_{n+1}=\frac12\bigl(x_{n}+\frac a{x_{n}}\bigr)$ converge a $\sqrt a$. Dimostrarlo
+adattando l'\cref{es:erone} (attenzione: se $x_{1}<\sqrt a$, la successione non è
+monotòna fin dal primo termine), e verificare numericamente quante iterazioni servono per
+calcolare $\sqrt{10}$ con $15$ cifre partendo da $x_{1}=1$.
+\begin{soluzione}
+Come nell'esempio, $x_{n+1}-\sqrt a=\frac{(x_{n}-\sqrt a)^{2}}{2x_{n}}\ge0$, quindi
+$x_{n}\ge\sqrt a$ per $n\ge2$ (anche se $x_{1}<\sqrt a$), e da $n=2$ in poi la successione
+è decrescente: è \emph{definitivamente} monotòna, e la \cref{oss:traslata} permette di
+concludere come nel testo.
+\begin{python}
+import math
+a, x = 10.0, 1.0
+r = math.sqrt(a)
+for n in range(1, 9):
+    print(f"x_{n} = {x:.15f}   errore = {abs(x - r):.1e}")
+    x = (x + a / x) / 2
+\end{python}
+\begin{risultato}
+x_1 = 1.000000000000000   errore = 2.2e+00
+x_2 = 5.500000000000000   errore = 2.3e+00
+x_3 = 3.659090909090909   errore = 5.0e-01
+x_4 = 3.196005081874647   errore = 3.4e-02
+x_5 = 3.162455622803890   errore = 1.8e-04
+x_6 = 3.162277665175675   errore = 5.0e-09
+x_7 = 3.162277660168379   errore = 4.4e-16
+x_8 = 3.162277660168379   errore = 4.4e-16
+\end{risultato}
+Il primo passo peggiora l'approssimazione (da $x_{1}=1$, per difetto, si salta a
+$x_{2}=5{,}5$, per eccesso); poi scatta la convergenza quadratica, e l'errore passa da
+circa $0{,}5$ a $3\cdot10^{-2}$, $2\cdot10^{-4}$, $5\cdot10^{-9}$: alla settima iterazione si
+raggiunge la precisione della macchina. \emph{Scelta logica:} l'identità
+$x_{n+1}-\sqrt a=\frac{(x_{n}-\sqrt a)^{2}}{2x_{n}}$ fa tutto il lavoro: dice che dal
+secondo termine in poi si sta sopra $\sqrt a$, e quindi che la successione è
+definitivamente decrescente e limitata, cioè proprio le ipotesi del \cref{teo:monotone}.
+\end{soluzione}
+\end{esercizio}

@@ -1,0 +1,308 @@
+%% ----------------------------------------------------------------------------
+%%  §5.4  Derivate delle funzioni composte e delle funzioni inverse
+%% ----------------------------------------------------------------------------
+\section{Derivate delle funzioni composte e delle funzioni inverse}
+\label{sec:composte-inverse}
+
+Una delle più importanti regole di derivazione è quella relativa alle funzioni composte.
+Se $y$ è funzione di $z$, $y=f(z)$, e $z$ è a sua volta funzione di $x$, $z=g(x)$, allora
+$y=f(g(x))$ è la \emph{funzione composta} risultante; si usa anche il simbolo
+$f(g(x))=(f\circ g)(x)$. Sono funzioni composte, ad esempio, $y=\sen x^{2}$ (con
+$y=\sen z$, $z=x^{2}$), oppure $y=\sen^{2}x$ (con $y=z^{2}$, $z=\sen x$).
+
+\begin{teorema}[Derivazione delle funzioni composte]\label{teo:derivata-composta}\index{derivata!di una funzione composta}\index{regola della catena}
+Sia $g$ una funzione definita in un intorno di $x$ e derivabile in $x$, e sia $f$ una
+funzione definita in un intorno del punto $g(x)$ e derivabile in $g(x)$. Allora la
+funzione composta $f(g(x))$ è derivabile in $x$, e si ha
+\begin{equation}\label{eq:derivata-composta}
+  D f(g(x))=f'(g(x))\cdot g'(x).
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$g$ derivabile in $x$; \ $f$ derivabile in $y=g(x)$.}
+\Tesi{$(f\circ g)'(x)=f'(g(x))\,g'(x)$.}
+\end{schema}
+
+\begin{strategia}
+L'idea naturale è moltiplicare e dividere il rapporto incrementale della composta per
+l'incremento $k=g(x+h)-g(x)$ della funzione interna:
+\[
+  \frac{f(g(x+h))-f(g(x))}{h}=\frac{f(g(x+h))-f(g(x))}{g(x+h)-g(x)}\cdot\frac{g(x+h)-g(x)}{h}.
+\]
+Il secondo fattore tende a $g'(x)$, il primo è un rapporto incrementale di $f$ nel punto
+$g(x)$, con incremento $k\to0$. Il procedimento è corretto se $k\neq0$ per $h\neq0$
+piccolo; ma può accadere che $g(x+h)=g(x)$ per valori di $h$ arbitrariamente vicini a
+zero (si pensi a una $g$ costante, o a $g(x)=x^{2}\sen\frac1x$ in $x=0$, che si annulla in
+tutti i punti $\frac1{n\pi}$), e allora la divisione per $k$ non è lecita. Per superare la
+difficoltà si sostituisce il rapporto incrementale di $f$ con una funzione $F(k)$ che
+coincide con esso per $k\neq0$ e che, per $k=0$, vale proprio $f'(g(x))$: così definita,
+$F$ è continua in $0$, e la continuità permette di passare al limite anche lungo valori
+$k=0$ (\cref{cor:limite-composta-continua}).
+\end{strategia}
+
+\begin{dimostrazione}
+\emph{Un caso particolare.} Per semplificare, consideriamo preliminarmente il caso in
+cui risulti $g(x+h)\neq g(x)$ per ogni $h\neq0$ abbastanza piccolo. Il rapporto
+incrementale della funzione composta, nel punto $x$, vale
+\begin{equation}\label{eq:composta-caso-particolare}
+  \frac{f(g(x+h))-f(g(x))}{h}=\frac{f(g(x+h))-f(g(x))}{g(x+h)-g(x)}\cdot\frac{g(x+h)-g(x)}{h}.
+\end{equation}
+Nel primo dei due quozienti a secondo membro compare il rapporto incrementale della
+funzione $f$ nel punto $g(x)$, con incremento $k=g(x+h)-g(x)$. Tale incremento $k$ tende a
+zero per $h\to0$, dato che $g$ è continua in $x$ (\cref{teo:derivabile-continua}), ed è
+diverso da zero per $h\neq0$; quindi, per il teorema sul limite delle funzioni composte
+(\cref{teo:limite-composta}),
+\begin{equation}\label{eq:composta-limite-particolare}
+\begin{split}
+  \lim_{h\to0}\frac{f(g(x+h))-f(g(x))}{g(x+h)-g(x)}
+  &=\lim_{k\to0}\frac{f(g(x)+k)-f(g(x))}{k}\\
+  &=f'(g(x)),
+\end{split}
+\end{equation}
+e la \eqref{eq:composta-caso-particolare} dà la tesi \eqref{eq:derivata-composta}.
+
+\emph{Il caso generale.} Osserviamo anzitutto che, essendo $g$ continua in $x$, esiste
+$\delta>0$ tale che $g(x+h)$ appartiene all'intorno di $g(x)$ in cui $f$ è definita per
+ogni $\abs h<\delta$: la funzione composta è dunque definita in un intorno di $x$, e
+tutti gli incrementi $k$ che considereremo stanno nel dominio della funzione $F$ che
+stiamo per introdurre. Poniamo $y=g(x)$ e
+\begin{equation}\label{eq:funzione-F}
+  F(k)=
+  \begin{cases}
+    \dfrac{f(y+k)-f(y)}{k} & \text{se } k\neq0,\\[1.5ex]
+    f'(y) & \text{se } k=0,
+  \end{cases}
+\end{equation}
+definita per $k$ in un intorno di $0$ (quello per cui $y+k$ sta nel dominio di $f$). Per
+l'ipotesi di derivabilità di $f$ nel punto $y$ e per la definizione di $F(0)$ risulta
+\begin{equation}\label{eq:F-continua}
+  \lim_{k\to0}F(k)=f'(y)=F(0),
+\end{equation}
+cioè $F$ è continua nel punto $k=0$. Posto
+\begin{equation}\label{eq:k-di-h}
+  k=k(h)=g(x+h)-g(x),
+\end{equation}
+ed essendo $g(x)=y$, $g(x+h)=y+k$, per ogni $h\neq0$ con $k\neq0$ risulta
+\begin{equation}\label{eq:composta-identita}
+\begin{split}
+  \frac{f(g(x+h))-f(g(x))}{h}&=\frac{f(y+k)-f(y)}{k}\cdot\frac kh\\
+  &=F(k)\cdot\frac{g(x+h)-g(x)}{h}.
+\end{split}
+\end{equation}
+La novità rispetto alla dimostrazione precedente è che l'identità
+\begin{equation}\label{eq:composta-identita-F}
+  \frac{f(g(x+h))-f(g(x))}{h}=F(k(h))\cdot\frac{g(x+h)-g(x)}{h}
+\end{equation}
+vale non solo per $k\neq0$, ma anche per $k=0$, perché in tal caso, essendo
+$k=g(x+h)-g(x)=0$, risulta nullo il secondo membro della \eqref{eq:composta-identita-F},
+ma anche il primo membro, dato che $g(x+h)=g(x)$. Passiamo al limite nella
+\eqref{eq:composta-identita-F} per $h\to0$. Per la continuità di $g$ in $x$, l'incremento
+$k(h)$ converge a zero per $h\to0$; allora, per la continuità di $F$ in $0$
+\eqref{eq:F-continua} e per il \cref{cor:limite-composta-continua}, $F(k(h))\to F(0)$, e
+si ottiene
+\begin{equation}\label{eq:composta-conclusione}
+\begin{split}
+  \lim_{h\to0}\frac{f(g(x+h))-f(g(x))}{h}&=\lim_{h\to0}F(k(h))\cdot\lim_{h\to0}\frac{g(x+h)-g(x)}{h}\\
+  &=F(0)\,g'(x)=f'(g(x))\,g'(x). \qedhere
+\end{split}
+\end{equation}
+\end{dimostrazione}
+
+Così, ad esempio, in base alla regola di derivazione delle funzioni composte, la derivata
+della funzione $y=\sen x^{2}$ vale $y'=\cos(x^{2})\cdot2x$, mentre la derivata della
+funzione $y=\sen^{2}x=(\sen x)^{2}$ vale $y'=2\sen x\cdot\cos x$ (usiamo la derivata di
+$\sen$, che calcoleremo nel \cref{sec:derivate-elementari}, e quella di $z^{2}$, già nota
+dalla \eqref{eq:tasso-t2}). Con la notazione di Leibniz, posto $y=f(z)$ e $z=g(x)$, la
+\eqref{eq:derivata-composta} assume la forma suggestiva
+\[
+  \frac{dy}{dx}=\frac{dy}{dz}\cdot\frac{dz}{dx},
+\]
+come se i differenziali $dz$ si «semplificassero»: per questo si parla anche di
+\emph{regola della catena}. Si tratta però di una regola mnemonica, non di una
+dimostrazione, che ha dovuto superare proprio la difficoltà di un incremento $k$ della
+variabile intermedia $z$ che può annullarsi.
+
+\begin{osservazione}\label{oss:caratheodory}
+L'artificio della funzione $F$ ha un significato che va oltre questa dimostrazione. La
+\eqref{eq:funzione-F} dice che \emph{$f$ è derivabile in $y$ se e solo se esiste una
+funzione $F$, continua in $0$, tale che $f(y+k)-f(y)=F(k)\,k$ per ogni $k$ in un intorno
+di $0$}; e allora
+$f'(y)=F(0)$. In questa forma, dovuta a Carathéodory, la derivabilità appare come la
+possibilità di «fattorizzare» l'incremento della funzione in un fattore continuo per
+l'incremento della variabile, e la regola della catena si riduce al fatto che il prodotto
+e la composizione di funzioni continue sono continui.
+\end{osservazione}
+
+\begin{idea}[La pressione dinamica durante un'accelerazione]
+Un velivolo accelera in volo orizzontale, a quota costante (densità $\rho$ costante),
+con velocità $V(t)$. La pressione dinamica $q=\frac12\rho V^{2}$ è funzione composta del
+tempo, $q(t)=f(V(t))$ con $f(V)=\frac12\rho V^{2}$, e la regola della catena dà
+\[
+  \frac{dq}{dt}=\frac{dq}{dV}\cdot\frac{dV}{dt}=\rho V\,\frac{dV}{dt}.
+\]
+Il tasso di crescita della pressione dinamica, e quindi dei carichi aerodinamici a
+parità di coefficienti, non dipende solo dall'accelerazione $\frac{dV}{dt}$, ma anche
+dalla velocità: la stessa accelerazione di $1$~m/s$^{2}$ fa crescere $q$, al livello del
+mare ($\rho=1{,}225$~kg/m$^{3}$), di circa $61$~Pa al secondo a $50$~m/s e di circa
+$245$~Pa al secondo a $200$~m/s.
+\end{idea}
+
+\subsection{La derivata della funzione inversa}
+
+Esaminiamo ora la regola di derivazione delle funzioni inverse. Ricordiamo quanto già
+detto circa le funzioni strettamente monotòne: una funzione $f$ è \emph{strettamente
+crescente} nell'intervallo $[a,b]$ se
+\begin{equation}\label{eq:strettamente-crescente}
+  a\le x_{1}<x_{2}\le b \quad\implica\quad f(x_{1})<f(x_{2}).
+\end{equation}
+Se $f$ è continua e strettamente crescente in $[a,b]$ allora è anche \emph{invertibile},
+cioè a ogni $y\in[f(a),f(b)]$ corrisponde un solo $x\in[a,b]$ per cui $f(x)=y$, e si indica
+$x=f^{-1}(y)$; la stessa proprietà vale per le funzioni strettamente decrescenti
+(\cref{teo:invertibilita}). Inoltre la funzione inversa è continua
+(\cref{teo:continuita-inversa}).
+
+\needspace{9\baselineskip}
+\begin{teorema}[Derivazione delle funzioni inverse]\label{teo:derivata-inversa}\index{derivata!della funzione inversa}
+Sia $f$ una funzione continua e strettamente crescente (oppure strettamente decrescente)
+in un intervallo $[a,b]$. Se $f$ è derivabile in un punto $x\in(a,b)$ e se $f'(x)\neq0$,
+allora anche $f^{-1}$ è derivabile nel punto $y=f(x)$ e la derivata vale
+\begin{equation}\label{eq:derivata-inversa}
+  D f^{-1}(y)=\frac1{f'(x)}=\frac1{f'(f^{-1}(y))}.
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$f$ continua e strettamente monotòna in $[a,b]$; \ $x\in(a,b)$; \ $f$ derivabile
+in $x$; \ $f'(x)\neq0$.}
+\Tesi{$f^{-1}$ derivabile in $y=f(x)$, \ $(f^{-1})'(y)=1/f'(x)$.}
+\end{schema}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.9\textwidth, height=5.8cm, xmin=0, xmax=6.2, ymin=0, ymax=4.4,
+  axis lines=left, xtick={1.8,4.4}, xticklabels={{$x=f^{-1}(y)$},{$x+h=f^{-1}(y+k)$}},
+  ytick={1.4,3.25}, yticklabels={{$y=f(x)$},{$y+k=f(x+h)$}},
+  tick label style={font=\scriptsize}, clip=false]
+  \addplot[curva, domain=0.6:6, samples=100, smooth]
+    coordinates {(0.6,0.7) (1.8,1.4) (2.8,2.3) (3.6,2.6) (4.4,3.25) (5.2,3.85) (6,4.1)};
+  \addplot[tratteggio] coordinates {(0,1.4) (1.8,1.4) (1.8,0)};
+  \addplot[tratteggio] coordinates {(0,3.25) (4.4,3.25) (4.4,0)};
+  \draw[decorate, decoration={brace, amplitude=5pt}, grigio] (axis cs:1.8,0.3) -- node[above=5pt, font=\scriptsize, text=black] {$h$} (axis cs:4.4,0.3);
+  \draw[decorate, decoration={brace, amplitude=5pt, mirror}, grigio] (axis cs:0.3,1.4) -- node[right=5pt, font=\scriptsize, text=black] {$k$} (axis cs:0.3,3.25);
+  \addplot[only marks, mark=*, mark size=1.6pt, rame] coordinates {(1.8,1.4) (4.4,3.25)};
+\end{axis}
+\end{tikzpicture}
+\caption{Il rapporto incrementale della funzione inversa è il reciproco di quello di $f$:
+all'incremento $h$ della $x$ corrisponde l'incremento $k$ della $y$, e
+$\frac{f^{-1}(y+k)-f^{-1}(y)}{k}=\frac hk=\frac1{k/h}$. Quando $k\to0$ anche $h\to0$,
+perché $f^{-1}$ è continua.}
+\label{fig:derivata-inversa}
+\end{figure}
+
+\begin{strategia}
+Il grafico di $f^{-1}$ è quello di $f$ visto «scambiando gli assi», e la pendenza di una
+retta, scambiando gli assi, diventa la sua reciproca. In formule: all'incremento $k$ della
+variabile $y$ corrisponde l'incremento $h=f^{-1}(y+k)-f^{-1}(y)$ della variabile $x$, e il
+rapporto incrementale di $f^{-1}$ è $\frac hk$, reciproco del rapporto incrementale
+$\frac kh$ di $f$ (\cref{fig:derivata-inversa}). Per passare al limite servono due fatti:
+che $h\neq0$ quando $k\neq0$ (iniettività) e che $h\to0$ quando $k\to0$ (continuità della
+funzione inversa, che abbiamo dimostrato nel \cref{sec:monotone-inverse}).
+\end{strategia}
+
+\begin{dimostrazione}
+Con riferimento alla \cref{fig:derivata-inversa}, a $x$ corrisponde $y=f(x)$, che è
+interno all'intervallo immagine di estremi $f(a)$, $f(b)$; per $k\neq0$ abbastanza
+piccolo anche $y+k$ sta in tale intervallo, e poniamo
+\[
+  h=h(k)=f^{-1}(y+k)-f^{-1}(y),
+\]
+cosicché $x+h=f^{-1}(y+k)$ e $y+k=f(x+h)$, cioè $k=f(x+h)-f(x)$. Il rapporto incrementale
+relativo a $f^{-1}$ vale quindi
+\begin{equation}\label{eq:rapporto-inversa}
+  \frac{f^{-1}(y+k)-f^{-1}(y)}{k}=\frac{h}{f(x+h)-f(x)} .
+\end{equation}
+Dato che $f$ è strettamente monotòna, risulta $h\neq0$ se e solo se $k\neq0$. Inoltre, se
+$k$ tende a zero allora anche $h$ tende a zero; infatti
+$h=f^{-1}(y+k)-f^{-1}(y)\to0$ per $k\to0$, perché $f^{-1}$ è una funzione continua
+(\cref{teo:continuita-inversa}). Dato che a secondo membro della
+\eqref{eq:rapporto-inversa} compare il reciproco del rapporto incrementale di $f$, che
+tende a $f'(x)\neq0$ quando l'incremento $h$ tende a zero, passando al limite nella
+\eqref{eq:rapporto-inversa} per $k\to0$ (\cref{teo:limite-composta}, con la funzione
+interna $h(k)$, che tende a $0$ ed è diversa da $0$ per $k\neq0$) si ottiene
+\[
+  \lim_{k\to0}\frac{f^{-1}(y+k)-f^{-1}(y)}{k}=\lim_{h\to0}\frac1{\dfrac{f(x+h)-f(x)}{h}}=\frac1{f'(x)}. \qedhere
+\]
+\end{dimostrazione}
+
+\begin{strategia}[Un'altra via]
+È la via seguita da Giusti \cite{giusti}, che ripete l'artificio usato per la funzione
+composta. Invece di controllare che l'incremento $h(k)$ non si annulli, come richiede il
+\cref{teo:limite-composta}, si assegna in $h=0$ al reciproco del rapporto incrementale di
+$f$ il valore $\frac1{f'(x)}$, che lo rende continuo. Il rapporto incrementale di
+$f^{-1}$ diventa allora la composizione di due funzioni continue, e per passare al limite
+basta il \cref{cor:limite-composta-continua}.
+\end{strategia}
+
+\begin{dimostrazione}[Seconda dimostrazione]
+Per gli $h$ tali che $x+h\in[a,b]$ poniamo
+\begin{equation}\label{eq:funzione-G-inversa}
+  G(h)=
+  \begin{cases}
+    \dfrac{h}{f(x+h)-f(x)} & \text{se } h\neq0,\\[1.5ex]
+    \dfrac1{f'(x)} & \text{se } h=0;
+  \end{cases}
+\end{equation}
+per $h\neq0$ il denominatore non si annulla, perché $f$ è strettamente monotòna. Il
+rapporto incrementale di $f$ tende a $f'(x)\neq0$, e quindi, per il limite del reciproco
+(\cref{teo:operazioni-funzioni}), $G(h)\to\frac1{f'(x)}=G(0)$ per $h\to0$: $G$ è continua
+in $0$. Sia ora, come nella prima dimostrazione, $h(k)=f^{-1}(y+k)-f^{-1}(y)$, così che
+$f(x+h(k))=y+k$. Per $k\neq0$ si ha $h(k)\neq0$, e dunque
+\[
+  \frac{f^{-1}(y+k)-f^{-1}(y)}{k}=\frac{h(k)}{f(x+h(k))-f(x)}=G(h(k)).
+\]
+Per la continuità di $f^{-1}$ (\cref{teo:continuita-inversa}) si ha $h(k)\to0$ per
+$k\to0$; poiché $G$ è continua in $0$, il \cref{cor:limite-composta-continua} dà
+$G(h(k))\to G(0)=\frac1{f'(x)}$, che è la tesi.
+\end{dimostrazione}
+
+\begin{osservazione}[La funzione inversa secondo Carathéodory]
+Nel linguaggio dell'\cref{oss:caratheodory} la seconda dimostrazione ha una lettura
+particolarmente semplice. L'incremento di $f$ si fattorizza come $f(x+h)-f(x)=F(h)\,h$,
+con $F$ continua in $0$ e $F(0)=f'(x)\neq0$; inoltre $F(h)\neq0$ anche per $h\neq0$, perché
+$f$ è iniettiva. Sostituendo $h=h(k)$ si ottiene $k=F(h(k))\,h(k)$, cioè
+\[
+  f^{-1}(y+k)-f^{-1}(y)=h(k)=\frac1{F(h(k))}\cdot k,
+\]
+e il fattore $\frac1{F(h(k))}=G(h(k))$ è continuo in $k=0$. L'incremento della funzione
+inversa ammette dunque una fattorizzazione dello stesso tipo, con il fattore reciproco:
+per questo la derivata dell'inversa è il reciproco della derivata di $f$. Come la regola
+della catena, anche la regola della funzione inversa si riduce così a proprietà delle
+funzioni continue: qui la continuità del reciproco e della composizione.
+\end{osservazione}
+
+Applichiamo il teorema a un esempio concreto: la funzione $y=f(x)=x^{2}$ è continua e
+strettamente crescente per $x>0$ (su ogni intervallo $[a,b]$ con $0<a<b$). La funzione
+inversa è $x=f^{-1}(y)=\sqrt y$. Abbiamo già visto che la funzione $y=x^{2}$ è derivabile
+e che la derivata vale $y'=2x\neq0$ per $x>0$. In base al teorema di derivazione delle
+funzioni inverse, anche $x=\sqrt y$ è derivabile per $y>0$ e la derivata vale
+\begin{equation}\label{eq:derivata-radice}
+  D\sqrt y=\frac1{D(x^{2})}=\frac1{2x}=\frac1{2\sqrt y}.
+\end{equation}
+(Che il teorema, enunciato su un intervallo chiuso, valga in ogni punto $y>0$ segue dal
+carattere locale della derivata: basta scegliere $[a,b]$ in modo che $x=\sqrt y$ sia
+interno.)
+
+\begin{osservazione}[Quando $f'(x)=0$]\label{oss:inversa-derivata-nulla}
+L'ipotesi $f'(x)\neq0$ è necessaria: se $f'(x)=0$, la funzione inversa \emph{non} è
+derivabile in $y=f(x)$. Infatti, se lo fosse, applicando il teorema di derivazione delle
+funzioni composte all'identità $f^{-1}(f(t))=t$ nel punto $t=x$ si otterrebbe
+$(f^{-1})'(y)\cdot f'(x)=1$, cioè $(f^{-1})'(y)\cdot0=1$, che è assurdo. Ad esempio
+$f(x)=x^{3}$ è strettamente crescente e derivabile, con $f'(0)=0$; la sua inversa
+$\sqrt[3]y$ non è derivabile in $0$, dove il grafico ha tangente verticale
+(\cref{es:derivate-infinite}). Geometricamente, la retta tangente orizzontale al grafico
+di $f$ diventa, scambiando gli assi, una tangente verticale al grafico di $f^{-1}$.
+Con la notazione di Leibniz la \eqref{eq:derivata-inversa} si scrive
+$\frac{dx}{dy}=1\Big/\frac{dy}{dx}$.
+\end{osservazione}

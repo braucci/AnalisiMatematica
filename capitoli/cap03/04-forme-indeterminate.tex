@@ -1,0 +1,160 @@
+%% ----------------------------------------------------------------------------
+%%  §3.4  Limiti infiniti e forme indeterminate
+%% ----------------------------------------------------------------------------
+\section{Limiti infiniti e forme indeterminate}
+\label{sec:forme-indeterminate}
+
+Il \cref{teo:operazioni-limiti} riguarda successioni con limiti \emph{finiti}. Quando
+uno o entrambi i limiti sono infiniti, alcune regole continuano a valere in una forma
+naturale, che conviene ricordare con una specie di «aritmetica dei simboli $\pm\infty$»;
+altre, invece, non danno alcuna informazione.
+
+\begin{teorema}[Operazioni con limiti infiniti]\label{teo:operazioni-infinite}
+Siano $a\in\R$ e $a_{n}$, $b_{n}$ due successioni. Valgono le implicazioni
+\begin{align}
+  &a_{n}\to a, &&b_{n}\to\pm\infty &&\implica\ a_{n}+b_{n}\to\pm\infty; \label{eq:inf1}\\
+  &a_{n}\to\pm\infty, &&b_{n}\to\pm\infty &&\implica\ a_{n}+b_{n}\to\pm\infty; \label{eq:inf2}\\
+  &a_{n}\to a\neq0, &&b_{n}\to\pm\infty &&\implica\ \abs{a_{n}b_{n}}\to+\infty; \label{eq:inf3}\\
+  &a_{n}\to\pm\infty, &&b_{n}\to\pm\infty &&\implica\ \abs{a_{n}b_{n}}\to+\infty; \label{eq:inf4}\\
+  &a_{n}\to a, &&b_{n}\to\pm\infty &&\implica\ a_{n}/b_{n}\to0; \label{eq:inf5}\\
+  &a_{n}\to a, &&b_{n}\to\pm\infty &&\implica\ \abs{b_{n}/a_{n}}\to+\infty \quad(a_{n}\neq0); \label{eq:inf6}\\
+  &a_{n}\to a\neq0, &&b_{n}\to0 &&\implica\ \abs{a_{n}/b_{n}}\to+\infty \quad(b_{n}\neq0). \label{eq:inf7}
+\end{align}
+Nella \eqref{eq:inf2} i due segni sono concordi; nelle \eqref{eq:inf5} e
+\eqref{eq:inf6} si sottintende che $b_{n}\neq0$ e, rispettivamente, $a_{n}\neq0$, perché i
+quozienti abbiano senso. Nelle \eqref{eq:inf3}, \eqref{eq:inf4}, \eqref{eq:inf6},
+\eqref{eq:inf7} il segno del limite (quando esiste) si determina con la regola dei segni:
+ad esempio, se $a>0$ e $b_{n}\to-\infty$, allora $a_{n}b_{n}\to-\infty$.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{in ciascuna riga, i limiti di $a_{n}$ e $b_{n}$ scritti a sinistra (con
+$a\in\R$, e $a\neq0$ dove indicato); i denominatori diversi da zero.}
+\Tesi{il comportamento della somma, del prodotto o del quoziente scritto a destra,
+\eqref{eq:inf1}--\eqref{eq:inf7}.}
+\end{schema}
+
+\begin{strategia}
+Le dimostrazioni seguono tutte lo stesso schema: per dimostrare che una successione
+diverge occorre, fissato un livello $M$ arbitrariamente grande, trovare un indice oltre
+il quale la successione lo supera. La successione divergente $b_{n}$ «trascina» il
+risultato: basta chiedere a $b_{n}$ di superare un livello un po' più grande di $M$, che
+compensi il contributo dell'altra successione, la quale --- essendo convergente --- è
+definitivamente compresa tra due numeri fissi. Per i quozienti con limite zero si
+procede in modo simmetrico: si rende il denominatore così grande che la frazione diventa
+minore di qualunque $\epsilon$ assegnato.
+\end{strategia}
+
+\begin{dimostrazione}
+Proviamo le \eqref{eq:inf1}, \eqref{eq:inf3}, \eqref{eq:inf5} e \eqref{eq:inf7} nel caso
+del segno $+$; le altre si dimostrano con argomenti dello stesso tipo e sono lasciate per
+esercizio.
+
+\eqref{eq:inf1}: poiché $a_{n}\to a$, scelto $\epsilon=1$ si ha definitivamente
+$a_{n}>a-1$. Fissato $M>0$, poiché $b_{n}\to+\infty$ si ha definitivamente
+$b_{n}>M+\abs{a-1}$ (lo si richiede con il livello $M+\abs{a-1}>0$). Per gli $n$ per cui
+valgono entrambe le disuguaglianze, cioè definitivamente,
+\[
+  a_{n}+b_{n}>(a-1)+M+\abs{a-1}\ge M .
+\]
+
+\eqref{eq:inf3}: per il \cref{lem:lim-modulo}, $\abs{a_{n}}\to\abs a>0$, e per il
+\cref{lem:denominatore} (applicato ad $a_{n}$) definitivamente $\abs{a_{n}}>\abs a/2$.
+Fissato $M>0$, definitivamente $\abs{b_{n}}\ge b_{n}>2M/\abs a$; quindi definitivamente
+$\abs{a_{n}b_{n}}>\frac{\abs a}{2}\cdot\frac{2M}{\abs a}=M$.
+
+\eqref{eq:inf5}: per il \cref{teo:convergente-limitata} esiste $K>0$ con $\abs{a_{n}}\le K$
+per ogni $n$. Fissato $\epsilon>0$, definitivamente $b_{n}>K/\epsilon>0$, e quindi
+$\abs{a_{n}/b_{n}}<K\cdot\frac{\epsilon}{K}=\epsilon$.
+
+\eqref{eq:inf7}: definitivamente $\abs{a_{n}}>\abs a/2$ (come sopra). Fissato $M>0$, poiché
+$b_{n}\to0$, definitivamente $\abs{b_{n}}<\frac{\abs a}{2M}$; allora definitivamente
+$\abs{a_{n}/b_{n}}>\frac{\abs a}{2}\cdot\frac{2M}{\abs a}=M$.
+\end{dimostrazione}
+
+\begin{attenzione}[$1/0$ non è $+\infty$]
+La \eqref{eq:inf7} afferma che il \emph{valore assoluto} del quoziente diverge, non il
+quoziente stesso. Ad esempio $b_{n}=\frac{(-1)^{n}}{n}\to0$, ma $\frac1{b_{n}}=(-1)^{n}n$
+assume alternativamente valori positivi e negativi sempre più grandi in modulo: non
+tende né a $+\infty$ né a $-\infty$. Vale però il seguente fatto: \emph{se $b_{n}\to0$, allora
+$1/b_{n}\to+\infty$ se e solo se $b_{n}>0$ definitivamente} (e $1/b_{n}\to-\infty$ se e solo
+se $b_{n}<0$ definitivamente). Infatti, se $1/b_{n}\to+\infty$, definitivamente
+$1/b_{n}>0$, cioè $b_{n}>0$; viceversa, se $b_{n}>0$ definitivamente, allora
+definitivamente $1/b_{n}=\abs{1/b_{n}}$, che diverge a $+\infty$ per la \eqref{eq:inf7}.
+\end{attenzione}
+
+\subsection{Le forme indeterminate}
+
+Risultano esclusi dal \cref{teo:operazioni-infinite} alcuni casi, che schematizziamo
+nelle forme seguenti, dette \emph{forme indeterminate}:\index{forma indeterminata}
+\begin{equation}\label{eq:forme-indeterminate}
+  \infty-\infty, \qquad 0\cdot\infty, \qquad \frac\infty\infty, \qquad \frac00 .
+\end{equation}
+Altre forme indeterminate, di tipo esponenziale, saranno introdotte nel
+\cref{sec:numero-e}. Dire che un limite è una forma indeterminata \emph{non} significa dire
+che il limite non esiste: significa semplicemente che la conoscenza dei limiti delle
+singole successioni non basta a determinarlo, e che occorre preliminarmente eseguire
+trasformazioni o semplificazioni per eliminare, se possibile, l'indeterminazione.
+
+\begin{esempio}[Perché «indeterminata»]\label{es:zero-per-infinito}
+Tutte le successioni seguenti hanno la forma $0\cdot\infty$, cioè sono prodotti di una
+successione infinitesima per una divergente; eppure hanno comportamenti completamente
+diversi:
+\[
+\renewcommand{\arraystretch}{1.6}
+\begin{array}{ll}
+  \dfrac1n\cdot n^{2}=n\to+\infty, \qquad & -\dfrac1n\cdot n^{2}=-n\to-\infty,\\[2ex]
+  \dfrac1n\cdot 3n=3\to3, & \dfrac1{n^{2}}\cdot n=\dfrac1n\to0,\\[2ex]
+  \multicolumn{2}{l}{\dfrac{(-1)^{n}}{n}\cdot n=(-1)^{n}\ \text{ non regolare}.}
+\end{array}
+\]
+Il risultato dipende dalla «velocità» con cui i due fattori tendono ai rispettivi limiti,
+non dai limiti soltanto. Lo stesso accade per le altre forme: $n-n\to0$,
+$(n+1)-n\to1$, $n^{2}-n\to+\infty$ sono tutte forme $\infty-\infty$.
+\end{esempio}
+
+\begin{esempio}\label{es:forme-indeterminate}
+Le successioni seguenti esprimono forme indeterminate:
+\begin{equation}\label{eq:es-forme}
+  (n+1)^{2}-(n-1)^{2}; \qquad \frac1{n^{2}}\cdot(n+1); \qquad \frac{n-1}{n}; \qquad
+  \frac{1/n^{2}}{1/n}.
+\end{equation}
+La prima è una forma $+\infty-\infty$; però svolgendo i quadrati si trova che la
+successione vale $4n$, e quindi tende a $+\infty$. La seconda è una forma $0\cdot\infty$,
+ma si può anche scrivere $\frac1n+\frac1{n^{2}}$, che tende a zero. La terza è una forma
+$\infty/\infty$, ma già sappiamo che tende a $1$ \eqref{eq:lim-n1n}. La quarta è del tipo
+$0/0$, ma semplificando si trova $1/n\to0$.
+\end{esempio}
+
+\begin{esempio}[Razionalizzare]\label{es:razionalizzare}
+La successione $a_{n}=\sqrt{n+1}-\sqrt n$ è una forma $\infty-\infty$ (che
+$\sqrt n\to+\infty$ si vede subito: $\sqrt n>M$ per $n>M^{2}$). Moltiplicando e dividendo
+per $\sqrt{n+1}+\sqrt n$ si ottiene
+\[
+  \sqrt{n+1}-\sqrt n=\frac{(n+1)-n}{\sqrt{n+1}+\sqrt n}=\frac1{\sqrt{n+1}+\sqrt n}\to0,
+\]
+per la \eqref{eq:inf5} con $a_{n}=1$ e $b_{n}=\sqrt{n+1}+\sqrt n\to+\infty$ (per la
+\eqref{eq:inf2}). È un esempio tipico di come una trasformazione algebrica possa
+eliminare l'indeterminazione.
+\end{esempio}
+
+\begin{python}[Forme indeterminate: stessi limiti, comportamenti diversi]
+# Prodotti "zero per infinito": un fattore tende a 0, l'altro
+# diverge; il comportamento dipende dalle velocità relative.
+casi = {
+    "(1/n) * n^2":      lambda n: (1 / n) * n**2,
+    "(1/n) * 3n":       lambda n: (1 / n) * 3 * n,
+    "(1/n^2) * n":      lambda n: (1 / n**2) * n,
+    "((-1)^n/n) * n":   lambda n: ((-1)**n / n) * n,
+}
+indici = (10, 11, 1000, 1001)
+for nome, a in casi.items():
+    valori = "  ".join(f"{a(n):>10.4g}" for n in indici)
+    print(f"{nome:>16s}:  {valori}")
+\end{python}
+\begin{risultato}
+     (1/n) * n^2:          10          11        1000        1001
+      (1/n) * 3n:           3           3           3           3
+     (1/n^2) * n:         0.1     0.09091       0.001    0.000999
+  ((-1)^n/n) * n:           1          -1           1          -1
+\end{risultato}

@@ -1,0 +1,473 @@
+%% ----------------------------------------------------------------------------
+%%  §3.6  Alcuni limiti notevoli
+%% ----------------------------------------------------------------------------
+\section{Alcuni limiti notevoli}
+\label{sec:limiti-notevoli}
+
+In questo paragrafo esaminiamo alcuni esempi di limiti particolarmente importanti, che
+useremo continuamente nel seguito come «mattoni» per calcolarne altri.
+
+\subsection{La successione geometrica $a^{n}$}
+
+\begin{teorema}[Limite della successione geometrica]\label{teo:lim-geometrica}\index{successione!geometrica}
+Sia $a\in\R$ fissato. Allora
+\begin{equation}\label{eq:lim-an}
+  \lim_{n\to+\infty}a^{n}=
+  \begin{cases}
+    +\infty & \text{se } a>1,\\
+    1 & \text{se } a=1,\\
+    0 & \text{se } -1<a<1,\\
+    \text{non esiste} & \text{se } a\le-1 .
+  \end{cases}
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$a\in\R$ fissato.}
+\Tesi{$a^{n}\to+\infty$ se $a>1$; \ $a^{n}\to1$ se $a=1$; \ $a^{n}\to0$ se
+$\abs a<1$; \ $a^{n}$ non ha limite se $a\le-1$.}
+\end{schema}
+
+\begin{strategia}
+Il caso chiave è $a>1$: bisogna mostrare che le potenze di un numero maggiore di $1$
+crescono oltre ogni limite. Scrivendo $a=1+(a-1)$ con $a-1>0$, la disuguaglianza di
+Bernoulli (\cref{teo:bernoulli}) fornisce una stima dal basso \emph{lineare},
+$a^{n}\ge1+n(a-1)$, e il secondo membro diverge; il confronto (\cref{teo:confronto-infinito})
+conclude. Tutti gli altri casi si riconducono a questo: per $0<\abs a<1$ si passa al
+reciproco, $1/\abs a>1$; per $a\le-1$ si osserva che i termini cambiano segno a ogni
+passo mentre i moduli non tendono a zero.
+\end{strategia}
+
+\begin{dimostrazione}
+\emph{Caso $a>1$.} È possibile utilizzare la disuguaglianza di Bernoulli
+\eqref{eq:bernoulli} con $x=a-1>0$:
+\begin{equation}\label{eq:an-bernoulli}
+  a^{n}=\bigl(1+(a-1)\bigr)^{n}\ge1+n(a-1).
+\end{equation}
+Dato che $a>1$, il secondo membro tende a $+\infty$ per $n\to+\infty$ (per la
+\eqref{eq:inf3} e la \eqref{eq:inf1}); per il \cref{teo:confronto-infinito} anche
+$a^{n}\to+\infty$.
+
+\emph{Casi $a=1$ e $a=0$.} Sono ovvi: le successioni sono costanti, uguali a $1$ e a $0$.
+
+\emph{Caso $0<\abs a<1$.} Risulta $1/\abs a>1$, e quindi dal caso già trattato
+$(1/\abs a)^{n}\to+\infty$; per la \eqref{eq:inf5} otteniamo
+\begin{equation}\label{eq:an-zero}
+  \lim_{n\to+\infty}\abs{a^{n}}=\lim_{n\to+\infty}\abs a^{n}=\lim_{n\to+\infty}\frac{1}{(1/\abs a)^{n}}=0,
+\end{equation}
+e quindi, per la \cref{prop:infinitesima-modulo}, $a^{n}\to0$.
+
+\emph{Caso $a=-1$.} Si riottiene la successione $(-1)^{n}$, che non ha limite finito
+(\cref{prop:alterna-non-converge}) e non diverge, essendo limitata.
+
+\emph{Caso $a<-1$.} Si ha $\abs{a^{n}}=\abs a^{n}\to+\infty$, perché $\abs a>1$; dunque la
+successione non è limitata, e per il \cref{teo:convergente-limitata} non può convergere.
+Non può nemmeno divergere a $+\infty$, perché in tal caso sarebbe definitivamente
+positiva, mentre i termini di indice dispari $a^{2k+1}=a\cdot(a^{2})^{k}$ sono negativi;
+né a $-\infty$, perché i termini di indice pari $a^{2k}=(a^{2})^{k}$ sono positivi. Si noti
+che invece esiste, ed è uguale a $+\infty$, il limite di $\abs{a^{n}}$ se $a<-1$.
+\end{dimostrazione}
+
+\begin{marginfigure}
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=5.4cm, height=4.8cm, xmin=0, xmax=12.5, ymin=-2.2, ymax=2.6,
+  xtick={5,10}, ytick={-1,1}]
+  \addplot[only marks, mark=*, mark size=1.1pt, blu, samples at={0,...,12}] {1.08^x};
+  \addplot[only marks, mark=square*, mark size=1.1pt, verde!60!black, samples at={0,...,12}] {0.75^x};
+  \addplot[only marks, mark=triangle*, mark size=1.4pt, rame, samples at={0,...,12}] {(-0.8)^x};
+  \node[font=\tiny, blu] at (axis cs:5,1.95) {$1{,}08^{n}$};
+  \node[font=\tiny, verde!60!black] at (axis cs:9.5,0.35) {$0{,}75^{n}$};
+  \node[font=\tiny, rame] at (axis cs:3.5,-1.4) {$(-0{,}8)^{n}$};
+\end{axis}
+\end{tikzpicture}
+\caption{Successioni geometriche: per $a>1$ divergono (anche se lentamente, come
+$1{,}08^{n}$), per $\abs a<1$ tendono a zero, eventualmente oscillando se $a<0$.}
+\end{marginfigure}
+
+\subsection{Le radici $\sqrt[n]{a}$ e $\sqrt[n]{n}$}
+
+\begin{proposizione}\label{prop:radice-n-a}
+Se $a$ è un numero reale positivo, risulta
+\begin{equation}\label{eq:lim-radice-a}
+  \lim_{n\to+\infty}\sqrt[n]{a}=\lim_{n\to+\infty}a^{1/n}=1 .
+\end{equation}
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$a>0$.}
+\Tesi{$\sqrt[n]a\to1$.}
+\end{schema}
+
+\begin{strategia}
+Nel caso $a\ge1$ la radice è $\ge1$, e scriviamo $\sqrt[n]a=1+b_{n}$ con $b_{n}\ge0$: la
+tesi diventa $b_{n}\to0$. Elevando alla $n$ e usando ancora Bernoulli,
+$a=(1+b_{n})^{n}\ge1+nb_{n}$, cioè $b_{n}\le\frac{a-1}{n}$: la successione $b_{n}$ è
+intrappolata tra $0$ e una successione infinitesima. È lo stesso trucco del teorema
+precedente, usato «al contrario»: là Bernoulli serviva a mostrare che $a^{n}$ cresce
+almeno linearmente, qui a mostrare che la radice $n$-esima si avvicina a $1$ almeno come
+$1/n$. Il caso $0<a<1$ si riduce al precedente passando al reciproco.
+\end{strategia}
+
+\begin{dimostrazione}
+Nel caso $a\ge1$ si ha $\sqrt[n]a\ge1$ (se fosse $\sqrt[n]a<1$, elevando alla $n$ sarebbe
+$a<1$). Poniamo $b_{n}=\sqrt[n]a-1$; risulta $b_{n}\ge0$ e inoltre, sempre per la
+disuguaglianza di Bernoulli,
+\begin{equation}\label{eq:radice-a-passo}
+  a=(1+b_{n})^{n}\ge1+n\,b_{n}.
+\end{equation}
+Perciò
+\begin{equation}\label{eq:radice-a-stima}
+  0\le b_{n}\le\frac{a-1}{n}.
+\end{equation}
+Dal teorema dei carabinieri segue che $b_{n}\to0$, cioè che $\sqrt[n]a\to1$. Se $0<a<1$,
+allora $1/a>1$ e quindi, per quanto già dimostrato e per la \eqref{eq:lim-quoziente},
+\begin{equation}\label{eq:radice-a-reciproco}
+  \sqrt[n]a=\frac{1}{\sqrt[n]{1/a}}\to\frac11=1. \qedhere
+\end{equation}
+\end{dimostrazione}
+
+Il limite \eqref{eq:lim-radice-a} si ricorda facilmente per mezzo dei passaggi
+$\sqrt[n]{a}=a^{1/n}\to a^{0}=1$; questi passaggi, però, non sono una dimostrazione,
+perché presuppongono la «continuità» della funzione esponenziale, che dimostreremo solo
+più avanti.
+
+Più sorprendente è il fatto che anche la radice $n$-esima di $n$ tenda a $1$
+(\cref{fig:radici-n}): qui la base cresce, ma l'indice della radice cresce più in fretta. Nel \cref{sec:binomio} avevamo
+anticipato che per dimostrarlo ci sarebbe servita la stima (iii) del
+\cref{cor:binomio}; manteniamo la promessa.
+
+\begin{proposizione}\label{prop:radice-n-n}
+Risulta
+\begin{equation}\label{eq:lim-radice-n}
+  \lim_{n\to+\infty}\sqrt[n]{n}=1 .
+\end{equation}
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{nessuna ipotesi aggiuntiva: $a_{n}=\sqrt[n]n$, \ $n\in\N$.}
+\Tesi{$\sqrt[n]n\to1$.}
+\end{schema}
+
+\begin{strategia}
+Ripetiamo l'idea della proposizione precedente: $\sqrt[n]n=1+b_{n}$ con $b_{n}\ge0$, e
+$n=(1+b_{n})^{n}$. Ma ora la stima di Bernoulli, $n\ge1+nb_{n}$, dà soltanto
+$b_{n}\le\frac{n-1}{n}$, che \emph{non} tende a zero: Bernoulli è troppo debole. Occorre
+una stima dal basso di $(1+b_{n})^{n}$ che cresca più velocemente di $n$, e la formula del
+binomio la fornisce: tenendo il termine di secondo grado,
+$(1+b_{n})^{n}\ge\frac{n(n-1)}{2}b_{n}^{2}$, che contiene $n^{2}$. Da qui
+$b_{n}^{2}\le\frac2{n-1}$.
+\end{strategia}
+
+\begin{dimostrazione}
+Per $n\ge1$ si ha $\sqrt[n]n\ge1$; poniamo $b_{n}=\sqrt[n]n-1\ge0$. Per $n\ge2$, per la
+\cref{cor:binomio}(iii) con $x=b_{n}\ge0$,
+\begin{equation}\label{eq:radice-n-binomio}
+  n=(1+b_{n})^{n}\ge1+nb_{n}+\frac{n(n-1)}{2}b_{n}^{2}\ge\frac{n(n-1)}{2}b_{n}^{2},
+\end{equation}
+da cui $b_{n}^{2}\le\frac{2}{n-1}$, cioè
+\begin{equation}\label{eq:radice-n-stima}
+  0\le b_{n}\le\sqrt{\frac{2}{n-1}} \qquad (n\ge2).
+\end{equation}
+Il secondo membro tende a zero: fissato $\epsilon>0$, si ha
+$\sqrt{2/(n-1)}<\epsilon$ se e solo se $n>1+2/\epsilon^{2}$. Per il teorema dei
+carabinieri $b_{n}\to0$, cioè $\sqrt[n]n\to1$.
+\end{dimostrazione}
+
+\begin{corollario}\label{cor:radice-n-nb}
+Per ogni $b\in\R$ risulta
+\begin{equation}\label{eq:lim-radice-nb}
+  \lim_{n\to+\infty}\sqrt[n]{n^{b}}=\lim_{n\to+\infty}n^{b/n}=1 .
+\end{equation}
+\end{corollario}
+
+\begin{schema}
+\Ipotesi{$b\in\R$.}
+\Tesi{$n^{b/n}\to1$.}
+\end{schema}
+
+\begin{strategia}
+Se $b=k$ è intero, $n^{k/n}=\bigl(\sqrt[n]n\bigr)^{k}$ è una potenza fissa di una
+successione che tende a $1$, e basta il teorema sul prodotto. Per $b$ reale qualsiasi
+intrappoliamo l'esponente tra due interi consecutivi, $\lfloor b\rfloor\le b<\lfloor
+b\rfloor+1$, e usiamo la monotonia di $x\mapsto n^{x}$ e il teorema dei carabinieri.
+\end{strategia}
+
+\begin{dimostrazione}
+Consideriamo dapprima il caso in cui l'esponente $b$ sia un intero $k\in\Z$. In tal caso
+$n^{k/n}=\bigl(n^{1/n}\bigr)^{k}$ è il prodotto di $\abs k$ fattori uguali a $n^{1/n}$ (o
+il reciproco di tale prodotto, se $k<0$; per $k=0$ vale costantemente $1$), e per la
+\cref{prop:radice-n-n} e il \cref{teo:operazioni-limiti} tende a $1^{k}=1$.
+
+Per trattare il caso generale $b\in\R$ ricorriamo alla parte intera $\lfloor b\rfloor$
+(\cref{prop:parte-intera}): $\lfloor b\rfloor\le b<\lfloor b\rfloor+1$. Poiché per $n\ge2$
+la funzione $x\mapsto n^{x}$ è crescente (\cref{teo:esponenziale}), e per $n=1$ è
+costante, si ha
+\begin{equation}\label{eq:radice-nb-stima}
+  n^{\lfloor b\rfloor/n}\le n^{b/n}\le n^{(\lfloor b\rfloor+1)/n} \qquad\perogni n\in\N .
+\end{equation}
+Il primo e il terzo membro tendono a $1$ per il caso intero appena visto; per il teorema
+dei carabinieri si ottiene la tesi.
+\end{dimostrazione}
+
+\begin{osservazione}[Un'altra strada]
+Il testo di riferimento \cite{marcellini-sbordone} dimostra la \eqref{eq:lim-radice-nb}
+partendo dal caso $b=\frac12$, per il quale basta Bernoulli: posto $b_{n}=n^{1/(2n)}-1$,
+si ha $\sqrt n=(1+b_{n})^{n}\ge1+nb_{n}$, da cui
+$0\le b_{n}\le\frac{\sqrt n-1}{n}<\frac1{\sqrt n}\to0$. Si ottiene poi il caso intero
+come $n^{k/n}=(n^{1/(2n)})^{2k}$. Il lettore si chieda perché si è scelto proprio
+$b=\frac12$, perché la dimostrazione non funziona con $b=1$, e per quali altri valori di
+$b$ funziona (si veda l'\cref{es:quesiti-b}).
+\end{osservazione}
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.92\textwidth, height=5cm, xmin=0, xmax=61, ymin=0.9, ymax=1.75,
+  xtick={10,20,30,40,50,60}, ytick={1,1.2,1.4,1.6},
+  yticklabels={$1$,$1{,}2$,$1{,}4$,$1{,}6$}, xlabel={$n$},
+  legend style={font=\scriptsize, draw=none, fill=none, at={(0.98,0.97)}, anchor=north east}]
+  \addplot[only marks, mark=*, mark size=1.1pt, blu, samples at={1,...,60}] {x^(1/x)};
+  \addplot[only marks, mark=square*, mark size=1pt, rame, samples at={3,...,60}] {5^(1/x)};
+  \addplot[tratteggio, domain=0:61] {1};
+  \legend{$\sqrt[n]{n}$, $\sqrt[n]{5}$}
+\end{axis}
+\end{tikzpicture}
+\caption{Le successioni $\sqrt[n]5$ (decrescente) e $\sqrt[n]n$: entrambe tendono a $1$.
+La seconda prima cresce (fino a $n=3$, dove vale $\sqrt[3]3\approx1{,}442$) e poi decresce
+lentamente verso $1$. Per $\sqrt[n]5$ sono riportati i termini da $n=3$ in poi
+($\sqrt[1]5=5$ e $\sqrt5\approx2{,}236$ uscirebbero dal grafico).}
+\label{fig:radici-n}
+\end{figure}
+
+\subsection{Limiti trigonometrici}
+
+Esaminiamo ora tre limiti relativi alle funzioni trigonometriche. Ci serve una
+disuguaglianza elementare.
+
+\begin{lemma}\label{lem:sen-minore-x}
+Per ogni $x\in\R$ si ha $\abs{\sen x}\le\abs x$, con l'uguaglianza solo per $x=0$.
+\end{lemma}
+
+\begin{schema}
+\Ipotesi{$x\in\R$.}
+\Tesi{$\abs{\sen x}\le\abs x$, \ e $\abs{\sen x}=\abs x$ solo per $x=0$.}
+\end{schema}
+
+\begin{strategia}
+Per gli angoli piccoli e positivi la disuguaglianza è la \eqref{eq:sen-x-tg}, che viene
+da un confronto geometrico nel cerchio unitario; gli angoli negativi si trattano con la disparità del
+seno; per gli angoli grandi, $\abs x\ge\pi/2$, basta che il seno non superi $1$.
+\end{strategia}
+
+\begin{dimostrazione}
+Se $0<x<\pi/2$, per la \eqref{eq:sen-x-tg} si ha $0<\sen x<x$. Se $-\pi/2<x<0$, poiché il
+seno è dispari, $\abs{\sen x}=\abs{\sen(-x)}=\sen(-x)<-x=\abs x$. Se $\abs x\ge\pi/2$,
+allora $\abs{\sen x}\le1<\pi/2\le\abs x$ (si ricordi che $\pi>3$). Infine per $x=0$ vale
+l'uguaglianza.
+\end{dimostrazione}
+
+\begin{teorema}[Seno e coseno di una successione infinitesima]\label{teo:lim-sen-cos}
+Se $a_{n}\to0$, allora
+\begin{equation}\label{eq:lim-sen-cos}
+  \sen a_{n}\to0 \qquad\text{e}\qquad \cos a_{n}\to1 .
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$a_{n}\to0$.}
+\Tesi{$\sen a_{n}\to0$, \ $\cos a_{n}\to1$.}
+\end{schema}
+
+\begin{strategia}
+Per il seno, il \cref{lem:sen-minore-x} dà $\abs{\sen a_{n}}\le\abs{a_{n}}$: il seno è
+«schiacciato» verso zero insieme ad $a_{n}$ (carabinieri). Per il coseno, la formula
+$\cos x=1-2\sen^{2}\frac x2$ riconduce tutto al seno, già trattato, e alle operazioni con
+i limiti.
+\end{strategia}
+
+\begin{dimostrazione}
+Per il \cref{lem:sen-minore-x}, $0\le\abs{\sen a_{n}}\le\abs{a_{n}}$. Per la
+\cref{prop:infinitesima-modulo} $\abs{a_{n}}\to0$; per il teorema dei carabinieri
+$\abs{\sen a_{n}}\to0$, e ancora per la \cref{prop:infinitesima-modulo} $\sen a_{n}\to0$.
+
+Per il coseno usiamo la formula di duplicazione \eqref{eq:duplicazione} e la relazione
+fondamentale \eqref{eq:relazione-fondamentale}: per ogni $x$,
+$\cos x=\cos^{2}\frac x2-\sen^{2}\frac x2=1-2\sen^{2}\frac x2$. Poiché $a_{n}/2\to0$, per
+la prima parte $\sen(a_{n}/2)\to0$, e quindi, per il \cref{teo:operazioni-limiti},
+\begin{equation}\label{eq:cos-passo}
+  \cos a_{n}=1-2\sen^{2}\frac{a_{n}}{2}\to1-2\cdot0=1. \qedhere
+\end{equation}
+\end{dimostrazione}
+
+Ad esempio $\sen(1/n)\to0$ e $\cos(1/n)\to1$, perché $1/n\to0$.
+
+\begin{osservazione}
+Il testo \cite{marcellini-sbordone} ottiene il limite del coseno dalla relazione
+$\cos a_{n}=\sqrt{1-\sen^{2}a_{n}}$, valida definitivamente perché $\cos a_{n}\ge0$ per
+$\abs{a_{n}}\le\pi/2$; ciò richiede di sapere che $b_{n}\to1$ implica $\sqrt{b_{n}}\to1$.
+La formula di duplicazione evita questo passaggio.
+\end{osservazione}
+
+Il terzo limite di funzione trigonometrica che prendiamo in considerazione è il più
+importante, ed è una forma indeterminata $0/0$.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.92\textwidth, height=5.2cm, xmin=-1.75, xmax=1.75, ymin=-0.05, ymax=1.18,
+  xtick={-1.5708,-0.7854,0.7854,1.5708}, xticklabels={$-\frac\pi2$,$-\frac\pi4$,$\frac\pi4$,$\frac\pi2$},
+  ytick={0.5}, yticklabels={$0{,}5$}, legend style={font=\scriptsize, draw=none, fill=none, at={(0.5,0.32)}, anchor=north}, legend columns=3]
+  \addplot[curva2, domain=-1.5708:1.5708, samples=120] {cos(deg(x))};
+  \addplot[curva, domain=-1.5708:-0.001, samples=120, forget plot] {sin(deg(x))/x};
+  \addplot[curva, domain=0.001:1.5708, samples=120] {sin(deg(x))/x};
+  \addplot[curva3, domain=-1.5708:1.5708] {1};
+  \addplot[only marks, mark=o, mark size=1.8pt, blu, fill=white] coordinates {(0,1)};
+  \legend{$\cos x$, $\frac{\sen x}{x}$, $1$}
+\end{axis}
+\end{tikzpicture}
+\caption{La disuguaglianza \eqref{eq:cos-sen-x-x}: per $0<\abs x<\pi/2$ il grafico di
+$\frac{\sen x}{x}$ è compreso tra quello di $\cos x$ e la retta $y=1$. Avvicinandosi a
+$x=0$, dove la funzione non è definita (cerchietto vuoto), i due «carabinieri» si
+stringono entrambi verso il valore $1$.}
+\label{fig:sen-x-su-x}
+\end{figure}
+
+\begin{teorema}[Il limite fondamentale $\sen x/x$]\label{teo:sen-x-su-x}\index{limite!notevole $\sen x/x$}
+Se $a_{n}\to0$ e $a_{n}\neq0$ per ogni $n$, allora
+\begin{equation}\label{eq:lim-sen-x-x}
+  \lim_{n\to+\infty}\frac{\sen a_{n}}{a_{n}}=1 .
+\end{equation}
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$a_{n}\to0$, \ $a_{n}\neq0$ per ogni $n$.}
+\Tesi{$\dfrac{\sen a_{n}}{a_{n}}\to1$.}
+\end{schema}
+
+\begin{strategia}
+Il quoziente è una forma $0/0$, quindi le regole sulle operazioni non servono. Usiamo
+il teorema dei carabinieri: cerchiamo due successioni, entrambe convergenti a $1$, tra
+cui $\frac{\sen a_{n}}{a_{n}}$ sia compresa. Le fornisce la geometria, con la catena di
+disuguaglianze $\sen x<x<\tg x$ per $0<x<\pi/2$ \eqref{eq:sen-x-tg}: dividendo per
+$\sen x$ e passando ai reciproci si ottiene
+$\cos x<\frac{\sen x}{x}<1$ (\cref{fig:sen-x-su-x}). Il carabiniere inferiore $\cos a_{n}$ tende a $1$ per il
+teorema precedente; quello superiore è costante. Occorre solo un po' di attenzione per i
+valori negativi di $x$, che si trattano con la parità delle funzioni coinvolte.
+\end{strategia}
+
+\begin{dimostrazione}
+Cominciamo col dimostrare che
+\begin{equation}\label{eq:cos-sen-x-x}
+  0<\abs x<\frac\pi2 \quad\implica\quad \cos x<\frac{\sen x}{x}<1 .
+\end{equation}
+Infatti, se $x$ è positivo, dalla \eqref{eq:sen-x-tg} si ottiene
+\begin{equation}\label{eq:sen-x-tg-bis}
+  \sen x<x<\tg x=\frac{\sen x}{\cos x},
+\end{equation}
+da cui, dividendo la prima disuguaglianza per $x>0$ e moltiplicando la seconda per
+$\frac{\cos x}{x}>0$ (si ricordi che $\cos x>0$ per $0<x<\frac\pi2$), e tenendo presente
+che moltiplicare per un numero positivo conserva le disuguaglianze strette,
+\begin{equation}\label{eq:cos-sen-passo}
+  \cos x<\frac{\sen x}{x}<1 .
+\end{equation}
+Se invece $x$ è negativo, applicando a $-x$ la \eqref{eq:cos-sen-passo} e ricordando che il
+coseno è pari e il seno dispari, si ottiene
+\begin{equation}\label{eq:cos-sen-negativo}
+  \cos x=\cos(-x)<\frac{\sen(-x)}{-x}=\frac{\sen x}{x}<1,
+\end{equation}
+dunque la \eqref{eq:cos-sen-passo} vale anche se $x$ è negativo, e la \eqref{eq:cos-sen-x-x}
+è dimostrata.
+
+Dato che $a_{n}\to0$, per la definizione di limite esiste un indice $\nu$ tale che
+$\abs{a_{n}}<\pi/2$ per ogni $n>\nu$. Dalla \eqref{eq:cos-sen-x-x} si ottiene
+\begin{equation}\label{eq:sen-x-x-carabinieri}
+  \cos a_{n}<\frac{\sen a_{n}}{a_{n}}<1 \qquad\perogni n>\nu .
+\end{equation}
+Per $n\to+\infty$, $\cos a_{n}\to1$ (\cref{teo:lim-sen-cos}). La tesi
+\eqref{eq:lim-sen-x-x} discende quindi dal teorema dei carabinieri.
+\end{dimostrazione}
+
+\begin{idea}[L'approssimazione dei piccoli angoli]
+Il \cref{teo:sen-x-su-x} giustifica l'approssimazione $\sen\alpha\approx\alpha$ (e, di
+conseguenza, $\tg\alpha\approx\alpha$, perché $\tg\alpha/\alpha=\frac{\sen\alpha}{\alpha}\cdot
+\frac1{\cos\alpha}\to1$) per angoli piccoli \emph{espressi in radianti}, usata
+ovunque in meccanica del volo. Nelle equazioni del volo librato o in salita, con
+angolo di rampa $\gamma$ piccolo, si scrive $W\sen\gamma\approx W\gamma$ e
+$W\cos\gamma\approx W$; la velocità ascensionale $V\sen\gamma$ diventa $V\gamma$; nella
+teoria dei profili sottili la linearizzazione delle condizioni al contorno per piccole
+incidenze porta alla celebre $C_{L}=2\pi\alpha$. L'errore relativo è modesto: per
+$\alpha=5^{\circ}=0{,}0873$~rad si ha $\frac{\sen\alpha}{\alpha}=0{,}99873$, cioè un errore
+dello $0{,}13\%$; a $15^{\circ}$ l'errore sale all'$1{,}1\%$ (il programma che segue
+calcola alcuni valori). La stima \eqref{eq:cos-sen-x-x} fornisce anche un controllo
+dell'errore: $1-\frac{\sen\alpha}{\alpha}<1-\cos\alpha=2\sen^{2}\frac\alpha2\le\frac{\alpha^{2}}2$.
+\end{idea}
+
+\begin{python}[Quanto è buona l'approssimazione $\sen\alpha\approx\alpha$?]
+import math
+
+print(" gradi   radianti   sen(a)/a   errore %   stima a^2/2 %")
+for gradi in (1, 2, 5, 10, 15, 20, 30):
+    a = math.radians(gradi)
+    r = math.sin(a) / a
+    print(f"{gradi:5d}   {a:8.5f}   {r:8.6f}   {100*(1-r):7.4f}"
+          f"    {100*a*a/2:8.4f}")
+\end{python}
+\begin{risultato}
+ gradi   radianti   sen(a)/a   errore %   stima a^2/2 %
+    1    0.01745   0.999949    0.0051      0.0152
+    2    0.03491   0.999797    0.0203      0.0609
+    5    0.08727   0.998731    0.1269      0.3808
+   10    0.17453   0.994931    0.5069      1.5231
+   15    0.26180   0.988616    1.1384      3.4269
+   20    0.34907   0.979816    2.0184      6.0923
+   30    0.52360   0.954930    4.5070     13.7078
+\end{risultato}
+
+\subsection{L'area del cerchio}
+
+Applichiamo il risultato appena dimostrato per concludere l'argomento del
+\cref{sec:premessa-limiti}.
+
+\begin{teorema}[Area del cerchio]\label{teo:area-cerchio}
+L'area del cerchio di raggio $1$ è uguale a $\pi$.
+\end{teorema}
+
+\begin{schema}
+\Ipotesi{$\pi$ è la lunghezza della semicirconferenza di raggio $1$; l'area del cerchio
+è, per definizione, il limite delle aree $a_{n}$ dei poligoni regolari inscritti.}
+\Tesi{$\displaystyle\lim_{n\to+\infty}a_{n}=\pi$.}
+\end{schema}
+
+\begin{strategia}
+La formula \eqref{eq:area-poligono}, $a_{n}=\frac n2\sen\frac{2\pi}n$, è una forma
+$\infty\cdot0$. Basta riscriverla mettendo in evidenza il quoziente
+$\frac{\sen x_{n}}{x_{n}}$ con $x_{n}=\frac{2\pi}n\to0$: il fattore che resta è proprio
+$\pi$, e il limite fondamentale appena dimostrato conclude.
+\end{strategia}
+
+\begin{dimostrazione}
+In base alla \eqref{eq:area-poligono} si ottiene
+\begin{equation}\label{eq:area-cerchio-1}
+  \text{area del cerchio di raggio }1=\lim_{n\to+\infty}\frac n2\sen\frac{2\pi}{n}.
+\end{equation}
+Dato che, per $n\to+\infty$, la successione $2\pi/n$ tende a zero ed è sempre diversa da
+zero, siamo nella situazione del limite notevole \eqref{eq:lim-sen-x-x}, e quindi
+\begin{equation}\label{eq:area-cerchio-2}
+  \text{area del cerchio di raggio }1=\lim_{n\to+\infty}\pi\,\frac{\sen(2\pi/n)}{2\pi/n}=\pi\cdot1=\pi. \qedhere
+\end{equation}
+\end{dimostrazione}
+
+\begin{osservazione}[Coerenza della definizione di $\pi$]
+Lo stesso ragionamento applicato ai perimetri dà un controllo di coerenza: il perimetro
+di $P_{n}$ è $p_{n}=2n\sen\frac\pi n=2\pi\,\frac{\sen(\pi/n)}{\pi/n}\to2\pi$, cioè la
+lunghezza della circonferenza, come deve essere se $\pi$ è la lunghezza della
+semicirconferenza. Si osservi però che il ragionamento poggia su due definizioni
+(lunghezza della circonferenza e area del cerchio) e sulla disuguaglianza
+\eqref{eq:sen-x-tg}, la cui giustificazione nel \cref{sec:trigonometriche} era di natura
+geometrica (confronto tra corda, arco e aree). Una teoria pienamente rigorosa della
+lunghezza delle curve e dell'area delle figure piane sarà sviluppata con il calcolo
+integrale; per ora, il \cref{teo:area-cerchio} va letto come la prova che le due
+nozioni geometriche di $\pi$ --- come rapporto tra circonferenza e diametro e come area
+del cerchio unitario --- coincidono.
+\end{osservazione}

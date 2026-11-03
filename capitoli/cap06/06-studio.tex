@@ -1,0 +1,329 @@
+%% ----------------------------------------------------------------------------
+%%  §6.6  Studio del grafico di una funzione
+%% ----------------------------------------------------------------------------
+\section{Studio del grafico di una funzione}
+\label{sec:studio-funzione}
+
+I risultati ottenuti in questo capitolo ci permettono di studiare l'andamento di una
+funzione $f(x)$ e di disegnarne il grafico in modo qualitativamente corretto. Si può
+procedere secondo lo schema seguente, che non va inteso come una ricetta rigida: in
+ciascun caso conviene adattarlo, saltando i passi superflui e approfondendo quelli
+rilevanti.
+
+\begin{enumerate}[label=\textbf{\Alph*.}, leftmargin=2em]
+  \item Si determina il \emph{dominio} (o \emph{insieme di definizione}) della funzione.
+  \item Si esamina se la funzione gode di qualche \emph{simmetria}: se è \emph{pari},
+  $f(-x)=f(x)$, il grafico è simmetrico rispetto all'asse $y$; se è \emph{dispari},
+  $f(-x)=-f(x)$, è simmetrico rispetto all'origine; se è \emph{periodica} di periodo $T$,
+  $f(x+T)=f(x)$, basta studiarla in un intervallo di lunghezza $T$. Quando è semplice
+  farlo, si calcolano le intersezioni con gli assi e si studia il segno della funzione.
+  \item Si calcolano i limiti agli estremi del dominio e si determinano gli eventuali
+  \emph{asintoti orizzontali e verticali}.
+  \item Si determinano, studiando il segno della derivata prima, gli \emph{intervalli in
+  cui la funzione è crescente o decrescente} e i \emph{punti di massimo e di minimo
+  relativo}, e si calcolano i valori di $f$ in tali punti.
+  \item Si determinano, studiando il segno della derivata seconda, gli \emph{intervalli
+  in cui la funzione è convessa o concava} e gli eventuali \emph{punti di flesso}, e si
+  calcolano i valori di $f$ in tali punti.
+  \item Si determinano gli eventuali \emph{asintoti obliqui}.
+\end{enumerate}
+
+\subsection{Gli asintoti}
+
+Precisiamo le nozioni di asintoto che compaiono ai punti C ed F.
+
+\begin{definizione}[Asintoti]\label{def:asintoti}\index{asintoto}
+\begin{enumerate}[label=\textup{(\roman*)}]
+  \item La retta $y=\ell$ è un \emph{asintoto orizzontale} per $x\to+\infty$ se
+  $\lim_{x\to+\infty}f(x)=\ell\in\R$; analogamente per $x\to-\infty$.
+  \item La retta $x=x_{0}$ è un \emph{asintoto verticale} se
+  $\lim_{x\to x_{0}}f(x)=\pm\infty$; si parla di asintoto verticale destro o sinistro se
+  il limite infinito è soltanto quello per $x\to x_{0}^{+}$ o per $x\to x_{0}^{-}$.
+  \item La retta $y=mx+q$ è un \emph{asintoto obliquo} per $x\to+\infty$ se
+  \begin{equation}\label{eq:asintoto-obliquo}
+    \lim_{x\to+\infty}\bigl[f(x)-(mx+q)\bigr]=0 ;
+  \end{equation}
+  analogamente per $x\to-\infty$.
+\end{enumerate}
+\end{definizione}
+
+La \eqref{eq:asintoto-obliquo} significa che, per $x\to+\infty$, la distanza verticale
+tra il grafico della funzione e la retta $y=mx+q$ tende a zero: il grafico «si appoggia»
+alla retta. L'asintoto orizzontale è il caso particolare $m=0$. La definizione non dice
+come trovare $m$ e $q$; lo dice la proposizione seguente.
+
+\begin{proposizione}[Ricerca dell'asintoto obliquo]\label{prop:asintoto-obliquo}
+La retta $y=mx+q$ è un asintoto obliquo per $x\to+\infty$ se e solo se esistono finiti
+i due limiti
+\begin{equation}\label{eq:m-q}
+  m=\lim_{x\to+\infty}\frac{f(x)}{x}, \qquad q=\lim_{x\to+\infty}\bigl[f(x)-mx\bigr].
+\end{equation}
+Analogamente per $x\to-\infty$.
+\end{proposizione}
+
+\begin{schema}
+\Ipotesi{$f$ definita in una semiretta $(c,+\infty)$.}
+\Tesi{$y=mx+q$ asintoto obliquo per $x\to+\infty$ \ $\sse$ \ valgono le \eqref{eq:m-q}
+con $m,q\in\R$.}
+\end{schema}
+
+\begin{strategia}
+Supponiamo che l'asintoto esista e cerchiamo di ricavare $m$ e $q$. L'osservazione chiave
+è che, se la quantità $f(x)-mx-q$ tende a zero, \emph{a maggior ragione} tende a zero la
+stessa quantità divisa per $x$, che tende all'infinito: in questo modo $q$ scompare e
+resta un'equazione per $m$. Noto $m$, il valore di $q$ si legge direttamente nella
+definizione. Il viceversa è immediato.
+\end{strategia}
+
+\begin{dimostrazione}
+Supponiamo che valga la \eqref{eq:asintoto-obliquo}. Allora, per il teorema sul limite
+del prodotto (una funzione infinitesima per una funzione infinitesima $\frac1x$),
+\[
+  0=\lim_{x\to+\infty}\frac{f(x)-(mx+q)}{x}=\lim_{x\to+\infty}\Bigl[\frac{f(x)}{x}-m-\frac qx\Bigr],
+\]
+e poiché $\frac qx\to0$, risulta $\lim_{x\to+\infty}\frac{f(x)}x=m$. Inoltre, sempre per la
+\eqref{eq:asintoto-obliquo}, $f(x)-mx=\bigl[f(x)-mx-q\bigr]+q\to q$. Viceversa, se
+valgono le \eqref{eq:m-q} con $m$, $q$ finiti, la seconda di esse dice che
+$f(x)-mx-q\to0$, cioè la \eqref{eq:asintoto-obliquo}.
+\end{dimostrazione}
+
+Si noti che, se esiste l'asintoto orizzontale $y=\ell$ per $x\to+\infty$, è inutile
+cercare un asintoto obliquo dalla stessa parte: infatti $\frac{f(x)}x\to0$, e quindi
+$m=0$ e $q=\ell$. Si noti anche che può esistere finito $m$ senza che esista l'asintoto:
+per $f(x)=x+\log x$ si ha $\frac{f(x)}x\to1$, ma $f(x)-x=\log x\to+\infty$. In tal caso
+il grafico ha la «direzione» della retta $y=x$ senza avvicinarsi ad alcuna retta.
+
+\subsection{Un esempio completo}
+
+Secondo lo schema proposto, studiamo la funzione
+\begin{equation}\label{eq:studio-xe1x}
+  f(x)=x\,e^{1/x} .
+\end{equation}
+
+\textbf{A.} La funzione è definita per ogni $x\neq0$: il dominio è
+$(-\infty,0)\cup(0,+\infty)$.
+
+\textbf{B.} Non ci sono simmetrie evidenti: $f(-x)=-x\,e^{-1/x}$ non coincide né con
+$f(x)$ né con $-f(x)$. Poiché $e^{1/x}>0$, la funzione non si annulla mai: il grafico non
+interseca gli assi, e $f(x)$ ha il segno di $x$.
+
+\textbf{C.} Calcoliamo i limiti agli estremi del dominio. Per $x\to\pm\infty$ si ha
+$\frac1x\to0$ ed $e^{1/x}\to e^{0}=1$, quindi
+\[
+  \lim_{x\to\pm\infty}x\,e^{1/x}=\pm\infty ,
+\]
+e non ci sono asintoti orizzontali. Per $x\to0^{-}$ il limite non è una forma
+indeterminata: $\frac1x\to-\infty$, quindi $e^{1/x}\to0$ e $x\,e^{1/x}\to0\cdot0=0$; per
+$x\to0^{-}$ non c'è asintoto verticale. Per $x\to0^{+}$ si ha invece la forma
+$0\cdot\infty$; con il teorema di L'Hôpital nella forma $\frac\infty\infty$,
+\[
+  \lim_{x\to0^{+}}x\,e^{1/x}=\lim_{x\to0^{+}}\frac{e^{1/x}}{1/x}
+  =\lim_{x\to0^{+}}\frac{e^{1/x}\cdot(-1/x^{2})}{-1/x^{2}}=\lim_{x\to0^{+}}e^{1/x}=+\infty .
+\]
+(Allo stesso risultato si arriva ponendo $t=\frac1x\to+\infty$: il limite diventa
+$\frac{e^{t}}{t}\to+\infty$, per la \eqref{eq:hopital-potenza-exp}.) La retta $x=0$ è un
+asintoto verticale destro.
+
+\textbf{D.} La derivata prima vale
+\begin{equation}\label{eq:studio-derivata-prima}
+  f'(x)=e^{1/x}+x\,e^{1/x}\Bigl(-\frac1{x^{2}}\Bigr)=e^{1/x}\Bigl(1-\frac1x\Bigr)
+  =e^{1/x}\,\frac{x-1}{x} .
+\end{equation}
+Il fattore $e^{1/x}$ è positivo; quindi $f'(x)>0$ se $x<0$ oppure $x>1$, e $f'(x)<0$ se
+$0<x<1$. Per il criterio di monotonia (in ciascun intervallo del dominio), la funzione
+è crescente in $(-\infty,0)$ e in $[1,+\infty)$, ed è decrescente in $(0,1]$. Il punto
+$x=1$ è di minimo relativo, e $f(1)=e$. Osserviamo anche che
+$f'(x)=e^{1/x}-\frac{e^{1/x}}{x}\to0$ per $x\to0^{-}$ (posto $t=\frac1x\to-\infty$, si ha
+$t\,e^{t}\to0$): il grafico arriva verso l'origine con tangente orizzontale.
+
+\textbf{E.} La derivata seconda vale
+\begin{equation}\label{eq:studio-derivata-seconda}
+  f''(x)=e^{1/x}\Bigl(-\frac1{x^{2}}\Bigr)\Bigl(1-\frac1x\Bigr)+e^{1/x}\,\frac1{x^{2}}
+  =\frac{e^{1/x}}{x^{2}}\Bigl(-1+\frac1x+1\Bigr)=\frac{e^{1/x}}{x^{3}} .
+\end{equation}
+È positiva per $x>0$ e negativa per $x<0$: la funzione è convessa in $(0,+\infty)$ e
+concava in $(-\infty,0)$. Poiché $f$ non è definita in $0$, non ci sono punti di
+flesso. Il criterio della derivata seconda conferma il minimo: $f''(1)=e>0$.
+
+\textbf{F.} Poiché $f(x)\to\pm\infty$ per $x\to\pm\infty$, cerchiamo gli asintoti
+obliqui con la \cref{prop:asintoto-obliquo}:
+\begin{equation}\label{eq:studio-m}
+  m=\lim_{x\to\pm\infty}\frac{f(x)}{x}=\lim_{x\to\pm\infty}e^{1/x}=e^{0}=1 ,
+\end{equation}
+e, ponendo $t=\frac1x\to0$ e usando il limite notevole \eqref{eq:ln-exp},
+\begin{equation}\label{eq:studio-q}
+  q=\lim_{x\to\pm\infty}\bigl(x\,e^{1/x}-x\bigr)=\lim_{x\to\pm\infty}\frac{e^{1/x}-1}{1/x}
+  =\lim_{t\to0}\frac{e^{t}-1}{t}=1
+\end{equation}
+(lo stesso risultato si ottiene con il teorema di L'Hôpital). La retta $y=x+1$ è un
+asintoto obliquo sia per $x\to+\infty$ sia per $x\to-\infty$.
+
+Possiamo anche stabilire da che parte dell'asintoto si trova il grafico. Con la stessa
+sostituzione $t=\frac1x$,
+\[
+  f(x)-(x+1)=\frac{e^{t}-1-t}{t},
+\]
+e il numeratore è positivo per $t\neq0$ per la \eqref{eq:exp-log-disuguaglianze}.
+Quindi il grafico sta sopra l'asintoto per $x>0$ e sotto per $x<0$. Con tutti questi
+elementi si esegue il disegno della \cref{fig:studio-xe1x}.
+
+\begin{figure}[htb]
+\centering
+\begin{tikzpicture}
+\begin{axis}[width=0.9\textwidth, height=7.5cm, xmin=-4.3, xmax=4.3, ymin=-3.7, ymax=6.4,
+  xtick={1}, ytick={1,2.71828}, yticklabels={$1$,$e$}, xlabel={$x$}, ylabel={$y$},
+  clip=false]
+  \addplot[tratteggio, domain=-4.2:4.2, samples=2] {x+1};
+  \addplot[curva, domain=-4.2:-0.02, samples=200] {x*exp(1/x)};
+  \addplot[curva, domain=0.3532:4.2, samples=200] {x*exp(1/x)};
+  \addplot[tratteggio] coordinates {(1,0) (1,2.71828) (0,2.71828)};
+  \addplot[only marks, mark=*, mark size=1.6pt, rame] coordinates {(1,2.71828)};
+  \addplot[only marks, mark=o, mark size=1.6pt, blu, fill=white] coordinates {(0,0)};
+  \node[font=\scriptsize, blu, anchor=west] at (axis cs:0.45,5.6) {$y=x\,e^{1/x}$};
+  \node[font=\scriptsize, grigio, anchor=north west] at (axis cs:2.6,3.4) {$y=x+1$};
+\end{axis}
+\end{tikzpicture}
+\caption{Il grafico di $f(x)=x\,e^{1/x}$: asintoto verticale destro $x=0$, asintoto
+obliquo $y=x+1$ per $x\to\pm\infty$ (sopra il grafico per $x<0$, sotto per $x>0$),
+minimo relativo in $(1,e)$, convessità per $x>0$ e concavità per $x<0$. Per
+$x\to0^{-}$ il grafico tende all'origine, che non gli appartiene, con tangente
+orizzontale.}
+\label{fig:studio-xe1x}
+\end{figure}
+
+Il programma seguente ripete con \texttt{sympy} i calcoli dei punti C, D, E, F.
+Strumenti di questo tipo sono un ottimo controllo, ma non sostituiscono lo studio: il
+programma fornisce i risultati, lo studio ne fornisce le ragioni.
+
+\needspace{12\baselineskip}
+\begin{python}[Lo studio di $x\,e^{1/x}$ con sympy]
+import sympy as sp
+
+x = sp.symbols("x", real=True)
+f = x * sp.exp(1 / x)
+print("limiti:", [sp.limit(f, x, p, d) for p, d in
+                  ((-sp.oo, "+"), (0, "-"), (0, "+"), (sp.oo, "-"))])
+d1 = sp.factor(sp.diff(f, x))
+d2 = sp.factor(sp.diff(f, x, 2))
+print("f'  =", d1, "   f' = 0 in", sp.solve(d1, x))
+print("f'' =", d2)
+print("f(1) =", f.subs(x, 1), "   f''(1) =", d2.subs(x, 1))
+for p in (sp.oo, -sp.oo):                  # asintoti obliqui
+    m = sp.limit(f / x, x, p)
+    q = sp.limit(f - m * x, x, p)
+    print(f"x -> {p}:  m = {m},  q = {q}")
+\end{python}
+\begin{risultato}
+limiti: [-oo, 0, oo, oo]
+f'  = (x - 1)*exp(1/x)/x    f' = 0 in [1]
+f'' = exp(1/x)/x**3
+f(1) = E    f''(1) = E
+x -> oo:  m = 1,  q = 1
+x -> -oo:  m = 1,  q = 1
+\end{risultato}
+
+\subsection{Un esempio aeronautico: resistenza e potenza necessaria}
+
+Consideriamo un velivolo di peso $W$ e superficie alare $S$, in volo rettilineo
+livellato alla velocità $V$ nell'aria di densità $\rho$. L'equilibrio verticale impone
+che la portanza eguagli il peso, $\frac12\rho V^{2}SC_{L}=W$, da cui
+$C_{L}=\frac{2W}{\rho V^{2}S}$; con la polare parabolica $C_{D}=C_{D0}+kC_{L}^{2}$, la
+resistenza $D=\frac12\rho V^{2}SC_{D}$ diventa una funzione della sola velocità:
+\begin{equation}\label{eq:resistenza-V}
+  D(V)=aV^{2}+\frac{b}{V^{2}}, \qquad a=\frac12\rho SC_{D0}, \qquad b=\frac{2kW^{2}}{\rho S} .
+\end{equation}
+Il primo termine è la \emph{resistenza parassita}, che cresce con il quadrato della
+velocità; il secondo è la \emph{resistenza indotta}, legata alla portanza, che
+diminuisce al crescere della velocità. Studiamo $D$ nell'intervallo $(0,+\infty)$,
+ricordando che il modello ha senso fisico soltanto al di sopra della velocità di stallo.
+
+\textbf{C.} Si ha $D(V)\to+\infty$ sia per $V\to0^{+}$ (asintoto verticale $V=0$) sia
+per $V\to+\infty$. Non ci sono asintoti obliqui, perché $\frac{D(V)}V\to+\infty$. Si noti
+però che $D(V)-aV^{2}=\frac b{V^{2}}\to0$ per $V\to+\infty$: il grafico si avvicina
+alla \emph{parabola} $y=aV^{2}$, che si comporta come un «asintoto curvilineo»; allo
+stesso modo, per $V\to0^{+}$, il grafico si avvicina all'iperbole $y=\frac b{V^{2}}$.
+
+\textbf{D.} La derivata è
+\[
+  D'(V)=2aV-\frac{2b}{V^{3}}=\frac{2\,(aV^{4}-b)}{V^{3}},
+\]
+negativa per $V<V_{\min D}$ e positiva per $V>V_{\min D}$, dove
+\begin{equation}\label{eq:V-min-D}
+  V_{\min D}=\Bigl(\frac ba\Bigr)^{1/4}=\sqrt{\frac{2W}{\rho S}}\,\Bigl(\frac{k}{C_{D0}}\Bigr)^{1/4} .
+\end{equation}
+Per il criterio di monotonia, $V_{\min D}$ è il punto di \emph{minimo assoluto} della
+resistenza in $(0,+\infty)$. In esso $aV^{4}=b$, cioè $aV^{2}=\frac b{V^{2}}$: \emph{alla
+velocità di minima resistenza la resistenza parassita e quella indotta sono uguali}. Il
+valore minimo è $D_{\min}=2aV_{\min D}^{2}=2\sqrt{ab}=2W\sqrt{kC_{D0}}=\frac{W}{E_{\max}}$,
+e il coefficiente di portanza corrispondente è proprio $C_{L}^{*}=\sqrt{C_{D0}/k}$:
+volare alla velocità di minima resistenza significa volare all'assetto di massima
+efficienza.
+
+\textbf{E.} La derivata seconda $D''(V)=2a+\frac{6b}{V^{4}}$ è positiva: la curva è
+convessa.
+
+Più interessante è la \emph{potenza necessaria} al volo livellato, $P(V)=D(V)\,V$:
+\[
+  P(V)=aV^{3}+\frac bV, \qquad P'(V)=3aV^{2}-\frac b{V^{2}}=\frac{3aV^{4}-b}{V^{2}},
+\]
+con $P''(V)=6aV+\frac{2b}{V^{3}}>0$.
+La potenza è convessa e ha il minimo assoluto in
+\begin{equation}\label{eq:V-min-P}
+  V_{\min P}=\Bigl(\frac{b}{3a}\Bigr)^{1/4}=\frac{V_{\min D}}{3^{1/4}}\approx0{,}760\,V_{\min D} .
+\end{equation}
+Il rapporto $\frac{V_{\min D}}{V_{\min P}}=3^{1/4}\approx1{,}316$ non dipende dal
+velivolo: è una conseguenza della sola forma della polare parabolica. C'è anche
+un'interpretazione geometrica: poiché $\frac{P(V)}V=D(V)$, la resistenza è la pendenza
+della retta che congiunge l'origine con il punto $(V,P(V))$; la velocità di minima
+resistenza è quindi il punto di contatto della \emph{tangente per l'origine} alla curva
+della potenza (\cref{fig:resistenza-potenza}), un'altra versione della costruzione della
+\cref{fig:polare-tangente}. Per un aliante, la velocità di minima resistenza è quella
+di massima efficienza, cioè di massima distanza percorribile in planata, mentre quella
+di minima potenza è la velocità di minima discesa, che si usa per rimanere in volo il più
+a lungo possibile.
+
+\begin{python}[Velocità di minima resistenza e di minima potenza]
+import math
+
+# velivolo leggero, volo livellato al livello del mare
+W, S, rho = 10000.0, 16.0, 1.225        # peso (N), superficie (m^2)
+CD0, AR, e = 0.025, 8.0, 0.8
+k = 1 / (math.pi * e * AR)
+a = 0.5 * rho * S * CD0                 # D(V) = a V^2 + b / V^2
+b = 2 * k * W**2 / (rho * S)
+D = lambda V: a * V**2 + b / V**2
+P = lambda V: D(V) * V                  # potenza necessaria
+
+V_D = (b / a) ** 0.25                   # minimo di D: D'(V) = 0
+V_P = (b / (3 * a)) ** 0.25             # minimo di P: P'(V) = 0
+print(f"k = {k:.5f}   a = {a:.4f}   b = {b:.4e}")
+print(f"V_minD = {V_D:.2f} m/s   D_min = {D(V_D):.1f} N"
+      f"   W/D_min = {W / D(V_D):.2f}")
+print(f"V_minP = {V_P:.2f} m/s   P_min = {P(V_P) / 1000:.2f} kW")
+print(f"V_minD / V_minP = {V_D / V_P:.4f}   3^(1/4) = {3**0.25:.4f}")
+CLmax = 1.5                             # C_L massimo (stallo)
+print(f"V_stallo = {math.sqrt(2 * W / (rho * S * CLmax)):.2f} m/s")
+\end{python}
+\begin{risultato}
+k = 0.04974   a = 0.2450   b = 5.0751e+05
+V_minD = 37.94 m/s   D_min = 705.2 N   W/D_min = 14.18
+V_minP = 28.83 m/s   P_min = 23.47 kW
+V_minD / V_minP = 1.3161   3^(1/4) = 1.3161
+V_stallo = 26.08 m/s
+\end{risultato}
+
+Il rapporto $\frac W{D_{\min}}\approx14{,}18$ coincide con l'efficienza massima trovata
+nel \cref{cap:funzioni-continue} per la stessa polare, e le due velocità ottime sono
+entrambe superiori alla velocità di stallo, calcolata con $C_{L,\max}=1{,}5$: il
+modello è applicabile.
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=\textwidth]{resistenza_potenza}
+\caption{Resistenza (a sinistra) e potenza necessaria (a destra) in volo livellato, in
+funzione della velocità, per il velivolo del programma precedente. La resistenza è
+minima dove le componenti parassita e indotta si eguagliano; la tangente per l'origine
+alla curva della potenza la tocca nella velocità di minima resistenza
+(\texttt{python/fig\_resistenza\_potenza.py}).}
+\label{fig:resistenza-potenza}
+\end{figure}
